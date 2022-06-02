@@ -1,0 +1,266 @@
+:host {
+  font-family: 'Montserrat';
+}
+
+.control-label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #222222;
+}
+
+.radio-consulta {
+  top: 50%;
+  margin: 0 !important;
+  left: 0;
+  margin: 0;
+  transform: translate(0, -40%);
+}
+
+td,
+th {
+  font-size: 14px;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+  z-index: 3;
+  color: #FFF;
+  background-color: #9D2449;
+  border-color: #ddd;
+  border-radius: 50%;
+}
+
+
+.pagination a {
+  border: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+.botonRojo {
+  font-family: Montserrat;
+  font-size: 14px;
+  width: 100px;
+  height: 17px;
+  font-family: Montserrat;
+  border-radius: 1.8px !important;
+  border: solid 1px #9d2449;
+}
+
+.consultaNotasTrabajoSocial {
+  font-family: 'Montserrat';
+  font-size: 24px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 29px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-align: left;
+  left: 3.45%;
+  right: 71.79%;
+  color: #222;
+}
+
+.div-container-image {
+  margin-left: 25%;
+}
+
+.tituloServicio {
+  color: #272829;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #272829;
+  width: 100%;
+  height: 17px;
+  margin: 0 242.5px 4px 0;
+  font-family: Montserrat;
+}
+
+.fondocalendar {
+  background-color: #eeeeee;
+  transform: translateY(-8%);
+  background-size: 10px 12px;
+  background-repeat: no-repeat;
+  margin: 0.6px 1px 3px 18.2px;
+  padding: 0 20.2px 0 18.2px;
+  height: 36.5px;
+  border-radius: 2px 2px 2px 2px;
+}
+
+.imgCalendar {
+  background-image: url("../../assets/images/calendario.svg");
+  background-repeat: no-repeat;
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-49%);
+  background-size: 20px 19px;
+  margin-left: -1.6px;
+}
+
+.datepicker-group .glyphicon {
+  color: #EEEEEE !important;
+}
+
+.encabezadoTable {
+  width: 150;
+  text-align: left;
+  background-color: rgba(196, 196, 196, 0.1);
+  border: 1px solid #EEEEEE;
+  text-align: center;
+}
+
+.encabezadoTableCentro {
+  width: 150;
+  text-align: left;
+  background-color: rgba(196, 196, 196, 0.1);
+  border: 1px solid #EEEEEE;
+  text-align: center;
+  padding-top: 13px;
+}
+
+.bordesTabla {
+  border: 1px solid #ddd;
+  text-align: center !important;
+}
+.bordesTablaFecha {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  padding-top: 14px;
+  width: 17%;
+}
+
+.bordesTablaHora {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  width: 13%;
+}
+
+.bordesTablaModalidad {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  width: 11%;
+
+}
+
+.bordesTablaTotalParticipantes {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  width: 13%;
+
+}
+.bordesTablaAsistieron {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  width: 13%;
+
+}
+.bordesTablaDescripcion {
+  border: 1px solid #ddd;
+  text-align: left !important;
+  width: 70%;
+}
+
+.links {
+  margin: 8px 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4d92df;
+  text-decoration: none;
+}
+
+.form-control {
+  font-size: 14px !important;
+}
+
+.centr {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+
+}
+
+.my-pagination ::ng-deep .current {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  background: rgb(143, 4, 4);
+  margin: 0 1em;
+  display: inline-block;
+  color: white;
+  font-size: 17.47px;
+  position: relative;
+  margin-top: 1%;
+  text-decoration: none;
+}
+
+.form {
+  width: 60%;
+  height: 29px;
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+
+.tabla>tbody>tr>td,
+.tabla>tbody>tr>th,
+.tabla>tfoot>tr>td,
+.tabla>tfoot>tr>th,
+.tabla>thead>tr>td,
+.tabla>thead>tr>th {
+    padding: 1.8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.buttonL {
+  width: 120px;
+  height: 35.87px;
+  border-radius: 3px;
+  margin: 10px 15px 0 10px !important;
+  padding: 5px;
+  align-self: stretch;
+  flex-grow: 1;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+}

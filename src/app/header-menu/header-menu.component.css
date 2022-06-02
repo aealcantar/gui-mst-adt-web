@@ -1,0 +1,146 @@
+
+.header-menu{
+  padding:12px 0px;
+}
+
+
+.section {
+  /* background-color: #FFFFFF; */
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.header-pleca {
+  width: 100%;
+  height: 258px;
+  background-color: #10312b;
+  position: absolute;
+  display: inline;
+  z-index: -999;
+  top: 0;
+  left: 0;
+}
+
+.pleca-head {
+  background-color: transparent;
+  height: 67px;
+  margin-top: 0;
+  color: #FFFFFF;
+  /* padding: 20px; */
+  padding-top: 14px;
+  padding-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+  font-weight: bold !important;
+}
+
+.Historial-clnico {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+  width: 80%;
+}
+
+@media (min-width: 1200px) {
+  .central {
+    width: 96.34%;
+  }
+}
+
+.central {
+  width: 1217px;
+}
+
+.Group-1028 {
+  /* width: 198px;
+  height: 33px; */
+  /* flex-grow: 0; */
+}
+
+.Group-1028 {
+  /* width: 198px;
+  height: 33px; */
+  /* flex-grow: 0; */
+}
+
+.auth-user {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  color: white;
+
+ /* // height: 14px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: right;
+  color: #fff; */
+}
+
+.auth-rol {
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+  line-height: 14px;
+  /* width: 198px;
+  height: 14px;
+  flex-grow: 0;
+  margin: 5px 0 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: right;
+  color: #999; */
+}
+
+.mnu {
+  color: #98989a;
+  text-decoration: none;
+
+  border-top: 10px dashed;
+  border-top: 4px solid\9;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+
+}
+
+.list-menu {
+  background-color: #0C231E;
+  color: #999;
+}
+
+.list-menu>li>a {
+  background-color: #0C231E;
+  color: #999;
+}
+
+.list-menu>li>a:hover,
+.list-menu>li>a:focus {
+  background-color: #0C231E;
+  color: #FFF;
+}

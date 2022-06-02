@@ -1,0 +1,12 @@
+.alertCompl{
+    border-radius: 8px;
+    width: 539px;
+    position: absolute;
+    margin-left: 336px;
+    margin-right: auto;
+    margin-top: 2px;
+    z-index: 4;
+    box-shadow: 3px 3px 3px #80808061;
+    padding: 4px 24px !important;
+    font-size: 15px;
+}

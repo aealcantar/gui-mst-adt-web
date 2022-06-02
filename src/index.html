@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ecosistema Digital</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.css">
+</head>
+
+<body style="overflow-x: hidden !important;">
+  <app-root></app-root>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+  <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+  <script>
+    setTimeout(function () {
+      if(document.querySelector(".main-footer")){
+
+      }
+      document.querySelector(".main-footer").remove();
+    }, 2000);
+    $gmx(document).ready(function () {
+      $('#calendar').datepicker();
+      $('#calendarCronica').datepicker();
+    });
+  </script>
+</body>
+<footer>
+  <img src="../assets/images/footer.png" class="footer">
+</footer>
+
+</html>

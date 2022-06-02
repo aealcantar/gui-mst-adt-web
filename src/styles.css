@@ -1,0 +1,83 @@
+.btn-primary {
+    border: 1px solid #9D2449 !important;
+}
+
+body {
+    padding-top: 0px;
+}
+
+select {
+    -moz-appearance: none;
+    /* Firefox */
+    -webkit-appearance: none;
+    /* Safari and Chrome */
+    appearance: none;
+    background: transparent;
+    background-image: url("./assets/images/Icon.png") !important;
+    background-repeat: no-repeat;
+    background-position-x: 99%;
+    background-position-y: 5px;
+    padding-right: 20px;
+    background-size: 20px 19px;
+
+}
+
+.select-font {
+    font-size: 14px !important;
+}
+
+.select-view-data {
+    border-radius: 5px 0px 0px 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 70px;
+}
+
+.botones {
+    float: right;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mat-dialog-container {
+    border-radius: 20px 20px 6px 6px !important;
+    padding: 0px !important;
+}
+
+.cdk-global-overlay-wrapper {
+    overflow: auto;
+    pointer-events: auto;
+}
+
+.dialog-styles {
+    margin-bottom: 30px;
+}
+
+.cdk-overlay-pane.dialog-styles {
+    position: relative!important;
+}
+
+.arrow {
+    cursor: pointer;
+    opacity: 0.5;
+    position: absolute;
+}
+
+.arrow-up {
+    margin: -2px 5px;
+    z-index: 999;
+}
+
+.arrow-down {
+    margin-left: 5px;
+    top: 20px;
+}
+
+.active-opacity {
+    opacity: 1;
+}
+
+td.dataTables_empty {
+    display: none !important;
+}
