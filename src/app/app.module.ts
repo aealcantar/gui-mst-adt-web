@@ -1,8 +1,9 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -29,6 +30,12 @@ import { UsuariosService } from './service/usuarios.service';
 import { SeguridadService } from './seguridad/seguridad.service';
 import { LoginComponent } from './seguridad/login/login.component';
 import { RegistroComponent } from './seguridad/registro/registro.component';
+import { PrincipalComponent } from './principal/principal.component';
+import { UserconsultaComponent } from './configuracion/usuarios/userconsulta/userconsulta.component';
+import { UserguardaComponent } from './configuracion/usuarios/userguarda/userguarda.component';
+import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca.component';
+
+import { ReadexcelDirective } from './directives/readexcel.directive';
 import { DataTablesModule } from 'angular-datatables';
 import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica/agregar-participante-dialog/agregar-participante-dialog.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -38,6 +45,30 @@ import { NumberDirective } from './directives/only-numbers.directive';
 import { NuevaNotaTSocialComponent } from './nueva-nota-tsocial/nueva-nota-tsocial.component';
 import { ConsultaListaNotasTSocialComponent } from './consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
+import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
+import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
+import { FichapacienteComponent } from './common/fichapaciente/fichapaciente.component';
+import { MenugralComponent } from './common/menugral/menugral.component';
+import { CitasService } from './citas/citas.service';
+
+import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
+import { FooterComponent } from './components/templates/footer/footer.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  NgxMatDateFormats,
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule,
+  NGX_MAT_DATE_FORMATS
+} from '@angular-material-components/datetime-picker';
+import { MAT_DATE_LOCALE,MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MyFilterPipe } from './directives/my-filter.pipe';
+
 registerLocaleData('es');
 
 @NgModule({
@@ -46,6 +77,7 @@ registerLocaleData('es');
     AlertaComponent,
     LoginComponent,
     RegistroComponent,
+    PrincipalComponent,
     BusquedaNssComponent,
     AppMenuComponent,
     AppInfoBottomComponent,
@@ -60,7 +92,20 @@ registerLocaleData('es');
     AgregarParticipanteDialogComponent,
     NumberDirective,
     NuevaNotaTSocialComponent,
-    ConsultaListaNotasTSocialComponent
+    ConsultaListaNotasTSocialComponent,
+    UserconsultaComponent,
+    UserguardaComponent,
+    UserbuscaComponent,
+    ReadexcelDirective,
+    CitabuscaComponent,
+    CitaconsultaComponent,
+    CitaguardaComponent,
+    FichapacienteComponent,
+    MenugralComponent,
+
+    LogoutBarComponent,
+    FooterComponent,
+    MyFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -69,6 +114,7 @@ registerLocaleData('es');
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatDialogModule,
     NgbModule,
     MatIconModule,
@@ -77,6 +123,15 @@ registerLocaleData('es');
     RecaptchaFormsModule,
     NgxPaginationModule,
     DataTablesModule,
+    MatPaginatorModule,
+    MatTableModule,
+	  MatProgressBarModule,
+    MatInputModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    MatNativeDateModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
@@ -88,7 +143,7 @@ registerLocaleData('es');
     })
   ],
   providers:
-    [DatePipe, UsuariosService, SeguridadService, {
+    [DatePipe, UsuariosService, SeguridadService, CitasService, {
       provide:
         RECAPTCHA_SETTINGS,
       useValue: {
@@ -96,16 +151,17 @@ registerLocaleData('es');
       } as RecaptchaSettings
     }, {
         provide:
-            HTTP_INTERCEPTORS, useClass: JRInterceptor, multi: true 
+            HTTP_INTERCEPTORS, useClass: JRInterceptor, multi: true
       }, {
         provide:
             LOCALE_ID, useValue: 'es'
-      }
+      },
+      {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
     ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(){
-   sessionStorage.setItem('token','token is null'); 
+   sessionStorage.setItem('token','token is null');
   }
 }

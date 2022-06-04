@@ -68,10 +68,10 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
   }
 
   irNuevaNota(){
-    let params = {
-      'objetoAEnviar': null,
-    }
-    this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
+    // let params = {
+    //   'objetoAEnviar': "",
+    // }
+    this.router.navigate(["nueva-nota"], { skipLocationChange: true });
   }
 
 }

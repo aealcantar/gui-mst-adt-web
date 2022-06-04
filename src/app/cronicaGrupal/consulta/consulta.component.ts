@@ -192,10 +192,10 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   addCronica() {
-    let params = {
-      'cronica': null,
-    }
-    this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+    // let params = {
+    //   'cronica': "",
+    // }
+    this.router.navigate(["nuevaCronica"], {  skipLocationChange: true });
   }
 
   irDetalle(cronicaGrupal: any) {

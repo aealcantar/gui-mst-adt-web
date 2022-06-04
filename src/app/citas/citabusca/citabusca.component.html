@@ -1,0 +1,181 @@
+<!-- componente alertas -->
+<app-alerta [objAlerta]="alert"></app-alerta>
+<!-- / -->
+
+<div class="container-fluid central">
+
+  <app-logout-bar ></app-logout-bar>
+  <!-- <app-menugral></app-menugral> -->
+  <app-menu></app-menu>
+  <app-fichapaciente></app-fichapaciente>
+  <!-- <app-card-template></app-card-template> -->
+
+  <section class="section">
+    <div class="base-cont">
+      <div class="tit-princ">
+        <div class="text-left pull-left">
+          <span>Citas</span>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-primary btuser pull-right" (click)="agendarcita()" >Agendar cita</button>
+        </div>
+      </div>
+
+      <div class="body-princ">
+        <form novalidate [formGroup]="citadata" class="form-inline" role="form" autocomplete="off" style="display: flex; flex-wrap:wrap;">
+
+          <div class="form-group usrlist pull-left datepicker-group">
+            <label for="fechahora" class="control-label titulo">Fecha y hora:
+            </label>
+
+            <input  [ngxMatDatetimePicker]="picker"
+              placeholder="Seleccionar fecha" formControlName="fechahora"
+              class="form-control captura" style="max-height: 30px !important; color: #222;"
+
+              (keyup)="picker.open()"
+              readonly>
+            <mat-datepicker-toggle  [for]="$any(picker)" matSuffix>
+              <mat-icon matDatepickerToggleIcon>
+                <img src="../../../assets/images/InputCalendarIcon.svg" height="29px" style="right: 12px;
+                  position: absolute;
+                  border-top-right-radius: 5px;
+                  border-bottom-right-radius: 5px;">
+              </mat-icon>
+            </mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker [touchUi]="false" [showSeconds]="true">
+              <ng-template>
+                <!-- <mat-icon>star</mat-icon> -->
+                <span>Aceptar</span>
+              </ng-template>
+            </ngx-mat-datetime-picker>
+
+          </div>
+          <div class="form-group usrlist pull-left">
+            <label for="turno" class="titulo">Turno:
+            </label>
+            <select
+              class="form-control captura"
+              id="turno"
+              formControlName="turno"
+              (ngModelChange)="onchangeturno($event)"
+              >
+              <option value="" disabled selected hidden>Seleccionar turno</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstCatTurnos">{{objeto.des_turno}}</option>
+            </select>
+          </div>
+
+          <div class="form-group usrlist pull-left">
+            <label for="servicio" class="titulo">Servicio:
+            </label>
+            <select
+              class="form-control captura"
+              id="servicio"
+              formControlName="servicio"
+              (ngModelChange)="onchangeservicio($event)"
+              >
+              <option value="" disabled selected hidden>Seleccionar servicio</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstCatServicios">{{objeto.des_especialidad}}</option>
+            </select>
+          </div>
+
+          <div class="form-group usrlist pull-left">
+            <label for="programa" class="titulo">Programa:
+            </label>
+            <select
+              class="form-control captura"
+              id="programa"
+              formControlName="programa"
+              >
+              <option value="" disabled selected hidden>Seleccionar programa</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstCatProgramas">{{objeto.des_grupo_programa}}</option>
+            </select>
+          </div>
+
+          <div class="form-group usrlist lugar pull-left">
+            <label for="lugar" class="titulo">Lugar:
+            </label>
+            <select
+              class="form-control captura lugar"
+              id="lugar"
+              formControlName="lugar"
+              (ngModelChange)="onchangelugar($event)"
+              >
+              <option value="" disabled selected hidden>Seleccionar lugar</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstCatLugares">{{objeto.des_completa_ubicacion}}</option>
+            </select>
+          </div>
+
+          <div class="form-group usrlist responsable pull-left">
+            <label for="responsable" class="titulo">Responsable:
+            </label>
+            <select
+              class="form-control captura responsable"
+              id="responsable"
+              formControlName="responsable"
+              >
+              <option value="" disabled selected hidden>Seleccionar responsable</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstCatResponsables">{{objeto.nom_nombre}}</option>
+            </select>
+          </div>
+
+          <div class="form-group grpbtns pull-right">
+
+          <button class="btn btn-default btuser " (click)="limpiarbusqueda()" >Limpiar</button>
+
+          <button class="btn btn-primary btuser " (click)="buscarcita()" >Buscar</button>
+          </div>
+
+        </form>
+
+        <table id="tblcitas" datatable [dtOptions]="dtOptions" class="table table-hover table-bordered table-catalogo caption-top" *ngIf="lstCitas.length > 0">
+          <caption class="borde-cap ps-2">
+            <div class="col-2 col-md-2 float-start pull-left" style="line-height: 40px;">
+              Resultados <span class="totcargas">{{lstCitas.length}}</span>
+            </div>
+            <div class="col-2 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right; ">
+              Visualizar datos
+              <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;min-width: 0 !important;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret-img">{{numitems}}</span> <img src="../../../../assets/images/Icon.png">
+              </button>
+              <ul class="dropdown-menu" >
+                <li *ngFor="let i of [15,20,50,100]"><a (click)="cambiatotalpaginas(i)">{{i}}</a></li>
+              </ul>
+            </div>
+          </caption>
+          <thead>
+            <tr>
+              <th style="width: 200px !important;">Fecha y hora</th>
+              <th style="width: 173px !important;">Modalidad de cita</th>
+              <th style="width: 175px !important;">Estatus de cita</th>
+              <th style="width: 620px !important;">Lugar (Ubicación)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lstCitas">
+              <td style="width: 200px !important;"
+                class="link-texto"
+                (click)="muestracita(item.cveCita)">
+                {{ item.fechaInicio + ' ' + item.horaInicio | date : 'dd/MM/yyyy - HH:mm:ss'}}</td>
+              <td style="width: 173px !important;">{{ item.modalidad }}</td>
+              <td style="width: 175px !important;">{{ item.status }}</td>
+              <td style="width: 620px !important;">{{ item.ubicacion }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="nopag pull-right" *ngIf="lstCitas.length > 0">
+          Página
+          <span class="bg-nopag" [innerText]="pagactual"></span>
+        </div>
+
+        <div class="sin-resultados" *ngIf="lstCitas.length == 0">
+          <img src="../../../../assets/images/Group 2358.png"
+            class="Group-2358">
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>

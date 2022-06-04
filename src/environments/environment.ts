@@ -13,7 +13,10 @@ export const environment = {
     siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
   },
   siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
-  secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5'
+  secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
+  urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
+  urlMSEDSCatalogos: 'http://localhost:8085/api/',
+  urlMSADTCITAS: 'http://localhost:8090/api/'
   
 };
 

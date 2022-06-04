@@ -1,0 +1,93 @@
+<!-- componente alertas -->
+<app-alerta [objAlerta]="alert"></app-alerta>
+<!-- / -->
+
+<div class="modal fade" role="dialog" id="content" #content>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content citas">
+      <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column">
+        <img src="../../../../assets/images/Group 2082.png"
+          class="Group-2082">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="modal-body">
+        <div class="mensaje" [innerHTML]="mod_mensaje"></div>
+      </div>
+      <div class="modal-footer">
+        <button
+      class="btn btn-danger btuser"
+      type="button"
+      (click)="cancelarmod()"
+    >
+      Cancelar
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary btuser"
+      (click)="aceptarmod()"
+    >
+      Aceptar
+    </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="container-fluid central">
+
+  <app-logout-bar ></app-logout-bar>
+  <!-- <app-menugral></app-menugral> -->
+  <app-menu></app-menu>
+  <app-fichapaciente></app-fichapaciente>
+  <!-- <app-card-template></app-card-template> -->
+
+    <section class="section">
+      <div class="base-cont">
+        <div class="tit-princ">
+          <div class="text-left pull-left">
+            <span (click)="regresar()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
+            <span>Consulta de cita</span>
+          </div>
+          <div class="pull-right">
+            <button class="btn btn-primary btuser pull-right" (click)="imprimir()" >Imprimir</button>
+          </div>
+        </div>
+
+        <div class="body-princ">
+          <div class="etiqueta-md spc-5">Recibe la atención*:</div>
+          <div class="etiqueta-lg spc-5">Paciente:</div>
+          <div class="texval">{{strpaciente}}</div>
+
+          <div class="cuadro-pct">
+            <div class="pct-fam">
+              <span class="etiqueta-lg">Núcleo familiar:</span>
+
+              <span class="texval" *ngFor="let fam of participantes_fam">{{fam.nom_nombre_completo}}</span>
+            </div>
+
+            <div class="pct-ots">
+              <span class="etiqueta-lg">Otros:</span>
+              <span class="texval" *ngFor="let fam of participantes_otrs">{{fam.nom_nombre_completo}}</span>
+            </div>
+
+          </div>
+
+          <div class="etiqueta-md spc-bt-25">Datos de cita:</div>
+
+          <div class="dts-citalist pull-left" *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
+            <div class="lbel">{{dato.key}}:</div>
+            <div class="valor">{{dato.value}}</div>
+
+          </div>
+
+
+
+        <div class="botones">
+          <button class="btn btn-primary btuser lrg pull-right" (click)="confirmarcita()" >Confirmar asistencia</button>
+          <button class="btn btn-danger btuser pull-right" (click)="cancelarcita()" >Cancelar cita</button>
+        </div>
+      </div>
+      </div>
+    </section>
+
+</div>
