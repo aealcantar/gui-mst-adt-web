@@ -7,11 +7,22 @@ import { Router } from '@angular/router';
 import { DatePipe, KeyValue } from '@angular/common';
 import { DataTableDirective } from 'angular-datatables';
 import { CitasService } from '../citas.service';
-import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 declare var $:any;
 declare var $gmx:any;
+
+class CustomDateAdapter extends MomentDateAdapter {
+  getDayOfWeekNames(style: 'long' | 'short' | 'narrow') {
+    return ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+  }
+}
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -20,7 +31,7 @@ export const MY_DATE_FORMATS = {
   display: {
     dateInput: 'DD/MM/YYYY',
     monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'D',
+    dateA11yLabel: 'DD/MMM/YYYY',
     monthYearA11yLabel: 'MMMM YYYY'
   },
 };
@@ -30,7 +41,13 @@ export const MY_DATE_FORMATS = {
   templateUrl: './citaguarda.component.html',
   styleUrls: ['./citaguarda.component.css'],
   providers: [
+    {
+      provide: DateAdapter,
+      useClass: CustomDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+
   ]
 })
 export class CitaguardaComponent implements OnInit {
@@ -249,7 +266,7 @@ export class CitaguardaComponent implements OnInit {
     }
   }
 
-  public onchangefecha(event: MatDatepickerInputEvent<Date>): void{
+  public onchangefecha(): void{
     let fechaInicio = this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "";
     console.log('fechaInicio', fechaInicio);
 
@@ -368,6 +385,18 @@ export class CitaguardaComponent implements OnInit {
 
   ngOnDestroy() {
 
+  }
+
+  // myFilter = (d: Date | null): boolean => {
+  //   const day = (d || new Date()).getDay();
+  //   // Prevent Saturday and Sunday from being selected.
+  //   return day !== 0 && day !== 6;
+  // }
+
+  myFilter = (d: Moment | null): boolean => {
+    const day = (d || moment()).day();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
   }
 
   // get f() {

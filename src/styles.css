@@ -522,12 +522,41 @@ img.footer {
   background-color: #9d2449 !important;
   color: #fff;
 }
-.mat-calendar-body-label,
+
 .mat-calendar-table-header-divider{
   display: none;
 }
+.mat-calendar-body-label{
+  color: transparent;
+}
 .mat-calendar-arrow{
-  fill: #9d2449;
+  /* fill: #9d2449;
+  border-top-color: #9d2449; */
+  background: url('../src/assets/images/Icon.png');
+  width: 25px !important;
+  background-size: cover;
+  height: 25px !important;
+  border: none !important;
+}
+.mat-calendar-previous-button::after, .mat-calendar-next-button::after{
+  width: 0 !important;
+  height: 0 !important;
+  border-left: 5px solid transparent !important;
+  border-right: 5px solid transparent !important;
+  border-top-width: 5px !important;
+  border-top-style: solid !important;
+}
+.mat-calendar-previous-button::after{
+  border-left-width: 5px !important;
+  transform: translateX(-10px) rotate(90deg) !important;
+}
+.mat-calendar-next-button::after{
+  border-right-width: 5px !important;
+  transform: translateX(-10px) rotate(-90deg) !important;
+}
+
+.mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button{
+  width: 20px !important;
 }
 
 td.dataTables_empty {

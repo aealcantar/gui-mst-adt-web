@@ -102,7 +102,6 @@ registerLocaleData('es');
     CitaguardaComponent,
     FichapacienteComponent,
     MenugralComponent,
-
     LogoutBarComponent,
     FooterComponent,
     MyFilterPipe
@@ -127,10 +126,10 @@ registerLocaleData('es');
     MatTableModule,
 	  MatProgressBarModule,
     MatInputModule,
-    MatDatepickerModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    MatDatepickerModule,
     MatNativeDateModule,
     JwtModule.forRoot({
       config: {

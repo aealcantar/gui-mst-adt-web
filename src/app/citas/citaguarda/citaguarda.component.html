@@ -244,7 +244,8 @@
                   placeholder="Seleccionar fecha" formControlName="fechahora"
                   class="form-control captura fecha" style="max-height: 30px !important; color: #222;"
                   [ngClass]="{'form-control-error': submitted && citadata.controls.fechahora.errors}"
-                  (dateChange)="onchangefecha($event)"
+                  (dateChange)="onchangefecha()"
+                  [matDatepickerFilter]="myFilter"
                   >
                 <mat-datepicker-toggle matSuffix [for]="picker">
                   <mat-icon matDatepickerToggleIcon>
@@ -348,7 +349,7 @@
 
           </div>
 
-          <div class="botones">
+          <div class="botones-alg">
             <button *ngIf="!citaagendada" class="btn btn-primary btuser pull-right" (click)="agendarcita();" >Agendar cita</button>
             <button *ngIf="!citaagendada" class="btn btn-danger btuser pull-right" (click)="cancelarcita();" >Cancelar</button>
             <button *ngIf="citaagendada" class="btn btn-primary btuser pull-right" (click)="imprimircita();" >Imprimir</button>
