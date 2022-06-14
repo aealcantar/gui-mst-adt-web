@@ -133,11 +133,12 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.usuario, this.aplicacion).subscribe(
           (result) => {
             console.log(result);
-            this.authService.userLogged$.next(true);
             this.authService.getUserData(this.usuario.strEmail).subscribe(
               (response: any) => {
                 // console.log("RESPONSE: ", response);
                 this.authService.guardarUsuarioEnSesion(response);
+                this.authService.userLogged$.next(true);
+                this.authService.isAuthenticatedObs$.next(true);
               }
             );
             this.authService.guardarToken(result.access_token);

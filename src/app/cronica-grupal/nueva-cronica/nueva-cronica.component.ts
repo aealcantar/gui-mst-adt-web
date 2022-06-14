@@ -9,6 +9,7 @@ import { Subscription, timer } from "rxjs";
 import { map, share } from "rxjs/operators";
 import { Participante } from 'src/app/models/participante.model';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
 const NUM_PARTICIPANTES: number = 5;
@@ -31,6 +32,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private cronicaGrupalService: CronicaGrupalService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -134,6 +136,24 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
       }
     });
+  }
+
+  modalcarga(content: any) {
+    //this.modalService.open(content, {centered: true,size: 'lg', backdrop: 'static', keyboard: false})
+    $('#content').modal({
+      keyboard: false,
+      backdrop: 'static'
+    })
+    $('#content').modal('show');
+  }
+  
+  cancelarModal() {
+    $('#content').modal('hide');
+  }
+  
+  salirModal(){
+    this.router.navigateByUrl("/consulta-notas", { skipLocationChange: true });
+    $('#content').modal('hide');
   }
 
   guardarCronica() {

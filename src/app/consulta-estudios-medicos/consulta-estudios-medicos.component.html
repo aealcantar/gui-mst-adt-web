@@ -2,11 +2,11 @@
 <app-card-template>
   <div header class="flex justify-content-between align-items-center consultaNotasTrabajoSocial">
     <label>
-      Consulta de notas de trabajo social
+      Consulta de estudios sociales médicos
     </label>
     <div class="botones">
-      <button class="btn btn-primary btuser buttonL" style="border: solid 1px" (click)="irNuevaNota()">
-        Nueva nota
+      <button class="btn btn-primary btuser buttonL" style="border: solid 1px" (click)="irNuevoEstudio()">
+        Nuevo estudio
       </button>
     </div>
   </div>
@@ -14,17 +14,18 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group datepicker-group">
-          <label class="control-label tituloServicio" for="notasInit">Fecha desde:</label>
-          <input notasInit class="form-control" id="notasInit" type="text" placeholder="dd/mm/aaaa">
+          <label class="control-label tituloServicio" for="calendarCEM1">Fecha desde:</label>
+          <input calendar class="form-control" id="calendarCESM1" type="text" placeholder="dd/mm/aaaa">
           <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
             <div class="imgCalendar"></div>
           </span>
         </div>
       </div>
+
       <div class="col-md-4">
         <div class="form-group datepicker-group">
-          <label class="control-label tituloServicio" for="notasFinal">Fecha hasta:</label>
-          <input notasFinal class="form-control" id="notasFinal" type="text" placeholder="dd/mm/aaaa">
+          <label class="control-label tituloServicio" for="calendarCESM2">Fecha hasta:</label>
+          <input calendar class="form-control" id="calendarCESM2" type="text" placeholder="dd/mm/aaaa">
           <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
             <div class="imgCalendar"></div>
           </span>
@@ -48,35 +49,41 @@
         </div>
       </div>
     </div>
-    <ng-container *ngIf="tabla.length > 0 else mostrarSeccionSinResultados">
+    <ng-container *ngIf="estudioMedicos.length > 0 else mostrarSeccionSinResultados">
       <div class="row">
         <div class="col-md-12">
           <table class="tabla" style="width: 100%;">
             <thead>
               <tr>
-                <th class="encabezadoTable"
-                  style="padding: 8px 30px 5px; justify-content: center; position: relative; display: flex; gap: 25px;">
-                  <div style="margin-left: -15px;">Fecha</div>
-                  <div>
-                  <i class="fa-solid fa-caret-up arrow arrow-up"
-                    [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'asc'}"
-                    (click)="sortBy('fecFecha', 'asc', 'fecha')">
-                  </i>
-                  <i class="fa-solid fa-caret-down arrow arrow-down"
-                    [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'desc'}"
-                    (click)="sortBy('fecFecha', 'desc', 'fecha')">
-                  </i>
+                <th class="encabezadoTable" style="padding-top: 3px;
+                padding-left: 1px;
+                text-align: center;">
+                  Fecha
+                  <div style="margin-left: 60%; margin-top: -21px;">
+                    <i class="fa-solid fa-caret-up arrow arrow-up st" style="margin-top: 0px;"
+                      [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'asc'}"
+                      (click)="sortBy('fecFecha', 'asc', 'fecha')">
+                    </i>
+                    <i class="fa-solid fa-caret-down arrow " style="margin-top: 8px; margin-left: 5px;"
+                      [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'desc'}"
+                      (click)="sortBy('fecFecha', 'desc', 'fecha')">
+                    </i>
                   </div>
                 </th>
-                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 70px;">Descripción</th>
+                <th class="encabezadoTable" style="padding-top: 3px; padding-left: 40px; width: 70px;">Nombre de Estudio
+                </th>
+                <th class="encabezadoTable" style="padding-top: 3px; padding-left: 40px; width: 70px;">Personal
+                  solicitante</th>
               </tr>
             </thead>
-            <tbody *ngFor="let item of tabla | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+            <tbody
+              *ngFor="let item of estudioMedicos | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
               <tr>
                 <td class="bordesTablaFecha"
-                  style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
-                  (click)="irDetalle(item);">{{ item.fecFecha | date: 'dd / MM / yyyy' }}</td>
-                <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.nombreDiagnostico}} </td>
+                  style="cursor: pointer; padding-left: 56px; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                  (click)="irDetalle(item);">{{ item.fecFecha | date: 'dd / MM / yyyy'}}</td>
+                <td class="bordesTablaNombreDeEstudio" style=padding-left:40px;> {{item.nombreSolicitante }} </td>
+                <td class="bordesTablaPersonalSOlicitante" style=padding-left:40px;> {{item.nombreResponsable}} </td>
               </tr>
             </tbody>
           </table>

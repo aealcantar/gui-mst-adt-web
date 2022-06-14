@@ -43,20 +43,14 @@ export class BusquedaNssComponent {
     private tarjetaService: AppTarjetaPresentacionService
   ) { }
 
-  elementoSeleccionado(obj: any) {
-
-    this.pacienteSeleccionado = obj;
-
+  elementoSeleccionado(elemento: any) {
+    this.pacienteSeleccionado = elemento;
     this.tarjetaService.add(this.pacienteSeleccionado);
-
     this.router.navigate(['consulta-notas'], { skipLocationChange: true });
-    console.log(this.pacienteSeleccionado)
-
   }
 
   muestra(i: number) {
     this.isCollapsed[i] = !this.isCollapsed[i];
-
   }
 
 
@@ -142,7 +136,7 @@ export class BusquedaNssComponent {
 
   sortBy(columnaId: string, order: string, type: string) {
     console.log(columnaId, order, type);
-    
+
     this.columnaId = columnaId;
     this.order = order;
 

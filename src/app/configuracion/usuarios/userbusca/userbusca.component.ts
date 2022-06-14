@@ -25,7 +25,7 @@ export class UserbuscaComponent implements OnInit  {
   @ViewChild(DataTableDirective, {static: false})
   datatableElement: any = DataTableDirective;
 
-  alert = new objAlert;
+  alert!: objAlert;
 
   lstUsuarios: Array<any> = [];
 

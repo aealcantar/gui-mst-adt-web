@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AdmonPasswordRequest } from '../models/admon-password-request.model';
-import { AdmonPasswordResponse } from '../models/admon-password-response.model';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cronica } from '../models/cronica.model';
@@ -32,6 +30,10 @@ export class CronicaGrupalService {
 
   getCatLugar(cveServicio: string) {
     return this.http.get<any>(`${environment.urlServCatalogos}/api/listUbicacion/${cveServicio}`);
+  }
+  
+  getCatDiagnosticosMedicos(texto: string) {
+    return this.http.get<any>(`${environment.urlServCatalogos}/api/getCatalogoCieAutoComplete/${texto}`);
   }
 
   getAllCronicasGrupales() {
@@ -72,7 +74,7 @@ export class CronicaGrupalService {
 
   downloadPdf(data: any): Observable<Blob> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
-    return this.http.post<Blob>(environment.urlServCronicas + '/reporte/reporteCronica', JSON.stringify(data),
+    return this.http.post<Blob>(environment.urlServCronicasReporte + '/reporte/reporteCronica', JSON.stringify(data),
     { headers: headers, responseType: 'blob' as 'json'});
   }
 

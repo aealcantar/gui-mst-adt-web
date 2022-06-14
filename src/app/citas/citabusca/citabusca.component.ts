@@ -328,7 +328,7 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   }
 
   muestraAlerta(mensaje: string, estilo: string, type: string){
-    this.alert = new objAlert();
+    // this.alert = new objAlert();
     this.alert = {
       message: mensaje,
       type: estilo,

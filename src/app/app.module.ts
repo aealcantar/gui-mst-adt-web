@@ -1,9 +1,11 @@
-import { LOCALE_ID, NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-nota-tsocial.component';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -46,14 +48,18 @@ import { NuevaNotaTSocialComponent } from './nueva-nota-tsocial/nueva-nota-tsoci
 import { ConsultaListaNotasTSocialComponent } from './consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatTableModule} from '@angular/material/table';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
 import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
 import { FichapacienteComponent } from './common/fichapaciente/fichapaciente.component';
 import { MenugralComponent } from './common/menugral/menugral.component';
 import { CitasService } from './citas/citas.service';
+import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
+import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
+import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
+import { CardTemplateExpandibleComponent } from './commons/card-template-expandible/card-template-expandible.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
 import { FooterComponent } from './components/templates/footer/footer.component';
@@ -66,7 +72,7 @@ import {
   NgxMatTimepickerModule,
   NGX_MAT_DATE_FORMATS
 } from '@angular-material-components/datetime-picker';
-import { MAT_DATE_LOCALE,MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
 
 registerLocaleData('es');
@@ -104,7 +110,12 @@ registerLocaleData('es');
     MenugralComponent,
     LogoutBarComponent,
     FooterComponent,
-    MyFilterPipe
+    MyFilterPipe,
+    NuevoEstudioSocialMedicoComponent,
+    ConsultaNotaTSocialComponent,
+    ConsultaEstudiosMedicosComponent,
+    EstudioMedicoGuardadoComponent,
+    CardTemplateExpandibleComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +126,7 @@ registerLocaleData('es');
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatAutocompleteModule,
     NgbModule,
     MatIconModule,
     MatFormFieldModule,
@@ -124,7 +136,7 @@ registerLocaleData('es');
     DataTablesModule,
     MatPaginatorModule,
     MatTableModule,
-	  MatProgressBarModule,
+    MatProgressBarModule,
     MatInputModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
@@ -136,8 +148,8 @@ registerLocaleData('es');
         tokenGetter: function tokenGetter() {
           return sessionStorage.getItem('token');
         },
-        allowedDomains: ['localhost:4200','localhost:8080','localhost:8081','localhost:8082'],
-        disallowedRoutes: ['http://localhost:8080/login','http://localhost:8081/login']
+        allowedDomains: ['localhost:4200', 'localhost:8080', 'localhost:8081', 'localhost:8082'],
+        disallowedRoutes: ['http://localhost:8080/login', 'http://localhost:8081/login']
       }
     })
   ],
@@ -150,17 +162,17 @@ registerLocaleData('es');
       } as RecaptchaSettings
     }, {
         provide:
-            HTTP_INTERCEPTORS, useClass: JRInterceptor, multi: true
+          HTTP_INTERCEPTORS, useClass: JRInterceptor, multi: true
       }, {
         provide:
-            LOCALE_ID, useValue: 'es'
+          LOCALE_ID, useValue: 'es'
       },
-      {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
+      { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }
     ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(){
-   sessionStorage.setItem('token','token is null');
+  constructor() {
+    sessionStorage.setItem('token', 'token is null');
   }
 }

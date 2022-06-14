@@ -1,0 +1,99 @@
+<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-card-template>
+  <div header class="flex justify-content-between align-items-center consultaNotasTrabajoSocial row">
+    <div class="col-md-6 ">
+      <label style="font-size: 24px; font-weight: 411;" class="consultaNotaTrabajoSocial">
+        Consulta de nota de trabajo social
+      </label>
+    </div>
+    <div class="col-md-6 ">
+      <div style=" clear:bloth; white-space: nowrap;">
+        <span class="tituloDosSpam"
+          style="white-space: nowrap;display:block; text-align: left;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{this.nota?.fecFecha
+          | date:
+          "EEEE" | titlecase }} {{ this.nota?.fecFecha | date: "d" }} de {{ this.nota?.fecFecha | date: "MMMM" }} del {{
+          this.nota?.fecFecha | date: "yyyy" }} &nbsp; {{ this.nota?.timHora}} </span>
+      </div>
+    </div>
+  </div>
+  <div content>
+    <div>
+      <span class="instrucciones">
+      </span>
+    </div>
+    <!-- <form novalidate class="formInfo"> -->
+    <div class="container seccion">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class=" tituloServicio">Tipo de nota:</label>
+            <label class="control-label">
+              {{nota.nombreTipoNota}}
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="tituloServicio">Red de apoyo con la que cuenta el paciente:</label>
+            <label class="control-label">
+              {{nota.nombreRedApoyo}}
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="tituloServicio">Actividad técnica:</label>
+            <label class="control-label">
+              {{nota.nombreActividadTecnica}}
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="tituloServicio">Diagnóstico médico:</label>
+            <label class="control-label" style="text-align: left;">
+              {{nota.nombreDiagnostico}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="separador"></div>
+    </div>
+    <div class="container seccion">
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <span class="spanInput">Redacción cronológica de la intervención:</span>
+          <br />
+          <label class="form-controler" id="redaccion" placeholder="Ingresar redaci&oacute;n cronol&oacute;gica">
+            {{nota.redaccion}}
+          </label>
+
+        </div>
+        <div class="col-md-12 form-group">
+          <span class="spanInput">Diagnóstico social:</span>
+          <br />
+          <label class="form-controler" id="diagnostico" placeholder="Ingresar diagnostico social">
+            {{nota.diagnostico}}
+          </label>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12" style="padding-top: 19px; padding-right: 24px; margin-top: -3%">
+            <button type="button" class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449"
+              (click)="imprimir()">
+              Imprimir
+            </button>
+            <button type="button" class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449"
+              (click)="update()">
+              Editar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- </form> -->
+
+  </div>
+</app-card-template>

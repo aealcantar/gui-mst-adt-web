@@ -1,5 +1,46 @@
 <app-app-alerts></app-app-alerts>
 <app-menu [activeItem]="1"></app-menu>
+<!-- Modal btn cancelar eduardo Flores-->
+<div class="modal fade" role="dialog" id="content" #content >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border: 1px solid #CCCCCC ;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16); border-radius: 10px;">
+      <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column"
+      style="border: 1px solid #CCCCCC ; border-bottom: 1px; 
+      border-radius: 10px 10px 0 0;">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="line62" style="border-bottom: black;"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+
+          <label class="titulo" style="font-weight: 500; font-size: 24px; 
+          line-height: 21.94px; text-align: center;" >¿Desea salir sin guardar</label>
+          <br>
+          <label style="font-weight: 500; font-size: 24px; 
+          line-height: 21.94px; text-align: center;"> los cambios?</label>
+
+      </div>
+      <div class="col-md12 row"
+          style="width:495px; height: 118px; text-align: center; margin: auto;
+          padding: 15px; background-color: #FAFAFA; border-radius: 10px;">
+
+          <div class="col-md10" width="495px" height="118px" aling="center" >
+              <button type="button" class="btn btn-danger buttonL" style="border: solid 1px #b38e5d;"
+                  (click)="cancelarModal()">
+                  Cancelar
+              </button>
+              <button type="button" class="btn btn-primary buttonL" style="border: solid 1px #9d2449;"
+                  (click)="salirModal()">
+                  Aceptar
+              </button>
+          </div>
+          </div>
+
+      </div>
+</div>
+</div>
+<!-- fin modal btn cancelar-->
 <app-card-template>
 
 
@@ -46,10 +87,8 @@
               <select class="form-control" formControlName="grupo" style="background-position-y: 5px;"
                 aria-label="Servicio">
                 <option class="select-font" [value]="'-1'" selected>Ingresar grupo</option>
-                <option class="select-font" [value]="grupo.cve_grupo_programa" *ngFor="let grupo of grupos">
-                  {{ grupo.des_grupo_programa }}
-                </option>
-                <option class="select-font">{{ 'Ingresar Grupo' }}
+                <option class="select-font" [value]="grupo.cveEspecialidad" *ngFor="let grupo of grupos">
+                  {{ grupo.desActividad }}
                 </option>
               </select>
             </div>
@@ -189,10 +228,10 @@
             style="float: right;border: solid 1px #9d2449;" (click)="guardarCronica()">
             Guardar
           </button>
-          <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;"
-            (click)="cancelar()">
-            Cancelar
-          </button>
+          <button (click)="modalcarga(content)" type="button" class="btn btn-danger buttonL"
+          style="float: right; border: solid 1px #b38e5d;" >
+          Cancelar
+      </button>
         </div>
       </div>
     </form>

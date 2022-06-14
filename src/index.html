@@ -9,7 +9,7 @@
   <link href="/favicon.ico" rel="shortcut icon">
   <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.css">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -20,14 +20,18 @@
   <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
   <script>
     setTimeout(function () {
-      if(document.querySelector(".main-footer")){
-
+      if (document.querySelector(".main-footer")) {
+        document.querySelector(".main-footer").remove();
       }
-      document.querySelector(".main-footer").remove();
     }, 2000);
     $gmx(document).ready(function () {
       $('#calendar').datepicker();
       $('#calendarCronica').datepicker();
+      $('#notasInit').datepicker();
+      $('#notasFinal').datepicker();
+      $('#calendarCESM1').datepicker();
+      $('#calendarCESM2').datepicker();
+      $('#calendarCESM3').datepicker();
     });
   </script>
 </body>

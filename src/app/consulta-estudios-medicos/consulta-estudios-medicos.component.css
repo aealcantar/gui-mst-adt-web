@@ -100,7 +100,7 @@ a {
   background-repeat: no-repeat;
   margin: 0.6px 1px 3px 18.2px;
   padding: 0 20.2px 0 18.2px;
-  height: 36px;
+  height: 36.5px;
   border-radius: 2px 2px 2px 2px;
 }
 
@@ -127,7 +127,7 @@ a {
   text-align: left;
   background-color: rgba(196, 196, 196, 0.1);
   border: 1px solid #EEEEEE;
-  text-align: center;
+  text-align: left;
 }
 
 .encabezadoTableCentro {
@@ -145,9 +145,24 @@ a {
 }
 .bordesTablaFecha {
   border: 1px solid #ddd;
-  text-align: center !important;
+  text-align: left !important;
   padding-top: 14px;
   width: 17%;
+}
+
+
+.bordesTablaNombreDeEstudio{
+  border: 1px solid #ddd;
+  text-align: left !important;
+  padding-top: 14px;
+  width: 50%;
+}
+
+.bordesTablaPersonalSOlicitante{
+  border: 1px solid #ddd;
+  text-align: left !important;
+  padding-top: 14px;
+  width: 30%;
 }
 
 .bordesTablaHora {

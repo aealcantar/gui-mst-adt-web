@@ -192,10 +192,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   addCronica() {
-    // let params = {
-    //   'cronica': "",
-    // }
-    this.router.navigate(["nuevaCronica"], {  skipLocationChange: true });
+    this.router.navigate(["nuevaCronica"], { skipLocationChange: true });
   }
 
   irDetalle(cronicaGrupal: any) {
@@ -214,10 +211,22 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       }
     } else if (this.radioBtnSelected === 'No') {
       console.log(" ENTRAMOS A NO ");
-      this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
+        console.log("NO HAY INFO");
+        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+      } else {
+        console.log("SI HAY INFO");
+        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+      }
     } else {
       console.log(" ENTRAMOS SIN VALOR ");
-      return;
+      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
+        console.log("NO HAY INFO");
+        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+      } else {
+        console.log("SI HAY INFO");
+        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+      }
     }
   }
 

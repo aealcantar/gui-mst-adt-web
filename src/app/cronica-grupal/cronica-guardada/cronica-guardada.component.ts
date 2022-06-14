@@ -36,7 +36,7 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.showSucces("¡La información se guardó con éxito!")
+    this.showSucces("¡La información se guardó con éxito!");
     this.route.queryParamMap.subscribe((params: any) => {
       this.cronica = JSON.parse(params.getAll('cronica'));
       console.log("OBJETO ENVIADO: ", this.cronica);

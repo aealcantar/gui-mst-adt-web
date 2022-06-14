@@ -151,7 +151,7 @@ export class CitaconsultaComponent implements OnInit {
   }
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string){
-    this.alert = new objAlert;
+    // this.alert = new objAlert;
     this.alert = {
       message: mensaje,
       type: estilo,
