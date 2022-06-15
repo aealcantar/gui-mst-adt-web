@@ -74,6 +74,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
+import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 registerLocaleData('es');
 
@@ -116,6 +117,7 @@ registerLocaleData('es');
     ConsultaEstudiosMedicosComponent,
     EstudioMedicoGuardadoComponent,
     CardTemplateExpandibleComponent,
+    ConsultaControlArticulosComponent,
   ],
   imports: [
     BrowserModule,
