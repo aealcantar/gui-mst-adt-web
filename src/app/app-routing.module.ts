@@ -25,7 +25,7 @@ import { UserguardaComponent } from './configuracion/usuarios/userguarda/usergua
 import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
 import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
-
+import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 
 const routes: Routes = [
@@ -51,6 +51,7 @@ const routes: Routes = [
   { path: 'buscacita', component: CitabuscaComponent, canActivate: [SeguridadRouter] },
   { path: 'consultacita/:id', component: CitaconsultaComponent, canActivate: [SeguridadRouter] },
   { path: 'guardacita', component: CitaguardaComponent, canActivate: [SeguridadRouter] },
+  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent, canActivate: [SeguridadRouter]  },
   { path: '**', redirectTo: 'login' }
 ];
 
