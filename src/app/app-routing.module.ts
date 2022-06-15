@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent, canActivate: [SeguridadRouter] },
   { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent, canActivate: [SeguridadRouter] },
   { path: 'buscauser', component: UserbuscaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
+  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent, canActivate: [SeguridadRouter] },
   { path: 'consultauser/:id', component: UserconsultaComponent, canActivate: [SeguridadRouter] },
   { path: 'guardauser', component: UserguardaComponent, canActivate: [SeguridadRouter] },
   { path: 'editauser/:id', component: UserguardaComponent, canActivate: [SeguridadRouter] },
