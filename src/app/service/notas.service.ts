@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Nota } from '../models/notas.model';
 
-const urlServNotas = `${environment.urlServNotas}/api`
-const urlServNotasReporte = `${environment.urlServNotas}/reporteNotasTs`
+const urlServNotas = `${environment.urlServNotas}/msmts-notas/api`
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +52,7 @@ export class NotasService {
 
   downloadPdf(data: any): Observable<Blob> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
-    return this.http.post<Blob>(`${urlServNotasReporte}/reporteNotaTs`, JSON.stringify(data),
+    return this.http.post<Blob>(`${urlServNotas}/reporteNotaTs`, JSON.stringify(data),
     { headers: headers, responseType: 'blob' as 'json'});
   }
 

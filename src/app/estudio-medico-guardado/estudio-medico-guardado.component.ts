@@ -129,7 +129,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     let reporteEstudioMedicoSocial: any = {
       ooad: "CDMX NORTE",
       unidad: "HGZ 48 SAN PEDRO XALAPA",
-      turno: this.pacienteSeleccionado.turno === "M" ? "Matutino" : "Vespertino",
+      turno: this.pacienteSeleccionado.turno === "M" ? "MATUTINO" : "VESPERTINO",
       servicio: "GRUPO",
       cvePtal: "35E1011D2153",
       nss: this.pacienteSeleccionado.nss,
@@ -138,7 +138,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       curp: this.pacienteSeleccionado.curp,
       unidad2: this.pacienteSeleccionado.unidadMedica,
       consultorio: this.pacienteSeleccionado.consultorio,
-      edad: this.pacienteSeleccionado.edad + " " + this.convertDate(this.pacienteSeleccionado.fechaNacimiento),
+      edad: this.pacienteSeleccionado.edad + "años " + this.convertDate(this.pacienteSeleccionado.fechaNacimiento),
       sexo: this.pacienteSeleccionado.sexo === "M" ? "Masculino" : "Femenino",
       calle: this.estudioMedico.nomVialidad,
       numeroInt: this.estudioMedico.numInterior,

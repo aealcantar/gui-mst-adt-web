@@ -78,8 +78,6 @@ export class LoginComponent implements OnInit {
       console.log(" app " + this.aplicacion.cveUsuario);
     }, (error: HttpErrorResponse) => {
       console.error("Error: ", error);
-      // this.msjError("Hubo error en la conexión con los servicios");
-      // this.mostrarMensaje(4, this._Mensajes.MSJ_ERROR_CONEXION_API);
     });
   }
 
@@ -112,30 +110,15 @@ export class LoginComponent implements OnInit {
 
     if (this.logindata.valid) {
       this.strMsjError = "";
-      /*
-        this.seguridadService.login({
-          email: this.logindata.value.email,
-          password: this.logindata.value.password
-        })*/
       try {
-        // this.recaptchaV3Service.execute('importantAction')
-        //   .subscribe((token: string) => {
         console.log(`Token [${this.token}] generated`);
-        // this.authService.validateRecaptcha(token).subscribe(
-        //   (result) => {
-        //     console.log(result);
-        //     this.recaptchaResponse = result;
-        // if (this.recaptchaResponse.success == true) {
-        //login
         this.usuario.strEmail = this.logindata.get("usuario")?.value;
         this.usuario.strPassword = this.logindata.get("password")?.value;
-
         this.authService.login(this.usuario, this.aplicacion).subscribe(
           (result) => {
             console.log(result);
             this.authService.getUserData(this.usuario.strEmail).subscribe(
               (response: any) => {
-                // console.log("RESPONSE: ", response);
                 this.authService.guardarUsuarioEnSesion(response);
                 this.authService.userLogged$.next(true);
                 this.authService.isAuthenticatedObs$.next(true);
@@ -146,6 +129,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["/busqueda"], { skipLocationChange: true });
           },
           (err: HttpErrorResponse) => {
+            window.scroll(0,0);
             console.log("error " + err.error.message);
             if (err.error.message == undefined) {
               this.showError("<strong>Error.</strong> Servicio no esta disponible. Favor de reportarlo!.");
@@ -157,27 +141,8 @@ export class LoginComponent implements OnInit {
               this.strMsjError = "" + err.status;
             }
             this.showError(err.error.message);
-            //this.showError(err.error.message?err.message:err.error.message);
           }
         );
-        // } else {
-        //   this.showError(" Eres un robot");
-        // }
-        //   },
-        //   (err: HttpErrorResponse) => {
-        //     console.log("eror " + err.error.message);
-        //     if (err.status == 400) {
-        //       this.strMsjError = "" + err.status;
-        //     } else {
-        //       this.strMsjError = "" + err.status;
-        //     }
-        //     this.showError(err.error.message ? err.message : err.message);
-        //   }
-        // );
-        // });
-        // } else {
-        //  this.showError();
-        // }
       } catch (error) {
         // this.showError();
       }
@@ -186,6 +151,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //Error
   private showError(error: string) {
     this.alert = {
       message: error,
@@ -227,7 +193,6 @@ export class LoginComponent implements OnInit {
   }
 
   modalcarga(content: any) {
-    //this.modalService.open(content, {centered: true,size: 'lg', backdrop: 'static', keyboard: false})
     $('#content').modal({
       keyboard: false,
       backdrop: 'static'
@@ -260,7 +225,6 @@ export class LoginComponent implements OnInit {
 
   cancelarenviocorreo() {
     this.correosubmitted = false;
-    //this.modalService.dismissAll();
     this.correodata.reset();
     $('#content').modal('hide')
   }

@@ -37,39 +37,39 @@ export class CronicaGrupalService {
   }
 
   getAllCronicasGrupales() {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasgrupales`, { responseType: 'json'});
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasgrupales`, { responseType: 'json'});
   }
 
   getCronicasGrupalesByServicioEspecialidad(cveServicio: string) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasbyesp/${cveServicio}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasbyesp/${cveServicio}`);
   }
 
   getCronicasGrupalesByTurno(cveTurno: number) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasbyturno/${cveTurno}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasbyturno/${cveTurno}`);
   }
 
   getCronicasGrupalesByGrupo(cveGrupo: number) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasbygrupo/${cveGrupo}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasbygrupo/${cveGrupo}`);
   }
 
   getCronicasGrupalesByUbicacion(cveUbicacion: string) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasbyubicacion/${cveUbicacion}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasbyubicacion/${cveUbicacion}`);
   }
 
   getCronicasGrupalesByFecha(fecha: string | null) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasbyfecha/${fecha}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasbyfecha/${fecha}`);
   }
 
   getCronicasGrupalesByEspecialidadEspecifica(especialidadEspecifica: string) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/cronicasbyespecif/${especialidadEspecifica}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/cronicasbyespecif/${especialidadEspecifica}`);
   }
 
   getCronicasGrupalesByFiltros(cveServicio: string, cveTurno: number, cveGrupo: number, cveUbicacion: string, fecha: string | null, especialidadEspecifica: string) {
-    return this.http.get<any>(`${environment.urlServCronicas}/api/filtrocronicas/${cveServicio}/${cveTurno}/${cveGrupo}/${cveUbicacion}/${fecha}/${especialidadEspecifica}`);
+    return this.http.get<any>(`${environment.urlServCronicas}/msmts-cronica-grupal/api/filtrocronicas/${cveServicio}/${cveTurno}/${cveGrupo}/${cveUbicacion}/${fecha}/${especialidadEspecifica}`);
   }
 
   addCronica(cronica: Cronica) {
-    return this.http.post(`${environment.urlServCronicas}/api/guardanueva/`, cronica);
+    return this.http.post(`${environment.urlServCronicas}/msmts-cronica-grupal/api/guardanueva/`, cronica);
   }
 
   downloadPdf(data: any): Observable<Blob> {
