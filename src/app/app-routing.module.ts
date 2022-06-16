@@ -58,6 +58,10 @@ const routes: Routes = [
     loadChildren:()=>
     import('./agenda-digital/agenda-digital.module').then((m)=> m.AgendaDigitalModule),
   },
+  {path:'trabajo-social',
+  loadChildren:()=>
+  import('./trabajo-social/trabajo-social.module').then((m)=> m.TrabajoSocialModule),
+},
   { path: '**', redirectTo: 'login' }
 ];
 
