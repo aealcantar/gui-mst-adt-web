@@ -18,6 +18,7 @@ import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico
 import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-nota-tsocial.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
+import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
 
 import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca.component';
 import { UserconsultaComponent } from './configuracion/usuarios/userconsulta/userconsulta.component';
@@ -25,7 +26,7 @@ import { UserguardaComponent } from './configuracion/usuarios/userguarda/usergua
 import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
 import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
-
+import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 
 const routes: Routes = [
@@ -45,12 +46,14 @@ const routes: Routes = [
   { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent, canActivate: [SeguridadRouter] },
   { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent, canActivate: [SeguridadRouter] },
   { path: 'buscauser', component: UserbuscaComponent, canActivate: [SeguridadRouter] },
+  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent, canActivate: [SeguridadRouter] },
   { path: 'consultauser/:id', component: UserconsultaComponent, canActivate: [SeguridadRouter] },
   { path: 'guardauser', component: UserguardaComponent, canActivate: [SeguridadRouter] },
   { path: 'editauser/:id', component: UserguardaComponent, canActivate: [SeguridadRouter] },
   { path: 'buscacita', component: CitabuscaComponent, canActivate: [SeguridadRouter] },
   { path: 'consultacita/:id', component: CitaconsultaComponent, canActivate: [SeguridadRouter] },
   { path: 'guardacita', component: CitaguardaComponent, canActivate: [SeguridadRouter] },
+  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent, canActivate: [SeguridadRouter]  },
   { path: '**', redirectTo: 'login' }
 ];
 

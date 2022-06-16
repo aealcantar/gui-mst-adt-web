@@ -59,6 +59,7 @@ import { CitasService } from './citas/citas.service';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
+import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { CardTemplateExpandibleComponent } from './commons/card-template-expandible/card-template-expandible.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
@@ -74,6 +75,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
+import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 registerLocaleData('es');
 
@@ -115,7 +117,9 @@ registerLocaleData('es');
     ConsultaNotaTSocialComponent,
     ConsultaEstudiosMedicosComponent,
     EstudioMedicoGuardadoComponent,
+    ConsultaVolantesDonacionComponent,
     CardTemplateExpandibleComponent,
+    ConsultaControlArticulosComponent,
   ],
   imports: [
     BrowserModule,
