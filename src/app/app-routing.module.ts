@@ -54,6 +54,10 @@ const routes: Routes = [
   { path: 'consultacita/:id', component: CitaconsultaComponent, canActivate: [SeguridadRouter] },
   { path: 'guardacita', component: CitaguardaComponent, canActivate: [SeguridadRouter] },
   { path: 'consulta-articulos', component: ConsultaControlArticulosComponent, canActivate: [SeguridadRouter]  },
+  {path:'agenda-digital',
+    loadChildren:()=>
+    import('./agenda-digital/agenda-digital.module').then((m)=> m.AgendaDigitalModule),
+  },
   { path: '**', redirectTo: 'login' }
 ];
 
