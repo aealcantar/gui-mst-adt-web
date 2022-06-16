@@ -289,22 +289,6 @@ input {
 }
 
 
-.tituloServicio {
-  color: #272829;
-  font-size: 14px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #272829;
-  width: 100%;
-  height: 17px;
-  margin: 0 242.5px 4px 0;
-  font-family: Montserrat;
-}
-
 .control-label {
   font-weight: 400;
   font-size: 14px;
@@ -366,8 +350,61 @@ input {
 .modal-content {
   margin: auto;
   width: 496px;
+  border: 1px solid #CCCCCC;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16); border-radius: 10px;
 }
 
 .inputBloqueo {
   background-color: #ccc;
+}
+
+.spantitulo{
+  font-weight: 700;
+  font-size: 24px;
+  color: #222222;
+  line-height: 29.16px;
+}
+
+.optionSelect{
+  background-position-y: 10px;
+}
+
+.styleselect{
+background-position-y: 5px;
+}
+
+.divBotones{
+  padding-top: 19px; padding-right: 24px;  margin-top: -1.4%;
+}
+
+.btnGuardar{
+  float: right;border: solid 1px #9d2449;
+
+}
+
+.btnCancelar{
+  float: right; border: solid 1px #b38e5d;
+}
+
+.modalAtencion{
+  border: 1px solid #CCCCCC ; border-bottom: 1px;
+  border-radius: 10px 10px 0 0;
+}
+
+.lineaSeparador{
+  height: 0.15px;
+  background-color: #CCCCCC;
+  width: 494px;
+  border-bottom: black;
+}
+
+.textConfirmacion{
+  font-weight: 500; font-size: 24px;
+  line-height: 21.94px; text-align: center;
+}
+
+.divBtnModal{
+  width:495px; height: 118px; text-align: center; margin: auto;
+  padding: 15px; background-color: #FAFAFA; border-radius: 10px;
+
 }

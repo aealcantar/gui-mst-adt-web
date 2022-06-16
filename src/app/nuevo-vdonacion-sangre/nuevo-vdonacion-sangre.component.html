@@ -1,11 +1,10 @@
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
   <div header class="nuevoVolanteDeDonacionSangre">
-    <span style="font-weight: 700; font-size: 24px; color: #222222; line-height: 29.16px;">
+    <span class="spantitulo">
       Nuevo Volante de donación de sangre
     </span>
   </div>
-
   <div content>
     <div>
       <span class="instrucciones">
@@ -24,9 +23,9 @@
           </div>
           <div class="col-md-4">
             <div class="form-group datepicker-group">
-              <label class="control-label tituloServicio" for="notasInit">Fecha*:</label>
+              <span class="spanInput">Fecha*:</span>
               <input notasInit class="form-control" id="notasInit" type="text" placeholder="Ingresar fecha">
-              <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
             </div>
@@ -41,9 +40,9 @@
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
-              <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
+              <select class="form-control styleselect" formControlName="hora"
                 aria-label="Servicio">
-                <option class="select-font " style="background-position-y: 10px;" placeholder="Ingresar ponentes"
+                <option class="select-font optionSelect" placeholder="Ingresar ponentes"
                   selected [value]="'-1'">Ingresar nombre</option>
                 <option class="select-font" [value]="1">BAnco de sangre 1</option>
               </select>
@@ -51,18 +50,18 @@
           </div>
           <div class="col-md-2">
             <span class="spanInput">Horario de atención*:</span>
-            <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
+            <select class="form-control styleselect" formControlName="hora"
               aria-label="Servicio">
-              <option class="select-font " style="background-position-y: 10px;" placeholder="Ingresar ponentes" selected
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected
                 [value]="'-1'">Hora inicial</option>
               <option class="select-font" [value]="1">10:00:00</option>
             </select>
           </div>
           <div class="col-md-2">
             <br>
-            <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
+            <select class="form-control styleselect" formControlName="hora"
               aria-label="Servicio">
-              <option class="select-font " style="background-position-y: 10px;" placeholder="Ingresar ponentes" selected
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected
                 [value]="'-1'">Hora final</option>
               <option class="select-font" [value]="1">10:00:00</option>
             </select>
@@ -90,9 +89,9 @@
         <div class="row">
           <div class="col-md-4">
             <span class="spanInput">Ciudad*:</span>
-            <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
+            <select class="form-control styleselect" formControlName="hora"
               aria-label="Servicio">
-              <option class="select-font " style="background-position-y: 10px;" placeholder="Ingresar ciudad" selected
+              <option class="select-font optionSelect" placeholder="Ingresar ciudad" selected
                 [value]="'-1'">Ingresar ciudad</option>
               <option class="select-font" [value]="1">ciudad 1</option>
             </select>
@@ -142,9 +141,9 @@
           </div>
           <div class="col-md-4">
             <span class="spanInput">Servicio*:</span>
-            <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
+            <select class="form-control styleselect" formControlName="hora"
               aria-label="Servicio">
-              <option class="select-font " style="background-position-y: 10px;" placeholder="Ingresar ponentes" selected
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected
                 [value]="'-1'">Ingresar nombre del servicio</option>
               <option class="select-font" [value]="1">Servicio 1</option>
             </select>
@@ -172,9 +171,9 @@
           </div>
           <div class="col-md-4">
             <span class="spanInput">Teléfono:</span>
-            <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
+            <select class="form-control styleselect" formControlName="hora"
               aria-label="Servicio">
-              <option class="select-font " style="background-position-y: 10px;" placeholder="Ingresar ponentes" selected
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected
                 [value]="'-1'">Ingresar telefono</option>
               <option class="select-font" [value]="1">10:00:00</option>
             </select>
@@ -218,11 +217,11 @@
         </span>
       </div>
       <div class="row">
-        <div class="col-md-12" style="padding-top: 19px; padding-right: 24px;  margin-top: -1.4%;">
-          <button class="btn btn-primary buttonL" style="float: right;border: solid 1px #9d2449;">
+        <div class="col-md-12 divBotones">
+          <button class="btn btn-primary buttonL btnGuardar">
             Guardar
           </button>
-          <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;">
+          <button type="button" class="btn btn-danger buttonL btnCancelar"(click)="modalcarga()">
             Cancelar
           </button>
         </div>
@@ -230,3 +229,34 @@
     </form>
   </div>
 </app-card-template>
+
+<div class="modal fade" role="dialog" id="content" #content>
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header text-center modalAtencion" fxLayoutAlign="space-between center" fxLayout="column">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="lineaSeparador"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+
+        <label class="tituloModal textConfirmacion">¿Desea salir sin guardar</label>
+        <br>
+        <label class="textConfirmacion"> los cambios?</label>
+      </div>
+      <div class="col-md12 row divBtnModal">
+        <div class="col-md10" width="495px" height="118px" aling="center" style="padding-right: 20%;">
+          <button type="button" (click)="salirModal()" class="btn btn-primary buttonL btnGuardar">
+            Aceptar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar"
+            (click)="cancelarModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
