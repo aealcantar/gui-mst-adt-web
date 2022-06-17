@@ -1,0 +1,565 @@
+.Bg {
+    height: 218px;
+    flex-grow: 0;
+    background-color: #10312b;
+    display: grid;
+    place-content: center;
+
+}
+
+.Rectangle-855 {
+
+    width: 1181PX;
+    height: 200px;
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: -65px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Rectangle-8555 {
+
+    width: 1181PX;
+    height: 300px;
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 1px;
+    margin-left: 15px;
+    margin-right: auto;
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    align-items: stretch;
+    height: 400px;
+}
+
+label {
+    width: 83.8px;
+    height: 15px;
+    flex-grow: 0;
+    margin: 0 315.8px 4px 0.4px;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222;
+}
+
+.Ellipse-61 {
+    width: 243.9px;
+    height: 111px;
+    flex-grow: 0;
+    margin: -35px 0px 0px 887px;
+    opacity: 0.5;
+    background-color: #d2e4ff;
+    float: right;
+    display: flex;
+    border-top-right-radius: 10px;
+    position: absolute;
+    z-index: 1;
+}
+
+.Cronologa {
+    width: 202px;
+    height: 27px;
+    flex-grow: 0;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+}
+
+
+.buscaico {
+    width: 31px;
+    height: 40px;
+    margin: 5px -12px 1px 18px;
+}
+
+#paralelograma {
+    width: 250px;
+    height: 111px;
+    -webkit-transform: skew(24deg);
+    -moz-transform: skew(20deg);
+    -o-transform: skew(20deg);
+    background: #f8f8fa;
+    position: absolute;
+    z-index: 2;
+    border-top-right-radius: 78px;
+    margin-left: 129px;
+}
+
+#paralelograma2 {
+    width: 291px;
+    height: 111px;
+    -webkit-transform: skew(56deg);
+    -moz-transform: skew(20deg);
+    -o-transform: skew(20deg);
+    background: #f8f8fa;
+    position: absolute;
+    z-index: 2;
+    border-top-right-radius: 78px;
+    margin-left: 33px;
+}
+
+.polig {
+    width: 50px;
+    float: right;
+    margin-right: 283px;
+    margin-top: -35px;
+}
+
+.logo {
+    margin-left: 845px;
+    margin-top: 8px;
+    position: absolute;
+    z-index: 3;
+}
+
+label {
+    width: 83.8px;
+    height: 15px;
+    flex-grow: 0;
+    margin: 24px 0 10px 65.4px;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222;
+}
+
+#busqueda {
+
+    display: flex;
+    margin-top: -26px;
+}
+
+.boton {
+    width: 83px;
+    height: 40px;
+    margin-left: 25px;
+    margin-top: 23px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: revert;
+    border-radius: 8px;
+
+}
+
+.inputs {
+    width: 370px;
+    height: 40px;
+    margin-left: 63px;
+    margin-top: 23px;
+}
+
+.nss-paciente1 {
+    width: 100%;
+    height: 409px;
+    padding: 19px 0 0;
+}
+
+.Rectangle-960 {
+    width: 1180px;
+    height: 41px;
+    flex-grow: 0;
+    margin-top: 20px;
+    border: solid 1px #eee;
+}
+
+.Rectangle-9601 {
+    width: 100%;
+    height: 41px;
+    flex-grow: 0;
+    margin-top: 20px;
+    border: solid 1px #eee;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+}
+
+.resultados {
+    width: 109px;
+    height: 17px;
+    flex-grow: 0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    float: left;
+    color: #222;
+    margin-right: 17px;
+    margin-top: 10px;
+}
+
+.resultados2 {
+
+    height: 17px;
+    flex-grow: 0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    float: left;
+    color: #222;
+    margin-top: 10px;
+}
+
+.table th,
+tr {
+    height: 24px;
+    border: solid 1px #eee;
+    /* background-color: rgba(252, 238, 231, 0.1); */
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table td {
+    height: 24px;
+    padding: 8px 51.5px 8px 21.9px;
+    border: solid 1px #eee;
+    background-color: rgba(252, 252, 252, 0.1);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.colorSubtabla{
+  color: #FFFFFF;
+}
+
+.subtable {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 5px 0px 5px 5px !important;
+}
+
+.tableTd {
+
+    padding: 0px 0px 0px 0px !important;
+    height: 0px !important;
+
+}
+
+.subtableTr {
+
+    padding: 0px 0px 0px 0px !important;
+    height: 25px !important;
+    border: transparent !important;
+
+}
+
+.subtableTd {
+
+    padding: 0px 0px 0px 0px !important;
+    height: 0px !important;
+    border: transparent !important;
+
+}
+
+.subtable Td {
+
+    padding: 0px 0px 0px 0px !important;
+    height: 0px !important;
+    border: transparent !important;
+
+}
+
+.subtable Th {
+
+    padding: 0px 0px 0px 0px !important;
+    height: 0px !important;
+    border: transparent !important;
+
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select {
+    width: 80px;
+    height: 40px;
+    border: solid 1px #eee;
+    float: right;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 7px 19px;
+
+}
+
+.collapsedElement {
+    position: absolute;
+    right: 10px;
+    width: 13px;
+    height: 13px;
+    display: block;
+    border-left: 2px solid #9f2241;
+    border-bottom: 2px solid #9f2241;
+    transform: rotate(-45deg);
+    margin-top: 8px;
+    margin-right: 5px;
+}
+
+.pading1{
+    padding-top: 175px;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.select-css option {
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+option {
+    margin-left: 50px;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.errorimgdiv {
+
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.errorimg {
+    width: 350px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.Rectangle-9600 {
+    width: 100%;
+    height: 41px;
+    flex-grow: 0;
+    margin-top: -27px;
+    border: solid 1px #eee;
+}
+
+.sinInfolbl {
+    width: 209px;
+    flex-grow: 0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    float: left;
+    color: #222;
+    margin-top: 10px;
+    margin-left: 32px;
+}
+
+.alertCompl {
+    border-radius: 8px;
+    width: 539px;
+    position: absolute;
+    margin-left: 336px;
+    margin-right: auto;
+    margin-top: 2px;
+    z-index: 4;
+    box-shadow: 3px 3px 3px #80808061;
+    padding: 4px 24px !important;
+    font-size: 15px;
+
+}
+
+.botonTabla {
+
+    margin-left: 20px;
+    background: transparent;
+    border: transparent;
+    position: absolute;
+    right: 10px;
+    width: 25px;
+    height: 18px;
+    display: block;
+    margin-top: -16px;
+    margin-right: 5px;
+}
+
+.iconTabla {
+    position: absolute;
+    right: 37px;
+    width: 13px;
+    height: 13px;
+    display: block;
+    border-left: 2px solid #50a7ee;
+    border-bottom: 2px solid #50a7ee;
+    transform: rotate(-45deg);
+    margin-top: -12px;
+    margin-right: -5px;
+}
+
+.iconTablainv {
+    position: absolute;
+    right: 37px;
+    width: 13px;
+    height: 13px;
+    display: block;
+    border-left: 2px solid #50a7ee;
+    border-bottom: 2px solid #50a7ee;
+    transform: rotate(135deg);
+    margin-top: -4px;
+    margin-right: -5px;
+}
+
+.renglonTabla {
+
+    border: solid 1px #eee;
+    background-color: rgba(252, 252, 252, 0.1);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    padding: 8px 51.5px 8px 21.9px;
+
+}
+
+.link-texto {
+    cursor: pointer;
+
+}
+
+.visDatos {
+
+    width: 109px;
+    height: 17px;
+    flex-grow: 0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #222;
+    margin-right: 17px;
+    float: right;
+    margin-top: 10px;
+  }
+
+
+.my-pagination /deep/ .ngx-pagination .current {
+
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+    background: rgb(143, 4, 4);
+    margin: 0 1em;
+    display: inline-block;
+    color: white;
+    position: relative;
+}
+
+.centr {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+}
+
+.pagina {
+    width: 50px;
+    height: 17px;
+    flex-grow: 0;
+    margin: auto 12px auto 0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #3e3e3e;
+    padding-bottom: 0px !important;
+}
+
+.paginanum {
+
+    width: 37px;
+    height: 28px;
+    margin: auto 12px auto 0px;
+    padding: 0 0 0 14px;
+    border-radius: 6px;
+    border: solid 1px #ddd;
+    background-color: #fff;
+    color: #f8f8f8;
+
+}
+
+.arrow-down {
+    top: 190px;
+    z-index: 9999;
+}
