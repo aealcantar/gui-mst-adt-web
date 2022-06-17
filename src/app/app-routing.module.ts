@@ -5,10 +5,10 @@ import { DeclarationListEmitMode } from '@angular/compiler';
 
 import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
-import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cronica.component';
-import { CCGrupalEspecificaComponent } from './cronica-grupal/c-cgrupal-especifica/c-cgrupal-especifica.component';
-import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
-import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
+import { CCGrupalEspecificaComponent } from './trabajo-social/cronicas-grupales/c-cgrupal-especifica/c-cgrupal-especifica.component';
+import { NuevaCronicaComponent } from './trabajo-social/cronicas-grupales/nueva-cronica/nueva-cronica.component';
+import { ConsultaComponent } from './trabajo-social/cronicas-grupales/list-cronica/consulta.component';
+import { CronicaGuardadaComponent } from './trabajo-social/cronicas-grupales/detalle-cronica/cronica-guardada.component';
 import { LoginComponent } from './seguridad/login/login.component';
 import { SeguridadRouter } from './seguridad/seguridad.router';
 import { RegistroComponent } from './seguridad/registro/registro.component';
@@ -19,7 +19,6 @@ import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-n
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
 import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
-
 import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca.component';
 import { UserconsultaComponent } from './configuracion/usuarios/userconsulta/userconsulta.component';
 import { UserguardaComponent } from './configuracion/usuarios/userguarda/userguarda.component';
@@ -33,27 +32,27 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'recuperarpassword', component: RegistroComponent },
-  { path: 'busqueda', component: BusquedaNssComponent, canActivate: [SeguridadRouter] },
-  { path: 'tarjeta', component: AppTarjetaPresentacionComponent, canActivate: [SeguridadRouter] },
-  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent, canActivate: [SeguridadRouter] },
-  { path: 'nuevaCronica', component: NuevaCronicaComponent, canActivate: [SeguridadRouter] },
-  { path: 'cronicaGuardada', component: CronicaGuardadaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-cronica-grupal', component: ConsultaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent, canActivate: [SeguridadRouter] },
-  { path: 'nueva-nota', component: NuevaNotaTSocialComponent, canActivate: [SeguridadRouter] },
-  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent, canActivate: [SeguridadRouter] },
+  { path: 'busqueda', component: BusquedaNssComponent },
+  { path: 'tarjeta', component: AppTarjetaPresentacionComponent },
+  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent },
+  { path: 'nuevaCronica', component: NuevaCronicaComponent },
+  { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
+  { path: 'consulta-cronica-grupal', component: ConsultaComponent },
+  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent },
+  { path: 'nueva-nota', component: NuevaNotaTSocialComponent },
+  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent },
+  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
   { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
-  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent, canActivate: [SeguridadRouter] },
-  { path: 'buscauser', component: UserbuscaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent, canActivate: [SeguridadRouter] },
-  { path: 'consultauser/:id', component: UserconsultaComponent, canActivate: [SeguridadRouter] },
-  { path: 'guardauser', component: UserguardaComponent, canActivate: [SeguridadRouter] },
-  { path: 'editauser/:id', component: UserguardaComponent, canActivate: [SeguridadRouter] },
+  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent },
+  { path: 'buscauser', component: UserbuscaComponent },
+  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
+  { path: 'consultauser/:id', component: UserconsultaComponent },
+  { path: 'guardauser', component: UserguardaComponent },
+  { path: 'editauser/:id', component: UserguardaComponent },
   { path: 'buscacita', component: CitabuscaComponent },
-  { path: 'consultacita/:id', component: CitaconsultaComponent, canActivate: [SeguridadRouter] },
-  { path: 'guardacita', component: CitaguardaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent, canActivate: [SeguridadRouter]  },
+  { path: 'consultacita/:id', component: CitaconsultaComponent },
+  { path: 'guardacita', component: CitaguardaComponent },
+  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
   {path:'agenda-digital',
     loadChildren:()=>
     import('./agenda-digital/agenda-digital.module').then((m)=> m.AgendaDigitalModule),

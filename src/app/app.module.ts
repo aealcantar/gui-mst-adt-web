@@ -17,10 +17,6 @@ import { AppAlertsComponent } from './app-alerts/app-alerts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
-import { CCGrupalEspecificaComponent } from './cronica-grupal/c-cgrupal-especifica/c-cgrupal-especifica.component';
-import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cronica.component';
-import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
-import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { CardTemplateComponent } from './commons/card-template/card-template.component';
 import { AlertaComponent } from './common/alerta/alerta.component';
@@ -39,7 +35,7 @@ import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca
 
 import { ReadexcelDirective } from './directives/readexcel.directive';
 import { DataTablesModule } from 'angular-datatables';
-import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica/agregar-participante-dialog/agregar-participante-dialog.component';
+// import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica/agregar-participante-dialog/agregar-participante-dialog.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import '@angular/common/locales/global/es';
@@ -76,6 +72,12 @@ import {
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+
+import { CCGrupalEspecificaComponent } from './trabajo-social/cronicas-grupales/c-cgrupal-especifica/c-cgrupal-especifica.component';
+import { NuevaCronicaComponent } from './trabajo-social/cronicas-grupales/nueva-cronica/nueva-cronica.component';
+import { CronicaGuardadaComponent } from './trabajo-social/cronicas-grupales/detalle-cronica/cronica-guardada.component';
+import { ConsultaComponent } from './trabajo-social/cronicas-grupales/list-cronica/consulta.component';
+import { AgregarParticipanteDialogComponent } from './trabajo-social/cronicas-grupales/nueva-cronica/agregar-participante-dialog/agregar-participante-dialog.component';
 
 registerLocaleData('es');
 

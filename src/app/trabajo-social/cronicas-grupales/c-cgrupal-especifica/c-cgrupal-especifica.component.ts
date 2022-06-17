@@ -3,7 +3,8 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription, timer } from "rxjs";
 import { map, share } from "rxjs/operators";
-import { CronicaGrupalService } from "src/app/service/cronica-grupal.service";
+import { CronicaGrupalService } from "../../services/cronica-grupal.service";
+
 
 @Component({
   selector: 'app-c-cgrupal-especifica',

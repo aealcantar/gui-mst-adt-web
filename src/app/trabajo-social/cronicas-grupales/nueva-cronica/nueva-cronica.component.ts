@@ -2,13 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cronica } from 'src/app/models/cronica.model';
+import { Cronica } from '../../models/cronica.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarParticipanteDialogComponent } from './agregar-participante-dialog/agregar-participante-dialog.component';
 import { Subscription, timer } from "rxjs";
 import { map, share } from "rxjs/operators";
 import { Participante } from 'src/app/models/participante.model';
-import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;

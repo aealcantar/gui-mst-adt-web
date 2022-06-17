@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import * as momment from 'moment';
 
 declare var $: any;

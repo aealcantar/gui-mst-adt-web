@@ -7,11 +7,11 @@ import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotasService } from '../service/notas.service';
-import { CronicaGrupalService } from '../service/cronica-grupal.service';
 import { Nota } from '../models/notas.model';
 import * as moment from 'moment';
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
+import { CronicaGrupalService } from '../trabajo-social/services/cronica-grupal.service';
 declare var $: any;
 
 @Component({
