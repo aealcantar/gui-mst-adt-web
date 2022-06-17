@@ -200,6 +200,7 @@ img.Group-2358 {
   font-weight: 600;
   height: 20px;
   margin-bottom: 10px;
+  display: flex;
 }
 
 .tblhorario > .head > span,
@@ -454,7 +455,7 @@ div.form-group > small {
   }
   .tblhorario > .inhabiliar{
     opacity: 0.75;
-  }  
+  }
 .tblhorario > .inhabiliar:hover{
   background-color: rgba(238, 238, 238, 1) !important;
   cursor: pointer;
