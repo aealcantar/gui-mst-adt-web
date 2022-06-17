@@ -133,6 +133,7 @@ registerLocaleData('es');
     HorariosComponent,
     MenuhorariosComponent,
     TrabajoSocialComponent,
+    NuevoVdonacionSangreComponent
   ],
   imports: [
     BrowserModule,

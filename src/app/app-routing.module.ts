@@ -33,6 +33,7 @@ import { ConsultaControlArticulosComponent } from './consulta-control-articulos/
 import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
 import { HorariosComponent } from './horarios/horarios.component';
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
+import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
