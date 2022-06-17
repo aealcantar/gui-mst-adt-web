@@ -2,7 +2,7 @@ import { ServiceService } from './busqueda-nss.service';
 import { Component } from '@angular/core';
 import { pacienteSeleccionado } from '../../models/paciente.interface';
 import { Router } from '@angular/router';
-import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+import { DatosGeneralesPacienteServiceService } from 'src/app/shared-modules/services/datos-generales-paciente-service.service';
 import * as momment from 'moment';
 
 @Component({
@@ -40,7 +40,7 @@ export class BusquedaNssComponent {
   constructor(
     private ServiceService: ServiceService,
     private router: Router,
-    private tarjetaService: AppTarjetaPresentacionService
+    private tarjetaService: DatosGeneralesPacienteServiceService
   ) { }
 
   elementoSeleccionado(elemento: any) {
