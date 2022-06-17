@@ -19,6 +19,27 @@ export class AlertaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("----objAlerta: ",this.objAlerta);
+  }
+
+  public getimage(tipo: string){
+    let strruta = "../../../assets/images/";
+    switch(tipo){
+      case "alert-danger":
+        strruta = strruta + "icon-close-danger.svg"
+        break;
+      case "alert-success":
+        strruta = strruta + "icon-close-success.svg"
+        break;
+      case "custom":
+      case "alert-warning":
+        strruta = strruta + "icon-close.svg"
+        break;
+      default:
+        strruta = strruta + "icon-close.svg"
+        break;
+    }
+    return strruta;
   }
 
 }
