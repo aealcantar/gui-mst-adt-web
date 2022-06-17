@@ -29,7 +29,7 @@ import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.compone
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
-//import { ConsultaComponent } from './configuracion/catalogos/consulta/consulta.component';
+import { CargaComponent } from './configuracion/catalogos/carga/carga.component';
 import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
 import { HorariosComponent } from './horarios/horarios.component';
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
@@ -65,7 +65,7 @@ const routes: Routes = [
   {
     path: 'catalogos', component: CatalogosComponent, children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
-      { path: 'cargaCatalogos', component: ConsultaComponent },
+      { path: 'cargaCatalogos', component: CargaComponent },
     ]
   },
   {

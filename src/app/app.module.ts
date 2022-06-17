@@ -80,7 +80,7 @@ import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vd
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { MomentDateModule } from '@angular/material-moment-adapter';
-//import { ConsultaComponent } from './configuracion/catalogos/consulta/consulta.component';
+import { CargaComponent } from './configuracion/catalogos/carga/carga.component';
 import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
 import { HorariosComponent } from './horarios/horarios.component';
 import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.component';
@@ -130,6 +130,7 @@ registerLocaleData('es');
     CardTemplateExpandibleComponent,
     ConsultaControlArticulosComponent,
     CatalogosComponent,
+    CargaComponent,
     HorariosComponent,
     MenuhorariosComponent,
     TrabajoSocialComponent,
