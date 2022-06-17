@@ -2,9 +2,9 @@
 <app-alerta [objAlerta]="alert"></app-alerta>
 <!-- / -->
 
-<div class="container-fluid central">
-  <app-logout-bar ></app-logout-bar>
-  <section class="section">
+<!-- <div class="container-fluid central">
+  <app-logout-bar ></app-logout-bar> -->
+  <!-- <section class="section"> -->
     <div class="base-cont">
       <div class="tit-princ">
         <div class="text-left pull-left">
@@ -16,8 +16,58 @@
         <div class="body-princ">
           <div class="texto-ind">Por favor capture los siguientes datos:</div>
           <br/>
-          <div class="form-group usrlist pull-left">
-            <label for="matricula" class="titulo">Matrícula
+          <div class="row">
+            <div class="col-md-4">
+              <label for="matricula" class="titulo">Matrícula
+                <span class="form-text"
+                  [ngClass]="{'form-text-error': userdata.controls.matricula.dirty && userdata.controls.matricula.errors}">*
+                </span>:
+              </label>
+              <input
+                type="text"
+                class="form-control captura"
+                id="matricula"
+                formControlName="matricula"
+                [ngClass]="{ 'form-control-error': userdata.controls.matricula.dirty && userdata.controls.matricula.errors}"
+                placeholder="Ingresar matrícula"
+                minlength="7"
+                maxlength="9"
+                (keyup)="onKeyUpEvent($event)"
+                required
+              />
+              <small
+                *ngIf="userdata.controls.matricula.dirty && f.matricula.errors"
+                class="form-text form-text-error">
+                {{f.matricula.errors?.required == true ? "Campo obligatorio" : ""}}
+                {{f.matricula.errors?.minlength? "Matrícula inválida" : ""}}
+                {{f.matricula.errors?.maxlength? "Matrícula inválida" : ""}}
+              </small>
+            </div>
+            <div class="col-md-4">
+              <label for="usuario" class="titulo">Usuario:</label>
+            <input
+              type="text"
+              class="form-control captura"
+              id="usuario"
+              placeholder=""
+              formControlName="usuario"
+              readonly
+            />
+            </div>
+            <div class="col-md-4">
+              <label for="password" class="titulo">Contraseña:</label>
+            <input
+              type="password"
+              class="form-control captura"
+              id="password"
+              placeholder=""
+              formControlName="password"
+              readonly
+            />
+            </div>
+          </div>
+          <!-- <div class="form-group usrlist pull-left"> -->
+            <!-- <label for="matricula" class="titulo">Matrícula
               <span class="form-text"
                 [ngClass]="{'form-text-error': userdata.controls.matricula.dirty && userdata.controls.matricula.errors}">*
               </span>:
@@ -40,10 +90,10 @@
               {{f.matricula.errors?.required == true ? "Campo obligatorio" : ""}}
               {{f.matricula.errors?.minlength? "Matrícula inválida" : ""}}
               {{f.matricula.errors?.maxlength? "Matrícula inválida" : ""}}
-            </small>
-          </div>
-          <div class="form-group usrlist pull-left">
-            <label for="usuario" class="titulo">Usuario:</label>
+            </small> -->
+          <!-- </div>
+          <div class="form-group usrlist pull-left"> -->
+            <!-- <label for="usuario" class="titulo">Usuario:</label>
             <input
               type="text"
               class="form-control captura"
@@ -51,10 +101,10 @@
               placeholder=""
               formControlName="usuario"
               readonly
-            />
-          </div>
-          <div class="form-group usrlist pull-left">
-            <label for="password" class="titulo">Contraseña:</label>
+            /> -->
+          <!-- </div>
+          <div class="form-group usrlist pull-left"> -->
+            <!-- <label for="password" class="titulo">Contraseña:</label>
             <input
               type="password"
               class="form-control captura"
@@ -62,8 +112,8 @@
               placeholder=""
               formControlName="password"
               readonly
-            />
-          </div>
+            /> -->
+          <!-- </div> -->
           <div class="form-group usrlist pull-left">
             <label for="nombres" class="titulo">Nombre(s)
               <span class="form-text"
@@ -225,7 +275,8 @@
             />
           </div>
         </div>
-        <div class="foot-princ">
+        <!-- CORREGIR ESTO PORQUE NO DEBEMOS USAR PX -->
+        <div class="foot-princ" style="height: 60px;">
           <span class="text-pie">*Campos obligatorios</span>
           <button
             type="submit"
@@ -245,5 +296,5 @@
         </div>
       </form>
     </div>
-  </section>
-</div>
+  <!-- </section> -->
+<!-- </div> -->
