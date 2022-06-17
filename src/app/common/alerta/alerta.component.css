@@ -1,3 +1,27 @@
+.alert-base{
+  margin: 0 auto;
+  width: 698px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  height: 60px;
+}
+
+.mensaje{
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #545454;
+}
+
 .x-ciera{
   opacity: 1;
   width: 25px;
@@ -5,10 +29,12 @@
   flex-grow: 0;
 }
 
-.x-ciera > span.error{
+div.alert-danger > button > span{
+  /* background: url('../../../assets/images/icon-close.svg'); */
   color: #d0021b;
 }
 
-.x-ciera > span.success{
+div.alert-success > button > span{
+  /* background: url('../../../assets/images/icon-close.svg'); */
   color: #1c7c3d;
 }

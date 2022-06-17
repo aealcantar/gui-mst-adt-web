@@ -1,4 +1,4 @@
- <!--<div *ngIf="objAlerta" style="position: absolute; width: 100%">
+<!--<div *ngIf="objAlerta" style="position: absolute; width: 100%">
   <ngb-alert
     [type]="objAlerta.type"
     [dismissible]="true"
@@ -9,19 +9,16 @@
     <div [innerHTML]="objAlerta.message"></div>
   </ngb-alert>
 </div>-->
-<div *ngIf="objAlerta!=null && objAlerta.type=='error'" style="position: absolute; width: 100%">
-<div *ngIf="objAlerta.visible || undefined" class="alert alert-danger alert-dismissible" style="margin: 0 auto; width: 698px;height: 60px;">
-  <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="error">x</span></button>
-  <div [innerHTML]="objAlerta.message"></div>
-</div>
-</div>
-<div *ngIf="objAlerta!=null && objAlerta.type=='success'" style="position: absolute; width: 100%; top: 4.7em !important; z-index: 999999999;">
-  <div *ngIf="objAlerta.visible || undefined" class="alert alert-success alert-dismissible" style="margin: 0 auto; width: 689px; height: 60px;">
-    <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close" >
-      <span aria-hidden="true" class="success close">
-        <img src="../../../assets/images/X.jpeg" style="margin-right: 23.5px; margin-top: -9.3px;">
-    </span>
-  </button>
-    <div [innerHTML]="objAlerta.message" style="margin-top: -6.8px;"></div>
+<div *ngIf="objAlerta" style="position: absolute; width: 100%;z-index: 9999;">
+  <div *ngIf="objAlerta.visible || undefined" class="alert alert-dismissible alert-base" [ngClass]="objAlerta.type">
+    <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close">
+      <img [src]="getimage(objAlerta.type)">
+      <!-- <span aria-hidden="true" class="img-alert">
+      </span> -->
+    </button>
+
+    <div  style="width: 100%;" class="mensaje">
+      <strong *ngIf="objAlerta?.typeMsg">{{objAlerta?.typeMsg}}.</strong> {{objAlerta.message}}
+    </div>
   </div>
-  </div>
+</div>
