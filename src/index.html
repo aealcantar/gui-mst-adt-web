@@ -24,11 +24,13 @@
   <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
   <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
   <script>
-    setTimeout(function () {
-      if (document.querySelector(".main-footer")) {
+    nIntervId = setInterval(function(){
+      if(document.querySelector(".main-footer")){
         document.querySelector(".main-footer").remove();
+        clearInterval(nIntervId);
       }
-    }, 2000);
+
+    }, 1000);
     $gmx(document).ready(function () {
       $('#calendar').datepicker();
       $('#calendarCronica').datepicker();

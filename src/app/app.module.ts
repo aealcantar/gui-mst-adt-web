@@ -1,5 +1,5 @@
 import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-nota-tsocial.component';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -77,6 +77,14 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular
 import { MyFilterPipe } from './directives/my-filter.pipe';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+//import { ConsultaComponent } from './configuracion/catalogos/consulta/consulta.component';
+import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
+import { HorariosComponent } from './horarios/horarios.component';
+import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.component';
+import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 
 registerLocaleData('es');
 
@@ -121,7 +129,10 @@ registerLocaleData('es');
     ConsultaVolantesDonacionComponent,
     CardTemplateExpandibleComponent,
     ConsultaControlArticulosComponent,
-    NuevoVdonacionSangreComponent,
+    CatalogosComponent,
+    HorariosComponent,
+    MenuhorariosComponent,
+    TrabajoSocialComponent,
   ],
   imports: [
     BrowserModule,
@@ -149,6 +160,9 @@ registerLocaleData('es');
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMatMomentModule,
+    MomentDateModule,
+    MatRadioModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {

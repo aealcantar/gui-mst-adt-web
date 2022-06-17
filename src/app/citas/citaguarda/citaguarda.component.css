@@ -112,6 +112,49 @@ select{
   background-size: 20px 19px;
 
 }
+select option {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #FFFFFF;
+  color: #222;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+
+}
+option:hover {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #9d2449;
+  color: #FFFFFF;
+}
+
+
+.select2-container .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  flex-grow: 0;
+  color: #222;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
 
 .encabezado{
   height: 20px;
@@ -149,7 +192,8 @@ select{
 
 .Rectangle-283 {
   width: 1170px;
-  height: 357px;
+  max-height: 357px;
+  height: auto;
   flex-grow: 0;
   border: solid 0.5px #ddd;
   background-color: #fff;

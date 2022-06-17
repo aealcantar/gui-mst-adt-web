@@ -12,10 +12,10 @@ import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/
 import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
 import { DatePipe } from '@angular/common';
 
-//import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
-//import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
+import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
 import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 
 //import { rootCertificates } from 'tls';
@@ -25,6 +25,18 @@ var listo: boolean;
 var table:any;
 var paginaactual:number=0;
 
+class CustomDateAdapter extends MomentDateAdapter {
+  getDayOfWeekNames(style: 'long' | 'short' | 'narrow') {
+    return ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+  }
+}
+
+// class CustomDateAdapter extends NgxMatDateAdapter<D> {
+//   override getDayOfWeekNames(style: 'long' | 'short' | 'narrow') {
+//     return ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+//   }
+// }
+
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY - HH:mm:ss',
@@ -32,7 +44,7 @@ export const MY_DATE_FORMATS = {
   display: {
     dateInput: 'DD/MM/YYYY - HH:mm:ss',
     monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'LL',
+    dateA11yLabel: 'DD/MMM/YYYY',
     monthYearA11yLabel: 'MMMM YYYY'
   },
 };
@@ -43,6 +55,17 @@ export const MY_DATE_FORMATS = {
   styleUrls: ['./citabusca.component.css'],
   providers: [
     //{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    // {
+    //   provide: NgxMatDateAdapter,
+    //   useClass: CustomDateAdapter,
+    //   deps: [MAT_DATE_LOCALE, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    // },
+    {
+      provide: DateAdapter,
+      useClass: CustomDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    //{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
     { provide: NGX_MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ]
 })
@@ -86,14 +109,14 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     const el = window.document.querySelector('.cdk-overlay-container') as HTMLElement | null;
-    if (el) {
+    //if (el) {
       //el.remove();
       // const p = document.createElement('div');
       // p.className = 'cdk-overlay-container';
       // const elm = window.document.body as HTMLElement | null;
       // elm.appendChild(p);
       //window.location.reload();
-    }
+    //}
 
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -112,15 +135,6 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
         }
       }
     };
-
-    // $gmx(document).ready(function() {
-    //   $('#fechahora').datepicker();
-    // });
-
-    // $(function() {
-    //       $("#fechahora").datepicker( {dateFormat : "dd/mm/yy", firstDay: 1});
-    //   }
-    // );
 
       this.paciente = this.tarjetaService.get();
       console.log("paciente:" + this.paciente);
@@ -328,7 +342,7 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   }
 
   muestraAlerta(mensaje: string, estilo: string, type: string){
-    // this.alert = new objAlert();
+    this.alert = new objAlert();
     this.alert = {
       message: mensaje,
       type: estilo,

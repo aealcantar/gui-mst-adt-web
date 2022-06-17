@@ -59,6 +59,7 @@ export class CitaguardaComponent implements OnInit {
 
   lstCatServicios: Array<any> = [];
   lstCatProgramas: Array<any> = [];
+  lstCatFechas: Array<any> = [];
   lstCatHorarios: Array<any> = [];
   //patternnombre = "^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$";
 
@@ -68,12 +69,12 @@ export class CitaguardaComponent implements OnInit {
   checkedList: Array<any>  = [];
   contadorparticipantes: number = 0;
   datoscita = {
-    'Fecha y hora de inicio de cita': '',
-    'Fecha y hora de finalización de cita': '',
-    'Duración de cita': '',
+    'Fecha y hora de inicio de la cita': '',
+    'Fecha y hora de finalización de la cita': '',
+    'Duración': '',
     'Ubicación (Lugar de atención)': '',
     'Trabajadora social responsable': '',
-    'Unidad médica': '',
+    'Unidad': '',
     'Dirección': '',
     'Turno': '',
     'Servicio': '',
@@ -112,10 +113,6 @@ export class CitaguardaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // $(function() {
-    //   $("#fechahora").datepicker( {dateFormat : "dd/mm/yy", firstDay: 1});
-    // });
-
     const el = window.document.querySelector('.cdk-overlay-container') as HTMLElement | null;
     if (el) {
       //el.remove();
@@ -131,19 +128,16 @@ export class CitaguardaComponent implements OnInit {
       {name:'', value:'Jorge Quezada Gas', id: 6, checked:false, isfam: true}
     ]
 
-    this.datoscita = {
-      'Fecha y hora de inicio de cita': '29/03/2022 - 10:00:00',
-      'Fecha y hora de finalización de cita': '10:30:00 - 13:00:00',
-      'Duración de cita': '30:00',
-      'Ubicación (Lugar de atención)': 'Lorem ipsum dolor sit amet',
-      'Trabajadora social responsable': 'Roberto Garcia',
-      'Unidad médica': 'Lorem ipsum dolor sit amet, consectetur',
-      'Dirección': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusumod tempor',
-      'Turno': 'Lorem ipsum',
-      'Servicio': 'Adrian Cristian',
-      'Programa': 'Lorem ipsum',
-      'Tipo de cita': 'Individual'
-    };
+
+
+
+    setTimeout(() =>{
+      //$("#servicio").select2();
+      $('#servicio').on('select2:select', function (e: any) {
+        console.log(e);
+    });
+
+    }, 2000);
 
     this.llenacatalogos();
   }
@@ -152,8 +146,6 @@ export class CitaguardaComponent implements OnInit {
 
     this.llenacatalogoservicios();
 
-    //TEMPORAL//
-    this.llenacatalogohorarios();
   }
 
   llenacatalogoservicios(){
@@ -186,26 +178,38 @@ export class CitaguardaComponent implements OnInit {
     })
   }
 
-  llenacatalogohorarios(){
-    // this.citaservice.getlistprogramas(cve_especialidad).subscribe({
-    //   next: (resp:any) => {
-    //     console.log(resp);
-    //     this.lstCatProgramas = resp;
+  llenafechas(cve_gpo: number){
+    this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo).subscribe({
+      next: (resp:any) => {
+        console.log(resp);
 
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     this.lstCatProgramas = [];
-    //     this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
-    //   }
-    // })
-    this.lstCatHorarios.push({id:1,value:"09:00:00"});
-    this.lstCatHorarios.push({id:2,value:"09:30:00"});
-    this.lstCatHorarios.push({id:3,value:"10:00:00"});
-    this.lstCatHorarios.push({id:4,value:"10:30:00"});
-    this.lstCatHorarios.push({id:5,value:"11:00:00"});
-    this.lstCatHorarios.push({id:6,value:"11:30:00"});
-    this.lstCatHorarios.push({id:7,value:"12:00:00"});
+        this.lstCatFechas = resp;
+
+      },
+      error: (err) => {
+        console.log(err);
+        this.lstCatFechas = [];
+        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+      }
+    })
+
+  }
+
+  llenacatalogohorarios(fechaInicio: string){
+    this.citaservice.gethorarioscalanual(this.citadata.value.servicio.cve_especialidad,
+      this.citadata.value.programa.cve_grupo_programa,
+      fechaInicio).subscribe({
+      next: (resp:any) => {
+        console.log(resp);
+        this.lstCatHorarios = resp;
+
+      },
+      error: (err) => {
+        console.log(err);
+        this.lstCatHorarios = [];
+        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+      }
+    })
   }
 
   changeSelection(){
@@ -266,9 +270,31 @@ export class CitaguardaComponent implements OnInit {
     }
   }
 
-  public onchangefecha(): void{
+  onchangeprograma(e:any){
+    if(e != ""){
+      this.llenafechas(e.cve_grupo_programa)
+    }
+
+    if(this.citadata.value.fechahora != ""){
+      this.citadata.controls['fechahora'].setValue('');
+      this.lstCatFechas = [];
+      this.onchangefecha(false);
+    }
+
+  }
+
+  public onchangefecha(origen?: boolean): void{
     let fechaInicio = this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "";
     console.log('fechaInicio', fechaInicio);
+
+    if(origen){
+      this.llenacatalogohorarios(fechaInicio);
+    }
+    if(this.citadata.value.hora != ""){
+      this.citadata.controls['hora'].setValue('');
+      this.lstCatHorarios = [];
+      this.muestraresumen = false;
+    }
 
     //validar espacio de la fecha seleccionada
     if(!true){
@@ -281,28 +307,68 @@ export class CitaguardaComponent implements OnInit {
   }
 
   onchangehora(e: any){
-    this.submitted = true;
-    if(this.citadata.value.servicio != "" && this.citadata.value.programa != ""
-      && this.citadata.value.fechahora != "" && this.citadata.value.hora != ""){
+    if(e != ""){
+      this.submitted = true;
+      if(this.citadata.value.servicio != "" && this.citadata.value.programa != ""
+        && this.citadata.value.fechahora != "" && this.citadata.value.hora != ""){
 
-        //Validar espacio cita
-        this.validaespaciocita();
+          this.limpiavaloresresumencita();
 
+          //Validar espacio cita
+          this.validaespaciocita(e);
+
+      }
     }
 
   }
 
-  validaespaciocita(){
+  validaespaciocita(e:any){
+    this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
+      this.citadata.value.programa.cve_grupo_programa).subscribe({
+      next: (resp:any) => {
+        console.log(resp);
+        this.datoscita = {
+          'Fecha y hora de inicio de la cita': e.fec_inicio? this.datePipe.transform(new Date(e.fec_inicio + " " + e.tim_hora_inicio), 'dd-MM-yyyy - HH:mm:ss')  : "",
+          'Fecha y hora de finalización de la cita': e.fec_fin? this.datePipe.transform(new Date(e.fec_fin + " " + e.tim_hora_fin), 'dd-MM-yyyy - HH:mm:ss')  : "",
+          'Duración': e.num_duracion,
+          'Ubicación (Lugar de atención)': resp.cve_ubicacion,
+          'Trabajadora social responsable': resp.des_trabajador_social, //e.des_trabajador_social,
+          'Unidad': resp.unidad_medica,
+          'Dirección': resp.direccion,
+          'Turno': resp.cve_turno,
+          'Servicio': this.citadata.value.servicio.des_especialidad,
+          'Programa': this.citadata.value.programa.des_grupo_programa,
+          'Tipo de cita': ''
+        };
 
-    //consumir servicio
-    if(true){
+        this.muestraresumen = true;
+        this.submitted = false;
 
-      this.muestraresumen = true;
-      this.submitted = false;
+
+      },
+      error: (err) => {
+        console.log(err);
+        this.muestraresumen = true;
+        this.submitted = false;
+        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+      }
+    })
+  }
+
+  limpiavaloresresumencita(){
+    this.datoscita = {
+      'Fecha y hora de inicio de la cita': '',
+      'Fecha y hora de finalización de la cita': '',
+      'Duración': '',
+      'Ubicación (Lugar de atención)': '',
+      'Trabajadora social responsable': '',
+      'Unidad': '',
+      'Dirección': '',
+      'Turno': '',
+      'Servicio': '',
+      'Programa': '',
+      'Tipo de cita': ''
     }
-
-
-
   }
 
   agendarcita(){
@@ -317,25 +383,92 @@ export class CitaguardaComponent implements OnInit {
       this.submitted = true;
       if(this.citadata.valid){
 
-        //consumir servicio guardar cita
-        if(true){
-          this.muestraAlerta(
-            'La cita fue agendada correctamente. Favor de realizar la descarga del formato.',
-            'alert-success',
-            'Éxito'
-          );
+        this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
+          next: (resp:any) => {
+            console.log(resp);
+            if(resp){
 
-          this.citaagendada = true;
+            interface LooseObject {
+              [key: string]: any
+            }
 
-        } else {
-          this.muestraAlerta(
-            'El espacio de cita seleccionado se encuentra bloqueado y no puede agendar citas. Favor de seleccionar otro espacio.',
-            'alert-danger',
-            'Error'
-          );
-          this.citaagendada = false;
-        }
+            var req: LooseObject = {
+              "cveCalendarioAnual": this.citadata.value.hora.cve_calendario_anual,
+              "nss": 4313947194,
+              "DescripcionServicio": this.citadata.value.servicio.des_especialidad,
+              "grupoPrograma": this.citadata.value.programa.des_grupo_programa,
+              "fechaInicio": this.citadata.value.hora.fec_inicio,
+              "horaInicio": this.citadata.value.hora.tim_hora_inicio,
+              "fechaFin": this.citadata.value.hora.fec_fin,
+              "horaFin": this.citadata.value.hora.tim_hora_fin,
+              "duracion": this.citadata.value.hora.num_duracion,
+              "ubicacion": this.datoscita['Ubicación (Lugar de atención)'],
+              "trabajadorSocial": this.datoscita['Trabajadora social responsable']?this.datoscita['Trabajadora social responsable']:"",
+              "unidadMedica": this.datoscita.Unidad,
+              "direccion": this.datoscita.Dirección,
+              "turno": this.datoscita.Turno,
+              "ocasionServicio": this.citadata.value.ocasion,
+              "modalidad": this.citadata.value.modalidad,
+              "tipoCita": this.datoscita['Tipo de cita'],
+              //"participantes": []
+            };
 
+            let arrparts = [];
+
+            this.lstParticipantes.forEach(val =>{
+              arrparts.push({"nombre": val, "tipo": 3});
+            })
+
+            for(var oj of this.checkedList){
+              arrparts.push({"nombre": oj.value, "tipo": oj.isfam?"2":"1"});
+            }
+
+            req['participantes'] = arrparts;
+
+            this.citaservice.guardacita(req).subscribe({
+              next: (resp:any) => {
+                console.log(resp);
+
+                if(resp.estatus == true){
+                  this.muestraAlerta(
+                    'La cita fue agendada correctamente. Favor de realizar la descarga del formato.',
+                    'alert-success',
+                    'Éxito'
+                  );
+
+                  this.citaagendada = true;
+
+                } else {
+
+                  // this.muestraAlerta(
+                  //   'El espacio de cita seleccionado se encuentra bloqueado y no puede agendar citas. Favor de seleccionar otro espacio.',
+                  //   'alert-danger',
+                  //   'Error'
+                  // );
+                  this.muestraAlerta(
+                    resp.mensaje?resp.mensaje:"Ocurrió un problema al guardar la cita.",
+                    'alert-danger',
+                    'Error'
+                  );
+                  this.citaagendada = false;
+                }
+              },
+              error: (err) => {
+                console.log(err);
+
+                this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+              }
+            })
+          } else {
+            this.muestraAlerta('Ocurrió un error al agendar la cita','alert-danger','Error');
+          }
+          },
+          error: (err) => {
+            console.log(err);
+
+            this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+          }
+        })
       }
     }
   }
@@ -394,17 +527,29 @@ export class CitaguardaComponent implements OnInit {
   // }
 
   myFilter = (d: Moment | null): boolean => {
-    const day = (d || moment()).day();
+    const habil: boolean = false;
+    //const day = (d || moment()).day();
     // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
+    //return day !== 0 && day !== 6;
+    const date = (d || moment());
+    for(var fec of this.lstCatFechas){
+      if(fec.fec_inicio == date.format('YYYY-MM-DD')){
+        return true;
+      }
+    }
+    return habil;
   }
 
   // get f() {
   //   return this.citadata.controls;
   // }
 
-  muestraAlerta(mensaje: string, estilo: string, type: string){
-    // this.alert = new objAlert();
+  callback = () =>{
+    this.regresar();
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, type: string,funxion?:any){
+    this.alert = new objAlert();
     this.alert = {
       message: mensaje,
       type: estilo,
@@ -416,6 +561,9 @@ export class CitaguardaComponent implements OnInit {
         message:'',
         type: 'custom',
         visible: false
+      }
+      if(funxion != null){
+        funxion();
       }
     }, 2000);
   }

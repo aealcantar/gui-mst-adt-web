@@ -124,7 +124,7 @@ caption.borde-cap > div > span.totcargas {
 }
 
 table.table-catalogo > thead tr th{
-  height: 31px;
+  /* height: 31px; */
   flex-grow: 0;
   font-family: Montserrat;
   font-size: 14px;
@@ -225,7 +225,8 @@ input.matricula{
 }
 
 .btn-select{
-  width: 80px;
+  width: 80px !important;
+  min-width: 80px !important;
   height: 34px;
   border-width: 1px;
   font-family: Montserrat;

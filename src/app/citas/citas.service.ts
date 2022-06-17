@@ -27,45 +27,82 @@ export class CitasService {
   constructor(private http:HttpClient) { }
 
   getlistservicios():Observable<any>{
-    let direccion = this.baseApiUrl + 'listservicios';
+    let direccion = this.baseApiUrl + '/listservicios';
 
     return this.http.get(direccion,{headers: this.header});
   }
 
   getlistturnos():Observable<any>{
-    let direccion = this.baseApiUrl + 'listTurnos';
+    let direccion = this.baseApiUrl + '/listTurnos';
 
     return this.http.get(direccion,{headers: this.header});
   }
 
   getlistprogramas(cve_especialidad: number):Observable<any>{
-    let direccion = this.baseApiUrl + 'listPrograma/' + cve_especialidad;
+    let direccion = this.baseApiUrl + '/listPrograma/' + cve_especialidad;
 
     return this.http.get(direccion,{headers: this.header});
   }
 
   getlistlugares(cve_especialidad: number):Observable<any>{
-    let direccion = this.baseApiUrl + 'listUbicacion/' + cve_especialidad;
+    let direccion = this.baseApiUrl + '/listUbicacion/' + cve_especialidad;
 
     return this.http.get(direccion,{headers: this.header});
   }
 
   getlistresponsables(cve_ubicacion: number, cve_turno: number):Observable<any>{
-    let direccion = this.baseApiUrl + 'listResponsables/' + cve_ubicacion + '/' + cve_turno;
+    let direccion = this.baseApiUrl + '/listResponsables/' + cve_ubicacion + '/' + cve_turno;
 
     return this.http.get(direccion,{headers: this.header});
   }
 
   buscacitas(data: object):Observable<any>{
-    let direccion = this.baseApiUrl2 + 'buscarCitas';
+    let direccion = this.baseApiUrl2 + '/buscarCitas';
 
     return this.http.post(direccion, data, {headers: this.header});
   }
 
   consultacita(id: number):Observable<any>{
-    let direccion = this.baseApiUrl2 + 'consultarCita/' + id;
+    let direccion = this.baseApiUrl2 + '/consultarCita/' + id;
 
     return this.http.get(direccion,{headers: this.header});
+  }
+
+  getfechascalanual(cve_especialidad: number, cve_gpo: number):Observable<any>{
+    let direccion = this.baseApiUrl + '/listCalendarioAnualFecha/' + cve_especialidad + '/' + cve_gpo;
+
+    return this.http.get(direccion,{headers: this.header});
+  }
+
+  gethorarioscalanual(cve_especialidad: number, cve_gpo: number, fecha: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/listCalendarioAnualHorarios/' + cve_especialidad + '/' + cve_gpo + '/' + fecha;
+
+    return this.http.get(direccion,{headers: this.header});
+  }
+
+  cancelarcita(id: number):Observable<any>{
+    let direccion = this.baseApiUrl2 + '/cancelarCita/' + id;
+    return this.http.put(direccion,{headers: this.header});
+  }
+
+  cancelarcitacal(id: number):Observable<any>{
+    let direccion = this.baseApiUrl + '/CancelarCita/' + id;
+    return this.http.post(direccion,{headers: this.header});
+  }
+
+  getcomplementocita(cve_especialidad: string, cve_gpo: number):Observable<any>{
+    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo;
+    return this.http.get(direccion,{headers: this.header});
+  }
+
+  altacita(id: number):Observable<any>{
+    let direccion = this.baseApiUrl + '/AltaCita/' + id;
+    return this.http.post(direccion,{headers: this.header});
+  }
+
+  guardacita(data: object):Observable<any>{
+    let direccion = this.baseApiUrl2 + '/agendarCita';
+    return this.http.post(direccion, data, {headers: this.header});
   }
 
 

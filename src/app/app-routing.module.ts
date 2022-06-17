@@ -1,6 +1,6 @@
 import { CanActivate } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes, } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 // import { DeclarationListEmitMode } from '@angular/compiler';
 
@@ -29,7 +29,10 @@ import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.compone
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
-import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+//import { ConsultaComponent } from './configuracion/catalogos/consulta/consulta.component';
+import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
+import { HorariosComponent } from './horarios/horarios.component';
+import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -57,7 +60,19 @@ const routes: Routes = [
   { path: 'guardacita', component: CitaguardaComponent, canActivate: [SeguridadRouter]},
   { path: 'consulta-articulos', component: ConsultaControlArticulosComponent, canActivate: [SeguridadRouter] },
   { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent, canActivate: [SeguridadRouter]},
-  { path: '**', redirectTo: 'login' }
+  //{ path: '**', redirectTo: 'login' },
+  {
+    path: 'catalogos', component: CatalogosComponent, children: [
+      { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
+      { path: 'cargaCatalogos', component: ConsultaComponent },
+    ]
+  },
+  {
+    path: 'TrabajoSocial', component: TrabajoSocialComponent, children: [
+      { path: '', redirectTo: '/TrabajoSocial/horarios', pathMatch: 'full' },
+      { path: 'horarios', component: HorariosComponent },
+    ]
+  },
 ];
 
 @NgModule({

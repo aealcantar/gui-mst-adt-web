@@ -47,8 +47,7 @@ import { Turno } from 'src/app/models/turno-model';
 import { TurnoRequest } from 'src/app/models/turno-request-model';
 import { Puesto } from 'src/app/models/puesto-model';
 import { PuestoRequest } from 'src/app/models/puesto-request-model';
-import { of, Subject } from 'rxjs';
-import { DataTableDirective } from 'angular-datatables';
+
 import { Persona } from 'src/app/models/persona-model';
 import { PersonaRequest } from 'src/app/models/persona-request-model';
 import { Router } from '@angular/router';
@@ -56,7 +55,7 @@ import { Router } from '@angular/router';
 declare var $: any;
 
 
-var table: any;
+
 
 @Component({
   selector: 'app-consulta',
@@ -176,6 +175,7 @@ export class ConsultaComponent implements OnInit {
         "paging": false,
         "info": false,
         "searching": false,
+        "aaSorting": []
       });
 
     }, 3000);
