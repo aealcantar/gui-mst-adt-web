@@ -4,33 +4,39 @@
 
 export const environment = {
   production: false,
-  msmtsPacientes: 'http://localhost:8080/api/busquedanss/',
-  urlServOauth: 'http://localhost:8081',
-  urlServCronicasReporte: 'http://localhost:8082',
-  urlServCatalogos: 'http://localhost:8084',
-  urlServCronicas: 'http://localhost:8085',
-  urlServNotas: 'http://localhost:8086',
-  urlServEstudioMedicos: 'http://localhost:8088',
+  urlLogin: 'http://localhost:4200/login',
+    //Agenda
+    urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
+    urlMSEDSCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
+    urlMSADTCITAS: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-citas/api',
+    urlMSEDSCatalogosHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
+    urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
+  
+  
+    //Trabajo Social
+    
+    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    urlServCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api/',
+    urlServCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    urlServCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api/',
+    urlServNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api/',
+    urlServEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api/',
+    urlServOauth: 'http://localhost:8081',
+  
+  
+  
+  
+  
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {
     siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
   },
   siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
   secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
-  urlLogin: 'http://localhost:4200/login',
-  // urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
-  urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
-  urlMSEDSCatalogosHorarios: '',
-  //urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/mseds-catalogos',
-  //mseds-catalogos  urlMSEDSCHorarios: 'msedsc-catalogos',
-  urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
-  urlMSEDSCAgenda: 'http://localhost:8085',
-  //urlMSADTCITAS: 'http://localhost:8090/msadt-citas/api',
-  //urlMSADTUSUARIOS: 'http://localhost:8081/msedsc-usuarios/api',
-  //urlMSEDSCatalogos: 'http://localhost:8085/api',
-  urlMSADTCITAS: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-citas/api',
-  urlMSADTUSUARIOS: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
-  urlMSEDSCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/mseds-catalogos/api',
+  
+
 
 };
 

@@ -1,20 +1,30 @@
 export const environment = {
   production: true,
-  urlLogin: 'msadts-gui',
+
+
+
+  //Agenda
+  urlLogin: 'msadts-gui/login',
   urlMSADCargasCatalogos: 'msedsc-carga-catalogos',
   urlMSEDSCatalogos: 'msedsc-catalogos/api',
   urlMSADTCITAS: 'msadt-citas/api',
   urlMSEDSCatalogosHorarios: 'msedsc-catalogos/api',
-
-  //  //mseds-catalogos
   urlMSEDSCHorarios: 'msedsc-catalogos',
   urlMSEDSCAgenda: 'msedsc-catalogos',
-
-  //msedsc-usuarios
   urlMSADTUSUARIOS:'msedsc-usuarios/api',
 
 
-  //msadt-auth
+  //Trabajo Social
+
+  msmtsPacientes: 'msmts-pacientes/api/busquedanss/',
+  urlServCronicasReporte: 'msmts-cronica-grupal/api/',
+  urlServCatalogos: 'msedsc-catalogos',
+  urlServCronicas: 'msmts-cronica-grupal/api/',
+  urlServNotas: 'msmts-notas/api/',
+  urlServEstudioMedicos: 'msmts-estudios-medicos/api/',
+
+
+
   urlServOauth: 'msadt-auth',
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {
