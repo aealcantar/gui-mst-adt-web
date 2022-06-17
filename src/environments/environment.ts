@@ -19,7 +19,8 @@ export const environment = {
   secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
   urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
   urlMSEDSCatalogos: 'http://localhost:8085/api/',
-  urlMSADTCITAS: 'http://localhost:8090/api/'
+  urlMSADTCITAS: 'http://localhost:8090/api/',
+  urlServArticulos: 'http://localhost:8088/msmts-ctrl-articulos',
   
 };
 

@@ -1,11 +1,11 @@
-import { ControlArticulos } from './../models/control-articulo.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ControlArticuloService } from '../service/control-articulo.service';
+import { AuthService } from 'src/app/service/auth-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
-
+import { ControlArticuloService } from '../service/control-articulo.service';
+import { ControlArticulos } from './../models/control-articulo.model';
 declare var $: any;
 
 @Component({
@@ -14,8 +14,7 @@ declare var $: any;
   styleUrls: ['./consulta-control-articulos.component.css']
 })
 export class ConsultaControlArticulosComponent implements OnInit {
-
-
+  
   public fechaSelected!: string;
   public page: number = 1;
   public pageSize: number = 15;
@@ -26,27 +25,26 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
-  public columnaId: string = 'fecFecha';
+  public columnaId: string = 'fecha';
 
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private Artservice: ControlArticuloService ,
-    private fb: FormBuilder,
-  ) {
-
-
-   }
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
     });
+    this.authService.project$.next("Trabajo Social");
+    this.getArticulos();
   }
 
-  getNotasById(id: number) {
+  getArticuloById(id: number) {
     this.Artservice.getArticuloById(id).subscribe(
       (res) => {
         console.log(res);
@@ -58,17 +56,47 @@ export class ConsultaControlArticulosComponent implements OnInit {
     );
   }
 
+
+  getArticulos() {
+    this.Artservice.getArticulos().subscribe(
+      (res) => {
+          this.tabla = res.List;
+          console.log("CONTROL DE ARTICULOS: ", this.tabla);
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }
+  
   getNotasByFecha() {
     this.Artservice.getArticulosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
       (res) => {
-        if (res && res.ArrayList.length > 0) {
-          this.tabla = res.ArrayList;
+        if (res && res.List.length > 0) {
+          this.tabla =  res.List;
+          console.log("CONTROL DE ARTICULOS: ", this.tabla);
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
       }
     );
+    this.dtOptions = {
+      order: [[2, 'desc']],
+      ordering: false,
+      paging: false,
+      processing: false,
+      info: false,
+      searching: false,
+    };
+    this.sortBy(this.columnaId, this.order, 'fecha');
+  }
+
+  irDetalle(controlArticulos: ControlArticulos) {
+    let params = {
+      'controlArticulos': JSON.stringify(controlArticulos),
+    }
+    this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
   }
 
   ngAfterViewInit(): void {
@@ -115,7 +143,6 @@ export class ConsultaControlArticulosComponent implements OnInit {
       this.getNotasByFecha();
     }
   }
-
 
   irNuevoRegistro() {
     let params = {}

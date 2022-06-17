@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Nota } from '../models/notas.model'; //modificar cuando haya endpoint
+import { ControlArticulos } from '../models/control-articulo.model';
 
 //configuración de url modificar cuando haya endpoint
-const urlServArticulo = `${environment.urlServNotas}/api`
+const urlServArticulo = `${environment.urlServArticulos}/api`
 
 @Injectable({
   providedIn: 'root'
@@ -15,25 +14,23 @@ const urlServArticulo = `${environment.urlServNotas}/api`
 export class ControlArticuloService {
 
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
   ) { }
 
+  getArticulos() {
+    return this.http.get<any>(`${urlServArticulo}/`);
+  }
+
   getArticulosByFechas(fechaInicial: string, fechaFinal: string) {
-    return this.http.get<any>(`${urlServArticulo}/findNotasByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+    return this.http.get<any>(`${urlServArticulo}/rango/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+  }
+
+  addArticulo(controlArticulos: ControlArticulos) {
+    return this.http.post<ControlArticulos>(`${urlServArticulo}/insert`, controlArticulos);
   }
 
   getArticuloById(id: number){
-    return this.http.get<any>(`${urlServArticulo}/getNotaTSById/${id}`, { responseType: 'json'});
+    return this.http.get<any>(`${urlServArticulo}/folio/${id}`, { responseType: 'json'});
   }
-
-  addArticulo(nota: Nota) {
-    return this.http.post<Nota>(`${urlServArticulo}/guardaNuevaNota`, nota);
-  }
-
-  updateArticulo(nota: Nota) {
-    return this.http.post<Nota>(`${urlServArticulo}/actualizaNotaTs`, nota);
-  }
-
 
 }
