@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router'; 
 import { NuevoControlArticulosComponent } from './nuevo-control-articulos/nuevo-control-articulos.component';
-import { ImprimirControlArticulosComponent } from './imprimir-control-articulos/imprimir-control-articulos.component';
+import { DetalleArticulosComponent } from './detalle-articulos/detalle-articulos.component';
 
 const routes: Routes = [
   { path: '', 
@@ -10,8 +10,8 @@ const routes: Routes = [
       path:'nuevo-articulo',
       component: NuevoControlArticulosComponent
     },{
-      path:"imprimir-articulo",
-      component:ImprimirControlArticulosComponent
+      path:"detalle-articulo",
+      component:DetalleArticulosComponent
     }]
   
   }

@@ -1,35 +1,368 @@
-<app-menu></app-menu> 
+<app-menu></app-menu>
 <app-card-template>
     <div header class="flex justify-content-between align-items-center nuevoEstudio">
-        <span class="tituloHeader">
-            Nuevo control de artículos
-        </span>
+        <span class="tituloHeader pb-10 pt-10"> Nuevo control de artículos </span>
     </div>
-    <div content class="content">
-        <span class="capText">Por favor capture los siguientes datos: </span>
-        <div class="container rectangule ">
-            <form role="form">
-                <div class="row mt-6 ml-1">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="labelTitle" for="email-01">Correo electrónico:</label>
-                            <input class="form-control" id="email-01" placeholder="Correo electrónico" type="text">
-                          </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label" for="email-01">Correo electrónico:</label>
-                            <input class="form-control" id="email-01" placeholder="Correo electrónico" type="text">
-                          </div>
-                    </div>
-                </div> 
-               
-                
-                <button class="btn btn-primary pull-right" type="submit">Enviar</button>
-              </form>
 
-           
+    <div content>
+        <div class="instText   pt-15">
+            Por favor capture los siguientes datos:
         </div>
+        
+
+      
+        <form novalidate class="formInfo" [formGroup]="formNuevoArticulo">
+            <div class=" contenido height154  mt-5 mb-5">
+                <div class="row p-5 ">
+                    <div class="col-sm-4 form-group pt-5  ">
+                        <span class="labels pb-1">Número de folio*:</span>
+                        <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
+                                            formNuevoArticulo.controls?.noFolio ?.touched &&
+                                            formNuevoArticulo.controls?.noFolio?.error}"
+                             class="form-control" id="noFolio" formControlName="noFolio" 
+                             placeholder="Ingresar artículo" type="text" />
+                        <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
+                                      formNuevoArticulo.controls?.noFolio?.touched &&
+                                      formNuevoArticulo.controls?.noFolio?.error"
+                                     class="form-text form-text-error Campo-obligatorio redColor" 
+                                     >
+                            Campo obligatorio
+                        </small>
+                    </div>
+                    <div class="col-sm-4 form-group  pt-5  ">
+                        <span class="labels pb-1">Fecha*:</span>
+                        <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.fecha?.dirty &&
+                                            formNuevoArticulo.controls?.fecha ?.touched &&
+                                            formNuevoArticulo.controls?.fecha?.error}"
+                        class="form-control" formControlName="fecha" id="calendarCESM1" type="text" placeholder="dd/mm/aaaa" />
+                        <small *ngIf="formNuevoArticulo.controls?.fecha?.dirty &&
+                                    formNuevoArticulo.controls?.fecha?.touched &&
+                                    formNuevoArticulo.controls?.fecha?.error"
+                         class="form-text form-text-error Campo-obligatorio redColor">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                    <div class="col-sm-4 form-group  pt-5  ">
+                        <span class="labels pb-1">Número de cama*:</span>
+                        <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noCama?.dirty &&
+                                            formNuevoArticulo.controls?.noCama ?.touched &&
+                                            formNuevoArticulo.controls?.noCama?.error}"
+                        class="form-control" id="solicitadoPor" formControlName="noCama" placeholder="Ingresar nombre"
+                            type="text" />
+                        <small  *ngIf="formNuevoArticulo.controls?.fecha?.dirty &&
+                                        formNuevoArticulo.controls?.fecha?.touched &&
+                                        formNuevoArticulo.controls?.fecha?.error"
+                        class="form-text form-text-error Campo-obligatorio redColor" >
+                            Campo obligatorio
+                        </small>
+                    </div>
+                    <div class="col-sm-4  form-group pt-5   ">
+                        <span class="labels pb-1">Servicio*:</span>
+                        <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.servicio?.dirty && 
+                                            formNuevoArticulo.controls?.servicio?.errors}"
+                        class="form-control" id="servicio" formControlName="servicio" >
+                        <option [value]="''" selected>Seleccionar servicio</option>
+                        <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
+                          {{ comunidad.descripcion }}
+                        </option> -->
+                        <small
+                          *ngIf=" formNuevoArticulo.controls?.servicio?.dirty && formNuevoArticulo.controls?.servicio?.errors"
+                          class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                          Campo obligatorio
+                        </small>
+                      </select>
+                    </div>
+                    <div class="col-sm-4 form-group pt-5    ">
+                        <span class="labels pb-1">Teléfono(s)*:</span>
+                        <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.telefono?.dirty &&
+                                            formNuevoArticulo.controls?.telefono ?.touched &&
+                                            formNuevoArticulo.controls?.telefono?.error}"
+                        class="form-control" formControlName="telefono" id="telefono" type="text" placeholder="" />
+                        <small *ngIf="formNuevoArticulo.controls?.telefono?.dirty &&
+                                    formNuevoArticulo.controls?.telefono?.touched &&
+                                    formNuevoArticulo.controls?.telefono?.error"
+                         class="form-text form-text-error Campo-obligatorio redColor">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+              
+            </div>
+
+        <!-- agregar Articulos recibidos -->
+        <div class=" contenido height154  mt-5 mb-5">
+            <div class="row pt-5 pl-5 pr-5">
+                <div class="col-md-7 form-group  pt-5"  >
+                    <span class="labels pb-1">Lista de artículos recibidos*:</span>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.articulos?.dirty &&
+                                        formNuevoArticulo.controls?.articulos ?.touched &&
+                                        formNuevoArticulo.controls?.articulos?.error}"
+                         class="form-control" id="articulos" formControlName="articulos" 
+                         placeholder="Ingresar artículo" type="text" />
+                    <small *ngIf="formNuevoArticulo.controls?.articulos?.dirty &&
+                                  formNuevoArticulo.controls?.articulos?.touched &&
+                                  formNuevoArticulo.controls?.articulos?.error"
+                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 >
+                        Campo obligatorio
+                    </small>
+                </div>
+                <div class="col-auto pt-5">
+                <button>asadsa</button>
+                </div>
+            </div>
+            <div class="row  pl-5 pr-5" >
+                <div class="col-sm-6 ">
+                    <table class=" table table-sm table-bordered tableArticulos">
+                        <thead>
+                            <th>
+                              <span class="ml-5">Nombre</span>  
+                            </th>
+                            <th>    
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+    
+                                </td>
+                                <td>
+    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row  pl-5 pr-5 ">
+                <div class="col-sm-6 form-group    ">
+                    <span class="labels pb-1">Nombre de quien recibe Trabajador(a) Social:</span>
+                    <input type="text"  class="form-control" formControlName="trabajadorNombreRecibe" id="trabajadorNombreRecibe" placeholder="" readonly="true" />
+                 </div>
+                 <div class="col-sm-6 form-group  ">
+                    <span class="labels pb-1">Nombre de quién entrega Enfermería*:</span>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.enfermeriaNombreEntrega?.dirty &&
+                                        formNuevoArticulo.controls?.enfermeriaNombreEntrega ?.touched &&
+                                        formNuevoArticulo.controls?.enfermeriaNombreEntrega?.error}"
+                    class="form-control" formControlName="enfermeriaNombreEntrega"  type="text" placeholder="Ingresar nombre" />
+                    <small *ngIf="formNuevoArticulo.controls?.enfermeriaNombreEntrega?.dirty &&
+                                formNuevoArticulo.controls?.enfermeriaNombreEntrega?.touched &&
+                                formNuevoArticulo.controls?.enfermeriaNombreEntrega?.error"
+                     class="form-text form-text-error Campo-obligatorio redColor">
+                        Campo obligatorio
+                    </small>
+                </div>
+            </div>
+            <div class="row pl-5 pr-5 ">
+                <div class="col-sm-8  form-group pt-5   ">
+                    <span class="labels pb-1">Ubicación*:</span>
+                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.ubicacion?.dirty && 
+                                        formNuevoArticulo.controls?.ubicacion?.errors}"
+                    class="form-control" id="ubicacion" formControlName="ubicacion" >
+                    <option [value]="''" selected>Seleccionar ubicación</option>
+                    <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
+                      {{ comunidad.descripcion }}
+                    </option> -->
+                    <small
+                      *ngIf=" formNuevoArticulo.controls?.ubicacion?.dirty && formNuevoArticulo.controls?.ubicacion?.errors"
+                      class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                      Campo obligatorio
+                    </small>
+                  </select>
+                </div>
+                <div class="col-sm-4  form-group pt-5   ">
+                    <span class="labels pb-1">Horario para entrega de artículos*:</span>
+                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.horarioEntregaArticulo?.dirty && 
+                                        formNuevoArticulo.controls?.horarioEntregaArticulo?.errors}"
+                    class="form-control" id="horarioEntregaArticulo" formControlName="horarioEntregaArticulo" >
+                    <option [value]="''" selected>Seleccionar horario</option>
+                    <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
+                      {{ comunidad.descripcion }}
+                    </option> -->
+                    <small
+                      *ngIf=" formNuevoArticulo.controls?.horarioEntregaArticulo?.dirty && formNuevoArticulo.controls?.horarioEntregaArticulo?.errors"
+                      class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                      Campo obligatorio
+                    </small>
+                  </select>
+                </div>
+            </div>
+         
+        </div>
+
+        
+ 
+        <!-- recepcion de articulos para resguardo -->
+
+        <div class=" contenido height154  mt-5 mb-5">
+            <div class="row pl-5 pr-5 mt-5">
+                <div class="col-md-7 form-group  pt-5"  >
+                    <span class="title1">
+                        Recepción de artículos para su resguardo en subdirección administrativa:
+                    </span>
+                </div>               
+            </div>
+            <div class="row pl-5 pr-5 ">
+                <div class="col-sm-4  ">
+                    <div class="form-group datepicker-group ">
+                    <label class="control-label labels" for="calendarYear">Fecha*:</label>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.resguardoFecha?.dirty &&
+                                        formNuevoArticulo.controls?.resguardoFecha ?.touched &&
+                                        formNuevoArticulo.controls?.resguardoFecha?.error}"
+                    class="form-control " formControlName="resguardoFecha" id="calendarCESM3" type="text" placeholder="dd/mm/aaaa" />
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color: #9F2241 !important;top: 16px !important;"></span>
+                    <small *ngIf="formNuevoArticulo.controls?.resguardoFecha?.dirty &&
+                                formNuevoArticulo.controls?.resguardoFecha?.touched &&
+                                formNuevoArticulo.controls?.resguardoFecha?.error"
+                     class="form-text form-text-error Campo-obligatorio redColor">
+                        Campo obligatorio
+                    </small>
+                    </div>
+                </div>  
+             
+                <div class="col-sm-4  ">
+                   <div class=" datepicker-group ">
+                  <label class="control-label labels" for="calendarYear">Hora*:</label>
+                  <input type="text" class="form-control hasDatepicker" id="calendarYear" placeholder="Ingresa hora">
+                  <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color: #9F2241 !important;top: 16px !important;"></span>
+                </div>
+                </div>
+                <div class="col-sm-4    ">
+                    <span class="labels pb-1">Recibió*:</span>
+                    <input type="text"  class="form-control" formControlName="resguardoNombreRecibe" id="resguardoNombreRecibe" placeholder="Nombre de quien recibió" readonly="true" />
+                 </div>
+               
+            </div>
+            
+       
+            <div class="row pl-5 pr-5">
+                <div class="col-sm-4   ">
+                    <span class="labels pb-1">Entregó*:</span>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
+                                        formNuevoArticulo.controls?.noFolio ?.touched &&
+                                        formNuevoArticulo.controls?.noFolio?.error}"
+                         class="form-control" id="noFolio" formControlName="noFolio" 
+                         placeholder="Nombre de quien entregó" type="text" />
+                    <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
+                                  formNuevoArticulo.controls?.noFolio?.touched &&
+                                  formNuevoArticulo.controls?.noFolio?.error"
+                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 >
+                        Campo obligatorio
+                    </small>
+                </div>
+            </div>
+            <div class="row pl-5 pr-5 mt-4">
+                <div class="col-md-7 form-group"  >
+                    <span class="title1">
+                        Recepción de artículos completos:
+                    </span>
+                </div>               
+            </div>
+            <div class="row pl-5 pr-5 ">
+                <div class="col-sm-4  ">
+                    <div class="form-group datepicker-group ">
+                    <label class="control-label labels" for="calendarYear">Fecha*:</label>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.resguardoFecha?.dirty &&
+                                        formNuevoArticulo.controls?.resguardoFecha ?.touched &&
+                                        formNuevoArticulo.controls?.resguardoFecha?.error}"
+                    class="form-control " formControlName="resguardoFecha" id="calendarCESM3" type="text" placeholder="dd/mm/aaaa" />
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color: #9F2241 !important;top: 16px !important;"></span>
+                    <small *ngIf="formNuevoArticulo.controls?.resguardoFecha?.dirty &&
+                                formNuevoArticulo.controls?.resguardoFecha?.touched &&
+                                formNuevoArticulo.controls?.resguardoFecha?.error"
+                     class="form-text form-text-error Campo-obligatorio redColor">
+                        Campo obligatorio
+                    </small>
+                    </div>
+                </div>  
+             
+                <div class="col-sm-4  ">
+                   <div class=" datepicker-group ">
+                  <label class="control-label labels" for="calendarYear">Hora*:</label>
+                  <input type="text" class="form-control hasDatepicker" id="calendarYear" placeholder="Ingresa hora">
+                  <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color: #9F2241 !important;top: 16px !important;"></span>
+                </div>
+                </div>
+                <div class="col-sm-4    ">
+                    <span class="labels pb-1">Recibió*:</span>
+                    <input type="text"  class="form-control" formControlName="resguardoNombreRecibe" id="resguardoNombreRecibe" placeholder="Nombre de quien recibió"  />
+                 </div>
+               
+            </div>
+            <div class="row pl-5 pr-5 mb-5">
+                <div class="col-sm-4   ">
+                    <span class="labels pb-1">Entregó*:</span>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
+                                        formNuevoArticulo.controls?.noFolio ?.touched &&
+                                        formNuevoArticulo.controls?.noFolio?.error}"
+                         class="form-control" id="noFolio" formControlName="noFolio" 
+                         placeholder="Nombre de quien entregó" type="text" />
+                    <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
+                                  formNuevoArticulo.controls?.noFolio?.touched &&
+                                  formNuevoArticulo.controls?.noFolio?.error"
+                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 >
+                        Campo obligatorio
+                    </small>
+                </div>
+                <div class="col-sm-4   ">
+                    <span class="labels pb-1">Ubicación*:</span>
+                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.ubicacion?.dirty && 
+                                        formNuevoArticulo.controls?.ubicacion?.errors}"
+                    class="form-control" id="ubicacion" formControlName="ubicacion" >
+                    <option [value]="''" selected>Seleccionar ubicación</option>
+                    <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
+                      {{ comunidad.descripcion }}
+                    </option> -->
+                    <small
+                      *ngIf=" formNuevoArticulo.controls?.ubicacion?.dirty && formNuevoArticulo.controls?.ubicacion?.errors"
+                      class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                      Campo obligatorio
+                    </small>
+                  </select>
+                </div>
+                <div class="col-sm-4   ">
+                    <span class="labels pb-1">Horario para entregar artículos*:</span>
+                    <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
+                                        formNuevoArticulo.controls?.noFolio ?.touched &&
+                                        formNuevoArticulo.controls?.noFolio?.error}"
+                         class="form-control" id="noFolio" formControlName="noFolio" 
+                         placeholder="Ingresa horario" type="text" />
+                    <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
+                                  formNuevoArticulo.controls?.noFolio?.touched &&
+                                  formNuevoArticulo.controls?.noFolio?.error"
+                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 >
+                        Campo obligatorio
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="instTextObligatorios mt-2">
+            *Campos obligatorios
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-8">
+
+            </div>
+            <div class=" colsm-2 align-self-end">
+                <button class="btn btn-danger btuser"   type="button"  (click)="cancelar()"             >
+                Cancelar
+              </button>
+                <button class="btn btn-primary btn-guardar" (click)="guardar()">Guardar</button>
+            </div>
+
+        </div>
+ 
+
+       
+
+     
+
+    </form>
+
     </div>
 </app-card-template>
 <app-trabajador-social-clinico></app-trabajador-social-clinico>

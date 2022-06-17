@@ -352,7 +352,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     console.log("DATA SAVE: ", estudioMedicoData);
     this.estudioSocialService.addEstudioSocial(estudioMedicoData).subscribe(
       (response: any) => {
-        console.log(response);
+        console.log(response); 
       }, (resp: HttpErrorResponse) => {
         console.log("RESPUESTA: ", resp.statusText);
         if (resp.statusText === 'OK') {
