@@ -1,11 +1,139 @@
 .sec-logout-bar {
     padding-top: 90px;
     width: 100%;
-    
+
 }
 
+.pleca-head{
+  background-color: transparent;
+  height: 67px;
+  margin-top: 0;
+  color: #FFFFFF;
+  /* padding: 20px; */
+  padding-top: 14px;
+  padding-bottom: 20px;
 
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.Historial-clnico{
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+  width: 80%;
+}
+
+.Group-1028{
+  width: 198px;
+  height: 33px;
+  flex-grow: 0;
+}
+
+.auth-user{
+  height: 14px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: right;
+  color: #fff;
+}
+
+.auth-rol{
+  width: 198px;
+  height: 14px;
+  flex-grow: 0;
+  margin: 5px 0 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: right;
+  color: #999;
+}
+
+.mnu{
+  color: #98989a;
+  text-decoration: none;
+
+  border-top: 10px dashed;
+    border-top: 4px solid\9;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+
+}
+
+.list-menu{
+  background-color: #0C231E;
+  color: #999;
+}
+
+.list-menu>li>a{
+  background-color: #0C231E;
+  color: #999;
+  padding: 3px 10px;
+}
+
+.list-menu>li>a:hover,
+.list-menu>li>a:focus{
+  background-color: #0C231E;
+  color: #FFF;
+}
+
+.list-menu>li>a>img:nth-child(2){
+  display: none;
+}
+
+.list-menu>li>a>img{
+  width: 20px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.list-menu>li>a:hover img:nth-child(1){
+  display: none;
+}
+.list-menu>li>a:hover img:nth-child(2){
+  display: inline-block;
+}
+
+/*
+.list-menu>li:nth-child(1)>a:hover,
+.list-menu>li:nth-child(1)>a>span:hover{
+  background: url('../../../../assets/images/icon-mnu-catalogo-hov.svg');
+}
+
+.list-menu>li:nth-child(4)>a>span{
+  background: url('../../../../assets/images/icon-mnu-logout.svg');
+  background-size: contain;
+  height: 20px;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+.list-menu>li:nth-child(4)>a>span:hover{
+  background: url('../../../../assets/images/icon-mnu-logout-hov.svg');
+}
+ */
 
 
 

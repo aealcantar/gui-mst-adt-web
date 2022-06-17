@@ -1,0 +1,340 @@
+<app-alerta [objAlerta]="mensaje"></app-alerta>
+<div class="container-fluid">
+
+  <!-- Modal -->
+  <div class="modal fade" id="content">
+    <div class="modal-dialog">
+      <div class="modal-content modal-dialog-centered">
+        <div class="modal-header">
+          <img class="center" src="../../assets/images/frame_reloj.png">
+          <h5 class="modal-title" id="agregarHorario">Agregar horario</h5>
+        </div>
+        <div class="modal-body-horarios">
+
+          <div class="rwdias">
+            <div class="col ">Aplicar a:</div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [(ngModel)]="dia1"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox1">Lunes</label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [(ngModel)]="dia2"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox2">Martes</label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" [(ngModel)]="dia3"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox3">Miércoles</label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" [(ngModel)]="dia4"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox4">Jueves</label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" [(ngModel)]="dia5"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox5">Viernes</label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox6" [(ngModel)]="dia6"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox6">Sábado</label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox7" [(ngModel)]="dia7"   [value]="true">
+              <label class="form-check-label" for="inlineCheckbox7">Domingo</label>
+            </div>
+          </div>
+
+          <form novalidate [formGroup]="formfields" class="form-inline" role="form" autocomplete="off"
+            style="display: flex; flex-wrap:wrap;">
+
+            <div class="form-group lstcampos pull-left">
+              <label for="horainicio" class="titulo">Horario inicial de atención
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horainicio.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="horainicio" name="horainicio" formControlName="horainicio"
+              [(ngModel)]="horarioNuevo.horaInicial"    (change)="obtenerLstHorarioFinal()"
+              [ngClass]="{'form-control-error': formfields.controls.horainicio.errors}" required>
+                <option value="" disabled selected hidden>Seleccionar horario</option>
+                <option [value]="objeto" *ngFor="let objeto of lstHorarioInicial">{{objeto}}</option>
+              </select>
+              <small *ngIf="formfields.controls.horainicio.errors" class="form-text form-text-error">
+                {{formfields.controls.horainicio.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="duracion" class="titulo">Duración
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.duracion.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="duracion" name="duracion" formControlName="duracion"
+              [(ngModel)]="horarioNuevo.duracion"  (change)="obtenerLstHorarioFinal()"
+              [ngClass]="{'form-control-error': formfields.controls.duracion.errors}" required>
+                <option value="" disabled selected hidden>Seleccionar duración</option>
+                <option [value]="objeto" *ngFor="let objeto of lstDuracion">{{objeto}}</option>
+              </select>
+              <small *ngIf="formfields.controls.duracion.errors" class="form-text form-text-error">
+                {{formfields.controls.duracion.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="horafin" class="titulo">Horario final de atención
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horafin.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="horafin" name="horafin" formControlName="horafin"
+              [(ngModel)]="horarioNuevo.horaFinal"  (change)="pintarTurno()"
+              [ngClass]="{'form-control-error': formfields.controls.horafin.errors}" required>
+                <option value="" disabled selected hidden>Seleccionar horario</option>
+                <option [value]="objeto" *ngFor="let objeto of lstHorarioFinal">{{objeto}}</option> -->
+              </select>
+              <small *ngIf="formfields.controls.horafin.errors" class="form-text form-text-error">
+                {{formfields.controls.horafin.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="turno" class="titulo">Turno
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.turno.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="turno" name="turno" formControlName="turno"
+              [(ngModel)]="turnoNuevo.des_TURNO"   (change)="pintarTurno()"
+              [ngClass]="{'form-control-error': formfields.controls.turno.errors}" required>
+                <option value="" disabled selected hidden>Seleccionar turno</option>
+                <option [value]="objeto.des_TURNO" *ngFor="let objeto of lstTurnos">{{objeto.des_TURNO}}</option>
+              </select>
+              <small *ngIf="formfields.controls.turno.errors" class="form-text form-text-error">
+                {{formfields.controls.turno.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btuser" aria-label="Close" data-bs-dismiss="modal"
+            (click)="btnCancelar()">Cancelar</button>
+          <button type="button" class="btn btn-primary btuser"
+            (click)="btnNuevoHorario()" style="margin-bottom: 5px;margin-left: 30px;">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Editar horario -->
+  <div class="modal fade" id="horario">
+    <div class="modal-dialog">
+      <div class="modal-content modal-dialog-centered">
+        <div class="modal-header">
+          <img class="center" src="../../assets/images/frame_reloj.png">
+          <h5 class="modal-title" id="editarHorario">Editar horario</h5>
+        </div>
+        <div class="modal-body-horarios">
+          <form novalidate [formGroup]="formfields" class="form-inline" role="form" autocomplete="off"
+            style="display: flex; flex-wrap:wrap;">
+
+            <div class="form-group lstcampos pull-left">
+              <label for="horainicio" class="titulo">Horario inicial de atención
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horainicio.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="horainicio" name="horainicio" formControlName="horainicio"
+                [(ngModel)]="horarioSeleccionado.horaInicial" (change)="actualizarLstHorarioFinal()"
+                [ngClass]="{'form-control-error': formfields.controls.horainicio.errors}" required>
+                <!-- <option value="" disabled selected hidden>Seleccionar horario</option> -->
+                <option [value]="objeto" *ngFor="let objeto of lstHorarioInicial">{{objeto}}
+                </option>
+              </select>
+              <small *ngIf="formfields.controls.horainicio.errors" class="form-text form-text-error">
+                {{formfields.controls.horainicio.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="duracion" class="titulo">Duración
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.duracion.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="duracion" name="duracion" formControlName="duracion"
+                [ngClass]="{'form-control-error': formfields.controls.duracion.errors}" required
+                [(ngModel)]="horarioSeleccionado.duracion" (change)="actualizarLstHorarioFinal()"
+                aria-placeholder="Seleccionar duración">
+<!--                 <option value="" disabled selected hidden>Seleccionar duración</option>
+ -->                <option [value]="objeto" *ngFor="let objeto of lstDuracion">{{objeto}}</option>
+              </select>
+              <small *ngIf="formfields.controls.duracion.errors" class="form-text form-text-error">
+                {{formfields.controls.duracion.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="horafin" class="titulo">Horario final de atención
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horafin.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="horafin" name="horafin" formControlName="horafin"
+
+                [ngClass]="{'form-control-error': formfields.controls.horafin.errors}" required
+                [(ngModel)]="horarioSeleccionado.horaFinal" aria-placeholder="Seleccionar horario">
+
+                <option ng-value="objeto"   *ngFor="let objeto of lstHorarioFinal">{{objeto}}
+                </option>
+              </select>
+              <small *ngIf="formfields.controls.horafin.errors" class="form-text form-text-error">
+                {{formfields.controls.horafin.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="turno" class="titulo">Turno
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.turno.errors}">*
+                </span>:
+              </label>
+              <select class="form-control captura" id="turno" name="turno" formControlName="turno"
+
+                [ngClass]="{'form-control-error': formfields.controls.turno.errors}" required
+                [(ngModel)]="turnoSeleccionado.des_TURNO" (change)="cambiarTurno()">
+                <option value="" disabled selected hidden>Seleccionar turno</option>
+                <option [value]="objeto.des_TURNO" *ngFor="let objeto of lstTurnos">
+                  {{objeto.des_TURNO}}</option>
+              </select>
+              <small *ngIf="formfields.controls.turno.errors" class="form-text form-text-error">
+                {{formfields.controls.turno.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small>
+            </div>
+
+            <div class="form-group lstcampos pull-left">
+              <label for="estatus" class="titulo">Estatus
+                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.turno.errors}">*
+                </span>:
+              </label>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="estatusActivoSeleccionado" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="form-lbl-mat-radio my-radio" style="margin-right: 18px;" *ngFor="let op of opciones" [value]="op">{{op?'Activo':'Bloqueado'}}</mat-radio-button>
+            </mat-radio-group>
+            <!--   <div class="valor"><span>Activo:</span>
+                <input type="radio" id="estatus" [(ngModel)]="estatusActivoSeleccionado"  formControlName="estatus"
+                  [ngClass]="{'form-control-error-2': formfields.controls.estatus.errors}">
+              </div>
+              <div class="valor"><span>Bloqueado:</span>
+                <input type="radio" id="estatus"[(ngModel)]="estatusBloqueadoSeleccionado"  formControlName="estatus"
+                  [ngClass]="{'form-control-error-2': formfields.controls.estatus.errors}">
+              </div>
+              <small *ngIf="formfields.controls.estatus.errors" class="form-text form-text-error">
+                {{formfields.controls.estatus.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+              </small> -->
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btuser" aria-label="Close" data-bs-dismiss="modal"
+            (click)="btnCancelarHorario()">Cancelar</button>
+          <button type="button" class="btn btn-primary btuser"
+            (click)="btnAceptarHorario()" style="margin-bottom: 5px;margin-left: 30px;">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Inhabilitar -->
+  <div class="modal fade" id="inhabilitar" >
+    <div class="modal-dialog" style="width: 450px;">
+      <div class="modal-content modal-dialog-centered" style="width: 450px;">
+        <div class="modal-header">
+          <img class="center" src="../../assets/images/Group 2082.png">
+          <h5 class="modal-title" id="agregarHorario">Atención</h5>
+        </div>
+        <div class="modal-body-horarios">
+
+          <div class="lblHabilitar" style="justify-content: center; font-size: 18px;  width: 227px;">
+            ¿Está seguro de {{lblHabilitar}} el día {{dia|lowercase }}?
+          </div>
+
+
+        </div>
+        <div style="height: 30px;"></div>
+        <div class="modal-footer" style="text-align: center ;">
+          <button type="button" class="btn btn-danger btuser" aria-label="Close" data-bs-dismiss="modal"
+            (click)="btnCancelarHabilitarDeshabilitar()">Cancelar</button>
+          <button type="button" class="btn btn-primary btuser" aria-label="Close" data-dismiss="modal"
+            (click)="btnHabilitarDeshabilitar()" style="margin-bottom: 5px;margin-left: 30px;">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid central">
+    <section class="section">
+      <div class="base-cont table-responsive">
+        <div class="tit-princ">
+          <div class="text-left pull-left">
+            <span><img src="../../../../assets/images/btn-arrow-lf.png"></span>
+            <span>Horario de atención</span>
+          </div>
+          <div class="pull-right">
+            <button class="btn btn-primary btuser pull-right" (click)="modalAgregar()" style="width: 149px;">Agregar
+              horario</button>
+          </div>
+        </div>
+        <div class="body-princ ">
+
+          <div class="texto-ind" style="margin-bottom: 10px;">
+            <app-menuhorarios (messageEvent)="receiveMessage($event)" [diainhabil]="diainhabil"></app-menuhorarios>
+          </div>
+
+
+          <div class="row">
+            <div class="col-12 encabezado" style=" display: inline-block;">
+              <div class="col-6 tituloDia" style="display: inline-block; ">
+                {{dia}}
+              </div>
+
+              <div class="col-6 pull-right" style=" display: inline-block; ">
+                <button type="button" class="btn btn-primary btuser pull-right" (click)="btnModalInhabilitar()">{{lblBtnHabilitar}}</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="tblhorario" *ngIf="diaSeleccionado.horarios?.length >0 ">
+            <div class="head">
+              <span class="num"></span>
+              <span class="ini">Inicio de atención:</span>
+              <span class="fin">Fin de atención:</span>
+              <span class="int">Intervalos:</span>
+              <span class="est">Estatus:</span>
+              <span class="acc"></span>
+            </div>
+            <div class="body " *ngFor="let item of diaSeleccionado?.horarios let i = index" (click)="seleccionafila(i)"
+            [ngClass]="{'inhabiliar': item.estatus.cveIdEstatus== 6}">
+              <span class="num">{{ i+1 }}</span>
+              <span class="ini"> {{ item.horaInicial }}</span>
+              <span class="fin">{{ item.horaFinal }}</span>
+              <span class="int">{{ item.duracion }} min.</span>
+              <span class="est">
+                <div *ngIf="item.estatus.cveIdEstatus == 4">
+                  <img src="../../assets/images/icon-ellipse-green.svg">
+                  {{item.estatus.cveNombre}}
+                </div>
+                <div *ngIf="item.estatus.cveIdEstatus == 5">
+                  <img src="../../assets/images/icon-ellipse-gray.svg">
+                  {{item.estatus.cveNombre}}
+                </div>
+                <div *ngIf="item.estatus.cveIdEstatus == 6">
+                  <img src="../../assets/images/icon-ellipse-gray.svg">
+                  {{item.estatus.cveNombre}}
+                </div>
+
+
+              </span>
+              <span class="acc">
+                <img src="../../assets/images/icon-editar-azul.svg">
+              </span>
+            </div>
+
+          </div>
+
+          <div class="sin-resultados" *ngIf="diaSeleccionado.horarios?.length ==0">
+            <img src="../../assets/images/horario-snres.svg" class="Group-2358">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

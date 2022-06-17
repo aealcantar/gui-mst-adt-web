@@ -42,6 +42,7 @@ export class HelperMensajesService {
   public MSJ_ERROR_CONEXION_TURNOS: string = 'No fue posible conectar con el servicio de Turnos';
   public MSJ_ERROR_CONEXION_PUESTOS: string = 'No fue posible conectar con el servicio de Roles';
   public MSJ_ERROR_CONEXION_ACUSE: string = 'No fue posible conectar con el servicio de Acuses';
+  public MSJ_ERROR_CONEXION_HORARIO: string = 'No fue posible conectar con el servicio de Horarios';
 
 
 
@@ -54,5 +55,14 @@ export class HelperMensajesService {
 
   public MSJ_EXITO_CARGAS: string = 'Todos los catálogos han sido cargados correctamente.';
  
-  
+  public MSJ_DATOS_OBLIGATORIOS: string = 'Ingresa los datos obligatorios';
+  public MSJ_CORREO_NO_REGISTRADO: string = 'Correo no registrado!';
+  public MSJ_ERROR_CONEXION_LOGIN: string = 'Servicio no disponible. Favor de reportarlo!';
+  public MSJ_CORREO_ENVIADO: string ='Correo enviado satisfactoriamente!';
+
+
+  //Mensajes Agenda Api
+  public MSJ_ERROR_EDITAR_HORARIO: string = 'Es necesario que el día este habilitado para poder editar los horarios';
+  public MSJ_ERROR_EDITAR_EXITOSO_HORARIO: string = 'El horario se editó exitosamente';
+  public MSJ_ERROR_DATOS_REQUERIDOS_HORARIO: string = 'Seleccione los campos requeridos';
 }

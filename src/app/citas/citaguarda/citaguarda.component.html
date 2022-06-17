@@ -3,7 +3,7 @@
 <!-- / -->
 
 <div class="modal fade" role="dialog" id="content" #content>
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document" style="margin-top: 360px !important;">
     <div class="modal-content citas">
       <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column">
         <img src="../../../../assets/images/Group 2082.png"
@@ -165,6 +165,7 @@
                   class="form-control captura programa"
                   id="programa"
                   formControlName="programa"
+                  (ngModelChange)="onchangeprograma($event)"
                   [ngClass]="{'form-control-error': submitted && citadata.controls.programa.errors}"
                   required
                   >
@@ -244,10 +245,12 @@
                   placeholder="Seleccionar fecha" formControlName="fechahora"
                   class="form-control captura fecha" style="max-height: 30px !important; color: #222;"
                   [ngClass]="{'form-control-error': submitted && citadata.controls.fechahora.errors}"
-                  (dateChange)="onchangefecha()"
+                  (click)="picker.open()"
+                  (dateChange)="onchangefecha(true)"
                   [matDatepickerFilter]="myFilter"
+                  readonly
                   >
-                <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="false">
                   <mat-icon matDatepickerToggleIcon>
                     <img src="../../../assets/images/InputCalendarIcon.svg" height="27px" style="right: 12px;
                       position: absolute;
@@ -255,7 +258,7 @@
                       border-bottom-right-radius: 5px;">
                   </mat-icon>
                 </mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker #picker [disabled]="false"></mat-datepicker>
                 <small
                   *ngIf="submitted && citadata.controls.fechahora.errors"
                   class="form-text form-text-error">
@@ -278,8 +281,8 @@
                   [ngClass]="{'form-control-error': submitted && citadata.controls.hora.errors}"
                   required
                   >
-                  <option value="" disabled selected hidden>Ingresar</option>
-                  <option [ngValue]="objeto" *ngFor="let objeto of lstCatHorarios">{{objeto.value}}</option>
+                  <option value="" disabled selected hidden>Seleccionar hora</option>
+                  <option [ngValue]="objeto" *ngFor="let objeto of lstCatHorarios">{{objeto.tim_hora_inicio}}</option>
                 </select>
                 <small
                   *ngIf="submitted && citadata.controls['hora'].errors"
@@ -291,7 +294,7 @@
               <div class="cuadro-resumen" *ngIf="muestraresumen">
                 <div class="txt-resumen">Resumen:</div>
                 <div class="lst-item pull-left"  *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
-                  <div class="lbel">{{dato.key}}</div>
+                  <div class="lbel">{{dato.key}}:</div>
                   <div class="valor">{{dato.value}}</div>
                 </div>
               </div>
@@ -302,14 +305,14 @@
                   <div class="valor"><span>Inicial:</span>
                     <input
                       type="radio" id=""
-                      value="inicial"
+                      value="Inicial"
                       formControlName="ocasion"
                       [ngClass]="{'form-control-error-2': submitted && citadata.controls.ocasion.errors}">
                   </div>
                   <div class="valor"><span>Seguimiento:</span>
                     <input
                       type="radio" id=""
-                      value="seguimiento"
+                      value="Seguimiento"
                       formControlName="ocasion"
                       [ngClass]="{'form-control-error-2': submitted && citadata.controls.ocasion.errors}">
                   </div>
@@ -324,14 +327,14 @@
                   <div class="valor"><span>Presencial:</span>
                     <input
                       type="radio" id=""
-                      value="presencial"
+                      value="Presencial"
                       formControlName="modalidad"
                       [ngClass]="{'form-control-error-2': submitted && citadata.controls.modalidad.errors}">
                   </div>
-                  <div class="valor"><span>Obligatorio:</span>
+                  <div class="valor"><span>A distancia:</span>
                     <input
                       type="radio" id=""
-                      value="obligatorio"
+                      value="Distancia"
                       formControlName="modalidad"
                       [ngClass]="{'form-control-error-2': submitted && citadata.controls.modalidad.errors}">
                   </div>

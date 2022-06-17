@@ -25,7 +25,7 @@ export class UserbuscaComponent implements OnInit  {
   @ViewChild(DataTableDirective, {static: false})
   datatableElement: any = DataTableDirective;
 
-  alert!: objAlert;
+  alert = new objAlert;
 
   lstUsuarios: Array<any> = [];
 
@@ -127,6 +127,11 @@ export class UserbuscaComponent implements OnInit  {
           this.dtOptions.pageLength = this.numitems;
 
           const app = document.getElementById("cargalay");
+
+          if(document.querySelector(".cargalayout")){
+            document.querySelector(".cargalayout").remove();
+          }
+
           // 2. Create a new <p></p> element programmatically
           const p = document.createElement('div');
           // 3. Add the text content

@@ -1,6 +1,6 @@
 import { CanActivate } from '@angular/router';
 import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes, } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 // import { DeclarationListEmitMode } from '@angular/compiler';
 
@@ -29,35 +29,51 @@ import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.compone
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
+import { CargaComponent } from './configuracion/catalogos/carga/carga.component';
+import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
+import { HorariosComponent } from './horarios/horarios.component';
+import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'recuperarpassword', component: RegistroComponent },
-  { path: 'busqueda', component: BusquedaNssComponent  },
-  { path: 'tarjeta', component: AppTarjetaPresentacionComponent  },
-  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent },
-  { path: 'nuevaCronica', component: NuevaCronicaComponent },
-  { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
-  { path: 'consulta-cronica-grupal', component: ConsultaComponent },
-  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent },
-  { path: 'nueva-nota', component: NuevaNotaTSocialComponent },
-  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent },
-  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
-  { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
-  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent },
-  { path: 'buscauser', component: UserbuscaComponent },
-  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
-  { path: 'consultauser/:id', component: UserconsultaComponent },
-  { path: 'guardauser', component: UserguardaComponent },
-  { path: 'editauser/:id', component: UserguardaComponent },
-  { path: 'buscacita', component: CitabuscaComponent },
-  { path: 'consultacita/:id', component: CitaconsultaComponent },
-  { path: 'guardacita', component: CitaguardaComponent },
-  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent  },
-  { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
-  { path: '**', redirectTo: 'login' }
+  { path: 'busqueda', component: BusquedaNssComponent },
+  { path: 'tarjeta', component: AppTarjetaPresentacionComponent },
+  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent},
+  { path: 'nuevaCronica', component: NuevaCronicaComponent},
+  { path: 'cronicaGuardada', component: CronicaGuardadaComponent},
+  { path: 'consulta-cronica-grupal', component: ConsultaComponent},
+  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent},
+  { path: 'nueva-nota', component: NuevaNotaTSocialComponent},
+  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent},
+  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent},
+  { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent},
+  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent},
+  { path: 'buscauser', component: UserbuscaComponent},
+  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent},
+  { path: 'consultauser/:id', component: UserconsultaComponent},
+  { path: 'guardauser', component: UserguardaComponent},
+  { path: 'editauser/:id', component: UserguardaComponent},
+  { path: 'buscacita', component: CitabuscaComponent},
+  { path: 'consultacita/:id', component: CitaconsultaComponent},
+  { path: 'guardacita', component: CitaguardaComponent},
+  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
+  { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent},
+  //{ path: '**', redirectTo: 'login' },
+  {
+    path: 'catalogos', component: CatalogosComponent, children: [
+      { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
+      { path: 'cargaCatalogos', component: CargaComponent },
+    ]
+  },
+  {
+    path: 'TrabajoSocial', component: TrabajoSocialComponent, children: [
+      { path: '', redirectTo: '/TrabajoSocial/horarios', pathMatch: 'full' },
+      { path: 'horarios', component: HorariosComponent },
+    ]
+  },
 ];
 
 @NgModule({

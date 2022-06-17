@@ -249,7 +249,7 @@ export class UserguardaComponent implements OnInit {
   }
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
-    // this.alert = new objAlert;
+    this.alert = new objAlert;
     this.alert = {
       message: mensaje,
       type: estilo,

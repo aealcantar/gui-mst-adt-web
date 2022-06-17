@@ -222,28 +222,28 @@
             </caption>
             <thead>
               <tr role="row">
-                <th style="width: 50%; " class="sorting_asc " tabindex="0" aria-controls="tblCatalogos"
-                  aria-sort="ascending" aria-label="Catálogo: activate to sort column ascending">Catálogo</th>
-                <th style="width: 25%;" class="sorting" tabindex="0" aria-controls="tblCatalogos" aria-sort="ascending"
-                  aria-label="Estatus de la carga: activate to sort column ascending">Estatus de carga</th>
-                <th style="width: 25%;" class="sorting" tabindex="0" aria-controls="tblCatalogos" aria-sort="ascending"
-                  aria-label="Última modificación: activate to sort column ascending">Última modificación</th>
+                <th style="width: 50%; "   aria-controls="tblCatalogos"
+                >Catálogo</th>
+                <th style="width: 25%;"   aria-controls="tblCatalogos" 
+                 >Estatus de carga</th>
+                <th style="width: 25%;" aria-controls="tblCatalogos" 
+                >Última modificación</th>
               </tr>
             </thead>
             <tbody>
 
               <tr *ngFor="let item of lstCatalogo" class="odd">
-                <td class="link-texto sorting_1" (click)="modalcarga(item.nombreCatalogo, item.sheetName)">
+                <td class="link-texto " (click)="modalcarga(item.nombreCatalogo, item.sheetName)">
                   {{ item.nombreCatalogo }}
                 </td>
-                <td class="sorting_1">
+                <td >
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 3" svgIcon="circle_rojo"></mat-icon>
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 2" svgIcon="circle_naranja"></mat-icon>
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 1" svgIcon="circle_verde"></mat-icon>
 
                   {{ item.estatusCarga.cveNombre }}
                 </td>
-                <td class="sorting_1"> {{ item.ultimaModificacion }}</td>
+                <td > {{ item.ultimaModificacion }}</td>
               </tr>
             </tbody>
           </table>

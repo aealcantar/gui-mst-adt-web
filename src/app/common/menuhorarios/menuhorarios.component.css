@@ -1,0 +1,124 @@
+.Subtract {
+    width: 1171px;
+    height: 60px;
+    flex-grow: 0;
+    padding: 0 0 0 0.6px;
+    /* box-shadow: 0 -4px 10px 0 rgba(0, 0, 0, 0.08); */
+    border: solid 1px #eee;
+    background-color: #fff;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    /* box-shadow: 4px -6px 12px 0 rgba(0, 0, 0, 0.18); */
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #666;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-content: center;
+  }
+
+  .bsca-pct{
+    width: 200px;
+    background-color: #eafffb;
+    margin-right: 160px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  .bsca-pct > img{
+    padding-left: 3px;
+  }
+
+  .bsca-pct > span{
+    margin-left: 6px;
+    margin-right: 14px;
+    width: 112px;
+    height: 15px;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #0e7b77;
+  }
+
+  .blq-2{
+    /* margin-right: 10px; */
+    width: 166.5px;
+    display: flex;
+    padding: 0 10px;
+    height: 60px;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+  }
+  .blq-2 img:nth-child(1),
+  .blq-2 img:nth-child(2){
+    display: none;
+  }
+  .blq-2 > img.marg-sup{
+    height: 5px;
+    width: 166.5px;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    object-fit: cover;
+    object-position: top;
+    display: none;
+  }
+  .blq-2:hover{
+    color: #0e7b77;
+    background: url('../../../assets/images/Subtract-sm.svg');
+    background-position: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .blq-2:hover img:nth-child(2){
+    display: none;
+  }
+  .blq-2:hover img:nth-child(1){
+    display: block;
+
+  }
+  .blq-2:hover img:nth-child(3){
+    display: block;
+  }
+
+  .diaOn {
+    color: #0e7b77;
+    background: url('../../../assets/images/Subtract-sm.svg');
+    background-position: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .diaOn.blq-2 > img.marg-sup{
+    display: block;
+  }
+  .diaOn.blq-2 > img:nth-child(2){
+    display: block;
+  }
+
+  .blq-2 > img
+  {
+    margin-right: 11px;
+  }
+
+  .diaOn.inhabil {
+    opacity: 0.5;
+  }

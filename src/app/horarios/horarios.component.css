@@ -1,0 +1,464 @@
+.modal-content{
+    max-width: 870px;
+    width: 770px;
+    min-height: 250px;
+  }
+
+
+  .modal-body-horarios{
+    padding: 0;
+    margin: 15px 25px;
+  }
+
+  .base-cont {
+    border-radius: 6px;
+    box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    margin-bottom: 30px;
+  }
+
+  .tit-princ {
+
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222;
+    padding-top: 20px;
+    padding-left: 23px;
+    padding-right: 24px;
+    padding-bottom: 19.5px;
+    border-bottom: 1px solid #eee;
+    height: 68.5px;
+
+    align-items: center;
+  }
+
+  .tit-princ > div.pull-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .tit-princ > div.pull-left > span > img{
+    margin-right: 15px;
+    cursor: pointer;
+  }
+
+  .btuser{
+    width: 120px;
+    height: 34px;
+    border-width: 1px;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding: 7px;
+    margin-top: 5px;
+  }
+
+  .body-princ {
+    padding-top: 9.5px;
+    padding-left: 22px;
+    padding-bottom: 30px;
+    padding-right: 23px;
+
+  }
+
+  .modal-footer {
+    min-height: 10px;
+    flex-grow: 0;
+    background-color: #fff;
+  }
+
+  .breakAll {
+    word-break: break-all;
+  }
+
+  .text-titulo{
+    flex-grow: 0;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222;
+  }
+  .Botones {
+    width: 149px;
+    height: 34px;
+    display: inline;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 40px 31px 14.5px 650px;
+    padding: 0px 10px 5px 10px;
+    border-radius: 3px;
+    border: solid 1px #9d2449;
+    background-color: #fff;
+  }
+
+  .Agregar-horario {
+    align-self: stretch;
+    flex-grow: 1;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #9d2449;
+  }
+
+  .icon_editar{
+    font-size: 14px;
+    font-family: Montserrat;
+    border-radius: 3px;
+    text-align: center;
+    color: #9d2449;
+    border: solid 1px #9d2449;
+    background-color: #fff;
+  }
+
+/*   .modal {
+      width: fit-content;
+  } */
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.tituloDia{
+  padding-top: 0px;
+  margin-top: 0px;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: 3.6px;
+  text-align: left;
+  color: #222;
+}
+
+.encabezado{
+  margin-left: 15px;
+
+  /* display: block; */
+  width: 97%;
+  height: 34px;
+  margin-bottom: 10px;
+}
+
+.sin-resultados{
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 70px;
+}
+
+img.Group-2358 {
+  width: 289px;
+  height: 196px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.tblhorario{
+  width: 100%;
+
+  font-family: Montserrat;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+.tblhorario > .head{
+  font-size: 12px;
+  font-weight: 600;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.tblhorario > .head > span,
+.tblhorario > .body > span{
+  display: inline-block;
+}
+
+.tblhorario > .head > span.num {
+  width: 77px;
+  text-align: center;
+  padding: 5px;
+}
+.tblhorario > .head > span.ini,
+.tblhorario > .head > span.fin,
+.tblhorario > .head > span.int{
+  width: 266px;
+  padding: 5px 32px;
+  text-align: left;
+}
+.tblhorario > .head > span.est{
+  width: 164px;
+  text-align: left;
+  padding: 5px 32px;
+}
+.tblhorario > .head > span.acc{
+  width: 130px;
+  padding: 5px 32px;
+}
+
+.tblhorario > .body{
+  font-size: 14px;
+  font-weight: normal;
+  height: 28.8px;
+  border: 1px solid #eee;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  display: flex;
+}
+
+/* .tblhorario > .body:hover{
+  cursor: pointer;
+  background-color: rgba(232, 253, 249, 1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+} */
+
+.tblhorario > .body > span.num{
+  width: 77px;
+  text-align: center;
+  padding: 5px;
+}
+.tblhorario > .body > span.ini,
+.tblhorario > .body > span.fin,
+.tblhorario > .body > span.int{
+  width: 266px;
+  padding: 5px 32px;
+  text-align: left;
+}
+.tblhorario > .body > span.est{
+  width: 164px;
+  text-align: left;
+  padding: 5px 32px;
+}
+.tblhorario > .body > span.est > img{
+  margin-right: 5px;
+}
+.tblhorario > .body > span.acc{
+  width: 130px;
+  text-align: center;
+  padding: 0px 32px;
+}
+input.captura,
+select.captura{
+  width: 100%;
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+select{
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+  appearance:none;
+  background: transparent;
+  background-image: url("../../assets/images/Icon.png");
+  background-repeat: no-repeat;
+  background-position-x: 99%;
+  background-position-y: 5px;
+  padding-right: 20px;
+  background-size: 20px 19px;
+
+}
+
+.lstcampos{
+  width: 212px;
+  height: 65px;
+  margin-bottom: 10px;
+  margin-right: 40px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+.lstcampos:nth-child(3){
+  margin-right: 0px;
+}
+div.lstcampos > label.titulo {
+  height: 20px;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+
+
+div.lstcampos > div.valor {
+  height: 20px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+  margin-top: 5px;
+  margin-right: 25px;
+  display: inline-flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.lstcampos > .valor > input[type=radio]{
+  margin-left: 10px;
+  margin-top: 0;
+}
+
+input[type="radio"].form-control-error-2{
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  padding: 6px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 1px solid #D0021B;
+  border-radius: 50%;
+}
+
+.lstcampos > small{
+  clear: both;
+  display: block;
+}
+
+div.form-group > small {
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+  display: block;
+}
+
+.rwdias{
+  height: 20px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  align-content: center;
+  margin-bottom: 10px;
+}
+.rwdias > .col > input[type=checkbox]{
+  margin-right: 5px;
+  margin-top: 5px;
+
+}
+
+.modal-title{
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.88;
+  letter-spacing: normal;
+  text-align: center;
+  color: #222;
+}
+
+
+
+
+.lblHabilitar{
+  width: 227px;
+  height: 44px;
+  flex-grow: 0;
+  margin: 25.8px 140px 0 89px;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+}
+
+
+
+.tblhorario > .body:hover{
+  /*  background-color: rgba(238, 238, 238, 1);*/
+  background-color: rgba(232, 253, 249, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .tblhorario > .inhabiliar{
+    opacity: 0.75;
+  }  
+.tblhorario > .inhabiliar:hover{
+  background-color: rgba(238, 238, 238, 1) !important;
+  cursor: pointer;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  opacity: 0.75;
+}
+

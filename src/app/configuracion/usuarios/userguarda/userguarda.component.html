@@ -78,7 +78,7 @@
               formControlName="nombres"
               [ngClass]="{'form-control-error': userdata.controls.nombres.dirty && userdata.controls.nombres.errors}"
               maxlength="35"
-              pattern="^([a-zA-Z \-\|[à-ú]|[À-Ú])+$"
+              pattern="^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$"
               required
             />
             <small
@@ -101,7 +101,7 @@
               formControlName="primerapellido"
               [ngClass]="{ 'form-control-error': userdata.controls.primerapellido.dirty && userdata.controls.primerapellido.errors}"
               maxlength="35"
-              pattern="^([a-zA-Z \-\|[à-ú]|[À-Ú])+$"
+              pattern="^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$"
               required
             />
             <small
@@ -124,7 +124,7 @@
               formControlName="segundoapellido"
               [ngClass]="{ 'form-control-error': userdata.controls.segundoapellido.dirty && userdata.controls.segundoapellido.errors}"
               maxlength="35"
-              pattern="^([a-zA-Z \-\|[à-ú]|[À-Ú])+$"
+              pattern="^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$"
               required
             />
             <small

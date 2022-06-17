@@ -46,6 +46,10 @@ export class CitaconsultaComponent implements OnInit {
   strpaciente: string = "";
 
   mod_mensaje: string = "";
+  objmodal = {
+    mensaje: "",
+    tipo: 0
+  };
 
   public keepOriginalOrder = (a: { key: any; }, b: any) => a.key;
 
@@ -91,22 +95,28 @@ export class CitaconsultaComponent implements OnInit {
           'Ubicación (Lugar de atención)': resp.cita.ubicacion,
           'Dirección': resp.cita.direccion,
           'Unidad médica': resp.cita.unidadMedica,
-          'Estatus de cita': resp.cita.status,
+          'Estatus de cita': resp.cita.estatus,
           'Turno': resp.cita.turno,
           'Servicio': resp.cita.descripcionServicio,
           'Programa': resp.cita.grupoPrograma,
-          'Ocasión de servicio': resp.cita.ocacionServicio,
+          'Ocasión de servicio': resp.cita.ocasionServicio,
           'Tipo de cita': resp.cita.tipoCita,
           'Trabajadora social responsable': resp.cita.trabajadorSocial,
           'Modalidad': resp.cita.modalidad
         };
+        /*
+        El campo tipo en el objeto participantes se desglosa de la siguiente manera.
+        1: Paciente.
+        2: Núcleo familiar
+        3: otros
+        */
 
         for(var part of resp.participantes){
-          if(part.ind_paciente !== null){
-            this.strpaciente = part.nom_nombre_completo;
-          }else if(part.ind_otros && part.ind_paciente == null){
+          if(part.CVE_TIPO_PACIENTE == 1){
+            this.strpaciente = part.NOM_COMPLETO;
+          }else if(part.CVE_TIPO_PACIENTE == 3){
             this.participantes_otrs.push(part);
-          } else if(part.ind_otros == false && part.ind_paciente == null){
+          } else if(part.CVE_TIPO_PACIENTE == 2){
             this.participantes_fam.push(part);
           }
         }
@@ -123,7 +133,9 @@ export class CitaconsultaComponent implements OnInit {
       keyboard: false,
       backdrop: 'static'
     })
-    this.mod_mensaje="¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?"
+    //this.mod_mensaje="¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?"
+    this.objmodal.mensaje="¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?";
+    this.objmodal.tipo = 1;
     $('#content').modal('show')
   }
 
@@ -132,26 +144,61 @@ export class CitaconsultaComponent implements OnInit {
       keyboard: false,
       backdrop: 'static'
     })
-    this.mod_mensaje="¿Está seguro de cancelar<br/>la cita seleccionada?"
+    //this.mod_mensaje="¿Está seguro de cancelar<br/>la cita seleccionada?"
+    this.objmodal.mensaje="¿Está seguro de cancelar<br/>la cita seleccionada?";
+    this.objmodal.tipo = 2;
     $('#content').modal('show')
   }
 
   imprimir(){}
 
   cancelarmod(){
-    this.mod_mensaje = "";
+    //this.mod_mensaje = "";
+    this.objmodal.mensaje = "";
+    this.objmodal.tipo = 0;
     $('#content').modal('hide');
 
   }
 
   aceptarmod(){
-    this.mod_mensaje = "";
-    $('#content').modal('hide');
+    if(this.objmodal.tipo == 2){
+      this.citaservice.cancelarcitacal(this.varid).subscribe({
+        next: (resp:any) => {
+          console.log(resp);
+
+          this.citaservice.cancelarcita(this.varid).subscribe({
+            next: (resp:any) => {
+              console.log(resp);
+              this.objmodal.mensaje = "";
+              this.objmodal.tipo = 0;
+              $('#content').modal('hide');
+              this.muestraAlerta("La cita fué cancelada correctamente",'alert-success','Éxito',this.callback);
+            },
+            error: (err) => {
+              this.muestraAlerta(err.error.mensaje?err.error.mensaje:err.error.message,'alert-danger','Error');
+            }
+          })
+        },
+        error: (err) => {
+          this.muestraAlerta(err.error.mensaje?err.error.mensaje:err.error.message,'alert-danger','Error');
+        }
+      })
+
+    } else {
+      //this.mod_mensaje = "";
+      this.objmodal.mensaje = "";
+      this.objmodal.tipo = 0;
+      $('#content').modal('hide');
+    }
 
   }
 
-  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string){
-    // this.alert = new objAlert;
+  callback = () =>{
+    this.regresar();
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string,funxion?:any){
+    this.alert = new objAlert;
     this.alert = {
       message: mensaje,
       type: estilo,
@@ -163,6 +210,9 @@ export class CitaconsultaComponent implements OnInit {
         message:'',
         type: 'custom',
         visible: false
+      }
+      if(funxion != null){
+        funxion();
       }
     }, 2000);
   }

@@ -1,0 +1,53 @@
+<div>
+    <div class="Subtract">
+      <div  [ngClass]="{'diaOn':diasSemana[1],'inhabil': diasSemanaInhabil[1]}" class="blq-2 pull-right" (click)="clickDay(1)">
+        <!-- <img src="../../../assets/images/icon-cron-grp-hov.svg" />
+        <img src="../../../assets/images/icon-cron-grp.svg" /> -->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Lunes</span>
+      </div>
+      <div  [ngClass]="{'diaOn':diasSemana[2],'inhabil': diasSemanaInhabil[2]}" class="blq-2 pull-right" (click)="clickDay(2)">
+        <!-- <img src="../../../assets/images/icon-don-sng-hov.svg" />
+        <img src="../../../assets/images/icon-don-sng.svg" /> -->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Martes</span>
+      </div>
+      <div [ngClass]="{'diaOn':diasSemana[3],'inhabil': diasSemanaInhabil[3]}" class="blq-2 pull-right" (click)="clickDay(3)">
+        <!--<img class="" src="../../../assets/images/icon-aviso-mp-hov.svg"/>
+        <img class="" src="../../../assets/images/icon-aviso-mp.svg" />-->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Miércoles</span>
+      </div>
+      <div  [ngClass]="{'diaOn':diasSemana[4],'inhabil': diasSemanaInhabil[4]}" class="blq-2 pull-right" (click)="clickDay(4)">
+        <!--<img class="" src="../../../assets/images/icon-serv-prof-hov.svg"/>
+        <img class="" src="../../../assets/images/icon-serv-prof.svg" />-->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Jueves</span>
+      </div>
+      <div  [ngClass]="{'diaOn':diasSemana[5],'inhabil': diasSemanaInhabil[5]}" class="blq-2 pull-right"  (click)="clickDay(5)">
+        <!--<img class="" src="../../../assets/images/icon-serv-prof-hov.svg"/>
+        <img class="" src="../../../assets/images/icon-serv-prof.svg" />-->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Viernes</span>
+      </div>
+      <div  [ngClass]="{'diaOn':diasSemana[6],'inhabil': diasSemanaInhabil[6]}" class="blq-2 pull-right" (click)="clickDay(6)">
+        <!--<img class="" src="../../../assets/images/icon-serv-prof-hov.svg"/>
+        <img class="" src="../../../assets/images/icon-serv-prof.svg" />-->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Sábado</span>
+      </div>
+      <div  [ngClass]="{'diaOn':diasSemana[0],'inhabil': diasSemanaInhabil[0]}" class="blq-2 pull-right" (click)="clickDay(0)">
+        <!--<img class="" src="../../../assets/images/icon-serv-prof-hov.svg"/>
+        <img class="" src="../../../assets/images/icon-serv-prof.svg" />-->
+        <img class="marg-sup" src="../../../assets/images/mnu-borde-sup.svg">
+        <img src="../../../assets/images/clock.svg" />
+        <span>Domingo</span>
+      </div>
+    </div>
+  </div>
