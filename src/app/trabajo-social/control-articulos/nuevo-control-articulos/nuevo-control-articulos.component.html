@@ -10,9 +10,9 @@
         <div class="instText   pt-15">
             Por favor capture los siguientes datos:
         </div>
-        
 
-      
+
+
         <form novalidate class="formInfo" [formGroup]="formNuevoArticulo">
             <div class=" contenido height154  mt-5 mb-5">
                 <div class="row p-5 ">
@@ -21,12 +21,12 @@
                         <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
                                             formNuevoArticulo.controls?.noFolio ?.touched &&
                                             formNuevoArticulo.controls?.noFolio?.error}"
-                             class="form-control" id="noFolio" formControlName="noFolio" 
+                             class="form-control" id="noFolio" formControlName="noFolio"
                              placeholder="Ingresar artículo" type="text" />
                         <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
                                       formNuevoArticulo.controls?.noFolio?.touched &&
                                       formNuevoArticulo.controls?.noFolio?.error"
-                                     class="form-text form-text-error Campo-obligatorio redColor" 
+                                     class="form-text form-text-error Campo-obligatorio redColor"
                                      >
                             Campo obligatorio
                         </small>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-sm-4  form-group pt-5   ">
                         <span class="labels pb-1">Servicio*:</span>
-                        <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.servicio?.dirty && 
+                        <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.servicio?.dirty &&
                                             formNuevoArticulo.controls?.servicio?.errors}"
                         class="form-control" id="servicio" formControlName="servicio" >
                         <option [value]="''" selected>Seleccionar servicio</option>
@@ -88,7 +88,7 @@
                         </small>
                     </div>
                 </div>
-              
+
             </div>
 
         <!-- agregar Articulos recibidos -->
@@ -99,12 +99,12 @@
                     <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.articulos?.dirty &&
                                         formNuevoArticulo.controls?.articulos ?.touched &&
                                         formNuevoArticulo.controls?.articulos?.error}"
-                         class="form-control" id="articulos" formControlName="articulos" 
+                         class="form-control" id="articulos" formControlName="articulos"
                          placeholder="Ingresar artículo" type="text" />
                     <small *ngIf="formNuevoArticulo.controls?.articulos?.dirty &&
                                   formNuevoArticulo.controls?.articulos?.touched &&
                                   formNuevoArticulo.controls?.articulos?.error"
-                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 class="form-text form-text-error Campo-obligatorio redColor"
                                  >
                         Campo obligatorio
                     </small>
@@ -118,18 +118,18 @@
                     <table class=" table table-sm table-bordered tableArticulos">
                         <thead>
                             <th>
-                              <span class="ml-5">Nombre</span>  
+                              <span class="ml-5">Nombre</span>
                             </th>
-                            <th>    
+                            <th>
                             </th>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>
-    
+
                                 </td>
                                 <td>
-    
+
                                 </td>
                             </tr>
                         </tbody>
@@ -158,7 +158,7 @@
             <div class="row pl-5 pr-5 ">
                 <div class="col-sm-8  form-group pt-5   ">
                     <span class="labels pb-1">Ubicación*:</span>
-                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.ubicacion?.dirty && 
+                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.ubicacion?.dirty &&
                                         formNuevoArticulo.controls?.ubicacion?.errors}"
                     class="form-control" id="ubicacion" formControlName="ubicacion" >
                     <option [value]="''" selected>Seleccionar ubicación</option>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-sm-4  form-group pt-5   ">
                     <span class="labels pb-1">Horario para entrega de artículos*:</span>
-                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.horarioEntregaArticulo?.dirty && 
+                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.horarioEntregaArticulo?.dirty &&
                                         formNuevoArticulo.controls?.horarioEntregaArticulo?.errors}"
                     class="form-control" id="horarioEntregaArticulo" formControlName="horarioEntregaArticulo" >
                     <option [value]="''" selected>Seleccionar horario</option>
@@ -189,11 +189,11 @@
                   </select>
                 </div>
             </div>
-         
+
         </div>
 
-        
- 
+
+
         <!-- recepcion de articulos para resguardo -->
 
         <div class=" contenido height154  mt-5 mb-5">
@@ -202,7 +202,7 @@
                     <span class="title1">
                         Recepción de artículos para su resguardo en subdirección administrativa:
                     </span>
-                </div>               
+                </div>
             </div>
             <div class="row pl-5 pr-5 ">
                 <div class="col-sm-4  ">
@@ -220,8 +220,8 @@
                         Campo obligatorio
                     </small>
                     </div>
-                </div>  
-             
+                </div>
+
                 <div class="col-sm-4  ">
                    <div class=" datepicker-group ">
                   <label class="control-label labels" for="calendarYear">Hora*:</label>
@@ -233,22 +233,22 @@
                     <span class="labels pb-1">Recibió*:</span>
                     <input type="text"  class="form-control" formControlName="resguardoNombreRecibe" id="resguardoNombreRecibe" placeholder="Nombre de quien recibió" readonly="true" />
                  </div>
-               
+
             </div>
-            
-       
+
+
             <div class="row pl-5 pr-5">
                 <div class="col-sm-4   ">
                     <span class="labels pb-1">Entregó*:</span>
                     <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
                                         formNuevoArticulo.controls?.noFolio ?.touched &&
                                         formNuevoArticulo.controls?.noFolio?.error}"
-                         class="form-control" id="noFolio" formControlName="noFolio" 
+                         class="form-control" id="noFolio" formControlName="noFolio"
                          placeholder="Nombre de quien entregó" type="text" />
                     <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
                                   formNuevoArticulo.controls?.noFolio?.touched &&
                                   formNuevoArticulo.controls?.noFolio?.error"
-                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 class="form-text form-text-error Campo-obligatorio redColor"
                                  >
                         Campo obligatorio
                     </small>
@@ -259,7 +259,7 @@
                     <span class="title1">
                         Recepción de artículos completos:
                     </span>
-                </div>               
+                </div>
             </div>
             <div class="row pl-5 pr-5 ">
                 <div class="col-sm-4  ">
@@ -277,8 +277,8 @@
                         Campo obligatorio
                     </small>
                     </div>
-                </div>  
-             
+                </div>
+
                 <div class="col-sm-4  ">
                    <div class=" datepicker-group ">
                   <label class="control-label labels" for="calendarYear">Hora*:</label>
@@ -290,7 +290,7 @@
                     <span class="labels pb-1">Recibió*:</span>
                     <input type="text"  class="form-control" formControlName="resguardoNombreRecibe" id="resguardoNombreRecibe" placeholder="Nombre de quien recibió"  />
                  </div>
-               
+
             </div>
             <div class="row pl-5 pr-5 mb-5">
                 <div class="col-sm-4   ">
@@ -298,19 +298,19 @@
                     <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
                                         formNuevoArticulo.controls?.noFolio ?.touched &&
                                         formNuevoArticulo.controls?.noFolio?.error}"
-                         class="form-control" id="noFolio" formControlName="noFolio" 
+                         class="form-control" id="noFolio" formControlName="noFolio"
                          placeholder="Nombre de quien entregó" type="text" />
                     <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
                                   formNuevoArticulo.controls?.noFolio?.touched &&
                                   formNuevoArticulo.controls?.noFolio?.error"
-                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 class="form-text form-text-error Campo-obligatorio redColor"
                                  >
                         Campo obligatorio
                     </small>
                 </div>
                 <div class="col-sm-4   ">
                     <span class="labels pb-1">Ubicación*:</span>
-                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.ubicacion?.dirty && 
+                    <select  [ngClass]="{'form-control-error': formNuevoArticulo.controls?.ubicacion?.dirty &&
                                         formNuevoArticulo.controls?.ubicacion?.errors}"
                     class="form-control" id="ubicacion" formControlName="ubicacion" >
                     <option [value]="''" selected>Seleccionar ubicación</option>
@@ -329,12 +329,12 @@
                     <input [ngClass]="{'form-control-error': formNuevoArticulo.controls?.noFolio?.dirty &&
                                         formNuevoArticulo.controls?.noFolio ?.touched &&
                                         formNuevoArticulo.controls?.noFolio?.error}"
-                         class="form-control" id="noFolio" formControlName="noFolio" 
+                         class="form-control" id="noFolio" formControlName="noFolio"
                          placeholder="Ingresa horario" type="text" />
                     <small *ngIf="formNuevoArticulo.controls?.noFolio?.dirty &&
                                   formNuevoArticulo.controls?.noFolio?.touched &&
                                   formNuevoArticulo.controls?.noFolio?.error"
-                                 class="form-text form-text-error Campo-obligatorio redColor" 
+                                 class="form-text form-text-error Campo-obligatorio redColor"
                                  >
                         Campo obligatorio
                     </small>
@@ -344,7 +344,7 @@
         <div class="instTextObligatorios mt-2">
             *Campos obligatorios
         </div>
-        
+
         <div class="row mt-3">
             <div class="col-md-8">
 
@@ -357,11 +357,11 @@
             </div>
 
         </div>
- 
 
-       
 
-     
+
+
+
 
     </form>
 
