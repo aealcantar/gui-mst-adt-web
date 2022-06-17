@@ -94,32 +94,57 @@ export class HelperCatalogosService {
       col7: 'UNIDAD MEDICA',
 
     },
+   
+   
+    
+    
     {
       idCatalogos: 4,
-      nombreCatalogo: 'Turnos',
-      rutaPlantilla: '../../../../assets/files/11.Turnos.xlsx',
-      idCatPadre: undefined,
-      col1: 'Clave turno',
-      col2: 'Descripción de turno',
-      col3: '4_30_6',
-
+      nombreCatalogo: 'Responsables',
+      rutaPlantilla: '../../../../assets/files/14.Responsables.xlsx',
+      idCatPadre: [7],
+      col1: 'MATRICULA',
+      col2: 'NOMBRE',
+      col3: 'UBICACIÓN',
+      col4: 'TURNO',
 
     },
     {
       idCatalogos: 5,
-      nombreCatalogo: 'Puestos',
-      rutaPlantilla: '../../../../assets/files/12.Puestos.xlsx',
+      nombreCatalogo: 'Programas de Trabajo Social',
+      rutaPlantilla: '../../../../assets/files/10.GruposProgramas O ProgramasTrabajoSocial.xlsx',
       idCatPadre: undefined,
-      col1: 'DESCRIPCION',
+      col1: 'CLAVE GRUPO',
+      col2: 'DESCRIPCION GRUPO / PROGRAMA',
+      col3: 'CODIGO',
+      col4: 'DESCRIPCION ACTIVIDAD',
+      col5: 'SERVICIO/ESPECIALIDAD',
+
+    },
 
 
-    }
-    ,
     {
       idCatalogos: 6,
+      nombreCatalogo: 'Configuración de Calendario Anual',
+      rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
+      idCatPadre: [2,3],
+      col1: 'PROGRAMA',
+      col2: 'UBICACIÓN',
+      col3: 'FECHA INICIO',
+      col4: 'HORA INICIO',
+      col5: 'DURACION',
+      col6: 'FECHA FIN',
+      col7: 'HORA FIN',
+      col8: 'MAXIMO DE PARTICIPANTES'
+
+
+    },
+
+    {
+      idCatalogos: 7,
       nombreCatalogo: 'Usuarios',
       rutaPlantilla: '../../../../assets/files/13.Personal.xlsx',
-      idCatPadre: [4,5],
+      idCatPadre: undefined,
       col1: 'PRIMER APELLIDO',
       col2: 'SEGUNDO APELLIDO',
       col3: 'NOMBRE',
@@ -133,54 +158,31 @@ export class HelperCatalogosService {
     },
 
     {
-      idCatalogos: 7,
-      nombreCatalogo: 'Programas de Trabajo Social',
-      rutaPlantilla: '../../../../assets/files/10.GruposProgramas O ProgramasTrabajoSocial.xlsx',
-      idCatPadre: undefined,
-      col1: 'CLAVE GRUPO',
-      col2: 'DESCRIPCION GRUPO / PROGRAMA',
-      col3: 'CODIGO',
-      col4: 'DESCRIPCION ACTIVIDAD',
-      col5: 'SERVICIO/ESPECIALIDAD',
-
-    },
-    {
       idCatalogos: 8,
-      nombreCatalogo: 'Responsables',
-      rutaPlantilla: '../../../../assets/files/14.Responsables.xlsx',
-      idCatPadre: [3, 4, 6],
-      col1: 'MATRICULA',
-      col2: 'NOMBRE',
-      col3: 'UBICACIÓN',
-      col4: 'TURNO',
+      nombreCatalogo: 'Turnos',
+      rutaPlantilla: '../../../../assets/files/11.Turnos.xlsx',
+      idCatPadre: undefined,
+      col1: 'Clave turno',
+      col2: 'Descripción de turno',
+      col3: '4_30_6',
+
 
     },
-
-
     {
       idCatalogos: 9,
-      nombreCatalogo: 'Configuración de Calendario Anual',
-      rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
+      nombreCatalogo: 'Puestos',
+      rutaPlantilla: '../../../../assets/files/12.Puestos.xlsx',
       idCatPadre: undefined,
-      col1: 'PROGRAMA',
-      col2: 'UBICACIÓN',
-      col3: 'FECHA INICIO',
-      col4: 'HORA INICIO',
-      col5: 'DURACION',
-      col6: 'FECHA FIN',
-      col7: 'HORA FIN',
-      col8: 'MAXIMO DE PARTICIPANTES'
+      col1: 'DESCRIPCION',
 
 
-    },
-
-
-
+    }
+    ,
 
   ];
 
 
-  getConfiguracionCat() {
+   getConfiguracionCat() {
     return this.lstConfiguracionCat;
   }
 
