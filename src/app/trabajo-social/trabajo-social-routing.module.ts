@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component';
 
+
+//las rutas serian 
+// :4200/trabajo-social/nuevo-control-articulos
 const routes: Routes = [
   // {path:'',
   // children:[
