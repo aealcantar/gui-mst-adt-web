@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../../models/usuario.model';
+import { Usuario } from '../models/usuario.model';
 
 @Component({
   selector: 'app-trabajador-social-clinico',
@@ -19,5 +19,4 @@ export class TrabajadorSocialClinicoComponent implements OnInit {
       console.log("USER DATA: ", this.usuario);
     }
   }
-
 }

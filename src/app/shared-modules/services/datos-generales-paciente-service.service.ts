@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { pacienteSeleccionado } from '../../models/paciente.interface'; 
+import { pacienteSeleccionado } from '../models/paciente.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppTarjetaPresentacionService {
-
+export class DatosGeneralesPacienteServiceService {
   paciente!: pacienteSeleccionado;
 
   add(paciente: pacienteSeleccionado) {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { pacienteSeleccionado } from '../../models/paciente.interface';
+import { pacienteSeleccionado } from '../models/paciente.interface';
+import { DatosGeneralesPacienteServiceService } from '../services/datos-generales-paciente-service.service';
 import {  Router } from '@angular/router';
-import { AppTarjetaPresentacionService } from './app-tarjeta-presentacion.service';
+
 @Component({
   selector: 'app-datos-generales-paciente',
   templateUrl: './datos-generales-paciente.component.html',
@@ -14,7 +15,7 @@ export class DatosGeneralesPacienteComponent implements OnInit {
   executed: boolean = false;
   months: any;
 
-  constructor(private tarjetaServce: AppTarjetaPresentacionService, private router: Router) { }
+  constructor(private tarjetaServce: DatosGeneralesPacienteServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.paciente = this.tarjetaServce.get();
@@ -73,4 +74,5 @@ export class DatosGeneralesPacienteComponent implements OnInit {
   irEstudioSocialMedico() {
     this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
   }
+
 }

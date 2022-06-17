@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+
 import {  Observable } from 'rxjs';
-import { AuthService } from '../../services/auth-service.service';
+import { AuthService } from '../services/auth-service.service';
 @Component({
   selector: 'app-datos-generales-usuario',
   templateUrl: './datos-generales-usuario.component.html',
@@ -9,6 +10,7 @@ import { AuthService } from '../../services/auth-service.service';
 })
 export class DatosGeneralesUsuarioComponent implements OnInit {
 
+  
   title = 'Ecosistema Digital';
   email: string | undefined;
   nombre: string | undefined;
@@ -40,3 +42,6 @@ export class DatosGeneralesUsuarioComponent implements OnInit {
   }
 
 }
+
+
+
