@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth-service.service';
 // import { AuthService } from './service/auth-service.service';
 
@@ -9,6 +9,7 @@ import { AuthService } from '../service/auth-service.service';
   styleUrls: ['./header-menu.component.css']
 })
 export class HeaderMenuComponent implements OnInit {
+  tituloAplicativo: string = '';
   title = 'Ecosistema Digital';
   email: string | undefined;
   nombre: string | undefined;
@@ -17,9 +18,13 @@ export class HeaderMenuComponent implements OnInit {
 
   isAuthenticated$!: Observable<boolean>;
 
-  constructor(
-    private authenticationService: AuthService
-  ) { }
+  constructor( private authenticationService: AuthService) {
+    if(window.location.href.includes('guardauser')) {
+      this.tituloAplicativo = 'Agenda Digital Transversal';
+    } else {
+      this.tituloAplicativo = 'Trabajo social';
+    }
+  }
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
