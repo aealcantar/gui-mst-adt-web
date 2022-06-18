@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Nota } from '../models/notas.model'; //modificar cuando haya endpoint
 
 //configuración de url modificar cuando haya endpoint
-const urlServArticulo = `${environment.urlServNotas}/api`
+const urlServArticulo = `${environment.msmtsNotas}/api`
 
 @Injectable({
   providedIn: 'root'

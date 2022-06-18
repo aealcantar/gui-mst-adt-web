@@ -1,5 +1,5 @@
 <div class="header-menu flex justify-content-between align-items-center" *ngIf="isAuthenticated$">
-  <div class="Historial-clnico">{{tituloAplicativo}}</div>
+  <div class="Historial-clnico">{{ proyecto }}</div>
   <div class="Group-1028">
     <div class="auth-user">{{ nombre }}</div>
     <div class="auth-rol">Trabajador(a) social - Nivel 2</div>
@@ -7,7 +7,10 @@
   <div><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span
         class="caret mnu"></span></a>
     <ul class="dropdown-menu dropdown-menu-right list-menu" role="menu" aria-labelledby="dLabel">
-      <li><a>Catálogos</a></li>
+      <!-- <li><a>Catálogos</a></li> -->
+      <li><a (click)="redirecciona(1)"><img src="../../../../assets/images/icon-mnu-catalogo-hov.svg"> Catálogos</a></li>
+      <li><a (click)="redirecciona(2)"> Usuarios</a></li>
+      <li><a (click)="redirecciona(3)"> Horarios</a></li>
       <li><a (click)="logOut()">Cerrar sesión</a></li>
     </ul>
   </div>

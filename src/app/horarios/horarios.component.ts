@@ -19,6 +19,7 @@ import { TurnoResponse } from '../models/turno-response-model';
 
 import { HorarioTurno } from '../models/horario.turno.model';
 import { HorarioStatus } from '../models/horario.status.model';
+import { AuthService } from '../service/auth-service.service';
 
 declare var $: any;
 interface LooseObject {
@@ -57,13 +58,14 @@ export class HorariosComponent implements OnInit {
     private _Mensajes: HelperMensajesService,
     private horarioService: HorarioService,
     private _agendaService: AgendaService,
+    private authService: AuthService,
     private http: HttpClient, private modalService: NgbModal) {
 
     this.diaNb = (new Date()).getDay();
     this.obtieneDia(this.diaNb)
 
     console.log("dia: ", this.diaNb);
-
+    this.authService.setProjectObs("Agenda Digital Transversal");
     this.turnoNuevo = new HorarioTurno();
 
   }

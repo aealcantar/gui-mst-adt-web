@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth-service.service';
 // import { AuthService } from './service/auth-service.service';
@@ -18,13 +19,10 @@ export class HeaderMenuComponent implements OnInit {
 
   isAuthenticated$!: Observable<boolean>;
 
-  constructor( private authenticationService: AuthService) {
-    if(window.location.href.includes('guardauser')) {
-      this.tituloAplicativo = 'Agenda Digital Transversal';
-    } else {
-      this.tituloAplicativo = 'Trabajo social';
-    }
-  }
+  constructor(
+    private authenticationService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
@@ -35,13 +33,34 @@ export class HeaderMenuComponent implements OnInit {
         this.matricula = isAuthiticated ? this.authenticationService.usuario.strUserName : "";
       }
     )
-    this.authenticationService.project$.asObservable().subscribe(
-      (proyectoActual) => this.proyecto = proyectoActual
+    this.authenticationService.getProjectObs().subscribe(
+      (proyectoActual) => {
+        this.proyecto = proyectoActual;
+      }
     );
   }
 
   logOut() {
     this.authenticationService.logout();
+  }
+
+  redirecciona(val: number){
+    var ruta:string;
+    switch(val){
+      case 1:
+        ruta = '/catalogos/cargaCatalogos';
+        break;
+      case 2:
+        ruta = '/buscauser';
+        break;
+      case 3:
+        ruta = '/TrabajoSocial/horarios';
+        break;
+      case 4:
+        ruta = '/login';
+        break;
+    }
+    this.router.navigate([ruta]);
   }
 
 }

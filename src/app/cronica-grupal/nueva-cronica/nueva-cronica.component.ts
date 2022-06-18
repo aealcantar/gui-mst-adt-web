@@ -152,8 +152,12 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
   
   salirModal(){
-    this.router.navigateByUrl("/consulta-notas", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-cronica-grupal", { skipLocationChange: true });
     $('#content').modal('hide');
+  }
+
+  getNombreGrupo(cveGrupo: number) {
+    return this.grupos.find(g => g.cve_grupo_programa = cveGrupo)?.des_grupo_programa;
   }
 
   guardarCronica() {
@@ -193,7 +197,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         desEspecialidad: null,
         idTurno: 1,
         desTurno: null,
-        idGrupo: parseInt(this.editForm.get('grupo')!.value),
+        idGrupo: this.getNombreGrupo(parseInt(this.editForm.get('grupo')!.value)),
         desGrupo: null,
         idUbicacion: '9',
         desUbicacion: null,

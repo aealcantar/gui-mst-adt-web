@@ -173,7 +173,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
           this.ciudades = ciudades;
           console.log("CIUDADES: ", this.ciudades);
           if (this.ciudades.length === 1) {
-            this.formEstudioSocial.controls['ciudad'].setValue(this.ciudades[0].idCiudad);
+            this.formEstudioSocial.controls['ciudad'].setValue(this.ciudades[0].cve_ciudad);
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -214,7 +214,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
           this.ciudadesFamiliar = ciudades;
           console.log("CIUDADES: ", this.ciudadesFamiliar);
           if (this.ciudadesFamiliar.length === 1) {
-            this.formEstudioSocial2.controls['ciudadF'].setValue(this.ciudadesFamiliar[0].idCiudad);
+            this.formEstudioSocial2.controls['ciudadF'].setValue(this.ciudadesFamiliar[0].cve_ciudad);
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -223,27 +223,27 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       );
   }
 
-  getNombreEstado(idEstado: number, esFamiliar: boolean) {
+  getNombreEstado(idEstado: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.estadosFamiliar.find(e => e.idEstado = idEstado)?.nomCompleto;
+      return this.estadosFamiliar.find(e => e.cve_estado = idEstado)?.des_nombre_completo;
     } else {
-      return this.estados.find(e => e.idEstado = idEstado)?.nomCompleto;
+      return this.estados.find(e => e.cve_estado = idEstado)?.des_nombre_completo;
     }
   }
 
-  getNombreMunicipio(idMunicipio: number, esFamiliar: boolean) {
+  getNombreMunicipio(idMunicipio: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.delegaciones.find(d => d.idDelegacionMunicipio = idMunicipio)?.nomMunicipio;
+      return this.delegaciones.find(d => d.cve_delegacion_municipio = idMunicipio)?.des_municipio;
     } else {
-      return this.municipios.find(m => m.idDelegacionMunicipio = idMunicipio)?.nomMunicipio;
+      return this.municipios.find(m => m.cve_delegacion_municipio = idMunicipio)?.des_municipio;
     }
   }
 
-  getNombreCiudad(idCiudad: number, esFamiliar: boolean) {
+  getNombreCiudad(idCiudad: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.ciudadesFamiliar.find(c => c.idCiudad = idCiudad)?.nomCiudad;
+      return this.ciudadesFamiliar.find(c => c.cve_ciudad = idCiudad)?.des_ciudad;
     } else {
-      return this.ciudades.find(c => c.idCiudad = idCiudad)?.nomCiudad;
+      return this.ciudades.find(c => c.cve_ciudad = idCiudad)?.des_ciudad;
     }
   }
 

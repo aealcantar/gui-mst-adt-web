@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValue } from '@angular/common';
 import { UsuariosService } from '../usuarios.service';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 declare var $gmx: any;
 
@@ -59,13 +60,14 @@ export class UserguardaComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
+    private authService: AuthService,
     private router: Router,
     private activerouter: ActivatedRoute,
     private userservice: UsuariosService
   ) {}
 
   ngOnInit(): void {
+    this.authService.setProjectObs("Agenda Digital Transversal");
     this.consultarRoles();
     $gmx(document).ready(() => {
       //this.cargaprincipal();

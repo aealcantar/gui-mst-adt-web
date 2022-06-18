@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { UsuariosService } from '../usuarios.service';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { DataTableDirective } from 'angular-datatables';
+import { AuthService } from 'src/app/service/auth-service.service';
 //import { rootCertificates } from 'tls';
 declare var $:any;
 //declare var $gmx:any;
@@ -37,14 +38,14 @@ export class UserbuscaComponent implements OnInit  {
   dtTrigger: Subject<any> = new Subject<any>();
 
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private authService: AuthService,
     private http: HttpClient, private router: Router,
     private userservice: UsuariosService,
     private renderer: Renderer2) {}
 
 
   public ngOnInit(): void {
-
+    this.authService.setProjectObs("Agenda Digital Transversal");
     //buscarusuario2();
     this.buscarusuario();
 

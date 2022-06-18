@@ -16,13 +16,13 @@ export const environment = {
   
   
     //Trabajo Social
-    
     msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
-    urlServCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api/',
-    urlServCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
-    urlServCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api/',
-    urlServNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api/',
-    urlServEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api/',
+    msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
+    msmtsCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
+    msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
+    msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
+    msmtsOauth: 'http://localhost:8081',
     urlServOauth: 'http://localhost:8081',
   
   

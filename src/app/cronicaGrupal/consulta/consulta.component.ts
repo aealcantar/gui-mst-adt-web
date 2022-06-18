@@ -54,7 +54,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-    this.authService.project$.next("Trabajo Social");
+    this.authService.setProjectObs("Trabajo social");
     this.loadCatalogos();
   }
 
