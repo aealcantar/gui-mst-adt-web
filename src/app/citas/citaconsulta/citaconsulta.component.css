@@ -297,7 +297,7 @@ img.Group-2082 {
 
 
 .lbel{
-  height: 20px;
+  vertical-align: top;
   font-family: Montserrat;
   font-size: 12px;
   font-weight: 600;
@@ -310,7 +310,7 @@ img.Group-2082 {
 }
 
 .valor{
-  flex-grow: 0;
+  
   font-family: Montserrat;
   font-size: 14px;
   font-weight: normal;
@@ -320,9 +320,16 @@ img.Group-2082 {
   letter-spacing: normal;
   text-align: left;
   color: #222;
+  max-height: 85px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
 }
 
 .reg{
-  max-height: 79px;
+  
+  max-height: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   
 }

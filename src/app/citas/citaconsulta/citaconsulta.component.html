@@ -37,7 +37,7 @@
       <div class="row col-12">
         <div class="text-left pull-left">
           <span (click)="regresar()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
-          <span>Consulta de cita</span>
+          <span style="padding-left: 15px;">Consulta de cita</span>
         </div>
         <div class="pull-right">
           <button class="btn btn-primary btuser pull-right" (click)="imprimir()">Imprimir</button>
@@ -82,7 +82,7 @@
       </div>
 
       <div class="row col-12 reg " style="display: inline-block; ">
-        <div class="col-4 " style=" display: inline-block; height: 100%; ">
+        <div class="col-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Fecha y hora de inicio de cita: </div>
           <div class="valor">{{citaResponse.cita?.fechaInicio}}</div>
         </div>
@@ -92,14 +92,14 @@
           <div class="valor">{{citaResponse.cita?.fechaFin}}</div>
 
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Duración de cita: </div>
           <div class="valor">{{citaResponse.cita?.duracion}}</div>
         </div>
       </div>
 
       <div class="row col-12 reg" style="display: block; ">
-        <div class="col-7 " style=" display: inline-block; height: 100%; ">
+        <div class="col-7 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Ubicación (Lugar de atención): </div>
 
         </div>
@@ -109,7 +109,7 @@
 
 
         </div>
-        <div class="col-7 " style=" display: inline-block; height: 100%; ">
+        <div class="col-7 " style=" display: inline-block; height: 100%; vertical-align: top;">
 
           <div class="valor">{{citaResponse.cita?.ubicacion}}</div>
         </div>
@@ -138,29 +138,29 @@
         </div>
       </div>
       <div class="row col-12 reg" style="display: inline-block; ">
-        <div class="col-4 " style=" display: inline-block; height: 100%; ">
+        <div class="col-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Servicio: </div>
           <div class="valor">{{citaResponse.cita?.descripcionServicio}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Programa: </div>
           <div class="valor">{{citaResponse.cita?.grupoPrograma}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Ocasión de servicio: </div>
           <div class="valor">{{citaResponse.cita?.ocasionServicio}}</div>
         </div>
       </div>
       <div class="row col-12 reg" style="display: inline-block;">
-        <div class="col-4 " style=" display: inline-block; height: 100%; ">
+        <div class="col-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Tipo de cita: </div>
           <div class="valor">{{citaResponse.cita?.tipoCita}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Trabajadora social responsable: </div>
           <div class="valor">{{citaResponse.cita?.trabajadorSocial}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Modalidad: </div>
           <div class="valor">{{citaResponse.cita?.modalidad}}</div>
         </div>
