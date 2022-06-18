@@ -94,28 +94,28 @@ export class CitaconsultaComponent implements OnInit {
     this.citaservice.consultacita(id).subscribe({
       next: (resp: CitaResponse) => {
         console.log("buscarCita: ", resp);
-      
-        // console.log("inicio: ",this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') );
-        this.citaResponse = resp;
-        this.citaResponse.cita.fechaInicio = "";//this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss')  ;
-        this.citaResponse.cita.fechaFin = "";// this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') ;
 
-        this.datoscita = {
-          'Fecha y hora de inicio de cita': resp.cita.fechaInicio ? this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') : "",
-          'Fecha y hora de finalización de cita': resp.cita.fechaFin ? this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') : "",
-          'Duración de cita': resp.cita.duracion,
-          'Ubicación (Lugar de atención)': resp.cita.ubicacion,
-          'Dirección': resp.cita.direccion,
-          'Unidad médica': resp.cita.unidadMedica,
-          'Estatus de cita': resp.cita.estatus,
-          'Turno': resp.cita.turno,
-          'Servicio': resp.cita.descripcionServicio,
-          'Programa': resp.cita.grupoPrograma,
-          'Ocasión de servicio': resp.cita.ocasionServicio,
-          'Tipo de cita': resp.cita.tipoCita,
-          'Trabajadora social responsable': resp.cita.trabajadorSocial,
-          'Modalidad': resp.cita.modalidad
-        };
+        //console.log("inicio: ",this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') );
+        this.citaResponse = resp;
+        this.citaResponse.cita.fechaInicio = this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') ;
+        this.citaResponse.cita.fechaFin = this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') ;
+
+        // this.datoscita = {
+        //   'Fecha y hora de inicio de cita': resp.cita.fechaInicio ? this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') : "",
+        //   'Fecha y hora de finalización de cita': resp.cita.fechaFin ? this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') : "",
+        //   'Duración de cita': resp.cita.duracion,
+        //   'Ubicación (Lugar de atención)': resp.cita.ubicacion,
+        //   'Dirección': resp.cita.direccion,
+        //   'Unidad médica': resp.cita.unidadMedica,
+        //   'Estatus de cita': resp.cita.estatus,
+        //   'Turno': resp.cita.turno,
+        //   'Servicio': resp.cita.descripcionServicio,
+        //   'Programa': resp.cita.grupoPrograma,
+        //   'Ocasión de servicio': resp.cita.ocasionServicio,
+        //   'Tipo de cita': resp.cita.tipoCita,
+        //   'Trabajadora social responsable': resp.cita.trabajadorSocial,
+        //   'Modalidad': resp.cita.modalidad
+        // };
 
 
         /*
