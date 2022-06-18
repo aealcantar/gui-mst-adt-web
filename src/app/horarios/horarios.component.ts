@@ -593,8 +593,8 @@ export class HorariosComponent implements OnInit {
     $('#content').modal('show')
   }
   obtenerTurnoNuevo() {
-    if (this.turnoNuevo.des_TURNO) {
-      this.turnoNuevo = this.lstTurnos.find(e => e.des_TURNO === this.turnoNuevo.des_TURNO);
+    if (this.turnoNuevo.des_turno) {
+      this.turnoNuevo = this.lstTurnos.find(e => e.des_turno === this.turnoNuevo.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
@@ -602,8 +602,8 @@ export class HorariosComponent implements OnInit {
   }
 
   cambiarTurno() {
-    if (this.turnoSeleccionado.des_TURNO) {
-      this.turnoSeleccionado = this.lstTurnos.find(e => e.des_TURNO === this.turnoSeleccionado.des_TURNO);
+    if (this.turnoSeleccionado.des_turno) {
+      this.turnoSeleccionado = this.lstTurnos.find(e => e.des_turno === this.turnoSeleccionado.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
@@ -762,7 +762,7 @@ export class HorariosComponent implements OnInit {
   }
   btnAceptarHorario() {
     if(this.horarioSeleccionado.horaInicial && this.horarioSeleccionado.horaFinal && this.horarioSeleccionado.duracion &&
-      this.turnoSeleccionado.des_TURNO){
+      this.turnoSeleccionado.des_turno){
         this.guardarHorario();
       }else{
         this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_DATOS_REQUERIDOS_HORARIO, this._Mensajes.ERROR);

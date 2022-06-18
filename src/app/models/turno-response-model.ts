@@ -2,7 +2,7 @@ export class TurnoResponse {
 
   public cve_TURNO: number;
 
-    public des_TURNO: string;
+    public des_turno: string;
 
     public fec_BAJA: string;
 

@@ -100,10 +100,10 @@
                 </span>:
               </label>
               <select class="form-control captura" id="turno" name="turno" formControlName="turno"
-              [(ngModel)]="turnoNuevo.des_TURNO"   (change)="pintarTurno()"
+              [(ngModel)]="turnoNuevo.des_turno"   (change)="pintarTurno()"
               [ngClass]="{'form-control-error': formfields.controls.turno.errors}" required>
                 <option value="" disabled selected hidden>Seleccionar turno</option>
-                <option [value]="objeto.des_TURNO" *ngFor="let objeto of lstTurnos">{{objeto.des_TURNO}}</option>
+                <option [value]="objeto.des_turno" *ngFor="let objeto of lstTurnos">{{objeto.des_turno}}</option>
               </select>
               <small *ngIf="formfields.controls.turno.errors" class="form-text form-text-error">
                 {{formfields.controls.turno.errors?.required? "Campo obligatorio" : "Formato inválido"}}
@@ -192,10 +192,10 @@
               <select class="form-control captura" id="turno" name="turno" formControlName="turno"
 
                 [ngClass]="{'form-control-error': formfields.controls.turno.errors}" required
-                [(ngModel)]="turnoSeleccionado.des_TURNO" (change)="cambiarTurno()">
+                [(ngModel)]="turnoSeleccionado.des_turno" (change)="cambiarTurno()">
                 <option value="" disabled selected hidden>Seleccionar turno</option>
-                <option [value]="objeto.des_TURNO" *ngFor="let objeto of lstTurnos">
-                  {{objeto.des_TURNO}}</option>
+                <option [value]="objeto.des_turno" *ngFor="let objeto of lstTurnos">
+                  {{objeto.des_turno}}</option>
               </select>
               <small *ngIf="formfields.controls.turno.errors" class="form-text form-text-error">
                 {{formfields.controls.turno.errors?.required? "Campo obligatorio" : "Formato inválido"}}
@@ -210,17 +210,7 @@
               <mat-radio-group aria-label="Select an option" [(ngModel)]="estatusActivoSeleccionado" [ngModelOptions]="{standalone: true}">
                 <mat-radio-button class="form-lbl-mat-radio my-radio" style="margin-right: 18px;" *ngFor="let op of opciones" [value]="op">{{op?'Activo':'Bloqueado'}}</mat-radio-button>
             </mat-radio-group>
-            <!--   <div class="valor"><span>Activo:</span>
-                <input type="radio" id="estatus" [(ngModel)]="estatusActivoSeleccionado"  formControlName="estatus"
-                  [ngClass]="{'form-control-error-2': formfields.controls.estatus.errors}">
-              </div>
-              <div class="valor"><span>Bloqueado:</span>
-                <input type="radio" id="estatus"[(ngModel)]="estatusBloqueadoSeleccionado"  formControlName="estatus"
-                  [ngClass]="{'form-control-error-2': formfields.controls.estatus.errors}">
-              </div>
-              <small *ngIf="formfields.controls.estatus.errors" class="form-text form-text-error">
-                {{formfields.controls.estatus.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-              </small> -->
+           
             </div>
           </form>
         </div>

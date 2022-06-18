@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { objAlert } from '../../common/alerta/alerta.interface';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
@@ -9,10 +9,12 @@ import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { DataTableDirective } from 'angular-datatables';
 import { CitasService } from '../citas.service';
 import { DatePipe, formatDate } from '@angular/common';
+import { CitaResponse, ParticipanteCita } from 'src/app/models/cita-model';
+import Swal from 'sweetalert2';
 
 
-declare var $:any;
-declare var $gmx:any;
+declare var $: any;
+declare var $gmx: any;
 
 @Component({
   selector: 'app-citaconsulta',
@@ -41,8 +43,8 @@ export class CitaconsultaComponent implements OnInit {
     'Modalidad': ''
   }
 
-  participantes_fam: Array<any> = [];
-  participantes_otrs: Array<any> = [];
+  participantes_fam: Array<ParticipanteCita> = [];
+  participantes_otrs: Array<ParticipanteCita> = [];
   strpaciente: string = "";
 
   mod_mensaje: string = "";
@@ -80,17 +82,27 @@ export class CitaconsultaComponent implements OnInit {
     this.buscarcita(this.varid);
   }
 
-  regresar(){
+  regresar() {
     this.router.navigate(['/buscacita']);
   }
 
-  buscarcita(id: number){
+  citaResponse: CitaResponse;
+  buscarcita(id: number) {
+    this.msjLoading("Cargando...");
+    this.strpaciente= "";
+    this.citaResponse = new CitaResponse();
     this.citaservice.consultacita(id).subscribe({
-      next: (resp:any) => {
-        console.log(resp);
+      next: (resp: CitaResponse) => {
+        console.log("buscarCita: ", resp);
+      
+        // console.log("inicio: ",this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') );
+        this.citaResponse = resp;
+        this.citaResponse.cita.fechaInicio = "";//this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss')  ;
+        this.citaResponse.cita.fechaFin = "";// this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') ;
+
         this.datoscita = {
-          'Fecha y hora de inicio de cita': resp.cita.fechaInicio? this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss')  : "",
-          'Fecha y hora de finalización de cita': resp.cita.fechaFin? this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss')  : "",
+          'Fecha y hora de inicio de cita': resp.cita.fechaInicio ? this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') : "",
+          'Fecha y hora de finalización de cita': resp.cita.fechaFin ? this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') : "",
           'Duración de cita': resp.cita.duracion,
           'Ubicación (Lugar de atención)': resp.cita.ubicacion,
           'Dirección': resp.cita.direccion,
@@ -104,6 +116,8 @@ export class CitaconsultaComponent implements OnInit {
           'Trabajadora social responsable': resp.cita.trabajadorSocial,
           'Modalidad': resp.cita.modalidad
         };
+
+
         /*
         El campo tipo en el objeto participantes se desglosa de la siguiente manera.
         1: Paciente.
@@ -111,48 +125,53 @@ export class CitaconsultaComponent implements OnInit {
         3: otros
         */
 
-        for(var part of resp.participantes){
-          if(part.CVE_TIPO_PACIENTE == 1){
+        for (var part of this.citaResponse.participantes) {
+          if (part.CVE_TIPO_PACIENTE == 1) {
             this.strpaciente = part.NOM_COMPLETO;
-          }else if(part.CVE_TIPO_PACIENTE == 3){
+          } else if (part.CVE_TIPO_PACIENTE == 3) {
             this.participantes_otrs.push(part);
-          } else if(part.CVE_TIPO_PACIENTE == 2){
+          } else if (part.CVE_TIPO_PACIENTE == 2) {
             this.participantes_fam.push(part);
           }
         }
+
+        Swal.close();
+        console.log("otros", this.participantes_otrs);
+        console.log("fam", this.participantes_fam);
       },
       error: (err) => {
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
       }
     })
 
   }
 
-  confirmarcita(){
+  confirmarcita() {
     $('#content').modal({
       keyboard: false,
       backdrop: 'static'
     })
     //this.mod_mensaje="¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?"
-    this.objmodal.mensaje="¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?";
+    this.objmodal.mensaje = "¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?";
     this.objmodal.tipo = 1;
     $('#content').modal('show')
   }
 
-  cancelarcita(){
+  cancelarcita() {
     $('#content').modal({
       keyboard: false,
       backdrop: 'static'
     })
     //this.mod_mensaje="¿Está seguro de cancelar<br/>la cita seleccionada?"
-    this.objmodal.mensaje="¿Está seguro de cancelar<br/>la cita seleccionada?";
+    this.objmodal.mensaje = "¿Está seguro de cancelar<br/>la cita seleccionada?";
     this.objmodal.tipo = 2;
     $('#content').modal('show')
   }
 
-  imprimir(){}
+  imprimir() { }
 
-  cancelarmod(){
+  cancelarmod() {
     //this.mod_mensaje = "";
     this.objmodal.mensaje = "";
     this.objmodal.tipo = 0;
@@ -160,27 +179,27 @@ export class CitaconsultaComponent implements OnInit {
 
   }
 
-  aceptarmod(){
-    if(this.objmodal.tipo == 2){
+  aceptarmod() {
+    if (this.objmodal.tipo == 2) {
       this.citaservice.cancelarcitacal(this.varid).subscribe({
-        next: (resp:any) => {
+        next: (resp: any) => {
           console.log(resp);
 
           this.citaservice.cancelarcita(this.varid).subscribe({
-            next: (resp:any) => {
+            next: (resp: any) => {
               console.log(resp);
               this.objmodal.mensaje = "";
               this.objmodal.tipo = 0;
               $('#content').modal('hide');
-              this.muestraAlerta("La cita fué cancelada correctamente",'alert-success','Éxito',this.callback);
+              this.muestraAlerta("La cita fué cancelada correctamente", 'alert-success', 'Éxito', this.callback);
             },
             error: (err) => {
-              this.muestraAlerta(err.error.mensaje?err.error.mensaje:err.error.message,'alert-danger','Error');
+              this.muestraAlerta(err.error.mensaje ? err.error.mensaje : err.error.message, 'alert-danger', 'Error');
             }
           })
         },
         error: (err) => {
-          this.muestraAlerta(err.error.mensaje?err.error.mensaje:err.error.message,'alert-danger','Error');
+          this.muestraAlerta(err.error.mensaje ? err.error.mensaje : err.error.message, 'alert-danger', 'Error');
         }
       })
 
@@ -193,11 +212,11 @@ export class CitaconsultaComponent implements OnInit {
 
   }
 
-  callback = () =>{
+  callback = () => {
     this.regresar();
   }
 
-  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string,funxion?:any){
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
     this.alert = new objAlert;
     this.alert = {
       message: mensaje,
@@ -207,14 +226,28 @@ export class CitaconsultaComponent implements OnInit {
     }
     setTimeout(() => {
       this.alert = {
-        message:'',
+        message: '',
         type: 'custom',
         visible: false
       }
-      if(funxion != null){
+      if (funxion != null) {
         funxion();
       }
     }, 2000);
   }
+
+
+  private msjLoading(titulo: string) {
+    Swal.fire({
+      title: titulo,
+
+      didOpen: () => {
+        Swal.showLoading();
+      }
+
+
+    })
+  }
+
 
 }
