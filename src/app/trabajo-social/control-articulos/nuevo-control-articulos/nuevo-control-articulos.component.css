@@ -314,3 +314,56 @@ select {
   top: 19px !important;
   height: 30px!important
 }
+
+
+.captura {
+  
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+
+.calendar{
+  margin-bottom: 1em!important;margin-left:-1em!important;
+}
+ 
+.togleCalendar{
+  margin-top: 1px; background-color: #EEEEEE;margin-right: 14px;border-radius: 3px;
+}
+
+ 
+ 
+
+ 
+ 
+
+input.captura.lugar,
+select.captura.lugar{
+  width: 470px;
+}
+ 
+  
+ 
+    
+.mat-datepicker-toggle {
+  display: inline;
+  position: absolute;
+  top: 28%;
+  width: 28px;
+  height: 29px;
+  right: 1px;
+}
+

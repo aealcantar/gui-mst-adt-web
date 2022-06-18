@@ -10,9 +10,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/trabajador-social-clinico.component';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
+
+export const MY_FORMATS = {
+  parse: {
+      dateInput: 'LL'
+  },
+  display: {
+      dateInput: 'DD-MM-YYYY',
+      monthYearLabel: 'MMMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
 @NgModule({
   declarations: [  CardTemplateComponent,
     CardTemplateExpandibleComponent,
@@ -20,7 +33,7 @@ import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/tr
     DatosGeneralesUsuarioComponent,
     MenuComponent,
     TrabajadorSocialClinicoComponent],
-  imports: [
+  imports: [    
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -45,6 +58,10 @@ import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/tr
      MatDatepickerModule,
      MatNativeDateModule,
      TrabajadorSocialClinicoComponent,
+    ],providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'es-mx'},
+      { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+{ provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
     ],
 })
 export class SharedModulesModule { }

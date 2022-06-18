@@ -41,31 +41,17 @@ export class NuevoControlArticulosComponent implements OnInit {
     resguardoFecha:new FormControl("",Validators.required), 
     resguardoHora:new FormControl("",Validators.required), 
     resguardoNombreRecibe: new FormControl("",Validators.required),
+    resguardoNombreEntrega: new FormControl("",Validators.required),
+    recepcionFecha: new FormControl("",Validators.required),
+    recepcionHora: new FormControl("",Validators.required),
+    recepcionNombreRecibe: new FormControl("",Validators.required),
+    recepcionNombreEntrega: new FormControl("",Validators.required),
+    recepcionUbicacion: new FormControl("",Validators.required),
+    recepcionHorarioEntregaArticulo: new FormControl("",Validators.required),
+  
   });
 
-  formNuevoArticulo2: any = this.formBuilder.group({
-    bitacora: [''],
-    personalQueElaboro: [''],
-    idCa: [""],
-    noFolioControl: [null, Validators.required],
-    fecha: ['', Validators.required],
-    noCama: ['', Validators.required],
-    servicio: ['', Validators.required],
-    telefono: ['', Validators.required],
-    articulos: ['', Validators.required],
-    articulo:new FormControl(""), 
-    trabajadorNombreRecibe: new FormControl(""),
-    enfermeriaNombreEntrega: ['', Validators.required],
-    ubicacion: ['', Validators.required],
-    horarioEntregaArticulo: ['', Validators.required],
-    resguardoFecha: ['', Validators.required],
-    resguardoHora: ['', Validators.required],
-    resguardoNombreRecibe: new FormControl(""),
-    resguardoNombreEntrega: ['', Validators.required],
-    numeroInt: [''],
-    telefonoFijo: [''],
-    telefonoCelular: [''],
-  });
+
 
 
 
@@ -78,6 +64,8 @@ export class NuevoControlArticulosComponent implements OnInit {
 
   guardarControl() {
     this.submitted = true;
+    console.log(this.formNuevoArticulo.controls.recepcionHorarioEntregaArticulo.errors);
+    console.log(this.formNuevoArticulo.value)
   }
   cancelar() {
     console.log("cancelar")
@@ -118,6 +106,6 @@ export class NuevoControlArticulosComponent implements OnInit {
     console.log(this.nuevosArticulosArray)
   }
 
-
+ 
   
 }
