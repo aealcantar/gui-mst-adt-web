@@ -4,6 +4,7 @@ import { TrabajoSocialRoutingModule } from './trabajo-social-routing.module';
  import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component'; 
 import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SharedModulesModule } from '../shared-modules/shared-modules.module';
   imports: [
     SharedModulesModule,
     TrabajoSocialRoutingModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class TrabajoSocialModule { }

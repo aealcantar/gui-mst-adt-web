@@ -45,8 +45,9 @@ export class DatosGeneralesPacienteComponent implements OnInit {
   convertDate() {
     if (!this.executed) {
       this.executed = true;
-      let stringDate = this.paciente.fechaNacimiento.substring(3, 5) + "-" + this.paciente.fechaNacimiento.substring(0, 2) + "-" + this.paciente.fechaNacimiento.substring(6, 10);
-      let birthDate = new Date(stringDate);
+     // let stringDate = this.paciente.fechaNacimiento.substring(3, 5) + "-" + this.paciente.fechaNacimiento.substring(0, 2) + "-" + this.paciente.fechaNacimiento.substring(6, 10);
+     let stringDate = "";
+     let birthDate = new Date(stringDate);
       console.log("FECHA: ", birthDate);
       let today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
