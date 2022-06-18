@@ -190,7 +190,8 @@
                     </label>
                     <input  [matDatepicker]="picker"
                       placeholder="Seleccionar fecha" formControlName="fechahora"
-                      class="form-control captura" style="max-height: 30px !important; color: #222;"
+                      class="form-control captura fechapicker" style="padding-left: 3px;
+                      font-size: 13px;"
                       [ngClass]="{'form-control-error': submitted && citadata.controls.fechahora.errors}"
                       (click)="picker.open()"
                       (dateChange)="onchangefecha(true)"

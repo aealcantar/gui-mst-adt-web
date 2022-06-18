@@ -614,6 +614,9 @@ input::placeholder{
   text-align: left;
   color: #222;
 }
+input.fechapicker::placeholder{
+  font-size: 13px;
+}
 
 img.Group-2082 {
   width: 46px;
