@@ -83,7 +83,7 @@ export class CitaconsultaComponent implements OnInit {
   }
 
   regresar() {
-    this.router.navigate(['/buscacita']);
+    this.router.navigateByUrl('/buscacita', {skipLocationChange: true});
   }
 
   citaResponse: CitaResponse;
@@ -194,11 +194,17 @@ export class CitaconsultaComponent implements OnInit {
               this.muestraAlerta("La cita fué cancelada correctamente", 'alert-success', 'Éxito', this.callback);
             },
             error: (err) => {
+              this.objmodal.mensaje = "";
+              this.objmodal.tipo = 0;
+              $('#content').modal('hide');
               this.muestraAlerta(err.error.mensaje ? err.error.mensaje : err.error.message, 'alert-danger', 'Error');
             }
           })
         },
         error: (err) => {
+          this.objmodal.mensaje = "";
+          this.objmodal.tipo = 0;
+          $('#content').modal('hide');
           this.muestraAlerta(err.error.mensaje ? err.error.mensaje : err.error.message, 'alert-danger', 'Error');
         }
       })

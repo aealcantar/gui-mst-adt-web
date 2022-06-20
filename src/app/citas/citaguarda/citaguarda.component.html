@@ -3,7 +3,7 @@
 <!-- / -->
 
 <div class="modal fade" role="dialog" id="content" #content>
-  <div class="modal-dialog" role="document" style="margin-top: 360px !important;">
+  <div class="modal-dialog" role="document">
     <div class="modal-content citas">
       <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column">
         <img src="../../../../assets/images/Group 2082.png"
@@ -66,8 +66,8 @@
                 <div class="tit">¿Quién recibe la atención?*:</div>
                 <div class="paciente">Paciente:</div>
                 <label for="chkpaciente" class="lblnombres">
-                  <input type="checkbox" value="Jaime Daniel Villalobos Barrios" id="chkpaciente" (change)="cambiacheck($event)">
-                  Jaime Daniel Villalobos Barrios
+                  <input type="checkbox" [value]="paciente?.paciente" id="chkpaciente" (change)="cambiacheck($event)">
+                  {{paciente?.paciente}}
                 </label>
               </div>
 
@@ -79,21 +79,6 @@
                     {{fam.value}}
                   </label>
                 </div>
-                <!-- <div class="itm-fam">
-                 <label for="chkfam2" class="lblnombres"><input type="checkbox" value="" id="chkfam2">Leonardo López García</label>
-                </div>
-                <div class="itm-fam">
-                  <label for="chkfam3" class="lblnombres"><input type="checkbox" value="" id="chkfam3">Adrián Flores Nava</label>
-                </div>
-                <div class="itm-fam">
-                 <label for="chkfam4" class="lblnombres"><input type="checkbox" value="" id="chkfam4">Adelia Allison Ramírez Gómez</label>
-                </div>
-                <div class="itm-fam">
-                  <label for="chkfam5" class="lblnombres"><input type="checkbox" value="" id="chkfam5">Ernesto Contreras Benitez</label>
-                </div>
-                <div class="itm-fam">
-                 <label for="chkfam6" class="lblnombres"><input type="checkbox" value="" id="chkfam6">Jorge Quezada Gas</label>
-                </div>  -->
               </div>
             </div>
 

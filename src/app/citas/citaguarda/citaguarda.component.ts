@@ -14,6 +14,8 @@ import { MAT_MOMENT_DATE_FORMATS,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface';
 
 declare var $:any;
 declare var $gmx:any;
@@ -89,6 +91,7 @@ export class CitaguardaComponent implements OnInit {
   };
 
   citaagendada: boolean = false;
+  paciente!: pacienteSeleccionado;
 
   public keepOriginalOrder = (a: { key: any; }, b: any) => a.key;
 
@@ -104,48 +107,49 @@ export class CitaguardaComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private http: HttpClient, private router: Router,
     private citaservice: CitasService,
-    public datePipe: DatePipe
+    public datePipe: DatePipe,
+    private tarjetaService: AppTarjetaPresentacionService
     ) { }
-
-
-
-
 
   ngOnInit(): void {
 
-    const el = window.document.querySelector('.cdk-overlay-container') as HTMLElement | null;
-    if (el) {
-      //el.remove();
-      //window.location.reload();
-    }
+    // this.lstchkparticipantes = [
+    //   {name:'', value:'Martha Rodríguez Gómez', id: 1, checked:false, isfam: true},
+    //   {name:'', value:'Leonardo López García', id: 2, checked:false, isfam: true},
+    //   {name:'', value:'Adrián Flores Nava', id: 3, checked:false, isfam: true},
+    //   {name:'', value:'Adelia Allison Ramírez Gómez', id: 4, checked:false, isfam: true},
+    //   {name:'', value:'Ernesto Contreras Benitez', id: 5, checked:false, isfam: true},
+    //   {name:'', value:'Jorge Quezada Gas', id: 6, checked:false, isfam: true}
+    // ]
 
-    this.lstchkparticipantes = [
-      {name:'', value:'Martha Rodríguez Gómez', id: 1, checked:false, isfam: true},
-      {name:'', value:'Leonardo López García', id: 2, checked:false, isfam: true},
-      {name:'', value:'Adrián Flores Nava', id: 3, checked:false, isfam: true},
-      {name:'', value:'Adelia Allison Ramírez Gómez', id: 4, checked:false, isfam: true},
-      {name:'', value:'Ernesto Contreras Benitez', id: 5, checked:false, isfam: true},
-      {name:'', value:'Jorge Quezada Gas', id: 6, checked:false, isfam: true}
-    ]
-
-
-
-
-    setTimeout(() =>{
-      //$("#servicio").select2();
-      $('#servicio').on('select2:select', function (e: any) {
-        console.log(e);
-    });
-
-    }, 2000);
-
-    this.llenacatalogos();
-  }
-
-  llenacatalogos(){
-
+    this.paciente = this.tarjetaService.get();
+    console.log("paciente:" + this.paciente);
+    this.llenaparticipantes();
     this.llenacatalogoservicios();
 
+  }
+
+  llenaparticipantes(){
+    this.citaservice.getlistparticipantes(this.paciente? this.paciente.nss : '4313947194').subscribe({
+      next: (resp:any) => {
+        console.log(resp);
+        //this.lstchkparticipantes = resp.busquedanss.beneficiarios;
+        this.lstchkparticipantes = [];
+        var cont: number = 0;
+        for(var prt of resp.busquedanss.beneficiarios){
+          if(prt.Parentesco == "Beneficiario"){
+            cont = cont + 1;
+            this.lstchkparticipantes.push({name:'', value: prt.paciente, id: cont, checked:false, isfam: true})
+          }
+        }
+
+      },
+      error: (err) => {
+        console.log(err);
+        this.lstchkparticipantes = [];
+        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+      }
+    })
   }
 
   llenacatalogoservicios(){
@@ -235,7 +239,7 @@ export class CitaguardaComponent implements OnInit {
   }
 
   regresar(){
-    this.router.navigate(['/buscacita']);
+    this.router.navigateByUrl('/buscacita', {skipLocationChange: true});
   }
 
   agregaparticipante(otrop: any){
@@ -394,7 +398,7 @@ export class CitaguardaComponent implements OnInit {
 
             var req: LooseObject = {
               "cveCalendarioAnual": this.citadata.value.hora.cve_calendario_anual,
-              "nss": 4313947194,
+              "nss": this.paciente? this.paciente.nss : 4313947194,
               "DescripcionServicio": this.citadata.value.servicio.des_especialidad,
               "grupoPrograma": this.citadata.value.programa.des_grupo_programa,
               "fechaInicio": this.citadata.value.hora.fec_inicio,
@@ -508,7 +512,7 @@ export class CitaguardaComponent implements OnInit {
     this.objmodal.mensaje = "";
     this.objmodal.tipo = 0;
     $('#content').modal('hide');
-    this.router.navigate(['/buscacita']);
+    this.router.navigateByUrl('/buscacita', {skipLocationChange: true});
   }
 
 

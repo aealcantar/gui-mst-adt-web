@@ -323,11 +323,11 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   }
 
   agendarcita(){
-    this.router.navigate(['/guardacita']);
+    this.router.navigateByUrl('/guardacita', {skipLocationChange: true});
   }
 
   muestracita(id: number){
-    this.router.navigate(['/consultacita/' + id]);
+    this.router.navigateByUrl('/consultacita/' + id, {skipLocationChange: true});
   }
 
   weekendsDatesFilter = (d: Date): boolean => {

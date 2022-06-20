@@ -78,4 +78,8 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   irControlDeArticulos(){
     this.router.navigateByUrl("/consulta-articulos", { skipLocationChange: true });
   }
+
+  irAgenda(){
+    this.router.navigateByUrl("/buscacita", { skipLocationChange: true });
+  }
 }
