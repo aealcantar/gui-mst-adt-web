@@ -198,7 +198,7 @@ img.Group-2358 {
 .tblhorario > .head{
   font-size: 12px;
   font-weight: 600;
-  height: 20px;
+  max-height: 80px;
   margin-bottom: 10px;
   display: flex;
 }

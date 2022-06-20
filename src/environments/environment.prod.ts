@@ -11,19 +11,22 @@ export const environment = {
   urlMSEDSCatalogosHorarios: 'msedsc-catalogos/api',
   urlMSEDSCHorarios: 'msedsc-catalogos',
   urlMSEDSCAgenda: 'msedsc-catalogos',
-  urlMSADTUSUARIOS:'msedsc-usuarios/api',
+  urlMSADTUSUARIOS: 'msedsc-usuarios/api',
 
 
   //Trabajo Social
 
+
   msmtsPacientes: 'msmts-pacientes/api/busquedanss/',
-  urlServCronicasReporte: 'msmts-cronica-grupal/api/',
-  urlServCatalogos: 'msedsc-catalogos',
-  urlServCronicas: 'msmts-cronica-grupal/api/',
-  urlServNotas: 'msmts-notas/api/',
-  urlServEstudioMedicos: 'msmts-estudios-medicos/api/',
+  msmtsCronicasReporte: 'msmts-cronica-grupal/api',
+  msmtsCatalogos: 'msedsc-catalogos',
+  msmtsCronicas: 'msmts-cronica-grupal/api',
+  msmtsNotas: 'msmts-notas/api',
+  msmtsEstudioMedicos: 'msmts-estudios-medicos/api',
 
 
+
+  msmtsOauth: 'msadt-auth',
 
   urlServOauth: 'msadt-auth',
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
