@@ -5,14 +5,17 @@ import { AuthService } from 'src/app/service/auth-service.service';
 //import { NotasService } from 'src/app/service/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { VolanteDonacionService } from '../service/volante-donacion.service';
 import { VolanteDonacion } from '../models/volante-donacion.model';
+import { DatePipe } from '@angular/common';
 
 declare var $: any;
 
 @Component({
   selector: 'app-consulta-volantes-donacion',
   templateUrl: './consulta-volantes-donacion.component.html',
-  styleUrls: ['./consulta-volantes-donacion.component.css']
+  styleUrls: ['./consulta-volantes-donacion.component.css'],
+  providers: [DatePipe]
 })
 export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit {
   public fechaSelected!: string;
@@ -31,8 +34,9 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   constructor(
     private router: Router,
     private authService: AuthService,
-//    private notasService: NotasService,
+    private volanteService: VolanteDonacionService,
     private fb: FormBuilder,
+    private datePipe: DatePipe
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
     if (this.extras && this.extras.state) {
@@ -42,10 +46,12 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   ngOnInit(): void {
+    debugger
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
     });
+    this.authService.project$.next("Trabajo Social");
   }
 
   ngAfterViewInit(): void {
@@ -83,6 +89,40 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     this.handleDatesChange();
   }
 
+  handleDatesChange() {
+    debugger
+    if (
+      this.datesForm.get('fechaInicial')?.value &&
+      this.datesForm.get('fechaInicial')?.value !== '' &&
+      this.datesForm.get('fechaFinal')?.value &&
+      this.datesForm.get('fechaFinal')?.value !== '') {
+      this.getVolantesByFecha();
+    }
+  }
+
+  getVolantesByFecha(): void {
+    this.volanteService.getVolantesByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+      (volantes: any) => {
+        if (volantes && volantes.List.length > 0) {
+          this.tabla =  volantes.List;
+          console.log("VOLANTES DONACION: ", this.tabla);
+        }
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+    this.dtOptions = {
+      order: [[2, 'desc']],
+      ordering: false,
+      paging: false,
+      processing: false,
+      info: false,
+      searching: false,
+    };
+    this.sortBy(this.columnaId, this.order, 'fecha');
+  }
+
   irDetalle(volanteDonacion: VolanteDonacion) {
     console.log(volanteDonacion);
     let params = {
@@ -92,20 +132,11 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   irNuevoVolante() {
-    //let params = {
-    //  'objetoAEnviar': null,
-    //}
-    //this.router.navigate(["nuevo-volante-donacion"], { queryParams: params, skipLocationChange: true });
-  }
-
-  handleDatesChange() {
-    if (
-      this.datesForm.get('fechaInicial')?.value &&
-      this.datesForm.get('fechaInicial')?.value !== '' &&
-      this.datesForm.get('fechaFinal')?.value &&
-      this.datesForm.get('fechaFinal')?.value !== '') {
-      //this.getNotasByFecha();
-    }
+  /*  let params = {
+      'objetoAEnviar': null,
+    } */
+    let params = {}
+    this.router.navigate(["nuevo-volante-donacion"], { queryParams: params, skipLocationChange: true });
   }
 
   sortBy(columnaId: string, order: string, type: string) {
@@ -125,17 +156,15 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     });
   }
 
-  converType(val: any, type: string) {
+    converType(val: any, type: string) {
     let data;
     switch (type) {
       case 'fecha':
+        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
         data = moment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
         data = moment(val, 'HH:mm:ss');
-        break;
-      case 'number':
-        data = parseInt(val);
         break;
 
       default:

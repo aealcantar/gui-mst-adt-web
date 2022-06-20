@@ -32,6 +32,7 @@ export const environment = {
   urlMSADTUSUARIOS: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
   urlMSEDSCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/mseds-catalogos/api',
   urlServArticulos: 'http://localhost:8088/msmts-ctrl-articulos',
+  urlServVolantes: 'http://localhost:8088/msmts-donacion-sangre',
 };
 
 /*
