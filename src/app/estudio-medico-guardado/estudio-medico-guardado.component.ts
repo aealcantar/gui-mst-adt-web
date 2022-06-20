@@ -23,7 +23,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   datosExploracionCaso = false;
   estudioMedico!: EstudioMedico;
   pacienteSeleccionado!: pacienteSeleccionado;
-  ocupacion!: Ocupacion;
+  ocupaciones: Ocupacion[] = [];
   catEstadosCiviles: EstadoCivil[] = [];
 
   constructor(
@@ -39,7 +39,6 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     this.route.queryParamMap.subscribe((params: any) => {
       if (params.getAll('estudioMedico').length > 0) {
         this.estudioMedico = JSON.parse(params.getAll('estudioMedico'));
-        this.getOcupacionById(this.estudioMedico.idOcupacion!);
         if (this.estudioMedico.esNuevo) {
           this.showSucces("¡La información se guardó con éxito!");
         }
@@ -80,6 +79,20 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
         console.error(httpErrorResponse);
       }
     );
+    this.estudioMedicoService.getCatOcupaciones().toPromise().then(
+      (ocupaciones: Ocupacion[]) => {
+        this.ocupaciones = ocupaciones;
+        console.log("OCUPACIONES: ", this.ocupaciones);
+      },
+
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }
+  
+  getNombreOcupacion(idOcupacion: number) {
+    return this.ocupaciones.find(c => c.id_OCUPACION = idOcupacion)?.nom_OCUPACION;
   }
 
   getNombreEstadoCivil(idEstadoCivil: number | string) {
@@ -90,14 +103,6 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       idEstadoCivilConverted = idEstadoCivil;
     }
     return this.catEstadosCiviles.find(e => e.id === idEstadoCivilConverted)?.descripcion;
-  }
-
-  async getOcupacionById(id: number) {
-    try {
-      this.ocupacion = await this.estudioMedicoService.getCatOcupacionById(id).toPromise();
-    } catch (e) {
-      console.error(e);
-    }
   }
 
   convertDate(fechaNacimiento: String): string  {

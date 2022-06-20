@@ -311,7 +311,10 @@
                           <select class="select" formControlName="ocupacion"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ocupacion?.dirty && formEstudioSocial.controls?.ocupacion?.errors}">
                             <option [value]="''" selected>Ingresar ocupación</option>
-                            <option class="select-font" [value]="1">Ingeniero</option>
+                            <option class="select-font" [value]="ocupacion.id_OCUPACION"
+                              *ngFor="let ocupacion of ocupaciones">
+                              {{ ocupacion.nom_OCUPACION }}
+                            </option>
                           </select>
                         </div>
                       </div>

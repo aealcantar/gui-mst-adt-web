@@ -38,6 +38,10 @@ export class EstudioSocialMedicoService {
     return this.http.get<Ocupacion>(`${environment.msmtsCatalogos}/api/getOcupacionByID/${idOcupacion}`);
   }
 
+  getCatOcupaciones() {
+    return this.http.get<Ocupacion[]>(`${environment.msmtsCatalogos}/api/lisOcupaciones`);
+  }
+
   getCatTiposComunidad() {
     return this.http.get<EstadoCivil[]>(`${environment.msmtsEstudioMedicos}/getTiposComunidad`);
   }

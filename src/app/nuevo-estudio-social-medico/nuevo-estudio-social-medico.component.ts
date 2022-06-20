@@ -12,6 +12,7 @@ import { EstudioSocialMedicoService } from '../service/estudio-social-medico.ser
 import { EstadoCivil } from '../models/estado-civil.model';
 import { EstudioMedico } from '../models/estudio-medico.model';
 import { objAlert } from '../common/alerta/alerta.interface';
+import { Ocupacion } from '../models/ocupacion.model';
 declare var $: any;
 
 @Component({
@@ -28,6 +29,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   ciudades: Ciudad[] = [];
   estadosCiviles: EstadoCivil[] = [];
   tiposComunidad: EstadoCivil[] = [];
+  ocupaciones: any[] = [];
   estadosFamiliar: Estado[] = [];
   delegaciones: Municipio[] = [];
   ciudadesFamiliar: Ciudad[] = [];
@@ -152,6 +154,16 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
         console.error(httpErrorResponse);
       }
     );
+    this.estudioSocialService.getCatOcupaciones().toPromise().then(
+      (ocupaciones: Ocupacion[]) => {
+        this.ocupaciones = ocupaciones;
+        console.log("OCUPACIONES: ", this.ocupaciones);
+      },
+
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
   }
 
   onChangeEstado(): void {
@@ -247,6 +259,10 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     }
   }
 
+  getNombreOcupacion(idOcupacion: number) {
+    return this.ocupaciones.find(c => c.id_OCUPACION = idOcupacion)?.nom_OCUPACION;
+  }
+
   getNombreTipoComunidad(idTipoComunidad: number | string) {
     let idTipoComunidadConverted: number;
     if (typeof idTipoComunidad === 'string') {
@@ -314,14 +330,14 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       correoElectronico: this.formEstudioSocial.get('email').value,
       idEstadoCivil: this.formEstudioSocial.get('estadoCivil').value,
       idOcupacion: this.formEstudioSocial.get('ocupacion').value,
-      nombreOcupacion: 'Ingeniero', //No hay catalogo general, solo por id
+      nombreOcupacion: this.getNombreOcupacion(this.formEstudioSocial.get('ocupacion').value),
       nombreResponsable: this.formEstudioSocial2.get('nombreFamiliar').value,
       edad: this.formEstudioSocial2.get('edad').value,
       parentesco: this.formEstudioSocial2.get('parentesco').value,
       codigoPostalFam: this.formEstudioSocial2.get('codigoP').value,
       idEstadoFam: this.formEstudioSocial2.get('estadoF').value,
       nombreEstadoFam: this.getNombreEstado(this.formEstudioSocial2.get('estadoF').value, true),
-      idDelegacionMunicipioFam: this.formEstudioSocial2.get('delegacionM').value,
+      idDelegacionMunicipioFam: parseInt(this.formEstudioSocial2.get('delegacionM').value),
       nombreDelegacionMunicipioFam: this.getNombreMunicipio(this.formEstudioSocial2.get('delegacionM').value, true),
       idCiudadFam: this.formEstudioSocial2.get('ciudadF').value,
       nombreCiudadFam: this.getNombreCiudad(this.formEstudioSocial2.get('ciudadF').value, true),

@@ -1,4 +1,4 @@
 export class Ocupacion {
-    id?: number;
-    nombreOcupacion?: string;
+    id_OCUPACION?: number;
+    nom_OCUPACION?: string;
 }
