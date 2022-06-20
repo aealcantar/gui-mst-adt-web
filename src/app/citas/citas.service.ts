@@ -105,5 +105,11 @@ export class CitasService {
     return this.http.post(direccion, data, {headers: this.header});
   }
 
+  getlistparticipantes(nss: String):Observable<any>{
+    let direccion = environment.msmtsPacientes + nss;
+
+    return this.http.get<any>(direccion);
+  }
+
 
 }

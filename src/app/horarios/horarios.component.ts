@@ -19,6 +19,7 @@ import { TurnoResponse } from '../models/turno-response-model';
 
 import { HorarioTurno } from '../models/horario.turno.model';
 import { HorarioStatus } from '../models/horario.status.model';
+import { AuthService } from '../service/auth-service.service';
 
 declare var $: any;
 interface LooseObject {
@@ -57,13 +58,14 @@ export class HorariosComponent implements OnInit {
     private _Mensajes: HelperMensajesService,
     private horarioService: HorarioService,
     private _agendaService: AgendaService,
+    private authService: AuthService,
     private http: HttpClient, private modalService: NgbModal) {
 
     this.diaNb = (new Date()).getDay();
     this.obtieneDia(this.diaNb)
 
     console.log("dia: ", this.diaNb);
-
+    this.authService.setProjectObs("Agenda Digital Transversal");
     this.turnoNuevo = new HorarioTurno();
 
   }
@@ -593,8 +595,8 @@ export class HorariosComponent implements OnInit {
     $('#content').modal('show')
   }
   obtenerTurnoNuevo() {
-    if (this.turnoNuevo.des_TURNO) {
-      this.turnoNuevo = this.lstTurnos.find(e => e.des_TURNO === this.turnoNuevo.des_TURNO);
+    if (this.turnoNuevo.des_turno) {
+      this.turnoNuevo = this.lstTurnos.find(e => e.des_turno === this.turnoNuevo.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
@@ -602,8 +604,8 @@ export class HorariosComponent implements OnInit {
   }
 
   cambiarTurno() {
-    if (this.turnoSeleccionado.des_TURNO) {
-      this.turnoSeleccionado = this.lstTurnos.find(e => e.des_TURNO === this.turnoSeleccionado.des_TURNO);
+    if (this.turnoSeleccionado.des_turno) {
+      this.turnoSeleccionado = this.lstTurnos.find(e => e.des_turno === this.turnoSeleccionado.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
@@ -762,7 +764,7 @@ export class HorariosComponent implements OnInit {
   }
   btnAceptarHorario() {
     if(this.horarioSeleccionado.horaInicial && this.horarioSeleccionado.horaFinal && this.horarioSeleccionado.duracion &&
-      this.turnoSeleccionado.des_TURNO){
+      this.turnoSeleccionado.des_turno){
         this.guardarHorario();
       }else{
         this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_DATOS_REQUERIDOS_HORARIO, this._Mensajes.ERROR);

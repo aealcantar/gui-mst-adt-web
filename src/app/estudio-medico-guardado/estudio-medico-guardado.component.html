@@ -190,7 +190,7 @@
                 <span class="labels">Ocupación:</span>
                 <br>
                 <label class="inputNormal">
-                  {{ estudioMedico.nombreOcupacion }}
+                  {{ getNombreOcupacion(estudioMedico.idOcupacion) }}
                 </label>
               </div>
             </div>
@@ -361,40 +361,42 @@
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="">
-            <label class="control-label tituloInput">
-              Ciudad
-            </label>
-            <label class="inputNormal" id="txtconsulta">
-              {{ estudioMedico.nombreCiudadFam }}
-            </label>
+        <div class="row" style="padding-left: 10px;">
+          <div class="col-md-4">
+            <div class="">
+              <label class="control-label tituloInput">
+                Ciudad
+              </label>
+              <label class="inputNormal" id="txtconsulta">
+                {{ estudioMedico.nombreCiudadFam }}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="">
+              <label class="control-label tituloInput">
+                Colonia:
+              </label>
+              <label class="inputNormal" id="txtconsulta">
+                {{ estudioMedico.nomColoniaFam }}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="">
+              <label class="control-label tituloInput">
+                Calle:
+              </label>
+              <label class="inputNormal" id="txtconsulta">
+                {{ estudioMedico.nomVialidadFam }}
+              </label>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="">
-            <label class="control-label tituloInput">
-              Colonia:
-            </label>
-            <label class="inputNormal" id="txtconsulta">
-              {{ estudioMedico.nomColoniaFam }}
-            </label>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="">
-            <label class="control-label tituloInput">
-              Calle:
-            </label>
-            <label class="inputNormal" id="txtconsulta">
-              {{ estudioMedico.nomVialidadFam }}
-            </label>
-          </div>
-        </div>
-
-        <div class="row" style="margin: 1 -4px  -4px; padding-left: 10px;">
+        <div class="row" style="padding-left: 10px;">
           <div class="col-md-4">
             <div class="">
               <label class="control-label tituloInput">

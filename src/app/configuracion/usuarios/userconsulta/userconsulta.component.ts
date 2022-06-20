@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValue } from '@angular/common';
 import { UsuariosService } from '../usuarios.service';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 declare var $:any;
 
@@ -40,7 +41,7 @@ export class UserconsultaComponent implements OnInit {
 
   public keepOriginalOrder = (a: { key: any; }, b: any) => a.key;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private authService: AuthService,
     private http: HttpClient, private router: Router,
     private activerouter: ActivatedRoute,
     private userservice: UsuariosService) { }
@@ -48,6 +49,7 @@ export class UserconsultaComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.authService.setProjectObs("Agenda Digital Transversal");
     this.varid = this.activerouter.snapshot.paramMap.get('id');
     this.buscarusuario(this.varid);
   }

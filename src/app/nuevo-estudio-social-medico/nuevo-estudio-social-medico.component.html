@@ -120,8 +120,8 @@
                           <span class="labels">Estado:</span>
                           <select class="select" formControlName="estado" (change)="onChangeEstado()">
                             <option class="select-font" [value]="''">Ingresar estado</option>
-                            <option class="select-font" [value]="estado.idEstado" *ngFor="let estado of estados">
-                              {{ estado.nomCompleto}}
+                            <option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of estados">
+                              {{ estado.des_nombre_completo}}
                             </option>
                           </select>
                         </div>
@@ -132,9 +132,9 @@
                           <span class="labels">Delegación/Municipio:</span>
                           <select class="select" formControlName="municipio" (change)="onChangeCiudad()">
                             <option class="select-font" [value]="''" selected>Ingresar delegación/municipio</option>
-                            <option class="select-font" [value]="municipio.idDelegacionMunicipio"
+                            <option class="select-font" [value]="municipio.cve_delegacion_municipio"
                               *ngFor="let municipio of municipios">
-                              {{ municipio.nomMunicipio}}
+                              {{ municipio.des_municipio}}
                             </option>
                           </select>
                         </div>
@@ -149,8 +149,8 @@
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors}"
                             class="form-control" id="ciudad" formControlName="ciudad">
                             <option [value]="''" selected>Ingresar ciudad</option>
-                            <option class="select-font" [value]="ciudad.idCiudad" *ngFor="let ciudad of ciudades">
-                              {{ ciudad.nomCiudad}}
+                            <option class="select-font" [value]="ciudad.cve_ciudad" *ngFor="let ciudad of ciudades">
+                              {{ ciudad.des_ciudad}}
                             </option>
                             <small
                               *ngIf="formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors"
@@ -311,7 +311,10 @@
                           <select class="select" formControlName="ocupacion"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ocupacion?.dirty && formEstudioSocial.controls?.ocupacion?.errors}">
                             <option [value]="''" selected>Ingresar ocupación</option>
-                            <option class="select-font" [value]="1">Ingeniero</option>
+                            <option class="select-font" [value]="ocupacion.id_OCUPACION"
+                              *ngFor="let ocupacion of ocupaciones">
+                              {{ ocupacion.nom_OCUPACION }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -510,8 +513,8 @@
                     </label>
                     <select class="select" formControlName="estadoF" (change)="onChangeEstadoFamiliar()">
                       <option class="select-font" [value]="''">Ingresar estado</option>
-                      <option class="select-font" [value]="estadoF.idEstado" *ngFor="let estadoF of estadosFamiliar">
-                        {{ estadoF.nomCompleto}}
+                      <option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
+                        {{ estadoF.des_nombre_completo}}
                       </option>
                     </select>
                   </div>
@@ -524,9 +527,9 @@
                     </label>
                     <select class="select" formControlName="delegacionM" (change)="onChangeMunicipioFamiliar()">
                       <option class="select-font" [value]="''" selected>Ingresar delegación/municipio</option>
-                      <option class="select-font" [value]="delegacion.idDelegacionMunicipio"
+                      <option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                         *ngFor="let delegacion of delegaciones">
-                        {{ delegacion.nomMunicipio}}
+                        {{ delegacion.des_municipio}}
                       </option>
                     </select>
 
@@ -551,8 +554,8 @@
                       [ngClass]="{'form-control-error': formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors}"
                       class="form-control" id="ciudadF" formControlName="ciudadF">
                       <option value="Seleccionar ciudad" [value]="''" selected>Ingresar ciudad</option>
-                      <option class="select-font" [value]="ciudadF.idCiudad" *ngFor="let ciudadF of ciudadesFamiliar">
-                        {{ ciudadF.nomCiudad}}
+                      <option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
+                        {{ ciudadF.des_ciudad}}
                       </option>
                       <small
                         *ngIf=" formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors"

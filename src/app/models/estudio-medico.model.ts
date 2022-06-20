@@ -28,7 +28,7 @@ export class EstudioMedico {
     codigoPostalFam?: string;
     idEstadoFam?: string;
     nombreEstadoFam?: string;
-    idDelegacionMunicipioFam?: string;
+    idDelegacionMunicipioFam?: number;
     nombreDelegacionMunicipioFam?: string;
     idCiudadFam?: string;
     nombreCiudadFam?: string;

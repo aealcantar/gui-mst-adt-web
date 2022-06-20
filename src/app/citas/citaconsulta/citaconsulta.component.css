@@ -10,6 +10,7 @@
 }
 
 .tit-princ{
+  
   flex-grow: 0;
   font-family: Montserrat;
   font-size: 24px;
@@ -50,7 +51,7 @@
   padding-left: 23px;
   padding-bottom: 20px;
   padding-right: 24px;
-  display: inline-block;
+  
 }
 
 .btuser{
@@ -167,29 +168,14 @@ select{
 }
 
 .cuadro-pct{
-  width: 1168px;
-  flex-grow: 0;
+ 
+  
   border-bottom: solid 1px #ddd;
-  display: inline-block;
+  
   margin: 10px 0;
 }
 
-.cuadro-pct > .pct-fam{
-  width: 50%;
-  float: left;
-}
-.cuadro-pct > .pct-fam > span{
-  display: block;
-  margin: 4px 0;
-}
-.cuadro-pct > .pct-ots{
-  width: 50%;
-  float: left;
-}
-.cuadro-pct > .pct-ots > span{
-  display: block;
-  margin: 4px 0;
-}
+
 
 div.dts-citalist{
   width: 370px;
@@ -306,4 +292,44 @@ img.Group-2082 {
 
 .modal-content.citas > .modal-footer > .btn{
   margin: 0 25px;
+}
+
+
+
+.lbel{
+  vertical-align: top;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+.valor{
+  
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+  max-height: 85px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.reg{
+  
+  max-height: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
 }

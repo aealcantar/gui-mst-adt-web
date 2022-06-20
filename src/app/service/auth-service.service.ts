@@ -9,7 +9,7 @@ import { AdmonPasswordRequest } from '../models/admon-password-request.model';
 import { AdmonPasswordResponse } from '../models/admon-password-response.model';
 import { RecaptchaResponse } from '../models/recaptcha-response-model';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -52,6 +52,14 @@ export class AuthService {
     return '';
   }
 
+  getProjectObs(): Observable<string> {
+    return this.project$.asObservable();
+  }
+
+  setProjectObs(proyecto: string) {
+    this.project$.next(proyecto);
+  }
+
   setNombreUsuarioActivo(name: string) {
     this.nombreUsuarioActivo = name;
   }
@@ -61,15 +69,15 @@ export class AuthService {
   }
   
   actualizarPassword(admonPasswordRequest:AdmonPasswordRequest){
-     return this.http.post<AdmonPasswordResponse>(`${environment.urlServOauth}/api/aplicacion/actualizarPassword/`, admonPasswordRequest);
+     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}/api/aplicacion/actualizarPassword/`, admonPasswordRequest);
   }
  
   getAppAccesbyAppName(name:string){
-    return this.http.get<Aplicacion>(`${environment.urlServOauth}/api/aplicacion/app?appName=${name}`);
+    return this.http.get<Aplicacion>(`${environment.msmtsOauth}/api/aplicacion/app?appName=${name}`);
   }
 
   getUserData(aliasUsuario?:string){
-    return this.http.get<Usuario>(`${environment.urlServOauth}/api/aplicacion/getUserSession?aliasUsuario=${aliasUsuario}`);
+    return this.http.get<Usuario>(`${environment.msmtsOauth}/api/aplicacion/getUserSession?aliasUsuario=${aliasUsuario}`);
   }
 
   validateRecaptcha(response: string) {
@@ -94,7 +102,7 @@ export class AuthService {
   login(usuario: Usuario, aplicacion:Aplicacion) {
     
     sessionStorage.clear();
-    const urlEndpoint = environment.urlServOauth + '/oauth/token';
+    const urlEndpoint = environment.msmtsOauth + '/oauth/token';
     
     console.log(" usuario app  "+ aplicacion.cveUsuario);
     console.log(" pass app  "+ aplicacion.cvePassword);
@@ -208,7 +216,7 @@ export class AuthService {
 
   async obtenerUsuario(usuario: string, contrasena: string) {
 
-    const urlEndpoint = environment.urlServOauth + '/app/' + usuario;
+    const urlEndpoint = environment.msmtsOauth + '/app/' + usuario;
     let respuesta: any = await this.webService.getAsync(urlEndpoint);
     
     if (respuesta != null) {

@@ -3,7 +3,7 @@
 <!-- / -->
 
 <div class="modal fade" role="dialog" id="content" #content>
-  <div class="modal-dialog" role="document" style="margin-top: 360px !important;">
+  <div class="modal-dialog" role="document">
     <div class="modal-content citas">
       <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column">
         <img src="../../../../assets/images/Group 2082.png"
@@ -33,16 +33,16 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="container-fluid central">
+<!-- <div class="container-fluid central"> -->
 
-  <app-logout-bar ></app-logout-bar>
+  <!-- <app-logout-bar ></app-logout-bar> -->
   <!-- <app-menugral></app-menugral> -->
-  <app-menu></app-menu>
-  <app-fichapaciente></app-fichapaciente>
+  <!-- <app-menu></app-menu> -->
+  <app-tarjeta-presentacion></app-tarjeta-presentacion>
   <!-- <app-card-template></app-card-template> -->
 
 
-    <section class="section">
+    <!-- <section class="section"> -->
       <div class="base-cont">
         <div class="tit-princ">
           <div class="text-left pull-left">
@@ -66,8 +66,8 @@
                 <div class="tit">¿Quién recibe la atención?*:</div>
                 <div class="paciente">Paciente:</div>
                 <label for="chkpaciente" class="lblnombres">
-                  <input type="checkbox" value="Jaime Daniel Villalobos Barrios" id="chkpaciente" (change)="cambiacheck($event)">
-                  Jaime Daniel Villalobos Barrios
+                  <input type="checkbox" [value]="paciente?.paciente" id="chkpaciente" (change)="cambiacheck($event)">
+                  {{paciente?.paciente}}
                 </label>
               </div>
 
@@ -79,21 +79,6 @@
                     {{fam.value}}
                   </label>
                 </div>
-                <!-- <div class="itm-fam">
-                 <label for="chkfam2" class="lblnombres"><input type="checkbox" value="" id="chkfam2">Leonardo López García</label>
-                </div>
-                <div class="itm-fam">
-                  <label for="chkfam3" class="lblnombres"><input type="checkbox" value="" id="chkfam3">Adrián Flores Nava</label>
-                </div>
-                <div class="itm-fam">
-                 <label for="chkfam4" class="lblnombres"><input type="checkbox" value="" id="chkfam4">Adelia Allison Ramírez Gómez</label>
-                </div>
-                <div class="itm-fam">
-                  <label for="chkfam5" class="lblnombres"><input type="checkbox" value="" id="chkfam5">Ernesto Contreras Benitez</label>
-                </div>
-                <div class="itm-fam">
-                 <label for="chkfam6" class="lblnombres"><input type="checkbox" value="" id="chkfam6">Jorge Quezada Gas</label>
-                </div>  -->
               </div>
             </div>
 
@@ -128,221 +113,182 @@
           </div>
 
           <div class="Rectangle-307">
-            <form novalidate [formGroup]="citadata" class="form-inline" role="form" autocomplete="off" style="display: flex; flex-wrap:wrap; width: 1138px;;">
+            <form novalidate [formGroup]="citadata" class="form-inline" role="form" autocomplete="off" style="display: flex; flex-wrap:wrap; width: 100%;">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group usrlist pull-left">
+                    <label for="servicio" class="titulo">Servicio
+                      <span class="form-text"
+                        [ngClass]="{'form-text-error': submitted && citadata.controls.servicio.errors}">*
+                      </span>:
+                    </label>
+                    <select
+                      class="form-control captura"
+                      id="servicio"
+                      name="servicio"
+                      formControlName="servicio"
+                      (ngModelChange)="onchangeservicio($event)"
+                      [ngClass]="{'form-control-error': submitted && citadata.controls.servicio.errors}"
+                      required
+                      >
+                      <option value="" disabled selected hidden>Seleccionar servicio</option>
+                      <option [ngValue]="objeto" *ngFor="let objeto of lstCatServicios">{{objeto.des_especialidad}}</option>
+                    </select>
+                    <small
+                      *ngIf="submitted && citadata.controls.servicio.errors"
+                      class="form-text form-text-error">
+                      {{citadata.controls.servicio.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group usrlist pull-left">
+                    <label for="programa" class="titulo">Programa
+                      <span class="form-text"
+                        [ngClass]="{'form-text-error': submitted && citadata.controls.programa.errors}">*
+                      </span>:
+                    </label>
+                    <select
+                      class="form-control captura"
+                      id="programa"
+                      formControlName="programa"
+                      (ngModelChange)="onchangeprograma($event)"
+                      [ngClass]="{'form-control-error': submitted && citadata.controls.programa.errors}"
+                      required
+                      >
+                      <option value="" disabled selected hidden>Seleccionar programa</option>
+                      <option [ngValue]="objeto" *ngFor="let objeto of lstCatProgramas">{{objeto.des_grupo_programa}}</option>
+                    </select>
+                    <small
+                      *ngIf="submitted && citadata.controls.programa.errors"
+                      class="form-text form-text-error">
+                      {{citadata.controls.programa.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group usrlist pull-left datepicker-group">
+                    <label for="fechahora" class="titulo">Fecha
+                      <span class="form-text"
+                        [ngClass]="{'form-text-error': submitted && citadata.controls.fechahora.errors}">*
+                      </span>:
+                    </label>
+                    <input  [matDatepicker]="picker"
+                      placeholder="Seleccionar fecha" formControlName="fechahora"
+                      class="form-control captura fechapicker" style="padding-left: 3px;
+                      font-size: 13px;"
+                      [ngClass]="{'form-control-error': submitted && citadata.controls.fechahora.errors}"
+                      (click)="picker.open()"
+                      (dateChange)="onchangefecha(true)"
+                      [matDatepickerFilter]="myFilter"
+                      readonly
+                      >
+                    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="false">
+                      <mat-icon matDatepickerToggleIcon>
+                        <img src="../../../assets/images/InputCalendarIcon.svg" height="27px" style="right: 12px;
+                          position: absolute;
+                          border-top-right-radius: 5px;
+                          border-bottom-right-radius: 5px;">
+                      </mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker [disabled]="false"></mat-datepicker>
+                    <small
+                      *ngIf="submitted && citadata.controls.fechahora.errors"
+                      class="form-text form-text-error">
+                      {{citadata.controls.fechahora.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+                    </small>
 
-              <div class="form-group usrlist pull-left servicio">
-                <label for="servicio" class="titulo">Servicio
-                  <span class="form-text"
-                    [ngClass]="{'form-text-error': submitted && citadata.controls.servicio.errors}">*
-                  </span>:
-                </label>
-                <select
-                  class="form-control captura servicio"
-                  id="servicio"
-                  name="servicio"
-                  formControlName="servicio"
-                  (ngModelChange)="onchangeservicio($event)"
-                  [ngClass]="{'form-control-error': submitted && citadata.controls.servicio.errors}"
-                  required
-                  >
-                  <option value="" disabled selected hidden>Seleccionar servicio</option>
-                  <option [ngValue]="objeto" *ngFor="let objeto of lstCatServicios">{{objeto.des_especialidad}}</option>
-                </select>
-                <small
-                  *ngIf="submitted && citadata.controls.servicio.errors"
-                  class="form-text form-text-error">
-                  {{citadata.controls.servicio.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-                </small>
-              </div>
-
-              <div class="form-group usrlist pull-left programa">
-                <label for="programa" class="titulo">Programa
-                  <span class="form-text"
-                    [ngClass]="{'form-text-error': submitted && citadata.controls.programa.errors}">*
-                  </span>:
-                </label>
-                <select
-                  class="form-control captura programa"
-                  id="programa"
-                  formControlName="programa"
-                  (ngModelChange)="onchangeprograma($event)"
-                  [ngClass]="{'form-control-error': submitted && citadata.controls.programa.errors}"
-                  required
-                  >
-                  <option value="" disabled selected hidden>Seleccionar programa</option>
-                  <option [ngValue]="objeto" *ngFor="let objeto of lstCatProgramas">{{objeto.des_grupo_programa}}</option>
-                </select>
-                <small
-                  *ngIf="submitted && citadata.controls.programa.errors"
-                  class="form-text form-text-error">
-                  {{citadata.controls.programa.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-                </small>
-              </div>
-
-              <!-- <div class="form-group usrlist pull-left datepicker-group fecha">
-                <label for="fechahora" class="titulo">Fecha
-                  <span class="form-text"
-                    [ngClass]="{'form-text-error': submitted && citadata.controls['fechahora'].errors}">*
-                  </span>:
-                </label>
-                <input
-                  type="text"
-                  class="form-control captura fecha"
-                  id="fechahora"
-                  formControlName="fechahora"
-                  placeholder="Seleccionar fecha"
-                  [ngClass]="{'form-control-error': submitted && citadata.controls['fechahora'].errors}"
-                  required
-                />
-                <span class=" " aria-hidden="true"
-                  style="top: 40% !important;
-                  background: url('../../../assets/images/InputCalendarIcon.svg');
-                  background-size: cover;
-                  width: 27px;
-                  height: 28px;
-                  z-index: 0;
-                  right: 1px;
-                  border-top-right-radius: 5px;
-                  border-bottom-right-radius: 5px;
-                  position: absolute;"></span>
-                <small
-                  *ngIf="submitted && citadata.controls['fechahora'].errors"
-                  class="form-text form-text-error">
-                  {{citadata.controls['fechahora'].errors?.['required']? "Campo obligatorio" : "Formato inválido"}}
-                </small>
-              </div> -->
-
-              <div class="form-group usrlist pull-left datepicker-group fecha">
-                <label for="fechahora" class="titulo">Fecha
-                  <span class="form-text"
-                    [ngClass]="{'form-text-error': submitted && citadata.controls.fechahora.errors}">*
-                  </span>:
-                </label>
-                <!-- <input  [ngxMatDatetimePicker]="picker"
-                  placeholder="Seleccionar fecha" formControlName="fechahora"
-                  class="form-control captura fecha" style="max-height: 30px !important; color: #222;"
-                  [ngClass]="{'form-control-error': submitted && citadata.controls['fechahora'].errors}"
-                  [ngxMatDatetimePickerFilter]="weekendsDatesFilter"
-                  (dateChange)="onChangeEvent($event)">
-                <mat-datepicker-toggle  [for]="$any(picker)" matSuffix>
-                  <mat-icon matDatepickerToggleIcon>
-                    <img src="../../../assets/images/InputCalendarIcon.svg" height="27px" style="right: 12px;
-                      position: absolute;
-                      border-top-right-radius: 5px;
-                      border-bottom-right-radius: 5px;">
-                  </mat-icon>
-                </mat-datepicker-toggle>
-                <ngx-mat-datetime-picker #picker [touchUi]="false" [hideTime]="true"
-                  (selectedChanged)="updateCalcs($event)"
-                  >
-                  <ng-template> -->
-                    <!-- <mat-icon>star</mat-icon> -->
-                    <!--<span>Aceptar</span>
-                  </ng-template>
-                </ngx-mat-datetime-picker> -->
-
-                <input  [matDatepicker]="picker"
-                  placeholder="Seleccionar fecha" formControlName="fechahora"
-                  class="form-control captura fecha" style="max-height: 30px !important; color: #222;"
-                  [ngClass]="{'form-control-error': submitted && citadata.controls.fechahora.errors}"
-                  (click)="picker.open()"
-                  (dateChange)="onchangefecha(true)"
-                  [matDatepickerFilter]="myFilter"
-                  readonly
-                  >
-                <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="false">
-                  <mat-icon matDatepickerToggleIcon>
-                    <img src="../../../assets/images/InputCalendarIcon.svg" height="27px" style="right: 12px;
-                      position: absolute;
-                      border-top-right-radius: 5px;
-                      border-bottom-right-radius: 5px;">
-                  </mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker [disabled]="false"></mat-datepicker>
-                <small
-                  *ngIf="submitted && citadata.controls.fechahora.errors"
-                  class="form-text form-text-error">
-                  {{citadata.controls.fechahora.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-                </small>
-
-              </div>
-
-              <div class="form-group usrlist pull-left hora">
-                <label for="hora" class="titulo">Horario
-                  <span class="form-text"
-                    [ngClass]="{'form-text-error': submitted && citadata.controls.hora.errors}">*
-                  </span>:
-                </label>
-                <select
-                  class="form-control captura hora"
-                  id="hora"
-                  formControlName="hora"
-                  (ngModelChange)="onchangehora($event)"
-                  [ngClass]="{'form-control-error': submitted && citadata.controls.hora.errors}"
-                  required
-                  >
-                  <option value="" disabled selected hidden>Seleccionar hora</option>
-                  <option [ngValue]="objeto" *ngFor="let objeto of lstCatHorarios">{{objeto.tim_hora_inicio}}</option>
-                </select>
-                <small
-                  *ngIf="submitted && citadata.controls['hora'].errors"
-                  class="form-text form-text-error">
-                  {{citadata.controls.hora.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-                </small>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group usrlist pull-left">
+                    <label for="hora" class="titulo">Horario
+                      <span class="form-text"
+                        [ngClass]="{'form-text-error': submitted && citadata.controls.hora.errors}">*
+                      </span>:
+                    </label>
+                    <select
+                      class="form-control captura"
+                      id="hora"
+                      formControlName="hora"
+                      (ngModelChange)="onchangehora($event)"
+                      [ngClass]="{'form-control-error': submitted && citadata.controls.hora.errors}"
+                      required
+                      >
+                      <option value="" disabled selected hidden>Seleccionar hora</option>
+                      <option [ngValue]="objeto" *ngFor="let objeto of lstCatHorarios">{{objeto.tim_hora_inicio}}</option>
+                    </select>
+                    <small
+                      *ngIf="submitted && citadata.controls['hora'].errors"
+                      class="form-text form-text-error">
+                      {{citadata.controls.hora.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+                    </small>
+                  </div>
+                </div>
               </div>
 
               <div class="cuadro-resumen" *ngIf="muestraresumen">
                 <div class="txt-resumen">Resumen:</div>
-                <div class="lst-item pull-left"  *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
-                  <div class="lbel">{{dato.key}}:</div>
-                  <div class="valor">{{dato.value}}</div>
+                <div class="row">
+                  <div class="col-md-4" *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
+                    <div class="lst-item pull-left">
+                      <div class="lbel">{{dato.key}}:</div>
+                      <div class="valor">{{dato.value}}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="cuadro-extra" *ngIf="muestraresumen">
-                <div class="form-group lst-item pull-left">
-                  <div class="lbel">Ocasión de servicio*:</div>
-                  <div class="valor"><span>Inicial:</span>
-                    <input
-                      type="radio" id=""
-                      value="Inicial"
-                      formControlName="ocasion"
-                      [ngClass]="{'form-control-error-2': submitted && citadata.controls.ocasion.errors}">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group lst-item pull-left">
+                      <div class="lbel">Ocasión de servicio*:</div>
+                      <div class="valor"><span>Inicial:</span>
+                        <input
+                          type="radio" id=""
+                          value="Inicial"
+                          formControlName="ocasion"
+                          [ngClass]="{'form-control-error-2': submitted && citadata.controls.ocasion.errors}">
+                      </div>
+                      <div class="valor"><span>Seguimiento:</span>
+                        <input
+                          type="radio" id=""
+                          value="Seguimiento"
+                          formControlName="ocasion"
+                          [ngClass]="{'form-control-error-2': submitted && citadata.controls.ocasion.errors}">
+                      </div>
+                      <small
+                        *ngIf="submitted && citadata.controls.ocasion.errors"
+                        class="form-text form-text-error">
+                        {{citadata.controls.ocasion.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+                      </small>
+                    </div>
                   </div>
-                  <div class="valor"><span>Seguimiento:</span>
-                    <input
-                      type="radio" id=""
-                      value="Seguimiento"
-                      formControlName="ocasion"
-                      [ngClass]="{'form-control-error-2': submitted && citadata.controls.ocasion.errors}">
+                  <div class="col-md-4">
+                    <div class="form-group lst-item pull-left ">
+                      <div class="lbel">Modalidad*:</div>
+                      <div class="valor"><span>Presencial:</span>
+                        <input
+                          type="radio" id=""
+                          value="Presencial"
+                          formControlName="modalidad"
+                          [ngClass]="{'form-control-error-2': submitted && citadata.controls.modalidad.errors}">
+                      </div>
+                      <div class="valor"><span>A distancia:</span>
+                        <input
+                          type="radio" id=""
+                          value="Distancia"
+                          formControlName="modalidad"
+                          [ngClass]="{'form-control-error-2': submitted && citadata.controls.modalidad.errors}">
+                      </div>
+                      <small
+                        *ngIf="submitted && citadata.controls?.modalidad?.errors"
+                        class="form-text form-text-error">
+                        {{citadata.controls?.modalidad?.errors?.required? "Campo obligatorio" : "Formato inválido"}}
+                      </small>
+                    </div>
                   </div>
-                  <small
-                    *ngIf="submitted && citadata.controls.ocasion.errors"
-                    class="form-text form-text-error">
-                    {{citadata.controls.ocasion.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-                  </small>
-                </div>
-                <div class="form-group lst-item pull-left ">
-                  <div class="lbel">Modalidad*:</div>
-                  <div class="valor"><span>Presencial:</span>
-                    <input
-                      type="radio" id=""
-                      value="Presencial"
-                      formControlName="modalidad"
-                      [ngClass]="{'form-control-error-2': submitted && citadata.controls.modalidad.errors}">
-                  </div>
-                  <div class="valor"><span>A distancia:</span>
-                    <input
-                      type="radio" id=""
-                      value="Distancia"
-                      formControlName="modalidad"
-                      [ngClass]="{'form-control-error-2': submitted && citadata.controls.modalidad.errors}">
-                  </div>
-                  <small
-                    *ngIf="submitted && citadata.controls?.modalidad?.errors"
-                    class="form-text form-text-error">
-                    {{citadata.controls?.modalidad?.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-                  </small>
                 </div>
               </div>
 
@@ -362,7 +308,7 @@
         </div>
 
       </div>
-    </section>
+    <!-- </section> -->
 
-</div>
+<!-- </div> -->
 
