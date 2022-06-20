@@ -17,20 +17,23 @@ export class ControlArticuloService {
     private http: HttpClient
   ) { }
 
-  getArticulos() {
-    return this.http.get<any>(`${urlServArticulo}/`);
-  }
-
-  getArticulosByFechas(fechaInicial: string, fechaFinal: string) {
-    return this.http.get<any>(`${urlServArticulo}/rango/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+  getArticuloById(id: number){
+    return this.http.get<any>(`${urlServArticulo}/idCa/${id}`, { responseType: 'json'});
   }
 
   addArticulo(controlArticulos: ControlArticulos) {
     return this.http.post<ControlArticulos>(`${urlServArticulo}/insert`, controlArticulos);
   }
 
-  getArticuloById(id: number){
-    return this.http.get<any>(`${urlServArticulo}/folio/${id}`, { responseType: 'json'});
+  getArticulosByFechas(fechaInicial: string, fechaFinal: string) {
+    return this.http.get<ControlArticulos[]>(`${urlServArticulo}/rango/fechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
   }
+  
+  getArticulos() {
+    return this.http.get<ControlArticulos[]>(`${urlServArticulo}/`);
+  }
+
+
+
 
 }

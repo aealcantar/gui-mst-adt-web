@@ -40,11 +40,11 @@
             <div class="col-md-6 flex justify-content-end">
                 <div class="form-group">
                     <label class="control-label">Visualizar datos</label>
-                    <select class="form-select ml-5 select-view-data">
-            <option [ngValue]="15">15</option>
-            <option [ngValue]="20">20</option>
-            <option [ngValue]="25">25</option>
-          </select>
+                    <select class="form-select ml-5 select-view-data" [(ngModel)]="pageSize">
+                        <option [ngValue]="15">15</option>
+                        <option [ngValue]="20">20</option>
+                        <option [ngValue]="25">25</option>
+                    </select>
                 </div>
             </div>
         </div>

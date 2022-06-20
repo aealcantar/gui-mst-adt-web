@@ -4,14 +4,17 @@ import { AuthService } from 'src/app/service/auth-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
+import * as momment from 'moment';
 import { ControlArticuloService } from '../service/control-articulo.service';
 import { ControlArticulos } from './../models/control-articulo.model';
+import { DatePipe } from '@angular/common';
 declare var $: any;
 
 @Component({
   selector: 'app-consulta-control-articulos',
   templateUrl: './consulta-control-articulos.component.html',
-  styleUrls: ['./consulta-control-articulos.component.css']
+  styleUrls: ['./consulta-control-articulos.component.css'],
+  providers: [DatePipe]
 })
 export class ConsultaControlArticulosComponent implements OnInit {
   
@@ -27,12 +30,12 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public datesForm!: FormGroup;
   public columnaId: string = 'fecha';
 
-
   constructor(
     private router: Router,
     private authService: AuthService,
     private Artservice: ControlArticuloService ,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +44,6 @@ export class ConsultaControlArticulosComponent implements OnInit {
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
     });
     this.authService.project$.next("Trabajo Social");
-    this.getArticulos();
   }
 
   getArticuloById(id: number) {
@@ -57,11 +59,13 @@ export class ConsultaControlArticulosComponent implements OnInit {
   }
 
 
-  getArticulos() {
+  getArticulos(): void {
     this.Artservice.getArticulos().subscribe(
-      (res) => {
-          this.tabla = res.List;
+      (articulos:any) => {
+        if (articulos && articulos.List.length > 0) {
+          this.tabla = articulos.List;
           console.log("CONTROL DE ARTICULOS: ", this.tabla);
+        }
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -69,11 +73,11 @@ export class ConsultaControlArticulosComponent implements OnInit {
     );
   }
   
-  getNotasByFecha() {
+  getArticulosByFecha(): void {
     this.Artservice.getArticulosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
-      (res) => {
-        if (res && res.List.length > 0) {
-          this.tabla =  res.List;
+      (articulos: any) => {
+        if (articulos && articulos.List.length > 0) {
+          this.tabla = articulos.List;
           console.log("CONTROL DE ARTICULOS: ", this.tabla);
         }
       },
@@ -140,7 +144,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
       this.datesForm.get('fechaInicial')?.value !== '' &&
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
-      this.getNotasByFecha();
+      this.getArticulosByFecha();
     }
   }
 
@@ -170,13 +174,11 @@ export class ConsultaControlArticulosComponent implements OnInit {
     let data;
     switch (type) {
       case 'fecha':
-        data = moment(val, 'DD/MM/YYYY');
+        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
+        data = momment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
-        data = moment(val, 'HH:mm:ss');
-        break;
-      case 'number':
-        data = parseInt(val);
+        data = momment(val, 'HH:mm:ss');
         break;
 
       default:
