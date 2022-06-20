@@ -469,33 +469,13 @@ export class CargaComponent implements OnInit {
             this.ubicacion[index].unidadMedica = element[this.confCarga.col7];
             break;
           case 4:
-            this.turnos[index] = new Turno();
-            this.turnos[index].cveTurno = element[this.confCarga.col1];
-            this.turnos[index].desTurno = element[this.confCarga.col2];
-            this.turnos[index].des4306 = element[this.confCarga.col3];
-
-
+            this.responsable[index] = new Responsable();
+            this.responsable[index].matricula = element[this.confCarga.col1];
+            this.responsable[index].nombre = element[this.confCarga.col2];
+            this.responsable[index].ubicacion = element[this.confCarga.col3];
+            this.responsable[index].turno = element[this.confCarga.col4];
             break;
           case 5:
-            this.puestos[index] = new Puesto();
-            this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
-            break;
-          case 6:
-            debbugger:
-            this.persona[index] = new Persona();
-            this.persona[index].primerApellido = element[this.confCarga.col1];
-            this.persona[index].segundoApellido = element[this.confCarga.col2];
-            this.persona[index].nombre = element[this.confCarga.col3];
-            this.persona[index].matricula = element[this.confCarga.col4];
-            this.persona[index].rol = element[this.confCarga.col5];
-            this.persona[index].puesto = element[this.confCarga.col6]
-            this.persona[index].nombreCompleto = element[this.confCarga.col7];
-            this.persona[index].usuario = element[this.confCarga.col8];
-            this.persona[index].contraseña = element[this.confCarga.col9];
-            this.persona[index].turno = element[this.confCarga.col10];
-            break;
-
-          case 7:
             this.programasTS[index] = new ProgramaTS();
             this.programasTS[index].cveGrupo = element[this.confCarga.col1];
             this.programasTS[index].desPrograma = element[this.confCarga.col2];
@@ -504,17 +484,7 @@ export class CargaComponent implements OnInit {
             this.programasTS[index].cveServicio = element[this.confCarga.col5];
             break;
 
-          case 8:
-            this.responsable[index] = new Responsable();
-            this.responsable[index].matricula = element[this.confCarga.col1];
-            this.responsable[index].nombre = element[this.confCarga.col2];
-            this.responsable[index].ubicacion = element[this.confCarga.col3];
-            this.responsable[index].turno = element[this.confCarga.col4];
-            break;
-
-
-
-          case 9:
+          case 6:
             this.calendarioDias[index] = new CalendarioDias();
             this.calendarioDias[index].cveServicio = element[this.confCarga.col1];
             this.calendarioDias[index].cveUbicacion = element[this.confCarga.col2];
@@ -539,8 +509,40 @@ export class CargaComponent implements OnInit {
             this.calendarioDias[index].horaFin = horaFin;
             this.calendarioDias[index].numParticipantes = element[this.confCarga.col8];
             break;
+        
+          case 7:
+            
+            this.persona[index] = new Persona();
+            this.persona[index].primerApellido = element[this.confCarga.col1];
+            this.persona[index].segundoApellido = element[this.confCarga.col2];
+            this.persona[index].nombre = element[this.confCarga.col3];
+            this.persona[index].matricula = element[this.confCarga.col4];
+            this.persona[index].rol = element[this.confCarga.col5];
+            this.persona[index].puesto = element[this.confCarga.col6]
+            this.persona[index].nombreCompleto = element[this.confCarga.col7];
+            this.persona[index].usuario = element[this.confCarga.col8];
+            this.persona[index].contraseña = element[this.confCarga.col9];
+            this.persona[index].turno = element[this.confCarga.col10];
+            break;
 
 
+
+
+          case 8:
+            this.turnos[index] = new Turno();
+            this.turnos[index].cveTurno = element[this.confCarga.col1];
+            this.turnos[index].desTurno = element[this.confCarga.col2];
+            this.turnos[index].des4306 = element[this.confCarga.col3];
+
+
+            break;
+
+
+
+            case 9:
+              this.puestos[index] = new Puesto();
+              this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
+              break;
 
 
 
@@ -666,7 +668,27 @@ export class CargaComponent implements OnInit {
             this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_UBICACIONES);
           });
           break;
-        case 4:
+          case 7:
+            this.personaRequest = new PersonaRequest();
+            this.personaRequest.personas = this.persona;
+            this.personaRequest.idUser = this.idUser;
+            this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
+              this.cargaResponse = resp;
+              if (resp) {
+                this.percentDone = 100;
+                this.reporteCarga(resp);
+  
+                setTimeout(() => {
+                  this.archivoCarga.proceso = 'result';
+                }, 800);
+              }
+            }, (error: HttpErrorResponse) => {
+              this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
+  
+            });
+  
+            break;
+        case 8:
           this.turnosRequest = new TurnoRequest();
           this.turnosRequest.turnos = this.turnos;
           this.turnosRequest.idUser = this.idUser;
@@ -688,7 +710,7 @@ export class CargaComponent implements OnInit {
           });
 
           break;
-        case 5:
+        case 9:
           this.puestosRequest = new PuestoRequest();
           this.puestosRequest.puestos = this.puestos;
           this.puestosRequest.idUser = this.idUser;
@@ -708,27 +730,8 @@ export class CargaComponent implements OnInit {
           });
 
           break;
-        case 6:
-          this.personaRequest = new PersonaRequest();
-          this.personaRequest.personas = this.persona;
-          this.personaRequest.idUser = this.idUser;
-          this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
-            this.cargaResponse = resp;
-            if (resp) {
-              this.percentDone = 100;
-              this.reporteCarga(resp);
-
-              setTimeout(() => {
-                this.archivoCarga.proceso = 'result';
-              }, 800);
-            }
-          }, (error: HttpErrorResponse) => {
-            this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
-
-          });
-
-          break;
-        case 7:
+       
+        case 5:
 
           this.programasTSRequest = new ProgramaTSRequest();
           this.programasTSRequest.programas = this.programasTS;
@@ -755,7 +758,7 @@ export class CargaComponent implements OnInit {
           });
           break;
 
-        case 8:
+        case 4:
 
           this.responsableRequest = new ResponsableRequest();
           this.responsableRequest.responsables = this.responsable;
@@ -781,7 +784,7 @@ export class CargaComponent implements OnInit {
           // }
           break;
 
-        case 9:
+        case 6:
 
           this.calendarioDiasRequest = new CalendarioRequest();
           this.calendarioDiasRequest.calendarioDias = this.calendarioDias;
