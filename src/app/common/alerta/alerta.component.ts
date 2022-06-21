@@ -33,10 +33,10 @@ export class AlertaComponent implements OnInit {
         break;
       case "custom":
       case "alert-warning":
-        strruta = strruta + "icon-close.svg"
+        strruta = strruta + "icon-close-nt.svg"
         break;
       default:
-        strruta = strruta + "icon-close.svg"
+        strruta = strruta + "icon-close-nt.svg"
         break;
     }
     return strruta;

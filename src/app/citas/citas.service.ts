@@ -87,7 +87,7 @@ export class CitasService {
 
   cancelarcitacal(id: number):Observable<any>{
     let direccion = this.baseApiUrl + '/CancelarCita/' + id;
-    return this.http.post(direccion,{headers: this.header});
+    return this.http.get(direccion,{headers: this.header});
   }
 
   getcomplementocita(cve_especialidad: string, cve_gpo: number):Observable<any>{
