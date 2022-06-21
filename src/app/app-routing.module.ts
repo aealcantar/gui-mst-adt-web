@@ -5,10 +5,10 @@ import { DeclarationListEmitMode } from '@angular/compiler';
 
 import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
-import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cronica.component';
-import { CCGrupalEspecificaComponent } from './cronica-grupal/c-cgrupal-especifica/c-cgrupal-especifica.component';
-import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
-import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
+// import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cronica.component';
+// import { CCGrupalEspecificaComponent } from './cronica-grupal/c-cgrupal-especifica/c-cgrupal-especifica.component';
+// import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
+// import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
 import { LoginComponent } from './seguridad/login/login.component';
 import { SeguridadRouter } from './seguridad/seguridad.router';
 import { RegistroComponent } from './seguridad/registro/registro.component';
@@ -32,10 +32,10 @@ const routes: Routes = [
   { path: 'recuperarpassword', component: RegistroComponent },
   { path: 'busqueda', component: BusquedaNssComponent  },
   { path: 'tarjeta', component: AppTarjetaPresentacionComponent  },
-  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent  },
-  { path: 'nuevaCronica', component: NuevaCronicaComponent  },
-  { path: 'cronicaGuardada', component: CronicaGuardadaComponent  },
-  { path: 'consulta-cronica-grupal', component: ConsultaComponent  },
+  // { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent  },
+  // { path: 'nuevaCronica', component: NuevaCronicaComponent  },
+  // { path: 'cronicaGuardada', component: CronicaGuardadaComponent  },
+  // { path: 'consulta-cronica-grupal', component: ConsultaComponent  },
   { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
   { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
   { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent  },

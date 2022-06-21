@@ -11,7 +11,7 @@ import { Ciudad } from '../models/ciudad.model';
 import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
 import { EstadoCivil } from '../models/estado-civil.model';
 import { EstudioMedico } from '../models/estudio-medico.model';
-import { objAlert } from '../common/alerta/alerta.interface';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 declare var $: any;
 
 @Component({

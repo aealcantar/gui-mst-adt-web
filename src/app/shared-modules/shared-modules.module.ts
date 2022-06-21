@@ -13,12 +13,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/trabajador-social-clinico.component';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { AlertaComponent } from './alerta/alerta.component';
+import { AlertaGeneralComponent } from './alerta-general/alerta.component';
 import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 import { AppMenuComponent } from './app-menu/app-menu.component';
 import { AppAlertsComponent } from './app-alerts/app-alerts.component';
-
+import { AlertaComponent } from './alerta/alerta.component';
+import { MenugralComponent } from './menugral/menugral.component';
+import { FichapacienteComponent } from './fichapaciente/fichapaciente.component';
+import { DataTablesModule } from 'angular-datatables';
 
 export const MY_FORMATS = {
   parse: {
@@ -38,11 +41,14 @@ export const MY_FORMATS = {
     DatosGeneralesPacienteComponent,
     DatosGeneralesUsuarioComponent,
     TrabajadorSocialClinicoComponent,
+    AlertaGeneralComponent,
     AlertaComponent,
     AppInfoBottomComponent,
     AppTarjetaPresentacionComponent,
     AppMenuComponent,
     AppAlertsComponent,
+    FichapacienteComponent,
+    MenugralComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +61,7 @@ export const MY_FORMATS = {
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    DataTablesModule,
 
   ], exports: [
     CardTemplateComponent,
@@ -71,11 +78,15 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     TrabajadorSocialClinicoComponent,
+    AlertaGeneralComponent,
     AlertaComponent,
     AppInfoBottomComponent,
     AppTarjetaPresentacionComponent,
     AppMenuComponent,
     AppAlertsComponent,
+    FichapacienteComponent,
+    MenugralComponent,
+    DataTablesModule,
   ], providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

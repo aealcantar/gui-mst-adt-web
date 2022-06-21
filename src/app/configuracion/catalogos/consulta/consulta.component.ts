@@ -2,25 +2,24 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { objAlert } from '../../../common/alerta/alerta.interface';
-
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 
 
-import { Servicio } from 'src/app/models/servicio-model';
-import { Ubicacion } from 'src/app/models/ubicacion-model';
-import { Responsable } from 'src/app/models/responsable-model';
-import { ServicioRequest } from 'src/app/models/servicio-request-model';
+import { Servicio } from 'src/app/agenda-digital/models/servicio-model';
+import { Ubicacion } from 'src/app/agenda-digital/models/ubicacion-model';
+import { Responsable } from 'src/app/agenda-digital/models/responsable-model';
+import { ServicioRequest } from 'src/app/agenda-digital/models/servicio-request-model';
 
-import { CalendarioDias } from 'src/app/models/calendario-dias.model';
-import { CalendarioRequest } from 'src/app/models/calendario-request-model';
+import { CalendarioDias } from 'src/app/agenda-digital/models/calendario-dias.model';
+import { CalendarioRequest } from 'src/app/agenda-digital/models/calendario-request-model';
 import * as XLSX from 'xlsx';
-import { ProgramaTS } from 'src/app/models/programa-ts.model';
-import { ProgramaTSRequest } from 'src/app/models/programa-ts-request-model';
-import { UbicacionRequest } from 'src/app/models/ubicacion-request-model';
+import { ProgramaTS } from 'src/app/agenda-digital/models/programa-ts.model';
+import { ProgramaTSRequest } from 'src/app/agenda-digital/models/programa-ts-request-model';
+import { UbicacionRequest } from 'src/app/agenda-digital/models/ubicacion-request-model';
 import Swal from 'sweetalert2';
-import { ArchivoCarga, CargasCatalogos, CatalogoData, ConfiguracionCarga } from 'src/app/models/catalogos.model';
+import { ArchivoCarga, CargasCatalogos, CatalogoData, ConfiguracionCarga } from 'src/app/agenda-digital/models/catalogos.model';
 import { CargasService } from 'src/app/services/catalogos/cargas.service';
 import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalogos.service';
 import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
@@ -28,9 +27,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from "@angular/material/icon";
 
 
-import { UnidadMedica } from 'src/app/models/unidad-medica.model';
-import { UnidadMedicaRequest } from 'src/app/models/unidad-medica-request.model';
-import { ResponsableRequest } from 'src/app/models/responsable-request-model';
+import { UnidadMedica } from 'src/app/agenda-digital/models/unidad-medica.model';
+import { UnidadMedicaRequest } from 'src/app/agenda-digital/models/unidad-medica-request.model';
+import { ResponsableRequest } from 'src/app/agenda-digital/models/responsable-request-model';
 
 
 
@@ -38,19 +37,19 @@ import { ResponsableRequest } from 'src/app/models/responsable-request-model';
 
 
 
-import { CargasResponse } from 'src/app/models/carga-response-model';
+import { CargasResponse } from 'src/app/agenda-digital/models/carga-response-model';
 
 
 
-import { DownloadFile } from 'src/app/models/downloadFile-model';
-import { Turno } from 'src/app/models/turno-model';
-import { TurnoRequest } from 'src/app/models/turno-request-model';
-import { Puesto } from 'src/app/models/puesto-model';
-import { PuestoRequest } from 'src/app/models/puesto-request-model';
+import { DownloadFile } from 'src/app/agenda-digital/models/downloadFile-model';
+import { Turno } from 'src/app/agenda-digital/models/turno-model';
+import { TurnoRequest } from 'src/app/agenda-digital/models/turno-request-model';
+import { Puesto } from 'src/app/agenda-digital/models/puesto-model';
+import { PuestoRequest } from 'src/app/agenda-digital/models/puesto-request-model';
 import { of, Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import { Persona } from 'src/app/models/persona-model';
-import { PersonaRequest } from 'src/app/models/persona-request-model';
+import { Persona } from 'src/app/agenda-digital/models/persona-model';
+import { PersonaRequest } from 'src/app/agenda-digital/models/persona-request-model';
 import { Router } from '@angular/router';
 
 declare var $: any;
@@ -165,7 +164,7 @@ export class ConsultaComponent implements OnInit {
     this.pesoMaximoBytes = this.pesoMaximoMB * Math.pow(1024, 2);
     console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
     this.lstCatalogo = new Array<CatalogoData>();
-    this.mensaje = new objAlert;
+    // this.mensaje = new objAlert;
     this.lstConfigCarga = this._HelperCatalogos.getConfiguracionCat();
     this.obtenerEstatusCarga();
     this.blnDeshabilitar = false;
@@ -1025,7 +1024,7 @@ export class ConsultaComponent implements OnInit {
   }
 
   private mostrarMensaje(tipo: string, msj: string, tipoMsj?: string) {
-    this.mensaje = new objAlert;
+    // this.mensaje = new objAlert;
     this.mensaje.visible = true;
     this.mensaje.type = tipo;
     this.mensaje.message = msj;
