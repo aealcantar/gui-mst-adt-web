@@ -43,7 +43,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
     });
-    this.authService.project$.next("Trabajo Social");
+    this.authService.setProjectObs("Trabajo social");
   }
 
   ngAfterViewInit(): void {

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
 import { Nota } from '../models/notas.model';
 import { ReporteNota } from '../models/reporte-notas.model';
+import { AuthService } from '../service/auth-service.service';
 import { NotasService } from '../service/notas.service';
 
 @Component({
@@ -26,9 +27,11 @@ export class ConsultaNotaTSocialComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private notasService: NotasService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.setProjectObs("Trabajo social");
     this.route.queryParamMap.subscribe((params: any) => {
       if (params.getAll('nota').length > 0) {
         this.nota = JSON.parse(params.getAll('nota'))

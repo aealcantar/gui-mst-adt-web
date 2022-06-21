@@ -40,7 +40,12 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       if (params.getAll('estudioMedico').length > 0) {
         this.estudioMedico = JSON.parse(params.getAll('estudioMedico'));
         if (this.estudioMedico.esNuevo) {
-          this.showSucces("¡La información se guardó con éxito!");
+          this.muestraAlerta(
+            '¡La información se guardó con éxito!',
+            'alert-success',
+            'Éxito',
+          );
+          // this.showSucces("¡La información se guardó con éxito!");
         }
       }
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.estudioMedico);
@@ -90,7 +95,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       }
     );
   }
-  
+
   getNombreOcupacion(idOcupacion: number) {
     return this.ocupaciones.find(c => c.id_OCUPACION = idOcupacion)?.nom_OCUPACION;
   }
@@ -173,18 +178,22 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     )
   }
 
-  //Success
-  private showSucces(msg: string) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+    this.alert = new objAlert;
     this.alert = {
-      message: msg,
-      type: 'success',
-      visible: true
-    }
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
     setTimeout(() => {
       this.alert = {
         message: '',
         type: 'custom',
-        visible: false
+        visible: false,
+      };
+      if(funxion != null){
+        funxion();
       }
     }, 2000);
   }
