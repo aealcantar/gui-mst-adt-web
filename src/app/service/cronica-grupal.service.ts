@@ -74,7 +74,7 @@ export class CronicaGrupalService {
 
   downloadPdf(data: any): Observable<Blob> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
-    return this.http.post<Blob>(environment.msmtsCronicasReporte + '/reporte/reporteCronica', JSON.stringify(data),
+    return this.http.post<Blob>(environment.msmtsCronicas + '/reporteCronica', JSON.stringify(data),
     { headers: headers, responseType: 'blob' as 'json'});
   }
 

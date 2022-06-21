@@ -113,10 +113,10 @@ export class LoginComponent implements OnInit {
       try {
         console.log(`Token [${this.token}] generated`);
         this.usuario.strEmail = this.logindata.get("usuario")?.value;
-        this.usuario.strPassword = this.logindata.get("password")?.value;
-        this.authService.login(this.usuario, this.aplicacion).subscribe(
-          (result) => {
-            console.log(result);
+        // this.usuario.strPassword = this.logindata.get("password")?.value;
+        // this.authService.login(this.usuario, this.aplicacion).subscribe(
+        //   (result) => {
+        //     console.log(result);
             this.authService.getUserData(this.usuario.strEmail).subscribe(
               (response: any) => {
                 this.authService.guardarUsuarioEnSesion(response);
@@ -124,25 +124,25 @@ export class LoginComponent implements OnInit {
                 this.authService.isAuthenticatedObs$.next(true);
               }
             );
-            this.authService.guardarToken(result.access_token);
-            this.seguridadService.registrarUsuario(this.usuario);
-            this.router.navigate(["/busqueda"], { skipLocationChange: true });
-          },
-          (err: HttpErrorResponse) => {
-            window.scroll(0,0);
-            console.log("error " + err.error.message);
-            if (err.error.message == undefined) {
-              this.showError("<strong>Error.</strong> Servicio no esta disponible. Favor de reportarlo!.");
-              return;
-            }
-            if (err.status == 400) {
-              this.strMsjError = "" + err.status;
-            } else {
-              this.strMsjError = "" + err.status;
-            }
-            this.showError(err.error.message);
-          }
-        );
+            // this.authService.guardarToken(result.access_token);
+            // this.seguridadService.registrarUsuario(this.usuario);
+            this.router.navigate(["/catalogos"], { skipLocationChange: true });
+          // },
+          // (err: HttpErrorResponse) => {
+          //   window.scroll(0,0);
+          //   console.log("error " + err.error.message);
+          //   if (err.error.message == undefined) {
+          //     this.showError("<strong>Error.</strong> Servicio no esta disponible. Favor de reportarlo!.");
+          //     return;
+            // }
+      //       if (err.status == 400) {
+      //         this.strMsjError = "" + err.status;
+      //       } else {
+      //         this.strMsjError = "" + err.status;
+      //       }
+      //       this.showError(err.error.message);
+      //     }
+      //   );
       } catch (error) {
         // this.showError();
       }

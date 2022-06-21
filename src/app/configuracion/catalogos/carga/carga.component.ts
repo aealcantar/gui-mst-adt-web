@@ -51,6 +51,7 @@ import { PuestoRequest } from 'src/app/models/puesto-request-model';
 import { Persona } from 'src/app/models/persona-model';
 import { PersonaRequest } from 'src/app/models/persona-request-model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 declare var $: any;
 
@@ -134,7 +135,7 @@ export class CargaComponent implements OnInit {
   regOK: number = 0;
   regERROR: number = 0;
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
+  constructor(private authService: AuthService, private modalService: NgbModal,
     private router: Router,
     private http: HttpClient,
     private _CargasService: CargasService, private _HelperCatalogos: HelperCatalogosService,
@@ -157,7 +158,7 @@ export class CargaComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.authService.setProjectObs("Agenda Digital Transversal");
     this.pesoMaximoBytes = this.pesoMaximoMB * Math.pow(1024, 2);
     console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
     this.lstCatalogo = new Array<CatalogoData>();
