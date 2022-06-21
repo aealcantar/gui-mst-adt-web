@@ -230,10 +230,17 @@ export class CitaguardaComponent implements OnInit {
     if(event.target.checked){
       this.lstchkparticipantes.push({name:'', value:event.target.value, id: event.target.id, checked:true, isfam: false});
     } else {
-      const index = this.lstchkparticipantes.findIndex(x => x.value == event.target.value);
-      if (index > -1) {
-        this.lstchkparticipantes.splice(index, 1);
+      // const index = this.lstchkparticipantes.findIndex(x => { event.target.id == "chkpaciente" && x.value == event.target.value });
+      // if (index > -1) {
+      //   this.lstchkparticipantes.splice(index, 1);
+      // }
+
+      for (var i = 0; i < this.lstchkparticipantes.length; i++) {
+        if(this.lstchkparticipantes[i].value == event.target.value && this.lstchkparticipantes[i].id == "chkpaciente"){
+          this.lstchkparticipantes.splice(i, 1);
+        }
       }
+
     }
     this.changeSelection();
   }
