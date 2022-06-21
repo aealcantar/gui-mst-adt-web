@@ -13,11 +13,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
-// import { CCGrupalEspecificaComponent } from './cronica-grupal/c-cgrupal-especifica/c-cgrupal-especifica.component';
-// import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cronica.component';
-// import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
-// import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica/agregar-participante-dialog/agregar-participante-dialog.component';
-// import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
 
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
@@ -34,7 +29,6 @@ import { UserguardaComponent } from './configuracion/usuarios/userguarda/usergua
 import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca.component';
 
 import { ReadexcelDirective } from './directives/readexcel.directive';
-// import { DataTablesModule } from 'angular-datatables';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import '@angular/common/locales/global/es';
@@ -77,12 +71,6 @@ registerLocaleData('es');
     PrincipalComponent,
     BusquedaNssComponent,
     AppTarjetaPresentacionComponent,
-    // CCGrupalEspecificaComponent,
-    // NuevaCronicaComponent,
-    // CronicaGuardadaComponent,
-    // ConsultaComponent,
-    // AgregarParticipanteDialogComponent,
-
     HeaderMenuComponent,
     NumberDirective,
     UserconsultaComponent,
