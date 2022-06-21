@@ -69,15 +69,15 @@ export class AuthService {
   }
   
   actualizarPassword(admonPasswordRequest:AdmonPasswordRequest){
-     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}/api/aplicacion/actualizarPassword/`, admonPasswordRequest);
+     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}actualizarPassword/`, admonPasswordRequest);
   }
  
   getAppAccesbyAppName(name:string){
-    return this.http.get<Aplicacion>(`${environment.msmtsOauth}/api/aplicacion/app?appName=${name}`);
+    return this.http.get<Aplicacion>(`${environment.msmtsOauth}app?appName=${name}`);
   }
 
   getUserData(aliasUsuario?:string){
-    return this.http.get<Usuario>(`${environment.msmtsOauth}/api/aplicacion/getUserSession?aliasUsuario=${aliasUsuario}`);
+    return this.http.get<Usuario>(`${environment.msmtsOauth}getUserSession?aliasUsuario=${aliasUsuario}`);
   }
 
   validateRecaptcha(response: string) {
@@ -102,7 +102,7 @@ export class AuthService {
   login(usuario: Usuario, aplicacion:Aplicacion) {
     
     sessionStorage.clear();
-    const urlEndpoint = environment.msmtsOauth + '/oauth/token';
+    const urlEndpoint = environment.urlServOauth + '/oauth/token';
     
     console.log(" usuario app  "+ aplicacion.cveUsuario);
     console.log(" pass app  "+ aplicacion.cvePassword);
@@ -149,17 +149,17 @@ export class AuthService {
 
   guardarUsuarioEnSesion(usuario: any): void {
     this._usuario = new Usuario();
-    this._usuario.strEmail = usuario.correo;
-    this._usuario.strRol = usuario.strRol;
-    this._usuario.strNombres = usuario.nombre;
-    this._usuario.strApellidoP = usuario.apellidoPaterno;
-    this._usuario.strApellidoM = usuario.apellidoMaterno;
-    this._usuario.matricula = usuario.matricula;
-    this._usuario.rolUser = usuario.rol.cveRol;
-    this._usuario.nameRolUser = usuario.rol.nomRol;
-    this._usuario.puesto = usuario.puesto;
-    this._usuario.unidadMedica = usuario.unidadMedica;
-    this.usuario.cedulaProfesional = usuario.cedulaProfesional;
+    this._usuario.strEmail = "antonio.alcantar@people-media.com.mx";
+    this._usuario.strRol = "Trabajador social";
+    this._usuario.strNombres = "Antonio Esteban";
+    this._usuario.strApellidoP = "Alcántar";
+    this._usuario.strApellidoM = "Valencia";
+    this._usuario.matricula = "15008669";
+    this._usuario.rolUser = 1;
+    this._usuario.nameRolUser = "Asistente Social";
+    this._usuario.puesto = "Asistente";
+    this._usuario.unidadMedica = "UMF 7";
+    this.usuario.cedulaProfesional = "24021992";
     this._usuario.cveUsuario = 1;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
