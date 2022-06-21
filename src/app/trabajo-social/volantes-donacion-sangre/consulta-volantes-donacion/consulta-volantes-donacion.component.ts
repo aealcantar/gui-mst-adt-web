@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/service/auth-service.service';
 //import { NotasService } from 'src/app/service/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { VolanteDonacion } from '../models/volante-donacion.model';
+import { VolanteDonacion } from '../../../models/volante-donacion.model';
 
 declare var $: any;
 
