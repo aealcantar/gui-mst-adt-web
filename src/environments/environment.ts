@@ -7,8 +7,10 @@ export const environment = {
   msmtsPacientes: 'http://localhost:8080/api/busquedanss/',
   urlServOauth: 'http://localhost:8081',
   urlServCronicasReporte: 'http://localhost:8082',
-  urlServCatalogos: 'http://localhost:8084',
-  urlServCronicas: 'http://localhost:8085',
+ // urlServCatalogos: 'http://localhost:8084',
+ 
+ urlServCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+ urlServCronicas: 'http://localhost:8085', 
   urlServNotas: 'http://localhost:8086',
   urlServEstudioMedicos: 'http://localhost:8088',
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
@@ -19,7 +21,7 @@ export const environment = {
   secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
   urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
   urlMSEDSCatalogos: 'http://localhost:8085/api/',
-  urlMSADTCITAS: 'http://localhost:8090/api/'
+  urlMSADTCITAS: 'http://localhost:8090/api/', 
   
 };
 

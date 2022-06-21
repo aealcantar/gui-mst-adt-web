@@ -1,0 +1,241 @@
+<div *ngIf="alertVisible">
+  <div class="alert alert-dismissible alertCompl" [ngClass]="alertTipo">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+    <div [innerHTML]="alertMensaje"></div>
+  </div>
+</div>
+
+<app-menu></app-menu>
+<app-card-template>
+  <div header class="flex justify-content-between align-items-center consultaCronicasGrupales">
+    <div class="row">
+
+      <label>
+        NSS paciente
+      </label>
+
+      <div id="busqueda">
+        <input class="form-control matricula inputs" id="txtconsulta" placeholder="Escribir NSS paciente" type="text"
+          required minlength="10" maxlength="10" [(ngModel)]="txtNSS" numbersOnly />
+
+        <button (click)="limpiar()" class="btn btn-default btuser boton">
+          Limpiar
+        </button>
+        <button (click)="get()" class="btn btn-primary btuser boton">
+          Buscar
+        </button>
+
+        <div class="polig">
+          <div id="paralelograma" class="shape"></div>
+          <div id="paralelograma2" class="shape"></div>
+        </div>
+
+        <div class="Ellipse-61"> </div>
+
+        <div class="logo">
+          <span class="Cronologa">
+            Búsqueda de NSS
+          </span>
+          <img src="./assets/hu002-busqueda/agenda3.png" class="buscaico">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div content>
+    <div class="nss-paciente1">
+
+      <div *ngIf="resultadoTotal > 0; then thenBlock else elseBlock"></div>
+
+      <ng-template #thenBlock>
+
+        <span class="resultados">
+          Resultados
+        </span>
+        <span class="resultados2" style="font-weight: bold;">
+          {{resultadoTotal}}
+        </span>
+
+        <select class="form-select" [(ngModel)]="pageSize">
+          <option [ngValue]="15">15</option>
+          <option [ngValue]="20">20</option>
+          <option [ngValue]="25">25</option>
+        </select>
+
+        <span class="visDatos" style="width: auto; float: right;">
+          Visualizar datos
+        </span>
+
+        <table class="table " style="margin-bottom: 0px !important;">
+          <thead style=" background: #f9f9f9;">
+            <tr>
+              <th style="width: 160px; padding-left: 33px !important;">
+                NSS
+                <i class="fa-solid fa-caret-up arrow arrow-up"
+                  [ngClass]="{'active-opacity': columnaId === 'nss' && order === 'asc'}"
+                  (click)="sortBy('nss', 'asc', 'number')">
+                </i>
+                <i class="fa-solid fa-caret-down arrow arrow-down"
+                  [ngClass]="{'active-opacity': columnaId === 'nss' && order === 'desc'}"
+                  (click)="sortBy('nss', 'desc', 'number')">
+                </i>
+              </th>
+              <th style="width: 600px; padding-left: 10px !important;">Paciente</th>
+              <th style="text-align: center !important;">Agregado Médico</th>
+              <th style="text-align: center !important;">Unidad Médica</th>
+            </tr>
+          </thead>
+          <tbody style="border-collapse: unset !important; border-top: 0px solid #f1eaea !important;"
+            *ngFor="let beneficiario of listaPacientes | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+            <tr style="border-collapse: unset !important;">
+              <td class="link-texto" style="text-align: center !important; padding: 0px; color:#4D92DF;">
+                <span (click)="elementoSeleccionado(beneficiario)">{{beneficiario.nss}}</span>
+              </td>
+              <td style="padding: 0px!important; padding-left: 13px !important;">{{beneficiario.paciente.toUpperCase()}}</td>
+              <td style="text-align: center !important; padding: 0px!important;">{{beneficiario.agregadoMedico}}
+              </td>
+              <td style="text-align: center !important; padding: 0px!important;">UMF {{beneficiario.unidadMedica}}
+                <button type="button" class="botonTabla" (click)="muestra(i);">
+                  <i *ngIf="isCollapsed[i]" class="iconTabla collapsedElement"></i>
+                  <i *ngIf="!isCollapsed[i]" class="iconTablainv collapsedElement"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="isCollapsed[i]; then escondido else visible"></tr>
+            <ng-template #escondido>
+              <div></div>
+            </ng-template>
+            <ng-template #visible>
+              <td colspan="4" class="tableTd">
+                <div>
+                  <table class=" subtable">
+                    <thead class="bg-primary subtable" style="background-color: #5f8cdc !important;">
+                      <tr class="subtableTr colorSubtabla">
+                        <th style="width: 160px; text-align: left !important;">CURP</th>
+                        <th style="width: 160px; text-align: left !important;">Fecha de nacimiento</th>
+                        <th style="width: 160px; text-align: left !important;">Turno</th>
+                        <th style="width: 160px; text-align: left !important;">Consultorio</th>
+                        <th style="width: 160px; text-align: left !important;">Edad</th>
+                        <th style="width: 160px; text-align: left !important;">Sexo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="subtableTr">
+                        <td class="link-texto" style="text-align: left !important; padding-left: 13px;">
+                          {{beneficiario.curp}}
+                        </td>
+                        <td style="padding: 0px!important; padding-left: 13px !important;">
+                          {{beneficiario.fechaNacimiento}}
+                        </td>
+                        <td class="link-texto" style="text-align: left !important; padding: 0px;">
+                          {{beneficiario.turno}}
+                        </td>
+                        <td style="padding: 0px!important; padding-left: 13px !important;">
+                          {{beneficiario.consultorio}}
+                        </td>
+                        <td style="padding: 0px!important; padding-left: 13px !important;">
+                          {{beneficiario.edad}}
+                        </td>
+                        <td style="padding: 0px!important; padding-left: 13px !important;">
+                          {{beneficiario.sexo}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </ng-template>
+          </tbody>
+        </table>
+
+        <div class="Rectangle-9601" style="margin-top: 0px !important;  justify-content: center; padding-left: 100px;">
+          <div class="centr">
+            <pagination-controls style="margin-left: auto; margin-right: auto;" class="my-pagination"
+              (pageChange)="page = $event" previousLabel="" nextLabel="" screenReaderPaginationLabel="Pagination">
+            </pagination-controls>
+          </div>
+          <span class="pagina" style="float: right;">
+            Página
+          </span>
+          <div class="paginanum" style="float: right;">{{page}} </div>
+        </div>
+
+      </ng-template>
+      <ng-template #elseBlock>
+        <div *ngIf="errorBusqueda ; then siEsError else noEsError"></div>
+
+        <ng-template #siEsError style="overflow:hidden;">
+          <div class="errorimgdiv">
+
+            <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
+
+          </div>
+        </ng-template>
+
+        <ng-template #noEsError>
+
+          <span class="resultados">
+            Resultados <b>{{resultadoTotal}}</b>
+          </span>
+
+          <select class="form-select">
+            <option [ngValue]="15">15</option>
+            <option [ngValue]="20">20</option>
+            <option [ngValue]="25">25</option>
+          </select>
+
+          <span class="visDatos" style="width: auto; float: right;">
+            Visualizar datos
+          </span>
+
+          <table class="table ">
+            <thead style=" background: #f9f9f9;">
+              <tr>
+                <th style="width: 160px; padding-left: 33px !important;">NSS</th>
+                <th style="width: 600px; padding-left: 10px !important;">Paciente</th>
+                <th style="text-align: center !important;">Agregado Médico</th>
+                <th style="text-align: center !important;">Unidad Médica</th>
+              </tr>
+            </thead>
+          </table>
+
+          <div class="Rectangle-9600" style="    background: #f9f9f9;">
+            <span class="sinInfolbl">
+              Sin informaci&oacute;n disponible
+            </span>
+
+          </div>
+
+          <div class="pading1">
+            <hr>
+            <div class="col-md-4  "></div>
+
+            <div class="col-md-4">
+
+              <ul class="pagination m-0">
+
+                <li><a>1</a></li>
+
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="flex justify-content-between align-items-center" style="float: right;">
+                <div class="flex align-items-center justify-content-end ">
+                  <label class="control-label ">Página</label>
+                  <div class="form-control w-3 ml-2">
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+
+</app-card-template>

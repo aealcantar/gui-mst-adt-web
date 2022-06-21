@@ -58,7 +58,7 @@ const routes: Routes = [
     loadChildren:()=>
     import('./agenda-digital/agenda-digital.module').then((m)=> m.AgendaDigitalModule),
   },
-  {path:'trabajo-social',
+  {path:'',
   loadChildren:()=>
   import('./trabajo-social/trabajo-social.module').then((m)=> m.TrabajoSocialModule),
 },

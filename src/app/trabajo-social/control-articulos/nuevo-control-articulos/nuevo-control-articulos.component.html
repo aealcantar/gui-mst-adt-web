@@ -1,3 +1,4 @@
+<app-alerta-general [objAlerta]="alert"></app-alerta-general>
 <app-datos-generales-usuario></app-datos-generales-usuario>
 <app-menu></app-menu>
 <app-datos-generales-paciente></app-datos-generales-paciente>
@@ -31,6 +32,7 @@
               formControlName="noFolioControl"
               placeholder="Ingresar artículo"
               type="text"
+              maxlength="10"
             />
             <small
               *ngIf="
@@ -50,9 +52,10 @@
               }"
               class="form-control calendario"
               formControlName="fecha"
-              id="calendarCESM1"
+              id="fecha"
               type="text"
               placeholder="dd/mm/aaaa"
+              maxlength="10"
             />
             <small
               *ngIf="submitted && formNuevoArticulo.controls.fecha.errors"
@@ -73,6 +76,7 @@
               formControlName="noCama"
               placeholder="Ingresar nombre"
               type="text"
+              maxlength="4"
             />
             <small
               *ngIf="submitted && formNuevoArticulo.controls.noCama.errors"
@@ -91,11 +95,12 @@
               class="form-control"
               id="servicio"
               formControlName="servicio"
+              (change)="onChangeServicio()"
             >
-              <option [value]="''" selected>Seleccionar servicio</option>
-              <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
-                          {{ comunidad.descripcion }}
-                        </option> -->
+              <option [value]="''" selected disabled>Seleccionar servicio</option>
+               <option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
+                          {{ item.des_especialidad }}
+                        </option> 
             </select>
             <small
               *ngIf="submitted && formNuevoArticulo.controls.servicio.errors"
@@ -116,6 +121,7 @@
               id="telefono"
               type="text"
               placeholder=""
+              maxlength="10"
             />
             <small
               *ngIf="submitted && formNuevoArticulo.controls.telefono.errors"
@@ -137,10 +143,8 @@
               class="form-control captura inp-otrs"
               placeholder="Ingresar nombre de participante"
               formControlName="articulo"
-              maxlength="50" 
-              
-            />
-            
+              maxlength="100"               
+            />            
           </div>
           <div class="col-auto mt-5">
             <span (click)="agegarArticulo()"  class="cursor"
@@ -199,6 +203,7 @@
               name="enfermeriaNombreEntrega"
               type="text"
               placeholder="Ingresar nombre"
+              maxlength="150"
             />
             <small
             *ngIf="submitted && formNuevoArticulo.controls.enfermeriaNombreEntrega.errors"
@@ -219,9 +224,9 @@
               name="ubicacion"
             >
               <option [value]="''" selected>Seleccionar ubicación</option>
-              <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
-                      {{ comunidad.descripcion }}
-                    </option> -->
+              <option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of listaUbicacion">
+                {{ item.des_completa_ubicacion }}
+              </option>
              
             </select>
             <small
@@ -258,6 +263,7 @@
       <!-- recepcion de articulos para resguardo -->
 
       <div class="contenido height154 mt-5 mb-5">
+    
         <div class="row pl-5 pr-5 mt-5">
           <div class="col-md-7 form-group pt-5">
             <span class="title1">
@@ -268,27 +274,30 @@
         </div>
         <div class="row pl-5 pr-5">
           <div class="col-sm-4">
-            <div class="form-group  fecha">
-                <label class="control-label labels" for="calendarYear"
-                  >Fecha*:</label
-                >
-             
-                <input matInput [matDatepicker]="resguardoFecha" 
-                formControlName="resguardoFecha"                  
-                class="form-control captura fecha"  >
-                <mat-datepicker-toggle matSuffix [for]="resguardoFecha"  class="togleCalendar" >
-                  <mat-icon matDatepickerToggleIcon >
-              <img src="assets/images/calendario.svg"class="calendar"  height="24px">
-                  </mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #resguardoFecha></mat-datepicker>
-              </div>
-              <small
-              *ngIf="submitted && formNuevoArticulo.controls.resguardoFecha.errors"
-              class="form-text form-text-error Campo-obligatorio"
-            >
-              Campo obligatorio
-            </small>
+            <div class="datepicker-group">
+              <label class="control-label labels" for="calendarYear"
+                >Fecha*:</label
+              >
+              <input 
+                 [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.resguardoFecha.errors}"
+                class="calendario form-control  " 
+                formControlName="resguardoFecha"
+                id="resguardoFecha"
+                type="text"
+                placeholder="dd/mm/aaaa"
+              />
+              <span
+                class="glyphicon fontIcono "
+                aria-hidden="true"
+               
+              > <img src="assets/images/calendario.svg" height="21px" class="icono"></span>
+            </div>
+            <small
+            *ngIf="submitted && formNuevoArticulo.controls.resguardoFecha.errors"
+            class="form-text form-text-error Campo-obligatorio"
+          >
+            Campo obligatorio
+          </small>
           </div>
 
           <div class="col-sm-4">
@@ -297,16 +306,17 @@
                 >Hora*:</label
               >
               <input
-                type="time" [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.resguardoHora.errors}"
+                type="time"
+                 [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.resguardoHora.errors}"
                 class="form-control hasDatepicker"
-                id="calendarYear"
+                id="resguardoHora"
                 formControlName="resguardoHora" 
                 placeholder="Ingresa hora"
               />
               <span
-                class="glyphicon "
+                class="glyphicon fontIcono "
                 aria-hidden="true"
-                style="color: #9f2241 !important; top: 19px !important;height:30px"
+                
               > <img src="assets/images/clock.svg" height="21px" class="icono"></span>
             </div>
             <small
@@ -324,6 +334,7 @@
               formControlName="resguardoNombreRecibe"
               id="resguardoNombreRecibe" 
               readonly="true"
+              maxlength="150"
             />
           </div>
         </div>
@@ -338,6 +349,7 @@
               formControlName="resguardoNombreEntrega"
               placeholder="Nombre de quien entregó"
               type="text"
+              maxlength="150"
             />
             <small
             *ngIf="submitted && formNuevoArticulo.controls.resguardoNombreEntrega.errors"
@@ -355,27 +367,31 @@
 <!-- articulos completos -->
         <div class="row pl-5 pr-5">
           <div class="col-sm-4">
-            <div class="form-group  fecha">
+              <div class="datepicker-group">
                 <label class="control-label labels" for="calendarYear"
-                  >Fecha*:</label>
-           
-                    <input matInput [matDatepicker]="recepcionFecha" 
-                    formControlName="recepcionFecha"                  
-                    class="form-control captura fecha"  >
-                    <mat-datepicker-toggle matSuffix [for]="recepcionFecha"  class="togleCalendar" >
-                      <mat-icon matDatepickerToggleIcon >
-                  <img src="assets/images/calendario.svg"class="calendar"  height="24px">
-                      </mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #recepcionFecha></mat-datepicker>
-       
-                    <small
-                    *ngIf="submitted && formNuevoArticulo.controls.recepcionFecha.errors"
-                    class="form-text form-text-error Campo-obligatorio"
-                  >
-                    Campo obligatorio
-                  </small>
+                  >Fecha*:</label
+                >
+                <input 
+                   [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.recepcionFecha.errors}"
+                  class="calendario form-control  " 
+                  formControlName="recepcionFecha"
+                  id="recepcionFecha"
+                  type="text"
+                  placeholder="dd/mm/aaaa"
+                />
+                <span
+                  class="glyphicon fontIcono "
+                  aria-hidden="true"
+                 
+                > <img src="assets/images/calendario.svg" height="21px" class="icono"></span>
               </div>
+              <small
+              *ngIf="submitted && formNuevoArticulo.controls.recepcionFecha.errors"
+              class="form-text form-text-error Campo-obligatorio"
+            >
+              Campo obligatorio
+            </small>
+            
              
           </div>
 
@@ -392,9 +408,9 @@
                 placeholder="Ingresa hora"
               />
               <span
-                class="glyphicon "
+                class="glyphicon fontIcono"
                 aria-hidden="true"
-                style="color: #9f2241 !important; top: 19px !important;height:30px"
+              
               > <img src="assets/images/clock.svg" height="21px" class="icono"></span>
             </div>
             <small
@@ -413,6 +429,7 @@
               class="form-control"
               formControlName="recepcionNombreRecibe"
               id="recepcionNombreRecibe"  
+              maxlength="150"
             />
             <small
             *ngIf="submitted && formNuevoArticulo.controls.recepcionNombreRecibe.errors"
@@ -432,6 +449,7 @@
               formControlName="recepcionNombreEntrega"
               placeholder="Nombre de quien entregó"
               type="text"
+              maxlength="150"
             />
             <small
             *ngIf="submitted && formNuevoArticulo.controls.recepcionNombreEntrega.errors"
@@ -445,12 +463,12 @@
             <select [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.recepcionUbicacion.errors}"
               class="form-control"
               id="ubicacion"
-              formControlName="ubicacion"
+              formControlName="recepcionUbicacion"
             >
               <option [value]="''" selected>Seleccionar ubicación</option>
-              <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
-                      {{ comunidad.descripcion }}
-                    </option> -->
+               <option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of listaUbicacion">
+                      {{ item.des_completa_ubicacion }}
+                    </option>
              
             </select>
             <small
@@ -467,9 +485,10 @@
               formControlName="recepcionHorarioEntregaArticulo"
               placeholder="Ingresa horario"
               type="text"
+              maxlength="5"
             />
             <small
-            *ngIf="formNuevoArticulo.controls.recepcionHorarioEntregaArticulo.errors"
+            *ngIf="submitted && formNuevoArticulo.controls.recepcionHorarioEntregaArticulo.errors"
             class="form-text form-text-error Campo-obligatorio"
           >
               Campo obligatorio
@@ -490,7 +509,7 @@
           <button
             class="btn btn-danger btuser"
             type="button"
-            (click)="cancelar()"
+            (click)="cancelar(cancelarModal)"
           >
             Cancelar
           </button>
@@ -506,3 +525,33 @@
   </div>
 </app-card-template>
 <app-trabajador-social-clinico></app-trabajador-social-clinico>
+
+
+
+<ng-template  #cancelarModal>
+
+   
+    <div class="col-sm m-3 text-center">
+      <img src="assets/images/Group 2082.png" class="Group-2082" alt="">
+      <div class="modal-title Atencin pt-3">Atención</div>
+  </div>
+  <div class="lineaSeparador"></div>
+  <div class="col-sm text-center mt-4 mb-4">      
+    <label class="tituloModal  fontEmergenteTitle">¿Desea salir sin guardar</label>
+    <br>
+    <label class="fontEmergenteTitle"> los cambios?</label> 
+    <br><br>
+</div>
+<div class="col-sm text-center mb-4">
+ 
+  <button    class="btn btn-danger btuser"
+  type="button" (click)="soloCerrarVentanaEmergente()" >
+    Cancelar
+  </button>
+  <button type="button"  (click)="cancelarSinGuardar()" class="btn btn-primary buttonL btnGuardar">
+    Aceptar
+  </button>
+</div>
+
+</ng-template>
+

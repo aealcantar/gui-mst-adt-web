@@ -10,6 +10,18 @@ export class ControlArticulosService {
 
   constructor(private httpsCliente:HttpClient) { }
 
+  
+  setControlArticulos(datos:any){
+ 
+    try {
+      return this.httpsCliente.post<any>(`${environment.urlServEstudioMedicos}/msmts-ctrl-articulos/api/insert`,datos);
+     
+    } catch (error) {
+      console.log("error")
+      return error;
+    }
+
+  }
   getDetalleControlArticulos(datos:any){
     console.log("dasd",datos)
     try {
@@ -21,5 +33,6 @@ export class ControlArticulosService {
     }
 
   }
+
 
 }

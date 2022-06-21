@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/trabajador-social-clinico.component';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { AlertaComponent } from './alerta/alerta.component';
 
 
 export const MY_FORMATS = {
@@ -32,7 +33,8 @@ export const MY_FORMATS = {
     DatosGeneralesPacienteComponent,
     DatosGeneralesUsuarioComponent,
     MenuComponent,
-    TrabajadorSocialClinicoComponent],
+    TrabajadorSocialClinicoComponent,
+    AlertaComponent],
   imports: [    
     CommonModule,
     FormsModule,
@@ -43,6 +45,7 @@ export const MY_FORMATS = {
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    
   ],exports:[
     CardTemplateComponent,
      CardTemplateExpandibleComponent,
@@ -58,6 +61,7 @@ export const MY_FORMATS = {
      MatDatepickerModule,
      MatNativeDateModule,
      TrabajadorSocialClinicoComponent,
+     AlertaComponent
     ],providers: [
       {provide: MAT_DATE_LOCALE, useValue: 'es-mx'},
       { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

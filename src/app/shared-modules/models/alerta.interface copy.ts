@@ -1,5 +1,5 @@
 export interface objAlert {
-  type?: string;
+  type: string;
   message: string;
   visible: boolean;
   typeMsg?: string;
