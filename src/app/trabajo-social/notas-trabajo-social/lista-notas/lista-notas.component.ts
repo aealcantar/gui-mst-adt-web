@@ -10,11 +10,11 @@ import { Nota } from '../../../models/notas.model';
 declare var $: any;
 
 @Component({
-  selector: 'app-consulta-lista-notas-tsocial',
-  templateUrl: './consulta-lista-notas-tsocial.component.html',
-  styleUrls: ['./consulta-lista-notas-tsocial.component.css']
+  selector: 'app-lista-notas',
+  templateUrl: './lista-notas.component.html',
+  styleUrls: ['./lista-notas.component.css']
 })
-export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit {
+export class ListaNotasComponent implements OnInit, AfterViewInit {
   public fechaSelected!: string;
   public page: number = 1;
   public pageSize: number = 15;

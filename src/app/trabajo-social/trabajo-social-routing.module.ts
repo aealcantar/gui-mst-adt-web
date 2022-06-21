@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component';
 import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component';
-import { ConsultaListaNotasTSocialComponent } from './notas-trabajo-social/consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
-import { NuevaNotaTSocialComponent } from './notas-trabajo-social/nueva-nota-tsocial/nueva-nota-tsocial.component';
-import { ConsultaNotaTSocialComponent } from './notas-trabajo-social/consulta-nota-tsocial/consulta-nota-tsocial.component';
+import { ListaNotasComponent } from './notas-trabajo-social/lista-notas/lista-notas.component';
+import { NuevaNotaComponent } from './notas-trabajo-social/nueva-nota/nueva-nota.component';
+import { ConsultaNotaComponent } from './notas-trabajo-social/consulta-nota/consulta-nota.component';
 
 //las rutas serian 
 // :4200/trabajo-social/nuevo-control-articulos
@@ -21,9 +21,9 @@ const routes: Routes = [
   // },
   { path: 'nuevo-control-articulos', component: NuevoControlArticulosComponent },
   { path: 'detalle-control-articulos/:id', component: DetalleControlArticulosComponent },
-  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent  },
-  { path: 'nueva-nota', component: NuevaNotaTSocialComponent  },
-  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent  },
+  { path: 'consulta-notas', component: ListaNotasComponent  },
+  { path: 'nueva-nota', component: NuevaNotaComponent  },
+  { path: 'detalle-nota', component: ConsultaNotaComponent  },
 
 ];
 

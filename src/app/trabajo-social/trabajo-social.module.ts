@@ -9,18 +9,18 @@ import { ControlArticulosService } from './services/control-articulos.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BusquedaNssComponent } from './pacientes/busqueda-nss/busqueda-nss.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NuevaNotaTSocialComponent } from './notas-trabajo-social/nueva-nota-tsocial/nueva-nota-tsocial.component';
-import { ConsultaListaNotasTSocialComponent } from './notas-trabajo-social/consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
-import { ConsultaNotaTSocialComponent } from './notas-trabajo-social/consulta-nota-tsocial/consulta-nota-tsocial.component';
+import { NuevaNotaComponent } from './notas-trabajo-social/nueva-nota/nueva-nota.component';
+import { ListaNotasComponent } from './notas-trabajo-social/lista-notas/lista-notas.component';
+import { ConsultaNotaComponent } from './notas-trabajo-social/consulta-nota/consulta-nota.component';
 
 @NgModule({
   declarations: [
     NuevoControlArticulosComponent,
     DetalleControlArticulosComponent,
     BusquedaNssComponent,
-    NuevaNotaTSocialComponent,
-    ConsultaListaNotasTSocialComponent,
-    ConsultaNotaTSocialComponent,
+    NuevaNotaComponent,
+    ListaNotasComponent,
+    ConsultaNotaComponent,
   ],
   imports: [
     MatDialogModule,

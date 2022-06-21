@@ -7,11 +7,11 @@ import { ReporteNota } from '../../models/reporte-notas.model';
 import { NotasService } from '../../services/notas.service';
 
 @Component({
-  selector: 'app-consulta-nota-tsocial',
-  templateUrl: './consulta-nota-tsocial.component.html',
-  styleUrls: ['./consulta-nota-tsocial.component.css']
+  selector: 'app-consulta-nota',
+  templateUrl: './consulta-nota.component.html',
+  styleUrls: ['./consulta-nota.component.css']
 })
-export class ConsultaNotaTSocialComponent implements OnInit {
+export class ConsultaNotaComponent implements OnInit {
 
   public nota!: Nota;
   public reporteNota!: ReporteNota;

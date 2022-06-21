@@ -15,11 +15,11 @@ import { AppTarjetaPresentacionService } from 'src/app/shared-modules/app-tarjet
 declare var $: any;
 
 @Component({
-  selector: 'app-nueva-nota-tsocial',
-  templateUrl: './nueva-nota-tsocial.component.html',
-  styleUrls: ['./nueva-nota-tsocial.component.css'],
+  selector: 'app-nueva-nota',
+  templateUrl: './nueva-nota.component.html',
+  styleUrls: ['./nueva-nota.component.css'],
 })
-export class NuevaNotaTSocialComponent implements OnInit {
+export class NuevaNotaComponent implements OnInit {
   camposCompletos: boolean = true
 
   alertMensaje: string = ''
