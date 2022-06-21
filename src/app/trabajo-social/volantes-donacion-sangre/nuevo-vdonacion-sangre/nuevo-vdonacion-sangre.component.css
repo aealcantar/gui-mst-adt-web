@@ -1,0 +1,405 @@
+.contenedorSec1 {
+  margin-top: 10px;
+  padding-bottom: 25px;
+  width: 800px;
+  /* flex-grow: 0; */
+  border: solid 1px #e6e6e6;
+}
+
+.nuevoVolanteDeDonacionSangre {
+  font-family: 'Montserrat';
+  font-size: 24px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 29px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-align: left;
+  left: 3.45%;
+  right: 71.79%;
+  color: #222;
+}
+
+.instrucciones {
+  width: 270px;
+  height: 17px;
+  margin: 14.5px 711px 10px 12px;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #222222;
+}
+
+.Bg {
+  height: 218px;
+  flex-grow: 0;
+  background-color: #10312b;
+  display: grid;
+  place-content: center;
+}
+
+.Rectangle-855 {
+
+  width: 1181PX;
+  height: 665px;
+  background-color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin-top: -65px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.glyphicon-calendar:before {
+  display: none;
+}
+
+.Rectangle-929 {
+  width: 1216px;
+  height: 68px;
+  margin: 0 0 1px;
+  padding: 19px 816px 20px 42px;
+  border-bottom: solid 1px #e6e6e6;
+}
+
+.titulo {
+  width: 358px;
+  height: 29px;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+.instrucciones {
+  width: 270px;
+  height: 17px;
+  margin: 14.5px 711px 10px 10px;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.seccion {
+  width: 96%;
+  border-radius: 15px;
+  border: solid 1px #e6e6e6;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 5px; */
+  padding-bottom: 10px;
+}
+
+.spanInput {
+  width: 275px;
+  height: 20px;
+  flex-grow: 0;
+  margin: 0 0 0 0;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 15%;
+  line-height: 100%;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select {
+
+  width: 100%;
+  height: 30px;
+  flex-grow: 0;
+  margin: 0px 0 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+
+}
+
+i {
+  width: 13px;
+  height: 13px;
+  border-left: 2px solid #9f2241;
+  border-bottom: 2px solid #9f2241;
+  transform: rotate(-45deg);
+  float: right;
+  position: absolute;
+  top: 31px;
+  right: 32px;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select-css option {
+  font-weight: normal;
+  padding-left: 10px;
+}
+
+.row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input {
+  height: 30px;
+}
+
+.buttonL {
+  width: 120px;
+  height: 34px;
+  border-radius: 3px;
+  margin: 10px 15px 0 10px !important;
+  padding: 5px;
+  align-self: stretch;
+  flex-grow: 1;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-left: 200%;
+}
+
+
+.pacienteNombreSpan {
+  /* width: 320px; */
+  height: 27px;
+  flex-grow: 0;
+  margin: 4px 0 0 0px;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color:
+    #222222;
+}
+
+.tituloDosSpam {
+  width: 120%;
+  height: 23px;
+  font-size: 16px;
+  color: #222222;
+  font-weight: 600;
+  margin-top: 3%;
+}
+
+
+.tituloDosServicioSpam {
+  font-size: 16px;
+  color: #222222;
+  font-weight: 600;
+
+}
+
+
+.spanCaracteres {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 200;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+
+}
+
+
+.pacienteNombreSpan {
+  width: 320px;
+  height: 27px;
+  flex-grow: 0;
+  margin: 4px 0 0 0px;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+
+.formInfo {
+  margin-left: -22px;
+  margin-right: -22px;
+}
+
+.campo-obligatorio {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: flex-end;
+  color: #272829;
+}
+
+.form-control {
+  font-size: 14px !important;
+}
+
+
+.control-label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+}
+
+.fondocalendar {
+  background-color: #eeeeee;
+  transform: translateY(-8%);
+  background-size: 10px 12px;
+  background-repeat: no-repeat;
+  margin: 0.6px 1px 3px 18.2px;
+  padding: 0 20.2px 0 18.2px;
+  height: 28.9px;
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 0.1px;
+  margin-top: -0.6px;
+}
+
+.fondocalendar2 {
+  background-color: #eeeeee;
+  transform: translateY(-8%);
+  background-size: 10px 12px;
+  background-repeat: no-repeat;
+  margin: 0.6px 1px 3px 18.2px;
+  padding: 0 20.2px 0 18.2px;
+  height: 28.9px;
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 0.1px;
+  margin-top: 8.3%;
+}
+
+.imgCalendar {
+  background-image: url("../../../../assets/images/calendario.svg");
+  background-repeat: no-repeat;
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-49%);
+  background-size: 20px 19px;
+  margin-left: -1.6px;
+}
+
+.datepicker-group .yyphicon {
+  color: #EEEEEE !important;
+}
+
+
+
+.modal-header {
+  background-color: #fff;
+  color: #fff;
+}
+
+.modal-content {
+  margin: auto;
+  width: 496px;
+  border: 1px solid #CCCCCC;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16); border-radius: 10px;
+}
+
+.inputBloqueo {
+  background-color: #ccc;
+}
+
+.spantitulo{
+  font-weight: 700;
+  font-size: 24px;
+  color: #222222;
+  line-height: 29.16px;
+}
+
+.optionSelect{
+  background-position-y: 10px;
+}
+
+.styleselect{
+background-position-y: 5px;
+}
+
+.divBotones{
+  padding-top: 19px; padding-right: 24px;  margin-top: -1.4%;
+}
+
+.btnGuardar{
+  float: right;border: solid 1px #9d2449;
+
+}
+
+.btnCancelar{
+  float: right; border: solid 1px #b38e5d;
+}
+
+.modalAtencion{
+  border: 1px solid #CCCCCC ; border-bottom: 1px;
+  border-radius: 10px 10px 0 0;
+}
+
+.lineaSeparador{
+  height: 0.15px;
+  background-color: #CCCCCC;
+  width: 494px;
+  border-bottom: black;
+}
+
+.textConfirmacion{
+  font-weight: 500; font-size: 24px;
+  line-height: 21.94px; text-align: center;
+}
+
+.divBtnModal{
+  width:495px; height: 118px; text-align: center; margin: auto;
+  padding: 15px; background-color: #FAFAFA; border-radius: 10px;
+
+}

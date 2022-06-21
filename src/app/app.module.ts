@@ -51,7 +51,8 @@ import { CitasService } from './citas/citas.service';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
-import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
 import { FooterComponent } from './components/templates/footer/footer.component';
@@ -103,6 +104,7 @@ registerLocaleData('es');
     ConsultaEstudiosMedicosComponent,
     EstudioMedicoGuardadoComponent,
     ConsultaVolantesDonacionComponent,
+    NuevoVdonacionSangreComponent,
     ConsultaControlArticulosComponent,
   ],
   imports: [

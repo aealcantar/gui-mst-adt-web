@@ -15,7 +15,8 @@ import { RegistroComponent } from './seguridad/registro/registro.component';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
-import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 
 import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca.component';
 import { UserconsultaComponent } from './configuracion/usuarios/userconsulta/userconsulta.component';
@@ -40,7 +41,6 @@ const routes: Routes = [
   { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
   { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent  },
   { path: 'buscauser', component: UserbuscaComponent  },
-  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent  },
   { path: 'consultauser/:id', component: UserconsultaComponent  },
   { path: 'guardauser', component: UserguardaComponent  },
   { path: 'editauser/:id', component: UserguardaComponent  },
@@ -48,6 +48,8 @@ const routes: Routes = [
   { path: 'consultacita/:id', component: CitaconsultaComponent  },
   { path: 'guardacita', component: CitaguardaComponent  },
   { path: 'consulta-articulos', component: ConsultaControlArticulosComponent   },
+  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent  },
+  { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
   {path:'agenda-digital',
     loadChildren:()=>
     import('./agenda-digital/agenda-digital.module').then((m)=> m.AgendaDigitalModule),
