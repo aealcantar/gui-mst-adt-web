@@ -1,7 +1,0 @@
-<div *ngIf="alert">
-    <div *ngIf="alert.visible || undefined" class="alert alert-dismissible alertCompl" [ngClass]="alert.tipo" style="z-index: 9999">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        <div [innerHTML]="alert.mensaje"></div>
-    </div>
-</div>

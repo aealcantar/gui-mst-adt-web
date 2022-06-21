@@ -4,7 +4,6 @@ import { CardTemplateComponent } from './card-template/card-template.component';
 import { CardTemplateExpandibleComponent } from './card-template-expandible/card-template-expandible.component';
 import { DatosGeneralesPacienteComponent } from './datos-generales-paciente/datos-generales-paciente.component';
 import { DatosGeneralesUsuarioComponent } from './datos-generales-usuario/datos-generales-usuario.component';
-import { MenuComponent } from './menu/menu.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -18,6 +17,7 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 import { AppMenuComponent } from './app-menu/app-menu.component';
+import { AppAlertsComponent } from './app-alerts/app-alerts.component';
 
 
 export const MY_FORMATS = {
@@ -37,12 +37,12 @@ export const MY_FORMATS = {
     CardTemplateExpandibleComponent,
     DatosGeneralesPacienteComponent,
     DatosGeneralesUsuarioComponent,
-    MenuComponent,
     TrabajadorSocialClinicoComponent,
     AlertaComponent,
     AppInfoBottomComponent,
     AppTarjetaPresentacionComponent,
     AppMenuComponent,
+    AppAlertsComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +61,6 @@ export const MY_FORMATS = {
     CardTemplateExpandibleComponent,
     DatosGeneralesPacienteComponent,
     DatosGeneralesUsuarioComponent,
-    MenuComponent,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -76,6 +75,7 @@ export const MY_FORMATS = {
     AppInfoBottomComponent,
     AppTarjetaPresentacionComponent,
     AppMenuComponent,
+    AppAlertsComponent,
   ], providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

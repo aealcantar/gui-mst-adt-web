@@ -10,8 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppMenuComponent } from './app-menu/app-menu.component';
-import { AppAlertsComponent } from './app-alerts/app-alerts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
@@ -72,7 +70,6 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular
 import { MyFilterPipe } from './directives/my-filter.pipe';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 import { SharedModulesModule } from './shared-modules/shared-modules.module';
-import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
 
 registerLocaleData('es');
 
@@ -84,9 +81,6 @@ registerLocaleData('es');
     RegistroComponent,
     PrincipalComponent,
     BusquedaNssComponent,
-    AppMenuComponent,
-    AppInfoBottomComponent,
-    AppAlertsComponent,
     AppTarjetaPresentacionComponent,
     CCGrupalEspecificaComponent,
     NuevaCronicaComponent,
@@ -141,6 +135,7 @@ registerLocaleData('es');
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    SharedModulesModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
