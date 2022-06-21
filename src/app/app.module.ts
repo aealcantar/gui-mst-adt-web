@@ -18,7 +18,6 @@ import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cron
 import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
 import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
-import { CardTemplateComponent } from './commons/card-template/card-template.component';
 import { AlertaComponent } from './common/alerta/alerta.component';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { JRInterceptor } from './jrinterceptor.interceptor';
@@ -53,7 +52,6 @@ import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
 import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
-import { CardTemplateExpandibleComponent } from './commons/card-template-expandible/card-template-expandible.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
 import { FooterComponent } from './components/templates/footer/footer.component';
@@ -87,7 +85,6 @@ registerLocaleData('es');
     CronicaGuardadaComponent,
     ConsultaComponent,
     HeaderMenuComponent,
-    CardTemplateComponent,
     AgregarParticipanteDialogComponent,
     NumberDirective,
     UserconsultaComponent,
@@ -106,7 +103,6 @@ registerLocaleData('es');
     ConsultaEstudiosMedicosComponent,
     EstudioMedicoGuardadoComponent,
     ConsultaVolantesDonacionComponent,
-    CardTemplateExpandibleComponent,
     ConsultaControlArticulosComponent,
   ],
   imports: [
