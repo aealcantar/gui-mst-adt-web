@@ -25,6 +25,7 @@ export class CitaconsultaComponent implements OnInit {
 
   alert!: objAlert;
   varid!: any;
+  varidcalendario!: any;
 
   datoscita = {
     'Fecha y hora de inicio de cita': '',
@@ -99,7 +100,7 @@ export class CitaconsultaComponent implements OnInit {
         this.citaResponse = resp;
         this.citaResponse.cita.fechaInicio = this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') ;
         this.citaResponse.cita.fechaFin = this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') ;
-
+        this.varidcalendario = resp.cita.cveCalendarioAnual;
         // this.datoscita = {
         //   'Fecha y hora de inicio de cita': resp.cita.fechaInicio ? this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') : "",
         //   'Fecha y hora de finalización de cita': resp.cita.fechaFin ? this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') : "",
@@ -181,7 +182,7 @@ export class CitaconsultaComponent implements OnInit {
 
   aceptarmod() {
     if (this.objmodal.tipo == 2) {
-      this.citaservice.cancelarcitacal(this.varid).subscribe({
+      this.citaservice.cancelarcitacal(this.varidcalendario).subscribe({
         next: (resp: any) => {
           console.log(resp);
 
