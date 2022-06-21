@@ -1,8 +1,6 @@
 export const environment = {
     production: true,
 
-
-
     //Agenda
     urlLogin: 'msadts-gui/login',
     urlMSADCargasCatalogos: 'msedsc-carga-catalogos',
@@ -13,21 +11,13 @@ export const environment = {
     urlMSEDSCAgenda: 'msedsc-catalogos',
     urlMSADTUSUARIOS: 'msedsc-usuarios/api',
 
-
     //Trabajo Social
-
-   
-    
+    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    msmtsCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
-    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
-    msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
-    msmtsCatalogos: 'msedsc-catalogos',
-
-
-
-    msmtsOauth: 'msadt-auth',
+    msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/api/aplicacion/',
 
     urlServOauth: 'msadt-auth',
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
