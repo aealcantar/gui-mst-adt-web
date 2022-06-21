@@ -8,64 +8,78 @@ import { MenuComponent } from './menu/menu.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/trabajador-social-clinico.component';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { AlertaComponent } from './alerta/alerta.component';
+import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
+import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
+import { AppMenuComponent } from './app-menu/app-menu.component';
 
 
 export const MY_FORMATS = {
   parse: {
-      dateInput: 'LL'
+    dateInput: 'LL'
   },
   display: {
-      dateInput: 'DD-MM-YYYY',
-      monthYearLabel: 'MMMM YYYY',
-      dateA11yLabel: 'LL',
-      monthYearA11yLabel: 'MMMM YYYY'
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
   }
 };
 @NgModule({
-  declarations: [  CardTemplateComponent,
+  declarations: [
+    CardTemplateComponent,
     CardTemplateExpandibleComponent,
     DatosGeneralesPacienteComponent,
     DatosGeneralesUsuarioComponent,
     MenuComponent,
     TrabajadorSocialClinicoComponent,
-    AlertaComponent],
-  imports: [    
+    AlertaComponent,
+    AppInfoBottomComponent,
+    AppTarjetaPresentacionComponent,
+    AppMenuComponent,
+  ],
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatAutocompleteModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    
-  ],exports:[
+
+  ], exports: [
     CardTemplateComponent,
-     CardTemplateExpandibleComponent,
-     DatosGeneralesPacienteComponent,
-     DatosGeneralesUsuarioComponent,
-     MenuComponent,
-     FormsModule,
-     ReactiveFormsModule,
-     MatInputModule,
-     NgxMatDatetimePickerModule,
-     NgxMatTimepickerModule,
-     NgxMatNativeDateModule,
-     MatDatepickerModule,
-     MatNativeDateModule,
-     TrabajadorSocialClinicoComponent,
-     AlertaComponent
-    ],providers: [
-      {provide: MAT_DATE_LOCALE, useValue: 'es-mx'},
-      { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-{ provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
-    ],
+    CardTemplateExpandibleComponent,
+    DatosGeneralesPacienteComponent,
+    DatosGeneralesUsuarioComponent,
+    MenuComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    TrabajadorSocialClinicoComponent,
+    AlertaComponent,
+    AppInfoBottomComponent,
+    AppTarjetaPresentacionComponent,
+    AppMenuComponent,
+  ], providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ],
 })
 export class SharedModulesModule { }

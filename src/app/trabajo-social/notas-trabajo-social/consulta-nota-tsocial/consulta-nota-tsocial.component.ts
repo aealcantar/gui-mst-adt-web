@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
-import { Nota } from '../models/notas.model';
-import { ReporteNota } from '../models/reporte-notas.model';
-import { NotasService } from '../service/notas.service';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { Nota } from '../../models/notas.model';
+import { ReporteNota } from '../../models/reporte-notas.model';
+import { NotasService } from '../../services/notas.service';
 
 @Component({
   selector: 'app-consulta-nota-tsocial',

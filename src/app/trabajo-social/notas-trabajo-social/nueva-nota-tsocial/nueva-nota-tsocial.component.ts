@@ -6,12 +6,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NotasService } from '../service/notas.service';
-import { CronicaGrupalService } from '../service/cronica-grupal.service';
-import { Nota } from '../models/notas.model';
 import * as moment from 'moment';
-import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
-import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
+import { NotasService } from '../../services/notas.service';
+import { CronicaGrupalService } from '../../services/cronica-grupal.service';
+import { Nota } from '../../models/notas.model';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 declare var $: any;
 
 @Component({

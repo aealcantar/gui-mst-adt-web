@@ -12,10 +12,7 @@ import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
 import { LoginComponent } from './seguridad/login/login.component';
 import { SeguridadRouter } from './seguridad/seguridad.router';
 import { RegistroComponent } from './seguridad/registro/registro.component';
-import { NuevaNotaTSocialComponent } from './nueva-nota-tsocial/nueva-nota-tsocial.component';
-import { ConsultaListaNotasTSocialComponent } from './consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
-import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-nota-tsocial.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
 import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
@@ -39,9 +36,6 @@ const routes: Routes = [
   { path: 'nuevaCronica', component: NuevaCronicaComponent  },
   { path: 'cronicaGuardada', component: CronicaGuardadaComponent  },
   { path: 'consulta-cronica-grupal', component: ConsultaComponent  },
-  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent  },
-  { path: 'nueva-nota', component: NuevaNotaTSocialComponent  },
-  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent  },
   { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
   { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
   { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent  },

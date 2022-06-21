@@ -1,4 +1,3 @@
-import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-nota-tsocial.component';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +11,6 @@ import { AppComponent } from './app.component';
 import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppMenuComponent } from './app-menu/app-menu.component';
-import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
 import { AppAlertsComponent } from './app-alerts/app-alerts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
@@ -44,9 +42,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import '@angular/common/locales/global/es';
 import { NumberDirective } from './directives/only-numbers.directive';
-import { NuevaNotaTSocialComponent } from './nueva-nota-tsocial/nueva-nota-tsocial.component';
-import { ConsultaListaNotasTSocialComponent } from './consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
-
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -76,6 +71,8 @@ import {
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
 import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+import { SharedModulesModule } from './shared-modules/shared-modules.module';
+import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
 
 registerLocaleData('es');
 
@@ -99,8 +96,6 @@ registerLocaleData('es');
     CardTemplateComponent,
     AgregarParticipanteDialogComponent,
     NumberDirective,
-    NuevaNotaTSocialComponent,
-    ConsultaListaNotasTSocialComponent,
     UserconsultaComponent,
     UserguardaComponent,
     UserbuscaComponent,
@@ -114,7 +109,6 @@ registerLocaleData('es');
     FooterComponent,
     MyFilterPipe,
     NuevoEstudioSocialMedicoComponent,
-    ConsultaNotaTSocialComponent,
     ConsultaEstudiosMedicosComponent,
     EstudioMedicoGuardadoComponent,
     ConsultaVolantesDonacionComponent,
