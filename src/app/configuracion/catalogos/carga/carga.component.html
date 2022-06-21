@@ -24,7 +24,9 @@
                   No salga del sistema hasta terminar el procesamiento del documento.
                 </p>
                 <p *ngIf="regERROR == 0 && archivoCarga.proceso == 'result'">
-                  Se ha procesado la información para el catálogo {{confCarga?.nombreCatalogo}} de forma correcta y puede consultar la información en el sistema. Puede descargar el resultado de la carga en el archivo adjunto, adicional le fue enviado a su correo electrónico.
+                  Se ha procesado la información para el catálogo {{confCarga?.nombreCatalogo}} de forma correcta y
+                  puede consultar la información en el sistema. Puede descargar el resultado de la carga en el archivo
+                  adjunto, adicional le fue enviado a su correo electrónico.
                 </p>
                 <p *ngIf="regERROR > 0 && archivoCarga.proceso == 'result'">
                   El archivo cuenta con errores. Se enviará un correo con el acuse de carga.
@@ -198,7 +200,7 @@
             Para poder continuar debe realizar la carga masiva de los siguientes
             catálogos utilizando la plantilla correspondiente.
           </div>
-          <table id="tblCatalogos"  style="width: 100%;"
+          <table id="tblCatalogos" style="width: 100%;"
             class="table datatable table-hover table-bordered table-catalogo caption-top table-responsive" role="grid">
 
             <caption class="borde-cap ps-2 col-12: display:inline-block ">
@@ -222,12 +224,9 @@
             </caption>
             <thead>
               <tr role="row">
-                <th style="width: 50%; "   aria-controls="tblCatalogos"
-                >Catálogo</th>
-                <th style="width: 25%;"   aria-controls="tblCatalogos"
-                 >Estatus de carga</th>
-                <th style="width: 25%;" aria-controls="tblCatalogos"
-                >Última modificación</th>
+                <th style="width: 50%; " aria-controls="tblCatalogos">Catálogo</th>
+                <th style="width: 25%;" aria-controls="tblCatalogos">Estatus de carga</th>
+                <th style="width: 25%;" aria-controls="tblCatalogos">Última modificación</th>
               </tr>
             </thead>
             <tbody>
@@ -236,19 +235,23 @@
                 <td class="link-texto " (click)="modalcarga(item.nombreCatalogo, item.sheetName)">
                   {{ item.nombreCatalogo }}
                 </td>
-                <td >
+                <td>
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 3" svgIcon="circle_rojo"></mat-icon>
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 2" svgIcon="circle_naranja"></mat-icon>
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 1" svgIcon="circle_verde"></mat-icon>
 
                   {{ item.estatusCarga.cveNombre }}
                 </td>
-                <td > {{ item.ultimaModificacion }}</td>
+                <td>
+                  <div *ngIf="item.estatusCarga?.cveIdEstatus  == 2">- </div>
+                  <div *ngIf="item.estatusCarga?.cveIdEstatus  != 2">{{ item.ultimaModificacion }} </div>
+                </td>
               </tr>
             </tbody>
           </table>
-          <div  style="width: 100%;   " *ngIf="blnContinuar">
-            <button type="button" class="btn btn-primary pull-right" style="margin-top: 10px; margin-bottom: 20px;" (click)="btnContinuar()">
+          <div style="width: 100%;   " *ngIf="blnContinuar">
+            <button type="button" class="btn btn-primary pull-right" style="margin-top: 10px; margin-bottom: 20px;"
+              (click)="btnContinuar()">
               Continuar
             </button>
           </div>
