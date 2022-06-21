@@ -5,8 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { objAlert } from '../../../common/alerta/alerta.interface';
-import { AlertaComponent } from '../../../common/alerta/alerta.component';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
+import { AlertaComponent } from 'src/app/shared-modules/alerta/alerta.component';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -6,6 +6,10 @@ import { DetalleControlArticulosComponent } from './control-articulos/detalle-co
 import { ListaNotasComponent } from './notas-trabajo-social/lista-notas/lista-notas.component';
 import { NuevaNotaComponent } from './notas-trabajo-social/nueva-nota/nueva-nota.component';
 import { ConsultaNotaComponent } from './notas-trabajo-social/consulta-nota/consulta-nota.component';
+import { CCGrupalEspecificaComponent } from './cronica-grupal/consulta-cronica-grupal/c-cgrupal-especifica.component';
+import { NuevaCronicaGrupalComponent } from './cronica-grupal/nueva-cronica-grupal/nueva-cronica-grupal.component';
+import { CronicaGuardadaComponent } from './cronica-grupal/detalle-nueva-cronica-grupal/cronica-guardada.component';
+import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grupal/lista-cronica-grupal.component';
 
 //las rutas serian 
 // :4200/trabajo-social/nuevo-control-articulos
@@ -17,13 +21,17 @@ const routes: Routes = [
   //   loadChildren:()=>
   //   import('./aplicativos/control-articulos/control-articulos.module').then((m)=> m.ControlArticulosModule),
   // }]
-   
+
   // },
   { path: 'nuevo-control-articulos', component: NuevoControlArticulosComponent },
   { path: 'detalle-control-articulos/:id', component: DetalleControlArticulosComponent },
-  { path: 'consulta-notas', component: ListaNotasComponent  },
-  { path: 'nueva-nota', component: NuevaNotaComponent  },
-  { path: 'detalle-nota', component: ConsultaNotaComponent  },
+  { path: 'consulta-notas', component: ListaNotasComponent },
+  { path: 'nueva-nota', component: NuevaNotaComponent },
+  { path: 'detalle-nota', component: ConsultaNotaComponent },
+  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent },
+  { path: 'nuevaCronica', component: NuevaCronicaGrupalComponent },
+  { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
+  { path: 'consulta-cronica-grupal', component: ListaCronicaGrupalComponent },
 
 ];
 

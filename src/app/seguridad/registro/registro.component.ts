@@ -6,7 +6,7 @@ import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpRequest,
 import { AuthService } from 'src/app/service/auth-service.service';
 import { AdmonPasswordResponse } from 'src/app/models/admon-password-response.model';
 import { AdmonPasswordRequest } from 'src/app/models/admon-password-request.model';
-import { objAlert } from 'src/app/common/alerta/alerta.interface';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 

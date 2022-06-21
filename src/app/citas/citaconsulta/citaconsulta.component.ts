@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { objAlert } from '../../common/alerta/alerta.interface';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';

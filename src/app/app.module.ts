@@ -13,12 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
-import { CCGrupalEspecificaComponent } from './cronica-grupal/c-cgrupal-especifica/c-cgrupal-especifica.component';
-import { NuevaCronicaComponent } from './cronica-grupal/nueva-cronica/nueva-cronica.component';
-import { CronicaGuardadaComponent } from './cronica-grupal/cronica-guardada/cronica-guardada.component';
-import { ConsultaComponent } from './cronicaGrupal/consulta/consulta.component';
+
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
-import { AlertaComponent } from './common/alerta/alerta.component';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { JRInterceptor } from './jrinterceptor.interceptor';
 import { environment } from 'src/environments/environment';
@@ -33,8 +29,6 @@ import { UserguardaComponent } from './configuracion/usuarios/userguarda/usergua
 import { UserbuscaComponent } from './configuracion/usuarios/userbusca/userbusca.component';
 
 import { ReadexcelDirective } from './directives/readexcel.directive';
-import { DataTablesModule } from 'angular-datatables';
-import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica/agregar-participante-dialog/agregar-participante-dialog.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import '@angular/common/locales/global/es';
@@ -45,8 +39,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
 import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
-import { FichapacienteComponent } from './common/fichapaciente/fichapaciente.component';
-import { MenugralComponent } from './common/menugral/menugral.component';
 import { CitasService } from './citas/citas.service';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
@@ -75,18 +67,12 @@ registerLocaleData('es');
 @NgModule({
   declarations: [
     AppComponent,
-    AlertaComponent,
     LoginComponent,
     RegistroComponent,
     PrincipalComponent,
     BusquedaNssComponent,
     AppTarjetaPresentacionComponent,
-    CCGrupalEspecificaComponent,
-    NuevaCronicaComponent,
-    CronicaGuardadaComponent,
-    ConsultaComponent,
     HeaderMenuComponent,
-    AgregarParticipanteDialogComponent,
     NumberDirective,
     UserconsultaComponent,
     UserguardaComponent,
@@ -95,8 +81,6 @@ registerLocaleData('es');
     CitabuscaComponent,
     CitaconsultaComponent,
     CitaguardaComponent,
-    FichapacienteComponent,
-    MenugralComponent,
     LogoutBarComponent,
     FooterComponent,
     MyFilterPipe,
@@ -123,7 +107,6 @@ registerLocaleData('es');
     RecaptchaModule,
     RecaptchaFormsModule,
     NgxPaginationModule,
-    DataTablesModule,
     MatPaginatorModule,
     MatTableModule,
     MatProgressBarModule,

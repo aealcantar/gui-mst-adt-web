@@ -1,0 +1,148 @@
+<app-alerta [objAlerta]="alert"></app-alerta>
+<app-menu [activeItem]="1"></app-menu>
+<app-card-template>
+  <div header class="justify-content-between align-items-center">
+    <div header class="flex justify-content-between row">
+      <div class="col-md-1">
+        <img
+          (click)="regresar()"
+          class="botonRegresar"
+          src="../../../../assets/hu003-tarjeta/volver (1).ico"
+        />
+      </div>
+      <div class="col-md-12">
+        <div style="display: grid; text-align: left; margin-left: -25px">
+          <span class="pacienteNombreSpan">{{ "Nueva crónica grupal" }}</span>
+        </div>
+      </div>
+      <!-- <hr class="hrCronica" style="margin-left: -7%" />
+      <div class="col-md-5" style="text-align: left; padding-top: 8px">
+        <span class="tituloDosSpam"
+          >{{ today | date: "EEEE" }} {{ day }} de {{ months[month] }} de
+          {{ year }} {{ rxTime | date: "hh:mm:ss" }}</span
+        >
+      </div>
+      <hr class="hrCronica" style="margin-left: -15%" />
+      <div class="col-md-2" style="padding-top: 8px">
+        <span class="tituloDosServicioSpam">{{ "Tour quirúrgico" }}</span>
+      </div> -->
+    </div>
+  </div>
+
+  <div content style="margin-left: -22px; margin-right: -22px">
+    <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 16px"></div>
+    <div class="container seccion">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="col-md-6">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Ponente:
+            </label>
+            <label class="texto">{{ cronica.descPonentes }}</label>
+
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Técnica didáctica:
+            </label>
+            <label class="texto">{{ cronica.desTecnicaDidactica }}</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="col-md-6">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Número de asistentes:
+            </label>
+            <label class="texto">{{
+              cronica.numParticipantesAsistieron
+            }}</label>
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Material de apoyo:
+            </label>
+            <label class="texto">{{ cronica.desMaterialApoyo }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container seccion">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-6">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Objetivos de la sesión:
+            </label>
+            <label class="texto">{{ cronica.desObjetivosSesion }}</label>
+          </div>
+
+          <div class="col-md-6">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Desarrollo de la sesión:
+            </label>
+            <label class="texto">{{ cronica.desDesarrolloSesion }}</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-6">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Perfil del grupo:
+            </label>
+            <label class="texto">{{ cronica.desPerfilGrupo }}</label>
+          </div>
+
+          <div class="col-md-6">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+              Observaciones:
+            </label>
+            <label class="texto">{{ cronica.desObservaciones }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container seccion">
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label texto"
+            >Total de participantes
+            <span style="font-weight: bold">
+              {{cronica.participanteList.length}}
+            </span></label>
+          <table
+            class="tabla texto"
+            style="margin-bottom: 0px !important; border: #eeeeee 2px solid">
+            <thead>
+              <tr>
+                <th style="background-color: rgba(196, 196, 196, 0.1)">
+                  Participantes
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cronica.participanteList">
+                <td>{{item.nombreParticipante}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div
+        class="col-md-12"
+        style="padding-top: 19px; padding-right: 24px; margin-top: -3%"
+      >
+        <button
+          type="button"
+          class="btn btn-primary buttonL"
+          style="float: right; border: solid 1px #9d2449"
+          (click)="imprimir()"
+        >
+          Imprimir
+        </button>
+      </div>
+    </div>
+  </div>
+</app-card-template>
+
+<app-info-bottom></app-info-bottom>

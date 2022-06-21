@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
-import { objAlert } from '../common/alerta/alerta.interface';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { EstadoCivil } from '../models/estado-civil.model';
 import { EstudioMedico } from '../models/estudio-medico.model';
 import { Ocupacion } from '../models/ocupacion.model';

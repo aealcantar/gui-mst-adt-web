@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SeguridadService } from '../seguridad.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { objAlert } from '../../common/alerta/alerta.interface';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { Aplicacion } from 'src/app/models/aplicacion.model';
 import { Usuario } from 'src/app/models/usuario.model';

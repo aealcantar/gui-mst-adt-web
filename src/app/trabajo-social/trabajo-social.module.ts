@@ -12,6 +12,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NuevaNotaComponent } from './notas-trabajo-social/nueva-nota/nueva-nota.component';
 import { ListaNotasComponent } from './notas-trabajo-social/lista-notas/lista-notas.component';
 import { ConsultaNotaComponent } from './notas-trabajo-social/consulta-nota/consulta-nota.component';
+import { CCGrupalEspecificaComponent } from './cronica-grupal/consulta-cronica-grupal/c-cgrupal-especifica.component';
+import { CronicaGuardadaComponent } from './cronica-grupal/detalle-nueva-cronica-grupal/cronica-guardada.component';
+import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica-grupal/agregar-participante-dialog/agregar-participante-dialog.component';
+import { NuevaCronicaGrupalComponent } from './cronica-grupal/nueva-cronica-grupal/nueva-cronica-grupal.component';
+import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grupal/lista-cronica-grupal.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,11 @@ import { ConsultaNotaComponent } from './notas-trabajo-social/consulta-nota/cons
     NuevaNotaComponent,
     ListaNotasComponent,
     ConsultaNotaComponent,
+    CCGrupalEspecificaComponent,
+    NuevaCronicaGrupalComponent,
+    CronicaGuardadaComponent,
+    ListaCronicaGrupalComponent,
+    AgregarParticipanteDialogComponent,
   ],
   imports: [
     MatDialogModule,
