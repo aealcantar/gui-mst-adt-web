@@ -18,49 +18,10 @@ export class ConsultaAvisoMpComponent implements OnInit {
   public dtOptions: DataTables.Settings = {};
   public numitems: number = 15;
   public order: string = 'desc';
-  // public tabla: any[] = [];
+  public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
-
-  public tabla = [
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-    {"fecha":"20/06/2022", "paciente":"Luis Francisco", "medico":"Gumaro eliosa", "trabajadorSocial":"un enferobienX" },
-  ]
-
 
   constructor(
     private router: Router,
