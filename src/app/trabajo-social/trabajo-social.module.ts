@@ -17,6 +17,10 @@ import { CronicaGuardadaComponent } from './cronica-grupal/detalle-nueva-cronica
 import { AgregarParticipanteDialogComponent } from './cronica-grupal/nueva-cronica-grupal/agregar-participante-dialog/agregar-participante-dialog.component';
 import { NuevaCronicaGrupalComponent } from './cronica-grupal/nueva-cronica-grupal/nueva-cronica-grupal.component';
 import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grupal/lista-cronica-grupal.component';
+import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta-estudio/estudio-medico-guardado.component';
+import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/lista-estudios/consulta-estudios-medicos.component';
+import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio/nuevo-estudio-social-medico.component';
+import { objAlert } from '../shared-modules/models/alerta.interface';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grup
     CronicaGuardadaComponent,
     ListaCronicaGrupalComponent,
     AgregarParticipanteDialogComponent,
+    EstudioMedicoGuardadoComponent,
+    ConsultaEstudiosMedicosComponent,
+    NuevoEstudioSocialMedicoComponent,
   ],
   imports: [
     MatDialogModule,

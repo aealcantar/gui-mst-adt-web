@@ -11,7 +11,12 @@ import { NuevaCronicaGrupalComponent } from './cronica-grupal/nueva-cronica-grup
 import { CronicaGuardadaComponent } from './cronica-grupal/detalle-nueva-cronica-grupal/cronica-guardada.component';
 import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grupal/lista-cronica-grupal.component';
 
-//las rutas serian 
+import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/lista-estudios/consulta-estudios-medicos.component';
+import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio/nuevo-estudio-social-medico.component';
+import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta-estudio/estudio-medico-guardado.component';
+
+
+//las rutas serian
 // :4200/trabajo-social/nuevo-control-articulos
 const routes: Routes = [
   // {path:'',
@@ -32,6 +37,11 @@ const routes: Routes = [
   { path: 'nuevaCronica', component: NuevaCronicaGrupalComponent },
   { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
   { path: 'consulta-cronica-grupal', component: ListaCronicaGrupalComponent },
+
+    // Estudio medico social
+    { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent  },
+    { path: 'nuevo-estudio', component: NuevoEstudioSocialMedicoComponent  },
+    { path: 'detalle-estudio', component: EstudioMedicoGuardadoComponent  },
 
 ];
 
