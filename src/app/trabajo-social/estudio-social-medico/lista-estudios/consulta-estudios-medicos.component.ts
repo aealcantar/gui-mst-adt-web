@@ -113,7 +113,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   }
 
   irNuevoEstudio() {
-    this.router.navigate(["nuevo-estudio-social-medico"], { skipLocationChange: true });
+    this.router.navigate(["nuevo-estudio"], { skipLocationChange: true });
   }
 
   handleDatesChange() {

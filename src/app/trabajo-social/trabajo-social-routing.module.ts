@@ -29,8 +29,8 @@ const routes: Routes = [
   //   loadChildren:()=>
   //   import('./aplicativos/control-articulos/control-articulos.module').then((m)=> m.ControlArticulosModule),
   // }]
-
   // },
+
   { path: 'nuevo-control-articulos', component: NuevoControlArticulosComponent },
   { path: 'detalle-control-articulos/:id', component: DetalleControlArticulosComponent },
   { path: 'consulta-control-articulos', component: ConsultaControlArticulosComponent},
@@ -48,7 +48,6 @@ const routes: Routes = [
   { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent },
   { path: 'nuevo-estudio', component: NuevoEstudioSocialMedicoComponent },
   { path: 'detalle-estudio', component: EstudioMedicoGuardadoComponent },
-
 ];
 
 @NgModule({

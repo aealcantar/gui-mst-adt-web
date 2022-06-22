@@ -288,7 +288,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
+    this.router.navigateByUrl("/lista-estudios", { skipLocationChange: true });
     $('#content').modal('hide');
   }
 
