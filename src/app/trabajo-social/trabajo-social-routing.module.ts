@@ -16,6 +16,7 @@ import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo
 import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta-estudio/estudio-medico-guardado.component';
 import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { AppTarjetaPresentacionComponent } from '../shared-modules/app-tarjeta-presentacion/app-tarjeta-presentacion.component';
+import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
 
 
 //las rutas serian
@@ -32,6 +33,7 @@ const routes: Routes = [
   // },
   { path: 'nuevo-control-articulos', component: NuevoControlArticulosComponent },
   { path: 'detalle-control-articulos/:id', component: DetalleControlArticulosComponent },
+  { path: 'consulta-control-articulos', component: ConsultaControlArticulosComponent},
   { path: 'consulta-notas', component: ListaNotasComponent },
   { path: 'nueva-nota', component: NuevaNotaComponent },
   { path: 'detalle-nota', component: ConsultaNotaComponent },

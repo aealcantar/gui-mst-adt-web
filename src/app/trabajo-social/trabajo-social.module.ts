@@ -21,6 +21,7 @@ import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grup
 import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta-estudio/estudio-medico-guardado.component';
 import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/lista-estudios/consulta-estudios-medicos.component';
 import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio/nuevo-estudio-social-medico.component';
+import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
 import { objAlert } from '../shared-modules/models/alerta.interface';
 
 @NgModule({
@@ -39,6 +40,7 @@ import { objAlert } from '../shared-modules/models/alerta.interface';
     EstudioMedicoGuardadoComponent,
     ConsultaEstudiosMedicosComponent,
     NuevoEstudioSocialMedicoComponent,
+    ConsultaControlArticulosComponent,
   ],
   imports: [
     MatDialogModule,
