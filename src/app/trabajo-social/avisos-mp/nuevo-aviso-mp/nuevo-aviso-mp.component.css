@@ -40,6 +40,21 @@ textarea {
   padding-bottom: 10px;
 }
 
+.divCustomHours {
+  width: 13% !important;
+}
+
+.divCustomMinutes {
+  width: 15% !important;
+}
+
+.spanInputCustom {
+  margin: auto !important;
+  padding-right: 5px;
+  padding-top: 3px;
+  width: fit-content !important;
+}
+
 .spanInput {
   width: 275px;
   height: 20px;
