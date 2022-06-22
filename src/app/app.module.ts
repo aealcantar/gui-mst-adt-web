@@ -87,6 +87,7 @@ import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.compon
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 
 registerLocaleData('es');
 
@@ -138,7 +139,8 @@ registerLocaleData('es');
     TrabajoSocialComponent,
     NuevoVdonacionSangreComponent,
     NuevoAvisoMpComponent,
-    ConsultaAvisoMpComponent
+    ConsultaAvisoMpComponent,
+    UbicacionesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,72 @@
+<app-alerta [objAlerta]="mensaje"></app-alerta>
+
+<div class="container">
+
+  <!-- <div class="container-fluid"> -->
+
+    <!-- <section class="section"> -->
+      <div class="base-cont table-responsive">
+        <div class="tit-princ">
+           
+                <span class="imgAtras" (click)="btnAtras()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
+                <span>Configuración de ubicaciones</span>
+           
+        </div>
+        <div class="body-princ ">
+          
+          <table id="tblCatalogos" style="width: 100%;"
+            class="table datatable table-hover table-bordered table-catalogo caption-top table-responsive" role="grid">
+            <caption class="borde-cap ps-2">
+                <div class="col-2 col-md-2 float-start pull-left" style="line-height: 40px;">
+                  Resultados <span class="totcargas">4</span>
+                </div>
+                <div class="col-4 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right; ">
+                  Visualizar datos
+                  <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;min-width: 0 !important;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret-img">{{2}}</span> <img src="../../../../assets/images/Icon.png">
+                  </button>
+                  <ul class="dropdown-menu" >
+                    <li *ngFor="let i of [15,20,50,100]"><a >{{i}}</a></li>
+                  </ul>
+                </div>
+              </caption>
+       
+            <thead>
+              <tr role="row">
+                <th style="width: 40%; " aria-controls="tblCatalogos">Descripción abreviada</th>
+                <th style="width: 30%;" aria-controls="tblCatalogos">Tipo</th>
+                <th style="width: 30%;" aria-controls="tblCatalogos">Servicio/Especialidad</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of lstUbicaciones" class="odd">
+                <td class="link-texto " >
+                  {{ item.nombreCatalogo }}
+                </td>
+                <td>
+                
+
+                  {{ item.estatusCarga.cveNombre }}
+                </td>
+                <td>
+                  <div *ngIf="item.estatusCarga?.cveIdEstatus  == 2">- </div>
+                  <div *ngIf="item.estatusCarga?.cveIdEstatus  != 2">{{ item.ultimaModificacion }} </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <div class="sin-resultados" *ngIf="lstUbicaciones.length == 0">
+            <img src="../../../../assets/images/Group 2358.png"
+              class="Group-2358">
+          </div>
+        </div>
+
+
+
+      </div>
+    <!-- </section>
+  </div> -->
+
+</div>

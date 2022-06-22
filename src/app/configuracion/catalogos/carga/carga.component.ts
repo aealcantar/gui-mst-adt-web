@@ -214,7 +214,23 @@ export class CargaComponent implements OnInit {
 
     }
   }
-
+  public btnAccionesCatalogos(catalogo: CatalogoData) {
+    switch (catalogo.idCatalogos) {
+      case 3:
+        if(catalogo.estatusCarga.cveIdEstatus == 1){
+          this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones", { skipLocationChange: true });
+        }else{
+          this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
+        }
+        
+        break;
+    
+      default:
+        this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
+        break;
+    }
+ 
+  }
   public btnCerrarModal(mdl: any) {
     (<any>$('#' + mdl)).appendTo("body").modal('hide');
   }
