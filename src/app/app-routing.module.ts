@@ -36,6 +36,7 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -70,6 +71,7 @@ const routes: Routes = [
     path: 'catalogos', component: CatalogosComponent, children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
       { path: 'cargaCatalogos', component: CargaComponent },
+      { path: 'ConfiguracionUbicaciones', component: UbicacionesComponent },
     ]
   },
   {

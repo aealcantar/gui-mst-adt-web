@@ -232,8 +232,8 @@
             <tbody>
 
               <tr *ngFor="let item of lstCatalogo" class="odd">
-                <td class="link-texto " (click)="modalcarga(item.nombreCatalogo, item.sheetName)">
-                  {{ item.nombreCatalogo }}
+                <td class="link-texto "  >
+                                  <div  (click)="btnAccionesCatalogos(item)">{{ item.nombreCatalogo }}</div>
                 </td>
                 <td>
                   <mat-icon *ngIf="item.estatusCarga?.cveIdEstatus  == 3" svgIcon="circle_rojo"></mat-icon>
