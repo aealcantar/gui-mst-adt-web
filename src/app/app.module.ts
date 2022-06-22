@@ -28,11 +28,11 @@ import { NumberDirective } from './shared-modules/directives/only-numbers.direct
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
-import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
-import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
-import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
-import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+// import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
+// import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
+// import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
+// import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+// import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
@@ -55,11 +55,11 @@ registerLocaleData('es');
     RegistroComponent,
     NumberDirective,
     ReadexcelDirective,
-    NuevoEstudioSocialMedicoComponent,
-    ConsultaEstudiosMedicosComponent,
-    EstudioMedicoGuardadoComponent,
-    ConsultaVolantesDonacionComponent,
-    NuevoVdonacionSangreComponent,
+    // NuevoEstudioSocialMedicoComponent,
+    // ConsultaEstudiosMedicosComponent,
+    // EstudioMedicoGuardadoComponent,
+    // ConsultaVolantesDonacionComponent,
+    // NuevoVdonacionSangreComponent,
     ConsultaControlArticulosComponent,
   ],
   imports: [

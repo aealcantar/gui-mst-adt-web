@@ -5,23 +5,23 @@ import { DeclarationListEmitMode } from '@angular/compiler';
 import { LoginComponent } from './seguridad/login/login.component';
 import { SeguridadRouter } from './seguridad/seguridad.router';
 import { RegistroComponent } from './seguridad/registro/registro.component';
-import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
-import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
-import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
-import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
-import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
-import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+// import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
+// import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
+// import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
+// import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+// import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+// import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'recuperarpassword', component: RegistroComponent },
-  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
-  { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
-  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent },
-  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
-  { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
-  { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
+  // { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
+  // { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
+  // { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent },
+  // { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
+  // { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
+  // { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
   {
     path: 'agenda-digital',
     loadChildren: () =>
