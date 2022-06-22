@@ -20,34 +20,36 @@ declare var $: any;
 export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
   alert!: objAlert;
-  submitted:boolean = false;
+  submitted: boolean = false;
   mostrarArticulos: boolean = false;
   articulo: string = '';
-@ViewChild("cancelarModal")
-cancelarModal!: TemplateRef<any>;
+  @ViewChild("cancelarModal")
+  cancelarModal!: TemplateRef<any>;
 
   bitacora = {
     aplicativo: '',
     flujo: '',
     idUsuario: 1,
     nombreUsuario: 'leandro',
-    tipoUsuario:1
+    tipoUsuario: 1
   };
 
   nuevosArticulosArray: Array<any> = [];
   listaServicios: Array<any> = [];
   listaUbicacion: Array<any> = [];
+  listaDeHorarios: Array<any> = [];
 
   formNuevoArticulo: any = this.formBuilder.group({
     bitacora: new FormControl(this.bitacora, Validators.required),
-    personalQueElaboro: new FormControl('', Validators.required),
-    idCa: new FormControl('', Validators.required),
+    personalQueElaboro: new FormControl(''),
+    idCa: new FormControl(''),
     noFolioControl: new FormControl('', Validators.required),
     fecha: new FormControl('', Validators.required),
     noCama: new FormControl('', Validators.required),
     servicio: new FormControl('', Validators.required),
     telefono: new FormControl('', Validators.required),
     articulo: new FormControl(''),
+    articulosArray: new FormControl(this.nuevosArticulosArray), 
     trabajadorNombreRecibe: new FormControl(''),
     enfermeriaNombreEntrega: new FormControl('', Validators.required),
     ubicacion: new FormControl('', Validators.required),
@@ -63,7 +65,7 @@ cancelarModal!: TemplateRef<any>;
     recepcionUbicacion: new FormControl('', Validators.required),
     recepcionHorarioEntregaArticulo: new FormControl('', Validators.required),
   });
- 
+
   datosAlert = {
     message: "asdasd",
     type: 'success',
@@ -74,33 +76,34 @@ cancelarModal!: TemplateRef<any>;
     private controlArticulosService: ControlArticulosService,
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService,
-    private dialog:MatDialog
-    
-  ) {}
+    private dialog: MatDialog
+
+  ) { }
 
   ngOnInit(): void {
     let userTmp = sessionStorage.getItem('usuario') || '';
     if (userTmp !== '') {
-   let usuario= JSON.parse(userTmp);
-     let nombre=usuario?.strNombres +" "+usuario?.strApellidoP+" "+usuario?.strApellidoM;
-     this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue(nombre);
-     this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);
-   this.bitacora  ={
-      aplicativo: '',
-      flujo: '',
-      idUsuario: 1,
-      nombreUsuario:nombre,
-      tipoUsuario:1
-    };
-     
-    }else{
-      this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");  
-      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");  
+      let usuario = JSON.parse(userTmp);
+      let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
+      this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue(nombre);
+      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);
+      this.bitacora = {
+        aplicativo: '',
+        flujo: '',
+        idUsuario: 1,
+        nombreUsuario: nombre,
+        tipoUsuario: 1
+      };
+
+    } else {
+      this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");
+      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");
     }
     this.servicios();
     this.ubicacion('1');
+    this.horarioEntrega();
 
- 
+
   }
 
   ngAfterViewInit(): void {
@@ -156,35 +159,80 @@ cancelarModal!: TemplateRef<any>;
     );
   }
 
-  //guarda los datos del formulario
-  guardarControl() {
-    this.muestraAlerta(
-      '¡La información se guardo con éxito!',
-      'alert-success',
-      'Success'
-    );
-    this.submitted = true;
-    console.log(this.formNuevoArticulo.value);
-    console.log(this.formNuevoArticulo.value.resguardoFecha);
-
-    let datos= this.formNuevoArticulo.value;
-    this.controlArticulosService.setControlArticulos(datos).subscribe((res:any)=>{
-     console.log(res);
-    },(error:any)=>{
+  //horarios
+  horarioEntrega() {
+    this.controlArticulosService.getHorarios().subscribe((res: any) => {
+     try {
+      let response = res.response;
+      let estatus = response.status;
+      console.log(estatus)
+      if (estatus == "OK") {
+        this.listaDeHorarios = response.listaDeHorarios;
+             
+      } else {
+        console.log(res)
+      }
+     
+     } catch (error) {
+      console.log(res);
+      console.log(error)
+     }
+      
+    }, (error: any) => {
       console.log(error);
     });
-    
-    
-    
-    
 
-    if(this.formNuevoArticulo.status!="INVALID"){
 
-      let datos= this.formNuevoArticulo.value;
+  }
+  //guarda los datos del formulario
+  guardarControl() {
+  
+
+
+
+    this.submitted = true;
+
+console.log(this.formNuevoArticulo.value)
+console.log(this.nuevosArticulosArray)
+
+
+console.log(this.formNuevoArticulo.status)
+    if (this.formNuevoArticulo.status != "INVALID") {
+
+     
+ 
+ 
+  
+      let datos = this.formNuevoArticulo.value;
       console.log(datos)
+      this.controlArticulosService.setControlArticulos(datos).subscribe((res: any) => {
+        console.log(res);
+
+        let estatus= res.status;
+        if(estatus=="OK"){
+        try {
+          let id=res.idCa;
+          this.muestraAlerta(
+            '¡La información se guardo con éxito!',
+            'alert-success',
+            'Success'
+          );
+          //, { skipLocationChange: true }
+          
+          this.router.navigateByUrl("/detalle-control-articulos/"+id);
+
+        } catch (error) {
+          
+        }
+        }else{
+
+        }
+      }, (error: any) => {
+        console.log(error);
+      });
 
 
-    }else{
+    } else {
       return;
     }
     console.log(
@@ -193,9 +241,9 @@ cancelarModal!: TemplateRef<any>;
 
   }
 
-  
-  muestraAlerta(mensaje: string, estilo: string, type: string){
- 
+
+  muestraAlerta(mensaje: string, estilo: string, type: string) {
+
     this.alert = {
       message: mensaje,
       type: estilo,
@@ -204,7 +252,7 @@ cancelarModal!: TemplateRef<any>;
     }
     setTimeout(() => {
       this.alert = {
-        message:'',
+        message: '',
         type: 'custom',
         visible: false
       }
@@ -212,20 +260,21 @@ cancelarModal!: TemplateRef<any>;
   }
 
 
-  cancelar(modal:any) {
-    this.dialog.open(modal,{disableClose:true,
-    width:"450px",
-    maxHeight:"350px"
-  });
+  cancelar(modal: any) {
+    this.dialog.open(modal, {
+      disableClose: true,
+      width: "450px",
+      maxHeight: "350px"
+    });
     console.log('cancelar');
   }
 
 
-  soloCerrarVentanaEmergente(){
+  soloCerrarVentanaEmergente() {
     this.dialog.closeAll();
   }
 
-  cancelarSinGuardar(){
+  cancelarSinGuardar() {
     this.dialog.closeAll();
     this.router.navigateByUrl("/consulta-control-articulos", { skipLocationChange: true });
   }

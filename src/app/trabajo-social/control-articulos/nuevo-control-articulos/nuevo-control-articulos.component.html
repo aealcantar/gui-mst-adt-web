@@ -245,9 +245,9 @@
               formControlName="horarioEntregaArticulo"
             >
               <option [value]="''" selected>Seleccionar horario</option>
-              <!-- <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
-                      {{ comunidad.descripcion }}
-                    </option> -->
+              <option class="select-font" [value]="item.idHorario" *ngFor="let item of listaDeHorarios">
+                      {{ item.nomDia }}
+                    </option>
               
             </select>
             <small
@@ -439,7 +439,7 @@
           </div>
         </div>   
 
-        <div class="row pl-5 pr-5">
+        <div class="row pl-5 pr-5 mb-3">
           <div class="col-sm-4 mt-4">
             <span class="labels pb-1">Entregó*:</span>
             <input [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.recepcionNombreEntrega.errors}"

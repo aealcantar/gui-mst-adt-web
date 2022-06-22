@@ -69,6 +69,7 @@ export class DetalleControlArticulosComponent implements OnInit {
       console.log(valor)
       console.log(valor["enfermeriaNombreEntrega"])
     },(error:any)=>{
+      console.log("fallo y no se porque")
       console.log(error);
     });
     

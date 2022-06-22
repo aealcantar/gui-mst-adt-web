@@ -22,10 +22,24 @@ export class ControlArticulosService {
     }
 
   }
+
   getDetalleControlArticulos(datos:any){
-    console.log("dasd",datos)
+    
     try {
       return this.httpsCliente.post<any>(`${environment.urlServEstudioMedicos}/msmts-ctrl-articulos/api/idCa`,datos);
+     
+    } catch (error) {
+      console.log("error")
+      return error;
+    }
+
+  }
+
+  
+  getHorarios(){
+    
+    try {
+      return this.httpsCliente.get<any>(`${environment.urlServEstudioMedicos}/msmts-ctrl-articulos/api/horarios`);
      
     } catch (error) {
       console.log("error")
