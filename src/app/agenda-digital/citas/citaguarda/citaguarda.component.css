@@ -104,7 +104,7 @@ select{
   -webkit-appearance:none; /* Safari and Chrome */
   appearance:none;
   background: transparent;
-  background-image: url("../../../assets/images/Icon.png");
+  background-image: url("../../../../assets/images/Icon.png");
   background-repeat: no-repeat;
   background-position-x: 99%;
   background-position-y: 5px;
@@ -384,7 +384,7 @@ div.form-group > small {
 
 .icon-calendar{
   top: 40% !important;
-  background: url('../../../assets/images/InputCalendarIcon.svg');
+  background: url('../../../../assets/images/InputCalendarIcon.svg');
   background-size: cover;
   width: 27px;
   height: 28px;

@@ -108,7 +108,7 @@
                 pattern="^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$"
                 #otrop="ngModel"
                 />
-              <span (click)="agregaparticipante(otrop);" style="cursor: pointer;"><img src="../../../assets/images/fi_plus-circle.svg"></span>
+              <span (click)="agregaparticipante(otrop);" style="cursor: pointer;"><img src="../../../../assets/images/fi_plus-circle.svg"></span>
             </div>
 
             <div class="tbl-ots" *ngIf="lstParticipantes.length>0">
@@ -119,7 +119,7 @@
               <div class="tb-row" *ngFor="let per of lstParticipantes">
                 <span class="nombre">{{per}}</span>
                 <span class="accion" >
-                  <img src="../../../assets/images/icon-delete-min.svg"
+                  <img src="../../../../assets/images/icon-delete-min.svg"
                   (click)="eliminaparticipante(per);">
                 </span>
               </div>
@@ -249,7 +249,7 @@
                   >
                 <mat-datepicker-toggle matSuffix [for]="picker">
                   <mat-icon matDatepickerToggleIcon>
-                    <img src="../../../assets/images/InputCalendarIcon.svg" height="27px" style="right: 12px;
+                    <img src="../../../../assets/images/InputCalendarIcon.svg" height="27px" style="right: 12px;
                       position: absolute;
                       border-top-right-radius: 5px;
                       border-bottom-right-radius: 5px;">

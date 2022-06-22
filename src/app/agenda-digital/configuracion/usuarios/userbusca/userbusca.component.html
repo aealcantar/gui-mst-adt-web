@@ -8,7 +8,7 @@
     <div class="base-cont">
       <div class="tit-princ ">
         <div class="text-left pull-left">
-          <span (click)="regresar()"><img src="../../../../assets/images/btn-arrow-lf.png" /></span>
+          <span (click)="regresar()"><img src="../../../../../assets/images/btn-arrow-lf.png" /></span>
         <span>Configuración de usuarios</span>
       </div>
       </div>
@@ -38,7 +38,7 @@
             <div class="col-4 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right;">
               Visualizar datos
               <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret-img">{{numitems}}</span> <img src="../../../../assets/images/Icon.png">
+                <span class="caret-img">{{numitems}}</span> <img src="../../../../../assets/images/Icon.png">
               </button>
               <ul class="dropdown-menu" >
                 <li *ngFor="let i of [15,20,50,100]"><a (click)="cambiatotalpaginas(i)">{{i}}</a></li>
@@ -110,12 +110,12 @@
         </div>
 
         <div class="sin-resultados" *ngIf="lstUsuarios.length == 0">
-          <img src="../../../../assets/images/Group 2358.png"
+          <img src="../../../../../assets/images/Group 2358.png"
             class="Group-2358">
         </div>
         <div class="table-pie sin-borde" *ngIf="lstUsuarios.length == 0">
           <div class="cargalayout">
-            <span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>
+            <span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../../assets/images/icon-upload.png"> </span>
           </div>
         </div>
 

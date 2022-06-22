@@ -20,9 +20,9 @@ import { ProgramaTSRequest } from 'src/app/agenda-digital/models/programa-ts-req
 import { UbicacionRequest } from 'src/app/agenda-digital/models/ubicacion-request-model';
 import Swal from 'sweetalert2';
 import { ArchivoCarga, CargasCatalogos, CatalogoData, ConfiguracionCarga } from 'src/app/agenda-digital/models/catalogos.model';
-import { CargasService } from 'src/app/services/catalogos/cargas.service';
-import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalogos.service';
-import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
+import { CargasService } from 'src/app/agenda-digital/services/catalogos/cargas.service';
+import { HelperCatalogosService } from 'src/app/agenda-digital/services/catalogos/helper.catalogos.service';
+import { HelperMensajesService } from 'src/app/agenda-digital/services/helper.mensajes.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from "@angular/material/icon";
 
