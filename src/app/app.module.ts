@@ -33,6 +33,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 // import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
 // import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 // import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+import { NuevoAvisoMpComponent } from './trabajo-social/avisos-mp/nuevo-aviso-mp/nuevo-aviso-mp.component';
+import { ConsultaAvisoMpComponent } from './trabajo-social/avisos-mp/consulta-aviso-mp/consulta-aviso-mp.component';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
@@ -61,6 +64,8 @@ registerLocaleData('es');
     // ConsultaVolantesDonacionComponent,
     // NuevoVdonacionSangreComponent,
     ConsultaControlArticulosComponent,
+    NuevoAvisoMpComponent,
+    ConsultaAvisoMpComponent,
   ],
   imports: [
     BrowserModule,

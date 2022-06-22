@@ -1,0 +1,160 @@
+<app-datos-generales-usuario></app-datos-generales-usuario>
+<app-menu></app-menu>
+<app-datos-generales-paciente></app-datos-generales-paciente>
+<app-card-template>
+  <div header class="nuevoAvisoMP">
+    <span class="spantitulo">
+      Aviso al Ministerio Público
+    </span>
+  </div>
+   <div content>
+    <div>
+      <span class="instrucciones">
+        Por favor capture los siguientes datos:
+      </span>
+    </div>
+    <form novalidate class="formInfo" [formGroup]="formNuevoAvisoMP">
+      <div class="container seccion">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha*:</span>
+              <input class="form-control" id="notasInit" type="text" placeholder="Seleccionar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Alcaldia*:</span>
+              <select class="form-control styleselect" formControlName="alcaldia" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Seleccionar alcaldia" selected [value]="'-1'">
+                  Seleccionar alcaldia</option>
+                <option class="select-font" [value]="1">Alcaldia 1</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Agencia del Ministerio público*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar agencia" formControlName="agenciaMP"
+              type="text" />
+          </div>   
+        </div>
+        
+        <div class="row">
+           <div class="col-md-4">
+            <span class="spanInput">Nombre del paciente*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre del paciente" formControlName="nomPaciente"
+              type="text" />
+           </div>
+           <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Nombre y número de hospital*:</span>
+              <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
+                  Seleccionar hospital</option>
+                <option class="select-font" [value]="1">Hospital 1</option>
+              </select>
+            </div>
+           </div>
+           <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <select class="form-control styleselect" formControlName="servicio" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Seleccionar servicio" selected [value]="'-1'">
+                  Seleccionar servicio</option>
+                <option class="select-font" [value]="1">Servicio 1</option>
+              </select>
+            </div>
+           </div>
+        </div>
+        
+        <div class="row">
+           <div class="col-md-4">
+            <span class="spanInput">Número de cama*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar cama" formControlName="numCama"
+              type="text" />
+           </div>
+           <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha de ingreso*:</span>
+              <input class="form-control" id="notasFinal" type="text" placeholder="Seleccionar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <span class="spanInput">Hora de ingreso*:</span>
+            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="hora" selected [value]="'0'">00</option>
+              <option class="select-font" [value]="1">01</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <br>
+            <select class="form-control styleselect" formControlName="minutos" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="minutos" selected [value]="'0'">00</option>
+              <option class="select-font" [value]="1">01</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="row">
+           <div class="col-md-12">
+            <span class="spanInput">Lesiones presentadas por el paciente*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones" formControlName="lesionesPaciente"
+              type="text" />
+           </div>
+        </div>
+        
+        <div class="row">
+           <div class="col-md-6">
+            <span class="spanInput">Nombre médico tratante*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre" formControlName="nomMedico"
+              type="text" />
+           </div>
+           <div class="col-md-6">
+            <span class="spanInput">Matricula del médico tratante*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula" formControlName="matMedico"
+              type="text" />
+           </div>
+        </div>
+
+         <div class="row">
+           <div class="col-md-6">
+            <span class="spanInput">Nombre Trabajador(a) social*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre" formControlName="nomTrabajador"
+              type="text" />
+           </div>
+           <div class="col-md-6">
+            <span class="spanInput">Matricula del(a) Trabajadora social*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula" formControlName="matTrabajador"
+              type="text" />
+           </div>
+        </div>
+    </div>
+       <div>
+        <span class="instrucciones">
+          *Campos obligatorios
+        </span>
+      </div>
+   
+      <div class="row">
+      <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
+        <button [disabled]="formNuevoAvisoMP.valid == false" type="button" (click)="guardar();"
+          class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449">
+          Guardar
+        </button>
+        <button type="button" class="btn btn-danger buttonL"
+          style="float: right; border: solid 1px #b38e5d;">
+          Cancelar
+        </button>
+      </div>
+    </div>
+     </form>
+  </div>
+</app-card-template>
+<app-info-bottom></app-info-bottom>
+<app-datos-generales-paciente></app-datos-generales-paciente>

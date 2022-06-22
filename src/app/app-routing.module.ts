@@ -11,6 +11,8 @@ import { RegistroComponent } from './seguridad/registro/registro.component';
 // import { ConsultaVolantesDonacionComponent } from './trabajo-social/volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 // import { NuevoVdonacionSangreComponent } from './trabajo-social/volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 // import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+import { NuevoAvisoMpComponent } from './trabajo-social/avisos-mp/nuevo-aviso-mp/nuevo-aviso-mp.component';
+import { ConsultaAvisoMpComponent } from './trabajo-social/avisos-mp/consulta-aviso-mp/consulta-aviso-mp.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   // { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
   // { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
   // { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
+    { path: 'nuevo-aviso-mp', component: NuevoAvisoMpComponent },
+    { path: 'consulta-aviso-mp', component: ConsultaAvisoMpComponent },
   {
     path: 'agenda-digital',
     loadChildren: () =>
