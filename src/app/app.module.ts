@@ -46,7 +46,6 @@ import {
   NGX_MAT_DATE_FORMATS
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
-import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 import { SharedModulesModule } from './shared-modules/shared-modules.module';
 
 registerLocaleData('es');
@@ -58,12 +57,6 @@ registerLocaleData('es');
     RegistroComponent,
     NumberDirective,
     ReadexcelDirective,
-    // NuevoEstudioSocialMedicoComponent,
-    // ConsultaEstudiosMedicosComponent,
-    // EstudioMedicoGuardadoComponent,
-    // ConsultaVolantesDonacionComponent,
-    // NuevoVdonacionSangreComponent,
-    ConsultaControlArticulosComponent,
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
   ],
