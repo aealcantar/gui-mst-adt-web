@@ -1,5 +1,5 @@
 .base-cont{
-  min-height: 346px;
+  /* min-height: 346px; */
 
   /* padding-left: 23px;
   padding-right: 23px;   */
@@ -34,13 +34,13 @@
   align-items: center;
 }
 
-.tit-princ > div.pull-left{
+.tit-princ div.pull-left{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.tit-princ > div.pull-left > span > img{
+.tit-princ div.pull-left > span > img{
   margin-right: 15px;
   cursor: pointer;
 }

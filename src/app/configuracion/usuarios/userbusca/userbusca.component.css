@@ -33,13 +33,13 @@
   justify-content: center;
 }
 
-.tit-princ > div.pull-left{
+.tit-princ div.pull-left{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.tit-princ > div.pull-left > span > img{
+.tit-princ div.pull-left > span > img{
   margin-right: 15px;
   cursor: pointer;
 }

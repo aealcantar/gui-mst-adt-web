@@ -10,5 +10,6 @@
 }
 
 .separator{
-    margin-top:60px;   
+    margin-top:60px;
+    min-height: 92.3%;
 }

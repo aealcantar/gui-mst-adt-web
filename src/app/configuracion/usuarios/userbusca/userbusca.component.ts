@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { objAlert } from '../../../common/alerta/alerta.interface';
 import { AlertaComponent} from '../../../common/alerta/alerta.component' ;
@@ -41,7 +41,8 @@ export class UserbuscaComponent implements OnInit  {
   constructor(private authService: AuthService,
     private http: HttpClient, private router: Router,
     private userservice: UsuariosService,
-    private renderer: Renderer2) {}
+    private renderer: Renderer2,
+    private elementRef:ElementRef) {}
 
 
   public ngOnInit(): void {
@@ -67,13 +68,7 @@ export class UserbuscaComponent implements OnInit  {
       }
     };
 
-    const recaptchaContainer = this.renderer.createElement('div');
-    // Set the id of the div
-    this.renderer.setProperty(recaptchaContainer, 'id', 'recaptcha-container');
-    // Append the created div to the body element
-    this.renderer.appendChild(document.body, recaptchaContainer);
 
-    return recaptchaContainer;
 
 
   }
@@ -133,15 +128,26 @@ export class UserbuscaComponent implements OnInit  {
             document.querySelector(".cargalayout").remove();
           }
 
-          // 2. Create a new <p></p> element programmatically
-          const p = document.createElement('div');
-          // 3. Add the text content
-          p.className = 'cargalayout';
-          p.innerHTML = '<span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>';
-          // 4. Append the p element to the div element
-          app?.appendChild(p);
-          //app?.appendChild("")
+          // // 2. Create a new <p></p> element programmatically
+          // const p = document.createElement('div');
+          // // 3. Add the text content
+          // p.className = 'cargalayout';
+          // p.innerHTML = '<span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>';
+          // // 4. Append the p element to the div element
+          // app?.appendChild(p);
+          // //app?.appendChild("")
 
+          const recaptchaContainer = this.renderer.createElement('div');
+          // Set the id of the div
+          this.renderer.setProperty(recaptchaContainer, 'className', 'cargalayout');
+          this.renderer.setProperty(recaptchaContainer, 'innerHTML', '<span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>');
+
+          // Append the created div to the body element
+          this.renderer.appendChild(app, recaptchaContainer);
+
+
+          this.elementRef.nativeElement.querySelector('.cargalayout')
+                                  .addEventListener('click', this.cargalayoutusuarios.bind(this));
 
           // const dm = document.getElementById("nopag");
           // const dv = document.createElement('div');
