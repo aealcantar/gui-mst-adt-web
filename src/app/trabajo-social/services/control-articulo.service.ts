@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Nota } from '../models/notas.model'; //modificar cuando haya endpoint
+import { Nota } from 'src/app/shared-modules/models/notas.model';
 
 //configuración de url modificar cuando haya endpoint
 const urlServArticulo = `${environment.urlServNotas}/api`

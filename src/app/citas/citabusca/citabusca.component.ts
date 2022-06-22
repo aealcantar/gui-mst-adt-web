@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { DataTableDirective } from 'angular-datatables';
 import { CitasService } from '../citas.service';
-import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
-import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
+
 import { DatePipe } from '@angular/common';
 
 //import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -17,6 +17,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
 //import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
 import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 
 //import { rootCertificates } from 'tls';
 declare var $:any;

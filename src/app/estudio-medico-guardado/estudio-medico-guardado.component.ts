@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
-import { EstadoCivil } from '../models/estado-civil.model';
-import { EstudioMedico } from '../models/estudio-medico.model';
-import { Ocupacion } from '../models/ocupacion.model';
-import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
+import { EstadoCivil } from '../shared-modules/models/estado-civil.model';
+import { EstudioMedico } from '../shared-modules/models/estudio-medico.model';
+import { Ocupacion } from '../shared-modules/models/ocupacion.model';
+import { EstudioSocialMedicoService } from '../trabajo-social/services/estudio-social.service';
 
 @Component({
   selector: 'app-estudio-medico-guardado',

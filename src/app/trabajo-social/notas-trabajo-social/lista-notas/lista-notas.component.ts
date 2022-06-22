@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from 'src/app/service/auth-service.service';
+import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
 import { NotasService } from 'src/app/trabajo-social/services/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { Nota } from '../../../models/notas.model';
+import { Nota } from 'src/app/shared-modules/models/notas.model';
 
 declare var $: any;
 

@@ -1,8 +1,8 @@
-import { ServiceService } from './busqueda-nss.service';
+import { ServiceService } from '../services/busqueda-nss.service';
 import { Component } from '@angular/core';
-import { pacienteSeleccionado } from './paciente.interface';
 import { Router } from '@angular/router';
-import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import * as momment from 'moment';
 
 @Component({

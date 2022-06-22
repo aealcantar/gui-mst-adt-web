@@ -14,6 +14,8 @@ import { ListaCronicaGrupalComponent } from './cronica-grupal/lista-cronica-grup
 import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/lista-estudios/consulta-estudios-medicos.component';
 import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio/nuevo-estudio-social-medico.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta-estudio/estudio-medico-guardado.component';
+import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
+import { AppTarjetaPresentacionComponent } from '../shared-modules/app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 
 
 //las rutas serian
@@ -37,11 +39,13 @@ const routes: Routes = [
   { path: 'nuevaCronica', component: NuevaCronicaGrupalComponent },
   { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
   { path: 'consulta-cronica-grupal', component: ListaCronicaGrupalComponent },
+  { path: 'busqueda', component: BusquedaNssComponent },
+  { path: 'tarjeta', component: AppTarjetaPresentacionComponent  },
 
-    // Estudio medico social
-    { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent  },
-    { path: 'nuevo-estudio', component: NuevoEstudioSocialMedicoComponent  },
-    { path: 'detalle-estudio', component: EstudioMedicoGuardadoComponent  },
+  // Estudio medico social
+  { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent },
+  { path: 'nuevo-estudio', component: NuevoEstudioSocialMedicoComponent },
+  { path: 'detalle-estudio', component: EstudioMedicoGuardadoComponent },
 
 ];
 

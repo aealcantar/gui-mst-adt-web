@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
-import { Nota } from '../../models/notas.model';
+import { Nota } from 'src/app/shared-modules/models/notas.model';
 import { ReporteNota } from '../../models/reporte-notas.model';
 import { NotasService } from '../../services/notas.service';
 

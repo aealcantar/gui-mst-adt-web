@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { pacienteSeleccionado } from '../../models/paciente.interface';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
 import { EstadoCivil } from './../../models/estado-civil.model';
 import { EstudioMedico } from './../../models/estudio-medico.model';

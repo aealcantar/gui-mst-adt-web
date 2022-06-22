@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { AuthService } from '../service/auth-service.service';
-// import { AuthService } from './service/auth-service.service';
+import { AuthService } from '../services/auth-service.service';;
 
 @Component({
   selector: 'app-header-menu',

@@ -22,6 +22,7 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { MenugralComponent } from './menugral/menugral.component';
 import { FichapacienteComponent } from './fichapaciente/fichapaciente.component';
 import { DataTablesModule } from 'angular-datatables';
+import { HeaderMenuComponent } from './header-menu/header-menu.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -49,6 +50,7 @@ export const MY_FORMATS = {
     AppAlertsComponent,
     FichapacienteComponent,
     MenugralComponent,
+    HeaderMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -87,6 +89,7 @@ export const MY_FORMATS = {
     FichapacienteComponent,
     MenugralComponent,
     DataTablesModule,
+    HeaderMenuComponent,
   ], providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

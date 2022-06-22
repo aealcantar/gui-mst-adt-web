@@ -5,12 +5,12 @@ import { Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Estado } from '../models/estado.model';
-import { Municipio } from '../models/municipio.model';
-import { Ciudad } from '../models/ciudad.model';
-import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
-import { EstadoCivil } from '../models/estado-civil.model';
-import { EstudioMedico } from '../models/estudio-medico.model';
+import { Estado } from '../shared-modules/models/estado.model';
+import { Municipio } from '../shared-modules/models/municipio.model';
+import { Ciudad } from '../shared-modules/models/ciudad.model';
+import { EstadoCivil } from '../shared-modules/models/estado-civil.model';
+import { EstudioMedico } from '../shared-modules/models/estudio-medico.model';
+import { EstudioSocialMedicoService } from '../trabajo-social/services/estudio-social.service';
 import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 declare var $: any;
 

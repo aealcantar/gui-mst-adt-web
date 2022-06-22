@@ -5,7 +5,7 @@ import { DatePipe } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
 import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { CronicaGrupalService } from "../../services/cronica-grupal.service";
 
 @Component({
   selector: 'app-cronica-guardada',

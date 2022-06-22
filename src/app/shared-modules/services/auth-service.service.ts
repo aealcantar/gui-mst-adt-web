@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from 'src/app/models/usuario.model';
+import { Usuario } from '../models/usuario.model';
 import { environment } from 'src/environments/environment';
 import { WebImssService } from './web-imss-service.service';
-
+import { Aplicacion } from '../models/aplicacion.model';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AdmonPasswordRequest } from '../models/admon-password-request.model';
 import { AdmonPasswordResponse } from '../models/admon-password-response.model';
-import { Aplicacion } from '../models/aplicacion.model';
-
 
 @Injectable({
   providedIn: 'root'

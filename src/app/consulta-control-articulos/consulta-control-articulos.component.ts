@@ -1,7 +1,6 @@
-import { ControlArticulos } from './../models/control-articulo.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ControlArticuloService } from '../service/control-articulo.service';
+import { ControlArticuloService } from '../trabajo-social/services/control-articulo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';

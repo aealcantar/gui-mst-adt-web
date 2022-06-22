@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Paciente } from 'src/app/models/paciente.model';
-import { Participante } from 'src/app/models/participante.model';
-import { ServiceService } from 'src/app/busqueda-nss/busqueda-nss.service';
+import { Paciente } from 'src/app/shared-modules/models/paciente.model';
+import { Participante } from 'src/app/shared-modules/models/participante.model';
+import { ServiceService } from 'src/app/trabajo-social/services/busqueda-nss.service';
 
 declare var $: any;
 declare var $gmx: any;

@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from 'src/app/service/auth-service.service';
+import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
 //import { NotasService } from 'src/app/service/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { VolanteDonacion } from '../models/volante-donacion.model';
+import { VolanteDonacion } from 'src/app/shared-modules/models/volante-donacion.model';
 
 declare var $: any;
 

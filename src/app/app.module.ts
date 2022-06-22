@@ -8,18 +8,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
-import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 
-import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { JRInterceptor } from './jrinterceptor.interceptor';
 import { environment } from 'src/environments/environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UsuariosService } from './service/usuarios.service';
+import { UsuariosService } from './shared-modules/services/usuarios.service';
 import { SeguridadService } from './seguridad/seguridad.service';
 import { LoginComponent } from './seguridad/login/login.component';
 import { RegistroComponent } from './seguridad/registro/registro.component';
@@ -70,9 +67,6 @@ registerLocaleData('es');
     LoginComponent,
     RegistroComponent,
     PrincipalComponent,
-    BusquedaNssComponent,
-    AppTarjetaPresentacionComponent,
-    HeaderMenuComponent,
     NumberDirective,
     UserconsultaComponent,
     UserguardaComponent,

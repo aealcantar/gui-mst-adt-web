@@ -9,9 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { NotasService } from '../../services/notas.service';
 import { CronicaGrupalService } from '../../services/cronica-grupal.service';
-import { Nota } from '../../models/notas.model';
+import { Nota } from 'src/app/shared-modules/models/notas.model';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
-import { AppTarjetaPresentacionService } from 'src/app/shared-modules/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 declare var $: any;
 
 @Component({

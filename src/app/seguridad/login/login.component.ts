@@ -5,11 +5,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SeguridadService } from '../seguridad.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
-import { AuthService } from 'src/app/service/auth-service.service';
-import { Aplicacion } from 'src/app/models/aplicacion.model';
-import { Usuario } from 'src/app/models/usuario.model';
-import { MailService } from 'src/app/service/mail-service.service';
-import { RecaptchaResponse } from 'src/app/models/recaptcha-response-model';
+import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
+import { Aplicacion } from 'src/app/shared-modules/models/aplicacion.model';
+import { Usuario } from 'src/app/shared-modules/models/usuario.model';
+import { RecaptchaResponse } from 'src/app/shared-modules/models/recaptcha-response-model';
+import { MailService } from 'src/app/shared-modules/services/mail-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 

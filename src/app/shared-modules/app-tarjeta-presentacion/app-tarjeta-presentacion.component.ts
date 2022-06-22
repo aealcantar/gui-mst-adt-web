@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AppTarjetaPresentacionService } from './../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { pacienteSeleccionado } from '../models/paciente.interface';
 
