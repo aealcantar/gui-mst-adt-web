@@ -190,7 +190,7 @@ table.table-catalogo > tbody tr td{
 
 
 input.matricula{
-  width: 570px;
+  width: 100%;
   height: 30px;
   padding: 5px 10px;
   border-radius: 5px;

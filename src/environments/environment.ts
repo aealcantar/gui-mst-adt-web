@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   urlLogin: 'http://localhost:4200/login',
     //Agenda
-    urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
+    //urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
+    urlMSADCargasCatalogos: 'http://localhost:8082/msedsc-carga-catalogos',
     urlMSEDSCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
     urlMSADTCITAS: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-citas/api',
     urlMSEDSCatalogosHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
