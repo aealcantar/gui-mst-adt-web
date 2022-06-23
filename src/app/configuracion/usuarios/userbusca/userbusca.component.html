@@ -4,13 +4,17 @@
 
 <!-- <div class="container-fluid central"> -->
   <!-- <app-logout-bar ></app-logout-bar> -->
-  <section class="section">
+  <!-- <section class="section"> -->
     <div class="base-cont">
       <div class="tit-princ ">
-        <div class="text-left pull-left">
-          <span (click)="regresar()"><img src="../../../../assets/images/btn-arrow-lf.png" /></span>
-        <span>Configuración de usuarios</span>
-      </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <div class="text-left pull-left">
+              <span (click)="regresar()"><img src="../../../../assets/images/btn-arrow-lf.png" /></span>
+              <span>Configuración de usuarios</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="body-princ">
         <div class="texto-ind">
@@ -18,16 +22,21 @@
         </div>
 
         <form class="form-inline" role="form" autocomplete="off">
-          <div class="form-group">
-            <!-- <label class="" for="txtconsulta">Buscar por matrícula o nombre completo</label> -->
-            <input class="form-control matricula" id="txtconsulta" placeholder="Ingresar matrícula o nombre" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="form-group" style="width: 100%;">
+                <!-- <label class="" for="txtconsulta">Buscar por matrícula o nombre completo</label> -->
+                <input class="form-control matricula" id="txtconsulta" placeholder="Ingresar matrícula o nombre" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="limpiarbusqueda()">Limpiar</button>
+              <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)="buscarusuario()">Buscar</button>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <button class="btn btn-primary btuser pull-right" style="padding-left: 10px;" (click)="nuevousuario()" >Nuevo usuario</button>
+            </div>
           </div>
-
-
-          <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="limpiarbusqueda()">Limpiar</button>
-          <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)="buscarusuario()">Buscar</button>
-
-          <button class="btn btn-primary btuser pull-right" style="padding-left: 10px;" (click)="nuevousuario()" >Nuevo usuario</button>
         </form>
 
         <table id="tblusuarios" datatable [dtOptions]="dtOptions" class="table table-hover table-bordered table-catalogo caption-top" *ngIf="lstUsuarios.length > 0">
@@ -124,6 +133,6 @@
 
       </div>
     </div>
-  </section>
+  <!-- </section> -->
 <!-- </div> -->
 

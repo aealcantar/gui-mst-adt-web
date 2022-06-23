@@ -33,13 +33,13 @@
   justify-content: center;
 }
 
-.tit-princ > div.pull-left{
+.tit-princ div.pull-left{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.tit-princ > div.pull-left > span > img{
+.tit-princ div.pull-left > span > img{
   margin-right: 15px;
   cursor: pointer;
 }
@@ -190,7 +190,7 @@ table.table-catalogo > tbody tr td{
 
 
 input.matricula{
-  width: 570px;
+  width: 100%;
   height: 30px;
   padding: 5px 10px;
   border-radius: 5px;
