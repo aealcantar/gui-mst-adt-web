@@ -113,13 +113,13 @@
                 <div>
                   <table class=" subtable">
                     <thead class="bg-primary subtable" style="background-color: #5f8cdc !important;">
-                      <tr class="subtableTr colorSubtabla">
-                        <th style="width: 160px; text-align: left !important;">CURP</th>
-                        <th style="width: 160px; text-align: left !important;">Fecha de nacimiento</th>
-                        <th style="width: 160px; text-align: left !important;">Turno</th>
-                        <th style="width: 160px; text-align: left !important;">Consultorio</th>
-                        <th style="width: 160px; text-align: left !important;">Edad</th>
-                        <th style="width: 160px; text-align: left !important;">Sexo</th>
+                      <tr class="subtableTr colorSubtabla" style="width: 100%; max-width: 100%;">
+                        <th style="width: 25.5%;">CURP</th>
+                        <th style="width: 25%;">Fecha de nacimiento</th>
+                        <th style="width: 14%;">Turno</th>
+                        <th style="width: 14%;">Consultorio</th>
+                        <th style="width: 13%;">Edad</th>
+                        <th style="width: 8.5%;">Sexo</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -131,7 +131,7 @@
                           {{beneficiario.fechaNacimiento}}
                         </td>
                         <td class="link-texto" style="text-align: left !important; padding: 0px;">
-                          {{beneficiario.turno}}
+                          {{beneficiario.turno === "M" ? "Matutino" : "Vespertino" }}
                         </td>
                         <td style="padding: 0px!important; padding-left: 13px !important;">
                           {{beneficiario.consultorio}}
@@ -140,7 +140,7 @@
                           {{beneficiario.edad}}
                         </td>
                         <td style="padding: 0px!important; padding-left: 13px !important;">
-                          {{beneficiario.sexo}}
+                          {{beneficiario.sexo === "M" ? "Masculino" : "Femenino"}}
                         </td>
                       </tr>
                     </tbody>
