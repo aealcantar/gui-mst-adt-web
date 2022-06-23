@@ -188,7 +188,7 @@ export class UserbuscaComponent implements OnInit  {
   }
 
   regresar(){
-
+    this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
   }
 
   muestraAlerta(mensaje: string, estilo: string,tipoMsj?: string){
