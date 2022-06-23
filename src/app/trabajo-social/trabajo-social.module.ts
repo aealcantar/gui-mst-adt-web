@@ -22,6 +22,8 @@ import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta
 import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/lista-estudios/consulta-estudios-medicos.component';
 import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio/nuevo-estudio-social-medico.component';
 import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
+import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { objAlert } from '../shared-modules/models/alerta.interface';
 
 @NgModule({
@@ -41,6 +43,8 @@ import { objAlert } from '../shared-modules/models/alerta.interface';
     ConsultaEstudiosMedicosComponent,
     NuevoEstudioSocialMedicoComponent,
     ConsultaControlArticulosComponent,
+    NuevoVdonacionSangreComponent,
+    ConsultaVolantesDonacionComponent,
   ],
   imports: [
     MatDialogModule,

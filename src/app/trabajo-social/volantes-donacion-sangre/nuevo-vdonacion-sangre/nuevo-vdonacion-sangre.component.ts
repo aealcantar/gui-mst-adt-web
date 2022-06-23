@@ -33,7 +33,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-volantes", { skipLocationChange: true });
     $('#content').modal('hide');
   }
 }

@@ -79,4 +79,16 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   irControlDeArticulos(){
     this.router.navigateByUrl("/consulta-articulos", { skipLocationChange: true });
   }
+
+  irDonacionDeSangre(){
+    this.router.navigateByUrl("/consulta-volantes", { skipLocationChange: true });
+  }
+
+  irMinisterioPublico(){
+    this.router.navigateByUrl("/consulta-aviso-mp", { skipLocationChange: true });
+  }
+
+  irCertificadoDefuncion(){
+    // this.router.navigateByUrl("/consulta-volantes", { skipLocationChange: true });
+  }
 }

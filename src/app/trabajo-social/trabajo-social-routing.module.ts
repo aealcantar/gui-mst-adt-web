@@ -18,6 +18,12 @@ import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
 import { AppTarjetaPresentacionComponent } from '../shared-modules/app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
 
+import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+
+import { NuevoAvisoMpComponent } from './avisos-mp/nuevo-aviso-mp/nuevo-aviso-mp.component';
+import { ConsultaAvisoMpComponent } from './avisos-mp/consulta-aviso-mp/consulta-aviso-mp.component';
+
 
 //las rutas serian
 // :4200/trabajo-social/nuevo-control-articulos
@@ -48,6 +54,14 @@ const routes: Routes = [
   { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent },
   { path: 'nuevo-estudio', component: NuevoEstudioSocialMedicoComponent },
   { path: 'detalle-estudio', component: EstudioMedicoGuardadoComponent },
+
+  //volanteDonacion
+  { path: 'nuevo-volante', component: NuevoVdonacionSangreComponent },
+  { path: 'consulta-volantes', component: ConsultaVolantesDonacionComponent },
+
+  { path: 'nuevo-aviso-mp', component: NuevoVdonacionSangreComponent },
+  { path: 'consulta-aviso-mp', component: ConsultaVolantesDonacionComponent },
+
 ];
 
 @NgModule({
