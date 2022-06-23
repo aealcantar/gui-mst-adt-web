@@ -97,7 +97,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   }
 
   getNombreOcupacion(idOcupacion: number) {
-    return this.ocupaciones.find(c => c.id_OCUPACION = idOcupacion)?.nom_OCUPACION;
+    return this.ocupaciones.find(c => c.id_OCUPACION === idOcupacion)?.nom_OCUPACION;
   }
 
   getNombreEstadoCivil(idEstadoCivil: number | string) {

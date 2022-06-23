@@ -237,30 +237,30 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
 
   getNombreEstado(idEstado: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.estadosFamiliar.find(e => e.cve_estado = idEstado)?.des_nombre_completo;
+      return this.estadosFamiliar.find(e => e.cve_estado === idEstado)?.des_nombre_completo;
     } else {
-      return this.estados.find(e => e.cve_estado = idEstado)?.des_nombre_completo;
+      return this.estados.find(e => e.cve_estado === idEstado)?.des_nombre_completo;
     }
   }
 
   getNombreMunicipio(idMunicipio: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.delegaciones.find(d => d.cve_delegacion_municipio = idMunicipio)?.des_municipio;
+      return this.delegaciones.find(d => d.cve_delegacion_municipio === idMunicipio)?.des_municipio;
     } else {
-      return this.municipios.find(m => m.cve_delegacion_municipio = idMunicipio)?.des_municipio;
+      return this.municipios.find(m => m.cve_delegacion_municipio === idMunicipio)?.des_municipio;
     }
   }
 
   getNombreCiudad(idCiudad: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.ciudadesFamiliar.find(c => c.cve_ciudad = idCiudad)?.des_ciudad;
+      return this.ciudadesFamiliar.find(c => c.cve_ciudad === idCiudad)?.des_ciudad;
     } else {
-      return this.ciudades.find(c => c.cve_ciudad = idCiudad)?.des_ciudad;
+      return this.ciudades.find(c => c.cve_ciudad === idCiudad)?.des_ciudad;
     }
   }
 
   getNombreOcupacion(idOcupacion: number) {
-    return this.ocupaciones.find(c => c.id_OCUPACION = idOcupacion)?.nom_OCUPACION;
+    return this.ocupaciones.find(c => c.id_OCUPACION === idOcupacion)?.nom_OCUPACION;
   }
 
   getNombreTipoComunidad(idTipoComunidad: number | string) {
