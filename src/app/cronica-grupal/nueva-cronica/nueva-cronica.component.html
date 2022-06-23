@@ -86,9 +86,9 @@
               <span class="spanInput">Grupo*:</span>
               <select class="form-control" formControlName="grupo" style="background-position-y: 5px;"
                 aria-label="Servicio">
-                <option class="select-font" [value]="'-1'" selected>Ingresar grupo</option>
-                <option class="select-font" [value]="grupo.cveEspecialidad" *ngFor="let grupo of grupos">
-                  {{ grupo.desActividad }}
+                <option class="select-font" [value]="''" selected>Ingresar grupo</option>
+                <option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
+                  {{ grupo.des_actividad }}
                 </option>
               </select>
             </div>
@@ -110,7 +110,7 @@
               <span class="spanInput">Hora*:</span>
               <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
                 aria-label="Servicio">
-                <option class="select-font " [value]="'-1'" style="background-position-y: 10px;"
+                <option class="select-font " [value]="''" style="background-position-y: 10px;"
                   placeholder="Ingresar ponentes" selected>Ingresar hora</option>
                 <option class="select-font" [value]="1">10:00:00</option>
               </select>
