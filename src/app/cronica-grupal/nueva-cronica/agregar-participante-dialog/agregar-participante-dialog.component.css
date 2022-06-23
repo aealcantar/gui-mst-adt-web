@@ -129,7 +129,7 @@ input {
     font-weight: 500;
     font-size: 14px;
     color: #6F7271;
-    display: flex;
+    display: block;
     flex-direction: row;
     align-items: flex-start;
     padding: 8px 14px;

@@ -96,8 +96,14 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     );
   }
 
-  getNombreOcupacion(idOcupacion: number) {
-    return this.ocupaciones.find(c => c.id_OCUPACION === idOcupacion)?.nom_OCUPACION;
+  getNombreOcupacion(idOcupacion: number | string) {
+    let idOcupacionConverted: number;
+    if (typeof idOcupacion === 'string') {
+      idOcupacionConverted = Number(idOcupacion);
+    } else if (typeof idOcupacion === 'number') {
+      idOcupacionConverted = idOcupacion;
+    }
+    return this.ocupaciones.find(e => e.id_OCUPACION === idOcupacionConverted)?.nom_OCUPACION;
   }
 
   getNombreEstadoCivil(idEstadoCivil: number | string) {
