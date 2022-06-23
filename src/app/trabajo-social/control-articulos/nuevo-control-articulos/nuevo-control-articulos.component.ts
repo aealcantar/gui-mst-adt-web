@@ -63,7 +63,7 @@ cancelarModal!: TemplateRef<any>;
     recepcionUbicacion: new FormControl('', Validators.required),
     recepcionHorarioEntregaArticulo: new FormControl('', Validators.required),
   });
- 
+
   datosAlert = {
     message: "asdasd",
     type: 'success',
@@ -75,7 +75,7 @@ cancelarModal!: TemplateRef<any>;
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService,
     private dialog:MatDialog
-    
+
   ) {}
 
   ngOnInit(): void {
@@ -92,15 +92,15 @@ cancelarModal!: TemplateRef<any>;
       nombreUsuario:nombre,
       tipoUsuario:1
     };
-     
+
     }else{
-      this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");  
-      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");  
+      this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");
+      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");
     }
     this.servicios();
     this.ubicacion('1');
 
- 
+
   }
 
   ngAfterViewInit(): void {
@@ -173,10 +173,10 @@ cancelarModal!: TemplateRef<any>;
     },(error:any)=>{
       console.log(error);
     });
-    
-    
-    
-    
+
+
+
+
 
     if(this.formNuevoArticulo.status!="INVALID"){
 
@@ -193,9 +193,9 @@ cancelarModal!: TemplateRef<any>;
 
   }
 
-  
+
   muestraAlerta(mensaje: string, estilo: string, type: string){
- 
+
     this.alert = {
       message: mensaje,
       type: estilo,

@@ -118,8 +118,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
 
   irNuevoRegistro() {
-    let params = {}
-    this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
+    this.router.navigateByUrl("/nuevo-control-articulos", { skipLocationChange: true });
   }
 
   sortBy(columnaId: string, order: string, type: string) {

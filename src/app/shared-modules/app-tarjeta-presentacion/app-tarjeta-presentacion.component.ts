@@ -73,11 +73,11 @@ export class AppTarjetaPresentacionComponent implements OnInit {
 
 
   irEstudioSocialMedico() {
-    this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
+    this.router.navigateByUrl("/lista-estudios", { skipLocationChange: true });
   }
 
   irControlDeArticulos(){
-    this.router.navigateByUrl("/consulta-articulos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-control-articulos", { skipLocationChange: true });
   }
 
   irDonacionDeSangre(){
