@@ -66,9 +66,9 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   initForm(cronicaParse: any): void {
     if (cronicaParse.length > 0) {
       this.editForm = this.fb.group({
-        grupo: ["-1"],
+        grupo: [""],
         fecha: [null],
-        hora: ["-1"],
+        hora: [""],
         descPonentes: [this.cronicaRecibida.descPonentes !== null ? this.cronicaRecibida.descPonentes : null, Validators.required],
         numParticipantesAsistieron: [this.cronicaRecibida.numParticipantesAsistieron !== null ? this.cronicaRecibida.numParticipantesAsistieron : null, Validators.required],
         desTecnicaDidactica: [this.cronicaRecibida.desTecnicaDidactica !== null ? this.cronicaRecibida.desTecnicaDidactica : null, Validators.required],
@@ -80,9 +80,9 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.editForm = this.fb.group({
-        grupo: ["-1", Validators.required],
+        grupo: ["", Validators.required],
         fecha: [null, Validators.required],
-        hora: ["-1", Validators.required],
+        hora: ["", Validators.required],
         descPonentes: [null, Validators.required],
         numParticipantesAsistieron: [null, Validators.required],
         desTecnicaDidactica: [null, Validators.required],
@@ -92,7 +92,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       });
-      this.cronicaGrupalService.getCatGrupo('1').toPromise().then(
+      this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
         (grupos) => {
           this.grupos = grupos;
           console.log("GRUPOS: ", this.grupos);
@@ -157,7 +157,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
 
   getNombreGrupo(cveGrupo: number) {
-    return this.grupos.find(g => g.cve_grupo_programa = cveGrupo)?.des_grupo_programa;
+    return this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa;
   }
 
   guardarCronica() {
@@ -193,7 +193,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       this.cronica = {
         id: null,
         idCalendarioAnual: null,
-        idEspecialidad: 'CS02',
+        idEspecialidad: 'CS01',
         desEspecialidad: null,
         idTurno: 1,
         desTurno: null,

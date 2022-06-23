@@ -49,8 +49,8 @@
           <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
             [(ngModel)]="this.grupoSelected" (change)="onChangeGrupo($event)">
             <option class="select-font" [value]="'-1'" selected>Seleccionar grupo</option>
-            <option class="select-font" [value]="grupo.cve_grupo_programa" *ngFor="let grupo of grupos">
-              {{ grupo.des_grupo_programa }}
+            <option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
+              {{ grupo.des_actividad }}
             </option>
           </select>
         </div>
