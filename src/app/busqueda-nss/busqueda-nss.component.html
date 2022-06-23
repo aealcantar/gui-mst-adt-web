@@ -71,9 +71,9 @@
         <table class="table " style="margin-bottom: 0px !important;">
           <thead style=" background: #f9f9f9;">
             <tr>
-              <th style="width: 160px; padding-left: 33px !important;">
+              <th style="width: 178px; padding-left: 48px !important;">
                 NSS
-                <i class="fa-solid fa-caret-up arrow arrow-up"
+                <i class="fa-solid fa-caret-up arrow flechaArriba"
                   [ngClass]="{'active-opacity': columnaId === 'nss' && order === 'asc'}"
                   (click)="sortBy('nss', 'asc', 'number')">
                 </i>
@@ -93,7 +93,8 @@
               <td class="link-texto" style="text-align: center !important; padding: 0px; color:#4D92DF;">
                 <span (click)="elementoSeleccionado(beneficiario)">{{beneficiario.nss}}</span>
               </td>
-              <td style="padding: 0px!important; padding-left: 13px !important;">{{beneficiario.paciente.toUpperCase()}}</td>
+              <td style="padding: 0px!important; padding-left: 13px !important;">{{beneficiario.paciente.toUpperCase()}}
+              </td>
               <td style="text-align: center !important; padding: 0px!important;">{{beneficiario.agregadoMedico}}
               </td>
               <td style="text-align: center !important; padding: 0px!important;">UMF {{beneficiario.unidadMedica}}

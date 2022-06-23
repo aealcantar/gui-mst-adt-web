@@ -562,4 +562,10 @@ option {
 .arrow-down {
     top: 190px;
     z-index: 9999;
+    margin-left: 43px;
+    margin-top:6px;
+}
+
+.flechaArriba{
+  margin-left: 43px; margin-top: -3px;
 }
