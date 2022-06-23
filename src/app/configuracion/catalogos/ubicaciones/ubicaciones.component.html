@@ -14,53 +14,73 @@
         </div>
         <div class="body-princ ">
           
-          <table id="tblCatalogos" style="width: 100%;"
-            class="table datatable table-hover table-bordered table-catalogo caption-top table-responsive" role="grid">
+          <div class="texto-ind">
+            Buscar por descripción
+          </div>
+          <form class="form-inline" role="form" autocomplete="off">
+            <div class="form-group">
+              <!-- <label class="" for="txtconsulta">Buscar por matrícula o nombre completo</label> -->
+              <input class="form-control matricula" id="txtconsulta" placeholder="Ingresa descripción" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
+            </div>
+  
+  
+            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="limpiarbusqueda()">Limpiar</button>
+            <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)= "buscarUbicacion()">Buscar</button>
+  
+          </form>
+
+
+          <table id="tblusuarios" datatable [dtOptions]="dtOptions" class="table table-hover table-bordered table-catalogo caption-top" *ngIf="lstUbicaciones.length > 0">
             <caption class="borde-cap ps-2">
-                <div class="col-2 col-md-2 float-start pull-left" style="line-height: 40px;">
-                  Resultados <span class="totcargas">4</span>
-                </div>
-                <div class="col-4 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right; ">
-                  Visualizar datos
-                  <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;min-width: 0 !important;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="caret-img">{{2}}</span> <img src="../../../../assets/images/Icon.png">
-                  </button>
-                  <ul class="dropdown-menu" >
-                    <li *ngFor="let i of [15,20,50,100]"><a >{{i}}</a></li>
-                  </ul>
-                </div>
-              </caption>
-       
+              <div class="col-2 col-md-2 float-start pull-left" style="line-height: 40px;">
+                Resultados <span class="totcargas">{{lstUbicaciones.length}}</span>
+              </div>
+              <div class="col-2 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right;">
+                Visualizar datos
+                <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="caret-img">{{numitems}}</span> <img src="../../../../assets/images/Icon.png">
+                </button>
+                <ul class="dropdown-menu" >
+                  <li *ngFor="let i of [15,20,50,100]"><a >{{i}}</a></li>
+                </ul>
+              </div>
+  
+  
+            </caption>
             <thead>
-              <tr role="row">
-                <th style="width: 40%; " aria-controls="tblCatalogos">Descripción abreviada</th>
-                <th style="width: 30%;" aria-controls="tblCatalogos">Tipo</th>
-                <th style="width: 30%;" aria-controls="tblCatalogos">Servicio/Especialidad</th>
+              <tr>
+                <th>Descripción abreviada</th>
+                <th>Tipo</th>
+                <th>Servicio/Especialidad</th>
               </tr>
             </thead>
             <tbody>
-
-              <tr *ngFor="let item of lstUbicaciones" class="odd">
-                <td class="link-texto " >
-                  {{ item.nombreCatalogo }}
-                </td>
-                <td>
-                
-
-                  {{ item.estatusCarga.cveNombre }}
-                </td>
-                <td>
-                  <div *ngIf="item.estatusCarga?.cveIdEstatus  == 2">- </div>
-                  <div *ngIf="item.estatusCarga?.cveIdEstatus  != 2">{{ item.ultimaModificacion }} </div>
-                </td>
+              <tr *ngFor="let item of lstUbicaciones">
+                <td
+                  class="link-texto"
+                 >
+                  {{ item.descripcionAbreviada }}</td>
+                <td>{{item.tipo }}</td>
+                <td>{{ item.servicio }}</td>
               </tr>
             </tbody>
           </table>
+  
         
+          <div class="nopag pull-right" *ngIf="lstUbicaciones.length > 0">
+            Página
+            <span class="bg-nopag" [innerText]="pagactual"></span>
+          </div>
           <div class="sin-resultados" *ngIf="lstUbicaciones.length == 0">
             <img src="../../../../assets/images/Group 2358.png"
               class="Group-2358">
           </div>
+          <div class="table-pie sin-borde" *ngIf="lstUbicaciones.length == 0">
+            <div class="cargalayout">
+              <span (click)="cargaUbicaciones()">Carga de ubicaciones: <img src="../../../../assets/images/icon-upload.png"> </span>
+            </div>
+          </div>
+
         </div>
 
 
