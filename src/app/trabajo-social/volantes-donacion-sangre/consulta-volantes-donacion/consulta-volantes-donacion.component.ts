@@ -27,7 +27,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
   //public prueba =  [{ "fecFecha": "20/06/2022", "nomTrabajadorSocial": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
- 
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -95,7 +95,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     //let params = {
     //  'objetoAEnviar': null,
     //}
-    //this.router.navigate(["nuevo-volante-donacion"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["nuevo-volante"], {skipLocationChange: true });
   }
 
   handleDatesChange() {
