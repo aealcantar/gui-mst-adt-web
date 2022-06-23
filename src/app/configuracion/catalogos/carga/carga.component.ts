@@ -222,14 +222,14 @@ export class CargaComponent implements OnInit {
         }else{
           this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
         }
-        
+
         break;
-    
+
       default:
         this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
         break;
     }
- 
+
   }
   public btnCerrarModal(mdl: any) {
     (<any>$('#' + mdl)).appendTo("body").modal('hide');
@@ -258,8 +258,8 @@ export class CargaComponent implements OnInit {
     //this.uploadAndProgressSingle2(event.target.files[0]);
     let archivo: File;
     archivo = event.target.files[0];
-    this.archivoCarga.nombrearchivo = archivo.name.toString();
-    this.archivoCarga.tamanioarchivo = archivo.size.toString();
+    this.archivoCarga.nombrearchivo = archivo? archivo.name.toString() : "";
+    this.archivoCarga.tamanioarchivo = archivo? archivo.size.toString() : "";
     let xlsx = ".xlsx";
     let xls = ".xls";
     console.log("size" + this.archivoCarga.nombrearchivo);
@@ -277,9 +277,9 @@ export class CargaComponent implements OnInit {
 
     }
 
-    console.log("tamaño: ", archivo.size, " bytes");
+    console.log("tamaño: ", +this.archivoCarga.tamanioarchivo, " bytes");
 
-    if (archivo.size > this.pesoMaximoBytes) {
+    if (+this.archivoCarga.tamanioarchivo > this.pesoMaximoBytes) {
       this.archivoCarga.proceso = 'error';
       this.blnProcedeCarga = false;
       console.log("es pesado");
@@ -526,9 +526,9 @@ export class CargaComponent implements OnInit {
             this.calendarioDias[index].horaFin = horaFin;
             this.calendarioDias[index].numParticipantes = element[this.confCarga.col8];
             break;
-        
+
           case 7:
-            
+
             this.persona[index] = new Persona();
             this.persona[index].primerApellido = element[this.confCarga.col1];
             this.persona[index].segundoApellido = element[this.confCarga.col2];
@@ -694,16 +694,16 @@ export class CargaComponent implements OnInit {
               if (resp) {
                 this.percentDone = 100;
                 this.reporteCarga(resp);
-  
+
                 setTimeout(() => {
                   this.archivoCarga.proceso = 'result';
                 }, 800);
               }
             }, (error: HttpErrorResponse) => {
               this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
-  
+
             });
-  
+
             break;
         case 8:
           this.turnosRequest = new TurnoRequest();
@@ -747,7 +747,7 @@ export class CargaComponent implements OnInit {
           });
 
           break;
-       
+
         case 5:
 
           this.programasTSRequest = new ProgramaTSRequest();

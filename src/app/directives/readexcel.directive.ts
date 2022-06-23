@@ -21,7 +21,8 @@ export class ReadexcelDirective {
     const file = target.files[0];
 
     this.excelObservable = new Observable((subscriber: Subscriber<any>) => {
-      this.readFile(file, subscriber);
+      if(file)
+        this.readFile(file, subscriber);
     });
 
     this.excelObservable.subscribe((d) => {
