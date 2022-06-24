@@ -9,13 +9,10 @@ import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ControlArticulosService } from '../../services/control-articulos.service';
 import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
-<<<<<<< HEAD
-import { MatDialog } from '@angular/material/dialog'; 
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
-=======
 import { MatDialog } from '@angular/material/dialog';
->>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
+
 declare var $: any;
 @Component({
   selector: 'app-nuevo-control-articulos',
@@ -121,21 +118,17 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
         tipoUsuario: rolUser
       };
 
-<<<<<<< HEAD
+
     } else{
-=======
-    } else {
->>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
+
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue("Roberto García");
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");
     }
-<<<<<<< HEAD
 
 
- 
-=======
->>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
+
+
     this.servicios(); 
     this.horarioEntrega();
 
