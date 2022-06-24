@@ -1,17 +1,19 @@
-import { ControlArticulos } from '../../models/control-articulo.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ControlArticuloService } from '../../services/control-articulo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
-
+import * as momment from 'moment';
+import { ControlArticulosService } from '../../services/control-articulos.service';
+import { ControlArticulos } from 'src/app/trabajo-social/models/control-articulo.model';
+import { DatePipe } from '@angular/common';
 declare var $: any;
 
 @Component({
   selector: 'app-consulta-control-articulos',
   templateUrl: './consulta-control-articulos.component.html',
-  styleUrls: ['./consulta-control-articulos.component.css']
+  styleUrls: ['./consulta-control-articulos.component.css'],
+  providers: [DatePipe]
 })
 export class ConsultaControlArticulosComponent implements OnInit {
 
@@ -26,14 +28,16 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
-  public columnaId: string = 'fecFecha';
-
+  public columnaId: string = 'fecha';
+  public findCtrolArt: any[] = [];
+  public valores: ControlArticulos;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private Artservice: ControlArticuloService ,
+    private Artservice: ControlArticulosService ,
     private fb: FormBuilder,
+    private datePipe: DatePipe
   ) {
 
 
@@ -46,29 +50,55 @@ export class ConsultaControlArticulosComponent implements OnInit {
     });
   }
 
-  getNotasById(id: number) {
-    this.Artservice.getArticuloById(id).subscribe(
-      (res) => {
-        console.log(res);
-        this.tabla = res;
-      },
-      (httpErrorResponse: HttpErrorResponse) => {
-        console.error(httpErrorResponse);
-      }
-    );
+  getArticulosByFecha(): void {
+
+    const findCtrolArt = {
+     "bitacora":[{
+         "aplicativo":"",
+         "flujo":"",
+         "idUsuario":1,
+         "nombreUsuario":"",
+         "tipoUsuario":1
+     }],
+     "pagina":"1",
+     "fechaInicial": this.datesForm.get('fechaInicial')?.value,
+     "fechaFinal": this.datesForm.get('fechaFinal')?.value,
+     "clavePaciente":123456789
+   };
+ 
+   this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
+       (articulos: any) => {
+         console.log("CONTROL DE ARTICULOS: ", articulos);
+       try {
+         if (articulos) {
+           const ariculosJson = articulos.response;
+           ariculosJson.status == "OK" ? this.tabla = ariculosJson.listaControlArticulosDto : null;
+           console.log("CONTROL DE ARTICULOS: ", this.tabla );
+         }
+       }catch (error) {
+         console.error(error);
+       }
+     },
+     (httpErrorResponse: HttpErrorResponse) => {
+       console.error(httpErrorResponse);
+     }
+   );
+   this.dtOptions = {
+     order: [[2, 'desc']],
+     ordering: false,
+     paging: false,
+     processing: false,
+     info: false,
+     searching: false,
+   };
+   this.sortBy(this.columnaId, this.order, 'fecha');
   }
 
-  getNotasByFecha() {
-    this.Artservice.getArticulosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
-      (res) => {
-        if (res && res.ArrayList.length > 0) {
-          this.tabla = res.ArrayList;
-        }
-      },
-      (httpErrorResponse: HttpErrorResponse) => {
-        console.error(httpErrorResponse);
-      }
-    );
+  irDetalle(controlArticulos: ControlArticulos) {
+    let params = {
+      'controlArticulos': JSON.stringify(controlArticulos),
+    }
+    this.router.navigateByUrl("/detalle-control-articulos/" + controlArticulos.idCa)
   }
 
   ngAfterViewInit(): void {
@@ -112,18 +142,17 @@ export class ConsultaControlArticulosComponent implements OnInit {
       this.datesForm.get('fechaInicial')?.value !== '' &&
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
-      this.getNotasByFecha();
+      this.getArticulosByFecha();
     }
   }
 
 
   irNuevoRegistro() {
+    let params = {}
     this.router.navigateByUrl("/nuevo-control-articulos", { skipLocationChange: true });
   }
 
   sortBy(columnaId: string, order: string, type: string) {
-    console.log(columnaId, order, type);
-
     this.columnaId = columnaId;
     this.order = order;
 

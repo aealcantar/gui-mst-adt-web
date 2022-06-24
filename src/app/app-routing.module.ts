@@ -7,6 +7,7 @@ import { SeguridadRouter } from './seguridad/seguridad.router';
 import { RegistroComponent } from './seguridad/registro/registro.component';
 import { NuevoAvisoMpComponent } from './trabajo-social/avisos-mp/nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './trabajo-social/avisos-mp/consulta-aviso-mp/consulta-aviso-mp.component';
+import { ConsultaControlArticulosComponent } from './trabajo-social/control-articulos/consulta-control-articulos/consulta-control-articulos.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'recuperarpassword', component: RegistroComponent },
     { path: 'nuevo-aviso-mp', component: NuevoAvisoMpComponent },
     { path: 'consulta-aviso-mp', component: ConsultaAvisoMpComponent },
+    { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
   {
     path: 'agenda-digital',
     loadChildren: () =>

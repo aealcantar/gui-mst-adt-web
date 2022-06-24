@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ControlArticulos } from 'src/app/trabajo-social/models/control-articulo.model';
 
 
 @Injectable({
@@ -38,8 +39,6 @@ export class ControlArticulosService {
   }
 
 
-
-
   getHorarios() {
 
     try {
@@ -59,4 +58,16 @@ export class ControlArticulosService {
     { headers: headers, responseType: 'blob' as 'json'});
   }
 
+  getArticulosByFechas(controlArticulos: any) {
+
+    try {
+      return this.httpsClient.post<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/rango/fechas`, controlArticulos);
+    } catch (error) {
+      console.log("error")
+      return error;
+    }
+
+  }
+
+  
 }
