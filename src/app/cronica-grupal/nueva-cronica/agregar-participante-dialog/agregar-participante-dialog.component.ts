@@ -131,7 +131,7 @@ export class AgregarParticipanteDialogComponent implements OnInit {
             this.muestraAlerta(
               '¡La longitud del NSS no es correcta, favor de verificar!',
               'alert-danger',
-              'Error. ',
+              'Error',
             );
         }
     }
