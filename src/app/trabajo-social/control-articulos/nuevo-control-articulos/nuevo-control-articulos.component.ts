@@ -42,7 +42,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   listaDeHorarios: Array<any> = [];
 
   formNuevoArticulo: any = this.formBuilder.group({
-    clavePaciente:new FormControl(''),
+    clavePaciente: new FormControl(''),
     bitacora: new FormControl(this.bitacora, Validators.required),
     personalQueElaboro: new FormControl(''),
     idCa: new FormControl(''),
@@ -59,20 +59,20 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     ubicacion: new FormControl('', Validators.required),
     horarioEntregaArticulo: new FormControl('', Validators.required),
     resguardoFecha: new FormControl('', [Validators.required,
-      Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
+    Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
     resguardoHora: new FormControl('', [Validators.required,
-      Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
-          resguardoNombreRecibe: new FormControl('', Validators.required),
+    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    resguardoNombreRecibe: new FormControl('', Validators.required),
     resguardoNombreEntrega: new FormControl('', Validators.required),
-    recepcionFecha:new FormControl('', [Validators.required,
-      Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
+    recepcionFecha: new FormControl('', [Validators.required,
+    Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
     recepcionHora: new FormControl('', [Validators.required,
-      Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
     recepcionNombreRecibe: new FormControl('', Validators.required),
     recepcionNombreEntrega: new FormControl('', Validators.required),
     recepcionUbicacion: new FormControl('', Validators.required),
     recepcionHorarioEntregaArticulo: new FormControl('', Validators.required),
-  
+
   });
 
   datosAlert = {
@@ -82,31 +82,31 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   };
 
   paciente!: pacienteSeleccionado;
+  
   constructor(
     private formBuilder: FormBuilder,
     private controlArticulosService: ControlArticulosService,
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService,
     private dialog: MatDialog,
-    private tarjetaServce: AppTarjetaPresentacionService,
+    private tarjetaService: AppTarjetaPresentacionService,
 
   ) { }
 
   ngOnInit(): void {
     let userTmp = sessionStorage.getItem('usuario') || '';
-    this.paciente = this.tarjetaServce.get();
-    if(this.paciente!== null && this.paciente!== undefined ){
-      let nss=this.paciente.nss;
- 
-     this.formNuevoArticulo.controls['clavePaciente'].setValue(nss);
+    this.paciente = this.tarjetaService.get();
+    if (this.paciente !== null && this.paciente !== undefined) {
+      let nss = this.paciente.nss;
+      this.formNuevoArticulo.controls['clavePaciente'].setValue(nss);
     }
-   
+
 
     if (userTmp !== '') {
       let usuario = JSON.parse(userTmp);
       let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
-      let rolUser= usuario?.rolUser;
-   
+      let rolUser = usuario?.rolUser;
+
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue(nombre);
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue(nombre);
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);
@@ -119,22 +119,21 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       };
 
 
-    } else{
+    } else {
 
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue("Roberto García");
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");
     }
 
-
-
-
-    this.servicios(); 
+     this.servicios();
     this.horarioEntrega();
 
 
   }
 
+
+  //asignacion del calendario 
   ngAfterViewInit(): void {
     $('#fecha').datepicker({
       onSelect: (date: any, datepicker: any) => {
@@ -166,12 +165,9 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       .toPromise()
       .then(
         (res) => {
-          console.log("#33333333333333333333")
-          console.log(res);
           this.listaServicios = res;
         },
         (httpErrorResponse: HttpErrorResponse) => {
-          console.log("quepoas")
           console.error(httpErrorResponse);
         }
       );
@@ -181,7 +177,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   ubicacion(idServicio: string) {
     this.cronicaGrupalService.getCatLugar(idServicio).subscribe(
       (lugares) => {
-      
+
         this.listaUbicacion = lugares;
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -196,21 +192,19 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       try {
         let response = res.response;
         let estatus = response.status;
-        console.log(estatus)
         if (estatus == "OK") {
           this.listaDeHorarios = response.listaDeHorarios;
-
         } else {
           console.log(res)
         }
 
       } catch (error) {
-        console.log(res);
-        console.log(error)
+        console.error(res);
+        console.error(error)
       }
 
     }, (error: any) => {
-      console.log(error);
+      console.error(error);
     });
 
 
@@ -218,8 +212,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   //guarda los datos del formulario
   guardarControl() {
 
-   this.submitted = true;
-    console.log(this.formNuevoArticulo.value)
+    this.submitted = true; 
     if (this.formNuevoArticulo.status != "INVALID") {
       //validaciones para que los campos no vayan vacios 
       if (this.formNuevoArticulo.value.noCama.trim().length == 0 ? true : false) {
@@ -281,11 +274,11 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       if (this.formNuevoArticulo.value.noCama.trim().length == 0 ? true : false) {
         this.formNuevoArticulo.controls['recepcionUbicacion'].setValue(null);
         return;
-      } 
+      }
       if (this.formNuevoArticulo.value.noCama.trim().length == 0 ? true : false) {
-      this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].setValue(null);
-      return;
-    } 
+        this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].setValue(null);
+        return;
+      }
       let datos = this.formNuevoArticulo.value;
       console.log(datos)
       this.controlArticulosService.setControlArticulos(datos).subscribe((res: any) => {
@@ -300,9 +293,9 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
               'alert-success',
               'Success'
             );
-            //, { skipLocationChange: true }
+            //,
 
-            this.router.navigateByUrl("/detalle-control-articulos/" + id);
+            this.router.navigateByUrl("/detalle-control-articulos/" + id, { skipLocationChange: true });
 
           } catch (error) {
             this.muestraAlerta(
@@ -324,20 +317,18 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
           'alert-danger',
           'Error'
         );
-        console.log(error);
+        console.error(error);
       });
 
 
     } else {
       return;
     }
-    console.log(
-      this.formNuevoArticulo.controls.recepcionHorarioEntregaArticulo.errors
-    );
+     
 
   }
 
-//mmuestra un alert en caso correcto o incorrecto
+  //mmuestra un alert en caso correcto o incorrecto
   muestraAlerta(mensaje: string, estilo: string, type: string) {
 
     this.alert = {
@@ -363,10 +354,10 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       width: "450px",
       maxHeight: "350px"
     });
- 
+
   }
 
-//solo cierra la ventana emergente
+  //solo cierra la ventana emergente
   soloCerrarVentanaEmergente() {
     this.dialog.closeAll();
   }
@@ -405,14 +396,14 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       this.mostrarArticulos = false;
     } else {
       this.mostrarArticulos = true;
-    } 
+    }
   }
 
   //si selecciona un servicio diferente cambia la ubicacion
   onChangeServicio() {
     let idServicio = this.formNuevoArticulo.value.servicio;
     if (idServicio != '' && idServicio != null) {
-    //  idServicio = '1';
+      //  idServicio = '1';
       this.ubicacion(idServicio);
     }
   }

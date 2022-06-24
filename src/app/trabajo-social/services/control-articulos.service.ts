@@ -44,6 +44,7 @@ export class ControlArticulosService {
 
     try {
       return this.httpsClient.get<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/horarios`);
+                                                          
 
     } catch (error) {
       console.log("error")
@@ -52,11 +53,25 @@ export class ControlArticulosService {
 
   }
 
-
+  
   downloadPdf(data: any): Observable<Blob> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
-    return this.httpsClient.post<Blob>('http://localhost:8088/reporte/reporteCtrlArticulos', JSON.stringify(data),
-    { headers: headers, responseType: 'blob' as 'json'});
+   let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    return this.httpsClient.post<any>(`${environment.urlControlArticulos}/reporte/reporteCtrlArticulos`,JSON.stringify (data),{headers: headers, responseType: 'blob' as 'json' });
+;
+  }
+
+  getArticulosByFechas(controlArticulos: any) {
+
+    try {
+      return this.httpsClient.post<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/rango/fechas`, controlArticulos);
+    } catch (error) {
+      console.log("error")
+      return error;
+    }
+
   }
 
 }
