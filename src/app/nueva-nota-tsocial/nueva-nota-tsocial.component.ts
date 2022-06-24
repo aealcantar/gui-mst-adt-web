@@ -28,9 +28,9 @@ export class NuevaNotaTSocialComponent implements OnInit {
   nota!: Nota;
 
   formNuevaNota: any = this.formBuilder.group({
-    idTipoNota: [-1, Validators.required],
-    idRedApoyo: [-1, Validators.required],
-    idActividadTecnica: [-1, Validators.required],
+    idTipoNota: ['', Validators.required],
+    idRedApoyo: ['', Validators.required],
+    idActividadTecnica: ['', Validators.required],
     diagnosticoMedico: [null, Validators.required],
     redaccion: ['', Validators.required],
     diagnostico: ['', Validators.required],
