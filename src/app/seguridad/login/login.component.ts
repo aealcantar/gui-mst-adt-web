@@ -73,12 +73,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
-      this.aplicacion = resp;
-      console.log(" app " + this.aplicacion.cveUsuario);
-    }, (error: HttpErrorResponse) => {
-      console.error("Error: ", error);
-    });
+    // this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
+    //   this.aplicacion = resp;
+    //   console.log(" app " + this.aplicacion.cveUsuario);
+    // }, (error: HttpErrorResponse) => {
+    //   console.error("Error: ", error.message);
+    // });
   }
 
   public send(form: NgForm): void {
@@ -117,13 +117,17 @@ export class LoginComponent implements OnInit {
         // this.authService.login(this.usuario, this.aplicacion).subscribe(
         //   (result) => {
         //     console.log(result);
-            this.authService.getUserData(this.usuario.strEmail).subscribe(
-              (response: any) => {
-                this.authService.guardarUsuarioEnSesion(response);
-                this.authService.userLogged$.next(true);
-                this.authService.isAuthenticatedObs$.next(true);
-              }
-            );
+            // this.authService.getUserData(this.usuario.strEmail).subscribe(
+            //   (response: any) => {
+            //     this.authService.guardarUsuarioEnSesion(response);
+            //     this.authService.userLogged$.next(true);
+            //     this.authService.isAuthenticatedObs$.next(true);
+            //   }
+            // );
+            let usuario:any;
+            this.authService.guardarUsuarioEnSesion(usuario);
+            this.authService.userLogged$.next(true);
+            this.authService.isAuthenticatedObs$.next(true);
             // this.authService.guardarToken(result.access_token);
             // this.seguridadService.registrarUsuario(this.usuario);
             this.router.navigate(["/catalogos"], { skipLocationChange: true });

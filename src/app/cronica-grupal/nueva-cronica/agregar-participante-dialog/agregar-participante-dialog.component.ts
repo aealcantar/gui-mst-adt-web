@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Paciente } from 'src/app/models/paciente.model';
 import { Participante } from 'src/app/models/participante.model';
 import { ServiceService } from 'src/app/busqueda-nss/busqueda-nss.service';
-
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 declare var $: any;
 declare var $gmx: any;
 
@@ -30,6 +30,7 @@ export class AgregarParticipanteDialogComponent implements OnInit {
     public alertVisible: boolean = false;
     public alertTipo: string = "";
     public errorBusqueda: boolean = false;
+    alert!: AlertInfo;
 
     public editForm: FormGroup = this.fb.group({
         nssPaciente: [null,
@@ -93,8 +94,10 @@ export class AgregarParticipanteDialogComponent implements OnInit {
                     }
 
                 }, error: (err) => {
-                    this.muestraAlerta('<strong>Error de red.</strong> No fue posible conectar con la API de busqueda',
-                        'alert-danger', null
+                    this.muestraAlerta(
+                      'No fue posible conectar con la API de busqueda',
+                      'alert-danger',
+                      'Error de red. ',
                     );
                     console.log(err);
                     this.errorBusqueda = true;
@@ -125,8 +128,10 @@ export class AgregarParticipanteDialogComponent implements OnInit {
                 }
             });
         } else {
-            this.muestraAlerta('<strong>Error.</strong>¡La longitud del NSS no es correcta, favor de verificar!',
-                'alert-danger', null
+            this.muestraAlerta(
+              '¡La longitud del NSS no es correcta, favor de verificar!',
+              'alert-danger',
+              'Error. ',
             );
         }
     }
@@ -194,20 +199,25 @@ export class AgregarParticipanteDialogComponent implements OnInit {
         return this.otrosForm.get("nombres") as FormArray
     }
 
-    muestraAlerta(mensaje: string, estilo: string, funxion: any) {
+    muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+      this.alert = new AlertInfo;
+      this.alert = {
 
-        this.alertMensaje = mensaje;
-        this.alertTipo = estilo;
-        this.alertVisible = true;
-
-        setTimeout(() => {
-            this.alertMensaje = mensaje;
-            this.alertTipo = estilo;
-            this.alertVisible = false;
-
-            if (funxion != null) {
-                funxion();
-            }
-        }, 5000);
+        message: mensaje,
+        type: estilo,
+        visible: true,
+        typeMsg: tipoMsj
+      };
+      setTimeout(() => {
+        this.alert = {
+          message: '',
+          type: 'custom',
+          visible: false,
+        };
+        if(funxion != null){
+          funxion();
+        }
+      }, 2000);
     }
+
 }

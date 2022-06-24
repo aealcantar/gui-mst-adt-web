@@ -1,7 +1,10 @@
-<div *ngIf="alert">
-    <div *ngIf="alert.visible || undefined" class="alert alert-dismissible alertCompl" [ngClass]="alert.tipo" style="z-index: 9999">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        <div [innerHTML]="alert.mensaje"></div>
+<div *ngIf="alert" style="position: absolute; width: 100%;z-index: 9999;">
+  <div *ngIf="alert.visible || undefined" class="alert alert-dismissible alert-base" [ngClass]="alert.type">
+    <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close">
+      <img [src]="getimage(alert.type)">
+    </button>
+    <div  style="width: 100%;" class="mensaje">
+      <strong *ngIf="alert?.typeMsg">{{alert?.typeMsg}}.</strong> {{alert.message}}
     </div>
+  </div>
 </div>
