@@ -244,7 +244,11 @@
               formControlName="ubicacion"
               name="ubicacion"
             >
+<<<<<<< HEAD
               <option [value]="''" selected disabled>Seleccionar ubicación</option>
+=======
+              <option [value]="''" selected>Seleccionar ubicación</option>
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               <option
                 class="select-font"
                 [value]="item.cve_ubicacion"
@@ -272,7 +276,11 @@
               id="horarioEntregaArticulo"
               formControlName="horarioEntregaArticulo"
             >
+<<<<<<< HEAD
               <option [value]="''" selected disabled>Seleccionar horario</option>
+=======
+              <option [value]="''" selected>Seleccionar horario</option>
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               <option
                 class="select-font"
                 [value]="item.idHorario"
@@ -347,7 +355,11 @@
                 >Hora*:</label
               >
               <input
+<<<<<<< HEAD
                 type="text"
+=======
+                type="time"
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
                 [ngClass]="{
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.resguardoHora.errors
@@ -432,11 +444,16 @@
                 class="calendario form-control"
                 formControlName="recepcionFecha"
                 id="recepcionFecha"
+<<<<<<< HEAD
                 type="text" 
                 placeholder="Ingresar fecha"
                 ng-pattern="/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/"
              
                 
+=======
+                type="text"
+                placeholder="dd/mm/aaaa"
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img
@@ -461,7 +478,11 @@
                 >Hora*:</label
               >
               <input
+<<<<<<< HEAD
                 type="text"
+=======
+                type="time"
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
                 [ngClass]="{
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.recepcionHora.errors
@@ -498,7 +519,10 @@
               class="form-control"
               formControlName="recepcionNombreRecibe"
               id="recepcionNombreRecibe"
+<<<<<<< HEAD
               placeholder="Nombre de quien recibió"
+=======
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               maxlength="150"
             />
             <small
@@ -551,7 +575,11 @@
               id="ubicacion"
               formControlName="recepcionUbicacion"
             >
+<<<<<<< HEAD
               <option [value]="''" selected disabled>Seleccionar ubicación</option>
+=======
+              <option [value]="''" selected>Seleccionar ubicación</option>
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               <option
                 class="select-font"
                 [value]="item.cve_ubicacion"
@@ -621,30 +649,44 @@
   </div>
 </app-card-template>
 <app-trabajador-social-clinico></app-trabajador-social-clinico>
+<<<<<<< HEAD
 <ng-template  #cancelarModal>
 
    
     <div class="col-sm m-3 text-center">
       <img src="assets/images/Group 2082.png" class="Group-2082" alt="">
       <div class="modal-title Atencin pt-3">Atención</div>
+=======
+
+<ng-template #cancelarModal>
+  <div class="col-sm m-3 text-center">
+    <img src="assets/images/Group 2082.png" class="Group-2082" alt="" />
+    <div class="modal-title Atencin pt-3">Atención</div>
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
   </div>
   <div class="lineaSeparador"></div>
-  <div class="col-sm text-center mt-4 mb-4">      
-    <label class="tituloModal  fontEmergenteTitle">¿Desea salir sin guardar</label>
-    <br>
-    <label class="fontEmergenteTitle"> los cambios?</label> 
-    <br><br>
-</div>
-<div class="col-sm text-center mb-4">
- 
-  <button    class="btn btn-danger btuser"
-  type="button" (click)="soloCerrarVentanaEmergente()" >
-    Cancelar
-  </button>
-  <button type="button"  (click)="cancelarSinGuardar()" class="btn btn-primary buttonL btnGuardar">
-    Aceptar
-  </button>
-</div>
-
+  <div class="col-sm text-center mt-4 mb-4">
+    <label class="tituloModal fontEmergenteTitle"
+      >¿Desea salir sin guardar</label
+    >
+    <br />
+    <label class="fontEmergenteTitle"> los cambios?</label>
+    <br /><br />
+  </div>
+  <div class="col-sm text-center mb-4">
+    <button
+      class="btn btn-danger btuser"
+      type="button"
+      (click)="soloCerrarVentanaEmergente()"
+    >
+      Cancelar
+    </button>
+    <button
+      type="button"
+      (click)="cancelarSinGuardar()"
+      class="btn btn-primary buttonL btnGuardar"
+    >
+      Aceptar
+    </button>
+  </div>
 </ng-template>
-

@@ -9,9 +9,13 @@ import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ControlArticulosService } from '../../services/control-articulos.service';
 import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
+<<<<<<< HEAD
 import { MatDialog } from '@angular/material/dialog'; 
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+=======
+import { MatDialog } from '@angular/material/dialog';
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
 declare var $: any;
 @Component({
   selector: 'app-nuevo-control-articulos',
@@ -46,8 +50,12 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     personalQueElaboro: new FormControl(''),
     idCa: new FormControl(''),
     noFolioControl: new FormControl(''),
+<<<<<<< HEAD
     fecha: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
+=======
+    fecha: new FormControl('', Validators.required),
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
     noCama: new FormControl('', Validators.required),
     servicio: new FormControl('', Validators.required),
     telefono: new FormControl('', Validators.required),
@@ -117,14 +125,21 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
         tipoUsuario: rolUser
       };
 
+<<<<<<< HEAD
     } else{
+=======
+    } else {
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue("Roberto García");
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue("Roberto García");
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");
     }
+<<<<<<< HEAD
 
 
  
+=======
+>>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
     this.servicios(); 
     this.horarioEntrega();
 
