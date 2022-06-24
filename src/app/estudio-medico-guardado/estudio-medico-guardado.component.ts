@@ -96,8 +96,14 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     );
   }
 
-  getNombreOcupacion(idOcupacion: number) {
-    return this.ocupaciones.find(c => c.id_OCUPACION === idOcupacion)?.nom_OCUPACION;
+  getNombreOcupacion(idOcupacion: number | string) {
+    let idOcupacionConverted: number;
+    if (typeof idOcupacion === 'string') {
+      idOcupacionConverted = Number(idOcupacion);
+    } else if (typeof idOcupacion === 'number') {
+      idOcupacionConverted = idOcupacion;
+    }
+    return this.ocupaciones.find(e => e.id_OCUPACION === idOcupacionConverted)?.nom_OCUPACION;
   }
 
   getNombreEstadoCivil(idEstadoCivil: number | string) {
@@ -138,7 +144,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   imprimir() {
     let reporteEstudioMedicoSocial: any = {
       ooad: "CDMX NORTE",
-      unidad: "HGZ 48 SAN PEDRO XALAPA",
+      unidad: "UMF " + this.pacienteSeleccionado.unidadMedica,
       turno: this.pacienteSeleccionado.turno === "M" ? "MATUTINO" : "VESPERTINO",
       servicio: "GRUPO",
       cvePtal: "35E1011D2153",
@@ -146,9 +152,9 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       aMedico: this.pacienteSeleccionado.agregadoMedico,
       nombrePaciente: this.pacienteSeleccionado.paciente.toUpperCase(),
       curp: this.pacienteSeleccionado.curp,
-      unidad2: this.pacienteSeleccionado.unidadMedica,
+      unidad2: "UMF " + this.pacienteSeleccionado.unidadMedica,
       consultorio: this.pacienteSeleccionado.consultorio,
-      edad: this.pacienteSeleccionado.edad + "años " + this.convertDate(this.pacienteSeleccionado.fechaNacimiento),
+      edad: this.pacienteSeleccionado.edad + " años " + this.convertDate(this.pacienteSeleccionado.fechaNacimiento),
       sexo: this.pacienteSeleccionado.sexo === "M" ? "Masculino" : "Femenino",
       calle: this.estudioMedico.nomVialidad,
       numeroInt: this.estudioMedico.numInterior,
