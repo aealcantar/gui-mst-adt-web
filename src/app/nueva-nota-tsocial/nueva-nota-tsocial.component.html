@@ -77,7 +77,7 @@
               <select class="form-control select"
                 [ngClass]="{'form-control-error': formNuevaNota.controls?.idTipoNota?.dirty && formNuevaNota.controls?.idTipoNota?.errors }"
                 formControlName="idTipoNota" id="idTipoNota" aria-label="Servicio">
-                <option class="select-font" [value]="'-1'" selected>Ingresar tipo de nota</option>
+                <li class="select-font" [value]="'-1'" selected>Ingresar tipo de nota</li>
                 <option class="select-font" [value]="item.id" *ngFor="let item of catTiposNotas">
                   {{ item.descripcion }}
                 </option>

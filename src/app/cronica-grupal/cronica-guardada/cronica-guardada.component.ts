@@ -1,9 +1,9 @@
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, timer } from "rxjs";
 import { map, share } from "rxjs/operators";
 import { DatePipe } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
-import { objAlert } from 'src/app/common/alerta/alerta.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 
@@ -15,7 +15,7 @@ import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 
 export class CronicaGuardadaComponent implements OnInit, OnDestroy {
 
-  alert!: objAlert;
+  alert!: AlertInfo;
 
   time = new Date();
   rxTime = new Date();
@@ -39,7 +39,7 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
     this.muestraAlerta(
       '¡La información se guardó con éxito!',
       'alert-success',
-      'Éxito',
+      '',
     );
     // this.showSucces("¡La información se guardó con éxito!");
     this.route.queryParamMap.subscribe((params: any) => {
@@ -64,7 +64,7 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
   }
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
-    this.alert = new objAlert;
+    this.alert = new AlertInfo;
     this.alert = {
       message: mensaje,
       type: estilo,
