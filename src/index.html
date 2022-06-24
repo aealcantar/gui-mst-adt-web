@@ -15,6 +15,9 @@
     #ui-datepicker-div {
       z-index: 999 !important;
     }
+    .ui-datepicker .ui-datepicker-header {
+      background-color: #9D2449 !important;
+    }
   </style>
 </head>
 
@@ -24,8 +27,8 @@
   <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
   <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
   <script>
-    nIntervId = setInterval(function(){
-      if(document.querySelector(".main-footer")){
+    nIntervId = setInterval(function () {
+      if (document.querySelector(".main-footer")) {
         document.querySelector(".main-footer").remove();
         clearInterval(nIntervId);
       }
@@ -36,7 +39,7 @@
       $('#calendarCronica').datepicker();
       $('#notasInit').datepicker();
       $('#notasFinal').datepicker();
-	  $('#volantesInit').datepicker();
+      $('#volantesInit').datepicker();
       $('#volantesFinal').datepicker();
       $('#avisompFec').datepicker();
       $('#avisompIng').datepicker();
@@ -44,6 +47,7 @@
       $('#calendarCESM2').datepicker();
       $('#calendarCESM3').datepicker();
     });
+
   </script>
 </body>
 <footer>

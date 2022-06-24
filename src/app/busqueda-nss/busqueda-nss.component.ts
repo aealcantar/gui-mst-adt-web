@@ -4,6 +4,7 @@ import { pacienteSeleccionado } from './paciente.interface';
 import { Router } from '@angular/router';
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import * as momment from 'moment';
+import { AuthService } from '../service/auth-service.service';
 
 @Component({
   selector: 'app-busqueda-nss',
@@ -40,8 +41,12 @@ export class BusquedaNssComponent {
   constructor(
     private ServiceService: ServiceService,
     private router: Router,
-    private tarjetaService: AppTarjetaPresentacionService
-  ) { }
+    private tarjetaService: AppTarjetaPresentacionService,
+    private authService: AuthService
+  ) {
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+   }
 
   elementoSeleccionado(elemento: any) {
     this.pacienteSeleccionado = elemento;

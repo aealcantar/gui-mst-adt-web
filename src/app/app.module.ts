@@ -176,8 +176,8 @@ registerLocaleData('es');
         tokenGetter: function tokenGetter() {
           return sessionStorage.getItem('token');
         },
-        allowedDomains: ['localhost:4200', 'localhost:8080', 'localhost:8081', 'localhost:8082'],
-        disallowedRoutes: ['http://localhost:8080/login', 'http://localhost:8081/login']
+        // allowedDomains: ['localhost:4200', 'localhost:8080', 'localhost:8081', 'localhost:8082'],
+        // disallowedRoutes: ['http://localhost:8080/login', 'http://localhost:8081/login']
       }
     })
   ],
