@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  msmtsPacientes: 'http://localhost:8080/api/busquedanss/',
+  msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
   urlServOauth: 'http://localhost:8081',
   urlServCronicasReporte: 'http://localhost:8082',
  // urlServCatalogos: 'http://localhost:8084',
@@ -22,6 +22,7 @@ export const environment = {
   urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
   urlMSEDSCatalogos: 'http://localhost:8085/api/',
   urlMSADTCITAS: 'http://localhost:8090/api/', 
+  urlControlArticulos:'http://localhost:8088'
   
 };
 

@@ -1,0 +1,134 @@
+<div class="bg">
+  <app-menu [activeItem]="1"></app-menu>
+</div>
+<app-card-template style=" width: 1217px; height: 654px;">
+  <div header class="flex justify-content-between row">
+    <div class="col-md-5" style="padding-right: 46.7%;">
+      <div style="display: grid; text-align: left;">
+        <span class="pacienteNombreSpan">{{"Consulta crónica grupal"}}  </span>
+      </div>
+    </div>
+    <div class="col-md-4 ">
+      <div style=" clear:bloth; white-space: nowrap;">
+        <span class="tituloDosSpam" style="white-space: nowrap;display:block; text-align: left;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{today | date: "EEEE" }} {{ day }} de {{ month }} de {{ year }} {{ this.cronica?.timHora}} </span>
+      </div>
+    </div>
+    <div class="col-md-3" style="text-align: right;">
+      <div style="display: grid; white-space: nowrap; text-align: left; display:block;">
+        <span class="tituloTresSpam" style="white-space: nowrap;display:block; text-align: left;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cronica?.desEspecialidad}}</span>
+      </div>
+    </div>
+  </div>
+  <div subHeader class="flex justify-content-between align-items-center subHeader" style="margin-top: -30;">
+    <div style="width: 7%">
+      <div class="divAmarillo">
+        <img style="width: 75px;   box-shadow: 4px 4px 15px 0 rgb(0 0 0 / 20%);"
+          src="../../../../assets/hu003-tarjeta/cronicaGrupal2.ico" class="divMenuHamburg">
+      </div>
+    </div>
+
+    <div class="pacienteDetalleDiv">
+      <div style="display: grid; width: 90px;  margin-left: 10px;">
+        <span class="unidadSpan">{{ cronica?.desEspecialidad }}</span>
+        <span class="detalleDescrip">{{ "Servicio" }}</span>
+      </div>
+
+      <div class="Rectangle-12052"></div>
+
+      <div style="display: grid; width: 123px">
+        <span class="unidadSpan">{{ cronica?.desGrupo }}</span>
+        <span class="detalleDescrip">{{ "Grupo" }}</span>
+      </div>
+
+      <div class="Rectangle-12052"></div>
+
+      <div style="display: grid; width: 95px">
+        <span class="unidadSpan">{{ cronica?.desUbicacion }}</span>
+        <span class="detalleDescrip">{{ "Lugar" }}</span>
+      </div>
+
+      <div class="Rectangle-12052"></div>
+
+      <div style="display: grid; width: 83px">
+        <span class="unidadSpan">{{ cronica?.desModalidad }}</span>
+        <span class="detalleDescrip">{{ "Modalidad" }}</span>
+      </div>
+
+      <div class="Rectangle-12052"></div>
+
+      <div style="display: grid; width: 290px">
+        <span class="unidadSpan">{{ cronica?.descPonentes }}</span>
+        <span class="detalleDescrip">{{ "Ponentes" }}</span>
+      </div>
+
+      <div class="Rectangle-12052"></div>
+
+      <div style="display: grid; width: 134px">
+        <span class="unidadSpan">{{ catalogoEstatus[cronica?.idEstatusCronica] }}</span>
+        <span class="detalleDescrip">{{ "Estatus" }}</span>
+      </div>
+      <div style="display: grid; width: 184px">
+        <span class="unidadSpan">{{ cronica?.numTotalParticipantes }}</span>
+        <span class="detalleDescrip">{{ "Numero de Participantes" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div content style="padding-bottom: 5.5%;">
+    <div class="Rectangle-306" style="background-color: white">
+      <div class="Texto-arriba" style="background-color: white">
+        <div class="Texto-derecha" style="background-color: white">
+          <label style="font-weight: bold;font-size: 16px;">
+            Técnica Didáctica:
+          </label>
+          <label class="textoCuatro">
+            {{ cronica?.desTecnicaDidactica }}
+          </label>
+          <br>
+          <br>
+
+          <label style="font-weight: bold;font-size: 16px;">
+            Objetivos de la sesión:
+          </label>
+          <label class="textoCuatroIzquierdo">
+            {{ cronica?.desObjetivosSesion }}
+          </label>
+          <br>
+          <br>
+
+          <label style="font-weight: bold;font-size: 16px;">
+            Perfil del grupo:
+          </label>
+          <label class="textoCuatroIzquierdo">
+            {{ cronica?.desPerfilGrupo }}
+          </label>
+          <br>
+          <br>
+
+        </div>
+        <div class="Texto-izquierda" style="background-color: white">
+          <label style="font-weight: bold;font-size: 16px;">
+            Desarrollo de la sesión:
+          </label>
+          <label class="textoCuatroDerecho">
+            {{ cronica?.desDesarrolloSesion }}
+          </label>
+          <br>
+          <br>
+          <label style="font-weight: bold;font-size: 16px;">
+            Observaciones:
+          </label>
+          <label class="textoCuatroDerecho" style="z-index: 100;">
+            {{ cronica?.desObservaciones }}
+          </label>
+        </div>
+      </div>
+      <div class="botones" style="margin-top: 4.8%;">
+        <button class="btn btn-danger btuser buttonL" style="border: solid 1px #b38e5d;" (click)="cancelar();">Cancelar</button>
+        <button class="btn btn-primary btuser buttonL" style="border: solid 1px #9d2449;" (click)="imprimir();">Imprimir</button>
+      </div>
+    </div>
+  </div>
+</app-card-template>
+
+<app-info-bottom></app-info-bottom>

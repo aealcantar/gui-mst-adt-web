@@ -5,8 +5,7 @@ import { LoginData } from './login/login-data.model';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Usuario } from '../models/usuario.model';
-
+import { Usuario } from '../shared-modules/models/usuario.model';
 
 
 @Injectable()

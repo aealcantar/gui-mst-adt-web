@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
- 
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ControlArticulosService {
 
-  constructor(private httpsCliente:HttpClient) { }
+  constructor(private httpsClient: HttpClient) { }
 
-  
-  setControlArticulos(datos:any){
- 
+
+  setControlArticulos(datos: any) {
+
     try {
-      return this.httpsCliente.post<any>(`${environment.urlServEstudioMedicos}/msmts-ctrl-articulos/api/insert`,datos);
-     
+      return this.httpsClient.post<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/insert`, datos);
+
     } catch (error) {
       console.log("error")
       return error;
@@ -23,11 +25,11 @@ export class ControlArticulosService {
 
   }
 
-  getDetalleControlArticulos(datos:any){
-    
+  getDetalleControlArticulos(datos: any) {
+
     try {
-      return this.httpsCliente.post<any>(`${environment.urlServEstudioMedicos}/msmts-ctrl-articulos/api/idCa`,datos);
-     
+      return this.httpsClient.post<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/idCa`, datos);
+
     } catch (error) {
       console.log("error")
       return error;
@@ -35,12 +37,14 @@ export class ControlArticulosService {
 
   }
 
-  
-  getHorarios(){
-    
+
+
+
+  getHorarios() {
+
     try {
-      return this.httpsCliente.get<any>(`${environment.urlServEstudioMedicos}/msmts-ctrl-articulos/api/horarios`);
-     
+      return this.httpsClient.get<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/horarios`);
+
     } catch (error) {
       console.log("error")
       return error;
@@ -48,5 +52,11 @@ export class ControlArticulosService {
 
   }
 
+
+  downloadPdf(data: any): Observable<Blob> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
+    return this.httpsClient.post<Blob>('http://localhost:8088/reporte/reporteCtrlArticulos', JSON.stringify(data),
+    { headers: headers, responseType: 'blob' as 'json'});
+  }
 
 }

@@ -367,28 +367,28 @@ select.captura.lugar {
 }
 
 
-.mat-dialog-container{
-  border-radius: 10px  10px  10px  10px !important;
+.mat-dialog-container {
+  border-radius: 10px 10px 10px 10px !important;
 }
 
-.fontEmergenteTitle{
-  
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 22px;
-text-align: center;
+.fontEmergenteTitle {
 
-color: #000000;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+
+  color: #000000;
 }
 
-.lineaSeparador{
+.lineaSeparador {
   left: 0.4%;
   right: 0%;
   top: 33.23%;
   bottom: 66.72%;
-  
+
   border: 1px solid #CCCCCC;
   transform: matrix(1, 0, 0, 1, 0, 0);
 }

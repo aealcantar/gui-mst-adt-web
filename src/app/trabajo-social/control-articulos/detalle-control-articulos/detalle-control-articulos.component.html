@@ -1,6 +1,4 @@
-<app-datos-generales-usuario></app-datos-generales-usuario>
-<app-menu></app-menu>
-<app-datos-generales-paciente></app-datos-generales-paciente>
+<app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
   <div
     header
@@ -15,7 +13,7 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-2 form-group pt-5">
           <span class="labels pb-1">Número de folio:</span>
-          <span class="labelDetail"> {{ detalle.noFolio }}</span>
+          <span class="labelDetail"> {{ detalle.noFolioControl }}</span>
         </div>
         <div class="col-sm-2 form-group pt-5">
           <span class="labels pb-1">Fecha:</span>
@@ -66,12 +64,12 @@
           <span class="labels pb-1"
             >Nombre de quien recibe Trabajador(a) Social:</span
           >
-          <span class="labelDetail"> {{ detalle.nombreTrabajadorRecibe }}</span>
+          <span class="labelDetail"> {{ detalle.trabajadorNombreRecibe }}</span>
         </div>
         <div class="col-sm-6 form-group">
           <span class="labels pb-1">Nombre de quién entrega Enfermería*:</span>
           <span class="labelDetail">
-            {{ detalle.nombreEntregaEnfermeria }}</span
+            {{ detalle.enfermeriaNombreEntrega }}</span
           >
         </div>
       </div>
@@ -82,7 +80,7 @@
         </div>
         <div class="col-sm-6 form-group pt-5">
           <span class="labels pb-1">Horario para entrega de artículos*:</span>
-          <span class="labelDetail"> {{ detalle.horario }}</span>
+          <span class="labelDetail"> {{ detalle.horarioEntregaArticulo }}</span>
         </div>
       </div>
     </div>
@@ -100,21 +98,21 @@
       <div class="row pl-5 pr-5">
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.fechaResguardo }}</span>
+          <span class="labelDetail"> {{ detalle.resguardoFecha }}</span>
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Hora:</span>
-          <span class="labelDetail"> {{ detalle.horaResguardo }}</span>
+          <span class="labelDetail"> {{ detalle.resguardoHora }}</span>
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Recibió:</span>
-          <span class="labelDetail"> {{ detalle.recibioResguardo }}</span>
+          <span class="labelDetail"> {{ detalle.resguardoNombreRecibe }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mb-5">
         <div class="col-sm-6 form-group pt-3">
           <span class="labels pb-1">Entregó*:</span>
-          <span class="labelDetail"> {{ detalle.entregoResguardo }}</span>
+          <span class="labelDetail"> {{ detalle.resguardoNombreEntrega }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mt-5">
@@ -125,29 +123,29 @@
       <div class="row pl-5 pr-5">
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.fechaRecepcion }}</span>
+          <span class="labelDetail"> {{ detalle.recepcionFecha }}</span>
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Hora:</span>
-          <span class="labelDetail"> {{ detalle.horaRecepcion }}</span>
+          <span class="labelDetail"> {{ detalle.recepcionHora }}</span>
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Recibió:</span>
-          <span class="labelDetail"> {{ detalle.recibioRecepcion }}</span>
+          <span class="labelDetail"> {{ detalle.recepcionNombreRecibe }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mb-5">
         <div class="col-sm-4 form-group pt-3">
           <span class="labels pb-1">Entregó*:</span>
-          <span class="labelDetail"> {{ detalle.entregoRececpion }}</span>
+          <span class="labelDetail"> {{ detalle.recepcionNombreEntrega }}</span>
         </div>
         <div class="col-sm-4 form-group pt-3">
           <span class="labels pb-1">Ubicación:</span>
-          <span class="labelDetail"> {{ detalle.ubicacionRecepcion }}</span>
+          <span class="labelDetail"> {{ detalle.recepcionUbicacion }}</span>
         </div>
         <div class="col-sm-4 form-group pt-3">
           <span class="labels pb-1">Horario para entregar artículos:</span>
-          <span class="labelDetail"> {{ detalle.horarioRecepcion }}</span>
+          <span class="labelDetail"> {{ detalle.recepcionHorarioEntregaArticulo }}</span>
         </div>
       </div>
     </div>

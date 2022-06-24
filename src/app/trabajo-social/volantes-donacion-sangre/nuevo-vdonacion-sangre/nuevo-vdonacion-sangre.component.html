@@ -1,0 +1,255 @@
+<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-card-template>
+  <div header class="nuevoVolanteDeDonacionSangre">
+    <span class="spantitulo">
+      Nuevo Volante de donación de sangre
+    </span>
+  </div>
+  <div content>
+    <div>
+      <span class="instrucciones">
+        Por favor capture los siguientes datos:
+      </span>
+    </div>
+    <form novalidate class="formInfo">
+      <div class="container seccion">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <span class="spanInput">Unidad médica hospitalaria*:</span>
+              <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
+                placeholder="Ingresar unidad médica hostalaria" type="text" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha*:</span>
+              <input notasInit class="form-control" id="notasInit" type="text" placeholder="Ingresar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="instrucciones">
+            Para asistir al banco de sangre
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <span class="spanInput">Nombre del Banco de Sangre*:</span>
+              <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">
+                  Ingresar nombre</option>
+                <option class="select-font" [value]="1">BAnco de sangre 1</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <span class="spanInput">Horario de atención*:</span>
+            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
+                inicial</option>
+              <option class="select-font" [value]="1">10:00:00</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <br>
+            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
+                final</option>
+              <option class="select-font" [value]="1">10:00:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <span class="spanInput">C&oacute;digo Postal*::</span>
+            <input class="form-control matricula" id="txtconsulta" formControlName="desTecnicaDidactica"
+              placeholder="Ingresar código postal" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Estado*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
+              type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Delegación/Municipio*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
+              type="text" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <span class="spanInput">Ciudad*:</span>
+            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="Ingresar ciudad" selected [value]="'-1'">Ingresar
+                ciudad</option>
+              <option class="select-font" [value]="1">ciudad 1</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Colonia*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar colonia" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Calle*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar calle" type="text" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span class="spanInput">N&uacute;ro exterior*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
+              placeholder="Ingresar n&uacute;mero" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">N&uacute;ro interior*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar n&uacute;mero" type="text" />
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+      <div class="container seccion">
+        <div>
+          <span class="instrucciones">
+            Datos del paciente
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span class="spanInput">Nombre:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar nombre" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">No. de Seguridad Social y agregado:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar no. de seguridad social" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Servicio*:</span>
+            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Ingresar
+                nombre del servicio</option>
+              <option class="select-font" [value]="1">Servicio 1</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha internamiento*:</span>
+              <input class="form-control" formControlName="fecha" id="notasFinal" type="text" placeholder="Ingresar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha cirugia*:</span>
+              <input class="form-control" formControlName="fecha" id="calendarCronica" type="text" placeholder="Ingresar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Teléfono:</span>
+            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Ingresar
+                telefono</option>
+              <option class="select-font" [value]="1">10:00:00</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="container seccion">
+        <div>
+          <span class="instrucciones">
+            Datos del Trabajador social
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span class="spanInput">Nombre completo*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
+              placeholder="Ingresar nombre" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Matr&iacute;cula*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar matr&iacute;cula" type="text" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Teléfono*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar t&eacute;" type="text" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span class="spanInput">Observaciones*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
+              placeholder="Ingresar observaciones" type="text" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="instrucciones">
+          *Campos obligatorios
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-md-12 divBotones">
+          <button class="btn btn-primary buttonL btnGuardar">
+            Guardar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="modalcarga()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-card-template>
+
+<div class="modal fade" role="dialog" id="content" #content>
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header text-center modalAtencion" fxLayoutAlign="space-between center" fxLayout="column">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="lineaSeparador"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+
+        <label class="tituloModal textConfirmacion">¿Desea salir sin guardar</label>
+        <br>
+        <label class="textConfirmacion"> los cambios?</label>
+      </div>
+      <div class="col-md12 row divBtnModal">
+        <div class="col-md10" width="495px" height="118px" aling="center" style="padding-right: 20%;">
+          <button type="button" (click)="salirModal()" class="btn btn-primary buttonL btnGuardar">
+            Aceptar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="cancelarModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- <app-trabajador-social-clinico></app-trabajador-social-clinico> -->
