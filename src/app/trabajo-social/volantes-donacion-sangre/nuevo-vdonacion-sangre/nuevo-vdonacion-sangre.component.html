@@ -4,7 +4,7 @@
 <app-card-template>
   <div header class="nuevoVolanteDeDonacionSangre">
     <span class="spantitulo">
-      Nuevo Volante de donación de sangre
+      Nuevo volante de donación de sangre
     </span>
   </div>
   <div content>
@@ -20,7 +20,7 @@
             <div class="form-group">
               <span class="spanInput">Unidad médica hospitalaria*:</span>
               <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
-                placeholder="Ingresar unidad médica hostalaria" type="text" />
+                placeholder="Ingresar unidad médica hostalaria" type="text" maxlength="100" />
             </div>
           </div>
           <div class="col-md-4">
@@ -40,19 +40,17 @@
         </div>
         <div class="row">
           <div class="col-md-8">
-            <div class="form-group">
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
               <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">
+                <option class="select-font optionSelect" placeholder="Ingresar nombre" selected [value]="'-1'">
                   Ingresar nombre</option>
-                <option class="select-font" [value]="1">BAnco de sangre 1</option>
+                <option class="select-font" [value]="1">Banco de sangre 1</option>
               </select>
-            </div>
-          </div>
+           </div>
           <div class="col-md-2">
             <span class="spanInput">Horario de atención*:</span>
             <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
+              <option class="select-font optionSelect" placeholder="Horario inicial" selected [value]="'-1'">Horario
                 inicial</option>
               <option class="select-font" [value]="1">10:00:00</option>
             </select>
@@ -60,7 +58,7 @@
           <div class="col-md-2">
             <br>
             <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
+              <option class="select-font optionSelect" placeholder="Horario final" selected [value]="'-1'">Horario
                 final</option>
               <option class="select-font" [value]="1">10:00:00</option>
             </select>
@@ -71,17 +69,23 @@
           <div class="col-md-4">
             <span class="spanInput">C&oacute;digo Postal*::</span>
             <input class="form-control matricula" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar código postal" type="text" />
+              placeholder="Ingresar código postal" type="text" maxlength="10" />
           </div>
           <div class="col-md-4">
             <span class="spanInput">Estado*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
-              type="text" />
+            <select class="form-control styleselect" formControlName="estado" aria-label="Servicio">
+               <option class="select-font optionSelect" placeholder="Seleccionar estado" selected [value]="'-1'">
+                Seleccionar estado</option>
+              <option class="select-font" [value]="1">Estado 1</option>
+            </select>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Delegación/Municipio*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
-              type="text" />
+            <select class="form-control styleselect" formControlName="municipio" aria-label="Servicio">
+               <option class="select-font optionSelect" placeholder="Seleccionar delegación o municipio" selected [value]="'-1'">
+                Seleccionar delegación o municipio</option>
+              <option class="select-font" [value]="1">Municipio 1</option>
+            </select>
           </div>
         </div>
 
@@ -91,30 +95,30 @@
             <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
               <option class="select-font optionSelect" placeholder="Ingresar ciudad" selected [value]="'-1'">Ingresar
                 ciudad</option>
-              <option class="select-font" [value]="1">ciudad 1</option>
+              <option class="select-font" [value]="1">Ciudad 1</option>
             </select>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Colonia*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar colonia" type="text" />
+              placeholder="Ingresar colonia" type="text" maxlength="150" />
           </div>
           <div class="col-md-4">
             <span class="spanInput">Calle*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar calle" type="text" />
+              placeholder="Ingresar calle" type="text" maxlength="150" />
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
             <span class="spanInput">N&uacute;ro exterior*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar n&uacute;mero" type="text" />
+              placeholder="Ingresar n&uacute;mero" type="text" maxlength="10 "/>
           </div>
           <div class="col-md-4">
             <span class="spanInput">N&uacute;ro interior*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar n&uacute;mero" type="text" />
+              placeholder="Ingresar n&uacute;mero" type="text" maxlength="10" />
           </div>
           <div class="col-md-4">
           </div>
@@ -140,7 +144,7 @@
           <div class="col-md-4">
             <span class="spanInput">Servicio*:</span>
             <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Ingresar
+              <option class="select-font optionSelect" placeholder="Ingresar nombre del servicio" selected [value]="'-1'">Ingresar
                 nombre del servicio</option>
               <option class="select-font" [value]="1">Servicio 1</option>
             </select>
@@ -149,7 +153,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group datepicker-group">
-              <span class="spanInput">Fecha internamiento*:</span>
+              <span class="spanInput">Fecha de internamiento*:</span>
               <input class="form-control" formControlName="fecha" id="notasFinal" type="text" placeholder="Ingresar fecha">
               <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
                 <div class="imgCalendar"></div>
@@ -158,7 +162,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group datepicker-group">
-              <span class="spanInput">Fecha cirugia*:</span>
+              <span class="spanInput">Fecha de cirugia*:</span>
               <input class="form-control" formControlName="fecha" id="calendarCronica" type="text" placeholder="Ingresar fecha">
               <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
                 <div class="imgCalendar"></div>
@@ -167,11 +171,8 @@
           </div>
           <div class="col-md-4">
             <span class="spanInput">Teléfono:</span>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Ingresar
-                telefono</option>
-              <option class="select-font" [value]="1">10:00:00</option>
-            </select>
+              <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
+                placeholder="Ingresar unidad médica hostalaria" type="text" maxlength="10" />
           </div>
         </div>
       </div>
@@ -183,18 +184,18 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">Nombre completo*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
+            <span class="spanInput">Nombre completo:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desTecnicaDidactica"
               placeholder="Ingresar nombre" type="text" />
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Matr&iacute;cula*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+            <span class="spanInput">Matr&iacute;cula:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
               placeholder="Ingresar matr&iacute;cula" type="text" />
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Teléfono*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+            <span class="spanInput">Teléfono:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
               placeholder="Ingresar t&eacute;" type="text" />
           </div>
         </div>
@@ -202,7 +203,7 @@
           <div class="col-md-12">
             <span class="spanInput">Observaciones*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar observaciones" type="text" />
+              placeholder="Ingresar observaciones" type="text" maxlength="500" />
           </div>
         </div>
       </div>
