@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import * as momment from 'moment';
 import { AuthService } from '../service/auth-service.service';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 
 @Component({
   selector: 'app-busqueda-nss',
@@ -37,6 +38,7 @@ export class BusquedaNssComponent {
 
   order: string = 'desc';
   columnaId: string = 'nss';
+  alert!: AlertInfo;
 
   constructor(
     private ServiceService: ServiceService,
@@ -62,9 +64,10 @@ export class BusquedaNssComponent {
   get() {
 
     if (this.validaInput()) {
-
-      this.muestraAlerta('<strong>Error.</strong>¡La longitud del NSS no es correcta, favor de verificar!',
-        'alert-danger', null
+      this.muestraAlerta(
+        '¡La longitud del NSS no es correcta, favor de verificar!',
+        'alert-danger',
+        'Error',
       );
 
     } else {
@@ -78,8 +81,10 @@ export class BusquedaNssComponent {
           if (this.resultadoTotal == 0) {
 
             this.errorBusqueda = true;
-            this.muestraAlerta('<strong>Sin resultados.</strong> Valide los filtros',
-              'alert-warning', null
+            this.muestraAlerta(
+              'Valide los filtros',
+              'alert-warning',
+              'Sin resultados',
             );
 
           } else {
@@ -91,9 +96,10 @@ export class BusquedaNssComponent {
           this.sortBy(this.columnaId, this.order, 'fecha');
 
         }, error: (err) => {
-
-          this.muestraAlerta('<strong>Error de red.</strong> No fue posible conectar con la API de busqueda',
-            'alert-danger', null
+          this.muestraAlerta(
+            'No fue posible conectar con la API de busqueda',
+            'alert-danger',
+            'Error de red',
           );
 
           console.log(err)
@@ -122,18 +128,22 @@ export class BusquedaNssComponent {
     this.alertVisible = false;
   }
 
-  muestraAlerta(mensaje: string, estilo: string, funxion: any) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+    this.alert = new AlertInfo;
+    this.alert = {
 
-    this.alertMensaje = mensaje;
-    this.alertTipo = estilo;
-    this.alertVisible = true;
-
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
     setTimeout(() => {
-      this.alertMensaje = mensaje;
-      this.alertTipo = estilo;
-      this.alertVisible = false;
-
-      if (funxion != null) {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if(funxion != null){
         funxion();
       }
     }, 5000);

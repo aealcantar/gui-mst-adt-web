@@ -1,10 +1,4 @@
-<div *ngIf="alertVisible">
-  <div class="alert alert-dismissible alertCompl" [ngClass]="alertTipo">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-        aria-hidden="true">&times;</span></button>
-    <div [innerHTML]="alertMensaje"></div>
-  </div>
-</div>
+<app-app-alerts [alert]="alert"></app-app-alerts>
 
 <app-menu></app-menu>
 <app-card-template>
