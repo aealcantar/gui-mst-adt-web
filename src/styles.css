@@ -675,3 +675,47 @@ table.dataTable.no-footer {
   letter-spacing: normal;
   text-align: left;
 }
+
+
+.mat-select-panel {
+  transform: translate(-2px, 25px) !important;
+}
+
+.mat-option:hover {
+  background: #9D2449 !important;
+  color: white !important;
+}
+
+.mat-select-arrow-wrapper {
+  background: transparent;
+  background-image: url("./assets/images/Icon.png") !important;
+  background-repeat: no-repeat;
+  background-position-x: 99%;
+  padding-right: 20px;
+  background-size: 20px 19px;
+}
+
+.mat-select-arrow {
+  opacity: 0;
+}
+
+.form-control-mat-select {
+  font-family: Montserrat;
+  padding-right: 2px !important;
+}
+
+.mat-select-panel-wrap .mat-select-panel {
+  min-width: calc(100% + 17px) !important;
+  left: 4px;
+  position: relative;
+}
+
+.mat-option-text {
+  font-family: Montserrat;
+  font-size: 14px;
+}
+
+.mat-select-value {
+  top: -2px;
+  position: relative;
+}

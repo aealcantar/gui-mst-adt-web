@@ -117,7 +117,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Actividad técnica*:</span>
-              <select [ngClass]="{
+              <!-- <select [ngClass]="{
                   'form-control-error':
                     formNuevaNota.controls?.idActividadTecnica?.dirty &&
                     formNuevaNota.controls?.idActividadTecnica?.errors
@@ -127,7 +127,20 @@
                 <option class="select-font" [value]="item.id" *ngFor="let item of catActividadesTecnicas">
                   {{ item.descripcion }}
                 </option>
-              </select>
+              </select> -->
+
+              <mat-select [ngClass]="{
+                'form-control-error':
+                  formNuevaNota.controls?.idActividadTecnica?.dirty &&
+                  formNuevaNota.controls?.idActividadTecnica?.errors
+              }" class="form-control form-control-mat-select" id="idActividadTecnica" formControlName="idActividadTecnica" [disableOptionCentering]="true"
+              style="background-position-y: 5px" aria-label="Servicio">
+                <mat-option class="select-font" [value]="''">Seleccionar actividad técnica</mat-option>
+                <mat-option class="select-font" [value]="item.id" *ngFor="let item of catActividadesTecnicas">
+                  {{ item.descripcion }}
+                </mat-option>
+              </mat-select>
+
               <small *ngIf="
                   formNuevaNota.controls?.idActividadTecnica?.dirty &&
                   formNuevaNota.controls?.idActividadTecnica?.errors

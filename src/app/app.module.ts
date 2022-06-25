@@ -66,6 +66,7 @@ import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar
 import { FooterComponent } from './components/templates/footer/footer.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 import {
   NgxMatDateFormats,
   NgxMatDatetimePickerModule,
@@ -171,6 +172,7 @@ registerLocaleData('es');
     NgxMatMomentModule,
     MomentDateModule,
     MatRadioModule,
+    MatSelectModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
