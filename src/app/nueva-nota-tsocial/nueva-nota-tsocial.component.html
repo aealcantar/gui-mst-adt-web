@@ -142,7 +142,7 @@
                 <span class="spanInput ">Diagnóstico médico*:</span>
                 <img src="../../assets/icons/select-indicador.svg" class="iconoSelect" alt="">
                 <input type=" input" class="form-control select" placeholder="Seleccionar diagnóstico médico" aria-label="Number"
-                  matInput formControlName="diagnosticoMedico" [matAutocomplete]="auto" (keyup)="handleChangeDiagnostico();">
+                  matInput formControlName="diagnosticoMedico" [matAutocomplete]="auto" (keyup)="handleChangeDiagnostico();" maxlength="19">
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onSelectionChanged($event)">
                   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option?.nDiagnosticoMedicoCie}}
