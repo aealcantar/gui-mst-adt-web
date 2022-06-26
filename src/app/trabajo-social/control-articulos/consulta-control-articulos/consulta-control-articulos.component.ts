@@ -3,10 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
-<<<<<<< HEAD
-import * as momment from 'moment';
-=======
->>>>>>> 7efa12ea07f0753eb5e48f036a0915a664b8ec0d
 import { ControlArticulosService } from '../../services/control-articulos.service';
 import { ControlArticulos } from 'src/app/trabajo-social/models/control-articulo.model';
 import { DatePipe } from '@angular/common';

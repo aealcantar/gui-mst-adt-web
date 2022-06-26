@@ -73,16 +73,5 @@ export class ControlArticulosService {
 
   }
 
-  getArticulosByFechas(controlArticulos: any) {
-
-    try {
-      return this.httpsClient.post<any>(`${environment.urlControlArticulos}/msmts-ctrl-articulos/api/rango/fechas`, controlArticulos);
-    } catch (error) {
-      console.log("error")
-      return error;
-    }
-
-  }
-
   
 }
