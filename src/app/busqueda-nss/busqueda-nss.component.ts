@@ -1,5 +1,5 @@
 import { ServiceService } from './busqueda-nss.service';
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { pacienteSeleccionado } from './paciente.interface';
 import { Router } from '@angular/router';
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
@@ -13,7 +13,7 @@ import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
   styleUrls: ['./busqueda-nss.component.css']
 })
 
-export class BusquedaNssComponent {
+export class BusquedaNssComponent implements AfterContentInit {
   pacienteSeleccionado!: pacienteSeleccionado;
 
   isCollapsed: boolean[] = [];
@@ -48,7 +48,11 @@ export class BusquedaNssComponent {
   ) {
     this.authService.userLogged$.next(true);
     this.authService.isAuthenticatedObs$.next(true);
-   }
+  }
+
+  ngAfterContentInit(): void {
+    this.authService.setProjectObs("Trabajo social");
+  }
 
   elementoSeleccionado(elemento: any) {
     this.pacienteSeleccionado = elemento;
@@ -128,7 +132,7 @@ export class BusquedaNssComponent {
     this.alertVisible = false;
   }
 
-  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
     this.alert = new AlertInfo;
     this.alert = {
 
@@ -143,7 +147,7 @@ export class BusquedaNssComponent {
         type: 'custom',
         visible: false,
       };
-      if(funxion != null){
+      if (funxion != null) {
         funxion();
       }
     }, 5000);

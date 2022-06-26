@@ -146,17 +146,25 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     })
     $('#content').modal('show');
   }
-  
+
   cancelarModal() {
     $('#content').modal('hide');
   }
-  
-  salirModal(){
+
+  salirModal() {
     this.router.navigateByUrl("/consulta-cronica-grupal", { skipLocationChange: true });
     $('#content').modal('hide');
   }
 
-  getNombreGrupo(cveGrupo: number) {
+  getNombreGrupo(cveGrupo: number | string) {
+    console.log(cveGrupo);
+    let idGrupoConverted: number;
+    if (typeof cveGrupo === 'string') {
+      idGrupoConverted = Number(cveGrupo);
+    } else if (typeof cveGrupo === 'number') {
+      idGrupoConverted = cveGrupo;
+    }
+    console.log("DESC GRUPO: ", this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa);
     return this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa;
   }
 
@@ -197,16 +205,16 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         desEspecialidad: null,
         idTurno: 1,
         desTurno: null,
-        idGrupo: this.getNombreGrupo(parseInt(this.editForm.get('grupo')!.value)),
-        desGrupo: null,
+        idGrupo: this.editForm.get('grupo')!.value,
+        desGrupo: this.getNombreGrupo(this.editForm.get('grupo')!.value),
         idUbicacion: '9',
         desUbicacion: null,
         fecFechaCorta: this.editForm.get('fecha')!.value,
         fecFechaCompleta: null,
         timHora: '10:00:00',
         desModalidad: null,
-        numTotalParticipantes: parseInt(this.editForm.get('desObservaciones')!.value),
-        numParticipantesAsistieron: null,
+        numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
+        numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: 1,
         desEstatusCronica: null,
         descPonentes: this.editForm.get('descPonentes')!.value,

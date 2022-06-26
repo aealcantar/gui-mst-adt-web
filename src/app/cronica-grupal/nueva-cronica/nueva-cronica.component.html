@@ -87,8 +87,8 @@
               <select class="form-control" formControlName="grupo" style="background-position-y: 5px;"
                 aria-label="Servicio">
                 <option class="select-font" [value]="''" selected>Ingresar grupo</option>
-                <option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
-                  {{ grupo.des_actividad }}
+                <option class="select-font" [value]="grupo.cve_grupo_programa" *ngFor="let grupo of grupos">
+                  {{ grupo.des_grupo_programa }}
                 </option>
               </select>
             </div>

@@ -7,6 +7,7 @@ import { EstadoCivil } from '../models/estado-civil.model';
 import { EstudioMedico } from '../models/estudio-medico.model';
 import { Ocupacion } from '../models/ocupacion.model';
 import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-estudio-medico-guardado',
@@ -25,11 +26,15 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   pacienteSeleccionado!: pacienteSeleccionado;
   ocupaciones: Ocupacion[] = [];
   catEstadosCiviles: EstadoCivil[] = [];
+  datetimeFormat = '';
+  dateToday= new Date();
 
   constructor(
     private route: ActivatedRoute,
     private estudioMedicoService: EstudioSocialMedicoService
-  ) { }
+  ) { 
+    this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
+  }
 
   ngOnInit(): void {
     this.datosGenerales = true;
@@ -43,9 +48,8 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
           this.muestraAlerta(
             '¡La información se guardó con éxito!',
             'alert-success',
-            'Éxito',
+            '',
           );
-          // this.showSucces("¡La información se guardó con éxito!");
         }
       }
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.estudioMedico);
@@ -142,12 +146,14 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   }
 
   imprimir() {
+    let fechaTransformada = this.datetimeFormat;
     let reporteEstudioMedicoSocial: any = {
       ooad: "CDMX NORTE",
       unidad: "UMF " + this.pacienteSeleccionado.unidadMedica,
       turno: this.pacienteSeleccionado.turno === "M" ? "MATUTINO" : "VESPERTINO",
       servicio: "GRUPO",
       cvePtal: "35E1011D2153",
+      fecImpresion: fechaTransformada,
       nss: this.pacienteSeleccionado.nss,
       aMedico: this.pacienteSeleccionado.agregadoMedico,
       nombrePaciente: this.pacienteSeleccionado.paciente.toUpperCase(),

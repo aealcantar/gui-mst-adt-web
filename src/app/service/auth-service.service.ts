@@ -57,6 +57,7 @@ export class AuthService {
   }
 
   setProjectObs(proyecto: string) {
+    this.project$.next("");
     this.project$.next(proyecto);
   }
 
