@@ -52,6 +52,7 @@ import { Persona } from 'src/app/models/persona-model';
 import { PersonaRequest } from 'src/app/models/persona-request-model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 declare var $: any;
 
@@ -101,7 +102,7 @@ export class CargaComponent implements OnInit {
 
   puestos: Puesto[] = new Array<Puesto>()
   puestosRequest: PuestoRequest;
-  idUser: number = 33; // 5 = Fer   33 = Ame
+  idUser: number ;//= 33; // 5 = Fer   33 = Ame
 
 
   correosubmitted = false;
@@ -135,7 +136,10 @@ export class CargaComponent implements OnInit {
   regOK: number = 0;
   regERROR: number = 0;
 
+  
+
   constructor(private authService: AuthService, private modalService: NgbModal,
+
     private router: Router,
     private http: HttpClient,
     private _CargasService: CargasService, private _HelperCatalogos: HelperCatalogosService,
@@ -157,10 +161,13 @@ export class CargaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
+    this.idUser = 1;//this.usuarioConectado.idUsuario;
+    //console.log("usuario: ",this.usuarioConectado);
     this.authService.setProjectObs("Agenda Digital Transversal");
+
     this.pesoMaximoBytes = this.pesoMaximoMB * Math.pow(1024, 2);
-    console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
+    //console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
     this.lstCatalogo = new Array<CatalogoData>();
     this.mensaje = new objAlert;
     this.lstConfigCarga = this._HelperCatalogos.getConfiguracionCat();
@@ -183,7 +190,7 @@ export class CargaComponent implements OnInit {
 
 
   modalcarga(tipocatalogo: string, sheetName: string) {
-    console.log("abre modal");
+    //console.log("abre modal");
     this.cleanVar();
 
     this.archivoCarga = new ArchivoCarga;
@@ -195,7 +202,7 @@ export class CargaComponent implements OnInit {
     this.confCarga = new ConfiguracionCarga();
 
     this.confCarga = this.lstConfigCarga.find(e => e.nombreCatalogo === tipocatalogo);
-    console.log(this.confCarga);
+   // console.log(this.confCarga);
     if (this.confCarga.rutaPlantilla.length == 0) {
 
       this.confCarga.rutaPlantilla = "../../../../assets/files/Plantilla_Estructura_CargasIniciales.xlsx";
@@ -216,24 +223,24 @@ export class CargaComponent implements OnInit {
   }
   public btnAccionesCatalogos(catalogo: CatalogoData) {
     switch (catalogo.idCatalogos) {
-      
+
       case 3:
-        if(catalogo.estatusCarga.cveIdEstatus == 1){
+        if (catalogo.estatusCarga.cveIdEstatus == 1) {
           this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones", { skipLocationChange: true });
-        }else{
-          this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
+        } else {
+          this.modalcarga(catalogo.nombreCatalogo, catalogo.sheetName);
         }
 
         break;
-        case 7:
-          if(catalogo.estatusCarga.cveIdEstatus == 1){
-            this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
-          }else{
-            this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
-          }
-          break;
+      case 7:
+        if (catalogo.estatusCarga.cveIdEstatus == 1) {
+          this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
+        } else {
+          this.modalcarga(catalogo.nombreCatalogo, catalogo.sheetName);
+        }
+        break;
       default:
-        this. modalcarga(catalogo.nombreCatalogo, catalogo.sheetName) ;
+        this.modalcarga(catalogo.nombreCatalogo, catalogo.sheetName);
         break;
     }
 
@@ -246,7 +253,7 @@ export class CargaComponent implements OnInit {
 
 
   upload(event: any) {
-    console.log("selecciona boton para cargar archivo");
+   // console.log("selecciona boton para cargar archivo");
 
 
 
@@ -265,11 +272,11 @@ export class CargaComponent implements OnInit {
     //this.uploadAndProgressSingle2(event.target.files[0]);
     let archivo: File;
     archivo = event.target.files[0];
-    this.archivoCarga.nombrearchivo = archivo? archivo.name.toString() : "";
-    this.archivoCarga.tamanioarchivo = archivo? archivo.size.toString() : "";
+    this.archivoCarga.nombrearchivo = archivo ? archivo.name.toString() : "";
+    this.archivoCarga.tamanioarchivo = archivo ? archivo.size.toString() : "";
     let xlsx = ".xlsx";
     let xls = ".xls";
-    console.log("size" + this.archivoCarga.nombrearchivo);
+   // console.log("size" + this.archivoCarga.nombrearchivo);
     this.blnProcedeCarga = true;
 
     if (!this.archivoCarga.nombrearchivo.toLowerCase().includes(xlsx) || !this.archivoCarga.nombrearchivo.toLowerCase().includes(xls)) {
@@ -284,12 +291,12 @@ export class CargaComponent implements OnInit {
 
     }
 
-    console.log("tamaño: ", +this.archivoCarga.tamanioarchivo, " bytes");
+    //console.log("tamaño: ", +this.archivoCarga.tamanioarchivo, " bytes");
 
     if (+this.archivoCarga.tamanioarchivo > this.pesoMaximoBytes) {
       this.archivoCarga.proceso = 'error';
       this.blnProcedeCarga = false;
-      console.log("es pesado");
+     // console.log("es pesado");
       this.archivoCarga.nombrearchivo = "";
       this.archivoCarga.tamanioarchivo = "";
 
@@ -326,7 +333,7 @@ export class CargaComponent implements OnInit {
   }
 
   onUpload(file2: File) {
-    console.log(file2);
+    //console.log(file2);
     this.archivoCarga.proceso = 'progress';
     this.archivoCarga.nombrearchivo = file2.name.toString();
     this.archivoCarga.tamanioarchivo = file2.size.toString();
@@ -342,7 +349,7 @@ export class CargaComponent implements OnInit {
           this.uploadSuccess = true;
 
         }
-        console.log(event);
+       // console.log(event);
       },
       err => {
         this.percentDone = 0;
@@ -479,7 +486,7 @@ export class CargaComponent implements OnInit {
             this.servicio[index].fec_baja = fchBaja.toString();
             this.servicio[index].fec_alta = fchAlta.toString();
             this.servicio[index].fec_actualizacion = fchAct.toString();
-            console.log(this.servicio[index]);
+            //console.log(this.servicio[index]);
             break;
 
           case 3:
@@ -563,16 +570,16 @@ export class CargaComponent implements OnInit {
 
 
 
-            case 9:
-              this.puestos[index] = new Puesto();
-              this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
-              break;
+          case 9:
+            this.puestos[index] = new Puesto();
+            this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
+            break;
 
 
 
 
           default:
-            console.log("1x");
+           // console.log("1x");
             this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_PLANTILLA_NOVALIDA, this._Mensajes.ERROR);
             break;
         }
@@ -589,7 +596,7 @@ export class CargaComponent implements OnInit {
         this.archivoCarga.nombrearchivo = "";
         this.archivoCarga.tamanioarchivo = "";
         this.archivoCarga.proceso = 'error';
-        console.log("2x");
+       // console.log("2x");
         this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_PLANTILLA_NOVALIDA, this._Mensajes.ERROR);
 
       }
@@ -609,7 +616,7 @@ export class CargaComponent implements OnInit {
 
   private iniciarCargaRegistros(archivoCarga: ArchivoCarga, confCarga: ConfiguracionCarga) {
 
-    console.log("Iniciar carga a BD: ");
+    //console.log("Iniciar carga a BD: ");
     this.archivoCarga = archivoCarga;
     if (this.archivoCarga.nombrearchivo) {
       switch (confCarga.idCatalogos) {
@@ -618,7 +625,7 @@ export class CargaComponent implements OnInit {
           this.unidadMedicaRequest = new UnidadMedicaRequest();
           this.unidadMedicaRequest.idUser = this.idUser;
           this.unidadMedicaRequest.unidadesMedicas = this.unidadMedica;
-          console.log(this.unidadMedica);
+         // console.log(this.unidadMedica);
           this._CargasService.agregarUnidadesMedicas(this.unidadMedicaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
 
 
@@ -692,31 +699,31 @@ export class CargaComponent implements OnInit {
             this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_UBICACIONES);
           });
           break;
-          case 7:
-            this.personaRequest = new PersonaRequest();
-            this.personaRequest.personas = this.persona;
-            this.personaRequest.idUser = this.idUser;
-            this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
-              this.cargaResponse = resp;
-              if (resp) {
-                this.percentDone = 100;
-                this.reporteCarga(resp);
+        case 7:
+          this.personaRequest = new PersonaRequest();
+          this.personaRequest.personas = this.persona;
+          this.personaRequest.idUser = this.idUser;
+          this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
+            this.cargaResponse = resp;
+            if (resp) {
+              this.percentDone = 100;
+              this.reporteCarga(resp);
 
-                setTimeout(() => {
-                  this.archivoCarga.proceso = 'result';
-                }, 800);
-              }
-            }, (error: HttpErrorResponse) => {
-              this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
+              setTimeout(() => {
+                this.archivoCarga.proceso = 'result';
+              }, 800);
+            }
+          }, (error: HttpErrorResponse) => {
+            this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
 
-            });
+          });
 
-            break;
+          break;
         case 8:
           this.turnosRequest = new TurnoRequest();
           this.turnosRequest.turnos = this.turnos;
           this.turnosRequest.idUser = this.idUser;
-          console.log("requestTurnos ", this.turnosRequest);
+          //console.log("requestTurnos ", this.turnosRequest);
           this._CargasService.agregarTurnos(this.turnosRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
             this.cargaResponse = resp;
             if (resp) {
@@ -837,7 +844,7 @@ export class CargaComponent implements OnInit {
 
 
         default:
-          console.log("3x");
+         // console.log("3x");
           this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_PLANTILLA_NOVALIDA, this._Mensajes.ERROR);
           break;
       }
@@ -856,7 +863,7 @@ export class CargaComponent implements OnInit {
 
 
     for (let registro of response.body.rowDTO) {
-      console.log("lstRow: ", registro.status);
+      //console.log("lstRow: ", registro.status);
 
       switch (registro.status) {
         case 'OK':
@@ -874,8 +881,8 @@ export class CargaComponent implements OnInit {
     }
 
 
-    console.log("Errores: ", this.regERROR);
-    console.log("Correctos: ", this.regOK);
+   // console.log("Errores: ", this.regERROR);
+   // console.log("Correctos: ", this.regOK);
     if (this.regERROR != 0) {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_CARGA + msj, this._Mensajes.ERROR);
     } else {
@@ -899,7 +906,7 @@ export class CargaComponent implements OnInit {
       const byteArray = new Uint8Array(atob(file.fileBytes).split('').map(char => char.charCodeAt(0)));
 
       const blob = new Blob([byteArray], { type: 'application/pdf' });
-      console.log(blob);
+     // console.log(blob);
 
       const url = window.URL.createObjectURL(blob);
       let link = document.createElement("a");
@@ -914,7 +921,7 @@ export class CargaComponent implements OnInit {
       this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_ACUSE);
 
 
-      console.log('Ocurrio un error en la operación', error);
+     // console.log('Ocurrio un error en la operación', error);
     });
   }
 
@@ -998,7 +1005,7 @@ export class CargaComponent implements OnInit {
 
 
 
-        console.log("cargaInicial: ", this.cargaCatalogos);
+      //  console.log("cargaInicial: ", this.cargaCatalogos);
 
       }, (error: HttpErrorResponse) => {
         this.cargaCatalogos = new CargasCatalogos;
@@ -1033,6 +1040,8 @@ export class CargaComponent implements OnInit {
     if (tot == completos) {
       this.blnContinuar = true;
       this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
+    } else {
+      this.blnContinuar = false;
     }
   }
 
@@ -1054,7 +1063,7 @@ export class CargaComponent implements OnInit {
     this.mensaje.type = tipo;
     this.mensaje.message = msj;
     this.mensaje.typeMsg = tipoMsj;
-    console.log(this.mensaje);
+    //console.log(this.mensaje);
     setTimeout(() => {
       this.mensaje.visible = false;
     }, 4500);
@@ -1139,9 +1148,9 @@ export class CargaComponent implements OnInit {
   }
 
   reset() {
-    console.log(this.myInputVariable.nativeElement.files);
+   // console.log(this.myInputVariable.nativeElement.files);
     this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
+   // console.log(this.myInputVariable.nativeElement.files);
   }
 
 }
