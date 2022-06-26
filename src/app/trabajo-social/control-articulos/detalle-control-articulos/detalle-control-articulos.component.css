@@ -184,3 +184,6 @@ color: #222222;
   color: #000000;
 }
 
+.ui-datepicker .ui-datepicker-header{
+  background-color: #9D2449!important;
+}

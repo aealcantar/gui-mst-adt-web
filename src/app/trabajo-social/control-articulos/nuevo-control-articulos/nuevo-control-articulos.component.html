@@ -244,11 +244,7 @@
               formControlName="ubicacion"
               name="ubicacion"
             >
-<<<<<<< HEAD
               <option [value]="''" selected disabled>Seleccionar ubicación</option>
-=======
-              <option [value]="''" selected>Seleccionar ubicación</option>
->>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               <option
                 class="select-font"
                 [value]="item.cve_ubicacion"
@@ -276,11 +272,7 @@
               id="horarioEntregaArticulo"
               formControlName="horarioEntregaArticulo"
             >
-<<<<<<< HEAD
               <option [value]="''" selected disabled>Seleccionar horario</option>
-=======
-              <option [value]="''" selected>Seleccionar horario</option>
->>>>>>> 8e8221c571a8c2dd708d166550f1b6a0b560c10f
               <option
                 class="select-font"
                 [value]="item.idHorario"
@@ -356,7 +348,6 @@
               >
               <input
                 type="text"
-                type="time"
                 [ngClass]="{
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.resguardoHora.errors
@@ -364,7 +355,7 @@
                 class="form-control hasDatepicker"
                 id="resguardoHora"
                 formControlName="resguardoHora"
-                placeholder="Ingresa hora"
+                placeholder="Ingresa hora" 
                 maxlength="5"
               />
               <span class="glyphicon fontIcono" aria-hidden="true">
