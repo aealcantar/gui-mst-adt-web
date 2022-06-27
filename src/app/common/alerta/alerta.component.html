@@ -17,8 +17,9 @@
       </span> -->
     </button>
 
-    <div  style="width: 100%;" class="mensaje">
+    <div class="colorLV"  style="width: 100%;" class="mensaje"  [ngClass]="{'colorLR': objAlerta?.typeMsg === 'Error' }" >
       <strong *ngIf="objAlerta?.typeMsg">{{objAlerta?.typeMsg}}.</strong> {{objAlerta.message}}
     </div>
+   
   </div>
 </div>

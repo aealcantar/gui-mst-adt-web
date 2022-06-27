@@ -6,6 +6,7 @@
   z-index: 200;
   margin-top: -50px;
   margin-left: 15%;
+  padding-top: 10px;
 }
 
 .mensaje {
@@ -17,7 +18,10 @@
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #545454;
+
+  margin: 0 47px 0 0;
+ 
+ /* color: #545454;*/
 }
 
 .x-ciera {
@@ -34,5 +38,13 @@ div.alert-danger>button>span {
 
 div.alert-success>button>span {
   /* background: url('../../../assets/images/icon-close.svg'); */
+  color: #1c7c3d;
+}
+
+.colorLR{
+  color: #d0021b;
+}
+
+.colorLV{
   color: #1c7c3d;
 }
