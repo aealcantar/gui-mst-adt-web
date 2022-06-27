@@ -3,14 +3,14 @@
   width: 698px;
   padding-top: 6px;
   padding-bottom: 6px;
-  display: flex;
   align-items: center;
-  flex-direction: row-reverse;
   height: 60px;
+  position: fixed !important;
+  z-index: 200;
+  margin-left: 250px;
 }
 
 .mensaje{
-  flex-grow: 0;
   font-family: Montserrat;
   font-size: 16px;
   font-weight: normal;
