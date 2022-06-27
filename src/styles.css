@@ -421,9 +421,9 @@ footer img {
   background-color: #9d2449;
   color: #fff;
 }
-.mat-calendar-table-header{
-  /* display: none; */
-}
+/* .mat-calendar-table-header{
+  display: none;
+} */
 .mat-calendar-body-selected {
   background-color: #9d2449 !important;
   color: #fff;
@@ -528,12 +528,14 @@ footer img {
 }
 
 
+/*
 .mat-calendar-body-active > .mat-calendar-body-today {
-  /* background-color: transparent !important;
+   background-color: transparent !important;
   color: rgba(0,0,0,0.3) !important;
   font-weight: normal;
-  border-color: transparent !important; */
+  border-color: transparent !important;
 }
+*/
 
 /* .mat-calendar-body-cell {
   position: absolute !important;
@@ -549,22 +551,24 @@ footer img {
 .cdk-program-focused .mat-calendar-body-active>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical){
   background-color: transparent !important;
 }
-
+/*
 .cdk-overlay-pane{
 
 }
 .cdk-overlay-pane.dialog-styles {
-  /* position: relative!important; */
+   position: relative!important;
 }
+
 .mat-datepicker-popup{
-  /* top: 899.949px !important;
+  top: 899.949px !important;
   left: 938.61px !important;
   bottom: auto !important;
-  position: relative; */
+  position: relative;
 }
 .cdk-overlay-connected-position-bounding-box {
-  /* position: relative !important; */
+   position: relative !important;
 }
+*/
 
 td.dataTables_empty {
   display: none !important;
