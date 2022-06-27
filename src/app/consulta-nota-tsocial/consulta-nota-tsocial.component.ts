@@ -6,7 +6,8 @@ import { Nota } from '../models/notas.model';
 import { ReporteNota } from '../models/reporte-notas.model';
 import { AuthService } from '../service/auth-service.service';
 import { NotasService } from '../service/notas.service';
-import {formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
+import { Usuario } from '../models/usuario.model';
 
 @Component({
   selector: 'app-consulta-nota-tsocial',
@@ -25,6 +26,7 @@ export class ConsultaNotaTSocialComponent implements OnInit {
   public pacienteSeleccionado!: pacienteSeleccionado;
   public datetimeFormat = '';
   public dateToday= new Date();
+  public usuario!: Usuario;
 
   constructor(
     private router: Router,
@@ -44,6 +46,11 @@ export class ConsultaNotaTSocialComponent implements OnInit {
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.nota);
     });
     this.pacienteSeleccionado = JSON.parse(localStorage.getItem('paciente')!);
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    if (userTmp !== '') {
+      this.usuario = JSON.parse(userTmp);
+      console.log("USER DATA: ", this.usuario);
+    }
     // this.notasService.getNotasById(1).subscribe(
     //   (res) => {
     //     this.nota = res;
@@ -75,9 +82,9 @@ export class ConsultaNotaTSocialComponent implements OnInit {
       unidad2: String(this.pacienteSeleccionado.unidadMedica),
       consultorio: String(this.pacienteSeleccionado.consultorio),
       fechaN: this.pacienteSeleccionado.fechaNacimiento.toString(),
-	    nombreTS: '',
-	    matriculaTS: '',
-	    nombreTS2: '',
+	    nombreTS: this.usuario.strNombres + " " + this.usuario.strApellidoP + " " + this.usuario.strApellidoM,
+	    matriculaTS: this.usuario.matricula,
+	    nombreTS2: this.usuario.strNombres + " " + this.usuario.strApellidoP + " " + this.usuario.strApellidoM,
 	    matriculaTS2: '',
 	    tipoNota: this.nota.nombreTipoNota,
 	    redApoyo: this.nota.nombreRedApoyo,
@@ -91,6 +98,7 @@ export class ConsultaNotaTSocialComponent implements OnInit {
 	    redaccion2: '',
 	    fecha1: fechaTransformada,
 	    fecha2: fechaTransformada,
+      fecImpresion: fechaTransformada,
 	    diagnosticoSocial: this.nota.diagnostico,
 	    diagnosticoSocial2: '',
     };

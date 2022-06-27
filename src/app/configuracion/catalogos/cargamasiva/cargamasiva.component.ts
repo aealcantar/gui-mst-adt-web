@@ -1,69 +1,46 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-
-import { FormBuilder } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { objAlert } from '../../../common/alerta/alerta.interface';
-
-
-import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
-
-
-import { Servicio } from 'src/app/models/servicio-model';
-import { Ubicacion } from 'src/app/models/ubicacion-model';
-import { Responsable } from 'src/app/models/responsable-model';
-import { ServicioRequest } from 'src/app/models/servicio-request-model';
-
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Component, OnInit, Inject, ElementRef, ViewChild, EventEmitter  } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { objAlert } from 'src/app/common/alerta/alerta.interface';
 import { CalendarioDias } from 'src/app/models/calendario-dias.model';
 import { CalendarioRequest } from 'src/app/models/calendario-request-model';
-import * as XLSX from 'xlsx';
-import { ProgramaTS } from 'src/app/models/programa-ts.model';
-import { ProgramaTSRequest } from 'src/app/models/programa-ts-request-model';
-import { UbicacionRequest } from 'src/app/models/ubicacion-request-model';
-import Swal from 'sweetalert2';
+import { CargasResponse } from 'src/app/models/carga-response-model';
 import { ArchivoCarga, CargasCatalogos, CatalogoData, ConfiguracionCarga } from 'src/app/models/catalogos.model';
+import { DownloadFile } from 'src/app/models/downloadFile-model';
+import { Persona } from 'src/app/models/persona-model';
+import { PersonaRequest } from 'src/app/models/persona-request-model';
+import { ProgramaTSRequest } from 'src/app/models/programa-ts-request-model';
+import { ProgramaTS } from 'src/app/models/programa-ts.model';
+import { Puesto } from 'src/app/models/puesto-model';
+import { PuestoRequest } from 'src/app/models/puesto-request-model';
+import { Responsable } from 'src/app/models/responsable-model';
+import { ResponsableRequest } from 'src/app/models/responsable-request-model';
+import { Servicio } from 'src/app/models/servicio-model';
+import { ServicioRequest } from 'src/app/models/servicio-request-model';
+import { Turno } from 'src/app/models/turno-model';
+import { TurnoRequest } from 'src/app/models/turno-request-model';
+import { Ubicacion } from 'src/app/models/ubicacion-model';
+import { UbicacionRequest } from 'src/app/models/ubicacion-request-model';
+import { UnidadMedicaRequest } from 'src/app/models/unidad-medica-request.model';
+import { UnidadMedica } from 'src/app/models/unidad-medica.model';
+import { AuthService } from 'src/app/service/auth-service.service';
 import { CargasService } from 'src/app/services/catalogos/cargas.service';
 import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalogos.service';
 import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import * as XLSX from 'xlsx';
 import { MatIconRegistry } from "@angular/material/icon";
 
 
-import { UnidadMedica } from 'src/app/models/unidad-medica.model';
-import { UnidadMedicaRequest } from 'src/app/models/unidad-medica-request.model';
-import { ResponsableRequest } from 'src/app/models/responsable-request-model';
-
-
-
-
-
-
-
-import { CargasResponse } from 'src/app/models/carga-response-model';
-
-
-
-import { DownloadFile } from 'src/app/models/downloadFile-model';
-import { Turno } from 'src/app/models/turno-model';
-import { TurnoRequest } from 'src/app/models/turno-request-model';
-import { Puesto } from 'src/app/models/puesto-model';
-import { PuestoRequest } from 'src/app/models/puesto-request-model';
-
-import { Persona } from 'src/app/models/persona-model';
-import { PersonaRequest } from 'src/app/models/persona-request-model';
-import { Router } from '@angular/router';
-
 declare var $: any;
 
-
-
-
 @Component({
-  selector: 'app-consulta',
-  templateUrl: './consulta.component.html',
-  styleUrls: ['./consulta.component.css']
+  selector: 'app-cargamasiva',
+  templateUrl: './cargamasiva.component.html',
+  styleUrls: ['./cargamasiva.component.css']
 })
-
-export class ConsultaComponent implements OnInit {
+export class CargamasivaComponent implements OnInit {
   @ViewChild('fileInput')
   myInputVariable: ElementRef;
 
@@ -72,120 +49,96 @@ export class ConsultaComponent implements OnInit {
       dynamicDownload: null as HTMLElement
     }
   }
-
   pesoMaximoBytes: number;
   pesoMaximoMB: number = 10;
   servicio: Servicio[] = new Array<Servicio>();
-
   calendarioDias: CalendarioDias[] = new Array<CalendarioDias>();
   calendarioDiasRequest: CalendarioRequest;
-
   programasTS: ProgramaTS[] = new Array<ProgramaTS>();
   programasTSRequest: ProgramaTSRequest;
-
   servicioRequest: ServicioRequest;
   cargaResponse: HttpResponse<CargasResponse>;
-
   ubicacion: Ubicacion[] = new Array<Ubicacion>();
   ubicacionRequest: UbicacionRequest;
-
   unidadMedica: UnidadMedica[] = new Array<UnidadMedica>();
   unidadMedicaRequest: UnidadMedicaRequest;
-
   responsable: Responsable[] = new Array<Responsable>();
   responsableRequest: ResponsableRequest;
-
   persona: Persona[] = new Array<Persona>();
   personaRequest: PersonaRequest;
-
   turnos: Turno[] = new Array<Turno>();
   turnosRequest: TurnoRequest;
-
   puestos: Puesto[] = new Array<Puesto>()
   puestosRequest: PuestoRequest;
   idUser: number = 33; // 5 = Fer   33 = Ame
-
-
   correosubmitted = false;
   alert!: objAlert;
   percentDone!: number;
   uploadSuccess!: boolean;
   file!: File[];
   shortLink: string = "";
-
-
-
-
   archivoCarga: ArchivoCarga;
-
   cargaCatalogos: CargasCatalogos;
   lstCatalogo: CatalogoData[];
   mensaje!: objAlert;
-
   blnPendientes: boolean = false;
   blnErrores: boolean = false;
   blnCompletos: boolean = false;
-
   blnDeshabilitar: boolean = false;
-
-
-
   numitems: number = 7;
   pagactual: number = 1;
   lstConfigCarga: ConfiguracionCarga[];
-
   regOK: number = 0;
   regERROR: number = 0;
+  confCarga: ConfiguracionCarga;
+  totalRegistros: number;
+  catPadre: CatalogoData;
+  blnProcedeCarga: boolean = true;
+  catFaltante: string = '';
+  dataparams:any;
+  onAlert = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
+  constructor(
+    public dialogRef: MatDialogRef<CargamasivaComponent>,
+    private authService: AuthService,
+    //private modalService: NgbModal,
     private router: Router,
     private http: HttpClient,
-    private _CargasService: CargasService, private _HelperCatalogos: HelperCatalogosService,
+    private _CargasService: CargasService,
+    private _HelperCatalogos: HelperCatalogosService,
     private _Mensajes: HelperMensajesService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon("circle_naranja", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse1.svg"));
-    this.matIconRegistry.addSvgIcon("circle_rojo", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse2.svg"));
-    this.matIconRegistry.addSvgIcon("circle_verde", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse3.svg"));
-    this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
-    this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
-    this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
-    this.matIconRegistry.addSvgIcon("close", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/close.svg"));
-    this.matIconRegistry.addSvgIcon("add", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/add.svg"));
-  }
-
-  ngOnDestroy(): void {
-
-  }
+    private domSanitizer: DomSanitizer,
+    @Inject(MAT_DIALOG_DATA) data:any
+    ) {
+      this.dataparams = data;
+      this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
+      this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
+      this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
+      this.matIconRegistry.addSvgIcon("close", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/close.svg"));
+      this.matIconRegistry.addSvgIcon("add", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/add.svg"));
+    }
 
   ngOnInit(): void {
-
+    const taghtml = document.querySelector('html');
+    taghtml.style.cssText += 'top: 0px;';
 
     this.pesoMaximoBytes = this.pesoMaximoMB * Math.pow(1024, 2);
     console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
     this.lstCatalogo = new Array<CatalogoData>();
     this.mensaje = new objAlert;
     this.lstConfigCarga = this._HelperCatalogos.getConfiguracionCat();
-    this.obtenerEstatusCarga();
     this.blnDeshabilitar = false;
     this.archivoCarga = new ArchivoCarga;
-
-    setTimeout(() => {
-      $('#tblCatalogos').DataTable({
-        "paging": false,
-        "info": false,
-        "searching": false,
-        "aaSorting": []
-      });
-
-    }, 3000);
-
+    this.modalcarga(this.dataparams.nombreCatalogo, this.dataparams.sheetName);
   }
 
-
+  cancelar() {
+    this.dialogRef.close();
+  }
 
   modalcarga(tipocatalogo: string, sheetName: string) {
-    console.log("abre modal");
+    //console.log("abre modal");
     this.cleanVar();
 
     this.archivoCarga = new ArchivoCarga;
@@ -202,50 +155,36 @@ export class ConsultaComponent implements OnInit {
 
       this.confCarga.rutaPlantilla = "../../../../assets/files/Plantilla_Estructura_CargasIniciales.xlsx";
     }
-    if (this.validarDependenciaDeCatalogos()) {
-
-
-      $('#content').modal({
-        keyboard: false,
-        backdrop: 'static'
-      })
-      $('#content').modal('show')
-    } else {
+    if (!this.validarDependenciaDeCatalogos()) {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Debe completar la carga del catálogo: " + this.catFaltante, this._Mensajes.ERROR);
-
-
     }
   }
 
-  public btnCerrarModal(mdl: any) {
-    (<any>$('#' + mdl)).appendTo("body").modal('hide');
+  private validarDependenciaDeCatalogos() {
+    let blnPuedeCargar: boolean = true;
+    this.catFaltante = '';
+    if (this.confCarga.idCatPadre != undefined) {
+      for (let catId of this.confCarga.idCatPadre) {
+        this.catPadre = this.lstCatalogo.find(e => e.idCatalogos === catId);
+        if (this.catPadre.estatusCarga.cveIdEstatus != 1) {
+          this.catFaltante = this.catPadre.nombreCatalogo;
+          blnPuedeCargar = false;
+        }
+      }
+    }
+    return blnPuedeCargar;
   }
-
-
-
 
   upload(event: any) {
     console.log("selecciona boton para cargar archivo");
 
-
-
     this.archivoCarga.proceso = 'inicio';
     this.archivoCarga.errmsg = "";
 
-    //this.file = event.target.files[0] || undefined;
-    // let file2 = (<HTMLInputElement>event.target) == null ? '' : (<HTMLInputElement>event.target).files;
-    // let file3: File[];
-    // file3 = file2[0];
-    // this.uploadAndProgressSingle2(file2[0]);
-
-    // event.target.files.length == 1 ? this.imageName = event.target.files[0].name : this.imageName = event.target.files.length + " archivos";
-    // this.selectedFiles = event.target.files;
-
-    //this.uploadAndProgressSingle2(event.target.files[0]);
     let archivo: File;
     archivo = event.target.files[0];
-    this.archivoCarga.nombrearchivo = archivo.name.toString();
-    this.archivoCarga.tamanioarchivo = archivo.size.toString();
+    this.archivoCarga.nombrearchivo = archivo? archivo.name.toString() : "";
+    this.archivoCarga.tamanioarchivo = archivo? archivo.size.toString() : "";
     let xlsx = ".xlsx";
     let xls = ".xls";
     console.log("size" + this.archivoCarga.nombrearchivo);
@@ -263,110 +202,22 @@ export class ConsultaComponent implements OnInit {
 
     }
 
-    console.log("tamaño: ", archivo.size, " bytes");
+    console.log("tamaño: ", +this.archivoCarga.tamanioarchivo, " bytes");
 
-    if (archivo.size > this.pesoMaximoBytes) {
+    if (+this.archivoCarga.tamanioarchivo > this.pesoMaximoBytes) {
       this.archivoCarga.proceso = 'error';
       this.blnProcedeCarga = false;
       console.log("es pesado");
       this.archivoCarga.nombrearchivo = "";
       this.archivoCarga.tamanioarchivo = "";
 
-      //   this.onUpload(archivo);
-      //} else {
       this.blnDeshabilitar = false;
       this.archivoCarga.errmsg = this._Mensajes.MSJ_ERROR_GENERAL + this._Mensajes.MSJ_EXCEDE_TAMANIO;
     }
 
 
   }
-  blnProcedeCarga: boolean = true;
 
-  uploadAndProgressSingle() {
-    this.http.post('https://file.io', this.file, { reportProgress: true, observe: 'events' })
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.percentDone = Math.round(100 * event.loaded / (event.total || this.file[0].size));
-        } else if (event instanceof HttpResponse) {
-          this.uploadSuccess = true;
-        }
-      });
-  }
-
-  uploadAndProgressSingle2(file2: File) {
-    this.http.post('https://file.io', file2, { reportProgress: true, observe: 'events' })
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.percentDone = Math.round(100 * event.loaded / (event.total || file2.size));
-        } else if (event instanceof HttpResponse) {
-          this.uploadSuccess = true;
-        }
-      });
-  }
-
-  onUpload(file2: File) {
-    console.log(file2);
-    this.archivoCarga.proceso = 'progress';
-    this.archivoCarga.nombrearchivo = file2.name.toString();
-    this.archivoCarga.tamanioarchivo = file2.size.toString();
-    this._CargasService.upload(file2).subscribe(
-      event => {
-        // if (typeof (event) === 'object') {
-        //     // Short link via api response
-        //     this.shortLink = event.link;
-        // }
-        if (event.type === HttpEventType.UploadProgress) {
-          this.percentDone = Math.round(100 * event.loaded / file2.size);
-        } else if (event instanceof HttpResponse) {
-          this.uploadSuccess = true;
-
-        }
-        console.log(event);
-      },
-      err => {
-        this.percentDone = 0;
-        this.uploadSuccess = false;
-        this.shortLink = 'No se puede subir el archivo ' + file2.name;
-        this.archivoCarga.errmsg = this._Mensajes.MSJ_ERROR_GENERAL + this._Mensajes.MSJ_EXTENSION_NO_PERMITIDA;
-      }
-    );
-
-
-  }
-
-  descargaacuse() {
-
-    let d = new Date();
-    let month = (d.getMonth() + 1);
-    let day = d.getDate();
-    let year = d.getFullYear();
-    let fecha = this.generateDateDDMMYYYY(day, month, year);
-    if (this.regERROR != 0)
-      this.generarAcuse("carga_catalogos_error_" + fecha + ".pdf");
-    else
-      this.generarAcuse("carga_catalogos_exito_" + fecha + ".pdf");
-
-  }
-
-  catFaltante: string = '';
-  private validarDependenciaDeCatalogos() {
-    let blnPuedeCargar: boolean = true;
-    this.catFaltante = '';
-    if (this.confCarga.idCatPadre != undefined) {
-      for (let catId of this.confCarga.idCatPadre) {
-        this.catPadre = this.lstCatalogo.find(e => e.idCatalogos === catId);
-        if (this.catPadre.estatusCarga.cveIdEstatus != 1) {
-          this.catFaltante = this.catPadre.nombreCatalogo;
-          blnPuedeCargar = false;
-        }
-      }
-    }
-    return blnPuedeCargar;
-  }
-
-  confCarga: ConfiguracionCarga;
-  totalRegistros: number;
-  catPadre: CatalogoData;
   DataFromEventEmitter(data: any, tipoCatalogo: string) {
 
     this.totalRegistros = 0;
@@ -472,33 +323,13 @@ export class ConsultaComponent implements OnInit {
             this.ubicacion[index].unidadMedica = element[this.confCarga.col7];
             break;
           case 4:
-            this.turnos[index] = new Turno();
-            this.turnos[index].cveTurno = element[this.confCarga.col1];
-            this.turnos[index].desTurno = element[this.confCarga.col2];
-            this.turnos[index].des4306 = element[this.confCarga.col3];
-
-
+            this.responsable[index] = new Responsable();
+            this.responsable[index].matricula = element[this.confCarga.col1];
+            this.responsable[index].nombre = element[this.confCarga.col2];
+            this.responsable[index].ubicacion = element[this.confCarga.col3];
+            this.responsable[index].turno = element[this.confCarga.col4];
             break;
           case 5:
-            this.puestos[index] = new Puesto();
-            this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
-            break;
-          case 6:
-            debbugger:
-            this.persona[index] = new Persona();
-            this.persona[index].primerApellido = element[this.confCarga.col1];
-            this.persona[index].segundoApellido = element[this.confCarga.col2];
-            this.persona[index].nombre = element[this.confCarga.col3];
-            this.persona[index].matricula = element[this.confCarga.col4];
-            this.persona[index].rol = element[this.confCarga.col5];
-            this.persona[index].puesto = element[this.confCarga.col6]
-            this.persona[index].nombreCompleto = element[this.confCarga.col7];
-            this.persona[index].usuario = element[this.confCarga.col8];
-            this.persona[index].contraseña = element[this.confCarga.col9];
-            this.persona[index].turno = element[this.confCarga.col10]; 
-            break;
-
-          case 7:
             this.programasTS[index] = new ProgramaTS();
             this.programasTS[index].cveGrupo = element[this.confCarga.col1];
             this.programasTS[index].desPrograma = element[this.confCarga.col2];
@@ -507,17 +338,7 @@ export class ConsultaComponent implements OnInit {
             this.programasTS[index].cveServicio = element[this.confCarga.col5];
             break;
 
-          case 8:
-            this.responsable[index] = new Responsable();
-            this.responsable[index].matricula = element[this.confCarga.col1];
-            this.responsable[index].nombre = element[this.confCarga.col2];
-            this.responsable[index].ubicacion = element[this.confCarga.col3];
-            this.responsable[index].turno = element[this.confCarga.col4];
-            break;
-
-
-
-          case 9:
+          case 6:
             this.calendarioDias[index] = new CalendarioDias();
             this.calendarioDias[index].cveServicio = element[this.confCarga.col1];
             this.calendarioDias[index].cveUbicacion = element[this.confCarga.col2];
@@ -543,7 +364,39 @@ export class ConsultaComponent implements OnInit {
             this.calendarioDias[index].numParticipantes = element[this.confCarga.col8];
             break;
 
+          case 7:
 
+            this.persona[index] = new Persona();
+            this.persona[index].primerApellido = element[this.confCarga.col1];
+            this.persona[index].segundoApellido = element[this.confCarga.col2];
+            this.persona[index].nombre = element[this.confCarga.col3];
+            this.persona[index].matricula = element[this.confCarga.col4];
+            this.persona[index].rol = element[this.confCarga.col5];
+            this.persona[index].puesto = element[this.confCarga.col6]
+            this.persona[index].nombreCompleto = element[this.confCarga.col7];
+            this.persona[index].usuario = element[this.confCarga.col8];
+            this.persona[index].contraseña = element[this.confCarga.col9];
+            this.persona[index].turno = element[this.confCarga.col10];
+            break;
+
+
+
+
+          case 8:
+            this.turnos[index] = new Turno();
+            this.turnos[index].cveTurno = element[this.confCarga.col1];
+            this.turnos[index].desTurno = element[this.confCarga.col2];
+            this.turnos[index].des4306 = element[this.confCarga.col3];
+
+
+            break;
+
+
+
+            case 9:
+              this.puestos[index] = new Puesto();
+              this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
+              break;
 
 
 
@@ -669,7 +522,27 @@ export class ConsultaComponent implements OnInit {
             this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_UBICACIONES);
           });
           break;
-        case 4:
+          case 7:
+            this.personaRequest = new PersonaRequest();
+            this.personaRequest.personas = this.persona;
+            this.personaRequest.idUser = this.idUser;
+            this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
+              this.cargaResponse = resp;
+              if (resp) {
+                this.percentDone = 100;
+                this.reporteCarga(resp);
+
+                setTimeout(() => {
+                  this.archivoCarga.proceso = 'result';
+                }, 800);
+              }
+            }, (error: HttpErrorResponse) => {
+              this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
+
+            });
+
+            break;
+        case 8:
           this.turnosRequest = new TurnoRequest();
           this.turnosRequest.turnos = this.turnos;
           this.turnosRequest.idUser = this.idUser;
@@ -691,7 +564,7 @@ export class ConsultaComponent implements OnInit {
           });
 
           break;
-        case 5:
+        case 9:
           this.puestosRequest = new PuestoRequest();
           this.puestosRequest.puestos = this.puestos;
           this.puestosRequest.idUser = this.idUser;
@@ -711,27 +584,8 @@ export class ConsultaComponent implements OnInit {
           });
 
           break;
-        case 6:
-          this.personaRequest = new PersonaRequest();
-          this.personaRequest.personas = this.persona;
-          this.personaRequest.idUser = this.idUser;
-          this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
-            this.cargaResponse = resp;
-            if (resp) {
-              this.percentDone = 100;
-              this.reporteCarga(resp);
 
-              setTimeout(() => {
-                this.archivoCarga.proceso = 'result';
-              }, 800);
-            }
-          }, (error: HttpErrorResponse) => {
-            this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
-
-          });
-
-          break;
-        case 7:
+        case 5:
 
           this.programasTSRequest = new ProgramaTSRequest();
           this.programasTSRequest.programas = this.programasTS;
@@ -758,7 +612,7 @@ export class ConsultaComponent implements OnInit {
           });
           break;
 
-        case 8:
+        case 4:
 
           this.responsableRequest = new ResponsableRequest();
           this.responsableRequest.responsables = this.responsable;
@@ -784,7 +638,7 @@ export class ConsultaComponent implements OnInit {
           // }
           break;
 
-        case 9:
+        case 6:
 
           this.calendarioDiasRequest = new CalendarioRequest();
           this.calendarioDiasRequest.calendarioDias = this.calendarioDias;
@@ -858,6 +712,20 @@ export class ConsultaComponent implements OnInit {
       this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGA + msj, this._Mensajes.EXITO);
     }
 
+
+  }
+
+  descargaacuse() {
+
+    let d = new Date();
+    let month = (d.getMonth() + 1);
+    let day = d.getDate();
+    let year = d.getFullYear();
+    let fecha = this.generateDateDDMMYYYY(day, month, year);
+    if (this.regERROR != 0)
+      this.generarAcuse("carga_catalogos_error_" + fecha + ".pdf");
+    else
+      this.generarAcuse("carga_catalogos_exito_" + fecha + ".pdf");
 
   }
 
@@ -948,142 +816,6 @@ export class ConsultaComponent implements OnInit {
     var event = new MouseEvent("click");
     element.dispatchEvent(event);
   }
-  blnContinuar: boolean = false;
-
-  //Estatus Cargas
-  private obtenerEstatusCarga(): void {
-    this.blnErrores = false;
-    this.blnPendientes = false;
-    this.blnCompletos = false;
-    this.lstCatalogo = new Array<CatalogoData>();
-    this.cargaCatalogos = new CargasCatalogos;
-    this.msjLoading("Cargando...");
-    this._CargasService.getEstatusCargaInicial()
-      .subscribe((resp: CargasCatalogos) => {
-
-        if (resp.code == 200) {
-          this.cargaCatalogos = resp;
-          this.lstCatalogo = resp.data.lstCatalogos;
-          this.validaCargaCompleta(this.lstCatalogo);
-          Swal.close();
-
-        } else {
-          this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_CONEXION_CARGAINICIAL, this._Mensajes.ERROR);
-          Swal.close();
-        }
-
-
-
-        console.log("cargaInicial: ", this.cargaCatalogos);
-
-      }, (error: HttpErrorResponse) => {
-        this.cargaCatalogos = new CargasCatalogos;
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_CONEXION_CARGAINICIAL, this._Mensajes.ERROR);
-        console.log(error);
-        Swal.close();
-      });
-  }
-
-
-
-  private validaCargaCompleta(lst: CatalogoData[]) {
-    let tot = lst.length;
-    let completos = 0;
-    this.blnCompletos = false;
-    this.blnErrores = false;
-    this.blnPendientes = false;
-
-    for (let reg of lst) {
-
-      if (reg.estatusCarga?.cveNombre.toLocaleLowerCase() === 'carga completa') {
-        this.blnCompletos = true;
-        completos = completos + 1;
-      }
-      if (reg.estatusCarga?.cveNombre.toLocaleLowerCase() === 'carga pendiente') {
-        this.blnPendientes = true;
-      }
-      if (reg.estatusCarga?.cveNombre.toLocaleLowerCase() === 'carga con errores') {
-        this.blnErrores = true;
-      }
-    }
-    if (tot == completos) {
-      this.blnContinuar = true;
-      this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
-    }
-  }
-
-  private msjLoading(titulo: string) {
-    Swal.fire({
-      title: titulo,
-
-      didOpen: () => {
-        Swal.showLoading();
-      }
-
-
-    })
-  }
-
-  private mostrarMensaje(tipo: string, msj: string, tipoMsj?: string) {
-    this.mensaje = new objAlert;
-    this.mensaje.visible = true;
-    this.mensaje.type = tipo;
-    this.mensaje.message = msj;
-    this.mensaje.typeMsg = tipoMsj;
-    console.log(this.mensaje);
-    setTimeout(() => {
-      this.mensaje.visible = false;
-    }, 4500);
-
-  }
-
-  private cleanVar() {
-    this.archivoCarga = new ArchivoCarga();
-    this.archivoCarga.errmsg = "";
-    this.blnDeshabilitar = false;
-    this.percentDone = 0;
-    this.unidadMedica = new Array<UnidadMedica>()
-    this.servicio = new Array<Servicio>();
-    this.ubicacion = new Array<Ubicacion>();
-    this.responsable = new Array<Responsable>();
-    this.programasTS = new Array<ProgramaTS>();
-    this.calendarioDias = new Array<CalendarioDias>();
-    this.persona = new Array<Persona>();
-    this.turnos = new Array<Turno>();
-    this.puestos = new Array<Puesto>();
-
-
-  }
-
-  btnContinuar() {
-
-    if (this.blnContinuar) {
-      this.router.navigate(['busqueda'], { skipLocationChange: true });
-    } else {
-      this.mostrarMensaje(this._Mensajes.ALERT_DANGER, 'Debe completar la carga de Catálogos', this._Mensajes.ERROR);
-    }
-
-  }
-  btnCancelar() {
-    this.cleanVar();
-    $('#content').modal('hide')
-    this.reset();
-    this.obtenerEstatusCarga();
-  }
-  btnAceptar() {
-    this.cleanVar();
-    $('#content').modal('hide')
-    this.reset();
-    this.obtenerEstatusCarga();
-  }
-
-  btnClose() {
-    this.cleanVar();
-
-    $('#content').modal('hide')
-    this.reset();
-    this.obtenerEstatusCarga();
-  }
 
   private mensajesError(error: HttpErrorResponse, msj: string) {
     this.archivoCarga.proceso = 'errorResponse';
@@ -1120,6 +852,61 @@ export class ConsultaComponent implements OnInit {
     console.log(this.myInputVariable.nativeElement.files);
   }
 
+  private cleanVar() {
+    this.archivoCarga = new ArchivoCarga();
+    this.archivoCarga.errmsg = "";
+    this.blnDeshabilitar = false;
+    this.percentDone = 0;
+    this.unidadMedica = new Array<UnidadMedica>()
+    this.servicio = new Array<Servicio>();
+    this.ubicacion = new Array<Ubicacion>();
+    this.responsable = new Array<Responsable>();
+    this.programasTS = new Array<ProgramaTS>();
+    this.calendarioDias = new Array<CalendarioDias>();
+    this.persona = new Array<Persona>();
+    this.turnos = new Array<Turno>();
+    this.puestos = new Array<Puesto>();
+
+
+  }
+
+  btnCancelar() {
+    this.cleanVar();
+    //$('#content').modal('hide')
+    this.reset();
+    //this.obtenerEstatusCarga();
+    this.cancelar();
+  }
+  btnAceptar() {
+    this.cleanVar();
+    //$('#content').modal('hide')
+    this.reset();
+    //this.obtenerEstatusCarga();
+    this.cancelar();
+  }
+
+  btnClose() {
+    this.cleanVar();
+
+    //$('#content').modal('hide')
+    this.reset();
+    //this.obtenerEstatusCarga();
+    this.cancelar();
+  }
+
+  private mostrarMensaje(tipo: string, msj: string, tipoMsj?: string) {
+    // this.mensaje = new objAlert;
+    // this.mensaje.visible = true;
+    this.mensaje.type = tipo;
+    this.mensaje.message = msj;
+    this.mensaje.typeMsg = tipoMsj;
+    // console.log(this.mensaje);
+    // setTimeout(() => {
+    //   this.mensaje.visible = false;
+    // }, 4500);
+    this.onAlert.emit(this.mensaje);
+  }
+
+
+
 }
-
-

@@ -372,20 +372,20 @@ option {
 }
 
 .errorimgdiv {
-
-    width: 350px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
 .errorimg {
-    width: 350px;
-    height: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
+
 
 .Rectangle-9600 {
     width: 100%;

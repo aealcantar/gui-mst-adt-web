@@ -66,6 +66,7 @@ import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar
 import { FooterComponent } from './components/templates/footer/footer.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 import {
   NgxMatDateFormats,
   NgxMatDatetimePickerModule,
@@ -88,6 +89,7 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
+import { CargamasivaComponent } from './configuracion/catalogos/cargamasiva/cargamasiva.component';
 
 registerLocaleData('es');
 
@@ -140,7 +142,8 @@ registerLocaleData('es');
     NuevoVdonacionSangreComponent,
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
-    UbicacionesComponent
+    UbicacionesComponent,
+    CargamasivaComponent
   ],
   imports: [
     BrowserModule,
@@ -171,6 +174,7 @@ registerLocaleData('es');
     NgxMatMomentModule,
     MomentDateModule,
     MatRadioModule,
+    MatSelectModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
