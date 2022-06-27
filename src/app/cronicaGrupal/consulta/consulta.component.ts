@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -60,7 +59,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     $('#calendar').datepicker({
-      dateFormat: "yy/mm/dd",
+      dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.fechaSelected = date.replaceAll('/', '-');
@@ -177,7 +176,8 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   getCronicasGrupales() {
-    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', this.fechaSelected !== undefined ? this.fechaSelected : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
+    let fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
+    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', fechaConvertedFormat !== undefined ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
       (cronicasGrupales) => {
         console.log("RESPUESTA CRONICAS: ", cronicasGrupales);
         this.cronicasGrupales = [];
