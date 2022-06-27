@@ -89,6 +89,7 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
+import { CargamasivaComponent } from './configuracion/catalogos/cargamasiva/cargamasiva.component';
 
 registerLocaleData('es');
 
@@ -141,7 +142,8 @@ registerLocaleData('es');
     NuevoVdonacionSangreComponent,
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
-    UbicacionesComponent
+    UbicacionesComponent,
+    CargamasivaComponent
   ],
   imports: [
     BrowserModule,

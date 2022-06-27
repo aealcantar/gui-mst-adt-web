@@ -9,6 +9,8 @@ import { UsuariosService } from '../usuarios.service';
 import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { DataTableDirective } from 'angular-datatables';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CargamasivaComponent } from '../../catalogos/cargamasiva/cargamasiva.component'
 //import { rootCertificates } from 'tls';
 declare var $:any;
 //declare var $gmx:any;
@@ -42,7 +44,8 @@ export class UserbuscaComponent implements OnInit  {
     private http: HttpClient, private router: Router,
     private userservice: UsuariosService,
     private renderer: Renderer2,
-    private elementRef:ElementRef) {}
+    private elementRef:ElementRef,
+    public dialog: MatDialog) {}
 
 
   public ngOnInit(): void {
@@ -175,15 +178,33 @@ export class UserbuscaComponent implements OnInit  {
   }
 
   nuevousuario(){
-    this.router.navigate(['/guardauser']);
+    this.router.navigateByUrl("/guardauser", { skipLocationChange: true });
   }
 
   muestrausuario(id: number){
-    this.router.navigate(['/consultauser/' + id]);
+    this.router.navigateByUrl("/consultauser/" + id, { skipLocationChange: true });
   }
 
   cargalayoutusuarios(){
-    //console.log("Click");
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      idCatalogos: 7,
+      "nombreCatalogo": "Usuarios",
+      "sheetName": "C_personal"
+    };
+
+    const dialogo1 = this.dialog.open(CargamasivaComponent, dialogConfig);
+
+    dialogo1.afterClosed().subscribe(art => {
+      console.log("result: ", art);
+      //if (art != undefined)
+
+    });
+
+    dialogo1.componentInstance.onAlert.subscribe(dats => {
+      console.log("result: ", dats);
+      this.muestraAlerta(dats.message, dats.type, dats.typeMsg);
+    });
 
   }
 
