@@ -1,14 +1,18 @@
+::ng-deep.mat-dialog-container {
+  border-radius: 10px !important;
+  padding: 0px !important;
+}
+
 .modal-content{
   max-width: 870px;
   width: 770px;
   min-height: 250px;
-  /* Heredado de styles gral (.mat-dialog-container) dado que esta como important y se aprecia diferencia */
-  border-radius: 20px 20px 6px 6px !important;
+  border-radius: 10px !important;
 }
 
 .base-cont {
 
-  border-radius: 6px;
+  
   box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, 0.2);
   background-color: #fff;
   margin-bottom: 30px;
