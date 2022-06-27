@@ -680,7 +680,6 @@ table.dataTable.no-footer {
   text-align: left;
 }
 
-
 .mat-select-panel {
   transform: translate(-2px, 25px) !important;
 }
@@ -688,6 +687,10 @@ table.dataTable.no-footer {
 .mat-option:hover {
   background: #9D2449 !important;
   color: white !important;
+}
+
+.mat-option {
+  height: 1.5em !important;
 }
 
 .mat-select-arrow-wrapper {
