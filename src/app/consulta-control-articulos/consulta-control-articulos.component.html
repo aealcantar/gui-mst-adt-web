@@ -68,7 +68,7 @@
                         </thead>
                         <tbody *ngFor="let item of tabla | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
                             <tr>
-                                <td class="bordesTablaFecha" style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;" (click)="irDetalle(item);">{{ item.fecha | date: 'dd / MM / yyyy' }}</td>
+                                <td class="bordesTablaFecha" style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;" (click)="irDetalle(item);">{{ item.fecha }}</td>
                                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.personalQueElaboro}} </td>
                             </tr>
                         </tbody>

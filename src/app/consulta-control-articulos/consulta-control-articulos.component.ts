@@ -29,6 +29,8 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecha';
+  public findCtrolArt: any[] = [];
+  public valores: ControlArticulos;
 
   constructor(
     private router: Router,
@@ -74,11 +76,33 @@ export class ConsultaControlArticulosComponent implements OnInit {
   }
   
   getArticulosByFecha(): void {
-    this.Artservice.getArticulosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
-      (articulos: any) => {
-        if (articulos && articulos.List.length > 0) {
-          this.tabla = articulos.List;
-          console.log("CONTROL DE ARTICULOS: ", this.tabla);
+
+     const findCtrolArt = {
+      "bitacora":[{
+          "aplicativo":"",
+          "flujo":"",
+          "idUsuario":1,
+          "nombreUsuario":"",
+          "tipoUsuario":1
+      }],
+      "pagina":"1",
+      "fechaInicial": this.datesForm.get('fechaInicial')?.value,
+      "fechaFinal": this.datesForm.get('fechaFinal')?.value,
+      "clavePaciente":123456789
+    };
+  
+    this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
+        (articulos: any) => {
+          console.log("CONTROL DE ARTICULOS: ", articulos);
+          debugger
+        try {
+          if (articulos) {
+            const ariculosJson = articulos.response;
+            ariculosJson.status == "OK" ? this.tabla = ariculosJson.listaControlArticulosDto : null;
+            console.log("CONTROL DE ARTICULOS: ", this.tabla );
+          }
+        }catch (error) {
+          console.error(error);
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -100,7 +124,8 @@ export class ConsultaControlArticulosComponent implements OnInit {
     let params = {
       'controlArticulos': JSON.stringify(controlArticulos),
     }
-    this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
+   // this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
+    this.router.navigateByUrl("/detalle-control-articulos/" + controlArticulos.idCa)
   }
 
   ngAfterViewInit(): void {
@@ -174,11 +199,13 @@ export class ConsultaControlArticulosComponent implements OnInit {
     let data;
     switch (type) {
       case 'fecha':
-        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
-        data = momment(val, 'DD/MM/YYYY');
+        data = moment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
-        data = momment(val, 'HH:mm:ss');
+        data = moment(val, 'HH:mm:ss');
+        break;
+      case 'number':
+        data = parseInt(val);
         break;
 
       default:

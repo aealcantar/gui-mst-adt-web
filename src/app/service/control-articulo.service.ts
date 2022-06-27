@@ -25,8 +25,8 @@ export class ControlArticuloService {
     return this.http.post<ControlArticulos>(`${urlServArticulo}/insert`, controlArticulos);
   }
 
-  getArticulosByFechas(fechaInicial: string, fechaFinal: string) {
-    return this.http.get<ControlArticulos[]>(`${urlServArticulo}/rango/fechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+  getArticulosByFechas(controlArticulos: any) {
+    return this.http.post<any>(`${urlServArticulo}/rango/fechas`, controlArticulos);
   }
   
   getArticulos() {
