@@ -6,21 +6,25 @@
 
     <!-- <section class="section"> -->
       <div class="base-cont table-responsive">
+
         <div class="tit-princ">
-           
-                <span class="imgAtras" (click)="btnAtras()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
-                <span>Configuración de ubicaciones</span>
-           
+          <div class=" text-left pull-left">
+            <span (click)="btnAtras()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
+            <span>Configuración de ubicaciones</span>
+          </div>
+      
         </div>
+
+       
         <div class="body-princ ">
           
           <div class="texto-ind">
             Buscar por descripción
           </div>
           <form class="form-inline" role="form" autocomplete="off">
-            <div class="form-group">
+            <div class="form-group"  style="width: 40%;">
               <!-- <label class="" for="txtconsulta">Buscar por matrícula o nombre completo</label> -->
-              <input class="form-control matricula" id="txtconsulta" placeholder="Ingresa descripción" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
+              <input class="form-control matricula" id="txtconsulta" placeholder="Ingresa descripción" minlength="5" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
             </div>
   
   
@@ -35,19 +39,21 @@
               <div class="col-2 col-md-2 float-start pull-left" style="line-height: 40px;">
                 Resultados <span class="totcargas">{{lstUbicaciones.length}}</span>
               </div>
-              <div class="col-2 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right;">
+              <div class="col-4 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right;">
                 Visualizar datos
                 <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="caret-img">{{numitems}}</span> <img src="../../../../assets/images/Icon.png">
                 </button>
                 <ul class="dropdown-menu" >
-                  <li *ngFor="let i of [15,20,50,100]"><a >{{i}}</a></li>
+                  <li *ngFor="let i of [15,20,50,100]"><a (click)="cambiatotalpaginas(i)">{{i}}</a></li>
                 </ul>
               </div>
+              
   
   
             </caption>
             <thead>
+              
               <tr>
                 <th>Descripción abreviada</th>
                 <th>Tipo</th>
@@ -58,7 +64,8 @@
               <tr *ngFor="let item of lstUbicaciones">
                 <td
                   class="link-texto"
-                 >
+                  (click)="muestraHorarios(item.cveUbicacion)">
+                 
                   {{ item.descripcionAbreviada }}</td>
                 <td>{{item.tipo }}</td>
                 <td>{{ item.servicio }}</td>
@@ -68,18 +75,21 @@
   
         
           <div class="nopag pull-right" *ngIf="lstUbicaciones.length > 0">
+            
             Página
             <span class="bg-nopag" [innerText]="pagactual"></span>
           </div>
-          <div class="sin-resultados" *ngIf="lstUbicaciones.length == 0">
+          <div class="sin-resultados" *ngIf="resultados == false">
             <img src="../../../../assets/images/Group 2358.png"
               class="Group-2358">
           </div>
+          <!--
           <div class="table-pie sin-borde" *ngIf="lstUbicaciones.length == 0">
             <div class="cargalayout">
+              
               <span (click)="cargaUbicaciones()">Carga de ubicaciones: <img src="../../../../assets/images/icon-upload.png"> </span>
             </div>
-          </div>
+          </div>-->
 
         </div>
 
@@ -88,5 +98,191 @@
       </div>
     <!-- </section>
   </div> -->
+  
+  <div class="modal fade" id="content">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header header-modal-det">
+          <div style="width: 100%; display: inline-block;">
+            <div
+              style="width: 5%; min-height: 53px;  display: inline-block; padding-top: 0px ;    vertical-align: top;">
+              <mat-icon class="mat-iconUpload" svgIcon="upload"></mat-icon>
+            </div>
+            <div style="width: 90%; display: inline-block;">
+              <div class="row">
+                <h4 class="modal-title">{{ archivoCarga.nombre }}</h4>
+              </div>
+              <div class="row modal-subtitle">
+                <div
+                  *ngIf="archivoCarga.proceso == 'inicio' || archivoCarga.proceso == null || archivoCarga.proceso == undefined">
+                  Al procesar la carga, el estado se informará por correo o podrá ser
+                  consultado en sistema.
+                </div>
+                <p *ngIf="archivoCarga.proceso == 'progress'">
+                  No salga del sistema hasta terminar el procesamiento del documento.
+                </p>
+                <p *ngIf="regERROR == 0 && archivoCarga.proceso == 'result'">
+                  Se ha procesado la información para el catálogo {{confCarga?.nombreCatalogo}} de forma correcta y
+                  puede consultar la información en el sistema. Puede descargar el resultado de la carga en el archivo
+                  adjunto, adicional le fue enviado a su correo electrónico.
+                </p>
+                <p *ngIf="regERROR > 0 && archivoCarga.proceso == 'result'">
+                  El archivo cuenta con errores. Se enviará un correo con el acuse de carga.
+                </p>
+                <p *ngIf="archivoCarga.proceso == 'errorResponse'">
+                  Hubo una falla en el servicio, contacte al administrador.
+                </p>
+                <p *ngIf="archivoCarga.proceso == 'error'">
+                  El archivo no corresponde a una plantilla válida.
+                </p>
 
+              </div>
+            </div>
+            <div style="width: 5%; display: inline-block; vertical-align: top;">
+              <mat-icon aria-label="Close" data-dismiss="modal" (click)="btnClose()" class="mat-iconClose"
+                svgIcon="close" *ngIf="archivoCarga.proceso != 'progress' &&  archivoCarga.proceso != 'inicio'">
+              </mat-icon>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-body breakAll" style=" margin-top: 0px;">
+          <div style="width: 100%;">
+            <form novalidate>
+              <div class="form-group">
+                <div class="row g-0">
+                  <div class="col-6 col-sm-6">
+                    <div class="pull-left mb-2 label1" style="font-weight: 600;"
+                      *ngIf="archivoCarga.proceso != 'result'">
+                      Carga de catálogo:</div>
+                    <div class="pull-left mb-2 label1" style="font-weight: 600;"
+                      *ngIf="archivoCarga.proceso === 'result'">
+                      Carga masiva:</div>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                    <div class="pull-right txtcarga-archivo mb-2 pull-right" *ngIf="archivoCarga.proceso != 'result' || regERROR > 0"
+                      (click)="fileInput.click()">
+                      <div class="icono-add"></div>
+
+                      Cargar archivo
+                    </div>
+                  </div>
+                </div>
+                <input type="file" appReadexcel #fileInput #readexcel="readexcel"
+                  (eventEmitter)="DataFromEventEmitter($event,archivoCarga.nombre)" [sheetName]="archivoCarga.sheetName"
+                  (change)="upload($event)" style="visibility: hidden; position: absolute;" hidden />
+                <!--
+            <input
+              type="file"
+              class="form-control"
+              #fileInput
+              hidden
+              (change)="upload($event)"
+            />-->
+
+
+                <div class="col-12 col-md-12 " style="border: 2px dashed #000000; min-height: 18px;  margin: 7px 0 0; ">
+                  <!-- opcion carga progress -->
+                  <div class="col-12">
+                    <div class="row" style="padding: 2px;"
+                      *ngIf="archivoCarga.proceso === 'inicio' || archivoCarga.proceso === 'progress' ">
+                      <div class="col-sm-1">
+                        <mat-icon *ngIf="percentDone>= 0" svgIcon="upload2"></mat-icon>
+                      </div>
+                      <div class="col">
+                        <div class="col-12 label4 ">
+                          {{ archivoCarga.nombrearchivo }}
+                          <div class="pull-right label4 ">
+                            {{ archivoCarga.tamanioarchivo }} {{ archivoCarga.tamanioarchivo?'mb':'' }}
+                          </div>
+
+                          <div style=" display: flex;">
+                            <mat-progress-bar style="height: 6px;" mode="determinate" value="{{percentDone}}">
+                            </mat-progress-bar>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="row" style="padding: 2px;  margin: 3px;" *ngIf="archivoCarga.proceso === 'result' ">
+                      <div class="col-sm-4" style="   min-height: 18px;  display: flex;
+                  align-items: center;">
+
+                        <button type="submit" class=" btnAcuse" (click)="descargaacuse()">
+                          <mat-icon class="mat-iconDown2" svgIcon="download"></mat-icon>
+                          Descarga de acuse
+                        </button>
+                      </div>
+                      <div class="col-sm-8 label1" style="min-height: 18px; display: flex;
+                  align-items: center; justify-content: center; text-overflow: ellipsis; overflow: hidden;">
+                        {{ archivoCarga.nombrearchivo }}
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+
+                  <!--  <ngb-progressbar class="barra-progress" [ngClass]="{ 'color-progres': true }" type="warning"
+                    [value]="percentDone"></ngb-progressbar> -->
+
+
+                  <!-- opcion descarga acuse -->
+
+                </div>
+
+
+                <div class="mb-1 label2">
+                  Formato aceptado de archivo: Hoja de cálculo. Peso máximo {{pesoMaximoMB}} MB.
+                </div>
+                <div *ngIf="archivoCarga.errmsg != ''" class="fail mb-2">
+                  {{ archivoCarga.errmsg }}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer" style="margin: 15px; ">
+          <div class="row">
+            <div class="col-md-6 pull-left" style="height: 18px;  display: inline-block;">
+
+
+              <div class="label3"
+                *ngIf="archivoCarga.proceso == undefined || archivoCarga.proceso === 'result' && regERROR > 0  ">
+                <a href="{{confCarga?.rutaPlantilla}}" download="{{confCarga?.nombreCatalogo}}.xlsx">
+
+                  Descargar Plantilla
+                  <div class="icono-iconDown"></div>
+
+                </a>
+
+              </div>
+
+            </div>
+            <div class="col-md-6" style=" display: inline-block;">
+
+              <button class="btn btn-danger" type="button" aria-label="Close"
+                *ngIf="archivoCarga.proceso === 'error' || archivoCarga.proceso == undefined" data-dismiss="modal"
+                (click)="btnCancelar()">
+                Cancelar
+              </button>
+
+              <button type="submit" class="btn btn-primary  "
+                *ngIf="archivoCarga.proceso === 'result'  || archivoCarga.proceso === 'errorResponse'"
+                data-dismiss="modal" aria-label="Close" (click)="btnAceptar()"
+                [ngClass]="{'disabled': blnDeshabilitar}">
+                Aceptar
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 </div>
