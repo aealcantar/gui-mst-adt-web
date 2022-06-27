@@ -7,6 +7,7 @@ import { EstadoCivil } from '../models/estado-civil.model';
 import { EstudioMedico } from '../models/estudio-medico.model';
 import { Ocupacion } from '../models/ocupacion.model';
 import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-estudio-medico-guardado',
@@ -25,11 +26,15 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   pacienteSeleccionado!: pacienteSeleccionado;
   ocupaciones: Ocupacion[] = [];
   catEstadosCiviles: EstadoCivil[] = [];
+  datetimeFormat = '';
+  dateToday= new Date();
 
   constructor(
     private route: ActivatedRoute,
     private estudioMedicoService: EstudioSocialMedicoService
-  ) { }
+  ) { 
+    this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
+  }
 
   ngOnInit(): void {
     this.datosGenerales = true;
@@ -43,9 +48,8 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
           this.muestraAlerta(
             '¡La información se guardó con éxito!',
             'alert-success',
-            'Éxito',
+            '',
           );
-          // this.showSucces("¡La información se guardó con éxito!");
         }
       }
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.estudioMedico);
@@ -96,8 +100,14 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     );
   }
 
-  getNombreOcupacion(idOcupacion: number) {
-    return this.ocupaciones.find(c => c.id_OCUPACION = idOcupacion)?.nom_OCUPACION;
+  getNombreOcupacion(idOcupacion: number | string) {
+    let idOcupacionConverted: number;
+    if (typeof idOcupacion === 'string') {
+      idOcupacionConverted = Number(idOcupacion);
+    } else if (typeof idOcupacion === 'number') {
+      idOcupacionConverted = idOcupacion;
+    }
+    return this.ocupaciones.find(e => e.id_OCUPACION === idOcupacionConverted)?.nom_OCUPACION;
   }
 
   getNombreEstadoCivil(idEstadoCivil: number | string) {
@@ -136,19 +146,21 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   }
 
   imprimir() {
+    let fechaTransformada = this.datetimeFormat;
     let reporteEstudioMedicoSocial: any = {
       ooad: "CDMX NORTE",
-      unidad: "HGZ 48 SAN PEDRO XALAPA",
+      unidad: "UMF " + this.pacienteSeleccionado.unidadMedica,
       turno: this.pacienteSeleccionado.turno === "M" ? "MATUTINO" : "VESPERTINO",
       servicio: "GRUPO",
       cvePtal: "35E1011D2153",
+      fecImpresion: fechaTransformada,
       nss: this.pacienteSeleccionado.nss,
       aMedico: this.pacienteSeleccionado.agregadoMedico,
       nombrePaciente: this.pacienteSeleccionado.paciente.toUpperCase(),
       curp: this.pacienteSeleccionado.curp,
-      unidad2: this.pacienteSeleccionado.unidadMedica,
+      unidad2: "UMF " + this.pacienteSeleccionado.unidadMedica,
       consultorio: this.pacienteSeleccionado.consultorio,
-      edad: this.pacienteSeleccionado.edad + "años " + this.convertDate(this.pacienteSeleccionado.fechaNacimiento),
+      edad: this.pacienteSeleccionado.edad + " años " + this.convertDate(this.pacienteSeleccionado.fechaNacimiento),
       sexo: this.pacienteSeleccionado.sexo === "M" ? "Masculino" : "Femenino",
       calle: this.estudioMedico.nomVialidad,
       numeroInt: this.estudioMedico.numInterior,

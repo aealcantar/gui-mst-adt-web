@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subscription, timer } from "rxjs";
-import { map, share } from "rxjs/operators";
 import { CronicaGrupalService } from "src/app/service/cronica-grupal.service";
+import { formatDate } from '@angular/common';
+import { Usuario } from "src/app/models/usuario.model";
 
 @Component({
   selector: 'app-c-cgrupal-especifica',
@@ -12,24 +12,24 @@ import { CronicaGrupalService } from "src/app/service/cronica-grupal.service";
 })
 export class CCGrupalEspecificaComponent implements OnInit {
 
-  // time = new Date();
-  // rxTime = new Date();
-  // intervalId: any;
-  // subscription: Subscription | undefined;
-  months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-  today: any;
-  day: any;
-  month: any;
-  year: any;
-
-  cronica: any;
-  catalogoEstatus: any[] = ['No impartida','Por impartir','Impartida'];
+  public months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  public today: any;
+  public day: any;
+  public month: any;
+  public year: any;
+  public cronica: any;
+  public catalogoEstatus: any[] = ['No impartida','Por impartir','Impartida'];
+  public datetimeFormat = '';
+  public dateToday= new Date();
+  public usuario!: Usuario;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService
-  ) { }
+  ) { 
+    this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
+  }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params: any) => {
@@ -38,7 +38,11 @@ export class CCGrupalEspecificaComponent implements OnInit {
       }
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.cronica);
     });
-    //martes 24 de mayo de 2022 08:00:12
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    if (userTmp !== '') {
+      this.usuario = JSON.parse(userTmp);
+      console.log("USER DATA: ", this.usuario);
+    }
     console.log("FECHA: ", this.cronica?.fecFechaCorta);
     this.day = this.cronica?.fecFechaCorta.substring('0','2');
     console.log("DAY: ", this.day);
@@ -85,21 +89,8 @@ export class CCGrupalEspecificaComponent implements OnInit {
     this.year = this.cronica?.fecFechaCorta.substring('6','10');
     console.log("YEAR: ", this.year);
     const currentDate = new Date(this.year+"-"+this.month+"-"+this.day);
-    // this.day = currentDate.getDate();
-    // this.month = currentDate.getMonth();
-    // this.year = currentDate.getFullYear();
     this.today = currentDate;
     console.log("DATE: ", this.today);
-
-    // this.subscription = timer(0, 1000)
-    //   .pipe(
-    //     map(() => new Date()),
-    //     share()
-    //   )
-    //   .subscribe(time => {
-    //     this.rxTime = time;
-    //   }
-    // );
   }
 
   cancelar() {
@@ -107,14 +98,14 @@ export class CCGrupalEspecificaComponent implements OnInit {
   }
 
   imprimir() {
+    let fechaTransformada = this.datetimeFormat;
     let data: any = {
       ooad: "CDMX NORTE",
         unidad: "HGZ 48 SAN PEDRO XALAPA",
         clavePtal: "35E1011D2153",
         turno: "MATUTINO",
         servicio: "GRUPO",
-        grupo: "TOUR QUIRURJICO",
-        // grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
+        grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
         fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
         hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",
         ponentes: this.cronica?.descPonentes !== null ? this.cronica?.descPonentes : "",
@@ -125,7 +116,8 @@ export class CCGrupalEspecificaComponent implements OnInit {
         contenido: this.cronica?.desDesarrolloSesion !== null ? this.cronica?.desDesarrolloSesion : "",
         perfilGrupo: this.cronica?.desPerfilGrupo !== null ? this.cronica?.desPerfilGrupo : "",
         observaciones: this.cronica?.desObservaciones !== null ? this.cronica?.desObservaciones : "",
-        trabajadorSocial: "Antonio Esteban Alcántar"
+        fecImpresion: fechaTransformada,
+        trabajadorSocial: this.usuario?.strNombres + " " + this.usuario?.strApellidoP + " " + this.usuario?.strApellidoM
     };
     console.log("DATA REPORT: ", data);
     this.cronicaGrupalService.downloadPdf(data).subscribe(

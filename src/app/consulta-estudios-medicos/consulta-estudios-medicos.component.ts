@@ -40,14 +40,14 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
+      fechaInicial: [null, Validators.required],
+      fechaFinal: [null, Validators.required],
     });
     this.authService.setProjectObs("Trabajo social");
   }
 
   ngAfterViewInit(): void {
-    $('#calendarCESM1').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#calendarCESM1').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -63,7 +63,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
       }
     });
 
-    $('#calendarCESM2').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#calendarCESM2').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -82,6 +82,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   }
 
   loadDataTable(): void {
+    this.estudioMedicos = [];
     this.estudioMedicoService.getEstudiosMedicosByFechas(this.datesForm.get('fechaInicial')!.value, this.datesForm.get('fechaFinal')!.value).subscribe(
       (estudiosMedicosSociales: any) => {
         if (estudiosMedicosSociales && estudiosMedicosSociales.ArrayList.length > 0) {

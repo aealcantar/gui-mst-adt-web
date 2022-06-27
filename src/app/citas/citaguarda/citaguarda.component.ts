@@ -349,7 +349,7 @@ export class CitaguardaComponent implements OnInit {
           'Turno': resp.cve_turno,
           'Servicio': this.citadata.value.servicio.des_especialidad,
           'Programa': this.citadata.value.programa.des_grupo_programa,
-          'Tipo de cita': ''
+          'Tipo de cita': 'Grupal'
         };
 
         this.muestraresumen = true;
@@ -384,9 +384,18 @@ export class CitaguardaComponent implements OnInit {
 
   agendarcita(){
     console.log(this.citadata.valid);
+    let fechaIni = this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "";
+    let objetoResuperado = this.lstCatFechas.filter(e => e.fec_inicio === fechaIni);
+
     if(this.contadorparticipantes == 0){
       this.muestraAlerta(
         'Seleccione mínimo un participante',
+        'alert-danger',
+        'Error'
+      );
+    } else if (this.contadorparticipantes > Number(JSON.stringify(objetoResuperado[0]['maximo_partcipantes']))) {
+      this.muestraAlerta(
+        'El espacio seleccionado se encuentra al maximo de su cupo, por favor seleccionar otra fecha.',
         'alert-danger',
         'Error'
       );

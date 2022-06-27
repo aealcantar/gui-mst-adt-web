@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -60,7 +59,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     $('#calendar').datepicker({
-      dateFormat: "yy/mm/dd",
+      dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.fechaSelected = date.replaceAll('/', '-');
@@ -93,7 +92,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatGrupo('1').toPromise().then(
+    this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
       (grupos) => {
         this.grupos = grupos;
         console.log("GRUPOS: ", this.grupos);
@@ -102,7 +101,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatLugar('1').toPromise().then(
+    this.cronicaGrupalService.getCatLugar('CS01').toPromise().then(
       (lugares) => {
         this.lugares = lugares;
         console.log("LUGARES: ", this.lugares);
@@ -113,11 +112,10 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     );
     this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
       (cronicasGrupales: any) => {
-        let cronicasArray = Object.keys(cronicasGrupales).map(index => {
-          let cronica = cronicasGrupales[index];
-          return cronica;
-        });
-        this.cronicasGrupales = cronicasArray[0];
+        this.cronicasGrupales = [];
+        if(cronicasGrupales && cronicasGrupales.List.length > 0) {
+          this.cronicasGrupales = cronicasGrupales.List;
+        }
         console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
       }
     );
@@ -177,15 +175,17 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   getCronicasGrupales() {
-    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', this.fechaSelected !== undefined ? this.fechaSelected : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
-      (cronicasGrupales) => {
+    this.cronicasGrupales = [];
+    let fechaConvertedFormat;
+    if(this.fechaSelected) {
+      fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
+    }
+    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
+      (cronicasGrupales: any) => {
         console.log("RESPUESTA CRONICAS: ", cronicasGrupales);
-        this.cronicasGrupales = [];
-        let cronicasArray = Object.keys(cronicasGrupales).map(index => {
-          let cronica = cronicasGrupales[index];
-          return cronica;
-        });
-        this.cronicasGrupales = cronicasArray[0];
+        if(cronicasGrupales && cronicasGrupales.List.length > 0) {
+          this.cronicasGrupales = cronicasGrupales.List;
+        }
         console.log("CRONICAS GRUPALES BY FILTROS: ", this.cronicasGrupales);
       }
     );

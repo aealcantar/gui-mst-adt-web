@@ -24,7 +24,7 @@ export const environment = {
     msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
-    msmtsOauth: 'http://localhost:8081',
+    msmtsOauth: 'http://localhost:8081/',
     urlServOauth: 'http://localhost:8081',
   
   

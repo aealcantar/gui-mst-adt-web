@@ -285,7 +285,6 @@ tr {
 }
 
 .subtableTr {
-
     padding: 0px 0px 0px 0px !important;
     height: 25px !important;
     border: transparent !important;
@@ -302,7 +301,7 @@ tr {
 
 .subtable Td {
 
-    padding: 0px 0px 0px 0px !important;
+    padding: 0px 0px 0px 10px !important;
     height: 0px !important;
     border: transparent !important;
 
@@ -310,7 +309,7 @@ tr {
 
 .subtable Th {
 
-    padding: 0px 0px 0px 0px !important;
+    padding: 0px 0px 0px 10px !important;
     height: 0px !important;
     border: transparent !important;
 
@@ -373,20 +372,20 @@ option {
 }
 
 .errorimgdiv {
-
-    width: 350px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
 .errorimg {
-    width: 350px;
-    height: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
+
 
 .Rectangle-9600 {
     width: 100%;
@@ -562,4 +561,10 @@ option {
 .arrow-down {
     top: 190px;
     z-index: 9999;
+    margin-left: 43px;
+    margin-top:6px;
+}
+
+.flechaArriba{
+  margin-left: 43px; margin-top: -3px;
 }

@@ -1,13 +1,18 @@
+::ng-deep.mat-dialog-container {
+  border-radius: 10px !important;
+  padding: 0px !important;
+}
+
 .modal-content{
   max-width: 870px;
   width: 770px;
   min-height: 250px;
-
+  border-radius: 10px !important;
 }
 
 .base-cont {
 
-  border-radius: 6px;
+  
   box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, 0.2);
   background-color: #fff;
   margin-bottom: 30px;
@@ -427,3 +432,10 @@ a {
   min-height:calc(100% - (30px * 2));
 }
 
+html{
+  top: 0px !important;
+}
+
+body{
+  height: initial !important;
+}
