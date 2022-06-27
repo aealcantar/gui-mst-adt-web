@@ -2,17 +2,20 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-//import { NotasService } from 'src/app/service/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { VolanteDonacion } from 'src/app/shared-modules/models/volante-donacion.model';
+import { VolantesDonacionService } from '../../services/volantes-donacion.service';
+import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacion.model';
+import { DatePipe } from '@angular/common';
 
 declare var $: any;
 
 @Component({
   selector: 'app-consulta-volantes-donacion',
   templateUrl: './consulta-volantes-donacion.component.html',
-  styleUrls: ['./consulta-volantes-donacion.component.css']
+  styleUrls: ['./consulta-volantes-donacion.component.css'],
+  providers: [DatePipe]
 })
 export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit {
   public fechaSelected!: string;
@@ -31,7 +34,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   constructor(
     private router: Router,
     private authService: AuthService,
-//    private notasService: NotasService,
+    private volantesService: VolantesDonacionService,
     private fb: FormBuilder,
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
@@ -42,6 +45,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   ngOnInit(): void {
+    debugger
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
@@ -49,7 +53,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   ngAfterViewInit(): void {
-    $('#notasInit').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#volantesInit').val(moment().format('DD/MM/YYYY')).datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -65,7 +69,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       }
     });
 
-    $('#notasFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#volantesFinal').val(moment().format('DD/MM/YYYY')).datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -83,6 +87,31 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     this.handleDatesChange();
   }
 
+  getVolantesByFecha(): void {
+    debugger
+    this.volantesService.getVolantesByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+      (volantes: any) => {
+        if (volantes && volantes.List.length > 0) {
+          this.tabla =  volantes.List;
+          console.log("VOLANTES DONACION: ", this.tabla);
+        }
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+    this.dtOptions = {
+      order: [[2, 'desc']],
+      ordering: false,
+      paging: false,
+      processing: false,
+      info: false,
+      searching: false,
+    };
+    this.sortBy(this.columnaId, this.order, 'fecha');
+  }
+
+  
   irDetalle(volanteDonacion: VolanteDonacion) {
     console.log(volanteDonacion);
     let params = {
@@ -104,7 +133,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       this.datesForm.get('fechaInicial')?.value !== '' &&
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
-      //this.getNotasByFecha();
+      this.getVolantesByFecha();
     }
   }
 

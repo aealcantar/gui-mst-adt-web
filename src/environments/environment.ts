@@ -22,7 +22,8 @@ export const environment = {
   urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
   urlMSEDSCatalogos: 'http://localhost:8085/api/',
   urlMSADTCITAS: 'http://localhost:8090/api/', 
-  urlControlArticulos:'http://localhost:8088'
+  urlControlArticulos:'http://localhost:8088',
+  urlVolantesDonacion: 'http://localhost:8090',
   
 };
 
