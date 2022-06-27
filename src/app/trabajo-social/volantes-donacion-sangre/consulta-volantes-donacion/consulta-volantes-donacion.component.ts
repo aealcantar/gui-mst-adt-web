@@ -28,14 +28,14 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
-  public columnaId: string = 'fecFecha';
-  //public prueba =  [{ "fecFecha": "20/06/2022", "nomTrabajadorSocial": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
+  public columnaId: string = 'fecEfec';
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private volantesService: VolantesDonacionService,
     private fb: FormBuilder,
+    private datePipe: DatePipe
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
     if (this.extras && this.extras.state) {
@@ -45,7 +45,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   ngOnInit(): void {
-    debugger
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
@@ -88,11 +87,10 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   getVolantesByFecha(): void {
-    debugger
     this.volantesService.getVolantesByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
       (volantes: any) => {
-        if (volantes && volantes.List.length > 0) {
-          this.tabla =  volantes.List;
+        if (volantes && volantes.length > 0) {
+          this.tabla =  volantes;
           console.log("VOLANTES DONACION: ", this.tabla);
         }
       },
@@ -154,17 +152,16 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     });
   }
 
+
   converType(val: any, type: string) {
     let data;
     switch (type) {
       case 'fecha':
+        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
         data = moment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
         data = moment(val, 'HH:mm:ss');
-        break;
-      case 'number':
-        data = parseInt(val);
         break;
 
       default:
@@ -172,4 +169,5 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     }
     return data;
   }
+
 }

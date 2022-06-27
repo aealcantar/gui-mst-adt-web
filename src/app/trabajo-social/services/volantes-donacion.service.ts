@@ -14,7 +14,6 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
     constructor(private httpsClient: HttpClient) { }
 
     getVolantesByFechas(fechaInicial: string, fechaFinal: string) {
-        debugger
         return this.httpsClient.get<VolantesDonacion[]>(`${environment.urlVolantesDonacion}/msmts-donacion-sangre/api/findVolantesByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
     }
 

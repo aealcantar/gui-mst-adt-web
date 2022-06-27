@@ -57,9 +57,9 @@
                                 <th class="encabezadoTable" style="padding: 8px 30px 5px; justify-content: center; position: relative; display: flex; gap: 25px;">
                                     <div style="margin-left: -15px;">Fecha</div>
                                     <div>
-                                        <i class="fa-solid fa-caret-up arrow arrow-up" [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'asc'}" (click)="sortBy('fecFecha', 'asc', 'fecha')">
+                                        <i class="fa-solid fa-caret-up arrow arrow-up" [ngClass]="{'active-opacity': columnaId === 'fecEfec' && order === 'asc'}" (click)="sortBy('fecEfec', 'asc', 'fecha')">
                   </i>
-                                        <i class="fa-solid fa-caret-down arrow arrow-down" [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'desc'}" (click)="sortBy('fecFecha', 'desc', 'fecha')">
+                                        <i class="fa-solid fa-caret-down arrow arrow-down" [ngClass]="{'active-opacity': columnaId === 'fecEfec' && order === 'desc'}" (click)="sortBy('fecEfec', 'desc', 'fecha')">
                   </i>
                                     </div>
                                 </th>
@@ -68,7 +68,7 @@
                         </thead>
                         <tbody *ngFor="let item of tabla | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
                             <tr>
-                                <td class="bordesTablaFecha" style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;" (click)="irDetalle(item);">{{ item.fecFecha | date: 'dd / MM / yyyy' }}</td>
+                                <td class="bordesTablaFecha" style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;" (click)="irDetalle(item);">{{ item.fecEfec }}</td>
                                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.nomTrabajadorSocial}} </td>
                             </tr>
                         </tbody>
