@@ -112,11 +112,10 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     );
     this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
       (cronicasGrupales: any) => {
-        let cronicasArray = Object.keys(cronicasGrupales).map(index => {
-          let cronica = cronicasGrupales[index];
-          return cronica;
-        });
-        this.cronicasGrupales = cronicasArray[0];
+        this.cronicasGrupales = [];
+        if(cronicasGrupales && cronicasGrupales.List.length > 0) {
+          this.cronicasGrupales = cronicasGrupales.List;
+        }
         console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
       }
     );
@@ -176,16 +175,17 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   getCronicasGrupales() {
-    let fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
-    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', fechaConvertedFormat !== undefined ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
-      (cronicasGrupales) => {
+    this.cronicasGrupales = [];
+    let fechaConvertedFormat;
+    if(this.fechaSelected) {
+      fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
+    }
+    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
+      (cronicasGrupales: any) => {
         console.log("RESPUESTA CRONICAS: ", cronicasGrupales);
-        this.cronicasGrupales = [];
-        let cronicasArray = Object.keys(cronicasGrupales).map(index => {
-          let cronica = cronicasGrupales[index];
-          return cronica;
-        });
-        this.cronicasGrupales = cronicasArray[0];
+        if(cronicasGrupales && cronicasGrupales.List.length > 0) {
+          this.cronicasGrupales = cronicasGrupales.List;
+        }
         console.log("CRONICAS GRUPALES BY FILTROS: ", this.cronicasGrupales);
       }
     );
