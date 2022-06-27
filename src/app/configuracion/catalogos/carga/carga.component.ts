@@ -23,7 +23,7 @@ declare var $: any;
 })
 export class CargaComponent implements OnInit {
 
-  idUser: number = 33; // 5 = Fer   33 = Ame
+  idUser: number = 1; // 5 = Fer   33 = Ame
   cargaCatalogos: CargasCatalogos;
   lstCatalogo: CatalogoData[];
   mensaje!: objAlert;

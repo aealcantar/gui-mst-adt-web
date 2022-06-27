@@ -42,7 +42,8 @@ div.alert-success>button>span {
 }
 
 .colorLR{
-  color: #d0021b;
+  /*color: #d0021b;*/
+  color: #545454;
 }
 
 .colorLV{
