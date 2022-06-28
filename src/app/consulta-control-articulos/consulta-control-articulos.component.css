@@ -73,8 +73,18 @@ a {
   color: #222;
 }
 
+.errorimg {
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
 .div-container-image {
-  margin-left: 25%;
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tituloServicio {
@@ -276,3 +286,4 @@ a {
   text-align: left;
 
 }
+

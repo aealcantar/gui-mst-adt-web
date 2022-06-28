@@ -2,7 +2,7 @@
 <app-card-template>
   <div header class="nuevoVolanteDeDonacionSangre">
     <span class="spantitulo">
-      Nuevo Volante de donación de sangre
+      Nuevo volante de donación de sangre
     </span>
   </div>
   <div content>
@@ -11,28 +11,44 @@
         Por favor capture los siguientes datos:
       </span>
     </div>
-    <form novalidate class="formInfo">
+    <form novalidate class="formInfo" [formGroup]="formNuevoVolante">
       <div class="container seccion">
         <div class="row">
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Unidad médica hospitalaria*:</span>
-              <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
-                placeholder="Ingresar unidad médica hostalaria" type="text" />
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.idUnidadMedica?.dirty && formNuevoVolante.controls?.idUnidadMedica?.errors }"
+                formControlName="idUnidadMedica" id="idUnidadMedica" aria-label="Servicio"
+                class="form-control matricula inputs" placeholder="Ingresar unidad médica hospitalaria" type="text"
+                maxlength="100" />
+              <small *ngIf="
+                formNuevoVolante.controls?.idUnidadMedica?.dirty &&
+                formNuevoVolante.controls?.idUnidadMedica?.errors
+              " class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input notasInit class="form-control" id="notasInit" type="text" placeholder="Ingresar fecha">
+              <input class="form-control" formControlName="fechaUnidadMedica" id="fechaUnidadMedica"
+                aria-label="Servicio" type="text" placeholder="Ingresar fecha"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.fechaUnidadMedica?.dirty && formNuevoVolante.controls?.fechaUnidadMedica?.errors }">
               <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
+              <small
+                *ngIf="formNuevoVolante.controls?.fechaUnidadMedica?.dirty && formNuevoVolante.controls?.fechaUnidadMedica?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
             </div>
           </div>
         </div>
         <div>
-          <span class="instrucciones">
+          <span class="instrucciones contenedorTitulo">
             Para asistir al banco de sangre
           </span>
         </div>
@@ -40,79 +56,171 @@
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
-              <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">
+              <select class="form-control styleselect" formControlName="nombreBancoSangre" id="nombreBancoSangre"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombreBancoSangre?.dirty && formNuevoVolante.controls?.nombreBancoSangre?.errors }">
+                <option class="select-font optionSelect" placeholder="Ingresar nombre" selected >
                   Ingresar nombre</option>
-                <option class="select-font" [value]="1">BAnco de sangre 1</option>
+                <option class="select-font" [value]="1">Banco de sangre 1</option>
               </select>
+              <small
+                *ngIf="formNuevoVolante.controls?.nombreBancoSangre?.dirty && formNuevoVolante.controls?.nombreBancoSangre?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
             </div>
           </div>
           <div class="col-md-2">
-            <span class="spanInput">Horario de atención*:</span>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
-                inicial</option>
-              <option class="select-font" [value]="1">10:00:00</option>
-            </select>
+            <div class="form-group">
+              <span class="spanInput">Horario de atención*:</span>
+              <select class="form-control styleselect" formControlName="horarioInicial" id="horarioInicial"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.horarioInicial?.dirty && formNuevoVolante.controls?.horarioInicial?.errors }">
+                <option class="select-font optionSelect" selected [value]="''">Horario inicial</option>
+                <option class="select-font" [value]="1">10:00:00</option>
+              </select>
+              <small
+                *ngIf="formNuevoVolante.controls?.horarioInicial?.dirty && formNuevoVolante.controls?.horarioInicial?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-2">
             <br>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
-                final</option>
-              <option class="select-font" [value]="1">10:00:00</option>
-            </select>
+            <div class="form-group">
+              <select class="form-control styleselect" formControlName="horarioFinal" id="horarioFinal"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.horarioFinal?.dirty && formNuevoVolante.controls?.horarioFinal?.errors }">
+                <option class="select-font optionSelect" selected [value]="''">Horario inicial</option>
+                <option class="select-font" [value]="1">10:00:00</option>
+              </select>
+              <small
+                *ngIf="formNuevoVolante.controls?.horarioFinal?.dirty && formNuevoVolante.controls?.horarioFinal?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">C&oacute;digo Postal*::</span>
-            <input class="form-control matricula" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar código postal" type="text" />
+            <div class="form-group">
+              <span class="spanInput">C&oacute;digo Postal*::</span>
+              <input class="form-control matricula"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.codigoPostal?.dirty && formNuevoVolante.controls?.codigoPostal?.errors }"
+                formControlName="codigoPostal" id="codigoPostal" aria-label="Servicio"
+                placeholder="Ingresar código postal" type="text" maxlength="10" />
+              <small
+                *ngIf="formNuevoVolante.controls?.codigoPostal?.dirty && formNuevoVolante.controls?.codigoPostal?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
+
           <div class="col-md-4">
-            <span class="spanInput">Estado*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
-              type="text" />
+            <div class="form-group">
+              <span class="spanInput">Estado*:</span>
+              <select class="form-control styleselect" formControlName="estado" id="estado"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.estado?.dirty && formNuevoVolante.controls?.estado?.errors }">
+                <option class="select-font optionSelect" placeholder="Seleccionar estado" selected [value]="''">
+                  Ingresar estado</option>
+                <option class="select-font" [value]="1">Estado 1</option>
+              </select>
+              <small *ngIf="formNuevoVolante.controls?.estado?.dirty && formNuevoVolante.controls?.estado?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
+
           <div class="col-md-4">
-            <span class="spanInput">Delegación/Municipio*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
-              type="text" />
+            <div class="form-group">
+              <span class="spanInput">Delegación/Municipio*:</span>
+              <select class="form-control styleselect" formControlName="deleMuni" id="deleMuni"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.deleMuni?.dirty && formNuevoVolante.controls?.deleMuni?.errors }">
+                <option class="select-font optionSelect" placeholder="Seleccionar delegación o municipio" selected
+                  [value]="''">
+                  Ingresar delegación o municipio</option>
+                <option class="select-font" [value]="1">Municipio 1</option>
+              </select>
+              <small *ngIf="formNuevoVolante.controls?.deleMuni?.dirty && formNuevoVolante.controls?.deleMuni?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">Ciudad*:</span>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ciudad" selected [value]="'-1'">Ingresar
-                ciudad</option>
-              <option class="select-font" [value]="1">ciudad 1</option>
-            </select>
+            <div class="form-group">
+              <span class="spanInput">Ciudad*:</span>
+              <select class="form-control styleselect" formControlName="ciudad" id="ciudad"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.ciudad?.dirty && formNuevoVolante.controls?.ciudad?.errors }">
+                <option class="select-font optionSelect" placeholder="Ingresar ciudad" selected [value]="''">Ingresar
+                  ciudad</option>
+                <option class="select-font" [value]="1">ciudad 1</option>
+              </select>
+              <small *ngIf="formNuevoVolante.controls?.ciudad?.dirty && formNuevoVolante.controls?.ciudad?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Colonia*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar colonia" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Colonia*:</span>
+              <input class="form-control matricula inputs"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.colonia?.dirty && formNuevoVolante.controls?.colonia?.errors }"
+                formControlName="colonia" id="colonia" placeholder="Ingresar colonia" type="text" maxlength="150" />
+              <small *ngIf="formNuevoVolante.controls?.colonia?.dirty && formNuevoVolante.controls?.colonia?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Calle*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar calle" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Calle*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.calle?.dirty && formNuevoVolante.controls?.calle?.errors }"
+                class="form-control matricula inputs" id="calle" formControlName="calle" placeholder="Ingresar calle"
+                type="text" maxlength="150" />
+              <small *ngIf="formNuevoVolante.controls?.calle?.dirty && formNuevoVolante.controls?.calle?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">N&uacute;ro exterior*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar n&uacute;mero" type="text" />
+            <div class="form-group">
+              <span class="spanInput">N&uacute;ro exterior*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.numeroExterior?.dirty && formNuevoVolante.controls?.numeroExterior?.errors }"
+                class="form-control matricula inputs" id="numeroExterior" formControlName="numeroExterior"
+                placeholder="Ingresar n&uacute;mero" type="text" maxlength="10" />
+              <small
+                *ngIf="formNuevoVolante.controls?.numeroExterior?.dirty && formNuevoVolante.controls?.numeroExterior?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">N&uacute;ro interior*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar n&uacute;mero" type="text" />
+            <div class="form-group">
+              <span class="spanInput">N&uacute;ro interior*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.numeroInterior?.dirty && formNuevoVolante.controls?.numeroInterior?.errors }"
+                class="form-control matricula inputs" id="numeroInterior" formControlName="numeroInterior"
+                placeholder="Ingresar n&uacute;mero" type="text" maxlength="10" />
+              <small
+                *ngIf="formNuevoVolante.controls?.numeroInterior?.dirty && formNuevoVolante.controls?.numeroInterior?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
           </div>
@@ -120,99 +228,178 @@
       </div>
       <div class="container seccion">
         <div>
-          <span class="instrucciones">
+          <span class="instrucciones contenedorTitulo">
             Datos del paciente
           </span>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">Nombre:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar nombre" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Nombre:</span>
+              <input
+                class="form-control matricula inputBloqueo" id="nombrePaciente" formControlName="nombrePaciente"
+                placeholder="Ingresar nombre" type="text" maxlength="19" />
+              <!-- <small
+                *ngIf="formNuevoVolante.controls?.nombrePaciente?.dirty && formNuevoVolante.controls?.nombrePaciente?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small> -->
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">No. de Seguridad Social y agregado:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar no. de seguridad social" type="text" />
+            <div class="form-group">
+              <span class="spanInput">No. de Seguridad Social y agregado:</span>
+              <input
+                class="form-control matricula inputBloqueo" formControlName="desMaterialApoyo"
+                placeholder="Ingresar no. de seguridad social" type="text" />
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Servicio*:</span>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Ingresar
-                nombre del servicio</option>
-              <option class="select-font" [value]="1">Servicio 1</option>
-            </select>
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <select
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.servicio?.dirty && formNuevoVolante.controls?.servicio?.errors }"
+                class="form-control styleselect" formControlName="servicio" id="servicio" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="''">Ingresar
+                  nombre del servicio</option>
+                <option class="select-font" [value]="1">Servicio 1</option>
+              </select>
+              <small *ngIf="formNuevoVolante.controls?.servicio?.dirty && formNuevoVolante.controls?.servicio?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="form-group datepicker-group">
-              <span class="spanInput">Fecha internamiento*:</span>
-              <input notasInit class="form-control" id="notasInit" type="text" placeholder="Ingresar fecha">
-              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
-                <div class="imgCalendar"></div>
-              </span>
+            <div class="form-group">
+              <div class="form-group datepicker-group">
+                <span class="spanInput">Fecha internamiento*:</span>
+                <input
+                  [ngClass]="{'form-control-error': formNuevoVolante.controls?.fechaInternamiento?.dirty && formNuevoVolante.controls?.fechaInternamiento?.errors }"
+                  class="form-control" id="fechaInternamiento" type="text" placeholder="Ingresar fecha"
+                  formControlName="fechaInternamiento">
+                <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                  <div class="imgCalendar"></div>
+                </span>
+                <small
+                  *ngIf="formNuevoVolante.controls?.fechaInternamiento?.dirty && formNuevoVolante.controls?.fechaInternamiento?.errors"
+                  class="form-text form-text-error Campo-obligatorio">
+                  Campo obligatorio
+                </small>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="form-group datepicker-group">
-              <span class="spanInput">Fecha cirugia*:</span>
-              <input class="form-control" formControlName="fecha" id="calendarCronica" type="text"
-                placeholder="Ingresar fecha">
-              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
-                <div class="imgCalendar"></div>
-              </span>
+            <div class="form-group">
+              <div class="form-group datepicker-group">
+                <span class="spanInput">Fecha cirugia*:</span>
+                <input
+                  [ngClass]="{'form-control-error': formNuevoVolante.controls?.fechaCirugia?.dirty && formNuevoVolante.controls?.fechaCirugia?.errors }"
+                  class="form-control" formControlName="fechaCirugia" id="fechaCirugia" type="text"
+                  placeholder="Ingresar fecha">
+                <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                  <div class="imgCalendar"></div>
+                </span>
+                <small
+                  *ngIf="formNuevoVolante.controls?.fechaCirugia?.dirty && formNuevoVolante.controls?.fechaCirugia?.errors"
+                  class="form-text form-text-error Campo-obligatorio">
+                  Campo obligatorio
+                </small>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Teléfono:</span>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="'-1'">Ingresar
-                telefono</option>
-              <option class="select-font" [value]="1">10:00:00</option>
-            </select>
+            <div class="form-group">
+              <span class="spanInput">Teléfono:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.telefonoPaciente?.dirty && formNuevoVolante.controls?.telefonoPaciente?.errors }"
+                formControlName="telefonoPaciente" class="form-control matricula inputs" id="telefonoPaciente"
+                placeholder="Ingresar teléfono" type="text" maxlength="10" />
+              <small
+                *ngIf="formNuevoVolante.controls?.telefonoPaciente?.dirty && formNuevoVolante.controls?.telefonoPaciente?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
       </div>
       <div class="container seccion">
         <div>
-          <span class="instrucciones">
+          <span class="instrucciones contenedorTitulo">
             Datos del Trabajador social
           </span>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">Nombre completo*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar nombre" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Nombre completo*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombreTS?.dirty && formNuevoVolante.controls?.nombreTS?.errors }"
+                class="form-control matricula inputs" id="nombreTS" formControlName="nombreTS"
+                placeholder="Ingresar nombre" type="text" />
+              <small *ngIf="formNuevoVolante.controls?.nombreTS?.dirty && formNuevoVolante.controls?.nombreTS?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Matr&iacute;cula*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar matr&iacute;cula" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Matr&iacute;cula*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.matriculaTS?.dirty && formNuevoVolante.controls?.matriculaTS?.errors }"
+                class="form-control matricula inputs" id="matriculaTS" formControlName="matriculaTS"
+                placeholder="Ingresar matr&iacute;cula" type="text" />
+              <small
+                *ngIf="formNuevoVolante.controls?.matriculaTS?.dirty && formNuevoVolante.controls?.matriculaTS?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Teléfono*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar t&eacute;" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Teléfono*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.telefonoTS?.dirty && formNuevoVolante.controls?.telefonoTS?.errors }"
+                class="form-control matricula inputs" id="telefonoTS" formControlName="telefonoTS"
+                placeholder="Ingresar tel&eacute;fono" type="text" maxlength="10" />
+              <small
+                *ngIf="formNuevoVolante.controls?.telefonoTS?.dirty && formNuevoVolante.controls?.telefonoTS?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <span class="spanInput">Observaciones*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar observaciones" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Observaciones*:</span>
+              <input
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.observacionesTS?.dirty && formNuevoVolante.controls?.observacionesTS?.errors }"
+                class="form-control matricula inputs" id="observacionesTS" formControlName="observacionesTS"
+                placeholder="Ingresar observaciones" type="text" maxlength="500" />
+              <small
+                *ngIf="formNuevoVolante.controls?.observacionesTS?.dirty && formNuevoVolante.controls?.observacionesTS?.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
       </div>
       <div>
-        <span class="instrucciones">
-          Campos obligatorios
+        <span class="instrucciones" style="margin-left: 2%;">
+          *Campos obligatorios
         </span>
       </div>
       <div class="row">
         <div class="col-md-12 divBotones">
-          <button class="btn btn-primary buttonL btnGuardar">
+          <button class="btn btn-primary buttonL btnGuardar" [disabled]="formNuevoVolante.valid == false" >
             Guardar
           </button>
           <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="modalcarga()">

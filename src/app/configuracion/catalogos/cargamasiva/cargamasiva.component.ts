@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, Inject, ElementRef, ViewChild, EventEmitter  } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, OnInit, Inject, ElementRef, ViewChild, EventEmitter } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { objAlert } from 'src/app/common/alerta/alerta.interface';
@@ -95,7 +95,7 @@ export class CargamasivaComponent implements OnInit {
   catPadre: CatalogoData;
   blnProcedeCarga: boolean = true;
   catFaltante: string = '';
-  dataparams:any;
+  dataparams: any;
   onAlert = new EventEmitter();
 
   constructor(
@@ -109,22 +109,22 @@ export class CargamasivaComponent implements OnInit {
     private _Mensajes: HelperMensajesService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    @Inject(MAT_DIALOG_DATA) data:any
-    ) {
-      this.dataparams = data;
-      this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
-      this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
-      this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
-      this.matIconRegistry.addSvgIcon("close", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/close.svg"));
-      this.matIconRegistry.addSvgIcon("add", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/add.svg"));
-    }
+    @Inject(MAT_DIALOG_DATA) data: any
+  ) {
+    this.dataparams = data;
+    this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
+    this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
+    this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
+    this.matIconRegistry.addSvgIcon("close", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/close.svg"));
+    this.matIconRegistry.addSvgIcon("add", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/add.svg"));
+  }
 
   ngOnInit(): void {
     const taghtml = document.querySelector('html');
     taghtml.style.cssText += 'top: 0px;';
 
     this.pesoMaximoBytes = this.pesoMaximoMB * Math.pow(1024, 2);
-    console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
+
     this.lstCatalogo = new Array<CatalogoData>();
     this.mensaje = new objAlert;
     this.lstConfigCarga = this._HelperCatalogos.getConfiguracionCat();
@@ -137,8 +137,10 @@ export class CargamasivaComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
+
   modalcarga(tipocatalogo: string, sheetName: string) {
-    //console.log("abre modal");
+
     this.cleanVar();
 
     this.archivoCarga = new ArchivoCarga;
@@ -155,25 +157,9 @@ export class CargamasivaComponent implements OnInit {
 
       this.confCarga.rutaPlantilla = "../../../../assets/files/Plantilla_Estructura_CargasIniciales.xlsx";
     }
-    if (!this.validarDependenciaDeCatalogos()) {
-      this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Debe completar la carga del catálogo: " + this.catFaltante, this._Mensajes.ERROR);
-    }
+
   }
 
-  private validarDependenciaDeCatalogos() {
-    let blnPuedeCargar: boolean = true;
-    this.catFaltante = '';
-    if (this.confCarga.idCatPadre != undefined) {
-      for (let catId of this.confCarga.idCatPadre) {
-        this.catPadre = this.lstCatalogo.find(e => e.idCatalogos === catId);
-        if (this.catPadre.estatusCarga.cveIdEstatus != 1) {
-          this.catFaltante = this.catPadre.nombreCatalogo;
-          blnPuedeCargar = false;
-        }
-      }
-    }
-    return blnPuedeCargar;
-  }
 
   upload(event: any) {
     console.log("selecciona boton para cargar archivo");
@@ -183,11 +169,11 @@ export class CargamasivaComponent implements OnInit {
 
     let archivo: File;
     archivo = event.target.files[0];
-    this.archivoCarga.nombrearchivo = archivo? archivo.name.toString() : "";
-    this.archivoCarga.tamanioarchivo = archivo? archivo.size.toString() : "";
+    this.archivoCarga.nombrearchivo = archivo ? archivo.name.toString() : "";
+    this.archivoCarga.tamanioarchivo = archivo ? archivo.size.toString() : "";
     let xlsx = ".xlsx";
     let xls = ".xls";
-    console.log("size" + this.archivoCarga.nombrearchivo);
+    //console.log("size" + this.archivoCarga.nombrearchivo);
     this.blnProcedeCarga = true;
 
     if (!this.archivoCarga.nombrearchivo.toLowerCase().includes(xlsx) || !this.archivoCarga.nombrearchivo.toLowerCase().includes(xls)) {
@@ -202,17 +188,18 @@ export class CargamasivaComponent implements OnInit {
 
     }
 
-    console.log("tamaño: ", +this.archivoCarga.tamanioarchivo, " bytes");
+    // console.log("tamaño: ", +this.archivoCarga.tamanioarchivo, " bytes");
 
-    if (+this.archivoCarga.tamanioarchivo > this.pesoMaximoBytes) {
+    if (Number(this.archivoCarga.tamanioarchivo) > this.pesoMaximoBytes) {
       this.archivoCarga.proceso = 'error';
       this.blnProcedeCarga = false;
-      console.log("es pesado");
+      // console.log("es pesado");
       this.archivoCarga.nombrearchivo = "";
       this.archivoCarga.tamanioarchivo = "";
 
       this.blnDeshabilitar = false;
       this.archivoCarga.errmsg = this._Mensajes.MSJ_ERROR_GENERAL + this._Mensajes.MSJ_EXCEDE_TAMANIO;
+
     }
 
 
@@ -221,14 +208,9 @@ export class CargamasivaComponent implements OnInit {
   DataFromEventEmitter(data: any, tipoCatalogo: string) {
 
     this.totalRegistros = 0;
-
-
-
     this.percentDone = 0;
-
-
     this.cargaResponse = new HttpResponse<CargasResponse>();
-
+    console.log("blnProcedeCarga: ", this.blnProcedeCarga);
     if (this.blnProcedeCarga) {
 
       this.archivoCarga.proceso = 'progress';
@@ -393,10 +375,10 @@ export class CargamasivaComponent implements OnInit {
 
 
 
-            case 9:
-              this.puestos[index] = new Puesto();
-              this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
-              break;
+          case 9:
+            this.puestos[index] = new Puesto();
+            this.puestos[index].descripcionPuesto = element[this.confCarga.col1];
+            break;
 
 
 
@@ -419,7 +401,7 @@ export class CargamasivaComponent implements OnInit {
         this.archivoCarga.nombrearchivo = "";
         this.archivoCarga.tamanioarchivo = "";
         this.archivoCarga.proceso = 'error';
-        console.log("2x");
+        // console.log("2x");
         this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_PLANTILLA_NOVALIDA, this._Mensajes.ERROR);
 
       }
@@ -429,7 +411,7 @@ export class CargamasivaComponent implements OnInit {
 
       this.archivoCarga.nombrearchivo = "";
       this.archivoCarga.tamanioarchivo = "";
-
+      this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "El archivo " + this._Mensajes.MSJ_EXCEDE_TAMANIO, this._Mensajes.ERROR);
     }
 
 
@@ -439,7 +421,7 @@ export class CargamasivaComponent implements OnInit {
 
   private iniciarCargaRegistros(archivoCarga: ArchivoCarga, confCarga: ConfiguracionCarga) {
 
-    console.log("Iniciar carga a BD: ");
+    // console.log("Iniciar carga a BD: ");
     this.archivoCarga = archivoCarga;
     if (this.archivoCarga.nombrearchivo) {
       switch (confCarga.idCatalogos) {
@@ -448,7 +430,7 @@ export class CargamasivaComponent implements OnInit {
           this.unidadMedicaRequest = new UnidadMedicaRequest();
           this.unidadMedicaRequest.idUser = this.idUser;
           this.unidadMedicaRequest.unidadesMedicas = this.unidadMedica;
-          console.log(this.unidadMedica);
+          // console.log(this.unidadMedica);
           this._CargasService.agregarUnidadesMedicas(this.unidadMedicaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
 
 
@@ -522,31 +504,31 @@ export class CargamasivaComponent implements OnInit {
             this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_UBICACIONES);
           });
           break;
-          case 7:
-            this.personaRequest = new PersonaRequest();
-            this.personaRequest.personas = this.persona;
-            this.personaRequest.idUser = this.idUser;
-            this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
-              this.cargaResponse = resp;
-              if (resp) {
-                this.percentDone = 100;
-                this.reporteCarga(resp);
+        case 7:
+          this.personaRequest = new PersonaRequest();
+          this.personaRequest.personas = this.persona;
+          this.personaRequest.idUser = this.idUser;
+          this._CargasService.agregarPersona(this.personaRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
+            this.cargaResponse = resp;
+            if (resp) {
+              this.percentDone = 100;
+              this.reporteCarga(resp);
 
-                setTimeout(() => {
-                  this.archivoCarga.proceso = 'result';
-                }, 800);
-              }
-            }, (error: HttpErrorResponse) => {
-              this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
+              setTimeout(() => {
+                this.archivoCarga.proceso = 'result';
+              }, 800);
+            }
+          }, (error: HttpErrorResponse) => {
+            this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_PERSONAL);
 
-            });
+          });
 
-            break;
+          break;
         case 8:
           this.turnosRequest = new TurnoRequest();
           this.turnosRequest.turnos = this.turnos;
           this.turnosRequest.idUser = this.idUser;
-          console.log("requestTurnos ", this.turnosRequest);
+          // console.log("requestTurnos ", this.turnosRequest);
           this._CargasService.agregarTurnos(this.turnosRequest).subscribe((resp: HttpResponse<CargasResponse>) => {
             this.cargaResponse = resp;
             if (resp) {
@@ -667,7 +649,7 @@ export class CargamasivaComponent implements OnInit {
 
 
         default:
-          console.log("3x");
+          //  console.log("3x");
           this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_PLANTILLA_NOVALIDA, this._Mensajes.ERROR);
           break;
       }
@@ -686,7 +668,7 @@ export class CargamasivaComponent implements OnInit {
 
 
     for (let registro of response.body.rowDTO) {
-      console.log("lstRow: ", registro.status);
+      //console.log("lstRow: ", registro.status);
 
       switch (registro.status) {
         case 'OK':
@@ -704,8 +686,8 @@ export class CargamasivaComponent implements OnInit {
     }
 
 
-    console.log("Errores: ", this.regERROR);
-    console.log("Correctos: ", this.regOK);
+    // console.log("Errores: ", this.regERROR);
+    //console.log("Correctos: ", this.regOK);
     if (this.regERROR != 0) {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_CARGA + msj, this._Mensajes.ERROR);
     } else {
@@ -743,7 +725,7 @@ export class CargamasivaComponent implements OnInit {
       const byteArray = new Uint8Array(atob(file.fileBytes).split('').map(char => char.charCodeAt(0)));
 
       const blob = new Blob([byteArray], { type: 'application/pdf' });
-      console.log(blob);
+      //  console.log(blob);
 
       const url = window.URL.createObjectURL(blob);
       let link = document.createElement("a");
@@ -847,9 +829,9 @@ export class CargamasivaComponent implements OnInit {
   }
 
   reset() {
-    console.log(this.myInputVariable.nativeElement.files);
+    // console.log(this.myInputVariable.nativeElement.files);
     this.myInputVariable.nativeElement.value = "";
-    console.log(this.myInputVariable.nativeElement.files);
+    //  console.log(this.myInputVariable.nativeElement.files);
   }
 
   private cleanVar() {
@@ -872,25 +854,22 @@ export class CargamasivaComponent implements OnInit {
 
   btnCancelar() {
     this.cleanVar();
-    //$('#content').modal('hide')
+
     this.reset();
-    //this.obtenerEstatusCarga();
+
     this.cancelar();
   }
   btnAceptar() {
     this.cleanVar();
-    //$('#content').modal('hide')
+
     this.reset();
-    //this.obtenerEstatusCarga();
+
     this.cancelar();
   }
 
   btnClose() {
     this.cleanVar();
-
-    //$('#content').modal('hide')
     this.reset();
-    //this.obtenerEstatusCarga();
     this.cancelar();
   }
 

@@ -18,6 +18,7 @@ export class HelperCatalogosService {
   private lstConfiguracionCat: Array<ConfiguracionCarga> = [
     {
       idCatalogos: 1,
+      sheetName: '',
       nombreCatalogo: 'Unidades médicas',
       rutaPlantilla: '../../../../assets/files/7.Unidades.xlsx',
       idCatPadre: undefined,
@@ -83,6 +84,7 @@ export class HelperCatalogosService {
     {
       idCatalogos: 3,
       nombreCatalogo: 'Ubicaciones',
+      sheetName: 'B_4_UBICACIONES',
       rutaPlantilla: '../../../../assets/files/9.Ubicaciones.xlsx',
       idCatPadre: [1, 2],
       col1: 'CLAVE DE UBICACIÓN',
