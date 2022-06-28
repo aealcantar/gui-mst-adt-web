@@ -146,7 +146,7 @@ export class HelperCatalogosService {
       idCatalogos: 7,
       nombreCatalogo: 'Usuarios',
       rutaPlantilla: '../../../../assets/files/13.Personal.xlsx',
-      idCatPadre: undefined,
+      idCatPadre: [1,8,9],
       col1: 'NOMBRE',
       col2: 'PRIMER_APELLIDO',
       col3: 'SEGUNDO_APELLIDO',
