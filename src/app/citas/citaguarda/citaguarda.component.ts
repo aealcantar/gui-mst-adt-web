@@ -83,6 +83,7 @@ export class CitaguardaComponent implements OnInit {
     'Programa': '',
     'Tipo de cita': ''
   }
+  participantes: number = 0;
 
   mod_mensaje: string = "";
   objmodal = {
@@ -123,7 +124,7 @@ export class CitaguardaComponent implements OnInit {
     // ]
 
     this.paciente = this.tarjetaService.get();
-    console.log("paciente:" + this.paciente);
+    //console.log("paciente:" + this.paciente);
     this.llenaparticipantes();
     this.llenacatalogoservicios();
 
@@ -132,7 +133,7 @@ export class CitaguardaComponent implements OnInit {
   llenaparticipantes(){
     this.citaservice.getlistparticipantes(this.paciente? this.paciente.nss : '4313947194').subscribe({
       next: (resp:any) => {
-        console.log(resp);
+        //console.log(resp);
         //this.lstchkparticipantes = resp.busquedanss.beneficiarios;
         this.lstchkparticipantes = [];
         var cont: number = 0;
@@ -145,7 +146,7 @@ export class CitaguardaComponent implements OnInit {
 
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.lstchkparticipantes = [];
         this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
@@ -155,12 +156,12 @@ export class CitaguardaComponent implements OnInit {
   llenacatalogoservicios(){
     this.citaservice.getlistservicios().subscribe({
       next: (resp:any) => {
-        console.log(resp);
+        //console.log(resp);
         this.lstCatServicios = resp;
 
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.lstCatServicios = [];
         this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
@@ -170,12 +171,12 @@ export class CitaguardaComponent implements OnInit {
   llenacatalogoprogramas(cve_especialidad: number){
     this.citaservice.getlistprogramas(cve_especialidad).subscribe({
       next: (resp:any) => {
-        console.log(resp);
+        //console.log(resp);
         this.lstCatProgramas = resp;
 
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.lstCatProgramas = [];
         this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
@@ -185,13 +186,13 @@ export class CitaguardaComponent implements OnInit {
   llenafechas(cve_gpo: number){
     this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo).subscribe({
       next: (resp:any) => {
-        console.log(resp);
+        //console.log(resp);
 
         this.lstCatFechas = resp;
 
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.lstCatFechas = [];
         this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
@@ -204,12 +205,12 @@ export class CitaguardaComponent implements OnInit {
       this.citadata.value.programa.cve_grupo_programa,
       fechaInicio).subscribe({
       next: (resp:any) => {
-        console.log(resp);
+        //console.log(resp);
         this.lstCatHorarios = resp;
 
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.lstCatHorarios = [];
         this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
@@ -250,8 +251,8 @@ export class CitaguardaComponent implements OnInit {
   }
 
   agregaparticipante(otrop: any){
-    console.log(this.txtotro);
-    console.log(otrop);
+    //console.log(this.txtotro);
+    //console.log(otrop);
     if(this.txtotro && this.txtotro.trim() != "" && otrop.control.status == "VALID"){
       this.lstParticipantes.push(this.txtotro);
       this.txtotro = "";
@@ -273,7 +274,7 @@ export class CitaguardaComponent implements OnInit {
   }
 
   onchangeservicio(e: any){
-    console.log(e);
+    //console.log(e);
     let cve_especialidad = e.cve_especialidad;
     this.llenacatalogoprogramas(cve_especialidad);
     if(this.citadata.value.programa != ""){
@@ -296,7 +297,7 @@ export class CitaguardaComponent implements OnInit {
 
   public onchangefecha(origen?: boolean): void{
     let fechaInicio = this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "";
-    console.log('fechaInicio', fechaInicio);
+    //console.log('fechaInicio', fechaInicio);
 
     if(origen){
       this.llenacatalogohorarios(fechaInicio);
@@ -337,7 +338,7 @@ export class CitaguardaComponent implements OnInit {
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa).subscribe({
       next: (resp:any) => {
-        console.log(resp);
+        //console.log(resp);
         this.datoscita = {
           'Fecha y hora de inicio de la cita': e.fec_inicio? this.datePipe.transform(new Date(e.fec_inicio + " " + e.tim_hora_inicio), 'dd-MM-yyyy - HH:mm:ss')  : "",
           'Fecha y hora de finalización de la cita': e.fec_fin? this.datePipe.transform(new Date(e.fec_fin + " " + e.tim_hora_fin), 'dd-MM-yyyy - HH:mm:ss')  : "",
@@ -358,7 +359,7 @@ export class CitaguardaComponent implements OnInit {
 
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.muestraresumen = true;
         this.submitted = false;
         this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
@@ -383,9 +384,8 @@ export class CitaguardaComponent implements OnInit {
   }
 
   agendarcita(){
-    console.log(this.citadata.valid);
-    let fechaIni = this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "";
-    let objetoResuperado = this.lstCatFechas.filter(e => e.fec_inicio === fechaIni);
+    //console.log(this.citadata.valid);
+   
 
     if(this.contadorparticipantes == 0){
       this.muestraAlerta(
@@ -393,19 +393,27 @@ export class CitaguardaComponent implements OnInit {
         'alert-danger',
         'Error'
       );
-    } else if (this.contadorparticipantes > Number(JSON.stringify(objetoResuperado[0]['maximo_partcipantes']))) {
-      this.muestraAlerta(
-        'El espacio seleccionado se encuentra al maximo de su cupo, por favor seleccionar otra fecha.',
-        'alert-danger',
-        'Error'
-      );
+    } else if (this.contadorparticipantes >= 1) {
+      this.submitted = true;
+      if(this.citadata.valid) {
+        let fechaIni = this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "";
+        let objetoResuperado = this.lstCatFechas.filter(e => e.fec_inicio === fechaIni);
+        this.participantes = Number(JSON.stringify(objetoResuperado[0].maximo_partcipantes));
+        if(this.contadorparticipantes > this.participantes) {
+          this.muestraAlerta(
+            'El espacio seleccionado se encuentra al máximo de su cupo, por favor seleccionar otra fecha.',
+            'alert-danger',
+            'Error'
+          );
+        }
+      }
     } else {
       this.submitted = true;
       if(this.citadata.valid){
 
         this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
           next: (resp:any) => {
-            console.log(resp);
+            //console.log(resp);
             if(resp){
 
             interface LooseObject {
@@ -447,7 +455,7 @@ export class CitaguardaComponent implements OnInit {
 
             this.citaservice.guardacita(req).subscribe({
               next: (resp:any) => {
-                console.log(resp);
+                //console.log(resp);
 
                 if(resp.estatus == true){
                   this.muestraAlerta(
@@ -474,7 +482,7 @@ export class CitaguardaComponent implements OnInit {
                 }
               },
               error: (err) => {
-                console.log(err);
+                //console.log(err);
 
                 this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
               }
@@ -484,7 +492,7 @@ export class CitaguardaComponent implements OnInit {
           }
           },
           error: (err) => {
-            console.log(err);
+            //console.log(err);
 
             this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
           }
