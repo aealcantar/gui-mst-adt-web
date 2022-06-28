@@ -10,4 +10,7 @@ export class Persona {
     public usuario: string;
     public contraseña: string;
     public turno: string;
+    public email: string;
+    public unidadMedica: string;
+    public escuelaProcedencia: string;
 } 

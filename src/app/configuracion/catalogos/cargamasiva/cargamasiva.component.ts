@@ -349,18 +349,22 @@ export class CargamasivaComponent implements OnInit {
           case 7:
 
             this.persona[index] = new Persona();
-            this.persona[index].primerApellido = element[this.confCarga.col1];
-            this.persona[index].segundoApellido = element[this.confCarga.col2];
-            this.persona[index].nombre = element[this.confCarga.col3];
+            this.persona[index].nombre = element[this.confCarga.col1];
+            this.persona[index].primerApellido = element[this.confCarga.col2];
+            this.persona[index].segundoApellido = element[this.confCarga.col3];
             this.persona[index].matricula = element[this.confCarga.col4];
             this.persona[index].rol = element[this.confCarga.col5];
             this.persona[index].puesto = element[this.confCarga.col6]
-            this.persona[index].nombreCompleto = element[this.confCarga.col7];
-            this.persona[index].usuario = element[this.confCarga.col8];
-            this.persona[index].contraseña = element[this.confCarga.col9];
-            this.persona[index].turno = element[this.confCarga.col10];
-            break;
+            this.persona[index].contraseña = element[this.confCarga.col7];
+            this.persona[index].turno = element[this.confCarga.col8];
+            this.persona[index].email = element[this.confCarga.col9];
+            this.persona[index].unidadMedica = element[this.confCarga.col10];
+            this.persona[index].escuelaProcedencia = element[this.confCarga.col11];
 
+            this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
+            this.persona[index].usuario = this.persona[index].matricula;
+            break;
+            console.log("usuario: ", this.persona[index]);
 
 
 
