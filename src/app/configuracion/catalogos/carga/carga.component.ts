@@ -42,7 +42,7 @@ export class CargaComponent implements OnInit {
     private router: Router,
     private _CargasService: CargasService,
     private _Mensajes: HelperMensajesService,
-    private matIconRegistry: MatIconRegistry,
+    private matIconRegistry: MatIconRegistry, private _HelperCatalogos: HelperCatalogosService,
     private domSanitizer: DomSanitizer,
     public dialog: MatDialog) {
     this.matIconRegistry.addSvgIcon("circle_naranja", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse1.svg"));
@@ -57,6 +57,7 @@ export class CargaComponent implements OnInit {
   ngOnInit(): void {
 
     this.authService.setProjectObs("Agenda Digital Transversal");
+    this.lstConfigCarga = this._HelperCatalogos.getConfiguracionCat();
     this.lstCatalogo = new Array<CatalogoData>();
     this.mensaje = new objAlert;
     this.obtenerEstatusCarga();
@@ -74,7 +75,39 @@ export class CargaComponent implements OnInit {
 
   }
 
-  abrirdialog(id:number, tipocatalogo: string, sheetName: string){
+
+
+  lstConfigCarga: ConfiguracionCarga[];
+  catPadre: CatalogoData;
+  catFaltante: string = '';
+  confCarga: ConfiguracionCarga;
+  private validarDependenciaDeCatalogos(tipocatalogo: string): boolean {
+    this.confCarga = new ConfiguracionCarga();
+
+    this.confCarga = this.lstConfigCarga.find(e => e.nombreCatalogo === tipocatalogo);
+    let blnPuedeCargar: boolean = true;
+    this.catFaltante = '';
+    if (this.confCarga.idCatPadre != undefined) {
+      for (let catId of this.confCarga.idCatPadre) {
+        this.catPadre = this.lstCatalogo.find(e => e.idCatalogos === catId);
+        if (this.catPadre.estatusCarga.cveIdEstatus != 1) {
+          this.catFaltante = this.catPadre.nombreCatalogo;
+          blnPuedeCargar = false;
+        }
+      }
+    }
+    return blnPuedeCargar;
+  }
+
+  private validacionAbrirModal(catalogo: CatalogoData) {
+    if (this.validarDependenciaDeCatalogos(catalogo.nombreCatalogo)) {
+      this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
+    } else {
+      this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Debe completar la carga del catálogo: " + this.catFaltante, this._Mensajes.ERROR);
+    }
+  }
+
+  abrirdialog(id: number, tipocatalogo: string, sheetName: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       idCatalogos: id,
@@ -99,22 +132,25 @@ export class CargaComponent implements OnInit {
   public btnAccionesCatalogos(catalogo: CatalogoData) {
     switch (catalogo.idCatalogos) {
       case 3:
-        if(catalogo.estatusCarga.cveIdEstatus == 1){
+        if (catalogo.estatusCarga.cveIdEstatus == 1) {
           this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones", { skipLocationChange: true });
-        }else{
-          this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
+        } else {
+          // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
+          this.validacionAbrirModal(catalogo);
         }
 
         break;
-        case 7:
-          if(catalogo.estatusCarga.cveIdEstatus == 1){
-            this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
-          }else{
-            this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
-          }
-          break;
+      case 7:
+        if (catalogo.estatusCarga.cveIdEstatus == 1) {
+          this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
+        } else {
+          // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
+          this.validacionAbrirModal(catalogo);
+        }
+        break;
       default:
-        this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
+        // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
+        this.validacionAbrirModal(catalogo);
         break;
     }
 
