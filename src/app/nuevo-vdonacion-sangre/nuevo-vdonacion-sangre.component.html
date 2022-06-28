@@ -48,7 +48,7 @@
           </div>
         </div>
         <div>
-          <span class="instrucciones">
+          <span class="instrucciones contenedorTitulo">
             Para asistir al banco de sangre
           </span>
         </div>
@@ -58,7 +58,7 @@
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
               <select class="form-control styleselect" formControlName="nombreBancoSangre" id="nombreBancoSangre"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombreBancoSangre?.dirty && formNuevoVolante.controls?.nombreBancoSangre?.errors }">
-                <option class="select-font optionSelect" placeholder="Ingresar nombre" selected [value]="''">
+                <option class="select-font optionSelect" placeholder="Ingresar nombre" selected >
                   Ingresar nombre</option>
                 <option class="select-font" [value]="1">Banco de sangre 1</option>
               </select>
@@ -228,7 +228,7 @@
       </div>
       <div class="container seccion">
         <div>
-          <span class="instrucciones">
+          <span class="instrucciones contenedorTitulo">
             Datos del paciente
           </span>
         </div>
@@ -237,21 +237,19 @@
             <div class="form-group">
               <span class="spanInput">Nombre:</span>
               <input
-                [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombrePaciente?.dirty && formNuevoVolante.controls?.nombrePaciente?.errors }"
                 class="form-control matricula inputBloqueo" id="nombrePaciente" formControlName="nombrePaciente"
                 placeholder="Ingresar nombre" type="text" maxlength="19" />
-              <small
+              <!-- <small
                 *ngIf="formNuevoVolante.controls?.nombrePaciente?.dirty && formNuevoVolante.controls?.nombrePaciente?.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
-              </small>
+              </small> -->
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">No. de Seguridad Social y agregado:</span>
               <input
-                [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombrePaciente?.dirty && formNuevoVolante.controls?.nombrePaciente?.errors }"
                 class="form-control matricula inputBloqueo" formControlName="desMaterialApoyo"
                 placeholder="Ingresar no. de seguridad social" type="text" />
             </div>
@@ -318,7 +316,7 @@
               <input
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.telefonoPaciente?.dirty && formNuevoVolante.controls?.telefonoPaciente?.errors }"
                 formControlName="telefonoPaciente" class="form-control matricula inputs" id="telefonoPaciente"
-                placeholder="Ingresar teléfono" type="number" maxlength="10" />
+                placeholder="Ingresar teléfono" type="text" maxlength="10" />
               <small
                 *ngIf="formNuevoVolante.controls?.telefonoPaciente?.dirty && formNuevoVolante.controls?.telefonoPaciente?.errors"
                 class="form-text form-text-error Campo-obligatorio">
@@ -330,7 +328,7 @@
       </div>
       <div class="container seccion">
         <div>
-          <span class="instrucciones">
+          <span class="instrucciones contenedorTitulo">
             Datos del Trabajador social
           </span>
         </div>
@@ -395,13 +393,13 @@
         </div>
       </div>
       <div>
-        <span class="instrucciones">
-          Campos obligatorios
+        <span class="instrucciones" style="margin-left: 2%;">
+          *Campos obligatorios
         </span>
       </div>
       <div class="row">
         <div class="col-md-12 divBotones">
-          <button class="btn btn-primary buttonL btnGuardar">
+          <button class="btn btn-primary buttonL btnGuardar" [disabled]="formNuevoVolante.valid == false" >
             Guardar
           </button>
           <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="modalcarga()">
