@@ -21,6 +21,7 @@ import { MenugralComponent } from './menugral/menugral.component';
 import { FichapacienteComponent } from './fichapaciente/fichapaciente.component';
 import { DataTablesModule } from 'angular-datatables';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export const MY_FORMATS = {
   parse: {
@@ -46,7 +47,7 @@ export const MY_FORMATS = {
     AppAlertsComponent,
     FichapacienteComponent,
     MenugralComponent,
-    HeaderMenuComponent,
+    HeaderMenuComponent
   ],
   imports: [
     CommonModule,
@@ -84,6 +85,7 @@ export const MY_FORMATS = {
     MenugralComponent,
     DataTablesModule,
     HeaderMenuComponent,
+
   ], providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

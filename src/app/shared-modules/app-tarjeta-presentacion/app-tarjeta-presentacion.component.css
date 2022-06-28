@@ -270,3 +270,13 @@ a:hover {
 }
 
 
+
+.botonRegresar{
+    width: 37px;
+    height: 34px;
+  
+    object-fit: contain;
+    cursor: pointer;
+}
+
+

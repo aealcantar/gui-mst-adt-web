@@ -7,23 +7,30 @@
 
  <div class="Rectangle-855">
 
-   <div class="row" style="display: contents;">
+   <div class="row" style="display: contents;" >
+    <div class="col-sm-1 pt-2  " *ngIf="mostrarBtnAtras">
+      <img       
+      (click)="regresar()"
+        class="botonRegresar mt-5"
+        src="assets/hu003-tarjeta/volver.ico"
+      />
+    </div>
+    <div class="col-sm-4">
+      <div style="display: grid;">
+        <span class="pacienteSpan">Paciente</span>
+        <span class="pacienteNombreSpan">{{paciente?.paciente?.toUpperCase()}}</span>
 
-     <div class="pacienteInfoDiv">
-
-       <div style="display: grid;">
-         <span class="pacienteSpan">Paciente</span>
-         <span class="pacienteNombreSpan">{{paciente?.paciente?.toUpperCase()}}</span>
-
-       </div>
-
-       <div class="Rectangle-1205"></div>
-
-       <div style="display: grid;">
-         <span class="unidadSpan">Unidad de Adscripción</span>
-         <span class="umf">UMF {{paciente?.unidadMedica}}</span>
-         <span class="ciudadUnidadMedica">Ciudad {{'Gustavo Días Ordaz'}}</span>
-       </div>
+      </div>
+    </div>
+    <div class="Rectangle-1205"></div>
+     <div class="col-sm">
+      <div class="pacienteInfoDiv">
+        <div style="display: grid;">
+          <span class="unidadSpan">Unidad de Adscripción</span>
+          <span class="umf">UMF {{paciente?.unidadMedica}}</span>
+          <span class="ciudadUnidadMedica">Ciudad {{'Gustavo Días Ordaz'}}</span>
+        </div>
+      </div>
      </div>
      <div class="polig">
        <div class="figura1">

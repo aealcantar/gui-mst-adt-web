@@ -5,6 +5,7 @@
   font-size: 24px !important;
   line-height: 29px !important;
   padding-left: 44px !important;
+  color: #222222!important;
   /* margin-bottom: 20px !important;
 padding-top:  20px !important; */
 }
@@ -392,3 +393,4 @@ select.captura.lugar {
   border: 1px solid #CCCCCC;
   transform: matrix(1, 0, 0, 1, 0, 0);
 }
+

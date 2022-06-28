@@ -17,7 +17,8 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   isCollapsed: boolean = true;
   executed: boolean = false;
   months: any;
-
+ @Input() mostrarBtnAtras:boolean=false;
+ @Input() url:string="";
   constructor(private tarjetaServce: AppTarjetaPresentacionService, private router: Router) { }
 
   ngOnInit(): void {
@@ -85,10 +86,15 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   }
 
   irMinisterioPublico(){
-    this.router.navigateByUrl("/consulta-aviso-mp", { skipLocationChange: true });
+    this.router.navigateByUrl("/"+this.url, { skipLocationChange: true });
   }
 
   irCertificadoDefuncion(){
     // this.router.navigateByUrl("/consulta-volantes", { skipLocationChange: true });
+  }
+
+  regresar() {
+    console.log(this.url)
+    this.router.navigateByUrl("/"+this.url, { skipLocationChange: true });
   }
 }
