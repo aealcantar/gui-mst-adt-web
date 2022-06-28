@@ -161,9 +161,10 @@ export class UbicacionesComponent implements OnInit {
         Swal.close();
 
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         Swal.close();
         this.lstUbicaciones = [];
+        this.mensajesError(err, this._Mensajes.MSJ_ERROR_CONEXION_UBICACION);
         //this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
     })
@@ -294,10 +295,10 @@ export class UbicacionesComponent implements OnInit {
             Swal.close();
 
           },
-          error: (err) => {
+          error: (err:HttpErrorResponse) => {
             Swal.close();
             this.lstUbicaciones = [];
-            //this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+            this.mensajesError(err, this._Mensajes.MSJ_ERROR_CONEXION_UBICACION);
           }
         })
       }else{
@@ -354,34 +355,7 @@ export class UbicacionesComponent implements OnInit {
   }
 
 
-  private mensajesError(error: HttpErrorResponse, msj: string) {
-    this.archivoCarga.proceso = 'errorResponse';
-    switch (error.status) {
-      case 400:
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_400, this._Mensajes.ERROR400);
-        break;
-      case 403:
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_403, this._Mensajes.ERROR403);
-        break;
 
-      case 404:
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_404, this._Mensajes.ERROR404);
-        break;
-      case 500:
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_500, this._Mensajes.ERROR500);
-        break;
-      case 503:
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_503, this._Mensajes.ERROR503);
-        break;
-
-      default:
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, msj, "Error " + error.status);
-        break;
-    }
-
-
-
-  }
 
 
 
@@ -712,6 +686,36 @@ export class UbicacionesComponent implements OnInit {
       this.blnContinuar = true;
       // this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
     }
+  }
+
+
+  private mensajesError(error: HttpErrorResponse, msj: string) {
+    this.archivoCarga.proceso = 'errorResponse';
+    switch (error.status) {
+      case 400:
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_400, this._Mensajes.ERROR400);
+        break;
+      case 403:
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_403, this._Mensajes.ERROR403);
+        break;
+
+      case 404:
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_404, this._Mensajes.ERROR404);
+        break;
+      case 500:
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_500, this._Mensajes.ERROR500);
+        break;
+      case 503:
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_503, this._Mensajes.ERROR503);
+        break;
+
+      default:
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, msj, "Error " + error.status);
+        break;
+    }
+
+
+
   }
 
 
