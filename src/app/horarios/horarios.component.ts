@@ -169,6 +169,7 @@ export class HorariosComponent implements OnInit {
 
   private obtenerHorarioporUbicacionDia(cveUbicacion:number,dia: string) {
     this.msjLoading("Cargando...");
+    this.diaSeleccionado.horarios = [];
     this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
       this.diaSeleccionado.horarios = resp.data;
       console.log(this.diaSeleccionado.horarios);
@@ -220,6 +221,7 @@ export class HorariosComponent implements OnInit {
 
 
   private obtenerHorarioporDia(dia: string) {
+    this.diaSeleccionado.horarios = [];
     this.msjLoading("Cargando...");
     this.horarioService.getHorariosByDia(dia).subscribe((resp: HorarioResponse) => {
       this.diaSeleccionado.horarios = resp.data;

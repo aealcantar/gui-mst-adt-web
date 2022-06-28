@@ -9,12 +9,10 @@
     <div [innerHTML]="objAlerta.message"></div>
   </ngb-alert>
 </div>-->
-<div *ngIf="objAlerta" style="position: absolute; width: 100%;z-index: 9999;">
+<div *ngIf="objAlerta" style="  display: flex; justify-content: center;">
   <div *ngIf="objAlerta.visible || undefined" class="alert alert-dismissible alert-base" [ngClass]="objAlerta.type">
     <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close">
       <img [src]="getimage(objAlerta.type)">
-      <!-- <span aria-hidden="true" class="img-alert">
-      </span> -->
     </button>
 
     <div class="colorLV"  style="width: 100%;" class="mensaje"  [ngClass]="{'colorLR': objAlerta?.typeMsg === 'Error' }" >

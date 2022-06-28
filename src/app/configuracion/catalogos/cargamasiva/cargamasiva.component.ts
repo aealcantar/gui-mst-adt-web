@@ -70,7 +70,7 @@ export class CargamasivaComponent implements OnInit {
   turnosRequest: TurnoRequest;
   puestos: Puesto[] = new Array<Puesto>()
   puestosRequest: PuestoRequest;
-  idUser: number = 33; // 5 = Fer   33 = Ame
+  idUser: number = 1; // 5 = Fer   33 = Ame
   correosubmitted = false;
   alert!: objAlert;
   percentDone!: number;
