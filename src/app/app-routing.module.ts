@@ -74,13 +74,7 @@ const routes: Routes = [
       { path: 'ConfiguracionUbicaciones', component: UbicacionesComponent },
       { path: 'horarios/:cveUbicacion', component: HorariosComponent }
     ]
-  },
-  {
-    path: 'TrabajoSocial', component: TrabajoSocialComponent, children: [
-      { path: '', redirectTo: '/TrabajoSocial/horarios', pathMatch: 'full' },
-      { path: 'horarios', component: HorariosComponent },
-    ]
-  },
+  }
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -16,6 +17,7 @@ import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalo
 import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
 import { UbicacionesService } from 'src/app/services/ubicaciones/ubicaciones.service';
 import Swal from 'sweetalert2';
+import { CargamasivaComponent } from '../cargamasiva/cargamasiva.component';
 
 
 declare var $: any;
@@ -62,27 +64,27 @@ export class UbicacionesComponent implements OnInit {
   pagactual: number = 1;
   dtOptions: DataTables.Settings = {};
   blnContinuar: boolean = false;
-  resultados: boolean=true;
+  resultados: boolean = true;
 
-  
+
   mensaje!: objAlert;
 
   constructor(private formBuilder: FormBuilder, private ubicaciones: UbicacionesService,
-    private http: HttpClient, private router: Router, private renderer: Renderer2,    private _Mensajes: HelperMensajesService,
+    private http: HttpClient, private router: Router, private renderer: Renderer2, private _Mensajes: HelperMensajesService,
     private matIconRegistry: MatIconRegistry,
     private _HelperCatalogos: HelperCatalogosService,
-    private _CargasService: CargasService,
+    private _CargasService: CargasService, public dialog: MatDialog,
     private domSanitizer: DomSanitizer) {
 
-      this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
-      this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
-      this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
-      this.matIconRegistry.addSvgIcon("close", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/close.svg"));
-      this.matIconRegistry.addSvgIcon("add", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/add.svg"));
-  
+    this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
+    this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
+    this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
+    this.matIconRegistry.addSvgIcon("close", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/close.svg"));
+    this.matIconRegistry.addSvgIcon("add", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/add.svg"));
+
 
   }
- 
+
   ngOnInit(): void {
     this.mensaje = new objAlert;
     this.getAll();
@@ -125,22 +127,23 @@ export class UbicacionesComponent implements OnInit {
   }
 
   getAll() {
-
-
     this.lstUbicaciones = [];
+    this.msjLoading("Buscando...");
+
     this.pagactual = 1;
     this.ubicaciones.getAll().subscribe({
       next: (resp: any) => {
 
         console.log(resp);
 
-        if(resp.data.length>0)        
-          this.resultados=true;
-        else this.resultados=false;
+        if (resp.data.length > 0)
+          this.resultados = true;
+        else this.resultados = false;
 
         this.lstUbicaciones = resp.data;
 
-
+        this.totRegistros = this.lstUbicaciones.length;
+        console.log(this.totRegistros);
 
         setTimeout(() => {
           table = $('#tblusuarios').DataTable();
@@ -155,9 +158,11 @@ export class UbicacionesComponent implements OnInit {
             });
           }, 1000);
         }, 1000);
+        Swal.close();
 
       },
       error: (err) => {
+        Swal.close();
         this.lstUbicaciones = [];
         //this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
       }
@@ -165,16 +170,16 @@ export class UbicacionesComponent implements OnInit {
 
   }
 
-  limpiarbusqueda() {
+  btnLimpiarbusqueda() {
     this.lstUbicaciones = [];
     this.txtbusca = '';
   }
   cargaUbicaciones() {
 
-  
-        this. modalcarga("Ubicaciones", "B_4_UBICACIONES") ;
-       
-    
+
+    this.modalcarga("Ubicaciones", "B_4_UBICACIONES");
+
+
 
   }
 
@@ -185,7 +190,7 @@ export class UbicacionesComponent implements OnInit {
     this.percentDone = 0;
 
     this.ubicacion = new Array<Ubicacion>();
-   
+
 
 
   }
@@ -248,50 +253,60 @@ export class UbicacionesComponent implements OnInit {
     }, 4500);
 
   }
-  buscarUbicacion(){
-
-if(this.txtbusca==""){
-  this.getAll();
-
-}else{
 
 
-debugger
-    this.ubicaciones.getByDescAbv(this.txtbusca).subscribe({
-      next: (resp: any) => {
+  totRegistros: number = 0;
+  btnBuscarUbicacion() {
+    this.lstUbicaciones = [];
+    if (this.txtbusca == "") {
+      this.getAll();
 
-        console.log(resp);
-        this.lstUbicaciones = resp.data;
-        if(resp.data.length>0)        
-        this.resultados=true;
-      else this.resultados=false;
+    } else {
+      if (this.txtbusca.trim().length >= 5) {
+
+        this.msjLoading("Buscando...");
+        this.ubicaciones.getByDescAbv(this.txtbusca).subscribe({
+          next: (resp: any) => {
+
+            console.log(resp);
+            this.lstUbicaciones = resp.data;
+            if (resp.data.length > 0)
+              this.resultados = true;
+            else this.resultados = false;
 
 
+            this.totRegistros = this.lstUbicaciones.length;
+            console.log(this.totRegistros);
+            setTimeout(() => {
+              table = $('#tblusuarios').DataTable();
+              this.dtOptions.pageLength = this.numitems;
 
-        setTimeout(() => {
-          table = $('#tblusuarios').DataTable();
-          this.dtOptions.pageLength = this.numitems;
 
+              setTimeout(() => {
+                table.on('page', () => {
+                  console.log('Page: ' + table.page.info().page);
+                  paginaactual = table.page.info().page;
+                  this.pagactual = paginaactual + 1;
+                });
+              }, 1000);
+            }, 1000);
 
-          setTimeout(() => {
-            table.on('page', () => {
-              console.log('Page: ' + table.page.info().page);
-              paginaactual = table.page.info().page;
-              this.pagactual = paginaactual + 1;
-            });
-          }, 1000);
-        }, 1000);
+            Swal.close();
 
-      },
-      error: (err) => {
-        this.lstUbicaciones = [];
-        //this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+          },
+          error: (err) => {
+            Swal.close();
+            this.lstUbicaciones = [];
+            //this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+          }
+        })
+      }else{
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Ingrese mínimo 5 caracteres para buscar" + this.catFaltante, this._Mensajes.ERROR);
       }
-    })
-  }
+    }
   }
 
-  
+
   descargaacuse() {
 
     let d = new Date();
@@ -338,7 +353,7 @@ debugger
     });
   }
 
-  
+
   private mensajesError(error: HttpErrorResponse, msj: string) {
     this.archivoCarga.proceso = 'errorResponse';
     switch (error.status) {
@@ -384,14 +399,14 @@ debugger
     $('#content').modal('hide')
     this.reset();
     this.obtenerEstatusCarga();
-    
+
   }
   btnAceptar() {
     this.cleanVar();
     $('#content').modal('hide')
     this.reset();
     this.obtenerEstatusCarga();
-   
+
   }
   reset() {
     console.log(this.myInputVariable.nativeElement.files);
@@ -402,13 +417,13 @@ debugger
     this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
   }
 
-  muestraHorarios(cveUbicacion:number){
+  muestraHorarios(cveUbicacion: number) {
     debugger
-    
+
     this.router.navigate(['/catalogos/horarios/' + cveUbicacion]);
 
   }
-  
+
   upload(event: any) {
     console.log("selecciona boton para cargar archivo");
 
@@ -614,23 +629,23 @@ debugger
 
 
   }
-  cambiatotalpaginas(numpag:number){
+  cambiatotalpaginas(numpag: number) {
     this.numitems = numpag;
-    $('#tblusuarios').DataTable().page.len( this.numitems ).draw();
+    $('#tblusuarios').DataTable().page.len(this.numitems).draw();
     paginaactual = table.page.info().page;
     this.pagactual = paginaactual + 1;
   }
 
-  
+
   btnClose() {
     this.cleanVar();
 
     $('#content').modal('hide')
     this.reset();
     this.obtenerEstatusCarga();
-    
+
   }
-  
+
   private msjLoading(titulo: string) {
     Swal.fire({
       title: titulo,
@@ -638,11 +653,8 @@ debugger
       didOpen: () => {
         Swal.showLoading();
       }
-
-
     })
   }
-
   private obtenerEstatusCarga(): void {
     this.blnErrores = false;
     this.blnPendientes = false;
@@ -698,9 +710,35 @@ debugger
     }
     if (tot == completos) {
       this.blnContinuar = true;
-     // this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
+      // this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
     }
   }
 
 
+  btnCargaMasiva(){
+  
+    this.confCarga = new ConfiguracionCarga();
+
+    this.confCarga = this.lstConfigCarga.find(e => e.nombreCatalogo === 'Ubicaciones');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      idCatalogos: this.confCarga.idCatalogos,
+      "nombreCatalogo": this.confCarga.nombreCatalogo,
+      "sheetName": this.confCarga.sheetName
+    };
+
+    const dialogo1 = this.dialog.open(CargamasivaComponent, dialogConfig);
+
+    dialogo1.afterClosed().subscribe(art => {
+      console.log("afterClosed: ", art);
+      //if (art != undefined)
+
+    });
+
+    dialogo1.componentInstance.onAlert.subscribe(dats => {
+      console.log("onAlert: ", dats);
+      this.mostrarMensaje( dats.type,dats.message, dats.typeMsg);
+    });
+
+  }
 }

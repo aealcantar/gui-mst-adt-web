@@ -124,7 +124,7 @@ export class CargamasivaComponent implements OnInit {
     taghtml.style.cssText += 'top: 0px;';
 
     this.pesoMaximoBytes = this.pesoMaximoMB * Math.pow(1024, 2);
-    console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
+   // console.log("meximo permitido: ", this.pesoMaximoBytes, " bytes");
     this.lstCatalogo = new Array<CatalogoData>();
     this.mensaje = new objAlert;
     this.lstConfigCarga = this._HelperCatalogos.getConfiguracionCat();
