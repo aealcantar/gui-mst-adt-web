@@ -44,6 +44,8 @@ export class HelperMensajesService {
   public MSJ_ERROR_CONEXION_ACUSE: string = 'No fue posible conectar con el servicio de Acuses';
   public MSJ_ERROR_CONEXION_HORARIO: string = 'No fue posible conectar con el servicio de Horarios';
 
+  public MSJ_ERROR_CONEXION_UBICACION: string = 'No fue posible conectar con el servicio de Ubicaciones';
+
 
 
   //MEnsajes de error servidor
