@@ -46,17 +46,28 @@
       <ng-template #thenBlock>
 
         <span class="resultados">
-          Resultados
+          Resultadosaa
         </span>
         <span class="resultados2" style="font-weight: bold;">
           {{resultadoTotal}}
         </span>
-
+<!-- 
         <select class="form-select" [(ngModel)]="pageSize">
           <option [ngValue]="15">15</option>
           <option [ngValue]="20">20</option>
           <option [ngValue]="25">25</option>
-        </select>
+        </select> -->
+
+        <mat-select
+          class="form-control form-control-mat-select"
+          [(ngModel)]="pageSize"
+          [disableOptionCentering]="true"
+          aria-label="Servicio"
+        >
+          <mat-option class="select-font" [value]="15">15</mat-option>
+          <mat-option class="select-font" [value]="20">20</mat-option>
+          <mat-option class="select-font" [value]="25">25</mat-option>
+        </mat-select>
 
         <span class="visDatos" style="width: auto; float: right;">
           Visualizar datos
@@ -175,7 +186,7 @@
             Resultados <b>{{resultadoTotal}}</b>
           </span>
 
-          <select class="form-select">
+          <!-- <select class="form-select">
             <option [ngValue]="15">15</option>
             <option [ngValue]="20">20</option>
             <option [ngValue]="25">25</option>
@@ -183,7 +194,23 @@
 
           <span class="visDatos" style="width: auto; float: right;">
             Visualizar datos
-          </span>
+          </span> -->
+
+          <div style="position: relative; float: right; display: flex;">
+            <span class="visDatos" style="width: auto; float: right;">
+              Visualizar datos
+            </span>
+
+            <mat-select
+              class="form-select mat-select-table"
+              [disableOptionCentering]="true"
+              aria-label="Servicio"
+            >
+              <mat-option class="select-font" [value]="15">15</mat-option>
+              <mat-option class="select-font" [value]="20">20</mat-option>
+              <mat-option class="select-font" [value]="25">25</mat-option>
+            </mat-select>
+          </div>
 
           <table class="table ">
             <thead style=" background: #f9f9f9;">
