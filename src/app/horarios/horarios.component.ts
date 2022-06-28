@@ -182,12 +182,14 @@ export class HorariosComponent implements OnInit {
             });
 
             console.log("horarios: ", this.diaSeleccionado.horarios);
+          }else{
+            this.mostrarMensaje(this._Mensajes.ALERT_DANGER,this._Mensajes.MSJ_MSG023,this._Mensajes.INFO);
           }
           Swal.close();
           break;
         case 204:
           this.diaSeleccionado = null;
-          //pintar en el front no existen horarios configurados.
+          this.mostrarMensaje(this._Mensajes.ALERT_DANGER,this._Mensajes.MSJ_MSG023,this._Mensajes.INFO);
           Swal.close();
           break;
         default:
