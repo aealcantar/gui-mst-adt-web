@@ -54,11 +54,11 @@ export class ConsultaAvisoMpComponent implements OnInit {
       }
     });
 
-    $('#notasFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    /*$('#notasFinal').val(format('DD/MM/YYYY')).datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+          //date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
           this.handleDatesChange();
         }
@@ -69,7 +69,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
         }
       }
     });
-    this.handleDatesChange();
+    this.handleDatesChange();*/
   }
 
   handleDatesChange() {

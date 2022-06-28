@@ -28,8 +28,8 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Alcaldia*:</span>
-              <select class="form-control styleselect" formControlName="alcaldia" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Seleccionar alcaldia" selected [value]="'-1'">
+              <select class="form-control" formControlName="alcaldia" aria-label="Servicio">
+                <option class="select-font" placeholder="Seleccionar alcaldia" selected [value]="'-1'">
                   Seleccionar alcaldia</option>
                 <option class="select-font" [value]="1">Alcaldia 1</option>
               </select>
@@ -74,7 +74,7 @@
            <div class="col-md-4">
             <span class="spanInput">Número de cama*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar cama" formControlName="numCama"
-              type="text" maxlength="3" />
+              type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="4" />
            </div>
            <div class="col-md-4">
             <div class="form-group datepicker-group">
@@ -92,6 +92,7 @@
               <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="hora" selected [value]="'0'">00</option>
                 <option class="select-font" [value]="1">01</option>
+                <option class="select-font" [value]="2">02</option>
               </select>
             </div>
           </div>
@@ -102,6 +103,7 @@
               <select class="form-control styleselect" formControlName="minutos" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="minutos" selected [value]="'0'">00</option>
                 <option class="select-font" [value]="1">01</option>
+                <option class="select-font" [value]="2">02</option>
               </select>
             </div>
           </div>
@@ -163,4 +165,3 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
-<app-datos-generales-paciente></app-datos-generales-paciente>
