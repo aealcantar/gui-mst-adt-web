@@ -193,7 +193,7 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
   }
 
   addCronica() {
-    this.router.navigate(["nuevaCronica"], { skipLocationChange: true });
+    this.router.navigate(["agregar-cronica-grupal"], { skipLocationChange: true });
   }
 
   irDetalle(cronicaGrupal: any) {
@@ -205,28 +205,28 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
       console.log(" ENTRAMOS A SI ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["agregar-cronica-grupal"], { queryParams: params, skipLocationChange: true });
       } else {
         console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["busqueda-especifica"], { queryParams: params, skipLocationChange: true });
       }
     } else if (this.radioBtnSelected === 'No') {
       console.log(" ENTRAMOS A NO ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["agregar-cronica-grupal"], { queryParams: params, skipLocationChange: true });
       } else {
         console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["busqueda-especifica"], { queryParams: params, skipLocationChange: true });
       }
     } else {
       console.log(" ENTRAMOS SIN VALOR ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["agregar-cronica-grupal"], { queryParams: params, skipLocationChange: true });
       } else {
         console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["busqueda-especifica"], { queryParams: params, skipLocationChange: true });
       }
     }
   }

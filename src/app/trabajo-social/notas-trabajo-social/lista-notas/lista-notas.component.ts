@@ -114,12 +114,12 @@ export class ListaNotasComponent implements OnInit, AfterViewInit {
     let params = {
       'nota': JSON.stringify(nota),
     }
-    this.router.navigate(["detalle-nota"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["detalle-notas"], { queryParams: params, skipLocationChange: true });
   }
 
   irNuevaNota() {
     let params = { }
-    this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["agregar-notas"], { queryParams: params, skipLocationChange: true });
   }
 
   handleDatesChange() {

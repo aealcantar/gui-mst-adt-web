@@ -108,12 +108,12 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     let params = {
       'estudioMedico': JSON.stringify(estudioMedico),
     }
-    this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["detalle-estudios-medicos"], { queryParams: params, skipLocationChange: true });
 
   }
 
   irNuevoEstudio() {
-    this.router.navigate(["nuevo-estudio"], { skipLocationChange: true });
+    this.router.navigate(["agregar-estudios-medicos"], { skipLocationChange: true });
   }
 
   handleDatesChange() {

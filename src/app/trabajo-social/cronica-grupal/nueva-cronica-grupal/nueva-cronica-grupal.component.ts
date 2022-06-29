@@ -242,7 +242,7 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
         }, (response: HttpErrorResponse) => {
           console.log("RESPUESTA: ", response.statusText);
           if (response.statusText === 'OK') {
-            this.router.navigate(["cronicaGuardada"], { queryParams: params, skipLocationChange: true });
+            this.router.navigate(["detalle-cronica-grupal"], { queryParams: params, skipLocationChange: true });
           }
         }
       );

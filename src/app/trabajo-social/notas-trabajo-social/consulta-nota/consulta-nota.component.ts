@@ -65,7 +65,7 @@ export class ConsultaNotaComponent implements OnInit {
     let params = {
       'nota': JSON.stringify(this.nota),
     }
-    this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["agregar-notas"], { queryParams: params, skipLocationChange: true });
   }
 
   imprimir() {

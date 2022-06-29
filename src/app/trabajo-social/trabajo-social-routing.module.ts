@@ -36,28 +36,28 @@ const routes: Routes = [
   // }]
   // },
 
-  { path: 'nuevo-control-articulos', component: NuevoControlArticulosComponent },
+  { path: 'agregar-control-articulos', component: NuevoControlArticulosComponent },
   { path: 'detalle-control-articulos/:id', component: DetalleControlArticulosComponent },
   { path: 'consulta-control-articulos', component: ConsultaControlArticulosComponent},
   { path: 'consulta-notas', component: ListaNotasComponent },
-  { path: 'nueva-nota', component: NuevaNotaComponent },
-  { path: 'detalle-nota', component: ConsultaNotaComponent },
-  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent },
-  { path: 'nuevaCronica', component: NuevaCronicaGrupalComponent },
-  { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
+  { path: 'agregar-notas', component: NuevaNotaComponent },
+  { path: 'detalle-notas', component: ConsultaNotaComponent },
+  { path: 'busqueda-especifica', component: CCGrupalEspecificaComponent },
+  { path: 'agregar-cronica-grupal', component: NuevaCronicaGrupalComponent },
+  { path: 'detalle-cronica-grupal', component: CronicaGuardadaComponent },
   { path: 'consulta-cronica-grupal', component: ListaCronicaGrupalComponent },
   { path: 'busqueda', component: BusquedaNssComponent },
 
   // Estudio medico social
-  { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent },
-  { path: 'nuevo-estudio', component: NuevoEstudioSocialMedicoComponent },
-  { path: 'detalle-estudio', component: EstudioMedicoGuardadoComponent },
+  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
+  { path: 'agregar-estudios-medicos', component: NuevoEstudioSocialMedicoComponent },
+  { path: 'detalle-estudios-medicos', component: EstudioMedicoGuardadoComponent },
 
   //volanteDonacion
-  { path: 'nuevo-volante', component: NuevoVdonacionSangreComponent },
-  { path: 'consulta-volantes', component: ConsultaVolantesDonacionComponent },
+  { path: 'agregar-volante', component: NuevoVdonacionSangreComponent },
+  { path: 'consulta-volante', component: ConsultaVolantesDonacionComponent },
 
-  { path: 'nuevo-aviso-mp', component: NuevoVdonacionSangreComponent },
+  { path: 'agregar-aviso-mp', component: NuevoVdonacionSangreComponent },
   { path: 'consulta-aviso-mp', component: ConsultaVolantesDonacionComponent },
 
 ];

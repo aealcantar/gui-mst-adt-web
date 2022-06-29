@@ -203,7 +203,7 @@ export class NuevaNotaComponent implements OnInit {
           console.log(response);
         }, (resp: HttpErrorResponse) => {
           if (resp.statusText === 'OK') {
-            this.router.navigate(["detalle-nota"], { queryParams: params, skipLocationChange: true });
+            this.router.navigate(["detalle-notas"], { queryParams: params, skipLocationChange: true });
           }
         }
       );
@@ -213,7 +213,7 @@ export class NuevaNotaComponent implements OnInit {
           if (response && response?.idNuevaNotaTS) {
             notaToSave.id = response?.idNuevaNotaTS;
             let params = { 'nota': JSON.stringify(notaToSave) };
-            this.router.navigate(["detalle-nota"], { queryParams: params, skipLocationChange: true });
+            this.router.navigate(["detalle-notas"], { queryParams: params, skipLocationChange: true });
           }
         }, (resp: HttpErrorResponse) => {
           console.log(resp);
