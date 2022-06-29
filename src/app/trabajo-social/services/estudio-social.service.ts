@@ -19,44 +19,44 @@ export class EstudioSocialMedicoService {
   ) { }
 
   getCatEstados() {
-    return this.http.get<Estado[]>(`${environment.urlServCatalogos}/api/listEstados`);
+    return this.http.get<Estado[]>(`${environment.msmtsCatalogos}/api/listEstados`);
   }
 
   getCatMunicipiosByEstado(idEstado: number) {
-    return this.http.get<Municipio[]>(`${environment.urlServCatalogos}/api/getDelegacionMunicipio/${idEstado}`);
+    return this.http.get<Municipio[]>(`${environment.msmtsCatalogos}/api/getDelegacionMunicipio/${idEstado}`);
   }
 
   getCiudadByEstadoMunicipio(idEstado: number, idDelegacionMunicipio: number) {
-    return this.http.get<Ciudad[]>(`${environment.urlServCatalogos}/api/getCiudades/${idEstado}/${idDelegacionMunicipio}`);
+    return this.http.get<Ciudad[]>(`${environment.msmtsCatalogos}/api/getCiudades/${idEstado}/${idDelegacionMunicipio}`);
   }
 
   getCatEstadosCiviles() {
-    return this.http.get<EstadoCivil[]>(`${environment.urlServEstudioMedicos}/getEstadosCiviles`);
+    return this.http.get<EstadoCivil[]>(`${environment.msmtsEstudioMedicos}/getEstadosCiviles`);
   }
 
   getCatOcupacionById(idOcupacion: number) {
-    return this.http.get<Ocupacion>(`${environment.urlServCatalogos}/api/getOcupacionByID/${idOcupacion}`);
+    return this.http.get<Ocupacion>(`${environment.msmtsCatalogos}/api/getOcupacionByID/${idOcupacion}`);
   }
 
   getCatOcupaciones() {
-    return this.http.get<Ocupacion[]>(`${environment.urlServCatalogos}/api/lisOcupaciones`);
+    return this.http.get<Ocupacion[]>(`${environment.msmtsCatalogos}/api/lisOcupaciones`);
   }
 
   getCatTiposComunidad() {
-    return this.http.get<EstadoCivil[]>(`${environment.urlServEstudioMedicos}/getTiposComunidad`);
+    return this.http.get<EstadoCivil[]>(`${environment.msmtsEstudioMedicos}/getTiposComunidad`);
   }
 
   getEstudiosMedicosByFechas(fechaInicio: string, fechaFin: string) {
-    return this.http.get<EstudioMedico[]>(`${environment.urlServEstudioMedicos}/findEstudiosMedByRangoFechas/${fechaInicio}/${fechaFin}`);
+    return this.http.get<EstudioMedico[]>(`${environment.msmtsEstudioMedicos}/findEstudiosMedByRangoFechas/${fechaInicio}/${fechaFin}`);
   }
 
   addEstudioSocial(estudioMedicoSocial: EstudioMedico){
-    return this.http.post<EstudioMedico>(`${environment.urlServEstudioMedicos}/guardaNuevoEstudioMed`, estudioMedicoSocial);
+    return this.http.post<EstudioMedico>(`${environment.msmtsEstudioMedicos}/guardaNuevoEstudioMed`, estudioMedicoSocial);
   }
 
   downloadPdf(data: any): Observable<Blob> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
-    return this.http.post<Blob>(`${environment.urlServEstudioMedicos}/reporteEstudiosMedicos`, JSON.stringify(data),
+    return this.http.post<Blob>(`${environment.msmtsEstudioMedicos}/reporteEstudiosMedicos`, JSON.stringify(data),
     { headers: headers, responseType: 'blob' as 'json'});
   }
 

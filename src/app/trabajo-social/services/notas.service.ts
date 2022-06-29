@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Nota } from 'src/app/shared-modules/models/notas.model';
+import { Nota } from '../models/notas.model';
 
-const urlServNotas = `${environment.urlServNotas}/msmts-notas/api`
+const urlServNotas = `${environment.msmtsNotas}`
 
 @Injectable({
   providedIn: 'root'
@@ -45,10 +45,6 @@ export class NotasService {
   getActividadesTecnicas() {
     return this.http.get<any>(`${urlServNotas}/getActividadesTecnicas`, { responseType: 'json'});
   }
-
-  // getDiagnosticosMedicos(texto: string) {
-  //   return this.http.get<any>(`${environment.urlServNotas}/registroNotasTs/getDiagnosticosMedicos/${texto}`, { responseType: 'json'});
-  // }
 
   downloadPdf(data: any): Observable<Blob> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
