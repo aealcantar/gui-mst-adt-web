@@ -277,8 +277,8 @@ input {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 10px;
+  line-height: 45px;
   display: flex;
   align-items: flex-end;
   color: #272829;
@@ -317,9 +317,9 @@ input {
   margin: 0.6px 1px 3px 18.2px;
   padding: 0 20.2px 0 18.2px;
   height: 28.9px;
-  border-radius: 2px 2px 2px 2px;
-  margin-right: 0.1px;
-  margin-top: 8.3%;
+  border-radius: 3px 3px 3px 3px;
+  margin-right: 0.7px;
+  margin-top: 8.7%;
 }
 
 .imgCalendar {
@@ -407,4 +407,8 @@ background-position-y: 5px;
   width:495px; height: 118px; text-align: center; margin: auto;
   padding: 15px; background-color: #FAFAFA; border-radius: 10px;
 
+}
+
+.contenedorTitulo{
+  margin-left: 1px;
 }

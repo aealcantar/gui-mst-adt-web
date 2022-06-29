@@ -2,30 +2,31 @@
 
 <div class="container">
 
-  <!-- <div class="container-fluid"> -->
-
-    <!-- <section class="section"> -->
       <div class="base-cont table-responsive">
+
         <div class="tit-princ">
-           
-                <span class="imgAtras" (click)="btnAtras()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
-                <span>Configuración de ubicaciones</span>
-           
+          <div class=" text-left pull-left">
+            <span (click)="btnAtras()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
+            <span>Configuración de ubicaciones</span>
+          </div>
+      
         </div>
+
+       
         <div class="body-princ ">
           
           <div class="texto-ind">
             Buscar por descripción
           </div>
           <form class="form-inline" role="form" autocomplete="off">
-            <div class="form-group">
+            <div class="form-group"  style="width: 50%;">
               <!-- <label class="" for="txtconsulta">Buscar por matrícula o nombre completo</label> -->
-              <input class="form-control matricula" id="txtconsulta" placeholder="Ingresa descripción" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
+              <input class="form-control matricula" id="txtconsulta" placeholder="Ingresa descripción" minlength="5" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
             </div>
   
   
-            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="limpiarbusqueda()">Limpiar</button>
-            <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)= "buscarUbicacion()">Buscar</button>
+            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="btnLimpiarbusqueda()">Limpiar</button>
+            <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)= "btnBuscarUbicacion()">Buscar</button>
   
           </form>
 
@@ -33,32 +34,35 @@
           <table id="tblusuarios" datatable [dtOptions]="dtOptions" class="table table-hover table-bordered table-catalogo caption-top" *ngIf="lstUbicaciones.length > 0">
             <caption class="borde-cap ps-2">
               <div class="col-2 col-md-2 float-start pull-left" style="line-height: 40px;">
-                Resultados <span class="totcargas">{{lstUbicaciones.length}}</span>
+                Resultados <span class="totcargas">{{totRegistros}}</span>
               </div>
-              <div class="col-2 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right;">
+              <div class="col-4 col-md-4 float-end pull-right" style="line-height: 40px;text-align: right;">
                 Visualizar datos
                 <button type="button" class="btn btn-default btn-select dropdown-toggle pull-right" style="margin-left: 20px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="caret-img">{{numitems}}</span> <img src="../../../../assets/images/Icon.png">
                 </button>
                 <ul class="dropdown-menu" >
-                  <li *ngFor="let i of [15,20,50,100]"><a >{{i}}</a></li>
+                  <li *ngFor="let i of [15,20,50,100]"><a (click)="cambiatotalpaginas(i)">{{i}}</a></li>
                 </ul>
               </div>
+              
   
   
             </caption>
             <thead>
+              
               <tr>
-                <th>Descripción abreviada</th>
-                <th>Tipo</th>
-                <th>Servicio/Especialidad</th>
+                <th style="width: 40%">Descripción abreviada</th>
+                <th style="width: 30%">Tipo</th>
+                <th style="width: 30%">Servicio/Especialidad</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of lstUbicaciones">
                 <td
                   class="link-texto"
-                 >
+                  (click)="muestraHorarios(item.cveUbicacion)">
+                 
                   {{ item.descripcionAbreviada }}</td>
                 <td>{{item.tipo }}</td>
                 <td>{{ item.servicio }}</td>
@@ -68,6 +72,7 @@
   
         
           <div class="nopag pull-right" *ngIf="lstUbicaciones.length > 0">
+            
             Página
             <span class="bg-nopag" [innerText]="pagactual"></span>
           </div>
@@ -75,9 +80,11 @@
             <img src="../../../../assets/images/Group 2358.png"
               class="Group-2358">
           </div>
-          <div class="table-pie sin-borde" *ngIf="lstUbicaciones.length == 0">
+         
+          <div class="table-pie sin-borde" >
             <div class="cargalayout">
-              <span (click)="cargaUbicaciones()">Carga de ubicaciones: <img src="../../../../assets/images/icon-upload.png"> </span>
+              
+              <span (click)="btnCargaMasiva()">Carga de ubicaciones: <img src="../../../../assets/images/icon-upload.png"> </span>
             </div>
           </div>
 
@@ -86,7 +93,5 @@
 
 
       </div>
-    <!-- </section>
-  </div> -->
 
 </div>

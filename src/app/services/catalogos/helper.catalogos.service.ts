@@ -18,6 +18,7 @@ export class HelperCatalogosService {
   private lstConfiguracionCat: Array<ConfiguracionCarga> = [
     {
       idCatalogos: 1,
+      sheetName: '',
       nombreCatalogo: 'Unidades médicas',
       rutaPlantilla: '../../../../assets/files/7.Unidades.xlsx',
       idCatPadre: undefined,
@@ -83,6 +84,7 @@ export class HelperCatalogosService {
     {
       idCatalogos: 3,
       nombreCatalogo: 'Ubicaciones',
+      sheetName: 'B_4_UBICACIONES',
       rutaPlantilla: '../../../../assets/files/9.Ubicaciones.xlsx',
       idCatPadre: [1, 2],
       col1: 'CLAVE DE UBICACIÓN',
@@ -144,17 +146,18 @@ export class HelperCatalogosService {
       idCatalogos: 7,
       nombreCatalogo: 'Usuarios',
       rutaPlantilla: '../../../../assets/files/13.Personal.xlsx',
-      idCatPadre: undefined,
-      col1: 'PRIMER APELLIDO',
-      col2: 'SEGUNDO APELLIDO',
-      col3: 'NOMBRE',
+      idCatPadre: [1,8,9],
+      col1: 'NOMBRE',
+      col2: 'PRIMER_APELLIDO',
+      col3: 'SEGUNDO_APELLIDO',
       col4: 'MATRÍCULA',
       col5: 'ROL EN EL SISTEMA',
       col6: 'PUESTO',
-      col7: 'NOMBRE COMPLETO',
-      col8: 'Usuario',
-      col9: 'Contraseña',
-      col10: 'TURNO'
+      col7: 'CONTRASEÑA',
+      col8: 'TURNO',
+      col9: 'EMAIL',
+      col10: 'UNIDAD_MEDICA',
+      col11: 'ESCUELA_PROCEDENCIA'
     },
 
     {

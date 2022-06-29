@@ -74,19 +74,35 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Tipo de nota*:</span>
-              <select class="form-control select"
+
+              <!-- <select class="form-control select"
                 [ngClass]="{'form-control-error': formNuevaNota.controls?.idTipoNota?.dirty && formNuevaNota.controls?.idTipoNota?.errors }"
                 formControlName="idTipoNota" id="idTipoNota" aria-label="Servicio">
                 <option class="select-font" [value]="''" selected>Ingresar tipo de nota</option>
                 <option class="select-font" [value]="item.id" *ngFor="let item of catTiposNotas">
                   {{ item.descripcion }}
                 </option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevaNota.controls?.idTipoNota?.dirty && formNuevaNota.controls?.idTipoNota?.errors }"
+                id="idTipoNota"
+                formControlName="idTipoNota"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Ingresar tipo de nota</mat-option>
+                <mat-option class="select-font" [value]="item.id" *ngFor="let item of catTiposNotas">
+                  {{ item.descripcion }}
+                </mat-option>
+              </mat-select>
+
               <small *ngIf="
                   formNuevaNota.controls?.idTipoNota?.dirty &&
                   formNuevaNota.controls?.idTipoNota?.errors
                 " class="form-text form-text-error Campo-obligatorio">
-                Campo obligatorios
+                Campo obligatorio
               </small>
             </div>
           </div>
@@ -94,7 +110,8 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Red de apoyo con la que cuenta el paciente*:</span>
-              <select [ngClass]="{
+
+              <!-- <select [ngClass]="{
                   'form-control-error':
                     formNuevaNota.controls?.idRedApoyo?.dirty &&
                     formNuevaNota.controls?.idRedApoyo?.errors
@@ -104,12 +121,27 @@
                 <option class="select-font" [value]="item.id" *ngFor="let item of catRedesApoyo">
                   {{ item.descripcion }}
                 </option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error':formNuevaNota.controls?.idRedApoyo?.dirty &&formNuevaNota.controls?.idRedApoyo?.errors}"
+                id="idRedApoyo"
+                formControlName="idRedApoyo"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Seleccionar red de apoyo</mat-option>
+                <mat-option class="select-font" [value]="item.id" *ngFor="let item of catRedesApoyo">
+                  {{ item.descripcion }}
+                </mat-option>
+              </mat-select>
+
               <small *ngIf="
                   formNuevaNota.controls?.idRedApoyo?.dirty &&
                   formNuevaNota.controls?.idRedApoyo?.errors
                 " class="form-text form-text-error Campo-obligatorio">
-                Campo obligatorios
+                Campo obligatorio
               </small>
             </div>
           </div>
@@ -134,7 +166,7 @@
                   formNuevaNota.controls?.idActividadTecnica?.dirty &&
                   formNuevaNota.controls?.idActividadTecnica?.errors
                 " class="form-text form-text-error Campo-obligatorio">
-                Campo obligatorios
+                Campo obligatorio
               </small>
             </div>
           </div>

@@ -42,6 +42,7 @@ export class ConfiguracionCarga {
     nombreCatalogo: string;
     rutaPlantilla: string;
     idCatPadre?: number[];
+    sheetName?: string;
     col1: string;
     col2?: string;
     col3?: string;

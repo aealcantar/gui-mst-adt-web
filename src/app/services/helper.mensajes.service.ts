@@ -11,8 +11,10 @@ export class HelperMensajesService {
   /*Tipos de mensajes: Alertas*/
   public ALERT_DANGER: string = 'alert-danger';
   public ALERT_SUCCESS: string = 'alert-success';
+  public ALERT_INFO: string = 'alert-info';
   public EXITO: string = 'Éxito';
   public ERROR: string = 'Error';
+  public INFO: string = 'Información';
   public ERROR400: string = 'Error 400';
   public ERROR403: string = 'Error 403';
   public ERROR404: string = 'Error 404';
@@ -44,6 +46,8 @@ export class HelperMensajesService {
   public MSJ_ERROR_CONEXION_ACUSE: string = 'No fue posible conectar con el servicio de Acuses';
   public MSJ_ERROR_CONEXION_HORARIO: string = 'No fue posible conectar con el servicio de Horarios';
 
+  public MSJ_ERROR_CONEXION_UBICACION: string = 'No fue posible conectar con el servicio de Ubicaciones';
+
 
 
   //MEnsajes de error servidor
@@ -65,4 +69,6 @@ export class HelperMensajesService {
   public MSJ_ERROR_EDITAR_HORARIO: string = 'Es necesario que el día este habilitado para poder editar los horarios';
   public MSJ_ERROR_EDITAR_EXITOSO_HORARIO: string = 'El horario se editó exitosamente';
   public MSJ_ERROR_DATOS_REQUERIDOS_HORARIO: string = 'Seleccione los campos requeridos';
+
+  public MSJ_MSG023: string = 'No existe ningún horario configurado para la ubicación';
 }

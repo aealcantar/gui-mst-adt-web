@@ -20,6 +20,9 @@ import { TurnoResponse } from '../models/turno-response-model';
 import { HorarioTurno } from '../models/horario.turno.model';
 import { HorarioStatus } from '../models/horario.status.model';
 import { AuthService } from '../service/auth-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { UbicacionesService } from '../services/ubicaciones/ubicaciones.service';
 
 declare var $: any;
 interface LooseObject {
@@ -32,7 +35,7 @@ interface LooseObject {
   styleUrls: ['./horarios.component.css']
 })
 export class HorariosComponent implements OnInit {
-
+  cveUbicacion!: any;
   public diaSeleccionado: HorarioDias;
   public diaNb: number;
   public request: HorarioRequest;
@@ -58,7 +61,10 @@ export class HorariosComponent implements OnInit {
     private _Mensajes: HelperMensajesService,
     private horarioService: HorarioService,
     private _agendaService: AgendaService,
+    private ubicacionService:UbicacionesService,
     private authService: AuthService,
+    private activerouter: ActivatedRoute,
+    private router: Router,
     private http: HttpClient, private modalService: NgbModal) {
 
     this.diaNb = (new Date()).getDay();
@@ -72,6 +78,10 @@ export class HorariosComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
+    this.cveUbicacion = this.activerouter.snapshot.paramMap.get('cveUbicacion');
+    console.log(" id "+this.cveUbicacion);
+
     this.horarioNuevo = new Horario();
     this.horarioSeleccionado = new Horario();
     this.turnoSeleccionado = new HorarioTurno();
@@ -84,8 +94,8 @@ export class HorariosComponent implements OnInit {
     this.diaSeleccionado = new HorarioDias();
     this.mensaje = new objAlert;
     //this.diaSeleccionado=null;
-
-    this.obtenerHorarioporDia(this.dia)
+    this.obtenerHorarioporUbicacionDia(this.cveUbicacion,this.dia);
+    //this.obtenerHorarioporDia(this.dia)
   }
 
 
@@ -146,15 +156,72 @@ export class HorariosComponent implements OnInit {
   private obtieneDia(dia: number) {
     this.dia = this.semana[dia];
   }
-
+  regresaconsulta(){
+    this.router.navigate(['/catalogos/ConfiguracionUbicaciones/']);
+  }
   async receiveMessage(evento: number) {
     console.log("recibimos el dia a consultar " + evento);
     this.diaNb = evento;
     this.obtieneDia(evento)
-    this.obtenerHorarioporDia(this.dia);
+    this.obtenerHorarioporUbicacionDia(this.cveUbicacion,this.dia);
+    //this.obtenerHorarioporDia(this.dia);
   }
 
+  private obtenerHorarioporUbicacionDia(cveUbicacion:number,dia: string) {
+    this.msjLoading("Cargando...");
+    this.diaSeleccionado.horarios = [];
+    this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
+      this.diaSeleccionado.horarios = resp.data;
+      console.log(this.diaSeleccionado.horarios);
+      switch (resp.code) {
+        case 200:
+          if (resp.data.length > 0) {
+            this.diaSeleccionado.horarios.forEach(data => {
+
+              data.horaInicial = data.horaInicial.trim();
+              data.horaFinal = data.horaFinal.trim();
+            });
+
+            console.log("horarios: ", this.diaSeleccionado.horarios);
+          }else{
+            this.mostrarMensaje(this._Mensajes.ALERT_DANGER,this._Mensajes.MSJ_MSG023,this._Mensajes.INFO);
+          }
+          Swal.close();
+          break;
+        case 204:
+          this.diaSeleccionado = null;
+          this.mostrarMensaje(this._Mensajes.ALERT_DANGER,this._Mensajes.MSJ_MSG023,this._Mensajes.INFO);
+          Swal.close();
+          break;
+        default:
+          let error: HttpErrorResponse = {
+            status: resp.code,
+            message: resp.message,
+            name: 'HttpErrorResponse',
+            error: undefined,
+            ok: false,
+            headers: new HttpHeaders,
+            statusText: '',
+            url: '',
+            type: HttpEventType.ResponseHeader
+          };
+
+
+          this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
+          Swal.close();
+          break;
+      }
+
+      this.validarDia();
+    }, (error: HttpErrorResponse) => {
+      this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
+      Swal.close();
+    });
+  }
+
+
   private obtenerHorarioporDia(dia: string) {
+    this.diaSeleccionado.horarios = [];
     this.msjLoading("Cargando...");
     this.horarioService.getHorariosByDia(dia).subscribe((resp: HorarioResponse) => {
       this.diaSeleccionado.horarios = resp.data;

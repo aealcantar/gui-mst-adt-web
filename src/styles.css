@@ -706,6 +706,24 @@ table.dataTable.no-footer {
   opacity: 0;
 }
 
+.mat-select-table {
+  font-family: Montserrat;
+  width: 80px !important;
+  height: 30px;
+  border: solid 1px #eee;
+  float: right;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-bottom: 15px;
+  padding: 5px 0px 5px 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(133, 133, 133);
+  border-image: initial;
+}
+
 .form-control-mat-select {
   font-family: Montserrat;
   padding-right: 2px !important;
