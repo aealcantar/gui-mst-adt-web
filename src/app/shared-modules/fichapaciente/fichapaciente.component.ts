@@ -15,12 +15,12 @@ export class FichapacienteComponent implements OnInit {
   isCollapsed: boolean = true
   executed: boolean = false
   months: any
-  @Input() mostrarBtnAtras:boolean=false;
-  @Input() url:string="";
+  @Input() mostrarBtnAtras: boolean = false;
+  @Input() url: string = "";
   constructor(
     private tarjetaServce: AppTarjetaPresentacionService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.paciente = this.tarjetaServce.get()
@@ -48,31 +48,74 @@ export class FichapacienteComponent implements OnInit {
   convertDate() {
     if (!this.executed) {
       this.executed = true
-      let stringDate =
-        this.paciente.fechaNacimiento.substring(3, 5) +
-        '-' +
-        this.paciente.fechaNacimiento.substring(0, 2) +
-        '-' +
-        this.paciente.fechaNacimiento.substring(6, 10)
-      let birthDate = new Date(stringDate)
-      console.log('FECHA: ', birthDate)
-      let today = new Date()
-      let age = today.getFullYear() - birthDate.getFullYear()
-      this.months = today.getMonth() - birthDate.getMonth()
-      if (
-        this.months < 0 ||
-        (this.months === 0 && today.getDate() < birthDate.getDate())
-      ) {
-        age--
+      // let stringDate =
+      //   this.paciente.fechaNacimiento.substring(3, 5) +
+      //   '-' +
+      //   this.paciente.fechaNacimiento.substring(0, 2) +
+      //   '-' +
+      //   this.paciente.fechaNacimiento.substring(6, 10);
+      //   console.log(stringDate)
+      // let birthDate = new Date(stringDate)
+      // console.log('FECHA: ', birthDate)
+      // let today = new Date()
+      // let age = today.getFullYear() - birthDate.getFullYear()
+      // this.months = today.getMonth() - birthDate.getMonth()
+      // if (
+      //   this.months < 0 ||
+      //   (this.months === 0 && today.getDate() < birthDate.getDate())
+      // ) {
+      //   age--
+      // }
+      // console.log('EDAD: ', age)
+      // if (this.months > 0) {
+      //   console.log('MESES: ', this.months)
+      //   this.months = this.months
+      // } else {
+      //   this.months = this.months + 12
+      //   console.log('MESES: ', this.months)
+      // }
+
+      //calcula la edad con meses si es necesario 
+      try { 
+        if(this.paciente!=undefined && this.paciente!=null){
+          let fecha = this.paciente.fechaNacimiento.split("/");
+          let fechaNacimientoStr = fecha[2] + "-" + fecha[1] + "-" + fecha[0];
+          let fechaNacimiento = new Date(fechaNacimientoStr);
+    
+          let diaN = fechaNacimiento.getDate();
+          let mesN = fechaNacimiento.getMonth() + 1;
+          let anioN = fechaNacimiento.getFullYear();
+    
+          let fechaActual = new Date();
+          let diaA = fechaActual.getDate();
+          let mesA = fechaActual.getMonth() + 1;
+          let anioA = fechaActual.getFullYear();
+    
+          let mesAdicional = 0;
+    
+          if (diaN > diaA) {
+            mesAdicional = 1;
+          }
+    
+          let anioAdicional = 0;
+          if (mesN > mesA) {
+            mesA = Number(mesA) + 12;
+            anioAdicional = 1;
+          }
+    
+          let meses = Number(mesA) - (Number(mesN) + Number(mesAdicional));
+          this.months = meses;
+        }
+       
+      } catch (error) {
+        console.log(error)
       }
-      console.log('EDAD: ', age)
-      if (this.months > 0) {
-        console.log('MESES: ', this.months)
-        this.months = this.months
-      } else {
-        this.months = this.months + 12
-        console.log('MESES: ', this.months)
-      }
+ 
+      //calcula los años
+    //  let aniosEdad=Number(anioA)-(Number(anioN)+Number(anioAdicional))
+ 
+
+
     }
     return this.months + ' meses'
   }
@@ -99,13 +142,13 @@ export class FichapacienteComponent implements OnInit {
     })
   }
 
-  irMinisterioPublico(){
+  irMinisterioPublico() {
     this.router.navigateByUrl('/consulta-aviso-mp', {
       skipLocationChange: true,
     })
   }
 
-  irSertificadoDefuncion(){
+  irSertificadoDefuncion() {
     this.router.navigateByUrl('/consulta-volante', {
       skipLocationChange: true,
     })
@@ -116,6 +159,9 @@ export class FichapacienteComponent implements OnInit {
   }
 
   regresar() {
-    this.router.navigateByUrl("/"+this.url, { skipLocationChange: true });
+    this.router.navigateByUrl("/" + this.url, { skipLocationChange: true });
   }
+
+ 
+
 }

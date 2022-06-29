@@ -7,12 +7,12 @@ import {
 import { Validators } from '@angular/forms';
 import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ControlArticulosService } from '../../services/control-articulos.service';
-import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
+import { ControlArticulosService } from '../../services/control-articulos.service'; 
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
 
 declare var $: any;
 @Component({
@@ -22,7 +22,7 @@ declare var $: any;
 })
 export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   //variables
-  alert!: objAlert;
+  alert!: AlertInfo;
   submitted: boolean = false;
   mostrarArticulos: boolean = false;
   articulo: string = '';
@@ -423,23 +423,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
   }
 
-  //muestra un alert en caso correcto o incorrecto
-  muestraAlerta(mensaje: string, estilo: string, type: string) {
-
-    this.alert = {
-      message: mensaje,
-      type: estilo,
-      typeMsg: type,
-      visible: true
-    }
-    setTimeout(() => {
-      this.alert = {
-        message: '',
-        type: 'custom',
-        visible: false
-      }
-    }, 2000);
-  }
+ 
 
 
   //despliega la ventana emergente con la opcion de cancelar
@@ -509,6 +493,28 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       //  idServicio = '1';
       this.ubicacion(idServicio);
     }
+  }
+
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
 

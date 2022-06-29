@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
+import { ActivatedRoute } from '@angular/router'; 
 import { ControlArticulosService } from '../../services/control-articulos.service';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
 @Component({
   selector: 'app-detalle-control-articulos',
   templateUrl: './detalle-control-articulos.component.html',
@@ -10,7 +10,7 @@ import { ControlArticulosService } from '../../services/control-articulos.servic
 })
 export class DetalleControlArticulosComponent implements OnInit {
   detalle: any = {};
-  alert!: objAlert;
+  alert!: AlertInfo;
   idControlArticulos: string = '';
 
   articulosArray: Array<any> = [];
@@ -36,12 +36,7 @@ export class DetalleControlArticulosComponent implements OnInit {
       this.buscarDetalleArticulos(this.idControlArticulos);
     }
 
-   
-
-
-
-
-  }
+ }
 
   buscarDetalleArticulos(idControlArticulo: string) {
     let datos = {
@@ -204,21 +199,25 @@ export class DetalleControlArticulosComponent implements OnInit {
     );
   }
 
-  muestraAlerta(mensaje: string, estilo: string, type: string) {
-
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
     this.alert = {
+
       message: mensaje,
       type: estilo,
-      typeMsg: type,
-      visible: true
-    }
+      visible: true,
+      typeMsg: tipoMsj
+    };
     setTimeout(() => {
       this.alert = {
         message: '',
         type: 'custom',
-        visible: false
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
       }
-    }, 2000);
+    }, 5000);
   }
 }
 
