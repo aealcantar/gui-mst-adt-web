@@ -1,10 +1,4 @@
-<div *ngIf="alertVisible">
-  <div class="alert alert-dismissible alertCompl" [ngClass]="alertTipo">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-        aria-hidden="true">&times;</span></button>
-    <div [innerHTML]="alertMensaje"></div>
-  </div>
-</div>
+<app-alerta-general [alert]="alert"></app-alerta-general>
 
 <app-menu></app-menu>
 <app-card-template>
@@ -37,7 +31,7 @@
           <span class="Cronologa">
             Búsqueda de NSS
           </span>
-          <img src="../../../assets/hu002-busqueda/agenda3.png" class="buscaico">
+          <img src="./assets/hu002-busqueda/agenda3.png" class="buscaico">
         </div>
       </div>
 
@@ -52,28 +46,31 @@
       <ng-template #thenBlock>
 
         <span class="resultados">
-          Resultados
+          Resultadosaa
         </span>
         <span class="resultados2" style="font-weight: bold;">
           {{resultadoTotal}}
         </span>
 
-        <select class="form-select" [(ngModel)]="pageSize">
-          <option [ngValue]="15">15</option>
-          <option [ngValue]="20">20</option>
-          <option [ngValue]="25">25</option>
-        </select>
+        <div style="position: relative; float: right; display: flex;">
+          <span class="visDatos" style="width: auto; float: right;">
+            Visualizar datos
+          </span>
 
-        <span class="visDatos" style="width: auto; float: right;">
-          Visualizar datos
-        </span>
+          <mat-select [(ngModel)]="pageSize" class="form-select mat-select-table" [disableOptionCentering]="true"
+            aria-label="Servicio">
+            <mat-option class="select-font" [value]="15">15</mat-option>
+            <mat-option class="select-font" [value]="20">20</mat-option>
+            <mat-option class="select-font" [value]="25">25</mat-option>
+          </mat-select>
+        </div>
 
         <table class="table " style="margin-bottom: 0px !important;">
           <thead style=" background: #f9f9f9;">
             <tr>
-              <th style="width: 160px; padding-left: 33px !important;">
+              <th style="width: 183px; padding-left: 48px !important;">
                 NSS
-                <i class="fa-solid fa-caret-up arrow arrow-up"
+                <i class="fa-solid fa-caret-up arrow flechaArriba"
                   [ngClass]="{'active-opacity': columnaId === 'nss' && order === 'asc'}"
                   (click)="sortBy('nss', 'asc', 'number')">
                 </i>
@@ -93,7 +90,8 @@
               <td class="link-texto" style="text-align: center !important; padding: 0px; color:#4D92DF;">
                 <span (click)="elementoSeleccionado(beneficiario)">{{beneficiario.nss}}</span>
               </td>
-              <td style="padding: 0px!important; padding-left: 13px !important;">{{beneficiario.paciente.toUpperCase()}}</td>
+              <td style="padding: 0px!important; padding-left: 13px !important;">{{beneficiario.paciente.toUpperCase()}}
+              </td>
               <td style="text-align: center !important; padding: 0px!important;">{{beneficiario.agregadoMedico}}
               </td>
               <td style="text-align: center !important; padding: 0px!important;">UMF {{beneficiario.unidadMedica}}
@@ -112,13 +110,13 @@
                 <div>
                   <table class=" subtable">
                     <thead class="bg-primary subtable" style="background-color: #5f8cdc !important;">
-                      <tr class="subtableTr colorSubtabla">
-                        <th style="width: 160px; text-align: left !important;">CURP</th>
-                        <th style="width: 160px; text-align: left !important;">Fecha de nacimiento</th>
-                        <th style="width: 160px; text-align: left !important;">Turno</th>
-                        <th style="width: 160px; text-align: left !important;">Consultorio</th>
-                        <th style="width: 160px; text-align: left !important;">Edad</th>
-                        <th style="width: 160px; text-align: left !important;">Sexo</th>
+                      <tr class="subtableTr colorSubtabla" style="width: 100%; max-width: 100%;">
+                        <th style="width: 25.5%;">CURP</th>
+                        <th style="width: 25%;">Fecha de nacimiento</th>
+                        <th style="width: 14%;">Turno</th>
+                        <th style="width: 14%;">Consultorio</th>
+                        <th style="width: 13%;">Edad</th>
+                        <th style="width: 8.5%;">Sexo</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -130,7 +128,7 @@
                           {{beneficiario.fechaNacimiento}}
                         </td>
                         <td class="link-texto" style="text-align: left !important; padding: 0px;">
-                          {{beneficiario.turno}}
+                          {{beneficiario.turno === "M" ? "Matutino" : "Vespertino" }}
                         </td>
                         <td style="padding: 0px!important; padding-left: 13px !important;">
                           {{beneficiario.consultorio}}
@@ -139,7 +137,7 @@
                           {{beneficiario.edad}}
                         </td>
                         <td style="padding: 0px!important; padding-left: 13px !important;">
-                          {{beneficiario.sexo}}
+                          {{beneficiario.sexo === "M" ? "Masculino" : "Femenino"}}
                         </td>
                       </tr>
                     </tbody>
@@ -169,7 +167,7 @@
         <ng-template #siEsError style="overflow:hidden;">
           <div class="errorimgdiv">
 
-            <img class="errorimg" src="../../../assets/hu002-busqueda/no encontrado.png">
+            <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
 
           </div>
         </ng-template>
@@ -180,15 +178,17 @@
             Resultados <b>{{resultadoTotal}}</b>
           </span>
 
-          <select class="form-select">
-            <option [ngValue]="15">15</option>
-            <option [ngValue]="20">20</option>
-            <option [ngValue]="25">25</option>
-          </select>
+          <div style="position: relative; float: right; display: flex;">
+            <span class="visDatos" style="width: auto; float: right;">
+              Visualizar datos
+            </span>
 
-          <span class="visDatos" style="width: auto; float: right;">
-            Visualizar datos
-          </span>
+            <mat-select class="form-select mat-select-table" [disableOptionCentering]="true" aria-label="Servicio">
+              <mat-option class="select-font" [value]="15">15</mat-option>
+              <mat-option class="select-font" [value]="20">20</mat-option>
+              <mat-option class="select-font" [value]="25">25</mat-option>
+            </mat-select>
+          </div>
 
           <table class="table ">
             <thead style=" background: #f9f9f9;">
@@ -211,13 +211,9 @@
           <div class="pading1">
             <hr>
             <div class="col-md-4  "></div>
-
             <div class="col-md-4">
-
               <ul class="pagination m-0">
-
                 <li><a>1</a></li>
-
               </ul>
             </div>
             <div class="col-md-4">
@@ -226,11 +222,8 @@
                   <label class="control-label ">Página</label>
                   <div class="form-control w-3 ml-2">
                   </div>
-
                 </div>
-
               </div>
-
             </div>
           </div>
         </ng-template>
