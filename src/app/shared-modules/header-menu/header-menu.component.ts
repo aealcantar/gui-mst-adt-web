@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth-service.service';
   templateUrl: './header-menu.component.html',
   styleUrls: ['./header-menu.component.css']
 })
-export class HeaderMenuComponent implements OnInit {
+export class HeaderMenuComponent implements OnInit ,AfterViewInit {
   tituloAplicativo: string = '';
   title = 'Ecosistema Digital';
   email: string | undefined;
@@ -25,7 +25,8 @@ export class HeaderMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
+ /*    this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
+ 
     this.authenticationService.isAuthenticatedObs$.subscribe(
       (isAuthiticated: boolean) => {
         this.nombre = isAuthiticated ? this.authenticationService.usuario.strNombres + " " + this.authenticationService.usuario.strApellidoP : "";
@@ -37,8 +38,27 @@ export class HeaderMenuComponent implements OnInit {
       (proyectoActual) => {
         this.proyecto = proyectoActual;
       }
+    ); */
+  }
+
+
+  ngAfterViewInit() {
+ 
+    this.authenticationService.isAuthenticatedObs$.subscribe(
+      (isAuthiticated: boolean) => {
+        this.nombre = isAuthiticated ? this.authenticationService.usuario.strNombres + " " + this.authenticationService.usuario.strApellidoP : "";
+        this.email = isAuthiticated ? this.authenticationService.usuario.strEmail : "";
+        this.matricula = isAuthiticated ? this.authenticationService.usuario.strUserName : "";
+      }
+    )
+    this.authenticationService.getProjectObs().subscribe(
+      (proyectoActual) => { 
+        this.proyecto = proyectoActual;
+      }
     );
   }
+
+
 
   logOut() {
     this.authenticationService.logout();
