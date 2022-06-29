@@ -64,7 +64,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
      "fechaFinal": this.datesForm.get('fechaFinal')?.value,
      "clavePaciente":123456789
    };
- 
+
    this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
        (articulos: any) => {
          console.log("CONTROL DE ARTICULOS: ", articulos);
@@ -148,7 +148,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
   irNuevoRegistro() {
     let params = {}
-    this.router.navigateByUrl("/nuevo-control-articulos", { skipLocationChange: true });
+    this.router.navigateByUrl("/agregar-control-articulos", { skipLocationChange: true });
   }
 
   sortBy(columnaId: string, order: string, type: string) {
