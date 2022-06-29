@@ -31,7 +31,7 @@
   width: 492px;
   margin-right: 0px;
   display: flex;
-  margin-left: 285.2px;
+  margin-left: 251.2px;
 }
 
 #paralelograma {
@@ -155,9 +155,10 @@
 .Rectangle-1205 {
   width: 0px;
   height: 27px;
-  margin: 37px 10px 0 11px;
+  margin: 37px 0px 0 11px;
   border: 1px solid #000000;
   background-color: #000000;
+  margin-left: 55px;
 }
 
 .Rectangle-12052 {
