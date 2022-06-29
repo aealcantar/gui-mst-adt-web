@@ -5,8 +5,9 @@
   position: fixed !important;
   z-index: 200;
   margin-top: -50px;
-  margin-left: 15%;
   padding-top: 10px;
+
+
 }
 
 .mensaje {
