@@ -17,6 +17,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
 import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
 import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 //import { rootCertificates } from 'tls';
 declare var $:any;
@@ -99,7 +100,8 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     responsable: ''
   });
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private authService: AuthService,
+    private formBuilder: FormBuilder,
     private http: HttpClient, private router: Router,
     private citaservice: CitasService,
     private tarjetaService: AppTarjetaPresentacionService,
@@ -108,6 +110,7 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     ) { }
 
   ngOnInit(): void {
+    this.authService.setProjectObs("Agenda Digital Transversal");
     const el = window.document.querySelector('.cdk-overlay-container') as HTMLElement | null;
     //if (el) {
       //el.remove();

@@ -11,6 +11,7 @@ import { CitasService } from '../citas.service';
 import { DatePipe, formatDate } from '@angular/common';
 import { CitaResponse, ParticipanteCita } from 'src/app/models/cita-model';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 
 declare var $: any;
@@ -56,13 +57,15 @@ export class CitaconsultaComponent implements OnInit {
 
   public keepOriginalOrder = (a: { key: any; }, b: any) => a.key;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private authService: AuthService,
+    private formBuilder: FormBuilder,
     private http: HttpClient, private router: Router,
     private activerouter: ActivatedRoute,
     private citaservice: CitasService,
     public datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.authService.setProjectObs("Agenda Digital Transversal");
     // this.datoscita = {
     //   'Fecha y hora de inicio de cita': '29/03/2022 - 10:00:00',
     //   'Fecha y hora de finalización de cita': '10:30:00',
