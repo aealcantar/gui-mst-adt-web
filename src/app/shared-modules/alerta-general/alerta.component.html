@@ -9,17 +9,27 @@
     <div [innerHTML]="objAlerta.message"></div>
   </ngb-alert>
 </div>-->
-<div *ngIf="objAlerta" style="position: absolute; width: 100%;z-index: 9999;">
+<!-- <div *ngIf="objAlerta" style="position: absolute; width: 100%;z-index: 9999;">
     <div *ngIf="objAlerta.visible || undefined" class="alert alert-dismissible alert-base" [ngClass]="objAlerta.type">
       <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close">
-        <img [src]="getimage(objAlerta.type)">
+        <img [src]="getimage(objAlerta.type)"> -->
         <!-- <span aria-hidden="true" class="img-alert">
         </span> -->
-      </button>
-  
+      <!-- </button>
+
       <div  style="width: 100%;" class="mensaje">
         <strong *ngIf="objAlerta?.typeMsg">{{objAlerta?.typeMsg}}.</strong> {{objAlerta.message}}
       </div>
     </div>
+  </div> -->
+
+  <div *ngIf="alert" style="position: absolute; width: 100%;z-index: 9999;">
+    <div *ngIf="alert.visible || undefined" class="alert alert-dismissible alert-base" [ngClass]="alert.type">
+      <button type="button" class="close x-ciera" data-dismiss="alert" aria-label="Close">
+        <img [src]="getimage(alert.type)">
+      </button>
+      <div  style="width: 100%;" class="mensaje">
+        <strong *ngIf="alert?.typeMsg">{{alert?.typeMsg}}.</strong> {{alert.message}}
+      </div>
+    </div>
   </div>
-  

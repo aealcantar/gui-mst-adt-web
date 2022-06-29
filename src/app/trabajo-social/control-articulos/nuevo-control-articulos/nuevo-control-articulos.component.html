@@ -1,4 +1,4 @@
-<app-alerta-general [objAlerta]="alert"></app-alerta-general>
+<!-- <app-alerta-general [objAlerta]="alert"></app-alerta-general> -->
 <app-fichapaciente></app-fichapaciente>
 <app-card-template>
   <div
@@ -30,7 +30,7 @@
               formControlName="noFolioControl"
               placeholder=""
               type="text"
-             
+
               readonly="true"
             />
             <small
@@ -311,7 +311,7 @@
                 class="form-control hasDatepicker"
                 id="horarioEntregaArticulo"
                 formControlName="horarioEntregaArticulo"
-                placeholder="Ingresa hora" 
+                placeholder="Ingresa hora"
                 maxlength="5"
               />
               <span class="glyphicon fontIcono" aria-hidden="true">
@@ -326,7 +326,7 @@
             >
               Campo obligatorio
             </small>
-          
+
           </div>
         </div>
       </div>
@@ -392,7 +392,7 @@
                 class="form-control hasDatepicker"
                 id="resguardoHora"
                 formControlName="resguardoHora"
-                placeholder="Ingresa hora" 
+                placeholder="Ingresa hora"
                 maxlength="5"
               />
               <span class="glyphicon fontIcono" aria-hidden="true">
@@ -469,10 +469,10 @@
                 class="calendario form-control"
                 formControlName="recepcionFecha"
                 id="recepcionFecha"
-                type="text" 
+                type="text"
                 placeholder="Ingresar fecha"
                 ng-pattern="/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/"
-             
+
                              />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img
