@@ -5,50 +5,65 @@
       Consulta de control de artículos
     </label>
         <div class="botones">
-            <button class="btn btn-primary btuser buttonL" style="border: solid 1px" (click)="irNuevoRegistro()">
-        Nuevo Registro
-      </button>
+            <button class="btn btn-primary btuser buttonL" style="border: solid 1px" (click)="irNuevoRegistro()">Nuevo Registro
+            </button>
         </div>
     </div>
     <div content style="padding-bottom: 3.7%;">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group datepicker-group">
-                    <label class="control-label tituloServicio" for="notasInit">Fecha desde:</label>
-                    <input notasInit class="form-control" id="notasInit" type="text" placeholder="dd/mm/aaaa">
-                    <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
-            <div class="imgCalendar"></div>
-          </span>
+        <form novalidate class="formInfo" [formGroup]="datesForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="articulosInit">Fecha desde:</label>
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaInicial').valid}" articulosInit class="form-control" id="articulosInit" formControlName="fechaInicial" type="text" placeholder="dd/mm/aaaa" (change)="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                        <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                        <div class="imgCalendar"></div>
+                    </span>
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                    Campo obligatorio
+                    </small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="articulosFinal">Fecha hasta:</label>
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaFinal').valid}" articulosFinal class="form-control" id="articulosFinal" formControlName="fechaFinal" type="text" placeholder="dd/mm/aaaa" (change)="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                        <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                        <div class="imgCalendar"></div>
+                    </span>
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                        Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="col-auto mt-5" style="padding-left: 1.20em !important">
+                        <button class="btn btn-default btuser boton" type="button" (click)="limpiar()">
+                            Limpiar
+                          </button>
+                        <button type=" submit " class="btn btn-primary btn-guardar " (click)="buscar() ">
+                            Búscar
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group datepicker-group">
-                    <label class="control-label tituloServicio" for="notasFinal">Fecha hasta:</label>
-                    <input notasFinal class="form-control" id="notasFinal" type="text" placeholder="dd/mm/aaaa">
-                    <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
-            <div class="imgCalendar"></div>
-          </span>
-                </div>
+        </form>
+        <div class="row ">
+            <div class="col-md-6 ">
+                <label class="control-label " style="font-weight: 700; color: #666666; ">Búsquedas anteriores</label>
             </div>
-            <div class="col-md-4">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label class="control-label" style="font-weight: 700; color: #666666;">Búsquedas anteriores</label>
-            </div>
-            <div class="col-md-6 flex justify-content-end">
-                <div class="form-group">
-                    <label class="control-label">Visualizar datos</label>
-                    <select class="form-select ml-5 select-view-data" [(ngModel)]="pageSize">
-            <option [ngValue]="15">15</option>
-            <option [ngValue]="20">20</option>
-            <option [ngValue]="25">25</option>
+            <div class="col-md-6 flex justify-content-end ">
+                <div class="form-group ">
+                    <label class="control-label ">Visualizar datos</label>
+                    <select class="form-select ml-5 select-view-data " [(ngModel)]="pageSize ">
+            <option [ngValue]="15 ">15</option>
+            <option [ngValue]="20 ">20</option>
+            <option [ngValue]="25 ">25</option>
           </select>
                 </div>
             </div>
         </div>
-        <ng-container *ngIf="tabla.length > 0 else mostrarSeccionSinResultados">
+        <ng-container *ngIf="tabla.length> 0 else mostrarSeccionSinResultados">
             <div class="row">
                 <div class="col-md-12">
                     <table class="tabla" style="width: 100%;">
