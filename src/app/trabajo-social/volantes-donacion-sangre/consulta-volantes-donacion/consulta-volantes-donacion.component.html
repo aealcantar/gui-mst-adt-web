@@ -11,28 +11,44 @@
         </div>
     </div>
     <div content style="padding-bottom: 3.7%;">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group datepicker-group">
-                    <label class="control-label tituloServicio" for="volantesInit">Fecha desde:</label>
-                    <input volantesInit class="form-control" id="volantesInit" type="text" placeholder="dd/mm/aaaa">
-                    <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
-            <div class="imgCalendar"></div>
-          </span>
+        <form novalidate class="formInfo" [formGroup]="datesForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="volantesInit">Fecha desde:</label>
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaInicial').valid}" volantesInit class="form-control" id="volantesInit" type="text" placeholder="dd/mm/aaaa" formControlName="fechaInicial" (change)="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                        <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                            <div class="imgCalendar"></div>
+                        </span>
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="volantesFinal">Fecha hasta:</label>
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaFinal').valid}" volantesFinal class="form-control" id="volantesFinal" type="text" placeholder="dd/mm/aaaa" formControlName="fechaFinal" (change)="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                        <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                             <div class="imgCalendar"></div>
+                         </span>
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="col-auto mt-5" style="padding-left: 1.20em !important">
+                        <button class="btn btn-danger btuser" type="button" (click)="limpiar()">
+                            Limpiar
+                          </button>
+                        <button type=" submit " class="btn btn-primary btn-guardar " (click)="buscar() ">
+                            Búscar
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group datepicker-group">
-                    <label class="control-label tituloServicio" for="volantesFinal">Fecha hasta:</label>
-                    <input volantesFinal class="form-control" id="volantesFinal" type="text" placeholder="dd/mm/aaaa">
-                    <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
-            <div class="imgCalendar"></div>
-          </span>
-                </div>
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-md-6">
                 <label class="control-label" style="font-weight: 700; color: #666666;">Búsquedas anteriores</label>

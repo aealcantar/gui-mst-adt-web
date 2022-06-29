@@ -2,11 +2,13 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { VolanteDonacion } from 'src/app/shared-modules/models/volante-donacion.model';
 import { VolantesDonacionService } from '../../services/volantes-donacion.service';
 import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacion.model';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { DatePipe } from '@angular/common';
 
 declare var $: any;
@@ -29,22 +31,39 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecEfec';
+  paciente!: pacienteSeleccionado;
+  nomPaciente: any;
+  rolPaciente: string;
+  nssPaciente: string;
+  formBuscarArticulos: FormGroup;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private volantesService: VolantesDonacionService,
     private fb: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
     if (this.extras && this.extras.state) {
       console.log(this.extras.state.id);
       //this.getNotasById(this.extras.state.id);
     }
+
+    this.datesForm = new FormGroup({
+      'fechaInicial': new FormControl('', [Validators.required]),
+      'fechaFinal': new FormControl('', [Validators.required]),
+    }, {updateOn: 'blur'});
   }
 
   ngOnInit(): void {
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    this.paciente = this.tarjetaService.get();
+    if (this.paciente !== null && this.paciente !== undefined) {
+      this.nssPaciente = this.paciente.nss.toString();
+      this.nomPaciente = this.paciente.paciente;
+    }
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
@@ -58,7 +77,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaInicial')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -74,7 +92,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -83,15 +100,32 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         }
       }
     });
-    this.handleDatesChange();
+  }
+
+  limpiar() {
+    this.datesForm.reset();
+    this.tabla = [];
+  }
+
+  buscar() {
+    if (this.datesForm.valid){
+      this.getVolantesByFecha();
+    }
+    else{
+      return;
+    }
   }
 
   getVolantesByFecha(): void {
     this.volantesService.getVolantesByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
       (volantes: any) => {
-        if (volantes && volantes.length > 0) {
-          this.tabla =  volantes;
-          console.log("VOLANTES DONACION: ", this.tabla);
+        try {
+          if (volantes && volantes.length > 0) {
+            this.tabla =  volantes;
+            console.log("VOLANTES DONACION: ", this.tabla);
+          }
+        }catch (error) {
+          console.error(error);
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -109,7 +143,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     this.sortBy(this.columnaId, this.order, 'fecha');
   }
 
-  
   irDetalle(volanteDonacion: VolanteDonacion) {
     console.log(volanteDonacion);
     let params = {
@@ -123,16 +156,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     //  'objetoAEnviar': null,
     //}
     this.router.navigate(["nuevo-volante"], {skipLocationChange: true });
-  }
-
-  handleDatesChange() {
-    if (
-      this.datesForm.get('fechaInicial')?.value &&
-      this.datesForm.get('fechaInicial')?.value !== '' &&
-      this.datesForm.get('fechaFinal')?.value &&
-      this.datesForm.get('fechaFinal')?.value !== '') {
-      this.getVolantesByFecha();
-    }
   }
 
   sortBy(columnaId: string, order: string, type: string) {
@@ -151,7 +174,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       }
     });
   }
-
 
   converType(val: any, type: string) {
     let data;
