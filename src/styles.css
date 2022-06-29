@@ -744,3 +744,21 @@ table.dataTable.no-footer {
   top: -2px;
   position: relative;
 }
+
+.visDatos {
+  width: 109px;
+  height: 17px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #222;
+  margin-right: 17px;
+  float: right;
+  margin-top: 10px;
+}
