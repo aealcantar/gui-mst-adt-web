@@ -49,8 +49,8 @@ export class ConsultaControlArticulosComponent implements OnInit {
     private tarjetaService: AppTarjetaPresentacionService,
   ) {  
     this.datesForm = new FormGroup({
-      'fechaInicial': new FormControl('', [Validators.required]),
-      'fechaFinal': new FormControl('', [Validators.required]),
+      'fechaInicial': new FormControl(null, [Validators.required]),
+      'fechaFinal': new FormControl(null, [Validators.required]),
     }, {updateOn: 'blur'});
 
   }
@@ -61,14 +61,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
     if (this.paciente !== null && this.paciente !== undefined) {
       this.nssPaciente = this.paciente.nss.toString();
       this.nomPaciente = this.paciente.paciente;
-   //  let usuario = JSON.parse(userTmp);
-   // this.rolPaciente = usuario?.rolUser;
     }
-    this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
-    });
-
   }
 
   limpiar() {
@@ -97,7 +90,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
      }],
      "fechaInicial": this.datesForm.get('fechaInicial')?.value,
      "fechaFinal": this.datesForm.get('fechaFinal')?.value,
-     "clavePaciente": this.nssPaciente
+     "clavePaciente": 4382641109
    };
  
    this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
@@ -136,7 +129,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    $('#articulosInit').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#articulosInit').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -151,7 +144,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
       }
     });
 
-    $('#articulosFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#articulosFinal').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {

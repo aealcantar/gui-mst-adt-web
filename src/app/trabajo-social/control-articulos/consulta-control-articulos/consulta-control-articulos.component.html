@@ -5,7 +5,8 @@
       Consulta de control de artículos
     </label>
         <div class="botones">
-            <button class="btn btn-primary btuser buttonL" style="border: solid 1px" (click)="irNuevoRegistro()">Nuevo Registro
+            <button type=" submit " class="btn btn-primary btn-guardar " (click)="irNuevoRegistro() ">
+                Nuevo Registro
             </button>
         </div>
     </div>
@@ -15,11 +16,11 @@
                 <div class="col-md-4">
                     <div class="form-group datepicker-group">
                         <label class="control-label tituloServicio" for="articulosInit">Fecha desde:</label>
-                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaInicial').valid}" articulosInit class="form-control" id="articulosInit" formControlName="fechaInicial" type="text" placeholder="dd/mm/aaaa" (change)="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaInicial').valid && datesForm.get('fechaInicial').dirty}" class="form-control calendario" id="articulosInit" formControlName="fechaInicial" type="text" placeholder="dd/mm/aaaa">
                         <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                         <div class="imgCalendar"></div>
                     </span>
-                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaInicial').valid && datesForm.get('fechaInicial').dirty ">
                     Campo obligatorio
                     </small>
                     </div>
@@ -27,18 +28,18 @@
                 <div class="col-md-4">
                     <div class="form-group datepicker-group">
                         <label class="control-label tituloServicio" for="articulosFinal">Fecha hasta:</label>
-                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaFinal').valid}" articulosFinal class="form-control" id="articulosFinal" formControlName="fechaFinal" type="text" placeholder="dd/mm/aaaa" (change)="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
-                        <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
-                        <div class="imgCalendar"></div>
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaFinal').valid && datesForm.get('fechaFinal').dirty}" class="form-control calendario" id="articulosFinal" formControlName="fechaFinal" type="text" placeholder="dd/mm/aaaa">
+                        <span class="glyphicon glyphicon-calendar fondocalendar " aria-hidden="true ">
+                        <div class="imgCalendar "></div>
                     </span>
-                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                        <small class="form-text form-text-error Campo-obligatorio redColor " *ngIf="!datesForm.get('fechaFinal').valid && datesForm.get('fechaFinal').dirty ">
                         Campo obligatorio
                         </small>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="col-auto mt-5" style="padding-left: 1.20em !important">
-                        <button class="btn btn-danger btuser" type="button" (click)="limpiar()">
+                <div class="col-sm-4 ">
+                    <div class="col-auto mt-5 " style="padding-left: 1.20em !important ">
+                        <button class="btn btn-danger btuser " type="button " (click)="limpiar() ">
                             Limpiar
                           </button>
                         <button type=" submit " class="btn btn-primary btn-guardar " (click)="buscar() ">
@@ -56,6 +57,7 @@
                 <div class="form-group ">
                     <label class="control-label ">Visualizar datos</label>
                     <select class="form-select ml-5 select-view-data " [(ngModel)]="pageSize ">
+            <option [ngValue]="10 ">10</option>
             <option [ngValue]="15 ">15</option>
             <option [ngValue]="20 ">20</option>
             <option [ngValue]="25 ">25</option>
