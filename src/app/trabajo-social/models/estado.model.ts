@@ -1,5 +1,5 @@
 export class Estado {
-    idEstado?: number;
-    nomCompleto?: string;
-    nomAbreviado?: string;
+  cve_estado?: string
+  des_nombre_completo?: string
+  des_nombre_abreviado?: string
 }

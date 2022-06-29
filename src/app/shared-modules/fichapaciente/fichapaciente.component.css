@@ -1,35 +1,96 @@
-.Rectangle-1205 {
-  width: 1217px;
+.Bg {
+  height: 218px;
+  flex-grow: 0;
+  background-color: #10312b;
+  display: grid;
+  place-content: center;
+
+}
+
+.Rectangle-855 {
+
+width: 100%;
   height: 145px;
-  border: solid 1px #eee;
-  background-color: #fff;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
+  background-color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  /* margin-top: -65px; */
+  /* margin-left: auto; */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
 }
 
-.pct-sup{
-  width: 100%;
+#busqueda {
+
+  display: flex;
+  margin-top: -26px;
+}
+
+.polig {
+  width: 492px;
+  margin-right: 0px;
+  display: flex;
+  margin-left: 688px;
+}
+
+#paralelograma {
+  width: 250px;
+  height: 107px;
+  -webkit-transform: skew(24deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  background: #f8f8fa;
+  position: absolute;
+  z-index: 2;
+  border-top-right-radius: 78px;
+  margin-left: 115px;
+
+}
+
+#paralelograma2 {
+  width: 291px;
+  height: 107px;
+  -webkit-transform: skew(56deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  background: #F6FAFF;
+  position: absolute;
+  z-index: 2;
+  border-top-right-radius: 78px;
+  margin-left: -22px;
+}
+
+.Ellipse-61 {
+  /* width: 243.9px; */
+  width: 203.9px;
+  height: 107px;
+  flex-grow: 0;
+  margin: 0px 0px 0px 248px;
+  opacity: 0.5;
+  background-color: #d2e4ff;
+  float: right;
+  display: flex;
+  border-top-right-radius: 15px;
+  position: absolute;
+  z-index: 1;
+
+}
+
+.pacienteInfoDiv {
+  width: 975px;
   height: 71px;
-  border-bottom: 1px solid rgba(149, 164, 183, 0.2);
-  padding: 11px 20px;
-  background-image: url('../../../assets/images/bg-header.png');
-  background-position-x: 100%;
-  background-repeat: no-repeat;
-  border-top-right-radius: 8px;
-  background-size: contain;
-  background-clip: border-box;
+  z-index: 4;
+  display: flex;
+  margin-left: 15px;
+  position: absolute;
 }
 
-.pct-sup > .encabezado{
-  height: 17px;
-  margin-bottom: 4px;
-}
-.Paciente {
-  width: 350px;
+.pacienteSpan {
+
   height: 15px;
   flex-grow: 0;
-  /* margin: 11px 20px 4px 20px; */
+  margin: 15px 0 0 0;
   font-family: Montserrat;
   font-size: 14px;
   font-weight: 600;
@@ -39,30 +100,15 @@
   letter-spacing: 2.8px;
   text-align: left;
   color: #bc955c;
-  margin-right: 41px;
-  display: inline-block;
-}
-.Unidad-de-adscripcin {
-  width: 161px;
-  height: 17px;
-  flex-grow: 0;
-  /* margin: 11px 14px 2px 20px; */
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #95a4b7;
 }
 
-.pct-sup > .descrp{
+.pacienteNombreSpan {
+  width: 413px;
   height: 27px;
   flex-grow: 0;
+  margin: 4px 0 0 0px;
   font-family: Montserrat;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
@@ -70,163 +116,157 @@
   letter-spacing: normal;
   text-align: left;
   color: #222;
-
-
+}
+.umf {
+  width: 375px;
+  height: 15px;
+  flex-grow: 0;
+  margin: 4px 0 0 0px;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
 }
 
-.pct-sup > .descrp > .nombre-pct{
-  width: 350px;
+
+.ciudadUnidadMedica {
+width: 375px;
+height: 27px;
+flex-grow: 0;
+margin: 4px 0 0 0px;
+font-family: Montserrat;
+font-size: 15px;
+font-weight: 600;
+font-stretch: normal;
+font-style: SemiBold;
+line-height: normal;
+letter-spacing: normal;
+text-align: left;
+color: #222;
+}
+
+
+.Rectangle-1205 {
+  width: 0px;
   height: 27px;
-  margin-right: 19.8px;
-  display: inline-block;
+  margin: 37px 10px 0 11px;
+  border: 1px solid #000000;
+  background-color: #000000;
 }
 
-.pct-sup > .descrp > .separador-pct{
-  border-left: 2px solid #222;
-    /* padding: 10px 0; */
-    margin: -3px 0px;
-    display: inline-block;
-    height: 21px;
-
+.Rectangle-12052 {
+  width: 0px;
+  height: 53px;
+  margin: 10px 10px 0 11px;
+  border: solid 1px #f5f7f8;
+  background-color: #fff;
 }
 
-.pct-sup > .descrp > .umf-pct{
-  height: 27px;
-  margin-left: 20.2px;
-}
+.unidadSpan {
 
-.pct-inf{
-  width: 100%;
-  height: 74px;
-}
-
-.pct-inf >.icon-izq{
-  width: 5.99%;
-  height: 74px;
+  height: 15px;
   flex-grow: 0;
-  padding: 6px 0px 0px 2px;
-  background-color: #ffe8a7;
-  border-bottom-left-radius: 6px;
-}
-
-.Rectangle-862 {
-  width: 48px;
-  height: 48px;
-  flex-grow: 0;
-  padding: 12px 13.7px 11px 13px;
-  border-radius: 5px;
-  box-shadow: 0 6px 10px 0 #fdcc44;
-  background-color: #fffcf4;
-  background-image: url("../../../assets/images/icon-nota.png");
-  background-repeat: no-repeat;
-  background-size: 21.3px 25px;
-  background-position: center;
-  border-bottom-left-radius: 6px;
-}
-
-.grd-info{
-  padding: 10px 0 9px 0;
-  height: 55px;
-  width: 94.01%;
-}
-
-.grd-info > .elm{
-  border-right: 1px solid rgba(149, 164, 183, 0.2);
-  float: left;
-  padding-right: 18.5px;
-  padding-left: 9.5px;
-}
-.grd-info > .elm:nth-child(1){
-  margin-left: 9.5px;
-}
-
-.grd-info > .elm:nth-child(8){
-  border: none;
-}
-
-.grd-info > .elm > span{
-  display: block;
-}
-
-.grd-info > .elm > span.etiqueta {
-  height: 25px;
-  flex-grow: 0;
+  margin: 15px 0 0 0;
   font-family: Montserrat;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  line-height: 2.14;
-  letter-spacing: normal;
+  line-height: normal;
   text-align: left;
   color: #95a4b7;
+
 }
 
-.grd-info > .elm > span.valor {
-  height: 30px;
+.divDetallePaciente {
+/* width: 117.5%; */
+width: 96.5%;
+  height: 71px;
+  margin-top: 73px;
+  margin-right: 0px;
+  margin-left: 0px;
+  background: white;
+  z-index: 6;
+  position: absolute;
+  display: flex;
+  border-top-color: rgb(245, 247, 248);
+  border-top-style: solid;
+  border-top-width: 1px;
+
+}
+
+.divAmarillo {
+
+  width: 73px;
+  height: 71px;
   flex-grow: 0;
+  padding: 4px 0px 0px px;
+  background-color: #ffe8a7;
+}
+
+.pacienteDetalleDiv {
+
+margin-left: 77px;
+  z-index: 4;
+  display: flex;
+  /* margin-left: 68px; */
+  position: absolute;
+
+}
+
+.detalleDescrip {
+  flex-grow: 0;
+  margin: -12px 0 0 0;
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.2;
+  line-height: 1.88;
   letter-spacing: normal;
   text-align: left;
   color: #222;
 }
+.divMenuHamburg{
 
-.grd-info > .elm-img{
-  position: relative;
-}
-img.menu-ts{
-  height: 72px;
-  /* width: 76px; */
-  margin-top: -10px;
-}
-
-.dropdown-menu>li>a {
+  width: 73px;
+  height: 71px;
   flex-grow: 0;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.1;
-  letter-spacing: normal;
-  text-align: left;
-  color: #222;
-}
-.dropdown-menu .divider {
-  margin: 3px;
+
+  /* margin-left: -1%; */
+
 }
 
-.dropdown-menu>li>a:focus,
-.dropdown-menu>li>a:hover {
-    text-decoration: none;
-    color: #FFFFFF;
-    background-color: #9D2449
+.menuSinSeleccionar{
+font-size: 16px;
+font-family: Montserrat;
+color:#000000;
+font-weight: 400;
+text-align: left;
+vertical-align: top;
+line-height: 20px;
+line-height: 100%;
+text-decoration: none;
 }
 
-.dropdown-menu>.active>a,
-.dropdown-menu>.active>a:focus,
-.dropdown-menu>.active>a:hover {
-    color: #fff;
-    text-decoration: none;
-    outline: 0;
-    background-color: #4A90E2
+.contenedorItems{
+height: 18px;
+}
+.contenedorItems:hover{
+background-color: #9D2449;
+height: 18px;
+color: white;
+cursor: pointer;
 }
 
-.dropdown-menu>.disabled>a,
-.dropdown-menu>.disabled>a:focus,
-.dropdown-menu>.disabled>a:hover {
-    color: #222;
-    font-size: 18px;
-    font-weight: bold;
+a:hover {
+color: white;
+cursor: pointer;
 }
 
-.dropdown-menu>.disabled>a:focus,
-.dropdown-menu>.disabled>a:hover {
-    text-decoration: none;
-    background-color: transparent;
-}
+

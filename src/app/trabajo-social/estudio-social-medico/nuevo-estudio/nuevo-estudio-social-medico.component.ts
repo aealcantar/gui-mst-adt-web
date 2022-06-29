@@ -11,7 +11,9 @@ import { Ciudad } from '../../models/ciudad.model';
 import { EstudioSocialMedicoService} from '../../services/estudio-social.service';
 import { EstadoCivil } from '../../models/estado-civil.model';
 import { EstudioMedico } from '../../models/estudio-medico.model';
-import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
+import { Ocupacion } from '../../models/ocupacion.model';
+
 declare var $: any;
 
 @Component({
@@ -21,13 +23,14 @@ declare var $: any;
 })
 export class NuevoEstudioSocialMedicoComponent implements OnInit {
 
-  alert!: objAlert;
+  alert!: AlertInfo;
 
   estados: Estado[] = [];
   municipios: Municipio[] = [];
   ciudades: Ciudad[] = [];
   estadosCiviles: EstadoCivil[] = [];
   tiposComunidad: EstadoCivil[] = [];
+  ocupaciones: any[] = [];
   estadosFamiliar: Estado[] = [];
   delegaciones: Municipio[] = [];
   ciudadesFamiliar: Ciudad[] = [];
@@ -152,6 +155,16 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
         console.error(httpErrorResponse);
       }
     );
+    this.estudioSocialService.getCatOcupaciones().toPromise().then(
+      (ocupaciones: Ocupacion[]) => {
+        this.ocupaciones = ocupaciones;
+        console.log("OCUPACIONES: ", this.ocupaciones);
+      },
+
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
   }
 
   onChangeEstado(): void {
@@ -173,7 +186,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
           this.ciudades = ciudades;
           console.log("CIUDADES: ", this.ciudades);
           if (this.ciudades.length === 1) {
-            this.formEstudioSocial.controls['ciudad'].setValue(this.ciudades[0].idCiudad);
+            this.formEstudioSocial.controls['ciudad'].setValue(this.ciudades[0].cve_ciudad);
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -214,7 +227,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
           this.ciudadesFamiliar = ciudades;
           console.log("CIUDADES: ", this.ciudadesFamiliar);
           if (this.ciudadesFamiliar.length === 1) {
-            this.formEstudioSocial2.controls['ciudadF'].setValue(this.ciudadesFamiliar[0].idCiudad);
+            this.formEstudioSocial2.controls['ciudadF'].setValue(this.ciudadesFamiliar[0].cve_ciudad);
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -223,28 +236,32 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       );
   }
 
-  getNombreEstado(idEstado: number, esFamiliar: boolean) {
+  getNombreEstado(idEstado: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.estadosFamiliar.find(e => e.idEstado = idEstado)?.nomCompleto;
+      return this.estadosFamiliar.find(e => e.cve_estado === idEstado)?.des_nombre_completo;
     } else {
-      return this.estados.find(e => e.idEstado = idEstado)?.nomCompleto;
+      return this.estados.find(e => e.cve_estado === idEstado)?.des_nombre_completo;
     }
   }
 
-  getNombreMunicipio(idMunicipio: number, esFamiliar: boolean) {
+  getNombreMunicipio(idMunicipio: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.delegaciones.find(d => d.idDelegacionMunicipio = idMunicipio)?.nomMunicipio;
+      return this.delegaciones.find(d => d.cve_delegacion_municipio === idMunicipio)?.des_municipio;
     } else {
-      return this.municipios.find(m => m.idDelegacionMunicipio = idMunicipio)?.nomMunicipio;
+      return this.municipios.find(m => m.cve_delegacion_municipio === idMunicipio)?.des_municipio;
     }
   }
 
-  getNombreCiudad(idCiudad: number, esFamiliar: boolean) {
+  getNombreCiudad(idCiudad: string, esFamiliar: boolean) {
     if (esFamiliar) {
-      return this.ciudadesFamiliar.find(c => c.idCiudad = idCiudad)?.nomCiudad;
+      return this.ciudadesFamiliar.find(c => c.cve_ciudad === idCiudad)?.des_ciudad;
     } else {
-      return this.ciudades.find(c => c.idCiudad = idCiudad)?.nomCiudad;
+      return this.ciudades.find(c => c.cve_ciudad === idCiudad)?.des_ciudad;
     }
+  }
+
+  getNombreOcupacion(idOcupacion: number) {
+    return this.ocupaciones.find(c => c.id_OCUPACION === idOcupacion)?.nom_OCUPACION;
   }
 
   getNombreTipoComunidad(idTipoComunidad: number | string) {
@@ -288,7 +305,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/lista-estudios", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
     $('#content').modal('hide');
   }
 
@@ -314,14 +331,14 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       correoElectronico: this.formEstudioSocial.get('email').value,
       idEstadoCivil: this.formEstudioSocial.get('estadoCivil').value,
       idOcupacion: this.formEstudioSocial.get('ocupacion').value,
-      nombreOcupacion: 'Ingeniero', //No hay catalogo general, solo por id
+      nombreOcupacion: this.getNombreOcupacion(this.formEstudioSocial.get('ocupacion').value),
       nombreResponsable: this.formEstudioSocial2.get('nombreFamiliar').value,
       edad: this.formEstudioSocial2.get('edad').value,
       parentesco: this.formEstudioSocial2.get('parentesco').value,
       codigoPostalFam: this.formEstudioSocial2.get('codigoP').value,
       idEstadoFam: this.formEstudioSocial2.get('estadoF').value,
       nombreEstadoFam: this.getNombreEstado(this.formEstudioSocial2.get('estadoF').value, true),
-      idDelegacionMunicipioFam: this.formEstudioSocial2.get('delegacionM').value,
+      idDelegacionMunicipioFam: parseInt(this.formEstudioSocial2.get('delegacionM').value),
       nombreDelegacionMunicipioFam: this.getNombreMunicipio(this.formEstudioSocial2.get('delegacionM').value, true),
       idCiudadFam: this.formEstudioSocial2.get('ciudadF').value,
       nombreCiudadFam: this.getNombreCiudad(this.formEstudioSocial2.get('ciudadF').value, true),
@@ -356,7 +373,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       }, (resp: HttpErrorResponse) => {
         console.log("RESPUESTA: ", resp.statusText);
         if (resp.statusText === 'OK') {
-          this.router.navigate(["detalle-estudios-medicos"], { queryParams: params, skipLocationChange: true });
+          this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
         } else {
           this.showError('Verificar datos capturados');
         }

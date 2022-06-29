@@ -1,4 +1,4 @@
-<!-- <app-alerta-general [objAlerta]="alert"></app-alerta-general> -->
+<app-alerta-general [alert]="alert"></app-alerta-general>
 <div style="margin-bottom: 1%"></div>
 <app-fichapaciente></app-fichapaciente>
 <ng-container *ngIf="datosGenerales == true">
@@ -77,7 +77,7 @@
                         <input
                           [ngClass]="{'form-control-error': formEstudioSocial.controls?.solicitadoPor?.dirty && formEstudioSocial.controls?.solicitadoPor?.touched && formEstudioSocial.controls?.solicitadoPor?.error}"
                           class="form-control" id="solicitadoPor" formControlName="solicitadoPor"
-                          placeholder="Ingresar nombre" type="text">
+                          placeholder="Ingresar nombre" type="text" maxlength="150">
                         <small
                           *ngIf="formEstudioSocial.controls?.solicitadoPor?.dirty && formEstudioSocial.controls?.solicitadoPor?.touched && formEstudioSocial.controls?.solicitadoPor?.error"
                           class="form-text form-text-error Campo-obligatorio" style="color: red;">
@@ -107,7 +107,7 @@
                           <span class="labels">Código Postal*:</span>
                           <input
                             [ngClass]="{'form-control-error':formEstudioSocial.controls?.cp?.dirty && formEstudioSocial.controls?.cp?.errors}"
-                            class="form-control" id="cp" formControlName="cp" placeholder="Ingresar código postal">
+                            class="form-control" id="cp" formControlName="cp" placeholder="Ingresar código postal" maxlength="10">
                           <small *ngIf="formEstudioSocial.controls?.cp?.dirty && formEstudioSocial.controls?.cp?.errors"
                             class="form-text form-text-error Campo-obligatorio" style="color: red;">
                             Campo obligatorio
@@ -117,11 +117,11 @@
 
                       <div class="col-md-4" style="margin-right: -23px; margin-top: 4px;">
                         <div class=" form-group">
-                          <span class="labels">Estado:</span>
+                          <span class="labels">Estado*:</span>
                           <select class="select" formControlName="estado" (change)="onChangeEstado()">
-                            <option class="select-font" [value]="''">Ingresar estado</option>
-                            <option class="select-font" [value]="estado.idEstado" *ngFor="let estado of estados">
-                              {{ estado.nomCompleto}}
+                            <option class="select-font" [value]="''">Seleccionar estado</option>
+                            <option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of estados">
+                              {{ estado.des_nombre_completo}}
                             </option>
                           </select>
                         </div>
@@ -129,12 +129,12 @@
 
                       <div class="col-md-4" style=" margin-top: 4px;">
                         <div class="form-group">
-                          <span class="labels">Delegación/Municipio:</span>
+                          <span class="labels">Delegación/Municipio*:</span>
                           <select class="select" formControlName="municipio" (change)="onChangeCiudad()">
-                            <option class="select-font" [value]="''" selected>Ingresar delegación/municipio</option>
-                            <option class="select-font" [value]="municipio.idDelegacionMunicipio"
+                            <option class="select-font" [value]="''" selected>Seleccionar delegación o municipio</option>
+                            <option class="select-font" [value]="municipio.cve_delegacion_municipio"
                               *ngFor="let municipio of municipios">
-                              {{ municipio.nomMunicipio}}
+                              {{ municipio.des_municipio}}
                             </option>
                           </select>
                         </div>
@@ -149,8 +149,8 @@
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors}"
                             class="form-control" id="ciudad" formControlName="ciudad">
                             <option [value]="''" selected>Ingresar ciudad</option>
-                            <option class="select-font" [value]="ciudad.idCiudad" *ngFor="let ciudad of ciudades">
-                              {{ ciudad.nomCiudad}}
+                            <option class="select-font" [value]="ciudad.cve_ciudad" *ngFor="let ciudad of ciudades">
+                              {{ ciudad.des_ciudad}}
                             </option>
                             <small
                               *ngIf="formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors"
@@ -168,7 +168,7 @@
                           <input
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.colonia?.dirty && formEstudioSocial.controls?.colonia?.errors}"
                             class="form-control" id="colonia" formControlName="colonia" placeholder="Ingresar colonia"
-                            type="text">
+                            type="text" maxlength="150">
                           <small
                             *ngIf="formEstudioSocial.controls?.colonia?.dirty && formEstudioSocial.controls?.colonia?.errors"
                             class="form-text form-text-error Campo-obligatorio" style="color: red;">
@@ -184,7 +184,7 @@
                           <input
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.calle?.dirty && formEstudioSocial.controls?.calle?.errors}"
                             class="form-control" id="calle" formControlName="calle" placeholder="Ingresar calle"
-                            type="text">
+                            type="text" maxlength="150">
                           <small
                             *ngIf="formEstudioSocial.controls?.calle?.dirty && formEstudioSocial.controls?.calle?.errors"
                             class="form-text form-text-error Campo-obligatorio" style="color: red;">
@@ -202,7 +202,7 @@
                           <input
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.numeroExt?.dirty && formEstudioSocial.controls?.numeroExt?.errors}"
                             class="form-control" id="numeroExt" formControlName="numeroExt"
-                            placeholder="Ingresar número" type="text">
+                            placeholder="Ingresar número" type="text" maxlength="10">
                           <small
                             *ngIf=" formEstudioSocial.controls?.numeroExt?.dirty && formEstudioSocial.controls?.numeroExt?.errors"
                             class="form-text form-text-error Campo-obligatorio" style="color: red;">
@@ -215,7 +215,7 @@
                           <span class="labels">Número interior:</span>
                           <br>
                           <input class="form-control" id="numeroInt" formControlName="numeroInt"
-                            placeholder="Ingresar número">
+                            placeholder="Ingresar número" maxlength="10">
                         </div>
                       </div>
 
@@ -247,7 +247,7 @@
                           <span class="labels">Teléfono fijo:</span>
                           <br>
                           <input class="form-control" id="telefonoFijo" formControlName="telefonoFijo"
-                            placeholder="Ingresar número">
+                            placeholder="Ingresar número" maxlength="10">
                         </div>
                       </div>
                       <div class="col-md-4" style="margin-right: -23px;">
@@ -255,7 +255,7 @@
                           <span class="labels">Teléfono celular:</span>
                           <br>
                           <input class="form-control" id="telefonoCelular" formControlName="telefonoCelular"
-                            placeholder="Ingresar número">
+                            placeholder="Ingresar número" maxlength="10">
                         </div>
                       </div>
 
@@ -271,7 +271,7 @@
                             placeholder="Ingresar correo"
                             [ngClass]="{'form-control-error':formEstudioSocial.controls?.email?.dirty && formEstudioSocial.controls?.email?.errors}"
                             pattern="[a-zA-Z0-9!#$%&'+-]([\.]?[a-zA-Z0-9_!#$%&'+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
-                            placeholder="Ingresar correo electrónico" maxlength="45" />
+                            placeholder="Ingresar correo electrónico" maxlength="100" />
                           <small
                             *ngIf="formEstudioSocial.controls?.email?.dirty && formEstudioSocial.controls?.email?.errors"
                             class="form-text form-text-error Campo-obligatorio">
@@ -311,7 +311,10 @@
                           <select class="select" formControlName="ocupacion"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ocupacion?.dirty && formEstudioSocial.controls?.ocupacion?.errors}">
                             <option [value]="''" selected>Ingresar ocupación</option>
-                            <option class="select-font" [value]="1">Ingeniero</option>
+                            <option class="select-font" [value]="ocupacion.id_OCUPACION"
+                              *ngFor="let ocupacion of ocupaciones">
+                              {{ ocupacion.nom_OCUPACION }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -432,7 +435,7 @@
                         formEstudioSocial2.controls?.nombreFamiliar?.dirty &&
                         formEstudioSocial2.controls?.nombreFamiliar?.errors
                     }" class="form-control" id="nombreFamiliar" formControlName="nombreFamiliar"
-                      placeholder="Ingresar nombre" type="text" />
+                      placeholder="Ingresar nombre" type="text" maxlength="50" />
                     <small *ngIf="
                   formEstudioSocial2.controls?.nombreFamiliar?.dirty &&
                   formEstudioSocial2.controls?.nombreFamiliar?.errors
@@ -451,7 +454,7 @@
                       'form-control-error':
                         formEstudioSocial2.controls?.edad?.dirty &&
                         formEstudioSocial2.controls?.edad?.errors
-                    }" class="form-control" id="edad" formControlName="edad" placeholder="Ingresar edad" type="text" numbersOnly />
+                    }" class="form-control" id="edad" formControlName="edad" placeholder="Ingresar edad" type="text" maxlength="3" numbersOnly />
                     <small *ngIf="
                   formEstudioSocial2.controls?.edad?.dirty &&
                   formEstudioSocial2.controls?.edad?.errors
@@ -471,7 +474,7 @@
                         formEstudioSocial2.controls?.parentesco?.dirty &&
                         formEstudioSocial2.controls?.parentesco?.errors
                     }" class="form-control" id="parentesco" formControlName="parentesco"
-                      placeholder="Ingresar parentesco" type="text" />
+                      placeholder="Ingresar parentesco" type="text" maxlength="100" />
                     <small *ngIf="
                   formEstudioSocial2.controls?.parentesco?.dirty &&
                   formEstudioSocial2.controls?.parentesco?.errors
@@ -493,7 +496,7 @@
                         formEstudioSocial2.controls?.codigoP?.dirty &&
                         formEstudioSocial2.controls?.codigoP?.errors
                     }" class="form-control" id="codigoP" formControlName="codigoP" placeholder="Ingresar Código postal"
-                      type="text" />
+                      type="text" maxlength="10" />
                     <small *ngIf="
                   formEstudioSocial2.controls?.codigoP?.dirty &&
                   formEstudioSocial2.controls?.codigoP?.errors
@@ -506,12 +509,12 @@
                 <div class="col-md-4" style="margin-top: 4px;">
                   <div class="form-group">
                     <label class="control-label tituloInput">
-                      Estado:
+                      Estado*:
                     </label>
                     <select class="select" formControlName="estadoF" (change)="onChangeEstadoFamiliar()">
-                      <option class="select-font" [value]="''">Ingresar estado</option>
-                      <option class="select-font" [value]="estadoF.idEstado" *ngFor="let estadoF of estadosFamiliar">
-                        {{ estadoF.nomCompleto}}
+                      <option class="select-font" [value]="''">Seleccionar estado</option>
+                      <option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
+                        {{ estadoF.des_nombre_completo}}
                       </option>
                     </select>
                   </div>
@@ -520,13 +523,13 @@
                 <div class="col-md-4" style="margin-top: 4px;">
                   <div class="form-group">
                     <label class="control-label tituloInput">
-                      Delegación/Municipio:
+                      Delegación/Municipio*:
                     </label>
                     <select class="select" formControlName="delegacionM" (change)="onChangeMunicipioFamiliar()">
-                      <option class="select-font" [value]="''" selected>Ingresar delegación/municipio</option>
-                      <option class="select-font" [value]="delegacion.idDelegacionMunicipio"
+                      <option class="select-font" [value]="''" selected>Seleccionar delegación o municipio</option>
+                      <option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                         *ngFor="let delegacion of delegaciones">
-                        {{ delegacion.nomMunicipio}}
+                        {{ delegacion.des_municipio}}
                       </option>
                     </select>
 
@@ -551,8 +554,8 @@
                       [ngClass]="{'form-control-error': formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors}"
                       class="form-control" id="ciudadF" formControlName="ciudadF">
                       <option value="Seleccionar ciudad" [value]="''" selected>Ingresar ciudad</option>
-                      <option class="select-font" [value]="ciudadF.idCiudad" *ngFor="let ciudadF of ciudadesFamiliar">
-                        {{ ciudadF.nomCiudad}}
+                      <option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
+                        {{ ciudadF.des_ciudad}}
                       </option>
                       <small
                         *ngIf=" formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors"
@@ -578,7 +581,7 @@
                     formEstudioSocial2.controls?.coloniaF?.dirty &&
                     formEstudioSocial2.controls?.coloniaF?.errors
                 }" class="form-control" id="coloniaF" formControlName="coloniaF" placeholder="Ingresar colonia"
-                      type="text" />
+                      type="text" maxlength="150" />
                     <small *ngIf="
               formEstudioSocial2.controls?.coloniaF?.dirty &&
               formEstudioSocial2.controls?.coloniaF?.errors
@@ -598,7 +601,7 @@
                         formEstudioSocial2.controls?.calleF?.dirty &&
                         formEstudioSocial2.controls?.calleF?.errors
                     }" class="form-control" id="calleF" formControlName="calleF" placeholder="Ingresar calle"
-                      type="text" />
+                      type="text" maxlength="150" />
                     <small *ngIf="
                   formEstudioSocial2.controls?.calleF?.dirty &&
                   formEstudioSocial2.controls?.calleF?.errors
@@ -620,7 +623,7 @@
                         formEstudioSocial2.controls?.numExtF?.dirty &&
                         formEstudioSocial2.controls?.numExtF?.errors
                     }" class="form-control" id="numExtF" formControlName="numExtF"
-                      placeholder="Ingresar número exterior" type="text" />
+                      placeholder="Ingresar número exterior" type="text" maxlength="10" />
                     <small *ngIf="
                   formEstudioSocial2.controls?.numExtF?.dirty &&
                   formEstudioSocial2.controls?.numExtF?.errors
@@ -640,7 +643,7 @@
                     formEstudioSocial2.controls?.numIntF?.dirty &&
                     formEstudioSocial2.controls?.numIntF?.errors
                 }" class="form-control" id="numIntF" formControlName="numIntF" placeholder="Ingresar número interior"
-                      type="text" />
+                      type="text" maxlength="10" />
                     <small *ngIf="
               formEstudioSocial2.controls?.numIntF?.dirty &&
               formEstudioSocial2.controls?.numIntF?.errors
@@ -664,7 +667,7 @@
                     formEstudioSocial2.controls?.telFijo?.dirty &&
                     formEstudioSocial2.controls?.telFijo?.errors
                 }" class="form-control" id="telFijo" formControlName="telFijo" placeholder="Ingresar teléfono fijo"
-                      type="text" />
+                      type="text" maxlength="10" />
                     <small *ngIf="
               formEstudioSocial2.controls?.telFijo?.dirty &&
               formEstudioSocial2.controls?.telFijo?.errors
@@ -683,7 +686,7 @@
                     formEstudioSocial2.controls?.telCel?.dirty &&
                     formEstudioSocial2.controls?.telCel?.errors
                 }" class="form-control" id="telCel" formControlName="telCel" placeholder="Ingresar teléfono celular"
-                      type="text" />
+                      type="text" maxlength="10" />
                     <small *ngIf="
               formEstudioSocial2.controls?.telCel?.dirty &&
               formEstudioSocial2.controls?.telCel?.errors
@@ -704,7 +707,7 @@
                       placeholder="Ingresar correo"
                       [ngClass]="{'form-control-error':formEstudioSocial2.controls?.correoF?.dirty && formEstudioSocial2.controls?.correoF?.errors}"
                       pattern="[a-zA-Z0-9!#$%&'+-]([\.]?[a-zA-Z0-9_!#$%&'+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
-                      placeholder="Ingresar correo electrónico" maxlength="45" />
+                      placeholder="Ingresar correo electrónico" maxlength="100" />
                     <small
                       *ngIf="formEstudioSocial2.controls?.correoF?.dirty && formEstudioSocial2.controls?.correoF?.errors"
                       class="form-text form-text-error Campo-obligatorio">
