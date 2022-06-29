@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
-  urlServOauth: 'http://localhost:8081',
+
+ 
+
   urlServCronicasReporte: 'http://localhost:8082',
  // urlServCatalogos: 'http://localhost:8084',
  
@@ -13,18 +13,42 @@ export const environment = {
  urlServCronicas: 'http://localhost:8085', 
   urlServNotas: 'http://localhost:8086',
   urlServEstudioMedicos: 'http://localhost:8088',
+
+  urlControlArticulos:'http://localhost:8088',
+  urlVolantesDonacion: 'http://localhost:8090',
+
+  production: false,
+  urlLogin: 'http://localhost:4200/login',
+    //Agenda
+    urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
+    //urlMSADCargasCatalogos: 'http://localhost:8080/msedsc-carga-catalogos',
+    urlMSEDSCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
+    urlMSADTCITAS: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-citas/api',
+    urlMSEDSCatalogosHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
+    //urlMSEDSCHorarios: 'http://localhost:8080/msedsc-catalogos',
+    urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
+
+
+    
+    //Trabajo Social
+    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
+    msmtsCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+    msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
+    msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
+    msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
+    msmtsOauth: 'http://localhost:8081/',
+    urlServOauth: 'http://localhost:8081',
+
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {
     siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
   },
   siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
   secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
-  urlMSADCargasCatalogos: 'http://localhost:8092//msedsc-carga-catalogos',
-  urlMSEDSCatalogos: 'http://localhost:8085/api/',
-  urlMSADTCITAS: 'http://localhost:8090/api/', 
-  urlControlArticulos:'http://localhost:8088',
-  urlVolantesDonacion: 'http://localhost:8090',
-  
+
 };
 
 /*

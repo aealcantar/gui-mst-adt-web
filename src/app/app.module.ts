@@ -17,9 +17,6 @@ import { JRInterceptor } from './jrinterceptor.interceptor';
 import { environment } from 'src/environments/environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UsuariosService } from './shared-modules/services/usuarios.service';
-import { SeguridadService } from './seguridad/seguridad.service';
-import { LoginComponent } from './seguridad/login/login.component';
-import { RegistroComponent } from './seguridad/registro/registro.component';
 import { ReadexcelDirective } from './shared-modules/directives/readexcel.directive';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
@@ -47,6 +44,9 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { SharedModulesModule } from './shared-modules/shared-modules.module';
+import { LoginComponent } from './shared-modules/login/login.component';
+import { RegistroComponent } from './shared-modules/registro/registro.component';
+import { SeguridadService } from './shared-modules/services/seguridad.service';
 
 registerLocaleData('es');
 

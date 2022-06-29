@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { ControlArticulosService } from '../../services/control-articulos.service';
 @Component({
   selector: 'app-detalle-control-articulos',
@@ -9,25 +10,37 @@ import { ControlArticulosService } from '../../services/control-articulos.servic
 })
 export class DetalleControlArticulosComponent implements OnInit {
   detalle: any = {};
-
+  alert!: objAlert;
   idControlArticulos: string = '';
 
-  articulosArray: Array<any> = [
-    'adasdasdasdasdas',
-    'asdasdasdasdasdasd',
-    'asdasdasdasdas',
-    'asdasdasasddas',
-  ];
+  articulosArray: Array<any> = [];
 
   constructor(
     private controlArticulosService: ControlArticulosService,
     private rutaActiva: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.idControlArticulos = this.rutaActiva.snapshot.paramMap.get('id');
-    console.log(this.idControlArticulos);
-    this.buscarDetalleArticulos(this.idControlArticulos);
+ 
+    if (Number(this.idControlArticulos) > 0) {
+      this.buscarDetalleArticulos(this.idControlArticulos);
+    } else {
+      this.muestraAlerta(
+        '¡La información se guardo con éxito!',
+        'alert-success',
+        ''
+      );
+      this.idControlArticulos = this.idControlArticulos.replace("nuevo", "");
+      console.log(this.idControlArticulos);
+      this.buscarDetalleArticulos(this.idControlArticulos);
+    }
+
+   
+
+
+
+
   }
 
   buscarDetalleArticulos(idControlArticulo: string) {
@@ -67,91 +80,100 @@ export class DetalleControlArticulosComponent implements OnInit {
 
   impirmiControlArticulos() {
 
-    let nombrePaciente="Maria del Carmen Romero Sanchez";
-    let splitNombre=nombrePaciente.split(" ");
-    let tamanioNombre=splitNombre.length;
-    let posicionAppMaterno=tamanioNombre-1;
-    let posicionAppPaterno=tamanioNombre-2;
-
-    console.log(splitNombre)
-    let appPaterno=splitNombre[posicionAppPaterno];
-    let appMaterno=splitNombre[posicionAppMaterno];
-   let nombre="";
+    let nombrePaciente = "Maria del Carmen Romero Sanchez";
+    let splitNombre = nombrePaciente.split(" ");
+    let tamanioNombre = splitNombre.length;
+    let posicionAppMaterno = tamanioNombre - 1;
+    let posicionAppPaterno = tamanioNombre - 2;
+    let appPaterno = splitNombre[posicionAppPaterno];
+    let appMaterno = splitNombre[posicionAppMaterno];
+    let nombre = "";
     for (let i = 0; i < posicionAppMaterno; i++) {
-      console.log(splitNombre[i])
-      nombre+=splitNombre[i]+" ";      
+        nombre += splitNombre[i] + " ";
     }
-    let recepcionFechaSA=this.detalle.resguardoFecha;
-    let diaRecepcionSA="";
-    let anioRecepionSA="";
-    let mesResguardoSA="";
-    if(recepcionFechaSA!=null && recepcionFechaSA!=""){
+    let recepcionFechaSA = this.detalle.resguardoFecha;
+    let diaRecepcionSA = "";
+    let anioRecepionSA = "";
+    let mesResguardoSA = "";
+    if (recepcionFechaSA != null && recepcionFechaSA != "") {
       try {
-        let splitResguardoFecha=recepcionFechaSA.split("/");  
-        diaRecepcionSA= splitResguardoFecha[0];
-        mesResguardoSA=splitResguardoFecha[1];
-         anioRecepionSA=splitResguardoFecha[2];
+        let splitResguardoFecha = recepcionFechaSA.split("/");
+        diaRecepcionSA = splitResguardoFecha[0];
+        mesResguardoSA = splitResguardoFecha[1];
+        anioRecepionSA = splitResguardoFecha[2];
       } catch (error) {
         console.error(error);
       }
-     
+
     }
 
-    let resguardoHora=this.detalle.resguardoHora;
-    let horaResguardo="";
-     if(resguardoHora!=null && resguardoHora!=""){
+    let resguardoHora = this.detalle.resguardoHora;
+    let horaResguardo = "";
+    if (resguardoHora != null && resguardoHora != "") {
       try {
-        let splitHora= resguardoHora.split(":");
-      let tipohorario=Number(splitHora[0]) > 11 ? "PM": "AM";
-      horaResguardo=splitHora[0]+":"+splitHora[1]+" "+tipohorario;
+        let splitHora = resguardoHora.split(":");
+        let tipohorario = Number(splitHora[0]) > 11 ? "PM" : "AM";
+        horaResguardo = splitHora[0] + ":" + splitHora[1] + " " + tipohorario;
       } catch (error) {
         console.error(error)
       }
-            
-     }
+
+    }
 
 
-    let recepcionFecha=this.detalle.recepcionFecha;
-    let diaRecepcion="";
-    let anioRecepion="";
-    let mesResguardo="";
-    if(recepcionFecha!=null && recepcionFecha!=""){
+    let recepcionFecha = this.detalle.recepcionFecha;
+    let diaRecepcion = "";
+    let anioRecepion = "";
+    let mesResguardo = "";
+    if (recepcionFecha != null && recepcionFecha != "") {
       try {
-        let splitResguardoFecha=recepcionFecha.split("/");  
-        diaRecepcion= splitResguardoFecha[0];
-         mesResguardo=splitResguardoFecha[1];
-         anioRecepion=splitResguardoFecha[2];
+        let splitResguardoFecha = recepcionFecha.split("/");
+        diaRecepcion = splitResguardoFecha[0];
+        mesResguardo = splitResguardoFecha[1];
+        anioRecepion = splitResguardoFecha[2];
       } catch (error) {
         console.error(error);
       }
-     
+
     }
 
-    let recepcionHora=this.detalle.recepcionHora;
-    let horaRecepcion="";
-     if(recepcionHora!=null && recepcionHora!=""){
+    let recepcionHora = this.detalle.recepcionHora;
+    let horaRecepcion = "";
+    if (recepcionHora != null && recepcionHora != "") {
       try {
-        let splitHora= recepcionHora.split(":");
-      let tipohorario=Number(splitHora[0]) > 11 ? "PM": "AM";
-      horaRecepcion=splitHora[0]+":"+splitHora[1]+" "+tipohorario;
+        let splitHora = recepcionHora.split(":");
+        let tipohorario = Number(splitHora[0]) > 11 ? "PM" : "AM";
+        horaRecepcion = splitHora[0] + ":" + splitHora[1] + " " + tipohorario;
       } catch (error) {
         console.error(error)
       }
-            
-     }
-    
-  
+
+    }
+
+    let articulos = this.detalle.articulosArray;
+    let nuevosArticulos = [];
+    let contador = 0;
+    for (let i = 0; i < articulos.length; i++) {
+      contador++;
+      let valor = {
+        noArticulo: contador,
+        articulo: articulos[i]
+      };
+      nuevosArticulos.push(valor);
+
+    }
+
     let data: any = {
       folio: this.detalle.noFolioControl,
       uMedica: '1M1989OR',
       paternoP: appPaterno,
       maternoP: appMaterno,
       nombreP: nombre,
-      cama:  this.detalle.noCama,
+      cama: this.detalle.noCama,
       nss: 'UMD No. 11',
       servicio: this.detalle.ubicacion,
       tel1: this.detalle.telefono,
-      articulos: this.detalle.articulosArray,
+      articulos: nuevosArticulos,
       diaSA: diaRecepcionSA,
       mesSA: mesResguardoSA,
       añoSA: anioRecepionSA,
@@ -162,8 +184,8 @@ export class DetalleControlArticulosComponent implements OnInit {
       mesR: mesResguardo,
       añoR: anioRecepion,
       horaR: horaRecepcion,
-      ubicacionEntrega:  this.detalle.recepcionUbicacion,
-      horarioEntrega:this.detalle.recepcionHorarioEntregaArticulo,
+      ubicacionEntrega: this.detalle.recepcionUbicacion,
+      horarioEntrega: this.detalle.recepcionHorarioEntregaArticulo,
       nombreTSC: 'Manuel Avila Camacho',
       matriculaTSC: '5542468958',
     };
@@ -180,6 +202,23 @@ export class DetalleControlArticulosComponent implements OnInit {
         console.error('Error al descargar reporte: ', error.message);
       }
     );
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, type: string) {
+
+    this.alert = {
+      message: mensaje,
+      type: estilo,
+      typeMsg: type,
+      visible: true
+    }
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false
+      }
+    }, 2000);
   }
 }
 

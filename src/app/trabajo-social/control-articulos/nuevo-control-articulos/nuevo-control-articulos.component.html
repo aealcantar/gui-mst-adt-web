@@ -1,5 +1,5 @@
 <app-alerta-general [objAlerta]="alert"></app-alerta-general>
-<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-fichapaciente></app-fichapaciente>
 <app-card-template>
   <div
     header
@@ -30,20 +30,20 @@
               formControlName="noFolioControl"
               placeholder=""
               type="text"
-              maxlength="10"
+             
               readonly="true"
             />
             <small
               *ngIf="
                 submitted && formNuevoArticulo.controls.noFolioControl.errors
               "
-              class="form-text form-text-error Campo-obligatorio redColor"
+              class="form-text form-text-error Campo-obligatorio "
             >
               Campo obligatorio
             </small>
           </div>
           <div class="col-sm-4 form-group pt-5">
-            <span class="labels pb-1">Fecha*:</span>
+            <span class="labels pb-1">Fecha *:</span>
             <input
               [ngClass]="{
                 'form-control-error':
@@ -58,7 +58,7 @@
             />
             <small
               *ngIf="submitted && formNuevoArticulo.controls.fecha.errors"
-              class="form-text form-text-error Campo-obligatorio redColor"
+              class="form-text form-text-error Campo-obligatorio"
             >
               Campo obligatorio
             </small>
@@ -79,7 +79,7 @@
             />
             <small
               *ngIf="submitted && formNuevoArticulo.controls.noCama.errors"
-              class="form-text form-text-error Campo-obligatorio redColor"
+              class="form-text form-text-error Campo-obligatorio "
             >
               Campo obligatorio
             </small>
@@ -128,12 +128,12 @@
               placeholder="Ingresar teléfono"
               maxlength="10"
             />
-            <small
+            <!-- <small
               *ngIf="submitted && formNuevoArticulo.controls.telefono.errors"
-              class="form-text form-text-error Campo-obligatorio redColor"
+              class="form-text form-text-error Campo-obligatorio "
             >
               Campo obligatorio
-            </small>
+            </small> -->
           </div>
         </div>
       </div>
@@ -150,6 +150,14 @@
               formControlName="articulo"
               maxlength="100"
             />
+
+            <small
+            *ngIf="validaArticulos"
+            class="form-text form-text-error Campo-obligatorio "
+          >
+            Campo obligatorio
+          </small>
+
           </div>
           <div class="col-auto mt-5">
             <span (click)="agegarArticulo()" class="cursor"
@@ -225,7 +233,7 @@
                 submitted &&
                 formNuevoArticulo.controls.enfermeriaNombreEntrega.errors
               "
-              class="form-text form-text-error Campo-obligatorio redColor"
+              class="form-text form-text-error Campo-obligatorio "
             >
               Campo obligatorio
             </small>
@@ -261,8 +269,8 @@
             </small>
           </div>
           <div class="col-sm-4 form-group pt-5">
-            <span class="labels pb-1">Horario para entrega de artículos*:</span>
-            <select
+           <!-- <span class="labels pb-1"></span>
+             <select
               [ngClass]="{
                 'form-control-error':
                   submitted &&
@@ -289,7 +297,36 @@
               class="form-text form-text-error Campo-obligatorio"
             >
               Campo obligatorio
+            </small> -->
+            <div class="datepicker-group ">
+              <label class="control-label labels" for="calendarYear"
+                >Horario para entrega de artículos*:</label
+              >
+              <input
+                type="text"
+                [ngClass]="{
+                  'form-control-error':
+                    submitted && formNuevoArticulo.controls.horarioEntregaArticulo.errors
+                }"
+                class="form-control hasDatepicker"
+                id="horarioEntregaArticulo"
+                formControlName="horarioEntregaArticulo"
+                placeholder="Ingresa hora" 
+                maxlength="5"
+              />
+              <span class="glyphicon fontIcono" aria-hidden="true">
+                <img src="assets/images/clock.svg" height="21px" class="icono"
+              /></span>
+            </div>
+            <small
+              *ngIf="
+                submitted && formNuevoArticulo.controls.resguardoHora.errors
+              "
+              class="form-text form-text-error Campo-obligatorio"
+            >
+              Campo obligatorio
             </small>
+          
           </div>
         </div>
       </div>
@@ -306,8 +343,8 @@
           </div>
         </div>
         <div class="row pl-5 pr-5">
-          <div class="col-sm-4">
-            <div class="datepicker-group">
+          <div class="col-sm-4 form-group">
+            <div class="datepicker-group ">
               <label class="control-label labels" for="calendarYear"
                 >Fecha*:</label
               >
@@ -317,7 +354,7 @@
                     submitted &&
                     formNuevoArticulo.controls.resguardoFecha.errors
                 }"
-                class="calendario form-control"
+                class="form-control calendario"
                 formControlName="resguardoFecha"
                 id="resguardoFecha"
                 type="text"
@@ -341,8 +378,8 @@
             </small>
           </div>
 
-          <div class="col-sm-4">
-            <div class="datepicker-group">
+          <div class="col-sm-4 form-group">
+            <div class="datepicker-group ">
               <label class="control-label labels" for="calendarYear"
                 >Hora*:</label
               >
@@ -371,7 +408,7 @@
               Campo obligatorio
             </small>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-4 ">
             <span class="labels pb-1">Recibió*:</span>
             <input
               type="text"
@@ -385,7 +422,7 @@
         </div>
 
         <div class="row pl-5 pr-5">
-          <div class="col-sm-4 mt-4">
+          <div class="col-sm-4 form-group mt-4">
             <span class="labels pb-1">Entregó*:</span>
             <input
               [ngClass]="{
@@ -417,9 +454,9 @@
           </div>
         </div>
         <!-- articulos completos -->
-        <div class="row pl-5 pr-5">
+        <div class="row pl-5 form-group pr-5">
           <div class="col-sm-4">
-            <div class="datepicker-group">
+            <div class="datepicker-group ">
               <label class="control-label labels" for="calendarYear"
                 >Fecha*:</label
               >
@@ -454,8 +491,8 @@
             </small>
           </div>
 
-          <div class="col-sm-4">
-            <div class="datepicker-group">
+          <div class="col-sm-4 form-group ">
+            <div class="datepicker-group ">
               <label class="control-label labels" for="calendarYear"
                 >Hora*:</label
               >
@@ -485,7 +522,7 @@
             </small>
           </div>
 
-          <div class="col-sm-4">
+          <div class="col-sm-4 form-group">
             <span class="labels pb-1">Recibió*:</span>
             <input
               [ngClass]="{
@@ -513,7 +550,7 @@
         </div>
 
         <div class="row pl-5 pr-5 mb-5 pb-3">
-          <div class="col-sm-4 mt-4">
+          <div class="col-sm-4 form-group mt-4">
             <span class="labels pb-1">Entregó*:</span>
             <input
               [ngClass]="{
@@ -538,7 +575,7 @@
               Campo obligatorio
             </small>
           </div>
-          <div class="col-sm-4 mt-4">
+          <div class="col-sm-4 form-group mt-4">
             <span class="labels pb-1">Ubicación*:</span>
             <select
               [ngClass]="{
@@ -569,7 +606,7 @@
               Campo obligatorio
             </small>
           </div>
-          <div class="col-sm-4 mt-4">
+          <div class="col-sm-4 form-group mt-4">
             <span class="labels pb-1">Horario para entregar artículos*:</span>
             <input
               [ngClass]="{
