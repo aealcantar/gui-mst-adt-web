@@ -5,21 +5,6 @@
 export const environment = {
   production: false,
   urlLogin: 'http://localhost:4200/login',
-
-
-  urlServCronicasReporte: 'http://localhost:8082',
-  // urlServCatalogos: 'http://localhost:8084',
-
-  urlServCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
-  urlServCronicas: 'http://localhost:8085',
-  urlServNotas: 'http://localhost:8086',
-  urlServEstudioMedicos: 'http://localhost:8088',
-
-  urlControlArticulos: 'http://localhost:8088',
-
-
-
-
   //Agenda
   urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
   //urlMSADCargasCatalogos: 'http://localhost:8080/msedsc-carga-catalogos',
@@ -39,12 +24,9 @@ export const environment = {
   msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
   msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
   msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
+  msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-control-articulos/api',
   msmtsOauth: 'http://localhost:8081/',
   urlServOauth: 'http://localhost:8081',
-
-
-
-
 
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {
@@ -52,7 +34,6 @@ export const environment = {
   },
   siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
   secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
-
 };
 
 /*

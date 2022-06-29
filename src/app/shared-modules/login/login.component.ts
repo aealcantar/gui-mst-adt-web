@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit {
             this.authService.isAuthenticatedObs$.next(true);
             // this.authService.guardarToken(result.access_token);
             // this.seguridadService.registrarUsuario(this.usuario);
-            this.router.navigate(["/catalogos"], { skipLocationChange: true });
+            this.router.navigate(["/busqueda"], { skipLocationChange: true });
           // },
           // (err: HttpErrorResponse) => {
           //   window.scroll(0,0);
