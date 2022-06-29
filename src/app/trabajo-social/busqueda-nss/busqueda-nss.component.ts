@@ -5,7 +5,7 @@ import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.int
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import * as momment from 'moment';
 import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface ';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
 
 @Component({
   selector: 'app-busqueda-nss',

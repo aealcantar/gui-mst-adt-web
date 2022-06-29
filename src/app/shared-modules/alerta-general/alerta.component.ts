@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertInfo } from '../models/app-alert.interface ';
+import { AlertInfo } from '../models/app-alert.interface';
 
 @Component({
   selector: 'app-alerta-general',
