@@ -15,7 +15,6 @@ import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/lista-
 import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio/nuevo-estudio-social-medico.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/consulta-estudio/estudio-medico-guardado.component';
 import { BusquedaNssComponent } from './busqueda-nss/busqueda-nss.component';
-import { AppTarjetaPresentacionComponent } from '../shared-modules/app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
 
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
@@ -48,7 +47,6 @@ const routes: Routes = [
   { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
   { path: 'consulta-cronica-grupal', component: ListaCronicaGrupalComponent },
   { path: 'busqueda', component: BusquedaNssComponent },
-  { path: 'tarjeta', component: AppTarjetaPresentacionComponent  },
 
   // Estudio medico social
   { path: 'lista-estudios', component: ConsultaEstudiosMedicosComponent },

@@ -12,10 +12,7 @@ import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } f
 import { TrabajadorSocialClinicoComponent } from './trabajador-social-clinico/trabajador-social-clinico.component';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { AlertaGeneralComponent } from './alerta-general/alerta.component';
-import { AppInfoBottomComponent } from './app-info-bottom/app-info-bottom.component';
-import { AppTarjetaPresentacionComponent } from './app-tarjeta-presentacion/app-tarjeta-presentacion.component';
 import { AppMenuComponent } from './app-menu/app-menu.component';
-import { AppAlertsComponent } from './app-alerts/app-alerts.component';
 import { AlertaComponent } from './alerta/alerta.component';
 import { MenugralComponent } from './menugral/menugral.component';
 import { FichapacienteComponent } from './fichapaciente/fichapaciente.component';
@@ -41,10 +38,7 @@ export const MY_FORMATS = {
     TrabajadorSocialClinicoComponent,
     AlertaGeneralComponent,
     AlertaComponent,
-    AppInfoBottomComponent,
-    AppTarjetaPresentacionComponent,
     AppMenuComponent,
-    AppAlertsComponent,
     FichapacienteComponent,
     MenugralComponent,
     HeaderMenuComponent
@@ -77,10 +71,7 @@ export const MY_FORMATS = {
     TrabajadorSocialClinicoComponent,
     AlertaGeneralComponent,
     AlertaComponent,
-    AppInfoBottomComponent,
-    AppTarjetaPresentacionComponent,
     AppMenuComponent,
-    AppAlertsComponent,
     FichapacienteComponent,
     MenugralComponent,
     DataTablesModule,
