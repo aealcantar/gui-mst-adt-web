@@ -40,14 +40,14 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
+      fechaInicial: [null, Validators.required],
+      fechaFinal: [null, Validators.required],
     });
-    this.authService.project$.next("Trabajo Social");
+    this.authService.setProjectObs("Trabajo social");
   }
 
   ngAfterViewInit(): void {
-    $('#calendarCESM1').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#calendarCESM1').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -63,7 +63,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
       }
     });
 
-    $('#calendarCESM2').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#calendarCESM2').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -82,6 +82,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   }
 
   loadDataTable(): void {
+    this.estudioMedicos = [];
     this.estudioMedicoService.getEstudiosMedicosByFechas(this.datesForm.get('fechaInicial')!.value, this.datesForm.get('fechaFinal')!.value).subscribe(
       (estudiosMedicosSociales: any) => {
         if (estudiosMedicosSociales && estudiosMedicosSociales.ArrayList.length > 0) {
@@ -108,12 +109,12 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     let params = {
       'estudioMedico': JSON.stringify(estudioMedico),
     }
-    this.router.navigate(["detalle-estudios-medicos"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
 
   }
 
   irNuevoEstudio() {
-    this.router.navigate(["agregar-estudios-medicos"], { skipLocationChange: true });
+    this.router.navigate(["nuevo-estudio-social-medico"], { skipLocationChange: true });
   }
 
   handleDatesChange() {

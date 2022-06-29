@@ -40,6 +40,19 @@ th {
   border-radius: 50%;
 }
 
+.errorimg {
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+.div-container-image {
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .pagination a {
   border: none;
@@ -73,9 +86,6 @@ a {
   color: #222;
 }
 
-.div-container-image {
-  margin-left: 25%;
-}
 
 .tituloServicio {
   color: #272829;
@@ -105,8 +115,7 @@ a {
 }
 
 .imgCalendar {
-  /* background-image: url("../../assets/images/calendario.svg"); */
-  background-color: url("../../../../assets/images/calendario.svg");
+  background-image: url("../../../../assets/images/calendario.svg");
   background-repeat: no-repeat;
   color: #191919;
   position: absolute;
@@ -144,6 +153,7 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
 }
+
 .bordesTablaFecha {
   border: 1px solid #ddd;
   text-align: left !important;
@@ -152,14 +162,14 @@ a {
 }
 
 
-.bordesTablaNombreDeEstudio{
+.bordesTablaNombreDeEstudio {
   border: 1px solid #ddd;
   text-align: left !important;
   padding-top: 14px;
   width: 50%;
 }
 
-.bordesTablaPersonalSOlicitante{
+.bordesTablaPersonalSOlicitante {
   border: 1px solid #ddd;
   text-align: left !important;
   padding-top: 14px;
@@ -185,12 +195,14 @@ a {
   width: 13%;
 
 }
+
 .bordesTablaAsistieron {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 13%;
 
 }
+
 .bordesTablaDescripcion {
   border: 1px solid #ddd;
   text-align: left !important;
@@ -257,10 +269,10 @@ a {
 .tabla>tfoot>tr>th,
 .tabla>thead>tr>td,
 .tabla>thead>tr>th {
-    padding: 1.8px;
-    line-height: 1.428571429;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+  padding: 1.8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
 }
 
 .buttonL {
