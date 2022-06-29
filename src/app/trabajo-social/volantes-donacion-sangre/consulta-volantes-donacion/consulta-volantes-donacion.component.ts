@@ -52,8 +52,8 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     }
 
     this.datesForm = new FormGroup({
-      'fechaInicial': new FormControl('', [Validators.required]),
-      'fechaFinal': new FormControl('', [Validators.required]),
+      'fechaInicial': new FormControl(null, [Validators.required]),
+      'fechaFinal': new FormControl(null, [Validators.required]),
     }, {updateOn: 'blur'});
   }
 
@@ -64,14 +64,11 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       this.nssPaciente = this.paciente.nss.toString();
       this.nomPaciente = this.paciente.paciente;
     }
-    this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
-    });
+  
   }
 
   ngAfterViewInit(): void {
-    $('#volantesInit').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#volantesInit').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -86,7 +83,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       }
     });
 
-    $('#volantesFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#volantesFinal').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {

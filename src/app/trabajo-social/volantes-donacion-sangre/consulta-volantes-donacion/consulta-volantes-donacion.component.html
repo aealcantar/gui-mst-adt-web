@@ -5,9 +5,9 @@
       Consulta de volante de donación de sangre
     </label>
         <div class="botones">
-            <button class="btn btn-primary btuser buttonL" style="border: solid 1px" (click)="irNuevoVolante()">
-        Nuevo registro
-      </button>
+            <button type=" submit " class="btn btn-primary btn-guardar " (click)="irNuevoVolante() ">
+        Nuevo Registro
+    </button>
         </div>
     </div>
     <div content style="padding-bottom: 3.7%;">
@@ -16,11 +16,11 @@
                 <div class="col-md-4">
                     <div class="form-group datepicker-group">
                         <label class="control-label tituloServicio" for="volantesInit">Fecha desde:</label>
-                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaInicial').valid}" volantesInit class="form-control" id="volantesInit" type="text" placeholder="dd/mm/aaaa" formControlName="fechaInicial" (change)="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaInicial').valid && datesForm.get('fechaInicial').dirty }" class="form-control" id="volantesInit" type="text" placeholder="dd/mm/aaaa" formControlName="fechaInicial">
                         <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                             <div class="imgCalendar"></div>
                         </span>
-                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaInicial').valid && (datesForm.get('fechaInicial').dirty || datesForm.get('fechaInicial').touched)">
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaInicial').valid && datesForm.get('fechaInicial').dirty">
                             Campo obligatorio
                         </small>
                     </div>
@@ -28,11 +28,11 @@
                 <div class="col-md-4">
                     <div class="form-group datepicker-group">
                         <label class="control-label tituloServicio" for="volantesFinal">Fecha hasta:</label>
-                        <input [ngClass]="{'form-control-error': !datesForm.get('fechaFinal').valid}" volantesFinal class="form-control" id="volantesFinal" type="text" placeholder="dd/mm/aaaa" formControlName="fechaFinal" (change)="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                        <input [ngClass]="{'form-control-error': !datesForm.get( 'fechaFinal').valid && datesForm.get( 'fechaFinal').dirty }" class="form-control" id="volantesFinal" type="text" placeholder="dd/mm/aaaa" formControlName="fechaFinal">
                         <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                              <div class="imgCalendar"></div>
                          </span>
-                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaFinal').valid && (datesForm.get('fechaFinal').dirty || datesForm.get('fechaFinal').touched)">
+                        <small class="form-text form-text-error Campo-obligatorio redColor" *ngIf="!datesForm.get('fechaFinal').valid && datesForm.get('fechaFinal').dirty">
                             Campo obligatorio
                         </small>
                     </div>
