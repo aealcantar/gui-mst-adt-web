@@ -6,7 +6,7 @@
     <div class="modal-content" style="border: 1px solid #CCCCCC ;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16); border-radius: 10px;">
       <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column"
-      style="border: 1px solid #CCCCCC ; border-bottom: 1px; 
+      style="border: 1px solid #CCCCCC ; border-bottom: 1px;
       border-radius: 10px 10px 0 0;">
         <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
         <div class="modal-title Atencin">Atención</div>
@@ -14,10 +14,10 @@
       <div class="line62" style="border-bottom: black;"></div>
       <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
 
-          <label class="titulo" style="font-weight: 500; font-size: 24px; 
+          <label class="titulo" style="font-weight: 500; font-size: 24px;
           line-height: 21.94px; text-align: center;" >¿Desea salir sin guardar</label>
           <br>
-          <label style="font-weight: 500; font-size: 24px; 
+          <label style="font-weight: 500; font-size: 24px;
           line-height: 21.94px; text-align: center;"> los cambios?</label>
 
       </div>
@@ -86,9 +86,9 @@
               <span class="spanInput">Grupo*:</span>
               <select class="form-control" formControlName="grupo" style="background-position-y: 5px;"
                 aria-label="Servicio">
-                <option class="select-font" [value]="'-1'" selected>Ingresar grupo</option>
-                <option class="select-font" [value]="grupo.cveEspecialidad" *ngFor="let grupo of grupos">
-                  {{ grupo.desActividad }}
+                <option class="select-font" [value]="''" selected>Ingresar grupo</option>
+                <option class="select-font" [value]="grupo.cve_grupo_programa" *ngFor="let grupo of grupos">
+                  {{ grupo.des_grupo_programa }}
                 </option>
               </select>
             </div>
@@ -98,7 +98,7 @@
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
               <input class="form-control" formControlName="fecha" id="calendarCronica" type="text"
-                placeholder="dd/mm/aaaa">
+                placeholder="dd/mm/aaaa" maxlength="10">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -110,8 +110,8 @@
               <span class="spanInput">Hora*:</span>
               <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
                 aria-label="Servicio">
-                <option class="select-font " [value]="'-1'" style="background-position-y: 10px;"
-                  placeholder="Ingresar ponentes" selected>Ingresar hora</option>
+                <option class="select-font " [value]="''" style="background-position-y: 10px;"
+                  selected>Ingresar hora</option>
                 <option class="select-font" [value]="1">10:00:00</option>
               </select>
             </div>
@@ -121,12 +121,12 @@
           <div class="col-md-6">
             <span class="spanInput">Ponentes*:</span>
             <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
-              placeholder="Ingresar ponentes" type="text" />
+             type="text" placeholder="Ingresar ponentes" maxlength="500"/>
           </div>
           <div class="col-md-6">
             <span class="spanInput">N&uacute;mero de asistentes*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="numParticipantesAsistieron"
-              placeholder="Ingresar n&uacute;mero de asistentes" type="number" />
+              placeholder="Ingresar n&uacute;mero de asistentes" type="number"/>
           </div>
         </div>
 
@@ -134,12 +134,12 @@
           <div class="col-md-6">
             <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" />
+              placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" maxlength="500"/>
           </div>
           <div class="col-md-6">
             <span class="spanInput">Material apoyo*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar material apoyo" type="text" />
+              placeholder="Ingresar material apoyo" type="text" maxlength="500"/>
           </div>
         </div>
       </div>
