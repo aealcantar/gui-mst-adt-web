@@ -88,7 +88,25 @@ export class FichapacienteComponent implements OnInit {
   }
 
   irControlDeArticulos() {
-    this.router.navigateByUrl('/consulta-articulos', {
+    this.router.navigateByUrl('/consulta-control-articulos', {
+      skipLocationChange: true,
+    })
+  }
+
+  irDonacionDeSangre() {
+    this.router.navigateByUrl('/consulta-volante', {
+      skipLocationChange: true,
+    })
+  }
+
+  irMinisterioPublico(){
+    this.router.navigateByUrl('/consulta-aviso-mp', {
+      skipLocationChange: true,
+    })
+  }
+
+  irSertificadoDefuncion(){
+    this.router.navigateByUrl('/consulta-volante', {
       skipLocationChange: true,
     })
   }
@@ -97,7 +115,7 @@ export class FichapacienteComponent implements OnInit {
     this.router.navigateByUrl('/buscacita', { skipLocationChange: true })
   }
 
-  regresar() { 
+  regresar() {
     this.router.navigateByUrl("/"+this.url, { skipLocationChange: true });
   }
 }
