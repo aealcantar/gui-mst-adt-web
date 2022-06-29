@@ -4,11 +4,14 @@ import { Usuario } from '../models/usuario.model';
 import { environment } from 'src/environments/environment';
 import { WebImssService } from './web-imss-service.service';
 import { Aplicacion } from '../models/aplicacion.model';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { MailResponse } from '../models/mail-response.model';
 import { AdmonPasswordRequest } from '../models/admon-password-request.model';
 import { AdmonPasswordResponse } from '../models/admon-password-response.model';
+import { RecaptchaResponse } from '../models/recaptcha-response-model';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +52,15 @@ export class AuthService {
     return '';
   }
 
+  getProjectObs(): Observable<string> {
+    return this.project$.asObservable();
+  }
+
+  setProjectObs(proyecto: string) {
+    this.project$.next("");
+    this.project$.next(proyecto);
+  }
+
   setNombreUsuarioActivo(name: string) {
     this.nombreUsuarioActivo = name;
   }
@@ -58,15 +70,15 @@ export class AuthService {
   }
   
   actualizarPassword(admonPasswordRequest:AdmonPasswordRequest){
-     return this.http.post<AdmonPasswordResponse>(`${environment.urlServOauth}/api/aplicacion/actualizarPassword/`, admonPasswordRequest);
+     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}actualizarPassword/`, admonPasswordRequest);
   }
  
   getAppAccesbyAppName(name:string){
-    return this.http.get<Aplicacion>(`${environment.urlServOauth}/api/aplicacion/app?appName=${name}`);
+    return this.http.get<Aplicacion>(`${environment.msmtsOauth}app?appName=${name}`);
   }
 
   getUserData(aliasUsuario?:string){
-    return this.http.get<Usuario>(`${environment.urlServOauth}/api/aplicacion/getUserSession?aliasUsuario=${aliasUsuario}`);
+    return this.http.get<Usuario>(`${environment.msmtsOauth}getUserSession?aliasUsuario=${aliasUsuario}`);
   }
 
   validateRecaptcha(response: string) {
@@ -138,17 +150,17 @@ export class AuthService {
 
   guardarUsuarioEnSesion(usuario: any): void {
     this._usuario = new Usuario();
-    this._usuario.strEmail = usuario.correo;
-    this._usuario.strRol = usuario.strRol;
-    this._usuario.strNombres = usuario.nombre;
-    this._usuario.strApellidoP = usuario.apellidoPaterno;
-    this._usuario.strApellidoM = usuario.apellidoMaterno;
-    this._usuario.matricula = usuario.matricula;
-    this._usuario.rolUser = usuario.rol.cveRol;
-    this._usuario.nameRolUser = usuario.rol.nomRol;
-    this._usuario.puesto = usuario.puesto;
-    this._usuario.unidadMedica = usuario.unidadMedica;
-    this.usuario.cedulaProfesional = usuario.cedulaProfesional;
+    this._usuario.strEmail = "antonio.alcantar@people-media.com.mx";
+    this._usuario.strRol = "Trabajador social";
+    this._usuario.strNombres = "Antonio Esteban";
+    this._usuario.strApellidoP = "Alcántar";
+    this._usuario.strApellidoM = "Valencia";
+    this._usuario.matricula = "15008669";
+    this._usuario.rolUser = 1;
+    this._usuario.nameRolUser = "Asistente Social";
+    this._usuario.puesto = "Asistente";
+    this._usuario.unidadMedica = "UMF 7";
+    this.usuario.cedulaProfesional = "24021992";
     this._usuario.cveUsuario = 1;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
@@ -205,7 +217,7 @@ export class AuthService {
 
   async obtenerUsuario(usuario: string, contrasena: string) {
 
-    const urlEndpoint = environment.urlServOauth + '/app/' + usuario;
+    const urlEndpoint = environment.msmtsOauth + '/app/' + usuario;
     let respuesta: any = await this.webService.getAsync(urlEndpoint);
     
     if (respuesta != null) {

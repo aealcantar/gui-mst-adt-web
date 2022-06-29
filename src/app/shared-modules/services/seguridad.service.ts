@@ -1,7 +1,7 @@
 import { Subject,Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { LoginData } from '../models/login-data.model';
+import { LoginData } from '../models/login-data.model'; 
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';

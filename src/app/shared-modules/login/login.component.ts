@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SeguridadService } from '../seguridad.service';
+import { SeguridadService } from '../services/seguridad.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
-import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-import { Aplicacion } from 'src/app/shared-modules/models/aplicacion.model';
-import { Usuario } from 'src/app/shared-modules/models/usuario.model';
-import { RecaptchaResponse } from 'src/app/shared-modules/models/recaptcha-response-model';
-import { MailService } from 'src/app/shared-modules/services/mail-service.service';
+import { objAlert } from '../alerta/alerta.interface';
+import { AuthService } from '../services/auth-service.service';
+import { Aplicacion } from '../models/aplicacion.model';
+import { Usuario } from '../models/usuario.model';
+import { MailService } from '../services/mail-service.service';
+import { RecaptchaResponse } from '../models/recaptcha-response-model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
@@ -73,12 +73,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
-      this.aplicacion = resp;
-      console.log(" app " + this.aplicacion.cveUsuario);
-    }, (error: HttpErrorResponse) => {
-      console.error("Error: ", error);
-    });
+    // this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
+    //   this.aplicacion = resp;
+    //   console.log(" app " + this.aplicacion.cveUsuario);
+    // }, (error: HttpErrorResponse) => {
+    //   console.error("Error: ", error.message);
+    // });
   }
 
   public send(form: NgForm): void {
@@ -113,36 +113,40 @@ export class LoginComponent implements OnInit {
       try {
         console.log(`Token [${this.token}] generated`);
         this.usuario.strEmail = this.logindata.get("usuario")?.value;
-        this.usuario.strPassword = this.logindata.get("password")?.value;
-        this.authService.login(this.usuario, this.aplicacion).subscribe(
-          (result) => {
-            console.log(result);
-            this.authService.getUserData(this.usuario.strEmail).subscribe(
-              (response: any) => {
-                this.authService.guardarUsuarioEnSesion(response);
-                this.authService.userLogged$.next(true);
-                this.authService.isAuthenticatedObs$.next(true);
-              }
-            );
-            this.authService.guardarToken(result.access_token);
-            this.seguridadService.registrarUsuario(this.usuario);
-            this.router.navigate(["/busqueda"], { skipLocationChange: true });
-          },
-          (err: HttpErrorResponse) => {
-            window.scroll(0,0);
-            console.log("error " + err.error.message);
-            if (err.error.message == undefined) {
-              this.showError("<strong>Error.</strong> Servicio no esta disponible. Favor de reportarlo!.");
-              return;
-            }
-            if (err.status == 400) {
-              this.strMsjError = "" + err.status;
-            } else {
-              this.strMsjError = "" + err.status;
-            }
-            this.showError(err.error.message);
-          }
-        );
+        // this.usuario.strPassword = this.logindata.get("password")?.value;
+        // this.authService.login(this.usuario, this.aplicacion).subscribe(
+        //   (result) => {
+        //     console.log(result);
+            // this.authService.getUserData(this.usuario.strEmail).subscribe(
+            //   (response: any) => {
+            //     this.authService.guardarUsuarioEnSesion(response);
+            //     this.authService.userLogged$.next(true);
+            //     this.authService.isAuthenticatedObs$.next(true);
+            //   }
+            // );
+            let usuario:any;
+            this.authService.guardarUsuarioEnSesion(usuario);
+            this.authService.userLogged$.next(true);
+            this.authService.isAuthenticatedObs$.next(true);
+            // this.authService.guardarToken(result.access_token);
+            // this.seguridadService.registrarUsuario(this.usuario);
+            this.router.navigate(["/catalogos"], { skipLocationChange: true });
+          // },
+          // (err: HttpErrorResponse) => {
+          //   window.scroll(0,0);
+          //   console.log("error " + err.error.message);
+          //   if (err.error.message == undefined) {
+          //     this.showError("<strong>Error.</strong> Servicio no esta disponible. Favor de reportarlo!.");
+          //     return;
+            // }
+      //       if (err.status == 400) {
+      //         this.strMsjError = "" + err.status;
+      //       } else {
+      //         this.strMsjError = "" + err.status;
+      //       }
+      //       this.showError(err.error.message);
+      //     }
+      //   );
       } catch (error) {
         // this.showError();
       }

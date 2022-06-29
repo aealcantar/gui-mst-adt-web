@@ -1,15 +1,3 @@
-// export class Usuario {
-//     public email: string;
-//     public password: string;
-
-//     constructor(correo: string, pass: string) {
-//         this.email = correo;
-//         this.password = pass;
-//      }
-
-
-// }
-
 export class Usuario {
     public idUsuario?: number | undefined;
     public strEmail?: string = "";

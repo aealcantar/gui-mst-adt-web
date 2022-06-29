@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SeguridadService } from '../seguridad.service';
+import { SeguridadService } from '../services/seguridad.service';
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
-import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-import { AdmonPasswordRequest } from 'src/app/shared-modules/models/admon-password-request.model';
-import { AdmonPasswordResponse } from 'src/app/shared-modules/models/admon-password-response.model';
-import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
+import { AuthService } from '../services/auth-service.service';
+import { AdmonPasswordResponse } from '../models/admon-password-response.model';
+import { AdmonPasswordRequest } from '../models/admon-password-request.model';
+import { objAlert } from '../models/alerta.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
