@@ -9,7 +9,7 @@
 
 .Rectangle-855 {
 
-width: 100%;
+  width: 100%;
   height: 145px;
   background-color: white;
   border-top-left-radius: 15px;
@@ -117,6 +117,7 @@ width: 100%;
   text-align: left;
   color: #222;
 }
+
 .umf {
   width: 375px;
   height: 15px;
@@ -135,19 +136,19 @@ width: 100%;
 
 
 .ciudadUnidadMedica {
-width: 375px;
-height: 27px;
-flex-grow: 0;
-margin: 4px 0 0 0px;
-font-family: Montserrat;
-font-size: 15px;
-font-weight: 600;
-font-stretch: normal;
-font-style: SemiBold;
-line-height: normal;
-letter-spacing: normal;
-text-align: left;
-color: #222;
+  width: 375px;
+  height: 27px;
+  flex-grow: 0;
+  margin: 4px 0 0 0px;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: SemiBold;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
 }
 
 
@@ -184,8 +185,8 @@ color: #222;
 }
 
 .divDetallePaciente {
-/* width: 117.5%; */
-width: 96.5%;
+  /* width: 117.5%; */
+  width: 96.5%;
   height: 71px;
   margin-top: 73px;
   margin-right: 0px;
@@ -211,7 +212,7 @@ width: 96.5%;
 
 .pacienteDetalleDiv {
 
-margin-left: 77px;
+  margin-left: 77px;
   z-index: 4;
   display: flex;
   /* margin-left: 68px; */
@@ -232,7 +233,8 @@ margin-left: 77px;
   text-align: left;
   color: #222;
 }
-.divMenuHamburg{
+
+.divMenuHamburg {
 
   width: 73px;
   height: 71px;
@@ -242,31 +244,38 @@ margin-left: 77px;
 
 }
 
-.menuSinSeleccionar{
-font-size: 16px;
-font-family: Montserrat;
-color:#000000;
-font-weight: 400;
-text-align: left;
-vertical-align: top;
-line-height: 20px;
-line-height: 100%;
-text-decoration: none;
+.menuSinSeleccionar {
+  font-size: 16px;
+  font-family: Montserrat;
+  color: #000000;
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+  line-height: 20px;
+  line-height: 100%;
+  text-decoration: none;
 }
 
-.contenedorItems{
-height: 18px;
+.contenedorItems {
+  height: 18px;
 }
-.contenedorItems:hover{
-background-color: #9D2449;
-height: 18px;
-color: white;
-cursor: pointer;
+
+.contenedorItems:hover {
+  background-color: #9D2449;
+  height: 18px;
+  color: white;
+  cursor: pointer;
 }
 
 a:hover {
-color: white;
-cursor: pointer;
+  color: white;
+  cursor: pointer;
 }
 
 
+.botonRegresar {
+  width: 37px;
+  height: 34px;
+  object-fit: contain;
+  cursor: pointer;
+}

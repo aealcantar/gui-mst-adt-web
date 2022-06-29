@@ -1,165 +1,169 @@
 <!-- <app-alerta-general [objAlerta]="alert"></app-alerta-general> -->
-<!-- <app-fichapaciente [mostrarBtnAtras]="true" [url]="'consulta-control-articulos'"></app-fichapaciente> -->
-<app-card-template>
-  <div
-    header
-    class="flex justify-content-between align-items-center nuevoEstudio"
-  >
-    <span class="tituloHeader pb-3 pt-5"> Nuevo control de artículos </span>
-  </div>
+  <app-fichapaciente [mostrarBtnAtras]="true" [url]="'consulta-control-articulos'"></app-fichapaciente> 
 
-  <div content>
-    <div class="contenido height154 mt-4 mb-5">
-      <div class="row p-5">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Número de folio:</span>
-          <span class="labelDetail"> {{ detalle.noFolioControl }}</span>
-        </div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.fecha }}</span>
-        </div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Número de cama:</span>
-          <span class="labelDetail"> {{ detalle.noCama }}</span>
-        </div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Servicio:</span>
-          <span class="labelDetail"> {{ detalle.servicio }}</span>
-        </div>
-
-        <div class="col-sm-3 form-group pt-5">
-          <span class="labels pb-1">Teléfono(s):</span>
-          <span class="labelDetail"> {{ detalle.telefono }}</span>
+  <app-alerta [objAlerta]="alert"></app-alerta>
+   
+  <app-card-template>
+    <div
+      header
+      class="flex justify-content-between align-items-center nuevoEstudio"
+    >
+      <span class="tituloHeader pb-3 pt-5"> Nuevo control de artículos </span>
+    </div>
+  
+    <div content>
+      <div class="contenido height154 mt-4 mb-5">
+        <div class="row p-5">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-2 form-group pt-5">
+            <span class="labels pb-1">Número de folio:</span>
+            <span class="labelDetail"> {{ detalle.noFolioControl }}</span>
+          </div>
+          <div class="col-sm-2 form-group pt-5">
+            <span class="labels pb-1">Fecha:</span>
+            <span class="labelDetail"> {{ detalle.fecha }}</span>
+          </div>
+          <div class="col-sm-2 form-group pt-5">
+            <span class="labels pb-1">Número de cama:</span>
+            <span class="labelDetail"> {{ detalle.noCama }}</span>
+          </div>
+          <div class="col-sm-2 form-group pt-5">
+            <span class="labels pb-1">Servicio:</span>
+            <span class="labelDetail"> {{ detalle.servicio }}</span>
+          </div>
+  
+          <div class="col-sm-3 form-group pt-5">
+            <span class="labels pb-1">Teléfono(s):</span>
+            <span class="labelDetail"> {{ detalle.telefono }}</span>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!--  Articulos recibidos -->
-    <div class="contenido height154 mt-5 mb-5">
-      <div class="row pl-5 pr-5 mt-5">
-        <div class="mt-3 ml-4">
-          <table
-            class="table table-bordered tableArticulos"
-            style="max-width: 750px"
+  
+      <!--  Articulos recibidos -->
+      <div class="contenido height154 mt-5 mb-5">
+        <div class="row pl-5 pr-5 mt-5">
+          <div class="mt-3 ml-4">
+            <table
+              class="table table-bordered tableArticulos"
+              style="max-width: 750px"
+            >
+              <thead>
+                <th>
+                  <span class="ml-5">Nombre</span>
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let valor of articulosArray">
+                  <td>
+                    <span class="ml-4"> {{ valor }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+        <div class="row pl-5 pr-5">
+          <div class="col-sm-6 form-group">
+            <span class="labels pb-1"
+              >Nombre de quien recibe Trabajador(a) Social:</span
+            >
+            <span class="labelDetail"> {{ detalle.trabajadorNombreRecibe }}</span>
+          </div>
+          <div class="col-sm-6 form-group">
+            <span class="labels pb-1">Nombre de quién entrega Enfermería:</span>
+            <span class="labelDetail">
+              {{ detalle.enfermeriaNombreEntrega }}</span
+            >
+          </div>
+        </div>
+        <div class="row pl-5 pr-5 mb-5">
+          <div class="col-sm-6 form-group pt-5">
+            <span class="labels pb-1">Ubicación:</span>
+            <span class="labelDetail"> {{ detalle.ubicacion }}</span>
+          </div>
+          <div class="col-sm-6 form-group pt-5">
+            <span class="labels pb-1">Horario para entrega de artículos:</span>
+            <span class="labelDetail"> {{ detalle.horarioEntregaArticulo }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- recepcion resguardo -->
+      <div class="contenido height154 mt-5 mb-5">
+        <div class="row pl-5 pr-5 mt-5">
+          <div class="col-md-7 form-group pt-5">
+            <span class="title1">
+              Recepción de artículos para su resguardo en subdirección
+              administrativa:
+            </span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5">
+          <div class="col-sm-4 form-group">
+            <span class="labels pb-1">Fecha:</span>
+            <span class="labelDetail"> {{ detalle.resguardoFecha }}</span>
+          </div>
+          <div class="col-sm-4 form-group">
+            <span class="labels pb-1">Hora:</span>
+            <span class="labelDetail"> {{ detalle.resguardoHora }}</span>
+          </div>
+          <div class="col-sm-4 form-group">
+            <span class="labels pb-1">Recibió:</span>
+            <span class="labelDetail"> {{ detalle.resguardoNombreRecibe }}</span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5 mb-5">
+          <div class="col-sm-6 form-group pt-3">
+            <span class="labels pb-1">Entregó*:</span>
+            <span class="labelDetail"> {{ detalle.resguardoNombreEntrega }}</span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5 mt-5">
+          <div class="col-md-7 form-group pt-5">
+            <span class="title1"> Recepción de artículos completos: </span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5">
+          <div class="col-sm-4 form-group">
+            <span class="labels pb-1">Fecha:</span>
+            <span class="labelDetail"> {{ detalle.recepcionFecha }}</span>
+          </div>
+          <div class="col-sm-4 form-group">
+            <span class="labels pb-1">Hora:</span>
+            <span class="labelDetail"> {{ detalle.recepcionHora }}</span>
+          </div>
+          <div class="col-sm-4 form-group">
+            <span class="labels pb-1">Recibió:</span>
+            <span class="labelDetail"> {{ detalle.recepcionNombreRecibe }}</span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5 mb-5">
+          <div class="col-sm-4 form-group pt-3">
+            <span class="labels pb-1">Entregó:</span>
+            <span class="labelDetail"> {{ detalle.recepcionNombreEntrega }}</span>
+          </div>
+          <div class="col-sm-4 form-group pt-3">
+            <span class="labels pb-1">Ubicación:</span>
+            <span class="labelDetail"> {{ detalle.recepcionUbicacion }}</span>
+          </div>
+          <div class="col-sm-4 form-group pt-3">
+            <span class="labels pb-1">Horario para entregar artículos:</span>
+            <span class="labelDetail"> {{ detalle.recepcionHorarioEntregaArticulo }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mr-3">
+          <button
+            class="btn btn-primary btuser pull-right"
+            (click)="impirmiControlArticulos()"
           >
-            <thead>
-              <th>
-                <span class="ml-5">Nombre</span>
-              </th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let valor of articulosArray">
-                <td>
-                  <span class="ml-4"> {{ valor }}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="row pl-5 pr-5">
-        <div class="col-sm-6 form-group">
-          <span class="labels pb-1"
-            >Nombre de quien recibe Trabajador(a) Social:</span
-          >
-          <span class="labelDetail"> {{ detalle.trabajadorNombreRecibe }}</span>
-        </div>
-        <div class="col-sm-6 form-group">
-          <span class="labels pb-1">Nombre de quién entrega Enfermería*:</span>
-          <span class="labelDetail">
-            {{ detalle.enfermeriaNombreEntrega }}</span
-          >
-        </div>
-      </div>
-      <div class="row pl-5 pr-5 mb-5">
-        <div class="col-sm-6 form-group pt-5">
-          <span class="labels pb-1">Ubicación*:</span>
-          <span class="labelDetail"> {{ detalle.ubicacion }}</span>
-        </div>
-        <div class="col-sm-6 form-group pt-5">
-          <span class="labels pb-1">Horario para entrega de artículos*:</span>
-          <span class="labelDetail"> {{ detalle.horarioEntregaArticulo }}</span>
+            Imprimir
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- recepcion resguardo -->
-    <div class="contenido height154 mt-5 mb-5">
-      <div class="row pl-5 pr-5 mt-5">
-        <div class="col-md-7 form-group pt-5">
-          <span class="title1">
-            Recepción de artículos para su resguardo en subdirección
-            administrativa:
-          </span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5">
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.resguardoFecha }}</span>
-        </div>
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Hora:</span>
-          <span class="labelDetail"> {{ detalle.resguardoHora }}</span>
-        </div>
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Recibió:</span>
-          <span class="labelDetail"> {{ detalle.resguardoNombreRecibe }}</span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5 mb-5">
-        <div class="col-sm-6 form-group pt-3">
-          <span class="labels pb-1">Entregó*:</span>
-          <span class="labelDetail"> {{ detalle.resguardoNombreEntrega }}</span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5 mt-5">
-        <div class="col-md-7 form-group pt-5">
-          <span class="title1"> Recepción de artículos completos: </span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5">
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.recepcionFecha }}</span>
-        </div>
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Hora:</span>
-          <span class="labelDetail"> {{ detalle.recepcionHora }}</span>
-        </div>
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Recibió:</span>
-          <span class="labelDetail"> {{ detalle.recepcionNombreRecibe }}</span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5 mb-5">
-        <div class="col-sm-4 form-group pt-3">
-          <span class="labels pb-1">Entregó*:</span>
-          <span class="labelDetail"> {{ detalle.recepcionNombreEntrega }}</span>
-        </div>
-        <div class="col-sm-4 form-group pt-3">
-          <span class="labels pb-1">Ubicación:</span>
-          <span class="labelDetail"> {{ detalle.recepcionUbicacion }}</span>
-        </div>
-        <div class="col-sm-4 form-group pt-3">
-          <span class="labels pb-1">Horario para entregar artículos:</span>
-          <span class="labelDetail"> {{ detalle.recepcionHorarioEntregaArticulo }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col mr-3">
-        <button
-          class="btn btn-primary btuser pull-right"
-          (click)="impirmiControlArticulos()"
-        >
-          Imprimir
-        </button>
-      </div>
-    </div>
-  </div>
-</app-card-template>
-<app-trabajador-social-clinico></app-trabajador-social-clinico>
+  </app-card-template>
+  <app-trabajador-social-clinico></app-trabajador-social-clinico>
+  

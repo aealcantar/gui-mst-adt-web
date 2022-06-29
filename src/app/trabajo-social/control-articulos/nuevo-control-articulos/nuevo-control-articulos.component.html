@@ -1,5 +1,4 @@
-<!-- <app-alerta-general [objAlerta]="alert"></app-alerta-general> -->
-<app-fichapaciente></app-fichapaciente>
+ <app-fichapaciente></app-fichapaciente>
 <app-card-template>
   <div
     header
@@ -30,7 +29,7 @@
               formControlName="noFolioControl"
               placeholder=""
               type="text"
-
+             
               readonly="true"
             />
             <small
@@ -91,16 +90,16 @@
                 'form-control-error':
                   submitted && formNuevoArticulo.controls.servicio.errors
               }"
-              class="form-control"
+              class="form-control styleselect"
               id="servicio"
               formControlName="servicio"
               (change)="onChangeServicio()"
             >
-              <option [value]="''" selected disabled>
+              <option [value]="''" selected disabled class="select-font optionSelect ">
                 Seleccionar servicio
               </option>
               <option
-                class="select-font"
+              class="select-font optionSelect"
                 [value]="item.cve_especialidad"
                 *ngFor="let item of listaServicios"
               >
@@ -247,14 +246,14 @@
                 'form-control-error':
                   submitted && formNuevoArticulo.controls.ubicacion.errors
               }"
-              class="form-control"
+              class="form-control styleselect"
               id="ubicacion"
               formControlName="ubicacion"
               name="ubicacion"
             >
-              <option [value]="''" selected disabled>Seleccionar ubicación</option>
+              <option [value]="''" selected disabled  class="select-font optionSelect ">Seleccionar ubicación</option>
               <option
-                class="select-font"
+              class="select-font optionSelect "
                 [value]="item.cve_ubicacion"
                 *ngFor="let item of listaUbicacion"
               >
@@ -311,7 +310,7 @@
                 class="form-control hasDatepicker"
                 id="horarioEntregaArticulo"
                 formControlName="horarioEntregaArticulo"
-                placeholder="Ingresa hora"
+                placeholder="Ingresa hora" 
                 maxlength="5"
               />
               <span class="glyphicon fontIcono" aria-hidden="true">
@@ -326,7 +325,7 @@
             >
               Campo obligatorio
             </small>
-
+          
           </div>
         </div>
       </div>
@@ -392,7 +391,7 @@
                 class="form-control hasDatepicker"
                 id="resguardoHora"
                 formControlName="resguardoHora"
-                placeholder="Ingresa hora"
+                placeholder="Ingresa hora" 
                 maxlength="5"
               />
               <span class="glyphicon fontIcono" aria-hidden="true">
@@ -469,10 +468,10 @@
                 class="calendario form-control"
                 formControlName="recepcionFecha"
                 id="recepcionFecha"
-                type="text"
+                type="text" 
                 placeholder="Ingresar fecha"
                 ng-pattern="/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/"
-
+             
                              />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img
@@ -489,68 +488,73 @@
             >
               Campo obligatorio
             </small>
-          </div>
-
-          <div class="col-sm-4 form-group ">
+          </div>   
+          <div class="col-sm-4">
             <div class="datepicker-group ">
-              <label class="control-label labels" for="calendarYear"
-                >Hora*:</label
-              >
+              <label class="control-label labels" 
+                >Hora*:</label>
               <input
-                type="text"
                 [ngClass]="{
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.recepcionHora.errors
                 }"
-                class="form-control hasDatepicker"
-                id="recepcionHora"
+                class="calendario form-control"
+				id="recepcionHora"
                 formControlName="recepcionHora"
                 placeholder="Ingresa hora"
                 maxlength="5"
-              />
+               
+                             />
               <span class="glyphicon fontIcono" aria-hidden="true">
-                <img src="assets/images/clock.svg" height="21px" class="icono"
+                <img
+                  src="assets/images/clock.svg"
+                  height="21px"
+                  class="icono"
               /></span>
             </div>
             <small
               *ngIf="
-                submitted && formNuevoArticulo.controls.recepcionHora.errors
+               submitted && formNuevoArticulo.controls.recepcionHora.errors
               "
               class="form-text form-text-error Campo-obligatorio"
             >
               Campo obligatorio
             </small>
           </div>
-
-          <div class="col-sm-4 form-group">
-            <span class="labels pb-1">Recibió*:</span>
+          <div class="col-sm-4">
+           
+            <label class="control-label labels"  
+              >Recibió*:</label
+            >
             <input
               [ngClass]="{
                 'form-control-error':
                   submitted &&
-                  formNuevoArticulo.controls.recepcionNombreRecibe.errors
-              }"
-              type="text"
-              class="form-control"
-              formControlName="recepcionNombreRecibe"
-              id="recepcionNombreRecibe"
-              placeholder="Nombre de quien recibió"
-              maxlength="150"
-            />
-            <small
-              *ngIf="
-                submitted &&
                 formNuevoArticulo.controls.recepcionNombreRecibe.errors
-              "
-              class="form-text form-text-error Campo-obligatorio"
-            >
-              Campo obligatorio
-            </small>
-          </div>
+              }"
+             type="text"
+        class="form-control"
+        formControlName="recepcionNombreRecibe"
+        id="recepcionNombreRecibe"
+        placeholder="Nombre de quien recibió"
+        maxlength="150"
+                           />
+           
+         
+          <small
+            *ngIf="
+             submitted &&
+              formNuevoArticulo.controls.recepcionNombreRecibe.errors
+            "
+            class="form-text form-text-error Campo-obligatorio"
+          >
+            Campo obligatorio
+          </small>
+        </div>
         </div>
 
-        <div class="row pl-5 pr-5 mb-5 pb-3">
-          <div class="col-sm-4 form-group mt-4">
+        <div class="row pl-5 pr-5  pb-1">
+          <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Entregó*:</span>
             <input
               [ngClass]="{
@@ -575,7 +579,7 @@
               Campo obligatorio
             </small>
           </div>
-          <div class="col-sm-4 form-group mt-4">
+          <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Ubicación*:</span>
             <select
               [ngClass]="{
@@ -583,13 +587,13 @@
                   submitted &&
                   formNuevoArticulo.controls.recepcionUbicacion.errors
               }"
-              class="form-control"
+              class="form-control styleselect"
               id="ubicacion"
               formControlName="recepcionUbicacion"
             >
-              <option [value]="''" selected disabled>Seleccionar ubicación</option>
+              <option [value]="''" selected disabled class="select-font optionSelect "> Seleccionar ubicación</option>
               <option
-                class="select-font"
+              class="select-font optionSelect "
                 [value]="item.cve_ubicacion"
                 *ngFor="let item of listaUbicacion"
               >
@@ -606,7 +610,7 @@
               Campo obligatorio
             </small>
           </div>
-          <div class="col-sm-4 form-group mt-4">
+          <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Horario para entregar artículos*:</span>
             <input
               [ngClass]="{
@@ -677,7 +681,7 @@
     <button
       class="btn btn-danger btuser"
       type="button"
-      (click)="soloCerrarVentanaEmergente()"
+      mat-dialog-close
     >
       Cancelar
     </button>
@@ -685,6 +689,7 @@
       type="button"
       (click)="cancelarSinGuardar()"
       class="btn btn-primary buttonL btnGuardar"
+      mat-dialog-close
     >
       Aceptar
     </button>

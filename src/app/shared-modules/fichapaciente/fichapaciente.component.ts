@@ -15,7 +15,8 @@ export class FichapacienteComponent implements OnInit {
   isCollapsed: boolean = true
   executed: boolean = false
   months: any
-
+  @Input() mostrarBtnAtras:boolean=false;
+  @Input() url:string="";
   constructor(
     private tarjetaServce: AppTarjetaPresentacionService,
     private router: Router,
@@ -94,5 +95,9 @@ export class FichapacienteComponent implements OnInit {
 
   irAgenda() {
     this.router.navigateByUrl('/buscacita', { skipLocationChange: true })
+  }
+
+  regresar() { 
+    this.router.navigateByUrl("/"+this.url, { skipLocationChange: true });
   }
 }
