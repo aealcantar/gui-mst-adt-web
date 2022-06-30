@@ -4,7 +4,8 @@ import { map, share } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CronicaGrupalService } from "../../services/cronica-grupal.service";
-import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
+// import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
 
 @Component({
   selector: 'app-cronica-guardada',
@@ -14,7 +15,7 @@ import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
 
 export class CronicaGuardadaComponent implements OnInit, OnDestroy {
 
-  alert!: objAlert;
+  alert!: AlertInfo;
 
   time = new Date();
   rxTime = new Date();
@@ -40,6 +41,7 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
       'alert-success',
       '',
     );
+
     // this.showSucces("¡La información se guardó con éxito!");
     this.route.queryParamMap.subscribe((params: any) => {
       this.cronica = JSON.parse(params.getAll('cronica'));
@@ -79,7 +81,7 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
       if(funxion != null){
         funxion();
       }
-    }, 2000);
+    }, 99999992000);
   }
 
   regresar() {
