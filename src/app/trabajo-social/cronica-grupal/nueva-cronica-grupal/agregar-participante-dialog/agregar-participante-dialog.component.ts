@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Paciente } from 'src/app/shared-modules/models/paciente.model';
 import { Participante } from 'src/app/shared-modules/models/participante.model';
 import { ServiceService } from 'src/app/trabajo-social/services/busqueda-nss.service';
-
+import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
 declare var $: any;
 declare var $gmx: any;
 
@@ -30,6 +30,7 @@ export class AgregarParticipanteDialogComponent implements OnInit {
     public alertVisible: boolean = false;
     public alertTipo: string = "";
     public errorBusqueda: boolean = false;
+    alert!: objAlert;
 
     public editForm: FormGroup = this.fb.group({
         nssPaciente: [null,
@@ -92,9 +93,11 @@ export class AgregarParticipanteDialogComponent implements OnInit {
                         this.getCountChecked();
                     }
 
-                }, error: (err) => {
-                    this.muestraAlerta('<strong>Error de red.</strong> No fue posible conectar con la API de busqueda',
-                        'alert-danger', null
+                }, error: (err: any) => {
+                    this.muestraAlerta(
+                      'No fue posible conectar con la API de busqueda',
+                      'alert-danger',
+                      'Error de red. ',
                     );
                     console.log(err);
                     this.errorBusqueda = true;
@@ -125,8 +128,10 @@ export class AgregarParticipanteDialogComponent implements OnInit {
                 }
             });
         } else {
-            this.muestraAlerta('<strong>Error.</strong>¡La longitud del NSS no es correcta, favor de verificar!',
-                'alert-danger', null
+            this.muestraAlerta(
+              '¡La longitud del NSS no es correcta, favor de verificar!',
+              'alert-danger',
+              'Error',
             );
         }
     }
@@ -194,20 +199,24 @@ export class AgregarParticipanteDialogComponent implements OnInit {
         return this.otrosForm.get("nombres") as FormArray
     }
 
-    muestraAlerta(mensaje: string, estilo: string, funxion: any) {
-
-        this.alertMensaje = mensaje;
-        this.alertTipo = estilo;
-        this.alertVisible = true;
-
-        setTimeout(() => {
-            this.alertMensaje = mensaje;
-            this.alertTipo = estilo;
-            this.alertVisible = false;
-
-            if (funxion != null) {
-                funxion();
-            }
-        }, 5000);
+    muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+    //   this.alert = new objAlert;
+      this.alert = {
+        message: mensaje,
+        type: estilo,
+        visible: true,
+        typeMsg: tipoMsj
+      };
+      setTimeout(() => {
+        this.alert = {
+          message: '',
+          type: 'custom',
+          visible: false,
+        };
+        if(funxion != null){
+          funxion();
+        }
+      }, 2000);
     }
+
 }

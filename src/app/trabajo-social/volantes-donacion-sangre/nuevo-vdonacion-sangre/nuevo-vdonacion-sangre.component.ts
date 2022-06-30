@@ -33,7 +33,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/consulta-volantes", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-volante", { skipLocationChange: true });
     $('#content').modal('hide');
   }
 }

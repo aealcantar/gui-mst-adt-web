@@ -152,7 +152,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     //let params = {
     //  'objetoAEnviar': null,
     //}
-    this.router.navigate(["nuevo-volante"], {skipLocationChange: true });
+    this.router.navigate(["agregar-volante"], {skipLocationChange: true });
   }
 
   sortBy(columnaId: string, order: string, type: string) {

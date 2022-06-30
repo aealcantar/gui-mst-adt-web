@@ -1,6 +1,6 @@
 export class Ciudad {
-  idCiudad?: number;
-  idEstado?: number;
-  idDelegacionMunicipio?: number;
-  nomCiudad?: string;
+  cve_ciudad?: string;
+  cve_estado?: string;
+  cve_delegacion_municipio?: string;
+  des_ciudad?: string;
 }

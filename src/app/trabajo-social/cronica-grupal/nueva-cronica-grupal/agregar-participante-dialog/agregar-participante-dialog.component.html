@@ -1,11 +1,4 @@
-<div *ngIf="alertVisible">
-    <div class="alert alert-dismissible alertCompl" [ngClass]="alertTipo">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        <div [innerHTML]="alertMensaje"></div>
-    </div>
-</div>
-
+<app-alerta-general></app-alerta-general>
 <img class="button-close" mat-button src="../../../../../assets/images/icon-close.svg" (click)="cancelar();">
 
 <div class="modal-container">
@@ -67,8 +60,7 @@
                         <tr>
                             <!-- <th><img style="cursor: pointer;" src="../../../assets/images/checkbox.svg"></th> -->
                             <th>
-                                <input type="checkbox" [disabled]="listPacientes.length === 0"
-                                    (change)="changeAll($event)" />
+                                <input type="checkbox" [disabled]="listPacientes.length === 0" (change)="changeAll($event)" />
                             </th>
                             <th>NSS</th>
                             <th>Participante</th>
@@ -80,8 +72,7 @@
                     <tbody>
                         <tr *ngFor=" let item of listPacientes; let i=index">
                             <td>
-                                <input type="checkbox" [checked]="item.checked"
-                                    (change)="changeChecked($event, item)" />
+                                <input type="checkbox" [checked]="item.checked" (change)="changeChecked($event, item)" />
                             </td>
                             <td>{{ item.nss }}</td>
                             <td>{{ item.paciente }}</td>
@@ -105,8 +96,7 @@
                 </div>
                 <div class="otros" *ngIf="otros.length > 0">
                     <form [formGroup]="otrosForm">
-                        <table id="tblotros" datatable
-                            class="table table-hover table-bordered table-gral table-otros caption-top">
+                        <table id="tblotros" datatable class="table table-hover table-bordered table-gral table-otros caption-top">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -117,8 +107,7 @@
                                 <tr *ngFor="let item of otros.value; let i=index">
                                     <td>{{item.nombreCompleto}}</td>
                                     <td style="text-align: center !important;">
-                                        <img style="cursor: pointer;" src="../../../../../assets/images/tache.svg"
-                                            (click)="removeOtro(i)">
+                                        <img style="cursor: pointer;" src="../../../../../assets/images/tache.svg" (click)="removeOtro(i)">
                                     </td>
                                 </tr>
                             </tbody>

@@ -16,7 +16,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService { 
+export class AuthService {
 
   private _usuario!: Usuario;
   private _token!: string;
@@ -26,11 +26,11 @@ export class AuthService {
   public isAuthenticatedObs$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     public webService: WebImssService,
     private jwtHelper: JwtHelperService,
     private router: Router
-    ) { }
+  ) { }
 
   public get usuario(): Usuario {
     if (this._usuario != null) {
@@ -68,22 +68,22 @@ export class AuthService {
   getNombreUsuarioActivo() {
     return this.nombreUsuarioActivo;
   }
-  
-  actualizarPassword(admonPasswordRequest:AdmonPasswordRequest){
-     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}actualizarPassword/`, admonPasswordRequest);
+
+  actualizarPassword(admonPasswordRequest: AdmonPasswordRequest) {
+    return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}actualizarPassword/`, admonPasswordRequest);
   }
- 
-  getAppAccesbyAppName(name:string){
+
+  getAppAccesbyAppName(name: string) {
     return this.http.get<Aplicacion>(`${environment.msmtsOauth}app?appName=${name}`);
   }
 
-  getUserData(aliasUsuario?:string){
+  getUserData(aliasUsuario?: string) {
     return this.http.get<Usuario>(`${environment.msmtsOauth}getUserSession?aliasUsuario=${aliasUsuario}`);
   }
 
   validateRecaptcha(response: string) {
-  
-    const urlEndpoint = environment.urlSiteGoogleRecaptcha ;
+
+    const urlEndpoint = environment.urlSiteGoogleRecaptcha;
     const httpHeaders = new HttpHeaders({
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Methods': '*',
@@ -91,26 +91,26 @@ export class AuthService {
       'Access-Control-Allow-Credentials': 'true',
       'Content-Type': 'application/x-www-form-urlencoded'
     });
-    
+
     let params = new URLSearchParams();
-    
-    params.set('response', response || '' );
+
+    params.set('response', response || '');
     params.set('secret', environment.secretKey);
-    
+
     return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
   }
 
-  login(usuario: Usuario, aplicacion:Aplicacion) {
-    
+  login(usuario: Usuario, aplicacion: Aplicacion) {
+
     sessionStorage.clear();
     const urlEndpoint = environment.urlServOauth + '/oauth/token';
-    
-    console.log(" usuario app  "+ aplicacion.cveUsuario);
-    console.log(" pass app  "+ aplicacion.cvePassword);
-    const credenciales = btoa( aplicacion.cveUsuario + ':' + aplicacion.cvePassword);
+
+    console.log(" usuario app  " + aplicacion.cveUsuario);
+    console.log(" pass app  " + aplicacion.cvePassword);
+    const credenciales = btoa(aplicacion.cveUsuario + ':' + aplicacion.cvePassword);
     //const credenciales = aplicacion.cveUsuario + ':' + aplicacion.cvePassword;
-    
-    
+
+
 
     const httpHeaders = new HttpHeaders({
       'Access-Control-Allow-Headers': '*',
@@ -122,12 +122,12 @@ export class AuthService {
     });
 
     let params = new URLSearchParams();
-    
-    params.set('username', usuario.strEmail || '' );
+
+    params.set('username', usuario.strEmail || '');
     params.set('password', usuario.strPassword || '');
     params.set('grant_type', 'password');
     params.set('appId', 'AD');
-  
+
     return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
   }
 
@@ -171,7 +171,7 @@ export class AuthService {
   }
 
   obtenerDatosToken(accessToken: string): any {
-    if (accessToken=='ajaltechnology') return accessToken;
+    if (accessToken == 'ajaltechnology') return accessToken;
     if (accessToken != null) {
       return JSON.parse(atob(accessToken.split(".")[1]));
     }
@@ -179,7 +179,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    if (this.token=='ajaltechnology') return true;
+    if (this.token == 'ajaltechnology') return true;
     let payload = this.obtenerDatosToken(this.token);
 
     if (payload != null && payload.user_name && payload.user_name.length > 0) {
@@ -188,7 +188,7 @@ export class AuthService {
     return false;
   }
 
-  onSession(){
+  onSession() {
     return this.usuario != undefined;
   }
 
@@ -211,7 +211,7 @@ export class AuthService {
     sessionStorage.removeItem('usuario');
     this.userLogged$.next(false);
     this.isAuthenticatedObs$.next(false);
-    sessionStorage.setItem('token','token is null'); 
+    sessionStorage.setItem('token', 'token is null');
     this.router.navigate(["/login"], { skipLocationChange: true });
   }
 
@@ -219,7 +219,7 @@ export class AuthService {
 
     const urlEndpoint = environment.msmtsOauth + '/app/' + usuario;
     let respuesta: any = await this.webService.getAsync(urlEndpoint);
-    
+
     if (respuesta != null) {
       let usuario: Usuario = {
         strApellidoP: respuesta.apellidoPaterno,
@@ -231,13 +231,13 @@ export class AuthService {
         areaDefault: respuesta.area,
       };
       sessionStorage.setItem('usuario', JSON.stringify(usuario));
-      
+
     }
-  
+
 
     return respuesta;
   }
 
- 
+
 
 }

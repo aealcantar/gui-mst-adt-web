@@ -90,9 +90,9 @@ export class ConsultaControlArticulosComponent implements OnInit {
      }],
      "fechaInicial": this.datesForm.get('fechaInicial')?.value,
      "fechaFinal": this.datesForm.get('fechaFinal')?.value,
-     "clavePaciente": 4382641109
+     "clavePaciente": this.nssPaciente
    };
- 
+
    this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
        (articulos: any) => {
          console.log("CONTROL DE ARTICULOS: ", articulos);
@@ -162,7 +162,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
   irNuevoRegistro() {
     let params = {}
-    this.router.navigateByUrl("/nuevo-control-articulos", { skipLocationChange: true });
+    this.router.navigateByUrl("/agregar-control-articulos", { skipLocationChange: true });
   }
 
   sortBy(columnaId: string, order: string, type: string) {

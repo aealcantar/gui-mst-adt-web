@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import * as momment from 'moment';
+import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
 
 @Component({
   selector: 'app-busqueda-nss',
@@ -36,12 +38,17 @@ export class BusquedaNssComponent {
 
   order: string = 'desc';
   columnaId: string = 'nss';
+  alert!: AlertInfo;
 
   constructor(
     private ServiceService: ServiceService,
     private router: Router,
-    private tarjetaService: AppTarjetaPresentacionService
-  ) { }
+    private tarjetaService: AppTarjetaPresentacionService,
+    private authService: AuthService
+  ) {
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+  }
 
   elementoSeleccionado(elemento: any) {
     this.pacienteSeleccionado = elemento;
@@ -57,9 +64,10 @@ export class BusquedaNssComponent {
   get() {
 
     if (this.validaInput()) {
-
-      this.muestraAlerta('<strong>Error.</strong>¡La longitud del NSS no es correcta, favor de verificar!',
-        'alert-danger', null
+      this.muestraAlerta(
+        '¡La longitud del NSS no es correcta, favor de verificar!',
+        'alert-danger',
+        'Error',
       );
 
     } else {
@@ -73,8 +81,10 @@ export class BusquedaNssComponent {
           if (this.resultadoTotal == 0) {
 
             this.errorBusqueda = true;
-            this.muestraAlerta('<strong>Sin resultados.</strong> Valide los filtros',
-              'alert-warning', null
+            this.muestraAlerta(
+              'Valide los filtros',
+              'alert-warning',
+              'Sin resultados',
             );
 
           } else {
@@ -86,9 +96,10 @@ export class BusquedaNssComponent {
           this.sortBy(this.columnaId, this.order, 'fecha');
 
         }, error: (err) => {
-
-          this.muestraAlerta('<strong>Error de red.</strong> No fue posible conectar con la API de busqueda',
-            'alert-danger', null
+          this.muestraAlerta(
+            'No fue posible conectar con la API de busqueda',
+            'alert-danger',
+            'Error de red',
           );
 
           console.log(err)
@@ -117,17 +128,21 @@ export class BusquedaNssComponent {
     this.alertVisible = false;
   }
 
-  muestraAlerta(mensaje: string, estilo: string, funxion: any) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
 
-    this.alertMensaje = mensaje;
-    this.alertTipo = estilo;
-    this.alertVisible = true;
-
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
     setTimeout(() => {
-      this.alertMensaje = mensaje;
-      this.alertTipo = estilo;
-      this.alertVisible = false;
-
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
       if (funxion != null) {
         funxion();
       }

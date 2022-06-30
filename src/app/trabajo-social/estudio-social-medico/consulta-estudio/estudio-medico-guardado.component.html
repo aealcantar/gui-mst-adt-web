@@ -1,6 +1,6 @@
-<app-alerta-general [objAlerta]="alert"></app-alerta-general>
+<app-alerta [objAlerta]="alert"></app-alerta>
 <div style="margin-bottom: 1%"></div>
-<app-fichapaciente></app-fichapaciente>
+<app-fichapaciente [mostrarBtnAtras]="true" [url]="'consulta-estudios-medicos'"></app-fichapaciente>
 <ng-container *ngIf="datosGenerales == true">
   <app-card-template>
     <div header class="flex justify-content-between align-items-center nuevoEstudio">
@@ -190,7 +190,7 @@
                 <span class="labels">Ocupación:</span>
                 <br>
                 <label class="inputNormal">
-                  {{ estudioMedico.nombreOcupacion }}
+                  {{ getNombreOcupacion(estudioMedico.idOcupacion) }}
                 </label>
               </div>
             </div>
@@ -352,7 +352,7 @@
           <div class="col-md-4">
             <div class="">
               <label class="control-label tituloInput">
-                Delegacion/Municipio:
+                Delegación/Municipio:
               </label>
               <label class="inputNormal" id="txtconsulta">
                 {{ estudioMedico.nombreDelegacionMunicipioFam }}
@@ -361,44 +361,46 @@
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="">
-            <label class="control-label tituloInput">
-              Ciudad
-            </label>
-            <label class="inputNormal" id="txtconsulta">
-              {{ estudioMedico.nombreCiudadFam }}
-            </label>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="">
-            <label class="control-label tituloInput">
-              Colonia:
-            </label>
-            <label class="inputNormal" id="txtconsulta">
-              {{ estudioMedico.nomColoniaFam }}
-            </label>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="">
-            <label class="control-label tituloInput">
-              Calle:
-            </label>
-            <label class="inputNormal" id="txtconsulta">
-              {{ estudioMedico.nomVialidadFam }}
-            </label>
-          </div>
-        </div>
-
-        <div class="row" style="margin: 1 -4px  -4px; padding-left: 10px;">
+        <div class="row" style="padding-left: 10px;">
           <div class="col-md-4">
             <div class="">
               <label class="control-label tituloInput">
-                Numero exterior
+                Ciudad
+              </label>
+              <label class="inputNormal" id="txtconsulta">
+                {{ estudioMedico.nombreCiudadFam }}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="">
+              <label class="control-label tituloInput">
+                Colonia:
+              </label>
+              <label class="inputNormal" id="txtconsulta">
+                {{ estudioMedico.nomColoniaFam }}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="">
+              <label class="control-label tituloInput">
+                Calle:
+              </label>
+              <label class="inputNormal" id="txtconsulta">
+                {{ estudioMedico.nomVialidadFam }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="padding-left: 10px;">
+          <div class="col-md-4">
+            <div class="">
+              <label class="control-label tituloInput">
+                Número exterior
               </label>
               <label class="inputNormal" id="txtconsulta">
                 {{ estudioMedico.numExteriorFam }}
@@ -409,7 +411,7 @@
           <div class="col-md-4">
             <div class="">
               <label class="control-label tituloInput">
-                Numero interior:
+                Número interior:
               </label>
               <label class="inputNormal" id="txtconsulta">
                 {{ estudioMedico.numInteriorFam }}
@@ -441,7 +443,7 @@
           <div class="col-md-4">
             <div class="">
               <label class="control-label tituloInput">
-                Correo electronico:
+                Correo electrónico:
               </label>
               <label class="inputNormal" id="txtconsulta">
                 {{ estudioMedico.correoElectronicoFam }}

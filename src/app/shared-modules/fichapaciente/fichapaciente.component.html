@@ -1,84 +1,124 @@
-<div class="row g-0">
-  <div class="Rectangle-1205">
-    <div class="pct-sup">
-      <div class="encabezado">
-        <span class="Paciente">PACIENTE</span>
-        <span class="Unidad-de-adscripcin">Unidad de adscripción</span>
+  <app-menu></app-menu>
+  <div class="Rectangle-855">
+
+    <div class="row" style="display: contents;">
+      <div class="col-sm-1 pt-2  " *ngIf="mostrarBtnAtras">
+        <img
+        (click)="regresar()"
+          class="botonRegresar mt-5"
+          src="assets/hu003-tarjeta/volver.ico"
+        />
       </div>
-      <div class="descrp">
-        <span class="nombre-pct">Jaime Daniel Villalobos Barrios</span>
-        <span class="separador-pct"></span>
-        <span class="umf-pct">UMF 49, Jalisco</span>
+      <div class="col-sm-4">
+        <div style="display: grid;">
+          <span class="pacienteSpan">Paciente</span>
+          <span class="pacienteNombreSpan">{{paciente?.paciente?.toUpperCase()}}</span>
+        </div>
+      </div>
+      <div class="Rectangle-1205"></div>
+      <div class="col-sm">
+        <div class="pacienteInfoDiv">
+          <div style="display: grid;">
+            <span class="unidadSpan">Unidad de Adscripción</span>
+            <span class="umf">UMF {{paciente?.unidadMedica}}</span>
+            <span class="ciudadUnidadMedica">Ciudad {{'Gustavo Días Ordaz'}}</span>
+          </div>
+        </div>
+       </div>
+       <div class="polig">
+        <div class="figura1">
+          <div id="paralelograma2"></div>
+          <div id="paralelograma"></div>
+        </div>
+        <div class="Ellipse-61"> </div>
       </div>
     </div>
-    <div class="pct-inf">
-      <div class="icon-izq pull-left">
-        <!-- <div class="Rectangle-862">
-        </div> -->
-        <img src="../../../assets/images/icono-amarillo.svg" />
+
+    <div class="row divDetallePaciente">
+      <div class="divAmarillo">
+        <img src=".\assets\hu003-tarjeta/icono-amarillo.png" style="margin-top: 7px;" class="divMenuHamburg">
       </div>
-      <div class="grd-info pull-left">
-        <div class="elm">
-          <span class="etiqueta">Fecha de nacimiento</span>
-          <span class="valor">05/12/1960</span>
-        </div>
-        <div class="elm" style="padding-right: 13px;">
-          <span class="etiqueta">Edad</span>
-          <span class="valor" style="max-width: 74px;">61 años, 3 meses</span>
-        </div>
-        <div class="elm">
-          <span class="etiqueta">Sexo</span>
-          <span class="valor">Masculino</span>
-        </div>
-        <div class="elm">
-          <span class="etiqueta">NSS</span>
-          <span class="valor">4382641109</span>
-        </div>
-        <div class="elm">
-          <span class="etiqueta">A. Médico</span>
-          <span class="valor">6M1952PE</span>
-        </div>
-        <div class="elm">
-          <span class="etiqueta">CURP</span>
-          <span class="valor">VIBJ520414HJCLRM07</span>
-        </div>
-        <div class="elm">
-          <span class="etiqueta">Consultorio</span>
-          <span class="valor">08</span>
-        </div>
-        <div class="elm">
-          <span class="etiqueta">Turno</span>
-          <span class="valor">Vespertino</span>
+      <div class="pacienteDetalleDiv">
+        <div style="display: grid; width: 165px;">
+          <span class="unidadSpan" style="margin-left: 12px;">Fecha de nacimiento</span>
+          <span class="detalleDescrip" style="margin-left: 12px;">{{paciente?.fechaNacimiento}}</span>
         </div>
 
-        <div class="elm-img pull-right">
-          <a
-            href="#"
-            class="dropdown-toggle"
-            data-toggle="dropdown"
-            role="button"
-            aria-expanded="false"
-          >
-            <img src="../../../assets/images/menu-ts.png" class="menu-ts" />
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid;  width: 74px;">
+          <span class="unidadSpan">Edad</span>
+          <span class="detalleDescrip" style="margin-top: -1px !important;">{{paciente?.edad}} años</span>
+          <span class="detalleDescrip" style="margin-top: -14px !important;">{{convertDate()}}</span>
+        </div>
+
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid; width: 77px;">
+          <span class="unidadSpan">Sexo</span>
+          <span class="detalleDescrip">{{validaSexo(paciente?.sexo)}}</span>
+        </div>
+
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid; width: 88px;">
+          <span class="unidadSpan">NSS</span>
+          <span class="detalleDescrip">{{paciente?.nss}}</span>
+        </div>
+
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid;  width: 81px;">
+          <span class="unidadSpan">A. M&eacute;dico</span>
+          <span class="detalleDescrip">{{paciente?.agregadoMedico}}</span>
+        </div>
+
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid; width: 182px;">
+          <span class="unidadSpan">CURP</span>
+          <span class="detalleDescrip">{{paciente?.curp}}</span>
+        </div>
+
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid; width: 73px;">
+          <span class="unidadSpan">Consultorio</span>
+          <span class="detalleDescrip">{{paciente?.consultorio}}</span>
+
+        </div>
+
+        <div class="Rectangle-12052"></div>
+
+        <div style="display: grid; width: 89px;">
+          <span class="unidadSpan">Turno</span>
+          <span class="detalleDescrip">{{validaTurno(paciente?.turno!)}}</span>
+        </div>
+
+        <div class="divMenuHamburg">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <img src=".\assets\hu003-tarjeta/menu-ts.png" class="divMenuHamburg">
           </a>
-
-          <ul
-            class="dropdown-menu dropdown-menu-right"
-            role="menu"
-            aria-labelledby="dLabel2"
-          >
-            <li class="disabled"><a>Menú</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a>Agenda</a></li>
-            <li><a>Notas de trabajo social médico</a></li>
-            <li><a>Estudio social médico</a></li>
-            <li><a>Control de artículos</a></li>
-            <li><a>Donación de sangre</a></li>
-            <li><a>Ministerio público</a></li>
-            <li><a>Certificado de defunción</a></li>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel2" style="width: 280px;">
+            <li style="font-weight: bold;">
+              <div style="width: 90%; margin-left: 18px; border-bottom: solid 1px #f5f7f8;">Menú</div>
+            </li>
+            <div style=" padding-left: 5%; padding-right: 5%;">
+              <li class="contenedorItems" (click)="irAgenda()"><a class="menuSinSeleccionar">Agenda</a></li>
+              <li class="contenedorItems" (click)="irNotasDeTrabajo()"><a class="menuSinSeleccionar">Notas de trabajo
+                  social médico</a></li>
+              <li class="contenedorItems" (click)="irEstudioSocialMedico()"><a class="menuSinSeleccionar">Estudio social
+                  médico</a></li>
+              <li class="contenedorItems" (click)="irControlDeArticulos()"><a class="menuSinSeleccionar">Control de artículos</a></li>
+              <li class="contenedorItems" (click)="irDonacionDeSangre()"><a class="menuSinSeleccionar">Donación de sangre</a></li>
+              <li class="contenedorItems" (click)="irMinisterioPublico()"><a class="menuSinSeleccionar">Ministerio público</a></li>
+              <li class="contenedorItems" (click)="irSertificadoDefuncion()"><a class="menuSinSeleccionar">Certificado de defunción</a></li>
+            </div>
           </ul>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div style="margin-bottom: 1%;">
+  </div>

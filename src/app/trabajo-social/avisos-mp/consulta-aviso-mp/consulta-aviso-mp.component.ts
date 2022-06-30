@@ -120,7 +120,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
 
   irNuevoAvisoMP() {
     let params = {}
-    this.router.navigate(["nuevo-aviso-mp"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["agregar-aviso-mp"], { queryParams: params, skipLocationChange: true });
   }
 
 
@@ -128,7 +128,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
     let params = {
       'estudioMedico': JSON.stringify(avisoMP),
     }
-    this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["detalle-estudios-medicos"], { queryParams: params, skipLocationChange: true });
 
   }
 }

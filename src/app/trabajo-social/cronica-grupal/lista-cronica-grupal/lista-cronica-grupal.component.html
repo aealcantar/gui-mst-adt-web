@@ -20,9 +20,9 @@
           <select class="form-control" style="background-position-y: 10px;" aria-label="Servicio"
             [(ngModel)]="this.servicioSelected" (change)="onChangeServicio($event)">
             <option class="select-font" [value]="'-1'" selected>Seleccionar servicio</option>
-            <option class="select-font" [value]="servicio.id"
+            <option class="select-font" [value]="servicio.cve_especialidad"
               *ngFor="let servicio of serviciosEspecialidad">
-              {{ servicio.nomEspecialidad}}</option>
+              {{ servicio.des_especialidad }}</option>
           </select>
         </div>
       </div>
@@ -35,7 +35,7 @@
           <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
             [(ngModel)]="this.turnoSelected" (change)="onChangeTurno($event)">
             <option class="select-font" [value]="'-1'" selected>Seleccionar turno</option>
-            <option class="select-font" [value]="turno.cveTurno" *ngFor="let turno of turnos">{{ turno.desTurno}}
+            <option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{ turno.des_turno }}
             </option>
           </select>
         </div>
@@ -49,8 +49,8 @@
           <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
             [(ngModel)]="this.grupoSelected" (change)="onChangeGrupo($event)">
             <option class="select-font" [value]="'-1'" selected>Seleccionar grupo</option>
-            <option class="select-font" [value]="grupo.cveEspecialidad" *ngFor="let grupo of grupos">
-              {{ grupo.desActividad }}
+            <option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
+              {{ grupo.des_actividad }}
             </option>
           </select>
         </div>
@@ -66,8 +66,8 @@
             [(ngModel)]="this.lugarSelected" (change)="onChangeLugar($event)">
             <option class="select-font" [value]="'-1'" style="background-position-y: 10px;" selected>Seleccionar lugar
             </option>
-            <option class="select-font" [value]="lugar.cveUbicacion" *ngFor="let lugar of lugares">
-              {{ lugar.desCompletaUbicacion }}
+            <option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
+              {{ lugar.des_completa_ubicacion }}
             </option>
           </select>
         </div>
@@ -192,7 +192,7 @@
     <ng-template #mostrarSeccionSinResultados>
       <div class="row">
         <div class="div-container-image">
-          <img class="errorimg" src="../../../../assets/hu002-busqueda/no encontrado.png">
+          <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
         </div>
       </div>
     </ng-template>

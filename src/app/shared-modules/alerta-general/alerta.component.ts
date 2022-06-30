@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';  
-import { objAlert } from '../models/alerta.interface';
+import { Component, Input, OnInit } from '@angular/core';
+import { AlertInfo } from '../models/app-alert.interface';
 
 @Component({
   selector: 'app-alerta-general',
@@ -7,14 +7,15 @@ import { objAlert } from '../models/alerta.interface';
   styleUrls: ['./alerta.component.css']
 })
 export class AlertaGeneralComponent implements OnInit {
-  @Input() objAlerta!: objAlert;
+  @Input() alert!: AlertInfo;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
 
-  
+
   public getimage(tipo: string){
     let strruta = "../../../assets/images/";
     switch(tipo){
@@ -26,10 +27,10 @@ export class AlertaGeneralComponent implements OnInit {
         break;
       case "custom":
       case "alert-warning":
-        strruta = strruta + "icon-close.svg"
+        strruta = strruta + "icon-close-nt.svg"
         break;
       default:
-        strruta = strruta + "icon-close.svg"
+        strruta = strruta + "icon-close-nt.svg"
         break;
     }
     return strruta;

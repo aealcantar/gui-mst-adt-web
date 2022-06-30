@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, timer } from "rxjs";
 import { map, share } from "rxjs/operators";
-import { DatePipe } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
-import { objAlert } from 'src/app/shared-modules/alerta/alerta.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CronicaGrupalService } from "../../services/cronica-grupal.service";
+import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
 
 @Component({
   selector: 'app-cronica-guardada',
@@ -36,7 +35,12 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.showSucces("¡La información se guardó con éxito!");
+    this.muestraAlerta(
+      '¡La información se guardó con éxito!',
+      'alert-success',
+      '',
+    );
+    // this.showSucces("¡La información se guardó con éxito!");
     this.route.queryParamMap.subscribe((params: any) => {
       this.cronica = JSON.parse(params.getAll('cronica'));
       console.log("OBJETO ENVIADO: ", this.cronica);
@@ -58,34 +62,22 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
       });
   }
 
-  private showError(error:string) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+    // this.alert = new AlertInfo;
     this.alert = {
-      message:error,
-      type: 'error',
-      visible: true
-    }
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
     setTimeout(() => {
       this.alert = {
-        message:'',
+        message: '',
         type: 'custom',
-        visible: false
-      }
-    }, 5000);
-  }
-
-  //Success
-  private showSucces(msg:string) {
-
-    this.alert = {
-      message:'<strong></strong>'+msg,
-      type: 'success',
-      visible: true
-    }
-    setTimeout(() => {
-      this.alert = {
-        message:'',
-        type: 'custom',
-        visible: false
+        visible: false,
+      };
+      if(funxion != null){
+        funxion();
       }
     }, 2000);
   }

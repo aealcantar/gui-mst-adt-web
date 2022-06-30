@@ -26,6 +26,7 @@ export class ReporteNota {
 	redaccion2?: string;
 	fecha1?: string;
 	fecha2?: string;
+	fecImpresion?: string;
 	diagnosticoSocial?: string;
 	diagnosticoSocial2?: string;
 }

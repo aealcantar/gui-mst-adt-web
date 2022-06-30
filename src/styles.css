@@ -1,9 +1,14 @@
+html{
+  height: 100%;
+}
+
 .btn-primary {
     border: 1px solid #9D2449 !important;
 }
 
 body {
     padding-top: 0px;
+    height: 93%;
 }
 
 select {
@@ -19,7 +24,6 @@ select {
     background-position-y: 5px;
     padding-right: 20px;
     background-size: 20px 19px;
-
 }
 
 .select-font {
@@ -91,22 +95,7 @@ td.dataTables_empty {
   margin-left: -15px;
   margin-right: -15px;
 }
-.pleca-head{
-  background-color: transparent;
-  height: 67px;
-  margin-top: 0;
-  color: #FFFFFF;
-  /* padding: 20px; */
-  padding-top: 14px;
-  padding-bottom: 20px;
 
-  display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .bi::before,
 [class^="bi-"]::before,
@@ -114,18 +103,7 @@ td.dataTables_empty {
   font-weight: bold !important;
 }
 
-.Historial-clnico{
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fff;
-  width: 80%;
-}
+
 @media (min-width: 1200px){
   .central{
     width: 96.34%;;
@@ -134,69 +112,6 @@ td.dataTables_empty {
 
 .central{
   width: 1217px;;
-}
-
-.Group-1028{
-  width: 198px;
-  height: 33px;
-  flex-grow: 0;
-}
-
-.auth-user{
-  height: 14px;
-  flex-grow: 0;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-align: right;
-  color: #fff;
-}
-
-.auth-rol{
-  width: 198px;
-  height: 14px;
-  flex-grow: 0;
-  margin: 5px 0 0;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-align: right;
-  color: #999;
-}
-
-.mnu{
-  color: #98989a;
-  text-decoration: none;
-
-  border-top: 10px dashed;
-    border-top: 4px solid\9;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-
-}
-
-.list-menu{
-  background-color: #0C231E;
-  color: #999;
-}
-
-.list-menu>li>a{
-  background-color: #0C231E;
-  color: #999;
-}
-
-.list-menu>li>a:hover,
-.list-menu>li>a:focus{
-  background-color: #0C231E;
-  color: #FFF;
 }
 
 
@@ -454,22 +369,11 @@ div.table-pie > #nopag > div.nopag > span.bg-nopag{
   background-color: #fafafa;
 }
 
-footer{
-  position: relative;
-}
-
-img.footer {
+footer img {
   width: 100%;
   height: 74px;
-  /* object-fit: contain; */
-  background-repeat: repeat-x;
-  /* position: relative; */
-  position: absolute;
-  z-index: -99;
- /* bottom: -74px;*/
-
+  bottom: 0;
 }
-
 
 /* @media ( min-height: 600px ) {
   img.footer {
@@ -486,12 +390,13 @@ img.footer {
 
 .mat-calendar {
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
+  color: #222;
 }
 .mat-calendar-body-today.mat-calendar-body-selected {
   box-shadow: none !important;
@@ -508,19 +413,24 @@ img.footer {
 
 @media (hover: hover){
   .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-    background-color: rgba(157,36,73,0.3) !important;
+    background-color: rgba(157,36,73,1) !important;
+    color: #FFF;
   }
 }
 .mat-datepicker-content .mat-calendar-body-selected {
   background-color: #9d2449;
   color: #fff;
 }
-.mat-calendar-table-header{
-  /* display: none; */
-}
+/* .mat-calendar-table-header{
+  display: none;
+} */
 .mat-calendar-body-selected {
   background-color: #9d2449 !important;
   color: #fff;
+}
+
+.mat-calendar-body-label{
+  opacity: 0;
 }
 
 .mat-calendar-table-header-divider{
@@ -529,6 +439,12 @@ img.footer {
 .mat-calendar-body-label{
   color: transparent;
 }
+.mat-calendar-body-label[colspan="7"] {
+  display: none;
+}
+::ng-deep .mat-calendar-body-label{
+  display: none;
+ }
 .mat-calendar-arrow{
   /* fill: #9d2449;
   border-top-color: #9d2449; */
@@ -537,6 +453,7 @@ img.footer {
   background-size: cover;
   height: 25px !important;
   border: none !important;
+  fill: rgba(0,0,0,0);
 }
 .mat-calendar-previous-button::after, .mat-calendar-next-button::after{
   width: 0 !important;
@@ -559,10 +476,289 @@ img.footer {
   width: 20px !important;
 }
 
+.mat-button-wrapper> #mat-calendar-button-0{
+  /* color: #9D2449; */
+  color: #222
+}
+.mat-button-wrapper> #mat-calendar-button-0::first-letter{
+  color: #222 !important;
+}
+
+.mat-calendar-table-header{
+  color: #222 !important;
+}
+
+.mat-calendar-table-header th > abbr[title]{
+  border: none;
+  cursor: default;
+}
+
+.mat-calendar-body {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #222;
+}
+
+.mat-calendar-controls{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.mat-calendar-body-cell-content{
+  color: #000;
+  font-weight: 600;
+}
+
+.mat-calendar-body-disabled>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical){
+  color: rgba(0,0,0,0.3) !important;
+  font-weight: normal;
+}
+
+.mat-datepicker-content .mat-calendar{
+  height: 310px !important;
+}
+
+.md-datepicker-input-container {
+  width: 300px;
+}
+
+
+/*
+.mat-calendar-body-active > .mat-calendar-body-today {
+   background-color: transparent !important;
+  color: rgba(0,0,0,0.3) !important;
+  font-weight: normal;
+  border-color: transparent !important;
+}
+*/
+
+/* .mat-calendar-body-cell {
+  position: absolute !important;
+  height: 100% !important;
+} */
+
+/* .ngx-mat-calendar-body > tr > .mat-calendar-body-cell{
+  position: relative !important;
+  height: 0 !important;
+  line-height: 0 !important;
+} */
+
+.cdk-program-focused .mat-calendar-body-active>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical){
+  background-color: transparent !important;
+}
+/*
+.cdk-overlay-pane{
+
+}
+.cdk-overlay-pane.dialog-styles {
+   position: relative!important;
+}
+
+.mat-datepicker-popup{
+  top: 899.949px !important;
+  left: 938.61px !important;
+  bottom: auto !important;
+  position: relative;
+}
+.cdk-overlay-connected-position-bounding-box {
+   position: relative !important;
+}
+*/
+
 td.dataTables_empty {
   display: none !important;
 }
 
 table.dataTable.no-footer {
   border-bottom: 1px solid #ddd;
+}
+
+
+
+.form-lbl-mat-radio {
+  font-family: Montserrat;
+  font-size: 12px;
+  text-align: left;
+  color: #222;
+  font-weight: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  opacity: 0.5 !important;
+  /*click effect color change*/
+  background-color: transparent !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #4D92DF !important;
+  /*inner circle color change*/
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #4D92DF !important;
+  /*outer ring color change*/
+}
+
+.mat-radio-container {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.mat-radio-outer-circle {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.mat-radio-inner-circle {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.mat-radio-button .mat-radio-ripple {
+  height: 15px !important;
+  /*double of your required circle radius*/
+  width: 15px !important;
+  /*double of your required circle radius*/
+  left: calc(50% - 7.5px) !important;
+  /*'10px'-same as your required circle radius*/
+  top: calc(50% - 7.5px) !important;
+  /*'10px'-same as your required circle radius*/
+}
+
+.navbar {
+  z-index: 10;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  flex-grow: 0;
+  color: #222;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.select2-container--default .select2-selection--single{
+  border:none;
+}
+.select2-search--dropdown{
+  display: none;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
+  background-color: #9d2449;
+  color: #FFFFFF;
+}
+.select2-results__option{
+  flex-grow: 0;
+  color: #222;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.mat-select-panel {
+  transform: translate(-2px, 25px) !important;
+}
+
+.mat-option:hover {
+  background: #9D2449 !important;
+  color: white !important;
+}
+
+.mat-option {
+  height: 1.5em !important;
+}
+
+.mat-select-arrow-wrapper {
+  background: transparent;
+  background-image: url("./assets/images/Icon.png") !important;
+  background-repeat: no-repeat;
+  background-position-x: 99%;
+  padding-right: 20px;
+  background-size: 20px 19px;
+}
+
+.mat-select-arrow {
+  opacity: 0;
+}
+
+.mat-select-table {
+  font-family: Montserrat;
+  width: 80px !important;
+  height: 30px;
+  border: solid 1px #eee;
+  float: right;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-bottom: 15px;
+  padding: 5px 0px 5px 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(133, 133, 133);
+  border-image: initial;
+}
+
+.form-control-mat-select {
+  font-family: Montserrat;
+  padding-right: 2px !important;
+}
+
+.mat-select-panel-wrap .mat-select-panel {
+  min-width: calc(100% + 17px) !important;
+  left: 4px;
+  position: relative;
+}
+
+.mat-option-text {
+  font-family: Montserrat;
+  font-size: 14px;
+}
+
+.mat-select-value {
+  top: -2px;
+  position: relative;
+}
+
+.visDatos {
+  width: 109px;
+  height: 17px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #222;
+  margin-right: 17px;
+  float: right;
+  margin-top: 10px;
 }

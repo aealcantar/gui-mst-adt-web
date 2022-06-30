@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cronica } from 'src/app/shared-modules/models/cronica.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarParticipanteDialogComponent } from './agregar-participante-dialog/agregar-participante-dialog.component';
-import { Subscription, timer } from "rxjs";
-import { map, share } from "rxjs/operators";
 import { Participante } from 'src/app/shared-modules/models/participante.model';
 import { CronicaGrupalService } from "../../services/cronica-grupal.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -66,9 +64,9 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
   initForm(cronicaParse: any): void {
     if (cronicaParse.length > 0) {
       this.editForm = this.fb.group({
-        grupo: ["-1"],
+        grupo: [""],
         fecha: [null],
-        hora: ["-1"],
+        hora: [""],
         descPonentes: [this.cronicaRecibida.descPonentes !== null ? this.cronicaRecibida.descPonentes : null, Validators.required],
         numParticipantesAsistieron: [this.cronicaRecibida.numParticipantesAsistieron !== null ? this.cronicaRecibida.numParticipantesAsistieron : null, Validators.required],
         desTecnicaDidactica: [this.cronicaRecibida.desTecnicaDidactica !== null ? this.cronicaRecibida.desTecnicaDidactica : null, Validators.required],
@@ -80,9 +78,9 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.editForm = this.fb.group({
-        grupo: ["-1", Validators.required],
+        grupo: ["", Validators.required],
         fecha: [null, Validators.required],
-        hora: ["-1", Validators.required],
+        hora: ["", Validators.required],
         descPonentes: [null, Validators.required],
         numParticipantesAsistieron: [null, Validators.required],
         desTecnicaDidactica: [null, Validators.required],
@@ -92,7 +90,7 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
         desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       });
-      this.cronicaGrupalService.getCatGrupo('1').toPromise().then(
+      this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
         (grupos) => {
           this.grupos = grupos;
           console.log("GRUPOS: ", this.grupos);
@@ -146,14 +144,26 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
     })
     $('#content').modal('show');
   }
-  
+
   cancelarModal() {
     $('#content').modal('hide');
   }
-  
-  salirModal(){
-    this.router.navigateByUrl("/consulta-notas", { skipLocationChange: true });
+
+  salirModal() {
+    this.router.navigateByUrl("/consulta-cronica-grupal", { skipLocationChange: true });
     $('#content').modal('hide');
+  }
+
+  getNombreGrupo(cveGrupo: number | string) {
+    console.log(cveGrupo);
+    let idGrupoConverted: number;
+    if (typeof cveGrupo === 'string') {
+      idGrupoConverted = Number(cveGrupo);
+    } else if (typeof cveGrupo === 'number') {
+      idGrupoConverted = cveGrupo;
+    }
+    console.log("DESC GRUPO: ", this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa);
+    return this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa;
   }
 
   guardarCronica() {
@@ -189,20 +199,20 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
       this.cronica = {
         id: null,
         idCalendarioAnual: null,
-        idEspecialidad: 'CS02',
+        idEspecialidad: 'CS01',
         desEspecialidad: null,
         idTurno: 1,
         desTurno: null,
-        idGrupo: parseInt(this.editForm.get('grupo')!.value),
-        desGrupo: null,
+        idGrupo: this.editForm.get('grupo')!.value,
+        desGrupo: this.getNombreGrupo(this.editForm.get('grupo')!.value),
         idUbicacion: '9',
         desUbicacion: null,
         fecFechaCorta: this.editForm.get('fecha')!.value,
         fecFechaCompleta: null,
         timHora: '10:00:00',
         desModalidad: null,
-        numTotalParticipantes: parseInt(this.editForm.get('desObservaciones')!.value),
-        numParticipantesAsistieron: null,
+        numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
+        numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: 1,
         desEstatusCronica: null,
         descPonentes: this.editForm.get('descPonentes')!.value,
@@ -232,7 +242,7 @@ export class NuevaCronicaGrupalComponent implements OnInit, AfterViewInit {
         }, (response: HttpErrorResponse) => {
           console.log("RESPUESTA: ", response.statusText);
           if (response.statusText === 'OK') {
-            this.router.navigate(["cronicaGuardada"], { queryParams: params, skipLocationChange: true });
+            this.router.navigate(["detalle-cronica-grupal"], { queryParams: params, skipLocationChange: true });
           }
         }
       );

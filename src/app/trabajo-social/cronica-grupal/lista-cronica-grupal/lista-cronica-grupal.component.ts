@@ -54,13 +54,13 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-    this.authService.project$.next("Trabajo Social");
+    this.authService.setProjectObs("Trabajo social");
     this.loadCatalogos();
   }
 
   ngAfterViewInit(): void {
     $('#calendar').datepicker({
-      dateFormat: "yy/mm/dd",
+      dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.fechaSelected = date.replaceAll('/', '-');
@@ -76,7 +76,7 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
   //Metodo que carga los catalogos iniciales y la información incial de la tabla CronicasGrupales
   loadCatalogos() {
     this.cronicaGrupalService.getCatServicios().toPromise().then(
-      (servicios) => {
+      (servicios: any[]) => {
         this.serviciosEspecialidad = servicios;
         console.log("SERVICIOS: ", this.serviciosEspecialidad);
       },
@@ -85,7 +85,7 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
       }
     );
     this.cronicaGrupalService.getCatTurnos().toPromise().then(
-      (turnos) => {
+      (turnos: any[]) => {
         this.turnos = turnos;
         console.log("TURNOS: ", this.turnos);
       },
@@ -93,8 +93,8 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatGrupo('1').toPromise().then(
-      (grupos) => {
+    this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
+      (grupos: any[]) => {
         this.grupos = grupos;
         console.log("GRUPOS: ", this.grupos);
       },
@@ -102,8 +102,8 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatLugar('1').toPromise().then(
-      (lugares) => {
+    this.cronicaGrupalService.getCatLugar('CS01').toPromise().then(
+      (lugares: any[]) => {
         this.lugares = lugares;
         console.log("LUGARES: ", this.lugares);
       },
@@ -113,11 +113,10 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
     );
     this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
       (cronicasGrupales: any) => {
-        let cronicasArray = Object.keys(cronicasGrupales).map(index => {
-          let cronica = cronicasGrupales[index];
-          return cronica;
-        });
-        this.cronicasGrupales = cronicasArray[0];
+        this.cronicasGrupales = [];
+        if(cronicasGrupales && cronicasGrupales.List.length > 0) {
+          this.cronicasGrupales = cronicasGrupales.List;
+        }
         console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
       }
     );
@@ -127,7 +126,7 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
   onChangeServicio(valueSelect: Event) {
     //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
     this.cronicaGrupalService.getCatGrupo(this.servicioSelected).subscribe(
-      (grupos) => {
+      (grupos: any[]) => {
         this.grupos = grupos;
         console.log("GRUPOS BY SERVICIO: ", this.turnos);
       },
@@ -137,7 +136,7 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
     );
     //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
     this.cronicaGrupalService.getCatLugar(this.servicioSelected).subscribe(
-      (lugares) => {
+      (lugares: any[]) => {
         this.lugares = lugares;
         console.log("LUGARES BY SERVICIO: ", this.turnos);
       },
@@ -177,22 +176,24 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
   }
 
   getCronicasGrupales() {
-    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', this.fechaSelected !== undefined ? this.fechaSelected : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
-      (cronicasGrupales) => {
+    this.cronicasGrupales = [];
+    let fechaConvertedFormat;
+    if(this.fechaSelected) {
+      fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
+    }
+    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
+      (cronicasGrupales: any) => {
         console.log("RESPUESTA CRONICAS: ", cronicasGrupales);
-        this.cronicasGrupales = [];
-        let cronicasArray = Object.keys(cronicasGrupales).map(index => {
-          let cronica = cronicasGrupales[index];
-          return cronica;
-        });
-        this.cronicasGrupales = cronicasArray[0];
+        if(cronicasGrupales && cronicasGrupales.List.length > 0) {
+          this.cronicasGrupales = cronicasGrupales.List;
+        }
         console.log("CRONICAS GRUPALES BY FILTROS: ", this.cronicasGrupales);
       }
     );
   }
 
   addCronica() {
-    this.router.navigate(["nuevaCronica"], { skipLocationChange: true });
+    this.router.navigate(["agregar-cronica-grupal"], { skipLocationChange: true });
   }
 
   irDetalle(cronicaGrupal: any) {
@@ -204,28 +205,28 @@ export class ListaCronicaGrupalComponent implements OnInit, AfterViewInit {
       console.log(" ENTRAMOS A SI ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["agregar-cronica-grupal"], { queryParams: params, skipLocationChange: true });
       } else {
         console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["busqueda-especifica"], { queryParams: params, skipLocationChange: true });
       }
     } else if (this.radioBtnSelected === 'No') {
       console.log(" ENTRAMOS A NO ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["agregar-cronica-grupal"], { queryParams: params, skipLocationChange: true });
       } else {
         console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["busqueda-especifica"], { queryParams: params, skipLocationChange: true });
       }
     } else {
       console.log(" ENTRAMOS SIN VALOR ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["agregar-cronica-grupal"], { queryParams: params, skipLocationChange: true });
       } else {
         console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+        this.router.navigate(["busqueda-especifica"], { queryParams: params, skipLocationChange: true });
       }
     }
   }

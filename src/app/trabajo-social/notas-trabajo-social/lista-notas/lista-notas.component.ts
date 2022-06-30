@@ -43,8 +43,8 @@ export class ListaNotasComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
+      fechaInicial: [null, Validators.required],
+      fechaFinal: [null, Validators.required],
     });
   }
 
@@ -61,6 +61,7 @@ export class ListaNotasComponent implements OnInit, AfterViewInit {
   }
 
   getNotasByFecha() {
+    this.tabla = [];
     this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
       (res) => {
         if (res && res.ArrayList.length > 0) {
@@ -74,7 +75,7 @@ export class ListaNotasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    $('#notasInit').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#notasInit').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -90,7 +91,7 @@ export class ListaNotasComponent implements OnInit, AfterViewInit {
       }
     });
 
-    $('#notasFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#notasFinal').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -113,12 +114,12 @@ export class ListaNotasComponent implements OnInit, AfterViewInit {
     let params = {
       'nota': JSON.stringify(nota),
     }
-    this.router.navigate(["detalle-nota"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["detalle-notas"], { queryParams: params, skipLocationChange: true });
   }
 
   irNuevaNota() {
     let params = { }
-    this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
+    this.router.navigate(["agregar-notas"], { queryParams: params, skipLocationChange: true });
   }
 
   handleDatesChange() {

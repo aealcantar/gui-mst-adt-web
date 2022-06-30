@@ -17,6 +17,7 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { MenugralComponent } from './menugral/menugral.component';
 import { FichapacienteComponent } from './fichapaciente/fichapaciente.component';
 import { DataTablesModule } from 'angular-datatables';
+import { MatSelectModule } from '@angular/material/select';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -55,6 +56,7 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     DataTablesModule,
+    MatSelectModule,
 
   ], exports: [
     CardTemplateComponent,
@@ -62,6 +64,7 @@ export const MY_FORMATS = {
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatSelectModule,
     MatAutocompleteModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,

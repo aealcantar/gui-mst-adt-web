@@ -7,12 +7,12 @@ import {
 import { Validators } from '@angular/forms';
 import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ControlArticulosService } from '../../services/control-articulos.service';
-import { objAlert } from 'src/app/shared-modules/models/alerta.interface';
+import { ControlArticulosService } from '../../services/control-articulos.service'; 
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
+import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
 
 declare var $: any;
 @Component({
@@ -21,15 +21,16 @@ declare var $: any;
   styleUrls: ['./nuevo-control-articulos.component.css'],
 })
 export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
-
-  alert!: objAlert;
+  //variables
+  alert!: AlertInfo;
   submitted: boolean = false;
   mostrarArticulos: boolean = false;
   articulo: string = '';
   @ViewChild("cancelarModal")
   cancelarModal!: TemplateRef<any>;
-  validaArticulos:boolean=false;
+  validaArticulos: boolean = false;
 
+  //datos generales del usuario logueado
   bitacora = {
     aplicativo: '',
     flujo: '',
@@ -44,8 +45,8 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   listaDeHorarios: Array<any> = [];
 
 
-  fecha= moment( Date.now()).format('DD/MM/YYYY');
-  hora= moment( Date.now()).format('HH:mm');
+  fecha = moment(Date.now()).format('DD/MM/YYYY');
+  hora = moment(Date.now()).format('HH:mm');
 
   formNuevoArticulo: any = this.formBuilder.group({
     clavePaciente: new FormControl(''),
@@ -54,45 +55,40 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     idCa: new FormControl(''),
     noFolioControl: new FormControl(''),
     fecha: new FormControl("", [Validators.required,
-    Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
-    noCama: new FormControl('', Validators.required),
-    servicio: new FormControl('', Validators.required),
-   // telefono: new FormControl('', Validators.required),
-   telefono: new FormControl(''),
+    Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/), Validators.maxLength(10)]),
+    noCama: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+    servicio: new FormControl('',[ Validators.required]),
+    // telefono: new FormControl('', Validators.required),
+    telefono: new FormControl(''),
     articulo: new FormControl(''),
     articulosArray: new FormControl(this.nuevosArticulosArray),
     trabajadorNombreRecibe: new FormControl(''),
-    enfermeriaNombreEntrega: new FormControl('', Validators.required),
+    enfermeriaNombreEntrega: new FormControl('', [Validators.required]),
     ubicacion: new FormControl('', Validators.required),
-   // horarioEntregaArticulo: new FormControl('', Validators.required),
-   horarioEntregaArticulo: new FormControl('', [Validators.required,
+    // horarioEntregaArticulo: new FormControl('', Validators.required),
+    horarioEntregaArticulo: new FormControl('', [Validators.required,
     Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
     resguardoFecha: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
-    resguardoHora: new FormControl('', [Validators.required,
+    resguardoHora: new FormControl('', [Validators.required, Validators.maxLength(5),
     Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
-    resguardoNombreRecibe: new FormControl('', Validators.required),
-    resguardoNombreEntrega: new FormControl('', Validators.required),
+    resguardoNombreRecibe: new FormControl('',[ Validators.required, Validators.maxLength(150)]),
+    resguardoNombreEntrega: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionFecha: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
-    recepcionHora: new FormControl('', [Validators.required,
+    recepcionHora: new FormControl('', [Validators.required,Validators.maxLength(5),
     Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
-    recepcionNombreRecibe: new FormControl('', Validators.required),
-    recepcionNombreEntrega: new FormControl('', Validators.required),
+    recepcionNombreRecibe: new FormControl('', [Validators.required,Validators.maxLength(150)]),
+    recepcionNombreEntrega: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionUbicacion: new FormControl('', Validators.required),
-    recepcionHorarioEntregaArticulo: new FormControl('', [Validators.required,
-      Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    recepcionHorarioEntregaArticulo: new FormControl('', [Validators.required,Validators.maxLength(5),
+    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
 
   });
 
-  datosAlert = {
-    message: "asdasd",
-    type: 'success',
-    visible: true
-  };
-
+ 
   paciente!: pacienteSeleccionado;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private controlArticulosService: ControlArticulosService,
@@ -100,7 +96,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     private cronicaGrupalService: CronicaGrupalService,
     private dialog: MatDialog,
     private tarjetaService: AppTarjetaPresentacionService,
-    
+
   ) { }
 
   ngOnInit(): void {
@@ -111,7 +107,6 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       let nss = this.paciente.nss;
       this.formNuevoArticulo.controls['clavePaciente'].setValue(nss);
     }
-
 
     if (userTmp !== '') {
       let usuario = JSON.parse(userTmp);
@@ -137,19 +132,15 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue("Roberto García");
     }
 
-     this.servicios();
-
-
-     console.log(this.hora)
-     this.formNuevoArticulo.controls['fecha'].setValue(this.fecha);
-     this.formNuevoArticulo.controls['recepcionFecha'].setValue(this.fecha);
-     this.formNuevoArticulo.controls['resguardoFecha'].setValue(this.fecha);
-     this.formNuevoArticulo.controls['resguardoHora'].setValue(this.hora);
-     this.formNuevoArticulo.controls['recepcionHora'].setValue(this.hora);
-     this.formNuevoArticulo.controls['horarioEntregaArticulo'].setValue(this.hora);
-     
-     this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].setValue(this.hora);
-   // this.horarioEntrega();
+    this.servicios();
+    this.formNuevoArticulo.controls['fecha'].setValue(this.fecha);
+    this.formNuevoArticulo.controls['recepcionFecha'].setValue(this.fecha);
+    this.formNuevoArticulo.controls['resguardoFecha'].setValue(this.fecha);
+    this.formNuevoArticulo.controls['resguardoHora'].setValue(this.hora);
+    this.formNuevoArticulo.controls['recepcionHora'].setValue(this.hora);
+    this.formNuevoArticulo.controls['horarioEntregaArticulo'].setValue(this.hora);
+    this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].setValue(this.hora);
+    // this.horarioEntrega();
 
 
   }
@@ -187,6 +178,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       .toPromise()
       .then(
         (res) => {
+          console.log(res)
           this.listaServicios = res;
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -199,7 +191,6 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   ubicacion(idServicio: string) {
     this.cronicaGrupalService.getCatLugar(idServicio).subscribe(
       (lugares) => {
-
         this.listaUbicacion = lugares;
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -209,41 +200,42 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   }
 
   //horarios
-  horarioEntrega() {
-    this.controlArticulosService.getHorarios().subscribe((res: any) => {
-      try {
-        let response = res.response;
-        let estatus = response.status;
-        if (estatus == "OK") {
-          this.listaDeHorarios = response.listaDeHorarios;
-        } else {
-          console.log(res)
+  /*   horarioEntrega() {
+      this.controlArticulosService.getHorarios().subscribe((res: any) => {
+        try {
+          let response = res.response;
+          let estatus = response.status;
+          if (estatus == "OK") {
+            this.listaDeHorarios = response.listaDeHorarios;
+          } else {
+            console.log(res)
+          }
+  
+        } catch (error) {
+          console.error(res);
+          console.error(error)
         }
-
-      } catch (error) {
-        console.error(res);
-        console.error(error)
-      }
-
-    }, (error: any) => {
-      console.error(error);
-    });
+  
+      }, (error: any) => {
+        console.error(error);
+      });
+  
+  
+    } */
 
 
-  }
   //guarda los datos del formulario
   guardarControl() {
-  
- 
-    this.submitted = true; 
 
-    let noArticulos=this.nuevosArticulosArray.length;
-    if(noArticulos==0){
-      this.validaArticulos=true;
-    }else{
-      this.validaArticulos=false;
+    this.submitted = true;
+
+    let noArticulos = this.nuevosArticulosArray.length;
+    if (noArticulos == 0) {
+      this.validaArticulos = true;
+    } else {
+      this.validaArticulos = false;
     }
-  console.log(this.formNuevoArticulo.value)
+    console.log(this.formNuevoArticulo.value)
     if (this.formNuevoArticulo.status != "INVALID") {
       //validaciones para que los campos no vayan vacios 
       if (this.formNuevoArticulo.value.noCama.trim().length == 0 ? true : false) {
@@ -386,20 +378,14 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
         return;
       }
       let datos = this.formNuevoArticulo.value;
-      console.log(datos)
       this.controlArticulosService.setControlArticulos(datos).subscribe(async (res: any) => {
-        console.log(res);
 
         let estatus = res.status;
         if (estatus == "OK") {
           try {
             console.log("insert correcto")
-            let id = res.idCa+"nuevo";
-     
-         
-      await     this.router.navigateByUrl("/detalle-control-articulos/" + id, { skipLocationChange: true });
-   
-            
+            let id = res.idCa + "nuevo";
+            await this.router.navigateByUrl("/detalle-control-articulos/" + id, { skipLocationChange: true });
 
           } catch (error) {
             this.muestraAlerta(
@@ -426,66 +412,41 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
 
     } else {
-       this.muestraAlerta(
+      this.muestraAlerta(
         ' Verificar datos capturados',
         'alert-danger',
         'Error'
       );
-      
+
       return;
     }
-     
+
 
   }
 
-  //mmuestra un alert en caso correcto o incorrecto
-  muestraAlerta(mensaje: string, estilo: string, type: string) {
-
-    this.alert = {
-      message: mensaje,
-      type: estilo,
-      typeMsg: type,
-      visible: true
-    }
-    setTimeout(() => {
-      this.alert = {
-        message: '',
-        type: 'custom',
-        visible: false
-      }
-    }, 2000);
-  }
+ 
 
 
   //despliega la ventana emergente con la opcion de cancelar
   cancelar(modal: any) {
     this.dialog.open(modal, {
-      disableClose: true,
-      width: "450px",
+       width: "450px",
       maxHeight: "350px"
     });
 
   }
 
-  //solo cierra la ventana emergente
-  soloCerrarVentanaEmergente() {
-    this.dialog.closeAll();
-  }
-
+ 
 
   //al dar click en la ventana emergente y da en la opcion de aceptar se redirecciona
-  async cancelarSinGuardar() {
+   cancelarSinGuardar() { 
     this.router.navigateByUrl("/consulta-control-articulos", { skipLocationChange: true });
-    this.dialog.closeAll();
-
-
    
   }
 
   //agrega articulos a la lista
   agegarArticulo() {
     let articulo = this.formNuevoArticulo.value.articulo;
-    console.log(articulo);
 
     if (articulo.trim().length == 0 ? true : false) {
       return;
@@ -495,16 +456,16 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     this.formNuevoArticulo.controls['articulo'].setValue('');
     this.mostrarArticulos = true;
 
-    let noArticulos=this.nuevosArticulosArray.length;
-    if(noArticulos==0){
-      this.validaArticulos=true;
-    }else{
-      this.validaArticulos=false;
+    let noArticulos = this.nuevosArticulosArray.length;
+    if (noArticulos == 0) {
+      this.validaArticulos = true;
+    } else {
+      this.validaArticulos = false;
     }
   }
 
 
-  //elmina el articulo
+  //elmina el articulo de la lista
   eliminarArticulo(articulo: string) {
     let i = this.nuevosArticulosArray.indexOf(articulo);
 
@@ -518,11 +479,11 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       this.mostrarArticulos = true;
     }
 
-    let noArticulos=this.nuevosArticulosArray.length;
-    if(noArticulos==0){
-      this.validaArticulos=true;
-    }else{
-      this.validaArticulos=false;
+    let noArticulos = this.nuevosArticulosArray.length;
+    if (noArticulos == 0) {
+      this.validaArticulos = true;
+    } else {
+      this.validaArticulos = false;
     }
   }
 
@@ -533,6 +494,28 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       //  idServicio = '1';
       this.ubicacion(idServicio);
     }
+  }
+
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
 
