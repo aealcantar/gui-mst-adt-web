@@ -20,6 +20,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { MatSelectModule } from '@angular/material/select';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { NumberDirective } from './directives/only-numbers.directive';
 
 export const MY_FORMATS = {
   parse: {
@@ -42,7 +43,8 @@ export const MY_FORMATS = {
     AppMenuComponent,
     FichapacienteComponent,
     MenugralComponent,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    NumberDirective,
   ],
   imports: [
     CommonModule,
@@ -79,7 +81,7 @@ export const MY_FORMATS = {
     MenugralComponent,
     DataTablesModule,
     HeaderMenuComponent,
-
+    NumberDirective,
   ], providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

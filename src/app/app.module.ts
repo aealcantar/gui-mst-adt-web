@@ -21,7 +21,6 @@ import { ReadexcelDirective } from './shared-modules/directives/readexcel.direct
 import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import '@angular/common/locales/global/es';
-import { NumberDirective } from './shared-modules/directives/only-numbers.directive';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -55,7 +54,6 @@ registerLocaleData('es');
     AppComponent,
     LoginComponent,
     RegistroComponent,
-    NumberDirective,
     ReadexcelDirective,
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
