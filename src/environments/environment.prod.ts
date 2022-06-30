@@ -11,7 +11,7 @@ export const environment = {
   urlMSEDSCHorarios: 'msedsc-catalogos',
   urlMSEDSCAgenda: 'msedsc-catalogos',
   urlMSADTUSUARIOS: 'msedsc-usuarios/api',
-
+  urlVolantesDonacion: "http://localhost:8090/msmts-donacion-sangre/api"    ,
   //Trabajo Social
   msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
   msmtsCatalogos: 'msedsc-catalogos',

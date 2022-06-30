@@ -15,7 +15,7 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
 
     getVolantesByFechas(fechaInicial: string, fechaFinal: string) {
         try {
-           return this.httpsClient.get<VolantesDonacion[]>(`${environment.urlVolantesDonacion}/msmts-donacion-sangre/api/findVolantesByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+           return this.httpsClient.get<VolantesDonacion[]>(`${environment.urlVolantesDonacion}/findVolantesByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
         } catch (error) {
             console.log("error")
             return error;
@@ -24,7 +24,7 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
 
     addVolante(volantesDonacion: VolantesDonacion) {
         try {
-            return this.httpsClient.post<VolantesDonacion>(`${environment.urlVolantesDonacion}/msmts-donacion-sangre/api/guardaNuevoVolanteDonacionSangre`, volantesDonacion);
+            return this.httpsClient.post<VolantesDonacion>(`${environment.urlVolantesDonacion}/guardaNuevoVolanteDonacionSangre`, volantesDonacion);
         } catch (error) {
             console.log("error")
             return error;

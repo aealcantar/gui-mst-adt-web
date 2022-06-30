@@ -21,4 +21,3 @@ export class ControlArticulos {
 	recepcionUbicacion?: string;
 	recepcionHorarioEntregaArticulo?: string;
 }
-
