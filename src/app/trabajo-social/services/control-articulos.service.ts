@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment'; 
 import { Observable } from 'rxjs';
 import { ControlArticulos } from 'src/app/trabajo-social/models/control-articulo.model';
 
@@ -15,28 +14,25 @@ export class ControlArticulosService {
 
   setControlArticulos(datos: any) {
     try {
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/msmts-ctrl-articulos/api/insert`, datos);
-    } catch (error) {
-      console.log("error")
+      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/insert`, datos);
+    } catch (error) {      
       return error;
     }
   }
 
   getDetalleControlArticulos(datos: any) {
     try {
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/msmts-ctrl-articulos/api/idCa`, datos);
-    } catch (error) {
-      console.log("error")
+      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/idCa`, datos);
+    } catch (error) {     
       return error;
     }
   }
-
+ 
 
   getHorarios() {
     try {
-      return this.httpsClient.get<any>(`${environment.msmtsControlArticulos}/msmts-ctrl-articulos/api/horarios`);
+      return this.httpsClient.get<any>(`${environment.msmtsControlArticulos}/horarios`);
     } catch (error) {
-      console.log("error")
       return error;
     }
 
@@ -53,9 +49,8 @@ export class ControlArticulosService {
 
   getArticulosByFechas(controlArticulos: any) {
     try {
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/msmts-ctrl-articulos/api/rango/fechas`, controlArticulos);
+      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/rango/fechas`, controlArticulos);
     } catch (error) {
-      console.log("error")
       return error;
     }
   }

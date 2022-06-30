@@ -266,8 +266,8 @@ tr {
   vertical-align: middle;
 }
 
-.colorSubtabla{
-color: #FFFFFF;
+.colorSubtabla {
+  color: #FFFFFF;
 }
 
 .subtable {
@@ -347,7 +347,7 @@ select {
   margin-right: 5px;
 }
 
-.pading1{
+.pading1 {
   padding-top: 175px;
 }
 
@@ -372,18 +372,18 @@ option {
 }
 
 .errorimgdiv {
-width: 289px;
-margin-left: auto;
-margin-right: auto;
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
 .errorimg {
-width: 289px;
-height: 197px;
-margin-left: auto;
-margin-right: auto;
-margin-top: 50px;
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
 
 
@@ -539,12 +539,13 @@ margin-top: 50px;
 }
 
 .arrow-down {
-  top: 190px;
+  top: 195px;
   z-index: 9999;
   margin-left: 43px;
-  margin-top:6px;
+  margin-top: 6px;
 }
 
-.flechaArriba{
-margin-left: 43px; margin-top: -3px;
+.flechaArriba {
+  margin-left: 43px;
+  margin-top: -3px;
 }
