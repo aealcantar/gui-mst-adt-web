@@ -14,7 +14,7 @@ export const environment = {
   urlServNotas: 'http://localhost:8086',
   urlServEstudioMedicos: 'http://localhost:8088',
 
-  msmtsControlArticulos:'http://localhost:8088/msmts-control-articulos/api',
+  msmtsControlArticulos:'http://localhost:8088/msmts-ctrl-articulos/api',
   urlVolantesDonacion: 'http://localhost:8090',
 
   production: false,
@@ -38,7 +38,7 @@ export const environment = {
   msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
   msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
   msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
-  //msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-control-articulos/api',
+  //msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
   msmtsOauth: 'http://localhost:8081/',
   urlServOauth: 'http://localhost:8081',
 
