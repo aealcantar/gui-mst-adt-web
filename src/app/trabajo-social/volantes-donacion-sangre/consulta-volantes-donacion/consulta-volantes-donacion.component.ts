@@ -35,7 +35,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   nomPaciente: any;
   rolPaciente: string;
   nssPaciente: string;
-  formBuscarArticulos: FormGroup;
 
   constructor(
     private router: Router,
@@ -106,7 +105,12 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
 
   buscar() {
     if (this.datesForm.valid){
-      this.getVolantesByFecha();
+      if(this.datesForm.controls['fechaInicial'].value < this.datesForm.controls['fechaFinal'].value){
+        this.getVolantesByFecha();
+      }
+      else{
+        this.tabla = [];
+      }
     }
     else{
       return;
