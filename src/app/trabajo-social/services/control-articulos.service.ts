@@ -45,7 +45,7 @@ export class ControlArticulosService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
-    return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/reporte/reporteCtrlArticulos`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
+    return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/reporteCtrlArticulos`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
   }
 
   getArticulosByFechas(controlArticulos: any) {

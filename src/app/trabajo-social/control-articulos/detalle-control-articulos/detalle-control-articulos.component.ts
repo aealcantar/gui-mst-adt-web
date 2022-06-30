@@ -220,8 +220,8 @@ export class DetalleControlArticulosComponent implements OnInit {
       horaR: horaRecepcion,
       ubicacionEntrega: this.detalle.recepcionUbicacion,
       horarioEntrega: this.detalle.recepcionHorarioEntregaArticulo,
-      nombreTSC: this.nombreTSC,
-      matriculaTSC: this.matricula,
+      nombreTSC: this.detalle.personalQueElaboro,
+      matriculaTSC: this.detalle.cvePersonalQueElaboro,
     };
     console.log('DATA REPORT: ', data);
 

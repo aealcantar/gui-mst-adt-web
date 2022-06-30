@@ -112,7 +112,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       let usuario = JSON.parse(userTmp);
       let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
       let rolUser = usuario?.rolUser;
-      let cveUsuario= usuario?.cveUsuario;
+      let cveUsuario= usuario?.matricula;
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue(nombre);
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue(nombre);
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);
