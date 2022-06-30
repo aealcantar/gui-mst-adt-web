@@ -18,6 +18,7 @@ import { Moment } from 'moment';
 import * as moment from 'moment';
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 declare var $: any;
 declare var $gmx: any;
@@ -107,7 +108,8 @@ export class CitaguardaComponent implements OnInit {
     modalidad: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private authService: AuthService,
+    private formBuilder: FormBuilder,
     private http: HttpClient, private router: Router,
     private citaservice: CitasService,
     public datePipe: DatePipe,
@@ -115,7 +117,7 @@ export class CitaguardaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.authService.setProjectObs("Agenda Digital Transversal");
     // this.lstchkparticipantes = [
     //   {name:'', value:'Martha Rodríguez Gómez', id: 1, checked:false, isfam: true},
     //   {name:'', value:'Leonardo López García', id: 2, checked:false, isfam: true},
