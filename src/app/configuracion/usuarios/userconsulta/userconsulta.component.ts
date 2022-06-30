@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValue } from '@angular/common';
 import { UsuariosService } from '../usuarios.service';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { HelperMensajesService } from '../../../services/helper.mensajes.service';
+import Swal from 'sweetalert2';
 
 declare var $:any;
 
@@ -44,7 +46,8 @@ export class UserconsultaComponent implements OnInit {
   constructor(private authService: AuthService,
     private http: HttpClient, private router: Router,
     private activerouter: ActivatedRoute,
-    private userservice: UsuariosService) { }
+    private userservice: UsuariosService,
+    private _Mensajes: HelperMensajesService) { }
 
 
 
@@ -54,11 +57,8 @@ export class UserconsultaComponent implements OnInit {
     this.buscarusuario(this.varid);
   }
 
-  limpiarbusqueda(){
-
-  }
-
   buscarusuario(id: number){
+    this.msjLoading("Cargando...");
     this.userservice.consultaUsuario(id).subscribe({
       next: (resp:any) => {
         console.log(resp);
@@ -74,9 +74,11 @@ export class UserconsultaComponent implements OnInit {
         this.items.Estatus = resp.ind_estatus? 'Activo' : 'Inactivo';
         this.items.Puesto = resp.des_puesto;
         this.items['Escuela de procedencia'] = resp.des_escuela_procedencia;
+        Swal.close();
       },
       error: (err) => {
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CONEXION_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
@@ -89,6 +91,16 @@ export class UserconsultaComponent implements OnInit {
 
   regresaconsulta(){
     this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
+  }
+
+  private msjLoading(titulo: string) {
+    Swal.fire({
+      title: titulo,
+
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    })
   }
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string){

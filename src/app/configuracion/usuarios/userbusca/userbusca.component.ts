@@ -11,6 +11,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CargamasivaComponent } from '../../catalogos/cargamasiva/cargamasiva.component'
+import { HelperMensajesService } from '../../../services/helper.mensajes.service';
+import Swal from 'sweetalert2';
 //import { rootCertificates } from 'tls';
 declare var $:any;
 //declare var $gmx:any;
@@ -45,7 +47,8 @@ export class UserbuscaComponent implements OnInit  {
     private userservice: UsuariosService,
     private renderer: Renderer2,
     private elementRef:ElementRef,
-    public dialog: MatDialog) {}
+    public dialog: MatDialog,
+    private _Mensajes: HelperMensajesService) {}
 
 
   public ngOnInit(): void {
@@ -86,12 +89,14 @@ export class UserbuscaComponent implements OnInit  {
 
     if(this.txtbusca.trim() != ""){
       if(!isNaN(+this.txtbusca.trim().toString()) && this.txtbusca.trim().toString().length < 7 ){
-        this.muestraAlerta('Debe ingresar mínimo 7 dígitos para la búsqueda de matrícula','alert-warning','Alerta');
+        //this.muestraAlerta('Debe ingresar mínimo 7 dígitos para la búsqueda de matrícula','alert-warning','Alerta');
+        this.muestraAlerta(this._Mensajes.MSJ_WARNING_BUSCA_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
         return;
       }
     }
     this.lstUsuarios = [];
     this.pagactual = 1;
+    this.msjLoading("Cargando...");
     this.userservice.getUsuarios(this.txtbusca.trim().toString()).subscribe({
       next: (resp:any) => {
 
@@ -166,12 +171,13 @@ export class UserbuscaComponent implements OnInit  {
               this.pagactual = paginaactual + 1;
               } );
           },1000);
+          Swal.close();
         },1000);
-
       },
       error: (err) => {
         this.lstUsuarios = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CONEXION_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+        Swal.close();
       }
     })
 
@@ -210,6 +216,16 @@ export class UserbuscaComponent implements OnInit  {
 
   regresar(){
     this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
+  }
+
+  private msjLoading(titulo: string) {
+    Swal.fire({
+      title: titulo,
+
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    })
   }
 
   muestraAlerta(mensaje: string, estilo: string,tipoMsj?: string){
