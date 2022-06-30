@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValue } from '@angular/common';
 import { UsuariosService } from '../usuarios.service';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { HelperMensajesService } from '../../../services/helper.mensajes.service';
+import Swal from 'sweetalert2';
 
 declare var $gmx: any;
 
@@ -63,15 +65,14 @@ export class UserguardaComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private activerouter: ActivatedRoute,
-    private userservice: UsuariosService
+    private userservice: UsuariosService,
+    private _Mensajes: HelperMensajesService,
   ) {}
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
     this.consultarRoles();
-    $gmx(document).ready(() => {
-      //this.cargaprincipal();
-    });
+
     this.varid = this.activerouter.snapshot.paramMap.get('id');
     this.currentroute = this.router.url;
     this.isedit = this.router.url.indexOf('guarda') > 0 ? false : true;
@@ -104,6 +105,7 @@ export class UserguardaComponent implements OnInit {
   }
 
   buscarusuario(id: number) {
+    this.msjLoading("Cargando...");
     this.userservice.consultaUsuario(id).subscribe({
       next: (resp: any) => {
         console.log(resp);
@@ -124,14 +126,11 @@ export class UserguardaComponent implements OnInit {
         });
         this.rolselected = resp.adtc_roles.cve_rol;
         //this.userdata.controls['matricula'].setValue(resp.des_matricula);
+        Swal.close();
       },
       error: (err) => {
-        this.muestraAlerta(
-          err.error.message.toString(),
-          'alert-danger',
-          'Error',
-          null
-        );
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_BUSCA_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
       },
     });
   }
@@ -143,6 +142,7 @@ export class UserguardaComponent implements OnInit {
       this.submitted = true;
 
       if (this.userdata.valid) {
+        this.msjLoading("Cargando...");
         let data = {
           nom_primer_apellido: this.userdata.value.primerapellido,
           nom_segundo_apellido: this.userdata.value.segundoapellido,
@@ -166,31 +166,18 @@ export class UserguardaComponent implements OnInit {
         this.userservice.guardaUsuario(data).subscribe({
           next: (resp: any) => {
             console.log(resp);
-            this.muestraAlerta(
-              'El usuario fue creado correctamente',
-              'alert-success',
-              'Éxito',
-              this.callback
-            );
+            Swal.close();
+            this.muestraAlerta(this._Mensajes.MSJ_EXITO_GUARDA_USR, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO, this.callback);
 
           },
           error: (err) => {
             console.log(err);
-            this.muestraAlerta(
-              err.error.mensaje,
-              'alert-danger',
-              'Error',
-              null
-            );
-          },
+            Swal.close();
+            this.muestraAlerta(this._Mensajes.MSJ_ERROR_GUARDA_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
+          }
         });
       } else {
-        this.muestraAlerta(
-          'Ingresa los datos obligatorios',
-          'alert-danger',
-          'Error',
-          null
-        );
+        this.muestraAlerta(this._Mensajes.MSJ_DATOS_OBLIGATORIOS, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
       }
     }
   }
@@ -199,6 +186,7 @@ export class UserguardaComponent implements OnInit {
     this.submitted = true;
 
     if (this.userdata.valid) {
+      this.msjLoading("Cargando...");
       let data = {
         nom_primer_apellido: this.userdata.value.primerapellido,
         nom_segundo_apellido: this.userdata.value.segundoapellido,
@@ -222,32 +210,28 @@ export class UserguardaComponent implements OnInit {
       this.userservice.actualizaUsuario(this.varid, data).subscribe({
         next: (resp: any) => {
           console.log(resp);
-          this.muestraAlerta(
-            'El usuario fue editado correctamente',
-            'alert-success',
-            'Éxito',
-            this.callback
-          );
-
+          Swal.close();
+          this.muestraAlerta(this._Mensajes.MSJ_EXITO_EDITA_USR, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO, this.callback);
         },
         error: (err) => {
           console.log(err);
-          this.muestraAlerta(
-            err.error.mensaje.toString(),
-            'alert-danger',
-            'Error',
-            null
-          );
-        },
+          Swal.close();
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_EDITA_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
+        }
       });
     } else {
-      this.muestraAlerta(
-        'Ingresa los datos obligatorios',
-        'alert-danger',
-        'Error',
-        null
-      );
+      this.muestraAlerta(this._Mensajes.MSJ_DATOS_OBLIGATORIOS, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
     }
+  }
+
+  private msjLoading(titulo: string) {
+    Swal.fire({
+      title: titulo,
+
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    })
   }
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
@@ -305,13 +289,8 @@ export class UserguardaComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.lstRoles = [];
-        this.muestraAlerta(
-          err.error.mensaje.toString(),
-          'alert-danger',
-          'Error',
-          null
-        );
-      },
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_ROLES_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
+      }
     });
   }
 }

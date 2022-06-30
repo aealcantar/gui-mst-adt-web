@@ -71,4 +71,14 @@ export class HelperMensajesService {
   public MSJ_ERROR_DATOS_REQUERIDOS_HORARIO: string = 'Seleccione los campos requeridos';
 
   public MSJ_MSG023: string = 'No existe ningún horario configurado para la ubicación';
+
+  //
+  public MSJ_ERROR_CONEXION_USR: string = 'No fue posible conectar con el servicio.';
+  public MSJ_WARNING_BUSCA_USR: string = 'Debe ingresar mínimo 7 dígitos para la búsqueda de matrícula.';
+  public MSJ_EXITO_GUARDA_USR: string = 'El usuario fue creado correctamente.';
+  public MSJ_EXITO_EDITA_USR: string = 'El usuario fue editado correctamente.';
+  public MSJ_ERROR_ROLES_USR: string = 'No fue posible conectar con el servicio de consultar roles.';
+  public MSJ_ERROR_GUARDA_USR: string = 'Ocurrió un error al guardar el usuario.';
+  public MSJ_ERROR_EDITA_USR: string = 'Ocurrió un error al editar el usuario.';
+  public MSJ_ERROR_BUSCA_USR: string = 'No fue posible conectar con el servicio de consultar usuarios.';
 }
