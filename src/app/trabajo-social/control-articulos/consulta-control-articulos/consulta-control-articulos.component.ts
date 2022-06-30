@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { ControlArticulosService } from '../../services/control-articulos.service';
 import { ControlArticulos } from 'src/app/trabajo-social/models/control-articulo.model';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { DatePipe } from '@angular/common';
+
 declare var $: any;
 
 @Component({
@@ -19,7 +22,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
   public fechaSelected!: string;
   public page: number = 1;
-  public pageSize: number = 15;
+  public pageSize: number = 10;
   public resultadoTotal: number = 0;
   public dtOptions: DataTables.Settings = {};
   public numitems: number = 15;
@@ -30,39 +33,68 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public columnaId: string = 'fecha';
   public findCtrolArt: any[] = [];
   public valores: ControlArticulos;
+  paciente!: pacienteSeleccionado;
+  nomPaciente: any;
+  rolPaciente: string;
+  nssPaciente: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private Artservice: ControlArticulosService ,
     private fb: FormBuilder,
-    private datePipe: DatePipe
-  ) {
+    private datePipe: DatePipe,
+    private tarjetaService: AppTarjetaPresentacionService,
+  ) {  
+    this.datesForm = new FormGroup({
+      'fechaInicial': new FormControl(null, [Validators.required]),
+      'fechaFinal': new FormControl(null, [Validators.required]),
+    }, {updateOn: 'blur'});
 
-
-   }
+  }
 
   ngOnInit(): void {
-    this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
-    });
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    this.paciente = this.tarjetaService.get();
+    if (this.paciente !== null && this.paciente !== undefined) {
+      this.nssPaciente = this.paciente.nss.toString();
+      this.nomPaciente = this.paciente.paciente;
+    }
+  }
+
+  limpiar() {
+    this.datesForm.reset();
+    this.tabla = [];
+  }
+
+  buscar() {
+    if (this.datesForm.valid){
+      if(this.datesForm.controls['fechaInicial'].value < this.datesForm.controls['fechaFinal'].value){
+        this.getArticulosByFecha();
+      }
+      else{
+        this.tabla = [];
+      }
+      
+    }
+    else{
+      return;
+    }
   }
 
   getArticulosByFecha(): void {
 
     const findCtrolArt = {
      "bitacora":[{
-         "aplicativo":"",
-         "flujo":"",
+         "aplicativo":"control-articulos",
+         "flujo":"post",
          "idUsuario":1,
-         "nombreUsuario":"",
+         "nombreUsuario":this.nomPaciente,
          "tipoUsuario":1
      }],
-     "pagina":"1",
      "fechaInicial": this.datesForm.get('fechaInicial')?.value,
      "fechaFinal": this.datesForm.get('fechaFinal')?.value,
-     "clavePaciente":123456789
+     "clavePaciente": this.nssPaciente
    };
 
    this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
@@ -101,13 +133,12 @@ export class ConsultaControlArticulosComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    $('#notasInit').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#articulosInit').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaInicial')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -117,13 +148,12 @@ export class ConsultaControlArticulosComponent implements OnInit {
       }
     });
 
-    $('#notasFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#articulosFinal').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -132,19 +162,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
         }
       }
     });
-    this.handleDatesChange();
   }
-
-  handleDatesChange() {
-    if (
-      this.datesForm.get('fechaInicial')?.value &&
-      this.datesForm.get('fechaInicial')?.value !== '' &&
-      this.datesForm.get('fechaFinal')?.value &&
-      this.datesForm.get('fechaFinal')?.value !== '') {
-      this.getArticulosByFecha();
-    }
-  }
-
 
   irNuevoRegistro() {
     let params = {}
@@ -184,6 +202,5 @@ export class ConsultaControlArticulosComponent implements OnInit {
     }
     return data;
   }
-
 
 }

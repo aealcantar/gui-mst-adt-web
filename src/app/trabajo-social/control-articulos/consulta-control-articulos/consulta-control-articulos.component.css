@@ -40,7 +40,6 @@ th {
   border-radius: 50%;
 }
 
-
 .pagination a {
   border: none;
 }
@@ -82,6 +81,7 @@ a {
 }
 
 .div-container-image {
+  margin-left: 25%;
   width: 289px;
   margin-left: auto;
   margin-right: auto;
@@ -153,6 +153,7 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
 }
+
 .bordesTablaFecha {
   border: 1px solid #ddd;
   text-align: center !important;
@@ -170,21 +171,20 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 11%;
-
 }
 
 .bordesTablaTotalParticipantes {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 13%;
-
 }
+
 .bordesTablaAsistieron {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 13%;
-
 }
+
 .bordesTablaDescripcion {
   border: 1px solid #ddd;
   text-align: left !important;
@@ -214,7 +214,6 @@ a {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-
 }
 
 .my-pagination ::ng-deep .current {
@@ -251,10 +250,10 @@ a {
 .tabla>tfoot>tr>th,
 .tabla>thead>tr>td,
 .tabla>thead>tr>th {
-    padding: 1.8px;
-    line-height: 1.428571429;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+  padding: 1.8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
 }
 
 .buttonL {
@@ -284,6 +283,29 @@ a {
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
-
 }
 
+.redColor {
+  color: #E10000 !important;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 45px;
+  /* or 450% */
+  display: flex;
+  align-items: center;
+}
+
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
