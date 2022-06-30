@@ -37,8 +37,6 @@ export class ConsultaControlArticulosComponent implements OnInit {
   nomPaciente: any;
   rolPaciente: string;
   nssPaciente: string;
-  formBuscarArticulos: FormGroup;
-  public enableForm: boolean = false;
 
   constructor(
     private router: Router,
@@ -71,7 +69,13 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
   buscar() {
     if (this.datesForm.valid){
-      this.getArticulosByFecha();
+      if(this.datesForm.controls['fechaInicial'].value < this.datesForm.controls['fechaFinal'].value){
+        this.getArticulosByFecha();
+      }
+      else{
+        this.tabla = [];
+      }
+      
     }
     else{
       return;
