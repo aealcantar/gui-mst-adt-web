@@ -1,30 +1,45 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute } from '@angular/router';
 import { ControlArticulosService } from '../../services/control-articulos.service';
 import { AlertInfo } from 'src/app/shared-modules/models/app-alert.interface';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 @Component({
   selector: 'app-detalle-control-articulos',
   templateUrl: './detalle-control-articulos.component.html',
   styleUrls: ['./detalle-control-articulos.component.css'],
 })
 export class DetalleControlArticulosComponent implements OnInit {
+
+  //declaracion de variables para el funcionamiento del aplicativo
   detalle: any = {};
   alert!: AlertInfo;
   idControlArticulos: string = '';
-
   articulosArray: Array<any> = [];
+  paciente!: pacienteSeleccionado;
+  bitacora: any = {
+    aplicativo: '',
+    flujo: '',
+    idUsuario: 1,
+    nombreUsuario: '',
+    tipoUsuario: 1,
+  };
+
+  nombreTSC: string = "";
+  matricula: string = "";
 
   constructor(
     private controlArticulosService: ControlArticulosService,
-    private rutaActiva: ActivatedRoute
+    private rutaActiva: ActivatedRoute,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) { }
 
   ngOnInit(): void {
     this.idControlArticulos = this.rutaActiva.snapshot.paramMap.get('id');
- 
+    this.paciente = this.tarjetaService.get();
     if (Number(this.idControlArticulos) > 0) {
-      this.buscarDetalleArticulos(this.idControlArticulos);
+      this.buscarDetalleArticulos();
     } else {
       this.muestraAlerta(
         '¡La información se guardo con éxito!',
@@ -32,22 +47,37 @@ export class DetalleControlArticulosComponent implements OnInit {
         ''
       );
       this.idControlArticulos = this.idControlArticulos.replace("nuevo", "");
-      console.log(this.idControlArticulos);
-      this.buscarDetalleArticulos(this.idControlArticulos);
+      this.buscarDetalleArticulos();
     }
 
- }
+  }
 
-  buscarDetalleArticulos(idControlArticulo: string) {
+
+  //realiza una peticion para mostra el detalle del articulo seleccionado
+  buscarDetalleArticulos() {
+
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    let rolUser = "";
+    let cveUsuario = "";
+    let nombre = "";
+    if (userTmp !== '') {
+      let usuario = JSON.parse(userTmp);
+      nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
+      this.nombreTSC = nombre;
+      rolUser = usuario?.rolUser;
+      cveUsuario = usuario?.cveUsuario;
+      this.matricula = usuario?.matricula;
+    }
+
     let datos = {
       bitacora: {
-        aplicativo: '',
+        aplicativo: 'detalle-contol-articulos',
         flujo: '',
-        idUsuario: 1,
-        nombreUsuario: '',
-        tipoUsuario: 1,
+        idUsuario: cveUsuario,
+        nombreUsuario: nombre,
+        tipoUsuario: rolUser,
       },
-      idCa: idControlArticulo,
+      idCa: this.idControlArticulos,
     };
 
     this.controlArticulosService.getDetalleControlArticulos(datos).subscribe(
@@ -60,31 +90,40 @@ export class DetalleControlArticulosComponent implements OnInit {
             let articulos = controlArticulos.articulosArray;
             this.articulosArray = articulos;
             this.detalle = controlArticulos;
-            console.log(controlArticulos);
           }
         } catch (error) {
           console.error(error);
         }
       },
       (error: any) => {
-        console.log('fallo y no se porque');
-        console.log(error);
+        console.error(error);
       }
     );
   }
 
-  impirmiControlArticulos() {
 
-    let nombrePaciente = "Maria del Carmen Romero Sanchez";
+  //genera un archivo pdf para su descarga
+  impirmiControlArticulos() {
+    let nombrePaciente = "";
+    let unidadMedica = "";
+    let nss = "";
+
+    if (this.paciente !== null && this.paciente !== undefined) {
+      nss = this.paciente.nss.toString();
+      nombrePaciente = this.paciente.paciente.toString();
+      unidadMedica = this.paciente.unidadMedica.toString();
+    }
+
     let splitNombre = nombrePaciente.split(" ");
     let tamanioNombre = splitNombre.length;
     let posicionAppMaterno = tamanioNombre - 1;
     let posicionAppPaterno = tamanioNombre - 2;
-    let appPaterno = splitNombre[posicionAppPaterno];
-    let appMaterno = splitNombre[posicionAppMaterno];
+    let appPaterno = splitNombre[posicionAppPaterno] == undefined ? "" : splitNombre[posicionAppPaterno];
+    let appMaterno = splitNombre[posicionAppMaterno] == undefined ? "" : splitNombre[posicionAppMaterno];;
     let nombre = "";
+
     for (let i = 0; i < posicionAppMaterno; i++) {
-        nombre += splitNombre[i] + " ";
+      nombre += splitNombre[i] + " ";
     }
     let recepcionFechaSA = this.detalle.resguardoFecha;
     let diaRecepcionSA = "";
@@ -155,17 +194,17 @@ export class DetalleControlArticulosComponent implements OnInit {
         articulo: articulos[i]
       };
       nuevosArticulos.push(valor);
-
     }
+
 
     let data: any = {
       folio: this.detalle.noFolioControl,
-      uMedica: '1M1989OR',
+      uMedica: unidadMedica,
       paternoP: appPaterno,
       maternoP: appMaterno,
       nombreP: nombre,
       cama: this.detalle.noCama,
-      nss: 'UMD No. 11',
+      nss: nss,
       servicio: this.detalle.ubicacion,
       tel1: this.detalle.telefono,
       articulos: nuevosArticulos,
@@ -181,10 +220,11 @@ export class DetalleControlArticulosComponent implements OnInit {
       horaR: horaRecepcion,
       ubicacionEntrega: this.detalle.recepcionUbicacion,
       horarioEntrega: this.detalle.recepcionHorarioEntregaArticulo,
-      nombreTSC: 'Manuel Avila Camacho',
-      matriculaTSC: '5542468958',
+      nombreTSC: this.nombreTSC,
+      matriculaTSC: this.matricula,
     };
     console.log('DATA REPORT: ', data);
+
     this.controlArticulosService.downloadPdf(data).subscribe(
       (response: any) => {
         console.log(response);
@@ -199,6 +239,7 @@ export class DetalleControlArticulosComponent implements OnInit {
     );
   }
 
+  //muesta el mensaje de alerta
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
     this.alert = new AlertInfo;
     this.alert = {

@@ -102,6 +102,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     let userTmp = sessionStorage.getItem('usuario') || '';
     this.paciente = this.tarjetaService.get();
+    
     if (this.paciente !== null && this.paciente !== undefined) {
       let nss = this.paciente.nss;
       this.formNuevoArticulo.controls['clavePaciente'].setValue(nss);
@@ -111,14 +112,14 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       let usuario = JSON.parse(userTmp);
       let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
       let rolUser = usuario?.rolUser;
-
+      let cveUsuario= usuario?.cveUsuario;
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue(nombre);
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue(nombre);
       this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);
       this.bitacora = {
         aplicativo: 'control-articulos',
         flujo: 'post',
-        idUsuario: 1,
+        idUsuario: cveUsuario,
         nombreUsuario: nombre,
         tipoUsuario: rolUser
       };
