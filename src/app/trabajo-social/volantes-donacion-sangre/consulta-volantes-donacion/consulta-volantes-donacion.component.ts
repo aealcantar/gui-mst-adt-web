@@ -5,12 +5,7 @@ import { AuthService } from 'src/app/shared-modules/services/auth-service.servic
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { VolanteDonacion } from 'src/app/shared-modules/models/volante-donacion.model';
-<<<<<<< HEAD
-import { VolantesDonacionService } from '../../services/volantes-donacion.service';
-import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacion.model';
-=======
 import { VolantesDonacionService } from '../../services/volantes-donacion.service'; 
->>>>>>> c2aa746ac2fc205c148db4282285332e22b26566
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { DatePipe } from '@angular/common';
