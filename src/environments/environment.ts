@@ -14,7 +14,7 @@ export const environment = {
   urlServNotas: 'http://localhost:8086',
   urlServEstudioMedicos: 'http://localhost:8088',
 
-  msmtsControlArticulos:'http://localhost:8088',
+  msmtsControlArticulos:'http://localhost:8088/msmts-control-articulos/api',
   urlVolantesDonacion: 'http://localhost:8090',
 
   production: false,
