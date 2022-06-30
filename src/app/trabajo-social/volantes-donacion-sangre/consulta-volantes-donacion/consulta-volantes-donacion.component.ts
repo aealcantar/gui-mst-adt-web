@@ -2,17 +2,21 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-//import { NotasService } from 'src/app/service/notas.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { VolanteDonacion } from 'src/app/shared-modules/models/volante-donacion.model';
+import { VolantesDonacionService } from '../../services/volantes-donacion.service'; 
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { DatePipe } from '@angular/common';
 
 declare var $: any;
 
 @Component({
   selector: 'app-consulta-volantes-donacion',
   templateUrl: './consulta-volantes-donacion.component.html',
-  styleUrls: ['./consulta-volantes-donacion.component.css']
+  styleUrls: ['./consulta-volantes-donacion.component.css'],
+  providers: [DatePipe]
 })
 export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit {
   public fechaSelected!: string;
@@ -25,37 +29,49 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
-  public columnaId: string = 'fecFecha';
-  //public prueba =  [{ "fecFecha": "20/06/2022", "nomTrabajadorSocial": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
+  public columnaId: string = 'fecEfec';
+  paciente!: pacienteSeleccionado;
+  nomPaciente: any;
+  rolPaciente: string;
+  nssPaciente: string;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-//    private notasService: NotasService,
+    private volantesService: VolantesDonacionService,
     private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
     if (this.extras && this.extras.state) {
       console.log(this.extras.state.id);
       //this.getNotasById(this.extras.state.id);
     }
+
+    this.datesForm = new FormGroup({
+      'fechaInicial': new FormControl(null, [Validators.required]),
+      'fechaFinal': new FormControl(null, [Validators.required]),
+    }, {updateOn: 'blur'});
   }
 
   ngOnInit(): void {
-    this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
-    });
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    this.paciente = this.tarjetaService.get();
+    if (this.paciente !== null && this.paciente !== undefined) {
+      this.nssPaciente = this.paciente.nss.toString();
+      this.nomPaciente = this.paciente.paciente;
+    }
+  
   }
 
   ngAfterViewInit(): void {
-    $('#notasInit').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#volantesInit').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaInicial')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -65,13 +81,12 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       }
     });
 
-    $('#notasFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#volantesFinal').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -80,7 +95,52 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         }
       }
     });
-    this.handleDatesChange();
+  }
+
+  limpiar() {
+    this.datesForm.reset();
+    this.tabla = [];
+  }
+
+  buscar() {
+    if (this.datesForm.valid){
+      if(this.datesForm.controls['fechaInicial'].value < this.datesForm.controls['fechaFinal'].value){
+        this.getVolantesByFecha();
+      }
+      else{
+        this.tabla = [];
+      }
+    }
+    else{
+      return;
+    }
+  }
+
+  getVolantesByFecha(): void {
+    this.volantesService.getVolantesByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+      (volantes: any) => {
+        try {
+          if (volantes && volantes.length > 0) {
+            this.tabla =  volantes;
+            console.log("VOLANTES DONACION: ", this.tabla);
+          }
+        }catch (error) {
+          console.error(error);
+        }
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+    this.dtOptions = {
+      order: [[2, 'desc']],
+      ordering: false,
+      paging: false,
+      processing: false,
+      info: false,
+      searching: false,
+    };
+    this.sortBy(this.columnaId, this.order, 'fecha');
   }
 
   irDetalle(volanteDonacion: VolanteDonacion) {
@@ -96,16 +156,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     //  'objetoAEnviar': null,
     //}
     this.router.navigate(["agregar-volante"], {skipLocationChange: true });
-  }
-
-  handleDatesChange() {
-    if (
-      this.datesForm.get('fechaInicial')?.value &&
-      this.datesForm.get('fechaInicial')?.value !== '' &&
-      this.datesForm.get('fechaFinal')?.value &&
-      this.datesForm.get('fechaFinal')?.value !== '') {
-      //this.getNotasByFecha();
-    }
   }
 
   sortBy(columnaId: string, order: string, type: string) {
@@ -129,13 +179,11 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     let data;
     switch (type) {
       case 'fecha':
+        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
         data = moment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
         data = moment(val, 'HH:mm:ss');
-        break;
-      case 'number':
-        data = parseInt(val);
         break;
 
       default:
@@ -143,4 +191,5 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     }
     return data;
   }
+
 }
