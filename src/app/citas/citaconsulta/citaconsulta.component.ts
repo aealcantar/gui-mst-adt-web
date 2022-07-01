@@ -12,6 +12,7 @@ import { DatePipe, formatDate } from '@angular/common';
 import { CitaResponse, ParticipanteCita } from 'src/app/models/cita-model';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { HelperMensajesService } from '../../services/helper.mensajes.service';
 
 
 declare var $: any;
@@ -62,7 +63,8 @@ export class CitaconsultaComponent implements OnInit {
     private http: HttpClient, private router: Router,
     private activerouter: ActivatedRoute,
     private citaservice: CitasService,
-    public datePipe: DatePipe) { }
+    public datePipe: DatePipe,
+    private _Mensajes: HelperMensajesService) { }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
@@ -145,7 +147,7 @@ export class CitaconsultaComponent implements OnInit {
       },
       error: (err) => {
         Swal.close();
-        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CONSULTA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
 
@@ -195,13 +197,15 @@ export class CitaconsultaComponent implements OnInit {
               this.objmodal.mensaje = "";
               this.objmodal.tipo = 0;
               $('#content').modal('hide');
-              this.muestraAlerta("La cita fué cancelada correctamente", 'alert-success', 'Éxito', this.callback);
+
+              this.muestraAlerta(this._Mensajes.MSJ_EXITO_CANCELAR_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO, this.callback);
             },
             error: (err) => {
               this.objmodal.mensaje = "";
               this.objmodal.tipo = 0;
               $('#content').modal('hide');
-              this.muestraAlerta(err.error.mensaje ? err.error.mensaje : err.error.message, 'alert-danger', 'Error');
+
+              this.muestraAlerta(err.error.mensaje ? err.error.mensaje : this._Mensajes.MSJ_ERROR_CANCELAR_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
             }
           })
         },
@@ -209,7 +213,8 @@ export class CitaconsultaComponent implements OnInit {
           this.objmodal.mensaje = "";
           this.objmodal.tipo = 0;
           $('#content').modal('hide');
-          this.muestraAlerta(err.error.mensaje ? err.error.mensaje : err.error.message, 'alert-danger', 'Error');
+
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_CANCELAR_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
         }
       })
 
