@@ -122,7 +122,7 @@ export class DetalleControlArticulosComponent implements OnInit {
     let appMaterno = splitNombre[posicionAppMaterno] == undefined ? "" : splitNombre[posicionAppMaterno];;
     let nombre = "";
 
-    for (let i = 0; i < posicionAppMaterno; i++) {
+    for (let i = 0; i < posicionAppPaterno; i++) {
       nombre += splitNombre[i] + " ";
     }
     let recepcionFechaSA = this.detalle.resguardoFecha;
@@ -220,14 +220,14 @@ export class DetalleControlArticulosComponent implements OnInit {
       horaR: horaRecepcion,
       ubicacionEntrega: this.detalle.recepcionUbicacion,
       horarioEntrega: this.detalle.recepcionHorarioEntregaArticulo,
-      nombreTSC: this.nombreTSC,
-      matriculaTSC: this.matricula,
+      nombreTSC: this.detalle.personalQueElaboro,
+      matriculaTSC: this.detalle.cvePersonalQueElaboro,
     };
-    console.log('DATA REPORT: ', data);
-
+    //  console.log('DATA REPORT: ', this.detalle);
+    //  console.log('DATA : ', data);
     this.controlArticulosService.downloadPdf(data).subscribe(
       (response: any) => {
-        console.log(response);
+        // console.log(response);
         var file = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(file);
         window.open(url);

@@ -373,7 +373,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       }, (resp: HttpErrorResponse) => {
         console.log("RESPUESTA: ", resp.statusText);
         if (resp.statusText === 'OK') {
-          this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
+          this.router.navigate(["detalle-estudios-medicos"], { queryParams: params, skipLocationChange: true });
         } else {
           this.showError('Verificar datos capturados');
         }
