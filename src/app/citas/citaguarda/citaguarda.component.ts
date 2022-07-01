@@ -19,6 +19,8 @@ import * as moment from 'moment';
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { HelperMensajesService } from '../../services/helper.mensajes.service';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 declare var $gmx: any;
@@ -113,21 +115,13 @@ export class CitaguardaComponent implements OnInit {
     private http: HttpClient, private router: Router,
     private citaservice: CitasService,
     public datePipe: DatePipe,
-    private tarjetaService: AppTarjetaPresentacionService
+    private tarjetaService: AppTarjetaPresentacionService,
+    private _Mensajes: HelperMensajesService
   ) { }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    // this.lstchkparticipantes = [
-    //   {name:'', value:'Martha Rodríguez Gómez', id: 1, checked:false, isfam: true},
-    //   {name:'', value:'Leonardo López García', id: 2, checked:false, isfam: true},
-    //   {name:'', value:'Adrián Flores Nava', id: 3, checked:false, isfam: true},
-    //   {name:'', value:'Adelia Allison Ramírez Gómez', id: 4, checked:false, isfam: true},
-    //   {name:'', value:'Ernesto Contreras Benitez', id: 5, checked:false, isfam: true},
-    //   {name:'', value:'Jorge Quezada Gas', id: 6, checked:false, isfam: true}
-    // ]
-
-    this.paciente = this.tarjetaService.get();
+    this.paciente = this.tarjetaService.get()? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
     //console.log("paciente:" + this.paciente);
     this.llenaparticipantes();
     this.llenacatalogoservicios();
@@ -135,7 +129,8 @@ export class CitaguardaComponent implements OnInit {
   }
 
   llenaparticipantes() {
-    this.citaservice.getlistparticipantes(this.paciente ? this.paciente.nss : '4313947194').subscribe({
+    this.msjLoading("Cargando...");
+    this.citaservice.getlistparticipantes(this.paciente ? this.paciente.nss : '0').subscribe({
       next: (resp: any) => {
         //console.log(resp);
         //this.lstchkparticipantes = resp.busquedanss.beneficiarios;
@@ -147,76 +142,87 @@ export class CitaguardaComponent implements OnInit {
             this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true })
           }
         }
-
+        Swal.close();
       },
       error: (err) => {
         //console.log(err);
         this.lstchkparticipantes = [];
-        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+        Swal.close();
+
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_BENEFICIARIOS_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+
       }
     })
   }
 
   llenacatalogoservicios() {
+    this.msjLoading("Cargando...");
     this.citaservice.getlistservicios().subscribe({
       next: (resp: any) => {
         //console.log(resp);
         this.lstCatServicios = resp;
-
+        Swal.close();
       },
       error: (err) => {
         //console.log(err);
         this.lstCatServicios = [];
-        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATSERVICIO, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
 
   llenacatalogoprogramas(cve_especialidad: number) {
+    this.msjLoading("Cargando...");
     this.citaservice.getlistprogramas(cve_especialidad).subscribe({
       next: (resp: any) => {
         //console.log(resp);
         this.lstCatProgramas = resp;
-
+        Swal.close();
       },
       error: (err) => {
         //console.log(err);
         this.lstCatProgramas = [];
-        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATPROGRAMA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
 
   llenafechas(cve_gpo: number) {
+    this.msjLoading("Cargando...");
     this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo).subscribe({
       next: (resp: any) => {
         //console.log(resp);
 
         this.lstCatFechas = resp;
-
+        Swal.close();
       },
       error: (err) => {
         //console.log(err);
         this.lstCatFechas = [];
-        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATFECHA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
 
   }
 
   llenacatalogohorarios(fechaInicio: string) {
+    this.msjLoading("Cargando...");
     this.citaservice.gethorarioscalanual(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa,
       fechaInicio).subscribe({
         next: (resp: any) => {
           //console.log(resp);
           this.lstCatHorarios = resp;
-
+          Swal.close();
         },
         error: (err) => {
           //console.log(err);
           this.lstCatHorarios = [];
-          this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+          Swal.close();
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATHORA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
         }
       })
   }
@@ -313,13 +319,13 @@ export class CitaguardaComponent implements OnInit {
     }
 
     //validar espacio de la fecha seleccionada
-    if (!true) {
-      this.muestraAlerta(
-        'El espacio seleccionado se encuentra al máximo de su cupo, favor de seleccionar otra fecha.',
-        'alert-danger',
-        'Error'
-      );
-    }
+    // if (!true) {
+    //   this.muestraAlerta(
+    //     'El espacio seleccionado se encuentra al máximo de su cupo, favor de seleccionar otra fecha.',
+    //     'alert-danger',
+    //     'Error'
+    //   );
+    // }
   }
 
   onchangehora(e: any) {
@@ -339,6 +345,7 @@ export class CitaguardaComponent implements OnInit {
   }
 
   validaespaciocita(e: any) {
+    this.msjLoading("Cargando...");
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa).subscribe({
         next: (resp: any) => {
@@ -360,13 +367,14 @@ export class CitaguardaComponent implements OnInit {
           this.muestraresumen = true;
           this.submitted = false;
 
-
+          Swal.close();
         },
         error: (err) => {
           //console.log(err);
           this.muestraresumen = true;
           this.submitted = false;
-          this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+          Swal.close();
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_COMPLEMENTO_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
         }
       })
   }
@@ -392,11 +400,7 @@ export class CitaguardaComponent implements OnInit {
 
 
     if (this.contadorparticipantes == 0) {
-      this.muestraAlerta(
-        'Seleccione mínimo un participante',
-        'alert-danger',
-        'Error'
-      );
+      this.muestraAlerta(this._Mensajes.MSJ_ERROR_NUMPARTICIPANTES_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
     } else {
       if (this.contadorparticipantes >= 1) {
         this.submitted = true;
@@ -405,15 +409,11 @@ export class CitaguardaComponent implements OnInit {
           let objetoResuperado = this.lstCatFechas.filter(e => e.fec_inicio === fechaIni);
           this.participantes = Number(JSON.stringify(objetoResuperado[0].maximo_partcipantes));
           if (this.contadorparticipantes > this.participantes) {
-            this.muestraAlerta(
-              'El espacio seleccionado se encuentra al máximo de su cupo, por favor seleccionar otra fecha.',
-              'alert-danger',
-              'Error'
-            );
+            this.muestraAlerta(this._Mensajes.MSJ_ERROR_ESPACIO_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
           } else {
             this.submitted = true;
             if (this.citadata.valid) {
-
+              this.msjLoading("Cargando...");
               this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
                 next: (resp: any) => {
                   //console.log(resp);
@@ -425,7 +425,7 @@ export class CitaguardaComponent implements OnInit {
 
                     var req: LooseObject = {
                       "cveCalendarioAnual": this.citadata.value.hora.cve_calendario_anual,
-                      "nss": this.paciente ? this.paciente.nss : 4313947194,
+                      "nss": this.paciente ? this.paciente.nss : 0,
                       "DescripcionServicio": this.citadata.value.servicio.des_especialidad,
                       "grupoPrograma": this.citadata.value.programa.des_grupo_programa,
                       "fechaInicio": this.citadata.value.hora.fec_inicio,
@@ -459,13 +459,9 @@ export class CitaguardaComponent implements OnInit {
                     this.citaservice.guardacita(req).subscribe({
                       next: (resp: any) => {
                         //console.log(resp);
-
+                        Swal.close();
                         if (resp.estatus == true) {
-                          this.muestraAlerta(
-                            'La cita fue agendada correctamente. Favor de realizar la descarga del formato.',
-                            'alert-success',
-                            'Éxito'
-                          );
+                          this.muestraAlerta(this._Mensajes.MSJ_EXITO_AGENDA_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO);
 
                           this.citaagendada = true;
 
@@ -476,28 +472,30 @@ export class CitaguardaComponent implements OnInit {
                           //   'alert-danger',
                           //   'Error'
                           // );
-                          this.muestraAlerta(
-                            resp.mensaje ? resp.mensaje : "Ocurrió un problema al guardar la cita.",
-                            'alert-danger',
-                            'Error'
-                          );
+
+                          this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                           this.citaagendada = false;
                         }
+
                       },
                       error: (err) => {
                         //console.log(err);
+                        Swal.close();
 
-                        this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+                        this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                       }
                     })
                   } else {
-                    this.muestraAlerta('Ocurrió un error al agendar la cita', 'alert-danger', 'Error');
+                    Swal.close();
+
+                    this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                   }
                 },
                 error: (err) => {
                   //console.log(err);
+                  Swal.close();
 
-                  this.muestraAlerta(err.error.message.toString(), 'alert-danger', 'Error');
+                  this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                 }
               })
             }
@@ -580,6 +578,16 @@ export class CitaguardaComponent implements OnInit {
 
   callback = () => {
     this.regresar();
+  }
+
+  private msjLoading(titulo: string) {
+    Swal.fire({
+      title: titulo,
+
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    })
   }
 
   muestraAlerta(mensaje: string, estilo: string, type: string, funxion?: any) {

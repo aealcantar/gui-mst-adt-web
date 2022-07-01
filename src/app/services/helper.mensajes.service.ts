@@ -72,7 +72,26 @@ export class HelperMensajesService {
 
   public MSJ_MSG023: string = 'No existe ningún horario configurado para la ubicación';
 
-  //
+  public MSJ_ERROR_BENEFICIARIOS_CITA: string = 'No fue posible conectar con el servicio de consultar beneficiarios.';
+  public MSJ_ERROR_CATSERVICIO: string = 'No fue posible consumir el catálogo de servicios.';
+  public MSJ_ERROR_CATTURNO: string = 'No fue posible consumir el catálogo de turnos.';
+  public MSJ_ERROR_CATPROGRAMA: string = 'No fue posible consumir el catálogo de programas.';
+  public MSJ_ERROR_CATLUGAR: string = 'No fue posible consumir el catálogo de lugares.';
+  public MSJ_ERROR_CATRESPONSABLE: string = 'No fue posible consumir el catálogo de responsables.';
+  public MSJ_ERROR_CATFECHA: string = 'No fue posible consumir el catálogo de fechas disponibles.';
+  public MSJ_ERROR_CATHORA: string = 'No fue posible consumir el catálogo de horarios disponibles.';
+  public MSJ_ERROR_COMPLEMENTO_CITA: string = 'No fue posible conectar con el servicio de complemento.';
+  public MSJ_ERROR_NUMPARTICIPANTES_CITA: string = 'Seleccione mínimo un participante.';
+  public MSJ_ERROR_ESPACIO_CITA: string = 'El espacio seleccionado se encuentra al máximo de su cupo, por favor seleccionar otra fecha.';
+  public MSJ_EXITO_AGENDA_CITA: string = 'La cita fue agendada correctamente. Favor de realizar la descarga del formato.';
+  public MSJ_ERROR_AGENDA_CITA: string = 'Ocurrió un error al agendar la cita.';
+  public MSJ_ERROR_CONSULTA_CITA: string = 'No fue posible conectar con el servicio de consultar cita.';
+  public MSJ_EXITO_CANCELAR_CITA: string = 'La cita fué cancelada correctamente.';
+  public MSJ_ERROR_CANCELAR_CITA: string = 'Ocurrió un error al cancelar la cita.';
+  public MSJ_ERROR_BUSCA_CITA: string = 'No fue posible conectar con el servicio de búsqueda de cita.';
+
+
+  //Mensajes Usuarios
   public MSJ_ERROR_CONEXION_USR: string = 'No fue posible conectar con el servicio.';
   public MSJ_WARNING_BUSCA_USR: string = 'Debe ingresar mínimo 7 dígitos para la búsqueda de matrícula.';
   public MSJ_EXITO_GUARDA_USR: string = 'El usuario fue creado correctamente.';
