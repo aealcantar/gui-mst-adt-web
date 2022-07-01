@@ -153,9 +153,10 @@ export class HelperCatalogosService {
       col4: 'MATRÍCULA',
       col5: 'ROL EN EL SISTEMA',
       col6: 'PUESTO',
-      col7: 'CONTRASEÑA',
-      col8: 'TURNO',
-      col9: 'EMAIL',
+      
+      col7: 'TURNO',
+      col8: 'EMAIL',
+      col9: 'ESCUELA_PROCEDENCIA',
      
     },
 
