@@ -355,12 +355,11 @@ export class CargamasivaComponent implements OnInit {
             this.persona[index].matricula = element[this.confCarga.col4];
             this.persona[index].rol = element[this.confCarga.col5];
             this.persona[index].puesto = element[this.confCarga.col6]
-            this.persona[index].contraseña = element[this.confCarga.col7];
-            this.persona[index].turno = element[this.confCarga.col8];
-            this.persona[index].email = element[this.confCarga.col9];
-          //  this.persona[index].unidadMedica = element[this.confCarga.col10];
-          //  this.persona[index].escuelaProcedencia = element[this.confCarga.col11];
-
+            this.persona[index].turno = element[this.confCarga.col7];
+            this.persona[index].email = element[this.confCarga.col8];
+            
+            this.persona[index].escuelaProcedencia = element[this.confCarga.col9];
+            this.persona[index].contraseña = element[this.confCarga.col4];
             this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
             this.persona[index].usuario = this.persona[index].matricula;
             break;
@@ -370,7 +369,7 @@ export class CargamasivaComponent implements OnInit {
 
           case 8:
             this.turnos[index] = new Turno();
-            this.turnos[index].cveTurno = "1";
+           // this.turnos[index].cveTurno = "1";
             this.turnos[index].desTurno = element[this.confCarga.col1];
             this.turnos[index].des4306 = element[this.confCarga.col2];
 
