@@ -18,6 +18,8 @@ import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@ang
 import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
 import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { HelperMensajesService } from '../../services/helper.mensajes.service';
+import Swal from 'sweetalert2';
 
 //import { rootCertificates } from 'tls';
 declare var $:any;
@@ -78,7 +80,6 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
 
   paciente!: pacienteSeleccionado;
 
-
   lstCatTurnos: Array<any> = [];
   lstCatServicios: Array<any> = [];
   lstCatProgramas: Array<any> = [];
@@ -106,7 +107,8 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     private citaservice: CitasService,
     private tarjetaService: AppTarjetaPresentacionService,
     public datePipe: DatePipe,
-    private overlayContainer: OverlayContainer
+    private overlayContainer: OverlayContainer,
+    private _Mensajes: HelperMensajesService
     ) { }
 
   ngOnInit(): void {
@@ -139,8 +141,8 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
       }
     };
 
-      this.paciente = this.tarjetaService.get();
-      console.log("paciente:" + this.paciente);
+      this.paciente = this.tarjetaService.get()? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
+      console.log("paciente:", this.paciente);
       this.llenacatalogos();
       this.buscarcita();
   }
@@ -152,74 +154,84 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
 
 
   llenacatalogoservicios(){
+    this.msjLoading("Cargando...");
     this.citaservice.getlistservicios().subscribe({
       next: (resp:any) => {
         console.log(resp);
         this.lstCatServicios = resp;
-
+        Swal.close();
       },
       error: (err) => {
         console.log(err);
         this.lstCatServicios = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATSERVICIO, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
 
   llenacatalogoturnos(){
+    this.msjLoading("Cargando...");
     this.citaservice.getlistturnos().subscribe({
       next: (resp:any) => {
         console.log(resp);
         this.lstCatTurnos = resp;
-
+        Swal.close();
       },
       error: (err) => {
         console.log(err);
         this.lstCatTurnos = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATTURNO, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
 
   llenacatalogoprogramas(cve_especialidad: number){
+    this.msjLoading("Cargando...");
     this.citaservice.getlistprogramas(cve_especialidad).subscribe({
       next: (resp:any) => {
         console.log(resp);
         this.lstCatProgramas = resp;
-
+        Swal.close();
       },
       error: (err) => {
         console.log(err);
         this.lstCatProgramas = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATPROGRAMA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
   llenacatalogolugares(cve_especialidad: number){
+    this.msjLoading("Cargando...");
     this.citaservice.getlistlugares(cve_especialidad).subscribe({
       next: (resp:any) => {
         console.log(resp);
         this.lstCatLugares = resp;
-
+        Swal.close();
       },
       error: (err) => {
         console.log(err);
         this.lstCatLugares = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATLUGAR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
   llenacatalogoresponsables(cve_ubicacion:number, cve_turno: number){
+    this.msjLoading("Cargando...");
     this.citaservice.getlistresponsables(cve_ubicacion, cve_turno).subscribe({
       next: (resp:any) => {
         console.log(resp);
         this.lstCatResponsables = resp;
-
+        Swal.close();
       },
       error: (err) => {
         console.log(err);
         this.lstCatResponsables = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATRESPONSABLE, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
@@ -276,12 +288,13 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   }
 
   buscarcita(){
+    this.msjLoading("Cargando...");
 
     this.lstCitas = [];
     this.pagactual = 1;
 
     let data = {
-      "nss": this.paciente? this.paciente.nss : 4313947194,
+      "nss": this.paciente? this.paciente.nss : 0,
       //"fechaInicio": this.citadata.value.fechahora,
       "fechaInicio": this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "",
       "horaInicio": this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'HH:mm:ss')  : "",
@@ -310,12 +323,14 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
               this.pagactual = paginaactual + 1;
               } );
           },1000);
+          Swal.close();
         },1000);
 
       },
       error: (err) => {
         this.lstCitas = [];
-        this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+        Swal.close();
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_BUSCA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
       }
     })
   }
@@ -342,6 +357,16 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
 
   ngOnDestroy() {
 
+  }
+
+  private msjLoading(titulo: string) {
+    Swal.fire({
+      title: titulo,
+
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    })
   }
 
   muestraAlerta(mensaje: string, estilo: string, type: string){

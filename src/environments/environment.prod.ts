@@ -12,11 +12,11 @@ export const environment = {
     urlMSADTUSUARIOS: 'msedsc-usuarios/api',
 
     //Trabajo Social
-    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    msmtsPacientes: 'msmts-pacientes/api/busquedanss/',
     msmtsCatalogos: 'msedsc-catalogos',
-    msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
-    msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
-    msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
+    msmtsCronicas: 'msmts-cronica-grupal/api',
+    msmtsNotas: 'msmts-notas/api',
+    msmtsEstudioMedicos: 'msmts-estudios-medicos/api',
     msmtsOauth: 'msadt-auth/api/aplicacion/',
 
     urlServOauth: 'msadt-auth',

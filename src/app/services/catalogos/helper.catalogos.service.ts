@@ -156,8 +156,7 @@ export class HelperCatalogosService {
       col7: 'CONTRASEÑA',
       col8: 'TURNO',
       col9: 'EMAIL',
-      col10: 'UNIDAD_MEDICA',
-      col11: 'ESCUELA_PROCEDENCIA'
+     
     },
 
     {
@@ -165,9 +164,9 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Turnos',
       rutaPlantilla: '../../../../assets/files/11.Turnos.xlsx',
       idCatPadre: undefined,
-      col1: 'Clave turno',
-      col2: 'Descripción de turno',
-      col3: '4_30_6',
+      
+      col1: 'Descripción de turno',
+      col2: '4_30_6',
 
 
     },
