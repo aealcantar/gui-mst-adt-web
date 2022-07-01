@@ -724,6 +724,9 @@ table.dataTable.no-footer {
   border-image: initial;
 }
 
+.form-control {
+  height: 30px;
+}
 .form-control-mat-select {
   font-family: Montserrat;
   padding-right: 2px !important;
