@@ -50,7 +50,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
   formNuevoArticulo: any = this.formBuilder.group({
     clavePaciente: new FormControl(''),
-    bitacora: new FormControl(this.bitacora, Validators.required),
+    bitacora: new FormControl(this.bitacora),
     personalQueElaboro: new FormControl(''),
     idCa: new FormControl(''),
     noFolioControl: new FormControl(''),
@@ -112,17 +112,13 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       let usuario = JSON.parse(userTmp);
       let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
       let rolUser = usuario?.rolUser;
-      let cveUsuario= usuario?.matricula;
+      let matricula= usuario?.matricula;
       this.formNuevoArticulo.controls['personalQueElaboro'].setValue(nombre);
       this.formNuevoArticulo.controls['trabajadorNombreRecibe'].setValue(nombre);
-      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);
-      this.bitacora = {
-        aplicativo: 'control-articulos',
-        flujo: 'post',
-        idUsuario: cveUsuario,
-        nombreUsuario: nombre,
-        tipoUsuario: rolUser
-      };
+      this.formNuevoArticulo.controls['resguardoNombreRecibe'].setValue(nombre);  
+      this.bitacora.idUsuario =matricula;
+      this.bitacora.nombreUsuario =nombre;
+      this.bitacora.tipoUsuario =  rolUser;
 
 
     } else {
@@ -177,8 +173,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       .getCatServicios()
       .toPromise()
       .then(
-        (res) => {
-          console.log(res)
+        (res) => { 
           this.listaServicios = res;
         },
         (httpErrorResponse: HttpErrorResponse) => {
@@ -235,7 +230,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     } else {
       this.validaArticulos = false;
     }
-    console.log(this.formNuevoArticulo.value)
+    // console.log(this.formNuevoArticulo.value)
     if (this.formNuevoArticulo.status != "INVALID") {
       //validaciones para que los campos no vayan vacios 
       if (this.formNuevoArticulo.value.noCama.trim().length == 0 ? true : false) {
@@ -383,7 +378,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
         let estatus = res.status;
         if (estatus == "OK") {
           try {
-            console.log("insert correcto")
+     
             let id = res.idCa + "nuevo";
             await this.router.navigateByUrl("/detalle-control-articulos/" + id, { skipLocationChange: true });
 

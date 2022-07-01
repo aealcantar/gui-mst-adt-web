@@ -223,8 +223,8 @@ export class DetalleControlArticulosComponent implements OnInit {
       nombreTSC: this.detalle.personalQueElaboro,
       matriculaTSC: this.detalle.cvePersonalQueElaboro,
     };
-    // console.log('DATA REPORT: ', this.detalle);
-    // console.log('DATA : ', data);
+    //  console.log('DATA REPORT: ', this.detalle);
+    //  console.log('DATA : ', data);
     this.controlArticulosService.downloadPdf(data).subscribe(
       (response: any) => {
         // console.log(response);

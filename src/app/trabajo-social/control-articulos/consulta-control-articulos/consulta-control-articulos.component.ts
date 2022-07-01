@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { ControlArticulosService } from '../../services/control-articulos.service';
@@ -8,7 +6,7 @@ import { ControlArticulos } from 'src/app/trabajo-social/models/control-articulo
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { DatePipe } from '@angular/common';
-
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -17,39 +15,28 @@ declare var $: any;
   styleUrls: ['./consulta-control-articulos.component.css'],
   providers: [DatePipe]
 })
-export class ConsultaControlArticulosComponent implements OnInit {
+export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit {
 
-
-  public fechaSelected!: string;
-  public page: number = 1;
-  public pageSize: number = 10;
-  public resultadoTotal: number = 0;
-  public dtOptions: DataTables.Settings = {};
-  public numitems: number = 15;
-  public order: string = 'desc';
-  public tabla: any[] = [];
-  public extras: any;
-  public datesForm!: FormGroup;
-  public columnaId: string = 'fecha';
-  public findCtrolArt: any[] = [];
-  public valores: ControlArticulos;
   paciente!: pacienteSeleccionado;
   nomPaciente: any;
   rolPaciente: string;
   nssPaciente: string;
+  fechaDesde: string = "";
+  fechaHasta: string = "";
+  page: number = 1;
+  pageSize: number = 10;
+  datosBusqueda: Array<any> = [];
+  columnaId: string = 'fecha';
+  order: string = 'desc';
+  rolUser = "";
+  cveUsuario = "";
+  nombre = "";
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private Artservice: ControlArticulosService ,
-    private fb: FormBuilder,
-    private datePipe: DatePipe,
+    private Artservice: ControlArticulosService,
     private tarjetaService: AppTarjetaPresentacionService,
-  ) {  
-    this.datesForm = new FormGroup({
-      'fechaInicial': new FormControl(null, [Validators.required]),
-      'fechaFinal': new FormControl(null, [Validators.required]),
-    }, {updateOn: 'blur'});
+  ) {
 
   }
 
@@ -60,120 +47,126 @@ export class ConsultaControlArticulosComponent implements OnInit {
       this.nssPaciente = this.paciente.nss.toString();
       this.nomPaciente = this.paciente.paciente;
     }
+
+    if (userTmp !== '') {
+      let usuario = JSON.parse(userTmp);
+      this.nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
+      this.rolUser = usuario?.rolUser;
+      this.cveUsuario = usuario?.cveUsuario;
+    }
+  }
+
+  //asignacion de inputs a fecha
+  ngAfterViewInit(): void {
+    $('#fechaDesde').datepicker({
+      dateFormat: "dd/mm/yy",
+      onSelect: (date: any, datepicker: any) => {
+        if (date != '') {
+          this.fechaDesde = date;
+        }
+      },
+
+    });
+
+    $('#fechaHasta').datepicker({
+      dateFormat: "dd/mm/yy",
+      onSelect: (date: any, datepicker: any) => {
+        if (date != '') {
+
+          this.fechaHasta = date;
+        }
+      }
+
+    });
   }
 
   limpiar() {
-    this.datesForm.reset();
-    this.tabla = [];
+    this.fechaDesde = "";
+    this.fechaHasta = "";
+    this.datosBusqueda = [];
   }
 
   buscar() {
-    if (this.datesForm.valid){
-      if(this.datesForm.controls['fechaInicial'].value < this.datesForm.controls['fechaFinal'].value){
-        this.getArticulosByFecha();
+
+    let fechaDesde = this.fechaDesde;
+    let fechaHasta = this.fechaHasta;
+
+    if (fechaDesde.trim() != "" && fechaHasta.trim() != "") {
+      //valida que el formato de la fecha se correcto
+      let validaFechaDesde = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
+      let validaFechaHasta = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
+      if (!validaFechaHasta) {
+        this.fechaDesde = "";
+        return;
       }
-      else{
-        this.tabla = [];
+      if (!validaFechaHasta) {
+        this.fechaHasta = "";
+        return;
       }
-      
-    }
-    else{
-      return;
+
+      if (validaFechaDesde && validaFechaHasta) {
+
+        let fechaDesdeArray = fechaDesde.split("/");
+        let fechaInicial = fechaDesdeArray[2] + "-" + fechaDesdeArray[1] + "-" + fechaDesdeArray[0];
+        let fechaHastaArray = fechaHasta.split("/");
+        let fechaFinal = fechaHastaArray[2] + "-" + fechaHastaArray[1] + "-" + fechaHastaArray[0];
+        let datosBusqueda = {
+          bitacora: [{
+            aplicativo: "control-articulos",
+            flujo: "post",
+            idUsuario: this.cveUsuario,
+            nombreUsuario: this.nombre,
+            tipoUsuario: this.rolUser,
+          }],
+          fechaInicial: fechaInicial,
+          fechaFinal: fechaFinal,
+          clavePaciente: this.nssPaciente
+        };
+        this.Artservice.getArticulosByFechas(datosBusqueda).subscribe(
+          (res: any) => {
+            try {
+              let response = res.response;
+              let estatus = response.status;
+              if (estatus == 'OK') {
+                this.datosBusqueda = response.listaControlArticulosDto;
+              } else {
+                this.datosBusqueda = [];
+              }
+            } catch (error) {
+              this.datosBusqueda = [];
+              console.error(error);
+            }
+          },
+          (httpErrorResponse: HttpErrorResponse) => {
+            console.error(httpErrorResponse);
+          }
+        );
+
+      }
+
     }
   }
 
-  getArticulosByFecha(): void {
-
-    const findCtrolArt = {
-     "bitacora":[{
-         "aplicativo":"control-articulos",
-         "flujo":"post",
-         "idUsuario":1,
-         "nombreUsuario":this.nomPaciente,
-         "tipoUsuario":1
-     }],
-     "fechaInicial": this.datesForm.get('fechaInicial')?.value,
-     "fechaFinal": this.datesForm.get('fechaFinal')?.value,
-     "clavePaciente": this.nssPaciente
-   };
-
-   this.Artservice.getArticulosByFechas(JSON.stringify(findCtrolArt)).subscribe(
-       (articulos: any) => {
-         console.log("CONTROL DE ARTICULOS: ", articulos);
-       try {
-         if (articulos) {
-           const ariculosJson = articulos.response;
-           ariculosJson.status == "OK" ? this.tabla = ariculosJson.listaControlArticulosDto : null;
-           console.log("CONTROL DE ARTICULOS: ", this.tabla );
-         }
-       }catch (error) {
-         console.error(error);
-       }
-     },
-     (httpErrorResponse: HttpErrorResponse) => {
-       console.error(httpErrorResponse);
-     }
-   );
-   this.dtOptions = {
-     order: [[2, 'desc']],
-     ordering: false,
-     paging: false,
-     processing: false,
-     info: false,
-     searching: false,
-   };
-   this.sortBy(this.columnaId, this.order, 'fecha');
-  }
-
+  //redirecciona al detalle
   irDetalle(controlArticulos: ControlArticulos) {
     let params = {
       'controlArticulos': JSON.stringify(controlArticulos),
     }
-    this.router.navigateByUrl("/detalle-control-articulos/" + controlArticulos.idCa,{ skipLocationChange: true })
+    this.router.navigateByUrl("/detalle-control-articulos/" + controlArticulos.idCa, { skipLocationChange: true })
   }
 
-  ngAfterViewInit(): void {
-    $('#articulosInit').datepicker({
-      dateFormat: "dd/mm/yy",
-      onSelect: (date: any, datepicker: any) => {
-        if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-          this.datesForm.get('fechaInicial')?.patchValue(date);
-        }
-      },
-      onClose: (date: any) => {
-        if (!date) {
-          this.datesForm.get('fechaInicial')?.patchValue(null);
-        }
-      }
-    });
 
-    $('#articulosFinal').datepicker({
-      dateFormat: "dd/mm/yy",
-      onSelect: (date: any, datepicker: any) => {
-        if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-          this.datesForm.get('fechaFinal')?.patchValue(date);
-        }
-      },
-      onClose: (date: any) => {
-        if (!date) {
-          this.datesForm.get('fechaFinal')?.patchValue(null);
-        }
-      }
-    });
-  }
-
+  //redirecciona a la pantalla de nuevo control de articulos
   irNuevoRegistro() {
-    let params = {}
     this.router.navigateByUrl("/agregar-control-articulos", { skipLocationChange: true });
   }
 
+  //ordenamiento
   sortBy(columnaId: string, order: string, type: string) {
     this.columnaId = columnaId;
     this.order = order;
 
-    this.tabla.sort((a: any, b: any) => {
+    this.datosBusqueda.sort((a: any, b: any) => {
       let c: any = this.converType(a[columnaId], type);
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
