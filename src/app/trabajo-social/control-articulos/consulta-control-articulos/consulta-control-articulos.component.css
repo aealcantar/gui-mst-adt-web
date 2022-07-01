@@ -301,11 +301,10 @@ a {
     width: 101px;
     height: 14px;
     font-family: Montserrat;
-    font-size: 14px;
-    font-weight: 200;
+    font-size: 10px;
+    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: normal;
     letter-spacing: normal;
     text-align: left;
     color: #e10000;
