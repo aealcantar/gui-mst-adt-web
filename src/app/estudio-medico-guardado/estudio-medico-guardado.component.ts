@@ -79,10 +79,8 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   async loadCatalogos() {
     await this.estudioMedicoService.getCatEstadosCiviles().toPromise().then(
       (estadosCiviles: any) => {
-        if (estadosCiviles && estadosCiviles.ArrayList.length > 0) {
-          this.catEstadosCiviles = estadosCiviles.ArrayList;
-          console.log("ESTADO CIVILES: ", this.catEstadosCiviles);
-        }
+        this.catEstadosCiviles = estadosCiviles;
+        console.log("ESTADO CIVILES: ", this.catEstadosCiviles);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);

@@ -85,10 +85,8 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     this.estudioMedicos = [];
     this.estudioMedicoService.getEstudiosMedicosByFechas(this.datesForm.get('fechaInicial')!.value, this.datesForm.get('fechaFinal')!.value).subscribe(
       (estudiosMedicosSociales: any) => {
-        if (estudiosMedicosSociales && estudiosMedicosSociales.ArrayList.length > 0) {
-          this.estudioMedicos = estudiosMedicosSociales.ArrayList;
-          console.log("ESTUDIOS MEDICOS: ", this.estudioMedicos);
-        }
+        this.estudioMedicos = estudiosMedicosSociales;
+        console.log("ESTUDIOS MEDICOS: ", this.estudioMedicos);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
