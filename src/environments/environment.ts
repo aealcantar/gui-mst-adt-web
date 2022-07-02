@@ -15,8 +15,8 @@ export const environment = {
     urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
-  
-  
+
+
     //Trabajo Social
     msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
     msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
@@ -26,18 +26,20 @@ export const environment = {
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
     msmtsOauth: 'http://localhost:8081/',
     urlServOauth: 'http://localhost:8081',
-  
-  
-  
-  
-  
+    // msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-control-articulos/api',
+    msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
+
+
+
+
+
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {
     siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
   },
   siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
   secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
-  
+
 
 
 };
