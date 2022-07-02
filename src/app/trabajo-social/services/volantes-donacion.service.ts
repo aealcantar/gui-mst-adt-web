@@ -22,9 +22,9 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
           }
     }
 
-    addVolante(volantesDonacion: VolantesDonacion) {
+    addVolante(datos: any) {
         try {
-            return this.httpsClient.post<VolantesDonacion>(`${environment.urlVolantesDonacion}/guardaNuevoVolanteDonacionSangre`, volantesDonacion);
+            return this.httpsClient.post<VolantesDonacion>(`${environment.urlVolantesDonacion}/guardaNuevoVolanteDonacionSangre`, datos);
         } catch (error) {
             console.log("error")
             return error;

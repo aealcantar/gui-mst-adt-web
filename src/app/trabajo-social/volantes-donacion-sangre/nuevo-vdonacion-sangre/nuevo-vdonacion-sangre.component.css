@@ -403,3 +403,27 @@ background-position-y: 5px;
   padding: 15px; background-color: #FAFAFA; border-radius: 10px;
 
 }
+
+
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
+
+.select {
+  border-radius: 5px;
+  width: 340px;
+  height: 30px;
+  top: 272px;
+  left: 10px;
+  font-size: 14px;
+  color: #222222;
+}
