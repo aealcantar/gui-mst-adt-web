@@ -22,6 +22,7 @@ import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-
 
 import { NuevoAvisoMpComponent } from './avisos-mp/nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './avisos-mp/consulta-aviso-mp/consulta-aviso-mp.component';
+import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 
 
 //las rutas serian
@@ -56,6 +57,8 @@ const routes: Routes = [
   //volanteDonacion
   { path: 'agregar-volante', component: NuevoVdonacionSangreComponent },
   { path: 'consulta-volante', component: ConsultaVolantesDonacionComponent },
+  { path: 'detalle-volante/:proviene', component: DetalleVolantesDonacionSangreComponent },
+  { path: 'detalle-volante', component: DetalleVolantesDonacionSangreComponent },
 
   { path: 'agregar-aviso-mp', component: NuevoVdonacionSangreComponent },
   { path: 'consulta-aviso-mp', component: ConsultaVolantesDonacionComponent },
