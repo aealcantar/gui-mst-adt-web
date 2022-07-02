@@ -15,7 +15,8 @@ export const environment = {
   urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
   urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
   urlMSADTUSUARIOS: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
-  urlVolantesDonacion: "http://localhost:8080/msmts-donacion-sangre/api"    ,
+ // urlVolantesDonacion: "http://localhost:8088/msmts-donacion-sangre/api"    ,
+  urlVolantesDonacion: "  https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api"    ,
 
   //Trabajo Social
   msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',

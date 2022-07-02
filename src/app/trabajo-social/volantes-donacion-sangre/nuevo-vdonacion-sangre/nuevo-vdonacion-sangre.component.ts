@@ -11,6 +11,8 @@ import { Ciudad } from '../../models/ciudad.model';
 import { Estado } from '../../models/estado.model';
 import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { VolantesDonacionService } from '../../services/volantes-donacion.service';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 declare var $: any;
 
 @Component({
@@ -55,17 +57,31 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   delegaciones: Municipio[] = [];
   listaServicios: Array<any> = [];
   alert!: AlertInfo;
+
+
+  paciente!: pacienteSeleccionado;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private estudioSocialService: EstudioSocialMedicoService,
     private cronicaGrupalService: CronicaGrupalService,
-    private volantesDonacionService:VolantesDonacionService
+    private volantesDonacionService:VolantesDonacionService,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) { }
 
   ngOnInit(): void {
     this.estados();
     this.servicios() ;
+
+    this.paciente = this.tarjetaService.get();
+    
+    if (this.paciente !== null && this.paciente !== undefined) {
+      let nss = this.paciente.nss;
+      let nombrePaciente = this.paciente.paciente;
+      this.formNuevaDonacion.controls['nombrePaciente'].setValue(nombrePaciente);
+      this.formNuevaDonacion.controls['desNSS'].setValue(nss);
+    }
   }
 
 
@@ -132,15 +148,18 @@ this.formNuevaDonacion.controls['fechaCirugia'].setValue(fechaCirugia );
 console.log(formNuevaDonacion.value)
 let datos =  JSON.stringify(this.formNuevaDonacion.value);
       this.volantesDonacionService.addVolante(datos).subscribe(async (res: any) => {
-        if (res.statusText === 'OK') {
-           this.router.navigate(["detalle-volante"], { queryParams: res, skipLocationChange: true });
-        } else {
-          this.muestraAlerta(
-            '¡La información no se pudo guardar, intente más tarde!',
-            'alert-danger',
-            'Error'
-          );
-        }
+        console.log(res)
+        // if (res.statusText === 'OK') {
+          let params = { 'datosVolante': JSON.stringify(res) };
+
+           this.router.navigate(["detalle-volante/i"], { queryParams: params, skipLocationChange: true });
+        // } else {
+        //   this.muestraAlerta(
+        //     '¡La información no se pudo guardar, intente más tarde!',
+        //     'alert-danger',
+        //     'Error'
+        //   );
+        // }
         console.log(res)
    
       }, (error: any) => {

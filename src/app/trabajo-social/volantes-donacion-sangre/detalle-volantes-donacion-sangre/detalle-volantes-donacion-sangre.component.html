@@ -1,108 +1,160 @@
 <app-alerta-general [alert]="alert"></app-alerta-general>   
-<app-fichapaciente [mostrarBtnAtras]="true" [url]="'consulta-control-articulos'"></app-fichapaciente> 
+<app-fichapaciente [mostrarBtnAtras]="true" [url]="'consulta-volante'"></app-fichapaciente> 
 <app-card-template>
   <div
     header
     class="flex justify-content-between align-items-center nuevoEstudio"
   >
-    <span class="tituloHeader pb-3 pt-5"> Nuevo control de artículos </span>
+    <span class="tituloHeader pb-3 pt-5"> Nuevo volante de donación de sangre  </span>
   </div>
 
   <div content>
     <div class="contenido height154 mt-4 mb-5">
-      <div class="row p-5">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Número de folio:</span>
+      <div class="row p-5"> 
+        <div class="col-sm-8 form-group pt-5">
+          <span class="labels pb-1">Unidad médica hospitalaria:</span>
           <span class="labelDetail"> {{ detalle.noFolioControl }}</span>
         </div>
-        <div class="col-sm-2 form-group pt-5">
+        <div class="col-sm-4 form-group pt-5">
           <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.fecha }}</span>
+          <span class="labelDetail"> {{ detalle.fecEfec }}</span>
         </div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Número de cama:</span>
-          <span class="labelDetail"> {{ detalle.noCama }}</span>
+      </div>
+      <div class="row pl-5 pr-5 ">
+        <div class="col-md-7 form-group ">
+          <span class="title1">
+            Para asistir al banco de sangre:
+          </span>
         </div>
-        <div class="col-sm-2 form-group pt-5">
-          <span class="labels pb-1">Servicio:</span>
-          <span class="labelDetail"> {{ detalle.servicio }}</span>
+      </div>
+      <div class="row p-5"> 
+        <div class="col-sm-8 form-group  ">
+          <span class="labels pb-1">Nombre del Banco de Sangre:</span>
+          <span class="labelDetail"> {{ detalle.idNombreBancoSangre }}</span>
         </div>
-
-        <div class="col-sm-3 form-group pt-5">
-          <span class="labels pb-1">Teléfono(s):</span>
-          <span class="labelDetail"> {{ detalle.telefono }}</span>
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Horario de atención:</span>
+          <span class="labelDetail"> {{ detalle.timInicialAtencion }}    {{ detalle.timFinalAtencion }}</span>
         </div>
+      </div> 
+      <div class="row p-5"> 
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Código Postal::</span>
+          <span class="labelDetail"> {{ detalle.desCodigoPostal }}</span>
+        </div>
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Estado:</span>
+          <span class="labelDetail"> {{ detalle.idEstado }}</span>
+        </div>
+        <div class="col-sm-4 form-group  ">
+            <span class="labels pb-1">Delegación/Municipio:</span>
+            <span class="labelDetail"> {{ detalle.idDelegacionMunicipio }}</span>
+          </div>
+      </div> 
+ 
+      <div class="row p-5"> 
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Ciudad:</span>
+          <span class="labelDetail"> {{ detalle.idCiudad }}</span>
+        </div>
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Colonia:</span>
+          <span class="labelDetail"> {{ detalle.nomColonia }}</span>
+        </div>
+        <div class="col-sm-4 form-group  ">
+            <span class="labels pb-1">Calle:</span>
+            <span class="labelDetail"> {{ detalle.nomCalle }}</span>
+          </div>
+      </div>
+      <div class="row p-5"> 
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Número exterior:</span>
+          <span class="labelDetail"> {{ detalle.numExterior }}</span>
+        </div>
+        <div class="col-sm-4 form-group  ">
+          <span class="labels pb-1">Número interior:</span>
+          <span class="labelDetail"> {{ detalle.numInterior }}</span>
+        </div>
+         
       </div>
     </div>
 
  
 
-    <!-- recepcion resguardo -->
-    <div class="contenido height154 mt-5 mb-5">
+    <!-- datos paciente -->
+    <div class="contenido height154   mb-5">
       <div class="row pl-5 pr-5 mt-5">
-        <div class="col-md-7 form-group pt-5">
+        <div class="col-md-7 form-group  ">
           <span class="title1">
-            Recepción de artículos para su resguardo en subdirección
-            administrativa:
+            Datos del paciente:
           </span>
         </div>
       </div>
       <div class="row pl-5 pr-5">
         <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.resguardoFecha }}</span>
+          <span class="labels pb-1">Nombre:</span>
+          <span class="labelDetail"> {{ detalle.nomPaciente }}</span>
         </div>
         <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Hora:</span>
-          <span class="labelDetail"> {{ detalle.resguardoHora }}</span>
+          <span class="labels pb-1">No. de Seguridad Social y agregado:</span>
+          <span class="labelDetail"> {{ detalle.desNssAgregado }}</span>
         </div>
         <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Recibió:</span>
-          <span class="labelDetail"> {{ detalle.resguardoNombreRecibe }}</span>
+          <span class="labels pb-1">Servicio:</span>
+          <span class="labelDetail"> {{ detalle.idServicio }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mb-5">
-        <div class="col-sm-6 form-group pt-3">
-          <span class="labels pb-1">Entregó*:</span>
-          <span class="labelDetail"> {{ detalle.resguardoNombreEntrega }}</span>
+        <div class="col-sm-4 form-group ">
+          <span class="labels pb-1">Fecha de internamiento:</span>
+          <span class="labelDetail"> {{ detalle.fecInternamiento }}</span>
         </div>
+        <div class="col-sm-4 form-group ">
+            <span class="labels pb-1">Teléfono:</span>
+            <span class="labelDetail"> {{ detalle.numTelefonoPaciente }}</span>
+          </div>
+         
       </div>
-      <div class="row pl-5 pr-5 mt-5">
-        <div class="col-md-7 form-group pt-5">
-          <span class="title1"> Recepción de artículos completos: </span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5">
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.recepcionFecha }}</span>
-        </div>
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Hora:</span>
-          <span class="labelDetail"> {{ detalle.recepcionHora }}</span>
-        </div>
-        <div class="col-sm-4 form-group">
-          <span class="labels pb-1">Recibió:</span>
-          <span class="labelDetail"> {{ detalle.recepcionNombreRecibe }}</span>
-        </div>
-      </div>
-      <div class="row pl-5 pr-5 mb-5">
-        <div class="col-sm-4 form-group pt-3">
-          <span class="labels pb-1">Entregó:</span>
-          <span class="labelDetail"> {{ detalle.recepcionNombreEntrega }}</span>
-        </div>
-        <div class="col-sm-4 form-group pt-3">
-          <span class="labels pb-1">Ubicación:</span>
-          <span class="labelDetail"> {{ detalle.recepcionUbicacion }}</span>
-        </div>
-        <div class="col-sm-4 form-group pt-3">
-          <span class="labels pb-1">Horario para entregar artículos:</span>
-          <span class="labelDetail"> {{ detalle.recepcionHorarioEntregaArticulo }}</span>
-        </div>
-      </div>
+ 
+ 
     </div>
-    <div class="row">
+
+    <!-- datos trabajador social -->
+    <div class="contenido height154   mb-1">
+        <div class="row pl-5 pr-5 mt-5">
+          <div class="col-md-7 form-group  ">
+            <span class="title1">
+                Datos del Trabajador social
+            </span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5">
+          <div class="col-sm-6 form-group">
+            <span class="labels pb-1">Nombre completo:</span>
+            <span class="labelDetail"> {{ detalle.nomTrabajadorSocial }}</span>
+          </div>
+          <div class="col-sm-3 form-group">
+            <span class="labels pb-1">Matrícula:</span>
+            <span class="labelDetail"> {{ detalle.desMatriculaTrabajadorSocial }}</span>
+          </div>
+          <div class="col-sm-3 form-group">
+            <span class="labels pb-1">Teléfono:</span>
+            <span class="labelDetail"> {{ detalle.numTelefonoTrabajadorSocial }}</span>
+          </div>
+        </div>
+        <div class="row pl-5 pr-5 mb-5">
+          <div class="col-sm-12 form-group ">
+            <span class="labels pb-1">Observaciones:</span>
+            <span class="labelDetail"> {{ detalle.desObservaciones }}</span>
+          </div>
+    
+        </div>
+   
+   
+      </div>
+  
+
+    <div class="row mt-3">
       <div class="col mr-3">
         <button
           class="btn btn-primary btuser pull-right"

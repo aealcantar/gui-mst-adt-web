@@ -19,7 +19,7 @@
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Unidad médica hospitalaria*:</span>
-              <input formControlName="umh" 
+              <input formControlName="umh"  maxlength="100"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.umh.errors }"
               class="form-control matricula inputs" id="umh"
                 placeholder="Ingresar unidad médica hostalaria" type="text" />
@@ -31,7 +31,7 @@
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input notasInit
+              <input notasInit maxlength="10"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.fecha1.errors }"
                class="form-control calendario"  formControlName="fecha1" id="fecha1" type="text" placeholder="Ingresar fecha">
               <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
@@ -148,7 +148,7 @@
           <div class="col-md-4  form-group">
             <span class="spanInput">Colonia*:</span>
             
-            <input   [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.colonia.errors }"
+            <input maxlength="150"  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.colonia.errors }"
             class="form-control matricula inputs" id="colonia" formControlName="colonia"
               placeholder="Ingresar colonia" type="text" />
               <small *ngIf="  submitted && formNuevaDonacion.controls.colonia.errors" class="form-text form-text-error Campo-obligatorio">
@@ -158,6 +158,7 @@
           <div class="col-md-4  form-group">
             <span class="spanInput">Calle*:</span>
             <input   [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.calle.errors }"
+            maxlength="100"
             class="form-control matricula inputs" id="calle" formControlName="calle"
               placeholder="Ingresar calle" type="text" />
               <small *ngIf="  submitted && formNuevaDonacion.controls.calle.errors" class="form-text form-text-error Campo-obligatorio">
@@ -268,7 +269,7 @@
           </div>
           <div class="col-md-4 form-group">
             <span class="spanInput">Teléfono:</span> 
-              <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoPaciente.errors }"
+              <input maxlength="10" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoPaciente.errors }"
                class="form-control" formControlName="numTelefonoPaciente" id="numTelefonoPaciente" 
                type="text" placeholder="Ingresar teléfono">             
               <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoPaciente.errors"
@@ -287,7 +288,7 @@
         <div class="row">
           <div class="col-md-4 form-group">
             <span class="spanInput">Nombre completo*:</span>
-            <input  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.nombreTrabajadorSocial.errors }"
+            <input maxlength="100" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.nombreTrabajadorSocial.errors }"
             class="form-control matricula inputs" id="nombreTrabajadorSocial" formControlName="nombreTrabajadorSocial"
               placeholder="Ingresar nombre" type="text" />
               <small *ngIf="submitted && formNuevaDonacion.controls.nombreTrabajadorSocial.errors"
@@ -297,7 +298,7 @@
           </div>
           <div class="col-md-4 form-group">
             <span class="spanInput">Matr&iacute;cula*:</span>
-            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.matriculaTrabajadorSocial.errors }"
+            <input maxlength="40" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.matriculaTrabajadorSocial.errors }"
              class="form-control matricula inputs" id="matriculaTrabajadorSocial" formControlName="matriculaTrabajadorSocial"
               placeholder="Ingresar matr&iacute;cula" type="text" />
               <small *ngIf="submitted && formNuevaDonacion.controls.matriculaTrabajadorSocial.errors"
@@ -307,7 +308,7 @@
           </div>
           <div class="col-md-4 form-group">
             <span class="spanInput">Teléfono*:</span>
-            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors }"
+            <input maxlength="10" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors }"
              class="form-control matricula inputs" id="numTelefonoTrabajadorSocial" formControlName="numTelefonoTrabajadorSocial"
               placeholder="Ingresar t&eacute;" type="text" />
               <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors"
@@ -319,7 +320,7 @@
         <div class="row">
           <div class="col-md-12 form-group">
             <span class="spanInput">Observaciones*:</span>
-            <input  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.observaciones.errors }"
+            <input maxlength="100" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.observaciones.errors }"
             class="form-control matricula inputs" id="observaciones" formControlName="observaciones"
               placeholder="Ingresar observaciones" type="text" />
               <small *ngIf="submitted && formNuevaDonacion.controls.observaciones.errors"
