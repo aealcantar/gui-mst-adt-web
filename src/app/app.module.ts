@@ -76,7 +76,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
-import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+// import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
@@ -90,6 +90,9 @@ import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 import { CargamasivaComponent } from './configuracion/catalogos/cargamasiva/cargamasiva.component';
+import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
+import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component';
+import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component';
 
 registerLocaleData('es');
 
@@ -133,7 +136,7 @@ registerLocaleData('es');
     EstudioMedicoGuardadoComponent,
     ConsultaVolantesDonacionComponent,
     CardTemplateExpandibleComponent,
-    ConsultaControlArticulosComponent,
+    // ConsultaControlArticulosComponent,
     CatalogosComponent,
     CargaComponent,
     HorariosComponent,
@@ -143,7 +146,10 @@ registerLocaleData('es');
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
     UbicacionesComponent,
-    CargamasivaComponent
+    CargamasivaComponent,
+    ConsultaControlArticulosComponent,
+    DetalleControlArticulosComponent,
+    NuevoControlArticulosComponent
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ export const environment = {
     msmtsNotas: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-notas/api',
     msmtsEstudioMedicos: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
     msmtsOauth: 'msadt-auth/api/aplicacion/',
+    msmtsControlArticulos: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
 
     urlServOauth: 'msadt-auth',
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',

@@ -27,7 +27,10 @@ import { UserguardaComponent } from './configuracion/usuarios/userguarda/usergua
 import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
 import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
-import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component'
+import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component'
+import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component'
+// import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 import { CargaComponent } from './configuracion/catalogos/carga/carga.component';
 import { CatalogosComponent } from './configuracion/catalogos/catalogos.component';
@@ -62,7 +65,9 @@ const routes: Routes = [
   { path: 'buscacita', component: CitabuscaComponent},
   { path: 'consultacita/:id', component: CitaconsultaComponent},
   { path: 'guardacita', component: CitaguardaComponent},
-  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
+  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent},
+  { path: 'detalle-articulos/:id', component: DetalleControlArticulosComponent},
+  { path: 'nuevo-articulo', component: NuevoControlArticulosComponent},
   { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
   { path: 'nuevo-aviso-mp', component: NuevoAvisoMpComponent },
   { path: 'consulta-aviso-mp', component: ConsultaAvisoMpComponent },
