@@ -140,7 +140,7 @@
       <div class="col-md-6">
         <label class="control-label">Búsquedas anteriores</label>
       </div>
-      <div class="col-md-6 flex justify-content-end">
+      <!-- <div class="col-md-6 flex justify-content-end">
         <div class="form-group">
           <label class="control-label">Visualizar datos</label>
           <select class="form-select ml-5 select-view-data" [(ngModel)]="pageSize">
@@ -148,6 +148,26 @@
             <option [ngValue]="20">20</option>
             <option [ngValue]="25">25</option>
           </select>
+        </div>
+      </div> -->
+
+      <div class="col-md-6 flex justify-content-end">
+        <div style="position: relative; float: right; display: flex;">
+          <span class="visDatos" style="width: auto; float: right;">
+            Visualizar datos
+          </span>
+
+          <mat-select
+            class="form-select mat-select-table"
+            [disableOptionCentering]="true"
+            aria-label="Servicio"
+            [(ngModel)]="pageSize"
+          >
+            <mat-option class="select-font" [value]="15">15</mat-option>
+            <mat-option class="select-font" [value]="20">20</mat-option>
+            <mat-option class="select-font" [value]="25">25</mat-option>
+          </mat-select>
+
         </div>
       </div>
     </div>

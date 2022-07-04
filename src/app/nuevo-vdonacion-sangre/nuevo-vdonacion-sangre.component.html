@@ -56,12 +56,26 @@
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
-              <select class="form-control styleselect" formControlName="nombreBancoSangre" id="nombreBancoSangre"
+
+              <!-- <select class="form-control styleselect" formControlName="nombreBancoSangre" id="nombreBancoSangre"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombreBancoSangre?.dirty && formNuevoVolante.controls?.nombreBancoSangre?.errors }">
                 <option class="select-font optionSelect" placeholder="Ingresar nombre" selected >
                   Ingresar nombre</option>
                 <option class="select-font" [value]="1">Banco de sangre 1</option>
-              </select>
+              </select> -->
+              
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.nombreBancoSangre?.dirty && formNuevoVolante.controls?.nombreBancoSangre?.errors }"
+                id="nombreBancoSangre"
+                formControlName="nombreBancoSangre"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Ingresar nombre</mat-option>
+                <mat-option class="select-font" [value]="1">Banco de sangre 1</mat-option>
+              </mat-select>
+
               <small
                 *ngIf="formNuevoVolante.controls?.nombreBancoSangre?.dirty && formNuevoVolante.controls?.nombreBancoSangre?.errors"
                 class="form-text form-text-error Campo-obligatorio">
@@ -72,11 +86,31 @@
           <div class="col-md-2">
             <div class="form-group">
               <span class="spanInput">Horario de atención*:</span>
-              <select class="form-control styleselect" formControlName="horarioInicial" id="horarioInicial"
+
+              <!-- <select class="form-control styleselect" formControlName="horarioInicial" id="horarioInicial"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.horarioInicial?.dirty && formNuevoVolante.controls?.horarioInicial?.errors }">
                 <option class="select-font optionSelect" selected [value]="''">Horario inicial</option>
                 <option class="select-font" [value]="1">10:00:00</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.horarioInicial?.dirty && formNuevoVolante.controls?.horarioInicial?.errors }"
+                id="horarioInicial"
+                formControlName="horarioInicial"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Horario inicial</mat-option>
+                <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+              </mat-select>
+
+              <!-- <mat-select class="form-control form-control-mat-select" formControlName="hora" [disableOptionCentering]="true"
+                style="background-position-y: 5px" aria-label="Servicio">
+                <mat-option class="select-font" [value]="''" selected>Ingresar hora</mat-option>
+                <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+              </mat-select> -->
+
               <small
                 *ngIf="formNuevoVolante.controls?.horarioInicial?.dirty && formNuevoVolante.controls?.horarioInicial?.errors"
                 class="form-text form-text-error Campo-obligatorio">
@@ -87,11 +121,25 @@
           <div class="col-md-2">
             <br>
             <div class="form-group">
-              <select class="form-control styleselect" formControlName="horarioFinal" id="horarioFinal"
+
+              <!-- <select class="form-control styleselect" formControlName="horarioFinal" id="horarioFinal"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.horarioFinal?.dirty && formNuevoVolante.controls?.horarioFinal?.errors }">
                 <option class="select-font optionSelect" selected [value]="''">Horario inicial</option>
                 <option class="select-font" [value]="1">10:00:00</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.horarioFinal?.dirty && formNuevoVolante.controls?.horarioFinal?.errors }"
+                id="horarioFinal"
+                formControlName="horarioFinal"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Horario inicial</mat-option>
+                <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+              </mat-select>
+
               <small
                 *ngIf="formNuevoVolante.controls?.horarioFinal?.dirty && formNuevoVolante.controls?.horarioFinal?.errors"
                 class="form-text form-text-error Campo-obligatorio">
@@ -104,7 +152,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <span class="spanInput">C&oacute;digo Postal*::</span>
+              <span class="spanInput">C&oacute;digo Postal*:</span>
               <input class="form-control matricula"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.codigoPostal?.dirty && formNuevoVolante.controls?.codigoPostal?.errors }"
                 formControlName="codigoPostal" id="codigoPostal" aria-label="Servicio"
@@ -120,12 +168,26 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Estado*:</span>
-              <select class="form-control styleselect" formControlName="estado" id="estado"
+
+              <!-- <select class="form-control styleselect" formControlName="estado" id="estado"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.estado?.dirty && formNuevoVolante.controls?.estado?.errors }">
                 <option class="select-font optionSelect" placeholder="Seleccionar estado" selected [value]="''">
                   Ingresar estado</option>
                 <option class="select-font" [value]="1">Estado 1</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.estado?.dirty && formNuevoVolante.controls?.estado?.errors }"
+                id="estado"
+                formControlName="estado"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Seleccionar estado</mat-option>
+                <mat-option class="select-font" [value]="1">Estado 1</mat-option>
+              </mat-select>
+
               <small *ngIf="formNuevoVolante.controls?.estado?.dirty && formNuevoVolante.controls?.estado?.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
@@ -136,13 +198,27 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Delegación/Municipio*:</span>
-              <select class="form-control styleselect" formControlName="deleMuni" id="deleMuni"
+
+              <!-- <select class="form-control styleselect" formControlName="deleMuni" id="deleMuni"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.deleMuni?.dirty && formNuevoVolante.controls?.deleMuni?.errors }">
                 <option class="select-font optionSelect" placeholder="Seleccionar delegación o municipio" selected
                   [value]="''">
                   Ingresar delegación o municipio</option>
                 <option class="select-font" [value]="1">Municipio 1</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.deleMuni?.dirty && formNuevoVolante.controls?.deleMuni?.errors }"
+                id="deleMuni"
+                formControlName="deleMuni"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Ingresar delegación o municipio</mat-option>
+                <mat-option class="select-font" [value]="1">Municipio 1</mat-option>
+              </mat-select>
+
               <small *ngIf="formNuevoVolante.controls?.deleMuni?.dirty && formNuevoVolante.controls?.deleMuni?.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
@@ -155,12 +231,25 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Ciudad*:</span>
-              <select class="form-control styleselect" formControlName="ciudad" id="ciudad"
+
+              <!-- <select class="form-control styleselect" formControlName="ciudad" id="ciudad"
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.ciudad?.dirty && formNuevoVolante.controls?.ciudad?.errors }">
                 <option class="select-font optionSelect" placeholder="Ingresar ciudad" selected [value]="''">Ingresar
                   ciudad</option>
                 <option class="select-font" [value]="1">ciudad 1</option>
-              </select>
+              </select> -->
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.ciudad?.dirty && formNuevoVolante.controls?.ciudad?.errors }"
+                id="ciudad"
+                formControlName="ciudad"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Ingresar ciudad</mat-option>
+                <mat-option class="select-font" [value]="1">Ciudad 1</mat-option>
+              </mat-select>
+
               <small *ngIf="formNuevoVolante.controls?.ciudad?.dirty && formNuevoVolante.controls?.ciudad?.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
@@ -257,13 +346,26 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Servicio*:</span>
-              <select
+              <!-- <select
                 [ngClass]="{'form-control-error': formNuevoVolante.controls?.servicio?.dirty && formNuevoVolante.controls?.servicio?.errors }"
                 class="form-control styleselect" formControlName="servicio" id="servicio" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Ingresar ponentes" selected [value]="''">Ingresar
                   nombre del servicio</option>
                 <option class="select-font" [value]="1">Servicio 1</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': formNuevoVolante.controls?.servicio?.dirty && formNuevoVolante.controls?.servicio?.errors }"
+                id="servicio"
+                formControlName="servicio"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Ingresar nombre del servicio</mat-option>
+                <mat-option class="select-font" [value]="1">Servicio 1</mat-option>
+              </mat-select>
+
               <small *ngIf="formNuevoVolante.controls?.servicio?.dirty && formNuevoVolante.controls?.servicio?.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
