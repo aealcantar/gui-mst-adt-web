@@ -154,7 +154,7 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
     let params = {
       'controlArticulos': JSON.stringify(controlArticulos),
     }
-    this.router.navigateByUrl("/detalle-control-articulos/" + controlArticulos.idCa, { skipLocationChange: true })
+    this.router.navigateByUrl("/detalle-articulos/" + controlArticulos.idCa, { skipLocationChange: true })
   }
 
 
