@@ -72,7 +72,7 @@
             </option>
           </select> -->
 
-          <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.turnoSelected" (change)="onChangeTurno($event)"
+          <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.grupoSelected" (change)="onChangeTurno($event)"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar grupo</mat-option>
             <mat-option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
