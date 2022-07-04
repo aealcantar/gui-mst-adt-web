@@ -19,40 +19,29 @@ declare var $: any;
   providers: [DatePipe]
 })
 export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit {
-  public fechaSelected!: string;
-  public page: number = 1;
-  public pageSize: number = 15;
-  public resultadoTotal: number = 0;
-  public dtOptions: DataTables.Settings = {};
-  public numitems: number = 15;
-  public order: string = 'desc';
-  public tabla: any[] = [];
-  public extras: any;
-  public datesForm!: FormGroup;
-  public columnaId: string = 'fecEfec';
+ 
   paciente!: pacienteSeleccionado;
   nomPaciente: any;
   rolPaciente: string;
   nssPaciente: string;
+  fechaDesde: string = "";
+  fechaHasta: string = "";
+  page: number = 1;
+  pageSize: number = 10;
+  datosBusqueda: Array<any> = [];
+  columnaId: string = 'fecha';
+  order: string = 'desc';
+  rolUser = "";
+  cveUsuario = "";
+  nombre = "";
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
-    private volantesService: VolantesDonacionService,
-    private fb: FormBuilder,
-    private datePipe: DatePipe,
+    private router: Router, 
+    private volantesDonacionService:VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
+    private datePipe: DatePipe,
   ) {
-    this.extras = this.router.getCurrentNavigation()?.extras;
-    if (this.extras && this.extras.state) {
-      console.log(this.extras.state.id);
-      //this.getNotasById(this.extras.state.id);
-    }
 
-    this.datesForm = new FormGroup({
-      'fechaInicial': new FormControl(null, [Validators.required]),
-      'fechaFinal': new FormControl(null, [Validators.required]),
-    }, {updateOn: 'blur'});
   }
 
   ngOnInit(): void {
@@ -62,109 +51,116 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       this.nssPaciente = this.paciente.nss.toString();
       this.nomPaciente = this.paciente.paciente;
     }
-  
+
+    if (userTmp !== '') {
+      let usuario = JSON.parse(userTmp);
+      this.nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
+      this.rolUser = usuario?.rolUser;
+      this.cveUsuario = usuario?.cveUsuario;
+    }
   }
 
+  //asignacion de inputs a fecha
   ngAfterViewInit(): void {
-    $('#volantesInit').datepicker({
+    $('#fechaDesde').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-          this.datesForm.get('fechaInicial')?.patchValue(date);
+          this.fechaDesde = date;
         }
       },
-      onClose: (date: any) => {
-        if (!date) {
-          this.datesForm.get('fechaInicial')?.patchValue(null);
-        }
-      }
+
     });
 
-    $('#volantesFinal').datepicker({
+    $('#fechaHasta').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-          this.datesForm.get('fechaFinal')?.patchValue(date);
-        }
-      },
-      onClose: (date: any) => {
-        if (!date) {
-          this.datesForm.get('fechaFinal')?.patchValue(null);
+
+          this.fechaHasta = date;
         }
       }
+
     });
   }
 
   limpiar() {
-    this.datesForm.reset();
-    this.tabla = [];
+    this.fechaDesde = "";
+    this.fechaHasta = "";
+    this.datosBusqueda = [];
   }
 
   buscar() {
-    if (this.datesForm.valid){
-      if(this.datesForm.controls['fechaInicial'].value < this.datesForm.controls['fechaFinal'].value){
-        this.getVolantesByFecha();
-      }
-      else{
-        this.tabla = [];
-      }
-    }
-    else{
-      return;
-    }
-  }
 
-  getVolantesByFecha(): void {
-    this.volantesService.getVolantesByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
-      (volantes: any) => {
-        try {
-          if (volantes && volantes.length > 0) {
-            this.tabla =  volantes;
-            console.log("VOLANTES DONACION: ", this.tabla);
+    let fechaDesde = this.fechaDesde;
+    let fechaHasta = this.fechaHasta;
+
+    if (fechaDesde.trim() != "" && fechaHasta.trim() != "") {
+      //valida que el formato de la fecha se correcto
+      let validaFechaDesde = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
+      let validaFechaHasta = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
+      if (!validaFechaHasta) {
+        this.fechaDesde = "";
+        return;
+      }
+      if (!validaFechaHasta) {
+        this.fechaHasta = "";
+        return;
+      }
+
+      if (validaFechaDesde && validaFechaHasta) {
+
+        let fechaDesdeArray = fechaDesde.split("/");
+        let fechaInicial = fechaDesdeArray[2] + "-" + fechaDesdeArray[1] + "-" + fechaDesdeArray[0];
+        let fechaHastaArray = fechaHasta.split("/");
+        let fechaFinal = fechaHastaArray[2] + "-" + fechaHastaArray[1] + "-" + fechaHastaArray[0];
+   
+        this.volantesDonacionService.getVolantesByFechas(fechaInicial,fechaFinal).subscribe(
+          (res: any) => {
+            console.log(res)
+            try {
+    
+              let estatus = res.status;
+              console.log(res.datosVolantesDonacion)
+              if (estatus == 'OK') {
+                this.datosBusqueda = res.datosVolantesDonacion;
+              } else {
+                this.datosBusqueda = [];
+              }
+            } catch (error) {
+              this.datosBusqueda = [];
+              console.error(error);
+            }
+          },
+          (httpErrorResponse: HttpErrorResponse) => {
+            console.error(httpErrorResponse);
           }
-        }catch (error) {
-          console.error(error);
-        }
-      },
-      (httpErrorResponse: HttpErrorResponse) => {
-        console.error(httpErrorResponse);
+        );
+
       }
-    );
-    this.dtOptions = {
-      order: [[2, 'desc']],
-      ordering: false,
-      paging: false,
-      processing: false,
-      info: false,
-      searching: false,
-    };
-    this.sortBy(this.columnaId, this.order, 'fecha');
-  }
 
-  irDetalle(volanteDonacion: VolanteDonacion) {
-    console.log(volanteDonacion);
-    let params = {
-      'nota': JSON.stringify(volanteDonacion),
     }
-    this.router.navigate(["detalle-volante-donacion"], { queryParams: params, skipLocationChange: true });
   }
 
-  irNuevoVolante() {
-    //let params = {
-    //  'objetoAEnviar': null,
-    //}
-    this.router.navigate(["agregar-volante"], {skipLocationChange: true });
+  //redirecciona al detalle
+  irDetalle(idVolanteDonacionSangre:string) {    
+     this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre, { skipLocationChange: true })
   }
 
+
+  //redirecciona a la pantalla de nuevo control de articulos
+  irNuevoRegistro() {
+    this.router.navigateByUrl("/agregar-volante-donacion-sangre", { skipLocationChange: true });
+  }
+
+  //ordenamiento
   sortBy(columnaId: string, order: string, type: string) {
     console.log(columnaId, order, type);
 
     this.columnaId = columnaId;
     this.order = order;
 
-    this.tabla.sort((a: any, b: any) => {
+    this.datosBusqueda.sort((a: any, b: any) => {
       let c: any = this.converType(a[columnaId], type);
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
@@ -174,6 +170,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       }
     });
   }
+
 
   converType(val: any, type: string) {
     let data;

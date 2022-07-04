@@ -21,6 +21,14 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
           }
     }
 
+    getDetatelleVolanteDonacion(idVolanteDonacion:String){
+      try {
+        return this.httpsClient.get<any>(`${environment.urlVolantesDonacion}/findVolantesById/${idVolanteDonacion}`);
+     } catch (error) { 
+         return error;
+       }
+    }
+
     addVolante(datos: any) {
         try {
             return this.httpsClient.post<VolantesDonacion>(`${environment.urlVolantesDonacion}/guardaNuevoVolanteDonacionSangre`, datos);

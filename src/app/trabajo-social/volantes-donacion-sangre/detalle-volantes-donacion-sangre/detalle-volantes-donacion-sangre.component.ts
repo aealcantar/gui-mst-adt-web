@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertInfo } from 'src/app/shared-modules/models/alerta.interface';
+import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { VolantesDonacionService } from '../../services/volantes-donacion.service';
 
 @Component({
@@ -12,30 +14,59 @@ import { VolantesDonacionService } from '../../services/volantes-donacion.servic
 export class DetalleVolantesDonacionSangreComponent implements OnInit {
   detalle: any = {};
   alert!: AlertInfo;
-  constructor(private volantesService: VolantesDonacionService, private rutaActiva: ActivatedRoute, private route: ActivatedRoute,) { }
+  idVolanteDonacion: string = "";
+  paciente!: pacienteSeleccionado;
+  constructor(private volantesService: VolantesDonacionService,
+     private volantesDonacionService: VolantesDonacionService,
+    private rutaActiva: ActivatedRoute,
+    private tarjetaService: AppTarjetaPresentacionService,) { }
 
   ngOnInit(): void {
 
-    this.route.queryParamMap.subscribe((params: any) => {
+    this.idVolanteDonacion = this.rutaActiva.snapshot.paramMap.get('id');
+    this.paciente = this.tarjetaService.get();
+    if (Number(this.idVolanteDonacion) > 0) {
+      this.buscarDetalleVolanteDonacion();
+    } else {
+      this.muestraAlerta(
+        '¡La información se guardo con éxito!',
+        'alert-success',
+        ''
+      );
+      this.idVolanteDonacion = this.idVolanteDonacion.replace("nuevo", "");
+      this.buscarDetalleVolanteDonacion();
+    }
 
-      let valida = this.rutaActiva.snapshot.paramMap.get('proviene');
-      console.log(valida)
-      if (valida != null) {
-        this.muestraAlerta(
-          '¡La información se guardo con éxito!',
-          'alert-success',
-          ''
-        );
-      }
-
-
-      if (params.getAll('datosVolante').length > 0) {
-        this.detalle = JSON.parse(params.getAll('datosVolante'))
-
-      }
-      console.log('OBJETO ENVIADO PARA DETALLE: ', this.detalle)
-    })
   }
+
+  //buscar detalloe de volante de donacion
+
+  buscarDetalleVolanteDonacion() {
+    this.volantesDonacionService.getDetatelleVolanteDonacion(this.idVolanteDonacion).subscribe(
+      (res: any) => {
+       console.log(res)
+        try {
+
+          let estatus = res.status;
+
+          if (estatus == 'OK') {
+            try {
+              this.detalle = res.datosVolantesDonacion[0];
+            } catch (error) {
+              console.error(error);
+            }
+
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
 
 
   //muesta el mensaje de alerta
@@ -62,7 +93,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
 
 
   impirmiVolante() {
-    let data: any = { 
+    let data: any = {
       uMedicaH: this.detalle.desUnidadMedicaHospitalaria,
       fechaSolc: this.detalle.fecEfec,
       nombreBancoS: this.detalle.idNombreBancoSangre,

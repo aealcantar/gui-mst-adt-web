@@ -13,7 +13,7 @@
       <div class="row p-5"> 
         <div class="col-sm-8 form-group pt-5">
           <span class="labels pb-1">Unidad médica hospitalaria:</span>
-          <span class="labelDetail"> {{ detalle.noFolioControl }}</span>
+          <span class="labelDetail"> {{ detalle.desUnidadMedicaHospitalaria }}</span>
         </div>
         <div class="col-sm-4 form-group pt-5">
           <span class="labels pb-1">Fecha:</span>
@@ -30,11 +30,11 @@
       <div class="row p-5"> 
         <div class="col-sm-8 form-group  ">
           <span class="labels pb-1">Nombre del Banco de Sangre:</span>
-          <span class="labelDetail"> {{ detalle.idNombreBancoSangre }}</span>
+          <span class="labelDetail"> {{ detalle.nombreBancoSangre }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Horario de atención:</span>
-          <span class="labelDetail"> {{ detalle.timInicialAtencion }}    {{ detalle.timFinalAtencion }}</span>
+          <span class="labelDetail"> {{ detalle.timHoraInicialAtencion }}    {{ detalle.timHoraFinalAtencion }}</span>
         </div>
       </div> 
       <div class="row p-5"> 
@@ -44,18 +44,18 @@
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Estado:</span>
-          <span class="labelDetail"> {{ detalle.idEstado }}</span>
+          <span class="labelDetail"> {{ detalle.nombreEstado }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
             <span class="labels pb-1">Delegación/Municipio:</span>
-            <span class="labelDetail"> {{ detalle.idDelegacionMunicipio }}</span>
+            <span class="labelDetail"> {{ detalle.nombreDelegacionMunicipio }}</span>
           </div>
       </div> 
  
       <div class="row p-5"> 
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Ciudad:</span>
-          <span class="labelDetail"> {{ detalle.idCiudad }}</span>
+          <span class="labelDetail"> {{ detalle.nombreCiudad }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Colonia:</span>
@@ -101,7 +101,7 @@
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Servicio:</span>
-          <span class="labelDetail"> {{ detalle.idServicio }}</span>
+          <span class="labelDetail"> {{ detalle.nombreServicio }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mb-5">

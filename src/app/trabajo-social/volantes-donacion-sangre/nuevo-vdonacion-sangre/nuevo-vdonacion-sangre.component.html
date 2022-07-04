@@ -91,7 +91,7 @@
 
         <div class="row">
           <div class="col-md-4 form-group">
-            <span class="spanInput">C&oacute;digo Postal*:</span>
+            <span class="spanInput">Código Postal*:</span>
             <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.codigoPostal.errors }"
             class="form-control matricula" id="codigoPostal" formControlName="codigoPostal"
               placeholder="Ingresar código postal" type="text" maxlength="5" />
@@ -168,19 +168,19 @@
         </div>
         <div class="row">
           <div class="col-md-4  form-group">
-            <span class="spanInput">N&uacute;ro exterior*:</span>
+            <span class="spanInput">Núro exterior*:</span>
             <input  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numExterior.errors }"
             class="form-control matricula inputs" id="numExterior" formControlName="numExterior"
-              placeholder="Ingresar n&uacute;mero" type="text" />
+              placeholder="Ingresar número" type="text" />
               <small *ngIf="  submitted && formNuevaDonacion.controls.numExterior.errors" class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
           </div>
           <div class="col-md-4  form-group">
-            <span class="spanInput">N&uacute;ro interior*:</span>
+            <span class="spanInput">Núro interior*:</span>
             <input  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numInterior.errors }"
             class="form-control matricula inputs" id="numInterior" formControlName="numInterior"
-              placeholder="Ingresar n&uacute;mero" type="text" />
+              placeholder="Ingresar número" type="text" />
               <small *ngIf="  submitted && formNuevaDonacion.controls.numInterior.errors" class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
@@ -297,10 +297,10 @@
             </small>
           </div>
           <div class="col-md-4 form-group">
-            <span class="spanInput">Matr&iacute;cula*:</span>
+            <span class="spanInput">Matrícula*:</span>
             <input maxlength="40" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.matriculaTrabajadorSocial.errors }"
              class="form-control matricula inputs" id="matriculaTrabajadorSocial" formControlName="matriculaTrabajadorSocial"
-              placeholder="Ingresar matr&iacute;cula" type="text" />
+              placeholder="Ingresar matrícula" type="text" />
               <small *ngIf="submitted && formNuevaDonacion.controls.matriculaTrabajadorSocial.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -310,7 +310,7 @@
             <span class="spanInput">Teléfono*:</span>
             <input maxlength="10" [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors }"
              class="form-control matricula inputs" id="numTelefonoTrabajadorSocial" formControlName="numTelefonoTrabajadorSocial"
-              placeholder="Ingresar t&eacute;" type="text" />
+              placeholder="Ingresar teléfono" type="text" />
               <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio

@@ -135,7 +135,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     this.submitted=true;
 
     if(formNuevaDonacion.status != "INVALID"){
-console.log(formNuevaDonacion.value)
+ 
 let fechaa= formNuevaDonacion.value.fecha1.split("/");
 let fechaNew = fechaa[2] + "/" + fechaa[1] + "/" + fechaa[0];
 let fechaI  = formNuevaDonacion.value.fecha2.split("/");
@@ -145,21 +145,24 @@ let fechaCirugia = fechaC[2] + "/" + fechaC[1] + "/" + fechaC[0];
 this.formNuevaDonacion.controls['fecha'].setValue(fechaNew);  
 this.formNuevaDonacion.controls['fechaInternamiento'].setValue(fechaInternamiento);  
 this.formNuevaDonacion.controls['fechaCirugia'].setValue(fechaCirugia );  
-console.log(formNuevaDonacion.value)
+ 
 let datos =  JSON.stringify(this.formNuevaDonacion.value);
       this.volantesDonacionService.addVolante(datos).subscribe(async (res: any) => {
-        console.log(res)
-        // if (res.statusText === 'OK') {
-          let params = { 'datosVolante': JSON.stringify(res) };
-
-           this.router.navigate(["detalle-volante/i"], { queryParams: params, skipLocationChange: true });
-        // } else {
-        //   this.muestraAlerta(
-        //     '¡La información no se pudo guardar, intente más tarde!',
-        //     'alert-danger',
-        //     'Error'
-        //   );
-        // }
+        
+        
+        let estatus=res.status;
+        if(estatus=="OK"){
+          let id = res.idVolanteDonacionSangre + "nuevo";
+          await this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + id, { skipLocationChange: true });
+        }else{
+          this.muestraAlerta(
+            '¡La información no se pudo guardar, intente más tarde!',
+            'alert-danger',
+            'Error'
+          );
+        }
+       
+       
         console.log(res)
    
       }, (error: any) => {

@@ -55,10 +55,10 @@ const routes: Routes = [
   { path: 'detalle-estudios-medicos', component: EstudioMedicoGuardadoComponent },
 
   //volanteDonacion
-  { path: 'agregar-volante', component: NuevoVdonacionSangreComponent },
+  { path: 'agregar-volante-donacion-sangre', component: NuevoVdonacionSangreComponent },
   { path: 'consulta-volante', component: ConsultaVolantesDonacionComponent },
-  { path: 'detalle-volante/:proviene', component: DetalleVolantesDonacionSangreComponent },
-  { path: 'detalle-volante', component: DetalleVolantesDonacionSangreComponent },
+  { path: 'detalle-volante-donacion-sangre/:id', component: DetalleVolantesDonacionSangreComponent },
+  
 
   { path: 'agregar-aviso-mp', component: NuevoVdonacionSangreComponent },
   { path: 'consulta-aviso-mp', component: ConsultaVolantesDonacionComponent },
