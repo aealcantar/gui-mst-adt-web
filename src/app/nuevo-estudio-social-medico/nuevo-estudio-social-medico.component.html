@@ -107,7 +107,8 @@
                           <span class="labels">Código Postal*:</span>
                           <input
                             [ngClass]="{'form-control-error':formEstudioSocial.controls?.cp?.dirty && formEstudioSocial.controls?.cp?.errors}"
-                            class="form-control" id="cp" formControlName="cp" placeholder="Ingresar código postal" maxlength="10">
+                            class="form-control" id="cp" formControlName="cp" placeholder="Ingresar código postal"
+                            maxlength="10">
                           <small *ngIf="formEstudioSocial.controls?.cp?.dirty && formEstudioSocial.controls?.cp?.errors"
                             class="form-text form-text-error Campo-obligatorio" style="color: red;">
                             Campo obligatorio
@@ -118,25 +119,32 @@
                       <div class="col-md-4" style="margin-right: -23px; margin-top: 4px;">
                         <div class=" form-group">
                           <span class="labels">Estado*:</span>
-                          <select class="select" formControlName="estado" (change)="onChangeEstado()">
-                            <option class="select-font" [value]="''">Seleccionar estado</option>
-                            <option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of estados">
-                              {{ estado.des_nombre_completo}}
-                            </option>
-                          </select>
+                          <mat-select class="form-control form-control-mat-select"
+                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.estado?.dirty && formEstudioSocial.controls?.estado?.errors }"
+                            id="estado" formControlName="estado" [disableOptionCentering]="true" aria-label="Servicio"
+                            (selectionChange)="onChangeEstado()">
+                            <mat-option class="select-font" [value]="''" selected>Seleccionar estado</mat-option>
+                            <mat-option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of estados">
+                              {{ estado.des_nombre_completo }}
+                            </mat-option>
+                          </mat-select>
                         </div>
                       </div>
 
                       <div class="col-md-4" style=" margin-top: 4px;">
                         <div class="form-group">
                           <span class="labels">Delegación/Municipio*:</span>
-                          <select class="select" formControlName="municipio" (change)="onChangeCiudad()">
-                            <option class="select-font" [value]="''" selected>Seleccionar delegación o municipio</option>
-                            <option class="select-font" [value]="municipio.cve_delegacion_municipio"
-                              *ngFor="let municipio of municipios">
-                              {{ municipio.des_municipio}}
-                            </option>
-                          </select>
+                          <mat-select class="form-control form-control-mat-select"
+                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.municipio?.dirty && formEstudioSocial.controls?.municipio?.errors }"
+                            id="municipio" formControlName="municipio" [disableOptionCentering]="true"
+                            aria-label="Servicio" (selectionChange)="onChangeCiudad()">
+                            <mat-option class="select-font" [value]="''" selected>Seleccionar delegación o municipio
+                            </mat-option>
+                            <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio"
+                              *ngFor="let municipio of municipios">{{ municipio.des_municipio}}
+                            </mat-option>
+                          </mat-select>
+
                         </div>
                       </div>
                     </div>
@@ -145,19 +153,20 @@
                         <div class="form-group">
                           <span class="labels">Ciudad*:</span>
                           <br>
-                          <select
-                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors}"
-                            class="form-control" id="ciudad" formControlName="ciudad">
-                            <option [value]="''" selected>Ingresar ciudad</option>
-                            <option class="select-font" [value]="ciudad.cve_ciudad" *ngFor="let ciudad of ciudades">
+                          <mat-select class="form-control form-control-mat-select"
+                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors }"
+                            id="ciudad" formControlName="ciudad" [disableOptionCentering]="true" aria-label="Servicio">
+                            <mat-option class="select-font" [value]="''" selected>Ingresar ciudad</mat-option>
+                            <mat-option class="select-font" [value]="ciudad.cve_ciudad" *ngFor="let ciudad of ciudades">
                               {{ ciudad.des_ciudad}}
-                            </option>
+                            </mat-option>
                             <small
                               *ngIf="formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors"
                               class="form-text form-text-error Campo-obligatorio" style="color: red;">
                               Campo obligatorio
                             </small>
-                          </select>
+                          </mat-select>
+
                         </div>
                       </div>
 
@@ -223,19 +232,23 @@
                         <div class="form-group">
                           <span class="labels">Tipo de comunidad*:</span>
                           <br>
-                          <select
-                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.comunidad?.dirty && formEstudioSocial.controls?.comunidad?.errors}"
-                            class="form-control" id="comunidad" formControlName="comunidad">
-                            <option [value]="''" selected>Seleccionar comunidad</option>
-                            <option class="select-font" [value]="comunidad.id" *ngFor="let comunidad of tiposComunidad">
+
+                          <mat-select class="form-control form-control-mat-select"
+                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.comunidad?.dirty && formEstudioSocial.controls?.comunidad?.errors }"
+                            id="comunidad" formControlName="comunidad" [disableOptionCentering]="true"
+                            aria-label="Servicio">
+                            <mat-option class="select-font" [value]="''" selected>Seleccionar comunidad</mat-option>
+                            <mat-option class="select-font" [value]="comunidad.id"
+                              *ngFor="let comunidad of tiposComunidad">
                               {{ comunidad.descripcion }}
-                            </option>
+                            </mat-option>
                             <small
                               *ngIf=" formEstudioSocial.controls?.comunidad?.dirty && formEstudioSocial.controls?.comunidad?.errors"
                               class="form-text form-text-error Campo-obligatorio" style="color: red;">
                               Campo obligatorio
                             </small>
-                          </select>
+                          </mat-select>
+
                         </div>
                       </div>
                     </div>
@@ -288,15 +301,17 @@
                         <div class="form-group">
                           <span class="labels">Estado civil*:</span>
                           <br>
-                          <select
-                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.estadoCivil?.dirty && formEstudioSocial.controls?.estadoCivil?.errors}"
-                            class="form-control" id="estadoCivil" formControlName="estadoCivil">
-                            <option [value]="''" selected>Seleccionar estado civil</option>
-                            <option class="select-font" [value]="estadoCivil.id"
+
+                          <mat-select class="form-control form-control-mat-select"
+                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.estadoCivil?.dirty && formEstudioSocial.controls?.estadoCivil?.errors }"
+                            id="estadoCivil" formControlName="estadoCivil" [disableOptionCentering]="true"
+                            aria-label="Servicio">
+                            <mat-option class="select-font" [value]="''" selected>Seleccionar estado civil</mat-option>
+                            <mat-option class="select-font" [value]="estadoCivil.id"
                               *ngFor="let estadoCivil of estadosCiviles">
                               {{ estadoCivil.descripcion }}
-                            </option>
-                          </select>
+                            </mat-option>
+                          </mat-select>
                           <small
                             *ngIf=" formEstudioSocial.controls?.estadoCivil?.dirty && formEstudioSocial.controls?.estadoCivil?.errors"
                             class="form-text form-text-error Campo-obligatorio" style="color: red;">
@@ -308,14 +323,16 @@
                         <div class="form-group">
                           <span class="labels">Ocupación*:</span>
                           <br>
-                          <select class="select" formControlName="ocupacion"
-                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.ocupacion?.dirty && formEstudioSocial.controls?.ocupacion?.errors}">
-                            <option [value]="''" selected>Ingresar ocupación</option>
-                            <option class="select-font" [value]="ocupacion.id_OCUPACION"
+                          <mat-select class="form-control form-control-mat-select"
+                            [ngClass]="{'form-control-error': formEstudioSocial.controls?.ocupacion?.dirty && formEstudioSocial.controls?.ocupacion?.errors }"
+                            id="ocupacion" formControlName="ocupacion" [disableOptionCentering]="true"
+                            aria-label="Servicio">
+                            <mat-option class="select-font" [value]="''" selected>Ingresar ocupación</mat-option>
+                            <mat-option class="select-font" [value]="ocupacion.id_OCUPACION"
                               *ngFor="let ocupacion of ocupaciones">
                               {{ ocupacion.nom_OCUPACION }}
-                            </option>
-                          </select>
+                            </mat-option>
+                          </mat-select>
                         </div>
                       </div>
                       <div class="col-md-4" style="margin-right: -23px;">
@@ -454,7 +471,8 @@
                       'form-control-error':
                         formEstudioSocial2.controls?.edad?.dirty &&
                         formEstudioSocial2.controls?.edad?.errors
-                    }" class="form-control" id="edad" formControlName="edad" placeholder="Ingresar edad" type="text" maxlength="3" numbersOnly />
+                    }" class="form-control" id="edad" formControlName="edad" placeholder="Ingresar edad" type="text"
+                      maxlength="3" numbersOnly />
                     <small *ngIf="
                   formEstudioSocial2.controls?.edad?.dirty &&
                   formEstudioSocial2.controls?.edad?.errors
@@ -511,12 +529,20 @@
                     <label class="control-label tituloInput">
                       Estado*:
                     </label>
-                    <select class="select" formControlName="estadoF" (change)="onChangeEstadoFamiliar()">
-                      <option class="select-font" [value]="''">Seleccionar estado</option>
-                      <option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
+
+                    <mat-select class="form-control form-control-mat-select"
+                      [ngClass]="{'form-control-error': formEstudioSocial.controls?.estadoF?.dirty && formEstudioSocial.controls?.estadoF?.errors }"
+                      id="estadoF" formControlName="estadoF" [disableOptionCentering]="true" aria-label="Servicio"
+                      (selectionChange)="onChangeEstadoFamiliar()">
+                      <mat-option class="select-font" [value]="''" selected>Seleccionar estado
+                      </mat-option>
+                      <mat-option class="select-font" [value]="estadoF.cve_estado"
+                        *ngFor="let estadoF of estadosFamiliar">
                         {{ estadoF.des_nombre_completo}}
-                      </option>
-                    </select>
+                      </mat-option>
+                    </mat-select>
+
+
                   </div>
                 </div>
 
@@ -525,17 +551,20 @@
                     <label class="control-label tituloInput">
                       Delegación/Municipio*:
                     </label>
-                    <select class="select" formControlName="delegacionM" (change)="onChangeMunicipioFamiliar()">
-                      <option class="select-font" [value]="''" selected>Seleccionar delegación o municipio</option>
-                      <option class="select-font" [value]="delegacion.cve_delegacion_municipio"
+                    <mat-select class="form-control form-control-mat-select"
+                      [ngClass]="{'form-control-error': formEstudioSocial.controls?.delegacionM?.dirty && formEstudioSocial.controls?.delegacionM?.errors }"
+                      id="delegacionM" formControlName="delegacionM" [disableOptionCentering]="true"
+                      aria-label="Servicio" (selectionChange)="onChangeMunicipioFamiliar()">
+                      <mat-option class="select-font" [value]="''" selected>Seleccionar delegación o municipio
+                      </mat-option>
+                      <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                         *ngFor="let delegacion of delegaciones">
                         {{ delegacion.des_municipio}}
-                      </option>
-                    </select>
-
+                      </mat-option>
+                    </mat-select>
                     <small *ngIf="
-                  formEstudioSocial2.controls?.delegacion?.dirty &&
-                  formEstudioSocial2.controls?.delegacion?.errors
+                  formEstudioSocial2.controls?.delegacionM?.dirty &&
+                  formEstudioSocial2.controls?.delegacionM?.errors
                 " class="form-text form-text-error Campo-obligatorio" style="color: red;">
                       Campo obligatorio
                     </small>
@@ -550,19 +579,16 @@
                     <label class="control-label tituloInput">
                       Ciudad*:
                     </label>
-                    <select
-                      [ngClass]="{'form-control-error': formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors}"
-                      class="form-control" id="ciudadF" formControlName="ciudadF">
-                      <option value="Seleccionar ciudad" [value]="''" selected>Ingresar ciudad</option>
-                      <option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
+                    <mat-select class="form-control form-control-mat-select"
+                      [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudadF?.dirty && formEstudioSocial.controls?.ciudadF?.errors }"
+                      id="ciudadF" formControlName="ciudadF" [disableOptionCentering]="true" aria-label="Servicio">
+                      <mat-option class="select-font" [value]="''" selected>Ingresar ciudad
+                      </mat-option>
+                      <mat-option class="select-font" [value]="ciudadF.cve_ciudad"
+                        *ngFor="let ciudadF of ciudadesFamiliar">
                         {{ ciudadF.des_ciudad}}
-                      </option>
-                      <small
-                        *ngIf=" formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors"
-                        class="form-text form-text-error Campo-obligatorio" style="color: red;">
-                        Campo obligatorio
-                      </small>
-                    </select>
+                      </mat-option>
+                    </mat-select>
                     <small
                       *ngIf=" formEstudioSocial2.controls?.ciudadF?.dirty && formEstudioSocial2.controls?.ciudadF?.errors"
                       class="form-text form-text-error Campo-obligatorio" style="color: red;">

@@ -72,7 +72,8 @@ export class NuevaNotaTSocialComponent implements OnInit {
   getCatalogos() {
     this.notasService.getTiposNota().subscribe(
       (res) => {
-        this.catTiposNotas = res.ArrayList;
+        console.log("Tipos Nota: ", res);
+        this.catTiposNotas = res;
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -82,7 +83,8 @@ export class NuevaNotaTSocialComponent implements OnInit {
     this.notasService.getRedesApoyo().subscribe(
       (res) => {
         if (res) {
-          this.catRedesApoyo = res.ArrayList;
+          console.log("Redes de apoyo: ", res);
+          this.catRedesApoyo = res;
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -93,7 +95,8 @@ export class NuevaNotaTSocialComponent implements OnInit {
     this.notasService.getActividadesTecnicas().subscribe(
       (res) => {
         if (res) {
-          this.catActividadesTecnicas = res.ArrayList;
+          console.log("Actividades técnicas: ", res);
+          this.catActividadesTecnicas = res;
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {

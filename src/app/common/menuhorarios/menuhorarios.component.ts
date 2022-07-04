@@ -27,7 +27,7 @@ export class MenuhorariosComponent implements OnInit,OnChanges  {
     this.diasSemana[this.dia]=true;
 
     //TEMPORAL -- CAMBIAR CUANDO SE TENGA EL DIA QUE SE DESEA INHABILITAR
-    //this.diasSemanaInhabil[this.diainhabil['dia']]=this.diainhabil['inhabil'];
+    // this.diasSemanaInhabil[this.diainhabil['dia']]=this.diainhabil['inhabil'];
 
   }
 
@@ -43,10 +43,11 @@ export class MenuhorariosComponent implements OnInit,OnChanges  {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    
     for (let property in changes) {
       if (property === 'diainhabil') {
         console.log('Current:', changes[property].currentValue);
-        this.diasSemanaInhabil[changes[property].currentValue['dia']]=changes[property].currentValue['inhabil'];
+        this.diasSemanaInhabil[changes[property].currentValue['dia']-1]=changes[property].currentValue['inhabil'];
       }
     }
   }

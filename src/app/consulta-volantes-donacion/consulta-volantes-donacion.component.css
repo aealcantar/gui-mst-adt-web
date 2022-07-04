@@ -98,10 +98,11 @@ a {
   transform: translateY(-8%);
   background-size: 10px 12px;
   background-repeat: no-repeat;
-  margin: 0.6px 1px 3px 18.2px;
-  padding: 0 20.2px 0 18.2px;
-  height: 36px;
+  margin: 0px 0px 3px 18.2px;
+  padding: 0 20px 0 18.2px;
+  height: 30px;
   border-radius: 2px 2px 2px 2px;
+  top: 29px!important;
 }
 
 .imgCalendar {

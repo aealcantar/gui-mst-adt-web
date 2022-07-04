@@ -64,9 +64,7 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
     this.tabla = [];
     this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
       (res) => {
-        if (res && res.ArrayList.length > 0) {
-          this.tabla = res.ArrayList;
-        }
+        this.tabla = res;
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);

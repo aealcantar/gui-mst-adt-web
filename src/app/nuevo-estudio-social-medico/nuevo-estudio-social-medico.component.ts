@@ -132,10 +132,8 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     );
     this.estudioSocialService.getCatEstadosCiviles().toPromise().then(
       (estadosCiviles: any) => {
-        if (estadosCiviles && estadosCiviles.ArrayList.length > 0) {
-          this.estadosCiviles = estadosCiviles.ArrayList;
-          console.log("ESTADO CIVILES: ", this.estadosCiviles);
-        }
+        this.estadosCiviles = estadosCiviles;
+        console.log("ESTADO CIVILES: ", this.estadosCiviles);
       },
 
       (httpErrorResponse: HttpErrorResponse) => {
@@ -144,10 +142,8 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     );
     this.estudioSocialService.getCatTiposComunidad().toPromise().then(
       (tiposComunidad: any) => {
-        if (tiposComunidad && tiposComunidad.ArrayList.length > 0) {
-          this.tiposComunidad = tiposComunidad.ArrayList;
-          console.log("TIPOS COMUNIDAD: ", this.tiposComunidad);
-        }
+        this.tiposComunidad = tiposComunidad;
+        console.log("TIPOS COMUNIDAD: ", this.tiposComunidad);
       },
 
       (httpErrorResponse: HttpErrorResponse) => {

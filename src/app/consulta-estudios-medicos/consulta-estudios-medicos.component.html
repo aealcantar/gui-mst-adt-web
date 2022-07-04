@@ -40,12 +40,22 @@
       </div>
       <div class="col-md-6 flex justify-content-end">
         <div class="form-group">
-          <label class="control-label">Visualizar datos</label>
+          <div style="position: relative; float: right; display: flex;">
+            <span class="visDatos" style="width: auto; float: right;">
+              Visualizar datos
+            </span>
+            <mat-select [(ngModel)]="pageSize"class="form-select mat-select-table" [disableOptionCentering]="true" aria-label="Servicio">
+              <mat-option class="select-font" [value]="15">15</mat-option>
+              <mat-option class="select-font" [value]="20">20</mat-option>
+              <mat-option class="select-font" [value]="25">25</mat-option>
+            </mat-select>
+          </div>
+          <!-- <label class="control-label">Visualizar datos</label>
           <select class="form-select ml-5 select-view-data">
             <option [ngValue]="15">15</option>
             <option [ngValue]="20">20</option>
             <option [ngValue]="25">25</option>
-          </select>
+          </select> -->
         </div>
       </div>
     </div>

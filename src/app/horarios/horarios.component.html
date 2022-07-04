@@ -7,7 +7,7 @@
       <div class="modal-content modal-dialog-centered">
         <div class="modal-header">
           <img class="center" src="../../assets/images/frame_reloj.png">
-          <h5 class="modal-title" id="agregarHorario">Agregar horario</h5>
+          <h5 class="modal-title" id="agregarHorario" >Agregar horario</h5>
         </div>
         <div class="modal-body-horarios">
 
@@ -115,7 +115,7 @@
           <button type="button" class="btn btn-danger btuser" aria-label="Close" data-bs-dismiss="modal"
             (click)="btnCancelar()">Cancelar</button>
           <button type="button" class="btn btn-primary btuser"
-            (click)="btnNuevoHorario()" style="margin-bottom: 5px;margin-left: 30px;">Aceptar</button>
+            (click)="btnNuevoHorario()"   style="margin-bottom: 5px;margin-left: 30px;">Aceptar</button>
         </div>
       </div>
     </div>
@@ -258,7 +258,7 @@
             <span>Horario de atención</span>
           </div>
           <div class="pull-right">
-            <button class="btn btn-primary btuser pull-right" (click)="modalAgregar()" style="width: 149px;">Agregar
+            <button class="btn btn-primary btuser pull-right" [disabled]="agregarHorarioBtn" (click)="modalAgregar()" style="width: 149px;">Agregar
               horario</button>
           </div>
         </div>
@@ -275,7 +275,7 @@
                 {{dia}}
               </div>
 
-              <div class="col-6 pull-right" style=" display: inline-block; ">
+              <div id="btnHabDeshabilitar"class="col-6 pull-right" style=" display: inline-block; ">
                 <button type="button" class="btn btn-primary btuser pull-right" (click)="btnModalInhabilitar()">{{lblBtnHabilitar}}</button>
               </div>
             </div>

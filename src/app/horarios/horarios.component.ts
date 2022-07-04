@@ -36,6 +36,7 @@ interface LooseObject {
 })
 export class HorariosComponent implements OnInit {
   cveUbicacion!: any;
+  agregarHorarioBtn:boolean;
   public diaSeleccionado: HorarioDias;
   public diaNb: number;
   public request: HorarioRequest;
@@ -49,6 +50,9 @@ export class HorariosComponent implements OnInit {
   estatusActivoSeleccionado: boolean;
   estatusBloqueadoSeleccionado: boolean;
   diainhabil: LooseObject = {};
+
+  lblBtnHabilitar: string = 'Habilitar día';
+  lblHabilitar: string = 'inhabilitar';
 
   formfields: any = this.formBuilder.group({
     horainicio: ['', Validators.required],
@@ -69,10 +73,12 @@ export class HorariosComponent implements OnInit {
 
     this.diaNb = (new Date()).getDay();
     this.obtieneDia(this.diaNb)
+    
 
     console.log("dia: ", this.diaNb);
     this.authService.setProjectObs("Agenda Digital Transversal");
     this.turnoNuevo = new HorarioTurno();
+  
 
   }
 
@@ -145,8 +151,6 @@ export class HorariosComponent implements OnInit {
     }
   }
 
-  lblBtnHabilitar: string = 'Inhabilitar día';
-  lblHabilitar: string = 'inhabilitar';
 
   getHorariosByDia(diasHorarios: HorarioDias, dia: number) {
     return diasHorarios.horarios.find(horario => horario.dia == this.semana[dia]);
@@ -176,6 +180,11 @@ export class HorariosComponent implements OnInit {
       switch (resp.code) {
         case 200:
           if (resp.data.length > 0) {
+            this.agregarHorarioBtn=false;     
+            this.validarDia();          
+            
+            //this.lblBtnHabilitar = 'Inhabilitar día';
+           
             this.diaSeleccionado.horarios.forEach(data => {
 
               data.horaInicial = data.horaInicial.trim();
@@ -184,6 +193,13 @@ export class HorariosComponent implements OnInit {
 
             console.log("horarios: ", this.diaSeleccionado.horarios);
           }else{
+            this.agregarHorarioBtn=true;     
+            this.lblBtnHabilitar = 'Habilitar día';
+            let index=this.semana.findIndex(diasemana=>diasemana==dia );
+            this.diainhabil = {
+              dia: index+1,
+              inhabil: true
+            };
             this.mostrarMensaje(this._Mensajes.ALERT_DANGER,this._Mensajes.MSJ_MSG023,this._Mensajes.INFO);
           }
           Swal.close();
@@ -212,7 +228,7 @@ export class HorariosComponent implements OnInit {
           break;
       }
 
-      this.validarDia();
+      //this.validarDia();
     }, (error: HttpErrorResponse) => {
       this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
       Swal.close();
@@ -263,7 +279,7 @@ export class HorariosComponent implements OnInit {
           break;
       }
 
-      this.validarDia();
+     
     }, (error: HttpErrorResponse) => {
       this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
       Swal.close();
