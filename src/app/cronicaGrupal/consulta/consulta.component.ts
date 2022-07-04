@@ -24,13 +24,13 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   catalogoEstatus: any[] = ['No impartida', 'Por impartir', 'Impartida'];
 
-  servicioSelected: any = '-1';
+  servicioSelected: any = '';
   serviciosEspecialidad: any[] = [];
-  turnoSelected: any = '-1';
+  turnoSelected: any = '';
   turnos: any[] = [];
-  grupoSelected: any = '-1';
+  grupoSelected: any = '';
   grupos: any[] = [];
-  lugarSelected: any = '-1';
+  lugarSelected: any = '';
   lugares: any[] = [];
   fechaSelected!: string;
   radioBtnSelected: any;

@@ -19,7 +19,7 @@
           </label>
           <!-- <select class="form-control" style="background-position-y: 10px;" aria-label="Servicio"
             [(ngModel)]="this.servicioSelected" (change)="onChangeServicio($event)">
-            <option class="select-font" [value]="'-1'" selected>Seleccionar servicio</option>
+            <option class="select-font" [value]="''" selected>Seleccionar servicio</option>
             <option class="select-font" [value]="servicio.cve_especialidad"
               *ngFor="let servicio of serviciosEspecialidad">
               {{ servicio.des_especialidad }}</option>
@@ -27,7 +27,7 @@
 
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.servicioSelected" (change)="onChangeServicio($event)"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
-            <mat-option class="select-font" [value]="'-1'">Seleccionar servicio</mat-option>
+            <mat-option class="select-font" [value]="''">Seleccionar servicio</mat-option>
             <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of serviciosEspecialidad">
               {{ item.des_especialidad }}
             </mat-option>
@@ -43,14 +43,14 @@
           </label>
           <!-- <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
             [(ngModel)]="this.turnoSelected" (change)="onChangeTurno($event)">
-            <option class="select-font" [value]="'-1'" selected>Seleccionar turno</option>
+            <option class="select-font" [value]="''" selected>Seleccionar turno</option>
             <option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{ turno.des_turno }}
             </option>
           </select> -->
 
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.turnoSelected" (change)="onChangeTurno($event)"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
-            <mat-option class="select-font" [value]="'-1'">Seleccionar turno</mat-option>
+            <mat-option class="select-font" [value]="''">Seleccionar turno</mat-option>
             <mat-option class="select-font" [value]="item.cve_turno" *ngFor="let item of turnos">
               {{ item.des_turno }}
             </mat-option>
@@ -66,7 +66,7 @@
           </label>
           <!-- <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
             [(ngModel)]="this.grupoSelected" (change)="onChangeGrupo($event)">
-            <option class="select-font" [value]="'-1'" selected>Seleccionar grupo</option>
+            <option class="select-font" [value]="''" selected>Seleccionar grupo</option>
             <option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
               {{ grupo.des_actividad }}
             </option>
@@ -74,9 +74,9 @@
 
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.turnoSelected" (change)="onChangeTurno($event)"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
-            <mat-option class="select-font" [value]="'-1'">Seleccionar turno</mat-option>
-            <mat-option class="select-font" [value]="item.cve_turno" *ngFor="let item of turnos">
-              {{ item.des_turno }}
+            <mat-option class="select-font" [value]="''">Seleccionar grupo</mat-option>
+            <mat-option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
+              {{ grupo.des_actividad }}
             </mat-option>
           </mat-select>
 
@@ -91,7 +91,7 @@
           </label>
           <!-- <select class="form-control" style="background-position-y: 10px;" aria-label="Servicio"
             [(ngModel)]="this.lugarSelected" (change)="onChangeLugar($event)">
-            <option class="select-font" [value]="'-1'" style="background-position-y: 10px;" selected>Seleccionar lugar
+            <option class="select-font" [value]="''" style="background-position-y: 10px;" selected>Seleccionar lugar
             </option>
             <option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
               {{ lugar.des_completa_ubicacion }}
@@ -100,7 +100,7 @@
 
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.lugarSelected" (change)="onChangeLugar($event)"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
-            <mat-option class="select-font" [value]="'-1'">Seleccionar lugar</mat-option>
+            <mat-option class="select-font" [value]="''">Seleccionar lugar</mat-option>
             <mat-option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of lugares">
               {{ item.des_completa_ubicacion }}
             </mat-option>
