@@ -1,23 +1,21 @@
-import {AfterViewInit, Component, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
-import { HttpErrorResponse } from '@angular/common/http'
-import * as moment from 'moment'
-import { ControlArticulosService } from 'src/app/service/control-articulos.service'
-import { ControlArticulos } from 'src/app/models/control-articulo.model'
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import * as moment from 'moment';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
-import { DatePipe } from '@angular/common'
- 
-declare var $: any
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+
+import { VolantesDonacionService } from   'src/app/service/volantes-donacion.service'; 
+declare var $: any;
 
 @Component({
-  selector: 'app-consulta-control-articulos',
-  templateUrl: './consulta-control-articulos.component.html',
-  styleUrls: ['./consulta-control-articulos.component.css'],
+  selector: 'app-consulta-volantes-donacion',
+  templateUrl: './consulta-volantes-donacion.component.html',
+  styleUrls: ['./consulta-volantes-donacion.component.css'],
   providers: [DatePipe]
 })
-export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit {
+export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit {
 
   paciente!: pacienteSeleccionado;
   nomPaciente: any;
@@ -36,8 +34,9 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
 
   constructor(
     private router: Router,
-    private Artservice: ControlArticulosService,
+    private volantesDonacionService: VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
+    private datePipe: DatePipe,
   ) {
 
   }
@@ -57,7 +56,6 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
       this.cveUsuario = usuario?.cveUsuario;
     }
   }
-
   //asignacion de inputs a fecha
   ngAfterViewInit(): void {
     $('#fechaDesde').datepicker({
@@ -81,6 +79,7 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
 
     });
   }
+
 
   limpiar() {
     this.fechaDesde = "";
@@ -112,25 +111,16 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
         let fechaInicial = fechaDesdeArray[2] + "-" + fechaDesdeArray[1] + "-" + fechaDesdeArray[0];
         let fechaHastaArray = fechaHasta.split("/");
         let fechaFinal = fechaHastaArray[2] + "-" + fechaHastaArray[1] + "-" + fechaHastaArray[0];
-        let datosBusqueda = {
-          bitacora: [{
-            aplicativo: "control-articulos",
-            flujo: "post",
-            idUsuario: this.cveUsuario,
-            nombreUsuario: this.nombre,
-            tipoUsuario: this.rolUser,
-          }],
-          fechaInicial: fechaInicial,
-          fechaFinal: fechaFinal,
-          clavePaciente: this.nssPaciente
-        };
-        this.Artservice.getArticulosByFechas(datosBusqueda).subscribe(
+
+        this.volantesDonacionService.getVolantesByFechas(fechaInicial, fechaFinal).subscribe(
           (res: any) => {
+            console.log(res)
             try {
-              let response = res.response;
-              let estatus = response.status;
+
+              let estatus = res.status;
+              console.log(res.datosVolantesDonacion)
               if (estatus == 'OK') {
-                this.datosBusqueda = response.listaControlArticulosDto;
+                this.datosBusqueda = res.datosVolantesDonacion;
               } else {
                 this.datosBusqueda = [];
               }
@@ -150,26 +140,26 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
   }
 
   //redirecciona al detalle
-  irDetalle(controlArticulos: ControlArticulos) {
-    let params = {
-      'controlArticulos': JSON.stringify(controlArticulos),
-    }
-    this.router.navigateByUrl("/detalle-articulos/" + controlArticulos.idCa, { skipLocationChange: true })
+  irDetalle(idVolanteDonacionSangre: string) {
+    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre, { skipLocationChange: true })
   }
 
 
   //redirecciona a la pantalla de nuevo control de articulos
   irNuevoRegistro() {
-    this.router.navigateByUrl("/nuevo-articulo", { skipLocationChange: true });
+    this.router.navigateByUrl("/agregar-volante-donacion-sangre", { skipLocationChange: true });
   }
 
   //ordenamiento
   sortBy(columnaId: string, order: string, type: string) {
+
     this.columnaId = columnaId;
     this.order = order;
 
     this.datosBusqueda.sort((a: any, b: any) => {
+
       let c: any = this.converType(a[columnaId], type);
+
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
         return d - c; // Descendiente
@@ -180,6 +170,7 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
   }
 
   converType(val: any, type: string) {
+
     let data;
     switch (type) {
       case 'fecha':

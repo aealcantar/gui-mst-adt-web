@@ -215,7 +215,7 @@ select {
   font-style: normal;
 
   font-size: 14px;
-  height: 25px !important;
+  
 
 
   color: #000000;
@@ -421,4 +421,14 @@ select.captura.lugar {
   top: 235px;
   border-radius: 5px;
   border-color: #DDDDDD
+}
+
+
+
+.table > tbody > tr > td{
+  padding:0px !important;
+}
+
+.table > thead  > tr > th{
+  padding:3px !important;
 }
