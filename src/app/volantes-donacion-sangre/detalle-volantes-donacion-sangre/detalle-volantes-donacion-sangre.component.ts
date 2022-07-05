@@ -13,7 +13,6 @@ import { VolantesDonacionService } from 'src/app/service/volantes-donacion.servi
   styleUrls: ['./detalle-volantes-donacion-sangre.component.css']
 })
 export class DetalleVolantesDonacionSangreComponent implements OnInit {
-
   alert!: AlertInfo;
   idVolanteDonacion: string = "";
   paciente!: pacienteSeleccionado;
@@ -49,7 +48,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   buscarDetalleVolanteDonacion() {
     this.volantesDonacionService.getDetatelleVolanteDonacion(this.idVolanteDonacion).subscribe(
       (res: any) => {
-console.log(res)
+        console.log(res)
         try {
           let estatus = res.status;
           if (estatus == 'OK') {
@@ -99,49 +98,43 @@ console.log(res)
 
 
   impirmiVolante() {
-    let nss= "";
-    let desNssAgregado="";
-    let datosnss=  this.volantesDonacion?.desNssAgregado.split(" ");
+    let nss = "";
+    let desNssAgregado = "";
+    let timHoraFinalAtencion = "";
+    let timHoraInicialAtencion = "";
+    this.volantesDonacion.nssCompleto=this.volantesDonacion?.desNssAgregado;
     try {
-        nss=  datosnss[0];
-      desNssAgregado=datosnss[1];
-    } catch (error) {
+      let datosnss = this.volantesDonacion?.desNssAgregado.split(" ");
+      nss = datosnss[0];
+      desNssAgregado = datosnss[1];
+      let hora1 = this.volantesDonacion?.timHoraInicialAtencion.split(":");
+      timHoraInicialAtencion = hora1[0] + ":" + hora1[1];
+      let hora2 = this.volantesDonacion?.timHoraFinalAtencion.split(":");
+      timHoraFinalAtencion = hora2[0] + ":" + hora2[1];
       
+    } catch (error) {
+      console.log(error)
     }
- 
-    let data: any = {
-      uMedicaH: this.volantesDonacion?.desUnidadMedicaHospitalaria,
-      fechaSolc: this.volantesDonacion?.fecEfec,
-      nombreBancoS: this.volantesDonacion?.idNombreBancoSangre,
-      calleBanco: this.volantesDonacion?.nomCalle,
-      noBanco: this.volantesDonacion?.numExterior,
-      colBanco: this.volantesDonacion?.nomColonia,
-      cpBanco: this.volantesDonacion?.desCodigoPostal,
-      alcaldiaBanco: this.volantesDonacion?.idDelegacionMunicipio,
-      hrDesde: this.volantesDonacion?.timHoraInicialAtencion,
-      hrHasta: this.volantesDonacion?.timHoraFinalAtencion,
-      nss: nss,
-      agregado: desNssAgregado,
-      fechaInter: this.volantesDonacion?.fecInternamiento,
-      fechaCir: this.volantesDonacion?.fecCirugia,
-      servicio: this.volantesDonacion?.idServicio,
-      telPaciente: this.volantesDonacion?.numTelefonoPaciente,
-      nombreTS: this.volantesDonacion?.nomTrabajadorSocial,
-      matricula: this.volantesDonacion?.desMatriculaTrabajadorSocial,
-      telTS: this.volantesDonacion?.numTelefonoTrabajadorSocial,
-      observaciones: this.volantesDonacion?.desObservaciones,
-      nombrePac: this.volantesDonacion?.nomPaciente,
-    };
+
+
+    this.volantesDonacion.desNssAgregado = desNssAgregado;
+    this.volantesDonacion.nss = nss;
+    this.volantesDonacion.timHoraFinalAtencion = timHoraFinalAtencion;
+    this.volantesDonacion.timHoraInicialAtencion = timHoraInicialAtencion;
+
+
     console.log('DATA REPORT: ', this.volantesDonacion);
-    console.log('DATA : ', data);
-    this.volantesService.downloadPdf(data).subscribe(
+    this.volantesService.downloadPdf(this.volantesDonacion).subscribe(
       (response: any) => {
         // console.log(response);
         var file = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(file);
         window.open(url);
+
+        this.volantesDonacion.desNssAgregado=this.volantesDonacion?.nssCompleto ;
       },
       (error: HttpErrorResponse) => {
+        this.volantesDonacion.desNssAgregado=this.volantesDonacion?.nssCompleto ;
         console.error(error);
         console.error('Error al descargar reporte: ', error.message);
       }

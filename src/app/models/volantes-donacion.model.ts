@@ -29,5 +29,6 @@ export class VolantesDonacion {
 	numTelefonoTrabajadorSocial?:string;
 	desObservaciones?:string;
 	nss?:string;
+	nssCompleto?:string;
 
 }

@@ -79,27 +79,21 @@
           </div>
           <div class="col-md-2 form-group">
             <span class="spanInput">Horario de atención*:</span>
-            <select [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion.errors }"
-            class="form-control styleselect" formControlName="horaInicialAtencion" aria-label="horaInicialAtencion">
-              <option class="select-font optionSelect" placeholder="Ingresar ponentes"  disabled [value]="'-1'">Hora
-                inicial</option>
-              <option class="select-font" value="08:00:00">08:00</option>
-            </select>
-            <small *ngIf="  submitted && formNuevaDonacion.controls.horaInicialAtencion.errors" class="form-text form-text-error Campo-obligatorio">
-              Campo obligatorio
-            </small>
+            <input maxlength="5"  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion1.errors }"
+            class="form-control matricula inputs" id="horaInicialAtencion1" formControlName="horaInicialAtencion1"
+              placeholder="Hora inicial" type="text" />
+              <small *ngIf="  submitted && formNuevaDonacion.controls.horaInicialAtencion1.errors" class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
           </div>
           <div class="col-md-2 form-group">
             <br>
-            <select  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaFinalAtencion.errors }"
-             class="form-control styleselect" formControlName="horaFinalAtencion" aria-label="Servicio">
-              <option class="select-font optionSelect"  disabled placeholder="Ingresar ponentes" selected [value]="'-1'">Hora
-                final</option>
-              <option class="select-font" value="19:00:00">19:00</option>
-            </select>
-            <small *ngIf="  submitted && formNuevaDonacion.controls.horaFinalAtencion.errors" class="form-text form-text-error Campo-obligatorio">
-              Campo obligatorio
-            </small>
+            <input maxlength="5"  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaFinalAtencion1.errors }"
+            class="form-control matricula inputs" id="horaFinalAtencion1" formControlName="horaFinalAtencion1"
+              placeholder="Hora final" type="text" />
+              <small *ngIf="  submitted && formNuevaDonacion.controls.horaFinalAtencion1.errors" class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
           </div>
         </div>
 
