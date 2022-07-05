@@ -12,6 +12,7 @@ import { CronicaGrupalService } from '../../services/cronica-grupal.service';
 import { VolantesDonacionService } from '../../services/volantes-donacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
@@ -64,7 +65,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   listaServicios: Array<any> = [];
   alert!: AlertInfo;
   bancosSangre: Array<any> = [];
-
+  fecha = moment(Date.now()).format('DD/MM/YYYY');
   paciente!: pacienteSeleccionado;
 
   constructor(
@@ -90,6 +91,17 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       this.formNuevaDonacion.controls['desNSS'].setValue(nss + " " + nssAgregado);
     }
 
+    this.formNuevaDonacion.controls['fecha1'].setValue(this.fecha);
+
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    if (userTmp !== '') {
+      let usuario = JSON.parse(userTmp);
+      let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
+      let matricula= usuario?.matricula;
+      this.formNuevaDonacion.controls['nombreTrabajadorSocial'].setValue(nombre);
+      this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(matricula);
+       
+      }
     this.buscarBancosSangre();
   }
 
