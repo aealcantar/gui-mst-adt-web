@@ -28,6 +28,8 @@ export const environment = {
     urlServOauth: 'http://localhost:8081',
     // msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-control-articulos/api',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
+    msmtsVolantesDonacion: "http://localhost:8088/msmts-donacion-sangre/api" ,
+  
 
 
 

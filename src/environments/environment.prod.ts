@@ -19,7 +19,7 @@ export const environment = {
     msmtsEstudioMedicos: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
     msmtsOauth: 'msadt-auth/api/aplicacion/',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
-
+    msmtsVolantesDonacion: "http://localhost:8088/msmts-donacion-sangre/api" ,
     urlServOauth: 'msadt-auth',
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
     recaptcha: {
