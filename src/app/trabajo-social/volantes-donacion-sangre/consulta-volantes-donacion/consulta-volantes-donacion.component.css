@@ -258,7 +258,7 @@
   
   .buttonL {
     width: 120px;
-    height: 35.87px;
+    height: 37px!important;
     border-radius: 3px;
     margin: 10px 15px 0 10px !important;
     padding: 5px;
