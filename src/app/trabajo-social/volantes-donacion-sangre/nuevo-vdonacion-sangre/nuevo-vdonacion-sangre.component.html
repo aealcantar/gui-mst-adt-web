@@ -79,7 +79,7 @@
           </div>
           <div class="col-md-2 form-group">
             <span class="spanInput">Horario de atención*:</span>
-            <input maxlength="5"  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion11.errors }"
+            <input maxlength="5"  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion11errors }"
             class="form-control matricula inputs" id="horaInicialAtencion1" formControlName="horaInicialAtencion1"
               placeholder="Hora inicial" type="text" />
               <small *ngIf="  submitted && formNuevaDonacion.controls.horaInicialAtencion1.errors" class="form-text form-text-error Campo-obligatorio">

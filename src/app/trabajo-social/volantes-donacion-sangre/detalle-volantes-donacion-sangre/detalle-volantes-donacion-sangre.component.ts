@@ -49,7 +49,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   buscarDetalleVolanteDonacion() {
     this.volantesDonacionService.getDetatelleVolanteDonacion(this.idVolanteDonacion).subscribe(
       (res: any) => {
-console.log(res)
+        console.log(res)
         try {
           let estatus = res.status;
           if (estatus == 'OK') {
@@ -99,26 +99,30 @@ console.log(res)
 
 
   impirmiVolante() {
-    let nss= "";
-    let desNssAgregado="";
-   let timHoraFinalAtencion="";
-   let timHoraInicialAtencion="";
+    let nss = "";
+    let desNssAgregado = "";
+    let timHoraFinalAtencion = "";
+    let timHoraInicialAtencion = "";
+    this.volantesDonacion.nssCompleto=this.volantesDonacion?.desNssAgregado;
     try {
-      let datosnss=  this.volantesDonacion?.desNssAgregado.split(" ");
-        nss=  datosnss[0];
-      desNssAgregado=datosnss[1];
-      let hora1=  this.volantesDonacion?.timHoraInicialAtencion.split(":");
-       timHoraInicialAtencion=hora1[0]+":"+hora1[1];
-      let hora2=  this.volantesDonacion?.timHoraFinalAtencion.split(":");
-       timHoraFinalAtencion=hora2[0]+":"+hora2[1];
+      let datosnss = this.volantesDonacion?.desNssAgregado.split(" ");
+      nss = datosnss[0];
+      desNssAgregado = datosnss[1];
+      let hora1 = this.volantesDonacion?.timHoraInicialAtencion.split(":");
+      timHoraInicialAtencion = hora1[0] + ":" + hora1[1];
+      let hora2 = this.volantesDonacion?.timHoraFinalAtencion.split(":");
+      timHoraFinalAtencion = hora2[0] + ":" + hora2[1];
+      
     } catch (error) {
       console.log(error)
     }
 
-    this.volantesDonacion.desNssAgregado=desNssAgregado;
-    this.volantesDonacion.nss=nss;
-    this.volantesDonacion.timHoraFinalAtencion=timHoraFinalAtencion;
-    this.volantesDonacion.timHoraInicialAtencion=timHoraInicialAtencion;
+
+    this.volantesDonacion.desNssAgregado = desNssAgregado;
+    this.volantesDonacion.nss = nss;
+    this.volantesDonacion.timHoraFinalAtencion = timHoraFinalAtencion;
+    this.volantesDonacion.timHoraInicialAtencion = timHoraInicialAtencion;
+
 
     console.log('DATA REPORT: ', this.volantesDonacion);
     this.volantesService.downloadPdf(this.volantesDonacion).subscribe(
@@ -127,8 +131,11 @@ console.log(res)
         var file = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(file);
         window.open(url);
+
+        this.volantesDonacion.desNssAgregado=this.volantesDonacion?.nssCompleto ;
       },
       (error: HttpErrorResponse) => {
+        this.volantesDonacion.desNssAgregado=this.volantesDonacion?.nssCompleto ;
         console.error(error);
         console.error('Error al descargar reporte: ', error.message);
       }
