@@ -49,12 +49,11 @@
                 <div class="col-md-6 ">
                     <label class="control-label " style="font-weight: 700; color: #666666; ">Búsquedas anteriores</label>
                 </div>
-                <div class="col-md-6 flex justify-content-end ">
+                <div class="col-md-6 flex justify-content-end ">    
                     <div class="form-group ">
                         <label class="control-label ">Visualizar datos</label>
                         <select class="form-select ml-5 select-view-data " [(ngModel)]="pageSize">
-                          <option [ngValue]="10 ">10</option>
-                          <option [ngValue]="15 ">15</option>
+                          <option [ngValue]="15 " selected>15</option>
                           <option [ngValue]="20 ">20</option>
                           <option [ngValue]="25 ">25</option>
                         </select>

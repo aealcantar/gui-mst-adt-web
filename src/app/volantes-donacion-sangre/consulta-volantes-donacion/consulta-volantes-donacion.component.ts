@@ -24,7 +24,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   fechaDesde: string = "";
   fechaHasta: string = "";
   page: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 15;
   datosBusqueda: Array<any> = [];
   columnaId: string = 'fecha';
   order: string = 'desc';
