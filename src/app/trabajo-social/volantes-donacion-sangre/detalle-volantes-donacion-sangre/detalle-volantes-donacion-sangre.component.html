@@ -13,11 +13,11 @@
       <div class="row p-5"> 
         <div class="col-sm-8 form-group pt-5">
           <span class="labels pb-1">Unidad médica hospitalaria:</span>
-          <span class="labelDetail"> {{ detalle.desUnidadMedicaHospitalaria }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.desUnidadMedicaHospitalaria }}</span>
         </div>
         <div class="col-sm-4 form-group pt-5">
           <span class="labels pb-1">Fecha:</span>
-          <span class="labelDetail"> {{ detalle.fecEfec }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.fecEfec }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 ">
@@ -30,50 +30,50 @@
       <div class="row p-5"> 
         <div class="col-sm-8 form-group  ">
           <span class="labels pb-1">Nombre del Banco de Sangre:</span>
-          <span class="labelDetail"> {{ detalle.nombreBancoSangre }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nombreBancoSangre }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Horario de atención:</span>
-          <span class="labelDetail"> {{ detalle.timHoraInicialAtencion }}    {{ detalle.timHoraFinalAtencion }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.timHoraInicialAtencion }}    {{ volantesDonacion?.timHoraFinalAtencion }}</span>
         </div>
       </div> 
       <div class="row p-5"> 
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Código Postal::</span>
-          <span class="labelDetail"> {{ detalle.desCodigoPostal }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.desCodigoPostal }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Estado:</span>
-          <span class="labelDetail"> {{ detalle.nombreEstado }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nombreEstado }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
             <span class="labels pb-1">Delegación/Municipio:</span>
-            <span class="labelDetail"> {{ detalle.nombreDelegacionMunicipio }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.nombreDelegacionMunicipio }}</span>
           </div>
       </div> 
  
       <div class="row p-5"> 
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Ciudad:</span>
-          <span class="labelDetail"> {{ detalle.nombreCiudad }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nombreCiudad }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Colonia:</span>
-          <span class="labelDetail"> {{ detalle.nomColonia }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nomColonia }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
             <span class="labels pb-1">Calle:</span>
-            <span class="labelDetail"> {{ detalle.nomCalle }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.nomCalle }}</span>
           </div>
       </div>
       <div class="row p-5"> 
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Número exterior:</span>
-          <span class="labelDetail"> {{ detalle.numExterior }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.numExterior }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Número interior:</span>
-          <span class="labelDetail"> {{ detalle.numInterior }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.numInterior }}</span>
         </div>
          
       </div>
@@ -93,25 +93,25 @@
       <div class="row pl-5 pr-5">
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Nombre:</span>
-          <span class="labelDetail"> {{ detalle.nomPaciente }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nomPaciente }}</span>
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">No. de Seguridad Social y agregado:</span>
-          <span class="labelDetail"> {{ detalle.desNssAgregado }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.desNssAgregado }}</span>
         </div>
         <div class="col-sm-4 form-group">
           <span class="labels pb-1">Servicio:</span>
-          <span class="labelDetail"> {{ detalle.nombreServicio }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nombreServicio }}</span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mb-5">
         <div class="col-sm-4 form-group ">
           <span class="labels pb-1">Fecha de internamiento:</span>
-          <span class="labelDetail"> {{ detalle.fecInternamiento }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.fecInternamiento }}</span>
         </div>
         <div class="col-sm-4 form-group ">
             <span class="labels pb-1">Teléfono:</span>
-            <span class="labelDetail"> {{ detalle.numTelefonoPaciente }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.numTelefonoPaciente }}</span>
           </div>
          
       </div>
@@ -131,21 +131,21 @@
         <div class="row pl-5 pr-5">
           <div class="col-sm-6 form-group">
             <span class="labels pb-1">Nombre completo:</span>
-            <span class="labelDetail"> {{ detalle.nomTrabajadorSocial }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.nomTrabajadorSocial }}</span>
           </div>
           <div class="col-sm-3 form-group">
             <span class="labels pb-1">Matrícula:</span>
-            <span class="labelDetail"> {{ detalle.desMatriculaTrabajadorSocial }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.desMatriculaTrabajadorSocial }}</span>
           </div>
           <div class="col-sm-3 form-group">
             <span class="labels pb-1">Teléfono:</span>
-            <span class="labelDetail"> {{ detalle.numTelefonoTrabajadorSocial }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.numTelefonoTrabajadorSocial }}</span>
           </div>
         </div>
         <div class="row pl-5 pr-5 mb-5">
           <div class="col-sm-12 form-group ">
             <span class="labels pb-1">Observaciones:</span>
-            <span class="labelDetail"> {{ detalle.desObservaciones }}</span>
+            <span class="labelDetail"> {{ volantesDonacion?.desObservaciones }}</span>
           </div>
     
         </div>

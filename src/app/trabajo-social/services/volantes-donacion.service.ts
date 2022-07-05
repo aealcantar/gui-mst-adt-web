@@ -21,6 +21,16 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
           }
     }
 
+    
+
+    
+    getBancosSangre( ) {
+      try {
+         return this.httpsClient.get<any>(`${environment.urlVolantesDonacion}/getBancosSangre`);
+      } catch (error) { 
+          return error;
+        }
+  }
     getDetatelleVolanteDonacion(idVolanteDonacion:String){
       try {
         return this.httpsClient.get<any>(`${environment.urlVolantesDonacion}/findVolantesById/${idVolanteDonacion}`);
@@ -44,7 +54,7 @@ import { VolantesDonacion } from 'src/app/trabajo-social/models/volantes-donacio
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       });
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/reporteDonacionSangre`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
+      return this.httpsClient.post<any>(`${environment.urlVolantesDonacion}/reporteDonacionSangre`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
     }
 
 }

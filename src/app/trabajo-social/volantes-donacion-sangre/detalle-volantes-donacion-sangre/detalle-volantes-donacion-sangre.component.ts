@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertInfo } from 'src/app/shared-modules/models/alerta.interface';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
+import { VolantesDonacion } from '../../models/volantes-donacion.model';
 import { VolantesDonacionService } from '../../services/volantes-donacion.service';
 
 @Component({
@@ -12,12 +13,15 @@ import { VolantesDonacionService } from '../../services/volantes-donacion.servic
   styleUrls: ['./detalle-volantes-donacion-sangre.component.css']
 })
 export class DetalleVolantesDonacionSangreComponent implements OnInit {
-  detalle: any = {};
+
   alert!: AlertInfo;
   idVolanteDonacion: string = "";
   paciente!: pacienteSeleccionado;
+  volantesDonacion!: VolantesDonacion;
+
+
   constructor(private volantesService: VolantesDonacionService,
-     private volantesDonacionService: VolantesDonacionService,
+    private volantesDonacionService: VolantesDonacionService,
     private rutaActiva: ActivatedRoute,
     private tarjetaService: AppTarjetaPresentacionService,) { }
 
@@ -35,6 +39,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
       );
       this.idVolanteDonacion = this.idVolanteDonacion.replace("nuevo", "");
       this.buscarDetalleVolanteDonacion();
+
     }
 
   }
@@ -44,14 +49,12 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   buscarDetalleVolanteDonacion() {
     this.volantesDonacionService.getDetatelleVolanteDonacion(this.idVolanteDonacion).subscribe(
       (res: any) => {
-       console.log(res)
+console.log(res)
         try {
-
           let estatus = res.status;
-
           if (estatus == 'OK') {
             try {
-              this.detalle = res.datosVolantesDonacion[0];
+              this.volantesDonacion = res.datosVolantesDonacion;
             } catch (error) {
               console.error(error);
             }
@@ -66,6 +69,9 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
       }
     );
   }
+
+
+
 
 
 
@@ -93,30 +99,40 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
 
 
   impirmiVolante() {
+    let nss= "";
+    let desNssAgregado="";
+    let datosnss=  this.volantesDonacion?.desNssAgregado.split(" ");
+    try {
+        nss=  datosnss[0];
+      desNssAgregado=datosnss[1];
+    } catch (error) {
+      
+    }
+ 
     let data: any = {
-      uMedicaH: this.detalle.desUnidadMedicaHospitalaria,
-      fechaSolc: this.detalle.fecEfec,
-      nombreBancoS: this.detalle.idNombreBancoSangre,
-      calleBanco: this.detalle.nomCalle,
-      noBanco: this.detalle.numExterior,
-      colBanco: this.detalle.nomColonia,
-      cpBanco: this.detalle.desCodigoPostal,
-      alcaldiaBanco: this.detalle.idDelegacionMunicipio,
-      hrDesde: this.detalle.timInicialAtencion,
-      hrHasta: this.detalle.timFinalAtencion,
-      nss: this.detalle.noFolioControl,
-      agregado: this.detalle.desNssAgregado,
-      fechaInter: this.detalle.fecInternamiento,
-      fechaCir: this.detalle.fecCirugia,
-      servicio: this.detalle.idServicio,
-      telPaciente: this.detalle.numTelefonoPaciente,
-      nombreTS: this.detalle.nomTrabajadorSocial,
-      matricula: this.detalle.desMatriculaTrabajadorSocial,
-      telTS: this.detalle.numTelefonoTrabajadorSocial,
-      observaciones: this.detalle.desObservaciones,
-      nombrePac: this.detalle.nomPaciente,
+      uMedicaH: this.volantesDonacion?.desUnidadMedicaHospitalaria,
+      fechaSolc: this.volantesDonacion?.fecEfec,
+      nombreBancoS: this.volantesDonacion?.idNombreBancoSangre,
+      calleBanco: this.volantesDonacion?.nomCalle,
+      noBanco: this.volantesDonacion?.numExterior,
+      colBanco: this.volantesDonacion?.nomColonia,
+      cpBanco: this.volantesDonacion?.desCodigoPostal,
+      alcaldiaBanco: this.volantesDonacion?.idDelegacionMunicipio,
+      hrDesde: this.volantesDonacion?.timHoraInicialAtencion,
+      hrHasta: this.volantesDonacion?.timHoraFinalAtencion,
+      nss: nss,
+      agregado: desNssAgregado,
+      fechaInter: this.volantesDonacion?.fecInternamiento,
+      fechaCir: this.volantesDonacion?.fecCirugia,
+      servicio: this.volantesDonacion?.idServicio,
+      telPaciente: this.volantesDonacion?.numTelefonoPaciente,
+      nombreTS: this.volantesDonacion?.nomTrabajadorSocial,
+      matricula: this.volantesDonacion?.desMatriculaTrabajadorSocial,
+      telTS: this.volantesDonacion?.numTelefonoTrabajadorSocial,
+      observaciones: this.volantesDonacion?.desObservaciones,
+      nombrePac: this.volantesDonacion?.nomPaciente,
     };
-    console.log('DATA REPORT: ', this.detalle);
+    console.log('DATA REPORT: ', this.volantesDonacion);
     console.log('DATA : ', data);
     this.volantesService.downloadPdf(data).subscribe(
       (response: any) => {

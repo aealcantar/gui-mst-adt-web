@@ -12,6 +12,7 @@ export const environment = {
   urlMSEDSCAgenda: 'msedsc-catalogos',
   urlMSADTUSUARIOS: 'msedsc-usuarios/api',
   urlVolantesDonacion: "http://localhost:8090/msmts-donacion-sangre/api"    ,
+  urlVolantesDonacion2: "http://localhost:8083/msmts-donacion-sangre/api"    ,
   //Trabajo Social
   msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
   msmtsCatalogos: 'msedsc-catalogos',
@@ -19,7 +20,7 @@ export const environment = {
   msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
   msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
   msmtsOauth: 'msadt-auth/api/aplicacion/',
-
+  msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
   urlServOauth: 'msadt-auth',
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {

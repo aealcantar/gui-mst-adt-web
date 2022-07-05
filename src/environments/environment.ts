@@ -25,7 +25,8 @@ export const environment = {
   msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
   msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
   msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
-  msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-control-articulos/api',
+  msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
+  urlVolantesDonacion2: "http://localhost:8083/msmts-donacion-sangre/api"    ,
   msmtsOauth: 'http://localhost:8081/',
   urlServOauth: 'http://localhost:8081',
 

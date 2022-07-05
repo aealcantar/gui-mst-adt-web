@@ -45,14 +45,17 @@
               style="max-width: 750px"
             >
               <thead>
-                <th>
-                  <span class="ml-5">Nombre</span>
-                </th>
+                <tr>
+                  <th>
+                    <span class="ml-4">Nombre</span>
+                  </th>
+                  <th class="width50"></th>
+                </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let valor of articulosArray">
                   <td>
-                    <span class="ml-4"> {{ valor }}</span>
+                    <span class="ml-5"> {{ valor }}</span>
                   </td>
                 </tr>
               </tbody>

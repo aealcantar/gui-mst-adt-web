@@ -45,19 +45,33 @@
         </div>
         <div>
           <span class="instrucciones">
-            Para asistir al banco de sangre
+            Para asistir al banco de sangre 
           </span>
         </div>
         <div class="row">
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
-              <select [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idBancoSangre.errors }"
-              class="form-control styleselect" formControlName="idBancoSangre" aria-label="Servicio">
-                <option class="select-font optionSelect" diabled placeholder="Ingresar ponentes" selected [value]="'-1'">
-                  Ingresar nombre</option>
-                <option class="select-font" [value]="1">Banco de sangre 1</option>
-              </select>
+              <select
+              [ngClass]="{
+                'form-control-error':
+                  submitted && formNuevaDonacion.controls.idBancoSangre.errors
+              }"
+              class="form-control styleselect"
+              id="idBancoSangre"
+              formControlName="idBancoSangre" 
+            >
+              <option [value]="''" selected disabled class="select-font optionSelect ">
+                Seleccionar banco de sangre
+              </option>
+              <option
+              class="select-font optionSelect"
+                [value]="item.idBancoSangre"
+                *ngFor="let item of bancosSangre"
+              >
+                {{ item.detalleBancoSangre }}
+              </option>
+            </select>
               <small *ngIf="  submitted && formNuevaDonacion.controls.idBancoSangre.errors" class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
@@ -168,7 +182,7 @@
         </div>
         <div class="row">
           <div class="col-md-4  form-group">
-            <span class="spanInput">Núro exterior*:</span>
+            <span class="spanInput">Número exterior*:</span>
             <input  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numExterior.errors }"
             class="form-control matricula inputs" id="numExterior" formControlName="numExterior"
               placeholder="Ingresar número" type="text" />
@@ -177,7 +191,7 @@
               </small>
           </div>
           <div class="col-md-4  form-group">
-            <span class="spanInput">Núro interior*:</span>
+            <span class="spanInput">Número interior*:</span>
             <input  [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numInterior.errors }"
             class="form-control matricula inputs" id="numInterior" formControlName="numInterior"
               placeholder="Ingresar número" type="text" />
@@ -199,11 +213,11 @@
           <div class="col-md-4">
             <span class="spanInput">Nombre:</span>
             <input class="form-control matricula inputBloqueo" id="nombrePaciente" formControlName="nombrePaciente"
-              placeholder="Ingresar nombre" type="text" />
+              placeholder="Ingresar nombre" type="text"   readonly="true"/>
           </div>
           <div class="col-md-4">
             <span class="spanInput">No. de Seguridad Social y agregado:</span>
-            <input class="form-control matricula inputBloqueo" id="desNSS" formControlName="desNSS"
+            <input class="form-control matricula inputBloqueo" id="desNSS"  readonly="true" formControlName="desNSS"
               placeholder="Ingresar no. de seguridad social" type="text" />
           </div>
           <div class="col-md-4 form-group">

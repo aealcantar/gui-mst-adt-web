@@ -1,15 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from 'src/app/shared-modules/services/auth-service.service';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import { VolanteDonacion } from 'src/app/shared-modules/models/volante-donacion.model';
-import { VolantesDonacionService } from '../../services/volantes-donacion.service'; 
 import { AppTarjetaPresentacionService } from 'src/app/shared-modules/services/app-tarjeta-presentacion.service';
 import { pacienteSeleccionado } from 'src/app/shared-modules/models/paciente.interface';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
+import { VolantesDonacionService } from '../../services/volantes-donacion.service';
 declare var $: any;
 
 @Component({
@@ -19,7 +16,7 @@ declare var $: any;
   providers: [DatePipe]
 })
 export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit {
- 
+
   paciente!: pacienteSeleccionado;
   nomPaciente: any;
   rolPaciente: string;
@@ -36,8 +33,8 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   nombre = "";
 
   constructor(
-    private router: Router, 
-    private volantesDonacionService:VolantesDonacionService,
+    private router: Router,
+    private volantesDonacionService: VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
     private datePipe: DatePipe,
   ) {
@@ -59,7 +56,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       this.cveUsuario = usuario?.cveUsuario;
     }
   }
-
   //asignacion de inputs a fecha
   ngAfterViewInit(): void {
     $('#fechaDesde').datepicker({
@@ -83,6 +79,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
 
     });
   }
+
 
   limpiar() {
     this.fechaDesde = "";
@@ -114,12 +111,12 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         let fechaInicial = fechaDesdeArray[2] + "-" + fechaDesdeArray[1] + "-" + fechaDesdeArray[0];
         let fechaHastaArray = fechaHasta.split("/");
         let fechaFinal = fechaHastaArray[2] + "-" + fechaHastaArray[1] + "-" + fechaHastaArray[0];
-   
-        this.volantesDonacionService.getVolantesByFechas(fechaInicial,fechaFinal).subscribe(
+
+        this.volantesDonacionService.getVolantesByFechas(fechaInicial, fechaFinal).subscribe(
           (res: any) => {
             console.log(res)
             try {
-    
+
               let estatus = res.status;
               console.log(res.datosVolantesDonacion)
               if (estatus == 'OK') {
@@ -143,8 +140,8 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
 
   //redirecciona al detalle
-  irDetalle(idVolanteDonacionSangre:string) {    
-     this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre, { skipLocationChange: true })
+  irDetalle(idVolanteDonacionSangre: string) {
+    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre, { skipLocationChange: true })
   }
 
 
@@ -155,13 +152,14 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
 
   //ordenamiento
   sortBy(columnaId: string, order: string, type: string) {
-    console.log(columnaId, order, type);
 
     this.columnaId = columnaId;
     this.order = order;
 
     this.datosBusqueda.sort((a: any, b: any) => {
+
       let c: any = this.converType(a[columnaId], type);
+
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
         return d - c; // Descendiente
@@ -171,16 +169,18 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
     });
   }
 
-
   converType(val: any, type: string) {
+
     let data;
     switch (type) {
       case 'fecha':
-        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
         data = moment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
         data = moment(val, 'HH:mm:ss');
+        break;
+      case 'number':
+        data = parseInt(val);
         break;
 
       default:

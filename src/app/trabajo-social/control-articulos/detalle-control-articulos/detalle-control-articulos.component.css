@@ -176,14 +176,19 @@ color: #222222;
   border: 0.576942px solid #EEEEEE;
   font-family: 'Montserrat';
   font-style: normal;
-
-  font-size: 14px;
-  height: 25px !important;
-
-
-  color: #000000;
+  font-size: 14px; 
+   color: #000000;
 }
 
 .ui-datepicker .ui-datepicker-header{
   background-color: #9D2449!important;
+}
+
+
+.table > tbody > tr > td{
+  padding:0px !important;
+}
+
+.table > thead  > tr > th{
+  padding:3px !important;
 }
