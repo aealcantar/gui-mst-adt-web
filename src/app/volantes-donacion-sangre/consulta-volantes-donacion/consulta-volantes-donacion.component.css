@@ -115,7 +115,7 @@
   }
   
   .imgCalendar {
-    background-image: url("../../../../assets/images/calendario.svg");
+    background-image: url("src/assets/images/calendario.svg");
     background-repeat: no-repeat;
     color: #191919;
     position: absolute;

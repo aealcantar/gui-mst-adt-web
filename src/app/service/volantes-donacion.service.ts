@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { VolantesDonacion } from '../models/volantes-donacion.model';  
 
@@ -14,11 +13,7 @@ import { VolantesDonacion } from '../models/volantes-donacion.model';
     constructor(private httpsClient: HttpClient) { }
 
     getVolantesByFechas(fechaInicial: string, fechaFinal: string) {
-        try {
-           return this.httpsClient.get<any>(`${environment.msmtsVolantesDonacion}/findVolantesByFechas/${fechaInicial}/${fechaFinal}`);
-        } catch (error) { 
-            return error;
-          }
+        return this.httpsClient.get<any>(`${environment.msmtsVolantesDonacion}/findVolantesByFechas/${fechaInicial}/${fechaFinal}`);
     }
 
     
