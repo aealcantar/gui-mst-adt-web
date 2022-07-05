@@ -26,11 +26,24 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Alcaldia*:</span>
-              <select class="form-control styleselect" formControlName="alcaldia" aria-label="Servicio">
+
+              <!-- <select class="form-control styleselect" formControlName="alcaldia" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Seleccionar alcaldia" selected [value]="'-1'">
                   Seleccionar alcaldia</option>
                 <option class="select-font" [value]="1">Alcaldia 1</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                id="alcaldia"
+                formControlName="alcaldia"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Seleccionar alcaldia</mat-option>
+                <mat-option class="select-font" [value]="1">Alcaldia 1</mat-option>
+              </mat-select>
+
             </div>
           </div>
           <div class="col-md-4">
@@ -49,21 +62,43 @@
            <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Nombre y número de hospital*:</span>
-              <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
+              <!-- <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
                   Seleccionar hospital</option>
                 <option class="select-font" [value]="1">Hospital 1</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                id="hospital"
+                formControlName="hospital"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option>
+                <mat-option class="select-font" [value]="1">Hospital 1</mat-option>
+              </mat-select>
             </div>
            </div>
            <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Servicio*:</span>
-              <select class="form-control styleselect" formControlName="servicio" aria-label="Servicio">
+              <!-- <select class="form-control styleselect" formControlName="servicio" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Seleccionar servicio" selected [value]="'-1'">
                   Seleccionar servicio</option>
                 <option class="select-font" [value]="1">Servicio 1</option>
-              </select>
+              </select> -->
+
+              <mat-select
+                class="form-control form-control-mat-select"
+                id="servicio"
+                formControlName="servicio"
+                [disableOptionCentering]="true"
+                aria-label="Servicio"
+              >
+                <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option>
+                <mat-option class="select-font" [value]="1">Servicio 1</mat-option>
+              </mat-select>
             </div>
            </div>
         </div>
@@ -85,17 +120,37 @@
           </div>
           <div class="col-md-2">
             <span class="spanInput">Hora de ingreso*:</span>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+            <!-- <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
               <option class="select-font optionSelect" placeholder="Hora inicial " selected [value]="'-1'">Hora inicial</option>
               <option class="select-font" [value]="1">10:00:00</option>
-            </select>
+            </select> -->
+
+            <mat-select
+              class="form-control form-control-mat-select"
+              formControlName="hora"
+              [disableOptionCentering]="true"
+              aria-label="Servicio"
+            >
+              <mat-option class="select-font" [value]="''" selected>Hora inicial</mat-option>
+              <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+            </mat-select>
           </div>
           <div class="col-md-2">
             <br>
-            <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+            <!-- <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
               <option class="select-font optionSelect" placeholder="Hora final" selected [value]="'-1'">Hora final</option>
               <option class="select-font" [value]="1">11:00:00</option>
-            </select>
+            </select> -->
+
+            <mat-select
+              class="form-control form-control-mat-select"
+              formControlName="hora"
+              [disableOptionCentering]="true"
+              aria-label="Servicio"
+            >
+              <mat-option class="select-font" [value]="''" selected>Hora final</mat-option>
+              <mat-option class="select-font" [value]="1">11:00:00</mat-option>
+            </mat-select>
           </div>
         </div>
         

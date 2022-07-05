@@ -59,7 +59,7 @@ import { CitasService } from './citas/citas.service';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
-import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
+//import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { CardTemplateExpandibleComponent } from './commons/card-template-expandible/card-template-expandible.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
@@ -76,8 +76,8 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
-import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
-import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+// import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
+//import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { MomentDateModule } from '@angular/material-moment-adapter';
@@ -90,6 +90,12 @@ import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 import { CargamasivaComponent } from './configuracion/catalogos/cargamasiva/cargamasiva.component';
+import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
+import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component';
+import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component';
+import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
+import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
+import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 
 registerLocaleData('es');
 
@@ -133,17 +139,24 @@ registerLocaleData('es');
     EstudioMedicoGuardadoComponent,
     ConsultaVolantesDonacionComponent,
     CardTemplateExpandibleComponent,
-    ConsultaControlArticulosComponent,
+    // ConsultaControlArticulosComponent,
     CatalogosComponent,
     CargaComponent,
     HorariosComponent,
     MenuhorariosComponent,
     TrabajoSocialComponent,
-    NuevoVdonacionSangreComponent,
+    
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
     UbicacionesComponent,
-    CargamasivaComponent
+    CargamasivaComponent,
+    ConsultaControlArticulosComponent,
+    DetalleControlArticulosComponent,
+    NuevoControlArticulosComponent,
+    //volantes donacion
+    NuevoVdonacionSangreComponent, 
+    ConsultaVolantesDonacionComponent,
+    DetalleVolantesDonacionSangreComponent,
   ],
   imports: [
     BrowserModule,

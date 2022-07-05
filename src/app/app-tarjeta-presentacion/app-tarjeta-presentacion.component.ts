@@ -82,4 +82,8 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   irAgenda(){
     this.router.navigateByUrl("/buscacita", { skipLocationChange: true });
   }
+
+  iraVolantesSangre(){
+    this.router.navigateByUrl("/consulta-volantes-donacion", { skipLocationChange: true });
+  }
 }

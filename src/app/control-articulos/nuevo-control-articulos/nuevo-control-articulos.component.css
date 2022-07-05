@@ -1,0 +1,434 @@
+.tituloHeader {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px !important;
+  line-height: 29px !important;
+  color: #222222!important;
+  /* margin-bottom: 20px !important;
+padding-top:  20px !important; */
+}
+
+.capText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  font-family: 'Montserrat';
+  color: #222222;
+
+}
+
+
+.rectangule {
+  box-sizing: border-box;
+  width: 1170px;
+  height: 154px;
+  border: 1px solid #DDDDDD;
+  border-radius: 10px;
+}
+
+
+
+.fondocalendar {
+  background-color: #eeeeee;
+  transform: translateY(-8%);
+  background-size: 10px 12px;
+  background-repeat: no-repeat;
+  margin: 0.6px 1px 3px 18.2px;
+  padding: 0 20.2px 0 18.2px;
+  height: 36.5px;
+  border-radius: 2px 2px 2px 2px;
+}
+
+.imgCalendar {
+  background-image: url("src/assets/images/calendario.svg");
+  background-repeat: no-repeat;
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-49%);
+  background-size: 20px 19px;
+  margin-left: -1.6px;
+}
+
+.datepicker-group .glyphicon {
+  color: #EEEEEE !important;
+}
+
+.labelTitle {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+
+  color: #222222;
+
+}
+
+
+input {
+  height: 30px;
+
+}
+
+input,
+textarea,
+select {
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+
+.height154 {
+  border: 1px solid #DDDDDD;
+  border-radius: 10px;
+
+}
+
+.paddingNControl {
+  padding-top: 15px !important;
+  padding-left: 25px !important;
+  padding-right: 22px !important;
+}
+
+
+.flex {
+  display: flex !important;
+  ;
+}
+
+.instText {
+  font-family: 'Montserrat';
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+  /* identical to box height */
+
+
+  color: #222222 !important;
+}
+
+.labels {
+  font-family: 'Montserrat' !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #222222 !important;
+}
+
+.redColor {
+  color: #E10000 !important;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 45px;
+  /* or 450% */
+
+  display: flex;
+  align-items: center;
+}
+
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
+
+
+select {
+  border-radius: 5px;
+  height: 30px;
+  top: 272px;
+  left: 10px;
+  font-size: 14px;
+  color: #222222;
+}
+
+.minHeight381 {
+  min-height: 381px !important;
+  border: 1px solid #DDDDDD;
+  border-radius: 10px;
+}
+
+.title1 {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+
+  color: #222222;
+
+}
+
+.mt-22 {
+  margin-top: 22px !important;
+}
+
+.ml-22 {
+  margin-left: 22px !important;
+}
+
+
+.tableArticulos thead th {
+  background: rgba(196, 196, 196, 0.1);
+  border-radius: 5px 5px 0px 0px;
+  border: 0.576942px solid #EEEEEE;
+  font-family: 'Montserrat';
+  font-style: normal;
+
+  font-size: 14px;
+}
+
+.tableArticulos tbody td {
+  border: 0.576942px solid #EEEEEE;
+  font-family: 'Montserrat';
+  font-style: normal;
+
+  font-size: 14px;
+  
+
+
+  color: #000000;
+}
+
+.instTextObligatorios {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: flex-end;
+
+  color: #272829;
+}
+
+
+
+.pl-25 {
+  padding-left: 25px !important;
+}
+
+.pt-15 {
+  padding-top: 15px !important;
+}
+
+.pb-10 {
+  padding-bottom: 10px !important;
+}
+
+.pt-10 {
+  padding-top: 10px !important;
+}
+
+.pt-20 {
+  padding-top: 20px !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
+.pt-5 {
+  padding-top: 5px !important;
+}
+
+.pl-21 {
+  padding-left: 21.73px !important;
+}
+
+.width348 {
+  width: 323px !important;
+}
+
+.ml-30 {
+  margin-left: 30px !important;
+}
+
+.ml-25 {
+  margin-left: 25px !important;
+
+}
+
+.mt-15 {
+  margin-top: 15px !important;
+}
+
+
+.inp-otrs {
+  width: 570px !important;
+  display: inline-block;
+  margin-right: 36px;
+}
+
+.cursor {
+  cursor: pointer !important;
+}
+
+.width50 {
+  width: 50px !important;
+}
+
+.icono {
+  margin-bottom: 1em;
+}
+
+.fontIcono {
+  color: #9f2241 !important;
+  top: 1.1em !important;
+  height: 30px;
+  background-color: #EEEEEE;
+  border-radius: 2px;
+}
+
+
+.captura {
+
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #222;
+}
+
+
+.calendar {
+  margin-bottom: 1em !important;
+  margin-left: -1em !important;
+}
+
+.togleCalendar {
+  margin-top: 1px;
+  background-color: #EEEEEE;
+  margin-right: 14px;
+  border-radius: 3px;
+}
+
+
+
+
+.fontIcono input.captura.lugar,
+select.captura.lugar {
+  width: 470px;
+}
+
+
+
+
+.mat-datepicker-toggle {
+  display: inline;
+  position: absolute;
+  top: 28%;
+  width: 28px;
+  height: 29px;
+  right: 1px;
+}
+
+
+.mat-dialog-container {
+  border-radius: 10px 10px 10px 10px !important;
+}
+
+.fontEmergenteTitle {
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+
+  color: #000000;
+}
+
+.lineaSeparador {
+  left: 0.4%;
+  right: 0%;
+  top: 33.23%;
+  bottom: 66.72%;
+
+  border: 1px solid #CCCCCC;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+.form-controlUvicacionLista {
+  font-size: 14px !important;
+  border-radius: 5px;
+  width: 691px;
+  height: 30px;
+  top: 272px;
+  left: 10px;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.form-control2 {
+  font-size: 14px !important;
+  border-radius: 5px;
+  width: 331px;
+  height: 30px;
+  top: 272px;
+  left: 10px;
+  font-size: 14px;
+}
+.form-control-txt {
+  font-size: 14px !important;
+  height: 60px;
+  width: 500px;
+  left: 10px;
+  top: 235px;
+  border-radius: 5px;
+  border-color: #DDDDDD
+}
+
+
+
+.table > tbody > tr > td{
+  padding:0px !important;
+}
+
+.table > thead  > tr > th{
+  padding:3px !important;
+}
