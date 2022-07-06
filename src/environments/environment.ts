@@ -26,14 +26,9 @@ export const environment = {
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
     msmtsOauth: 'http://localhost:8081/msadt-auth/api/aplicacion',
     urlServOauth: 'http://localhost:8081/msadt-auth',
-    // msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-control-articulos/api',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
-  
-
-
-
-
+    
 
   urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
   recaptcha: {

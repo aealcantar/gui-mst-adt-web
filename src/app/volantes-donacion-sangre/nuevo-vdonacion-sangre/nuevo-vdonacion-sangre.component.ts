@@ -12,6 +12,7 @@ import { VolantesDonacionService } from 'src/app/service/volantes-donacion.servi
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service' 
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
@@ -64,7 +65,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   listaServicios: Array<any> = [];
   alert!: AlertInfo;
   bancosSangre: Array<any> = [];
-
+  fecha = moment(Date.now()).format('DD/MM/YYYY');
   paciente!: pacienteSeleccionado;
 
   constructor(
@@ -89,6 +90,16 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       this.formNuevaDonacion.controls['nombrePaciente'].setValue(nombrePaciente);
       this.formNuevaDonacion.controls['desNSS'].setValue(nss + " " + nssAgregado);
     }
+    this.formNuevaDonacion.controls['fecha1'].setValue(this.fecha);
+
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    if (userTmp !== '') {
+      let usuario = JSON.parse(userTmp);
+      let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
+      let matricula= usuario?.matricula;
+      this.formNuevaDonacion.controls['nombreTrabajadorSocial'].setValue(nombre);
+      this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(matricula);       
+      }
 
     this.buscarBancosSangre();
   }

@@ -127,12 +127,11 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
         this.Artservice.getArticulosByFechas(datosBusqueda).subscribe(
           (res: any) => {
             try {
-              let response = res.response;
-              let estatus = response.status;
+              this.datosBusqueda = [];
+              let response = res;
+              let estatus = res.status;
               if (estatus == 'OK') {
                 this.datosBusqueda = response.listaControlArticulosDto;
-              } else {
-                this.datosBusqueda = [];
               }
             } catch (error) {
               this.datosBusqueda = [];

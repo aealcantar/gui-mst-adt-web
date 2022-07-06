@@ -84,7 +84,7 @@ export class DetalleControlArticulosComponent implements OnInit {
      this.controlArticulosService.getDetalleControlArticulos(datos).subscribe(
        (res: any) => {
          try {
-           let response = res.response;
+           let response = res;
            let estatus = response.status;
            if (estatus == 'OK') {
              let controlArticulos = response.controlArticulosDto;

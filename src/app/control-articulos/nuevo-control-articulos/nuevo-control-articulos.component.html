@@ -101,12 +101,12 @@
                   submitted && formNuevoArticulo.controls.telefono.errors
               }" class="form-control" formControlName="telefono" id="telefono" type="text"
               placeholder="Ingresar teléfono" maxlength="10" />
-            <!-- <small
+           <small
               *ngIf="submitted && formNuevoArticulo.controls.telefono.errors"
               class="form-text form-text-error Campo-obligatorio "
             >
               Campo obligatorio
-            </small> -->
+            </small> 
           </div>
         </div>
       </div>
@@ -430,14 +430,14 @@
                 {{ item.des_completa_ubicacion }}
               </mat-option>
             </mat-select>
-
+            <small *ngIf="
+            submitted &&
+            formNuevoArticulo.controls.recepcionUbicacion.errors
+          " class="form-text form-text-error Campo-obligatorio">
+          Campo obligatorio
+        </small>
           </div>
-          <small *ngIf="
-              submitted &&
-              formNuevoArticulo.controls.recepcionUbicacion.errors
-            " class="form-text form-text-error Campo-obligatorio">
-            Campo obligatorio
-          </small>
+         
 
           <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Horario para entregar artículos*:</span>

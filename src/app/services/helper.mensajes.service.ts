@@ -26,12 +26,12 @@ export class HelperMensajesService {
   public MSJ_EXTENSION_NO_PERMITIDA: string = 'el formato es erróneo.';
   public MSJ_WARNING_SELECCIONAR_ARCHIVO: string = 'Seleccionar  archivo';
   public MSJ_ERROR_PLANTILLA_NOVALIDA: string = 'El archivo que intenta cargar no corresponde a una plantilla válida o está vacío.';
-  
+
   public MSJ_EXCEDE_TAMANIO: string = 'supera el máximo permitido';
   public MSJ_ERROR_ARCHIVOVACIO: string = 'El archivo seleccionado está vacío.';
   public MSJ_EXITO_CARGA: string = 'La carga se ha realizado correctamente, se enviará un correo con el acuse de carga.';
   public MSJ_ERROR_CARGA: string = 'El archivo cuenta con errores. Se enviará un correo con el acuse de carga';
-  
+
   /**MENSAJES PERSONALIZADOS CONEXION API */
   public MSJ_ERROR_CONEXION_CARGAINICIAL: string = 'No fue posible conectar con el servicio de Carga inicial.';
   public MSJ_ERROR_CONEXION_UNIDADESMEDICAS: string = 'No fue posible conectar con el servicio de Unidades Médicas.';
@@ -58,7 +58,7 @@ export class HelperMensajesService {
   public MSJ_ERROR_503: string = 'El servidor web actualmente no está disponible para manejar tu solicitud debido a una sobrecarga temporal o a un mantenimiento del servidor.';
 
   public MSJ_EXITO_CARGAS: string = 'Todos los catálogos han sido cargados correctamente.';
- 
+
   public MSJ_DATOS_OBLIGATORIOS: string = 'Ingresa los datos obligatorios';
   public MSJ_CORREO_NO_REGISTRADO: string = 'Correo no registrado!';
   public MSJ_ERROR_CONEXION_LOGIN: string = 'Servicio no disponible. Favor de reportarlo!';
@@ -89,6 +89,8 @@ export class HelperMensajesService {
   public MSJ_EXITO_CANCELAR_CITA: string = 'La cita fué cancelada correctamente.';
   public MSJ_ERROR_CANCELAR_CITA: string = 'Ocurrió un error al cancelar la cita.';
   public MSJ_ERROR_BUSCA_CITA: string = 'No fue posible conectar con el servicio de búsqueda de cita.';
+  public MSJ_EXITO_CONFIRMAR_CITA: string = 'La asistencia fue confirmada correctamente.';
+  public MSJ_ERROR_CONFIRMAR_CITA: string = 'Ocurrió un error al confirmar la asistencia.';
 
 
   //Mensajes Usuarios
