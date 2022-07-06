@@ -12,28 +12,15 @@ export class ControlArticulosService {
   constructor(private httpsClient: HttpClient) { }
 
   setControlArticulos(datos: any) {
-    try {
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/insert`, datos);
-    } catch (error) {
-      return error;
-    }
+    return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/insert`, datos);
   }
 
   getDetalleControlArticulos(datos: any) {
-    try {
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/idCa`, datos);
-    } catch (error) {
-      return error;
-    }
+    return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/idCa`, datos);
   }
 
   getHorarios() {
-    try {
-      return this.httpsClient.get<any>(`${environment.msmtsControlArticulos}/horarios`);
-    } catch (error) {
-      return error;
-    }
-
+    return this.httpsClient.get<any>(`${environment.msmtsControlArticulos}/horarios`);
   }
 
   downloadPdf(data: any): Observable<Blob> {
@@ -45,11 +32,7 @@ export class ControlArticulosService {
   }
 
   getArticulosByFechas(controlArticulos: any) {
-    try {
-      return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/rango/fechas`, controlArticulos);
-    } catch (error) {
-      return error;
-    }
+    return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/rango/fechas`, controlArticulos);
   }
 
 }
