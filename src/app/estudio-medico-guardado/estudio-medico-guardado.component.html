@@ -178,7 +178,7 @@
                 </label>
               </div>
             </div>
-            <div class="flex-6" style="display:flex ;">
+            <div class="flex-6" style="display:flex ; margin: 0 -4px 30px 0px;">
               <div class="divEstadoCivil">
                 <span class="labels">Estado civil:</span>
                 <br>
@@ -208,18 +208,18 @@
                 <img src="url('../../../../assets/icons/circulo_verde.svg" alt="" style="margin-left: 9px;">
                 <img src="url('../../../../assets/icons/1.svg" alt="" style="margin-left: -18px;">
               </div>
+
               <div class="col-md-4" style="padding-top: 29px; padding-right: 79px;  margin-top: -1.4%; ">
-                <button type="button" (click)="imprimir();" class="btn btn-primary buttonL"
-                  style="float: right;border: solid 1px #9d2449;">
-                  Imprimir
-                </button>
+                <button type="button" class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449"
+                (click)="imprimir()">
+                Imprimir
+              </button>
                 <button type="button" class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449;"
                   (click)="irDatosDeFamiliar()">
                   Siguiente
                 </button>
-
-
               </div>
+
             </div>
           </div>
         </form>
@@ -237,7 +237,7 @@
         Nuevo estudio social médico
       </label>
     </div>
-    <div content style="padding-bottom: 5.5%; height: 540px;">
+    <div content style="padding-bottom: 5.5%; height: 532px;">
       <div class="Rectangle-306" style="background-color: white">
         <div class="row" style="width: 100%; height: 11%; ">
           <div header class="flex justify-content-between align-items-center col-md-6">
@@ -419,7 +419,7 @@
             </div>
           </div>
         </div>
-        <div class="row" style="margin: 0 -4px  -4px;">
+        <div class="row" style="margin: 0 -4px  -4px; margin: 0 -4px 35px 0px;">
           <div class="col-md-4">
             <div class="">
               <label class="control-label tituloInput">
@@ -459,7 +459,7 @@
 
             </div>
             <div class="col-md-4"
-              style="padding-top: 35px; padding-right: 24px;  margin-top: 0.4%; text-align: center;">
+              style=" padding-right: 24px;  margin-top: 0.4%; text-align: center;">
               <img src="url('../../../../assets/icons/menor_que.svg" alt="" style="margin-right: 5px; cursor:pointer;"
                 (click)="irDatosGenerales()">
               <label style="font-size: 14px; font-weight: 500; cursor:pointer;" (click)="irDatosGenerales()"> Atrás
@@ -467,7 +467,8 @@
               <img src="url('../../../../assets/icons/circulo_verde.svg" alt="" style="margin-left: 9px;">
               <img src="url('../../../../assets/icons/2.svg" alt="" style="margin-left: -18px;">
             </div>
-            <div class="col-md-4" style="padding-top: 35px; padding-right: 24px;  margin-top: -1.4%;">
+
+            <div class="col-md-4" style=" padding-right: 24px;  margin-top: -1.4%;">
               <button (click)="imprimir();" class="btn btn-primary buttonL"
                 style="float: right;border: solid 1px #9d2449;">
                 Imprimir
@@ -477,6 +478,7 @@
                 Siguiente
               </button>
             </div>
+
           </div>
         </div>
       </div>
@@ -564,7 +566,6 @@
               </label>
               <label class="inputs3" style="margin-left: 10px;">
                 {{ estudioMedico.datoPaciente }}
-                fdsdf
               </label>
             </div>
             <div class="col-md-1">
