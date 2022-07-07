@@ -133,8 +133,8 @@ export class CargamasivaComponent implements OnInit {
     this.modalcarga(this.dataparams.nombreCatalogo, this.dataparams.sheetName);
   }
 
-  cancelar() {
-    this.dialogRef.close();
+  cancelar(iscancel: boolean) {
+    this.dialogRef.close({'iscancel': iscancel});
   }
 
 
@@ -357,7 +357,7 @@ export class CargamasivaComponent implements OnInit {
             this.persona[index].puesto = element[this.confCarga.col6]
             this.persona[index].turno = element[this.confCarga.col7];
             this.persona[index].email = element[this.confCarga.col8];
-            
+
             this.persona[index].escuelaProcedencia = element[this.confCarga.col9];
             this.persona[index].contraseña = this.persona[index].matricula+"";
             this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
@@ -860,20 +860,20 @@ export class CargamasivaComponent implements OnInit {
 
     this.reset();
 
-    this.cancelar();
+    this.cancelar(true);
   }
   btnAceptar() {
     this.cleanVar();
 
     this.reset();
 
-    this.cancelar();
+    this.cancelar(false);
   }
 
   btnClose() {
     this.cleanVar();
     this.reset();
-    this.cancelar();
+    this.cancelar(true);
   }
 
   private mostrarMensaje(tipo: string, msj: string, tipoMsj?: string) {
