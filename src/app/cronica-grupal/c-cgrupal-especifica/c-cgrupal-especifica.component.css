@@ -9,16 +9,6 @@
 
 
 .Rectangle-855 {
-  /* width: 1217PX;
-  height: 600px;
-  background-color: white;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  margin-top: -65px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex; */
-
   width: 1217PX;
   height: 600px;
   background-color: white;
@@ -27,7 +17,6 @@
   margin-top: -65px;
   margin-left: auto;
   margin-right: auto;
-  /* display: flex; */
 }
 
 
@@ -116,7 +105,6 @@
   width: 100 5;
   height: 27px;
   flex-grow: 0;
-  /* margin: 4px 0 0 0px; */
   font-family: Montserrat;
   font-size: 22px;
   font-weight: 600;
@@ -131,9 +119,7 @@
 
 .tituloDosSpam {
   width: 100%;
-  /* height: 23px; */
   flex-grow: 0;
-  /* margin: 3px 0 2px 15px; */
   font-family: Montserrat;
   font-size: 17px;
   font-weight: bold;
@@ -147,7 +133,7 @@
 
 .textoCuatro{
   width: 480px;
-  height: 20px;
+  height: 61px;
   flex-grow: 0;
   font-family: Montserrat;
   margin: 3px 0 2px 15px;
@@ -159,6 +145,8 @@
   letter-spacing: normal;
   text-align: left;
   color: #222;
+  word-wrap: break-word;
+  overflow: auto;
 }
 
 .tituloTresSpam {
@@ -179,7 +167,7 @@
 
 .textoCuatroDerecho {
   width: 507px;
-  height: 20px;
+  height: 61px;
   flex-grow: 0;
   font-family: Montserrat;
   margin: 3px 0 2px 15px;
@@ -192,11 +180,13 @@
   text-align: left;
   color: #222;
   margin-left: 18px;
+  word-wrap: break-word;
+  overflow: auto;
 }
 
 .textoCuatroIzquierdo {
   width: 480px;
-  height: 20px;
+  height: 61px;
   flex-grow: 0;
   font-family: Montserrat;
   margin: 3px 0 2px 15px;
@@ -208,6 +198,8 @@
   letter-spacing: normal;
   text-align: left;
   color: #222;
+  word-wrap: break-word;
+  overflow: auto;
 }
 
 .Rectangle-1205 {
@@ -215,33 +207,44 @@
   height: 27px;
   margin: 37px 10px 0 11px;
   border: solid 1px #f5f7f8;
-  background-color: #fff;
+  background-color: #EEEEEE;
 }
 
 .Rectangle-12052 {
   width: 0px;
   height: 53px;
-  margin: 10px 10px 0 11px;
+  margin: 10px 8px 0 8px;
   border: solid 1px #f5f7f8;
   background-color: #fff;
 }
 
 .unidadSpan {
-
-  height: 15px;
-  flex-grow: 0;
-  margin: 16px 0 0 0;
+  height: 100%;
+  margin: 17px 0 -7px 0;
   font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 540;
+  font-style: medium;
+  line-height: 20px;
+  text-align: left;
+  color: #222222;
+  text-overflow: ellipsis;
+  line-height: 103%;
+  vertical-align: top;
+}
+
+.detalleDescrip {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
-  line-height: normal;
+  line-height: 1.88;
+  letter-spacing: normal;
   text-align: left;
-  /* color: #95a4b7; */
-  color: #222;
-
-
+  color: #95a4b7;
+  height: 100%;
+  text-overflow: ellipsis;
 }
 
 .unidadSpanTitulos {
@@ -258,38 +261,9 @@
   text-align: left;
   color: #95a4b7;
   margin-top: 1px;
-
-  /* ---------------------------------- */
-
-  /* width: 380px;
-  height: 29px;
-  margin: 0 656px 7.9px 0;
-  font-family: Montserrat;
-  font-size: 24px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #222; */
-
 }
 
 .divDetallePaciente {
-  /* width: 1180px;
-  height: 71px;
-  margin-top: 73px;
-  margin-right: 0px;
-  margin-left: 0px;
-  background: white;
-  z-index: 6;
-  position: absolute;
-  display: flex;
-  border-top-color: rgb(245, 247, 248);
-  border-top-style: solid;
-  border-top-width: 1px; */
-
   width: 1180px;
   height: 71px;
   margin-top: 73px;
@@ -297,7 +271,6 @@
   margin-left: 0px;
   background: white;
   z-index: 6;
-  /* position: absolute; */
   display: flex;
   border-top-color: rgb(245, 247, 248);
   border-top-style: solid;
@@ -315,30 +288,16 @@
 }
 
 .pacienteDetalleDiv {
-  height: 71px;
+  height: 68.2px;
   z-index: 4;
   display: flex;
-  /* margin-left: 100px;
-  position: absolute; */
-  box-shadow: 4px 4px 15px 0 rgb(0 0 0 / 20%);
-  /* margin-left: 80px; */
-  width: 93%;
+  width: 97.5%;
+  margin-left: 16px;
+  border-bottom: 1px solid #EEEEEE;
+  box-shadow: 0 4px 122px -2px #eeeeee;
 }
 
-.detalleDescrip {
-  flex-grow: 0;
-  margin: -12px 0 0 0;
-  font-family: Montserrat;
-  font-size: 10px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.88;
-  letter-spacing: normal;
-  text-align: left;
-  /* color: #222; */
-  color: #95a4b7;
-}
+
 
 .divMenuHamburg {
 
@@ -370,9 +329,7 @@
   flex-grow: 0;
   margin: 0px auto 0 auto;
   padding: 15px 1px 20px 0;
-  /* transform: rotate(-270deg); */
   border-radius: 6px;
-  /* box-shadow: 4px 4px 15px 0 rgb(0 0 0 / 20%); */
 }
 
 
@@ -389,26 +346,23 @@
 
 
 .Texto-derecha {
-  width: 50%;
+  width: 49%;
   float: left;
   height: 300px;
   flex-grow: 0;
   margin: 0px auto 0 auto;
   padding: 15px 1px 20px 0;
   border-radius: 6px;
+  padding-right: 5%;
 }
 
 .Texto-arriba {
   width: 100%;
-  /* float:left; */
-  /* width: 1100px; */
   height: 400px;
   flex-grow: 0;
   margin: 0px auto 0 auto;
   padding: 15px 1px 20px 0;
-  /* transform: rotate(-270deg); */
   border-radius: 6px;
-  /* box-shadow: 4px 4px 15px 0 rgb(0 0 0 / 20%); */
 }
 
 .Texto-abajo {
@@ -425,17 +379,15 @@
 
 
 .divAmarillo {
-
   width: 73px;
   height: 70px;
-  flex-grow: 0;
   padding: 4px 0px 0px px;
-  background-color: #ffe8a7;
 
 }
 
 .subHeader {
   box-shadow: 0px 1px 10px 0px rgb(0 0 0 / 15%);
+
 }
 
 .buttonL {
@@ -457,27 +409,20 @@
 }
 
 .hrCronicaFecha {
-  /* margin-left: -15%; */
   border: none;
-  /* border-left: 1px solid hsla(200, 10%, 50%,100); */
   height: 2.0vh;
   width: 0.1%;
   margin-top: 0.6%;
   text-align: left;
-  /* padding-top: 0.8%; */
-  /* background-color: #000000; */
 }
 
 .hrCronicaServicio {
-  /* margin-left: -23%; */
   border: none;
   border-left: 1px solid hsla(200, 10%, 50%, 100);
   height: 2.0vh;
   width: 0.1%;
   margin-top: 0.6%;
   text-align: left;
-  /* background-color: #000000; */
-  /* padding-top: 0.8%; */
 }
 
 .tituloDosSpam {
