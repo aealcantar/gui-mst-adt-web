@@ -34,20 +34,22 @@
 
   <div class="base-cont">
     <div class="tit-princ">
-      <div class="row col-12">
-        <div class="text-left pull-left">
+      <div class="row">
+      <!-- <div class="col-md-12"> -->
+        <div class="col-md-6 text-left pull-left">
           <span (click)="regresar()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
           <span style="padding-left: 15px;">Consulta de cita</span>
         </div>
-        <div class="pull-right">
+        <div class="col-md-6 pull-right">
           <button class="btn btn-primary btuser pull-right" (click)="imprimir()">Imprimir</button>
         </div>
+      <!-- </div> -->
       </div>
     </div>
 
     <div class="body-princ">
-      <div class="row col-12">
-        <div class="col-12">
+      <div class="row">
+        <div class="col-md-12">
           <div class="etiqueta-md ">Recibe la atención:</div>
           <div class="etiqueta-lg spc-5">Paciente:</div>
           <div class="texval">
@@ -55,8 +57,10 @@
           </div>
         </div>
       </div>
-      <div class="row col-12 cuadro-pct" style="display: inline-block; padding-top: 0px;">
-        <div class="col-6 " style=" display: inline-flex; height: 100%; ">
+      <div class="row">
+      <div class="col-md-12 cuadro-pct" style="display: inline-block; padding-top: 0px;">
+        <div class="row">
+        <div class="col-md-6" style=" display: inline-flex; height: 100%; ">
           <div>
             <div class="etiqueta-lg">Núcleo familiar:</div>
             <div class="texval" *ngFor="let reg of participantes_fam">
@@ -64,56 +68,56 @@
             </div>
           </div>
         </div>
-        <div class="col-6 " style=" display: inline-flex;">
+        <div class="col-md-6 " style=" display: inline-flex;">
           <div>
             <span class="etiqueta-lg">Otros:</span>
             <div class="texval" *ngFor="let reg of participantes_otrs">
               <div> {{reg.NOM_COMPLETO}}</div>
             </div>
           </div>
-        </div>
+        </div></div>
       </div>
-
-      <div class="row col-12">
-        <div class="col-12">
+    </div>
+    <div class="row">
+      <div class="col-md-12">
           <div class="etiqueta-md spc-bt-25">Datos de cita:</div>
-
-        </div>
       </div>
+    </div>
 
-      <div class="row col-12 reg " style="display: inline-block; ">
-        <div class="col-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
+      <div class="row reg">
+        <div class="col-md-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Fecha y hora de inicio de cita: </div>
           <div class="valor">{{citaResponse.cita?.fechaInicio}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-md-4 " style=" display: inline-block;">
 
           <div class="lbel">Fecha y hora de finalización de cita: </div>
           <div class="valor">{{citaResponse.cita?.fechaFin}}</div>
 
         </div>
-        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
+        <div class="col-md-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Duración de cita: </div>
           <div class="valor">{{citaResponse.cita?.duracion}}</div>
         </div>
       </div>
 
-      <div class="row col-12 reg" style="display: block; ">
-        <div class="col-7 " style=" display: inline-block; height: 100%; vertical-align: top;">
+
+      <div class="row reg">
+        <div class="col-md-7 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Ubicación (Lugar de atención): </div>
 
         </div>
-        <div class="col-5 " style=" display: inline-block;">
+        <div class="col-md-5 " style=" display: inline-block;">
 
           <div class="lbel">Dirección: </div>
 
 
         </div>
-        <div class="col-7 " style=" display: inline-block; height: 100%; vertical-align: top;">
+        <div class="col-md-7 " style=" display: inline-block; height: 100%; vertical-align: top;">
 
           <div class="valor">{{citaResponse.cita?.ubicacion}}</div>
         </div>
-        <div class="col-5 " style=" display: inline-block;">
+        <div class="col-md-5 " style=" display: inline-block;">
 
 
           <div class="valor">{{citaResponse.cita?.direccion}}</div>
@@ -123,48 +127,53 @@
       </div>
 
 
-      <div class="row col-12 reg" style="display: inline-block; ">
-        <div class="col-4 " style=" display: inline-block; height: 100%; ">
+      <div class="row reg">
+        <div class="col-md-4 " style=" display: inline-block; height: 100%; ">
           <div class="lbel">Unidad médica: </div>
           <div class="valor">{{citaResponse.cita?.unidadMedica}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-md-4 " style=" display: inline-block;">
           <div class="lbel">Estatus de cita: </div>
           <div class="valor">{{citaResponse.cita?.estatus}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block;">
+        <div class="col-md-4 " style=" display: inline-block;">
           <div class="lbel">Turno: </div>
           <div class="valor">{{citaResponse.cita?.turno}}</div>
         </div>
       </div>
-      <div class="row col-12 reg" style="display: inline-block; ">
-        <div class="col-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
+
+
+      <div class="row reg" >
+        <div class="col-md-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Servicio: </div>
           <div class="valor">{{citaResponse.cita?.descripcionServicio}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
+        <div class="col-md-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Programa: </div>
           <div class="valor">{{citaResponse.cita?.grupoPrograma}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
+        <div class="col-md-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Ocasión de servicio: </div>
           <div class="valor">{{citaResponse.cita?.ocasionServicio}}</div>
         </div>
       </div>
-      <div class="row col-12 reg" style="display: inline-block;">
-        <div class="col-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
+
+
+      <div class="row reg">
+        <div class="col-md-4 " style=" display: inline-block; height: 100%; vertical-align: top;">
           <div class="lbel">Tipo de cita: </div>
           <div class="valor">{{citaResponse.cita?.tipoCita}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
+        <div class="col-md-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Trabajadora social responsable: </div>
           <div class="valor">{{citaResponse.cita?.trabajadorSocial}}</div>
         </div>
-        <div class="col-4 " style=" display: inline-block; vertical-align: top;">
+        <div class="col-md-4 " style=" display: inline-block; vertical-align: top;">
           <div class="lbel">Modalidad: </div>
           <div class="valor">{{citaResponse.cita?.modalidad}}</div>
         </div>
       </div>
+
 
 
 

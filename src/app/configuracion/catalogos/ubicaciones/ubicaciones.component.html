@@ -1,6 +1,5 @@
 <app-alerta [objAlerta]="mensaje"></app-alerta>
 
-<div class="container">
 
       <div class="base-cont table-responsive">
 
@@ -9,12 +8,12 @@
             <span (click)="btnAtras()"><img src="../../../../assets/images/btn-arrow-lf.png"></span>
             <span>Configuración de ubicaciones</span>
           </div>
-      
+
         </div>
 
-       
+
         <div class="body-princ ">
-          
+
           <div class="texto-ind">
             Buscar por descripción
           </div>
@@ -23,11 +22,11 @@
               <!-- <label class="" for="txtconsulta">Buscar por matrícula o nombre completo</label> -->
               <input class="form-control matricula" id="txtconsulta" placeholder="Ingresa descripción" minlength="5" type="text" name="txtconsulta" [(ngModel)]="txtbusca" #ctrl="ngModel">
             </div>
-  
-  
+
+
             <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="btnLimpiarbusqueda()">Limpiar</button>
             <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)= "btnBuscarUbicacion()">Buscar</button>
-  
+
           </form>
 
 
@@ -45,16 +44,16 @@
                   <li *ngFor="let i of [15,20,50,100]"><a (click)="cambiatotalpaginas(i)">{{i}}</a></li>
                 </ul>
               </div>
-              
-  
-  
+
+
+
             </caption>
             <thead>
-              
+
               <tr>
-                <th style="width: 40%">Descripción abreviada</th>
-                <th style="width: 30%">Tipo</th>
-                <th style="width: 30%">Servicio/Especialidad</th>
+                <th>Descripción abreviada</th>
+                <th>Tipo</th>
+                <th>Servicio/Especialidad</th>
               </tr>
             </thead>
             <tbody>
@@ -62,17 +61,17 @@
                 <td
                   class="link-texto"
                   (click)="muestraHorarios(item.cveUbicacion)">
-                 
+
                   {{ item.descripcionAbreviada }}</td>
                 <td>{{item.tipo }}</td>
                 <td>{{ item.servicio }}</td>
               </tr>
             </tbody>
           </table>
-  
-        
+
+
           <div class="nopag pull-right" *ngIf="lstUbicaciones.length > 0">
-            
+
             Página
             <span class="bg-nopag" [innerText]="pagactual"></span>
           </div>
@@ -80,10 +79,10 @@
             <img src="../../../../assets/images/Group 2358.png"
               class="Group-2358">
           </div>
-         
+
           <div class="table-pie sin-borde" >
             <div class="cargalayout">
-              
+
               <span (click)="btnCargaMasiva()">Carga de ubicaciones: <img src="../../../../assets/images/icon-upload.png"> </span>
             </div>
           </div>
@@ -94,4 +93,3 @@
 
       </div>
 
-</div>

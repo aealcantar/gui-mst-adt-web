@@ -109,7 +109,7 @@
   color: #222222;
 }
 
-.buttonL {
+/* .buttonL {
   width: 120px;
   height: 34px;
   border-radius: 3px;
@@ -120,11 +120,13 @@
   font-family: Montserrat;
   font-size: 14px;
   font-weight: normal;
-  text-align: left;
-  color: #222;
-  margin-top: 5px;
-  margin-left: 10px;
-}
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-left: 200%;
+} */
 /* ---------------------------------------------FER------------------------------------------------- */
 .Rectangle-306 {
   margin-top: 10px;
@@ -385,7 +387,7 @@ background-color: #fff;
   align-self: stretch;
   flex-grow: 1;
   font-family: Montserrat;
-  color: #9d2449;
+  /* color: #9d2449; */
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -395,6 +397,26 @@ background-color: #fff;
   text-align: center;
   margin-left: 200%;
 }
+
+/* .buttonL {
+  width: 120px;
+  height: 34px;
+  border-radius: 3px;
+  margin: 10px 15px 0 10px !important;
+  padding: 5px;
+  align-self: stretch;
+  flex-grow: 1;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-left: 200%;
+} */
+
 
 .buttonL:hover{
   background-color: #9d2449;

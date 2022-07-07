@@ -142,6 +142,13 @@ table.table-catalogo > thead tr th{
   border-bottom: 0 solid #dee2e6;
 
 }
+table.table-catalogo > thead tr th:nth-child(1){
+  width: 45% !important;
+}
+table.table-catalogo > thead tr th:nth-child(2),
+table.table-catalogo > thead tr th:nth-child(3){
+  width: 27.5% !important;
+}
 
 .borde-cap{
   border-top: 1px solid #dee2e6;

@@ -35,11 +35,6 @@
   color: #222222;
 }
 
---------------------------------------------quitar------------------------------------------ label span {
-  font-family: 'Montserrat';
-  font-style: normal;
-}
-
 .Bg {
   height: 218px;
   flex-grow: 0;
@@ -277,8 +272,8 @@ input {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  font-size: 10px;
-  line-height: 45px;
+  font-size: 14px;
+  line-height: 17px;
   display: flex;
   align-items: flex-end;
   color: #272829;
@@ -314,16 +309,16 @@ input {
   transform: translateY(-8%);
   background-size: 10px 12px;
   background-repeat: no-repeat;
-  margin: 0.6px 1px 3px 18.2px;
+  /* margin: -27.4px 1px -2px 18.2px; */
   padding: 0 20.2px 0 18.2px;
-  height: 28.9px;
-  border-radius: 3px 3px 3px 3px;
-  margin-right: 0.7px;
-  margin-top: 8.7%;
+  height: 28.7px;
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 0.9px;
+  margin-top: 8.66%;
 }
 
 .imgCalendar {
-  background-image: url("../../assets/images/calendario.svg");
+  background-image: url("src/assets/images/calendario.svg");
   background-repeat: no-repeat;
   color: #191919;
   position: absolute;
@@ -367,6 +362,7 @@ input {
 
 .optionSelect{
   background-position-y: 10px;
+  color: #545454;
 }
 
 .styleselect{
@@ -409,6 +405,26 @@ background-position-y: 5px;
 
 }
 
-.contenedorTitulo{
-  margin-left: 1px;
+
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
+
+.select {
+  border-radius: 5px;
+  width: 340px;
+  height: 30px;
+  top: 272px;
+  left: 10px;
+  font-size: 14px;
+  color: #222222;
 }

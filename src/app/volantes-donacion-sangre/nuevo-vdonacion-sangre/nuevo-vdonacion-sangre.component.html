@@ -1,0 +1,394 @@
+<app-app-alerts [alert]="alert"></app-app-alerts>
+
+<app-fichapaciente></app-fichapaciente>
+<app-card-template>
+  <div header class="nuevoVolanteDeDonacionSangre">
+    <span class="spantitulo">
+      Nuevo Volante de donación de sangre
+    </span>
+  </div>
+  <div content>
+    <div>
+      <span class="instrucciones">
+        Por favor capture los siguientes datos:
+      </span>
+    </div>
+    <form novalidate class="formInfo" [formGroup]="formNuevaDonacion" (ngSubmit)="registarDonacion(formNuevaDonacion)">
+      <div class="container seccion">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <span class="spanInput">Unidad médica hospitalaria*:</span>
+              <input formControlName="umh" maxlength="100"
+                [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.umh.errors }"
+                class="form-control matricula inputs" id="umh" placeholder="Ingresar unidad médica hostalaria"
+                type="text" />
+              <small *ngIf="  submitted && formNuevaDonacion.controls.umh.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha*:</span>
+              <input notasInit maxlength="10"
+                [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.fecha1.errors }"
+                class="form-control calendario" formControlName="fecha1" id="fecha1" type="text"
+                placeholder="Ingresar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+              <small *ngIf="  submitted && formNuevaDonacion.controls.fecha1.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="instrucciones">
+            Para asistir al banco de sangre
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <span class="spanInput">Nombre del Banco de Sangre*:</span>
+              <mat-select class="form-control2 form-control form-control-mat-select "
+                [ngClass]="{'form-control-error': submitted && formNuevaDonacion.controls.idBancoSangre.errors}"
+                id="idBancoSangre" formControlName="idBancoSangre">
+                <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                  Seleccionar servicio</mat-option>
+                <mat-option class="select-font" [value]="item.idBancoSangre" *ngFor="let item of bancosSangre">
+                  {{ item.detalleBancoSangre }}
+                </mat-option>
+              </mat-select>
+              <small *ngIf="  submitted && formNuevaDonacion.controls.idBancoSangre.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
+          </div>
+          <div class="col-md-2 form-group">
+            <span class="spanInput">Horario de atención*:</span>
+            <input maxlength="5"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion1.errors }"
+              class="form-control matricula inputs" id="horaInicialAtencion1" formControlName="horaInicialAtencion1"
+              placeholder="Hora inicial" type="text" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.horaInicialAtencion1.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-2 form-group">
+            <br>
+            <input maxlength="5"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaFinalAtencion1.errors }"
+              class="form-control matricula inputs" id="horaFinalAtencion1" formControlName="horaFinalAtencion1"
+              placeholder="Hora final" type="text" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.horaFinalAtencion1.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Código Postal*:</span>
+            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.codigoPostal.errors }"
+              class="form-control matricula" id="codigoPostal" formControlName="codigoPostal"
+              placeholder="Ingresar código postal" type="text" maxlength="5" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.codigoPostal.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Estado*:</span>
+            <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idEstado.errors}" id="idEstado"
+              formControlName="idEstado" (selectionChange)="onChangeEstado()">
+              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                Ingresar estado</mat-option>
+              <mat-option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
+                {{ estadoF.des_nombre_completo}}
+              </mat-option>
+            </mat-select>
+            <small *ngIf="  submitted && formNuevaDonacion.controls.idEstado.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Delegación/Municipio*:</span>
+            <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idDelegacion.errors }"
+              id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()">
+              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                Ingresar delegación o municipio</mat-option>
+              <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
+                *ngFor="let delegacion of delegaciones">
+                {{ delegacion.des_municipio}}
+              </mat-option>
+            </mat-select>
+
+            <small *ngIf="  submitted && formNuevaDonacion.controls.idDelegacion.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Ciudad*:</span>
+            <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idCiudad.errors }"
+              id="idCiudad" formControlName="idCiudad">
+              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                Ingresar ciudad</mat-option>
+              <mat-option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
+                {{ ciudadF.des_ciudad}}
+              </mat-option>
+            </mat-select>
+
+
+            <small *ngIf="  submitted && formNuevaDonacion.controls.idCiudad.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4  form-group">
+            <span class="spanInput">Colonia*:</span>
+
+            <input maxlength="150"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.colonia.errors }"
+              class="form-control matricula inputs" id="colonia" formControlName="colonia"
+              placeholder="Ingresar colonia" type="text" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.colonia.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4  form-group">
+            <span class="spanInput">Calle*:</span>
+            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.calle.errors }"
+              maxlength="100" class="form-control matricula inputs" id="calle" formControlName="calle"
+              placeholder="Ingresar calle" type="text" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.calle.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4  form-group">
+            <span class="spanInput">Número exterior*:</span>
+            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numExterior.errors }"
+              class="form-control matricula inputs" id="numExterior" formControlName="numExterior"
+              placeholder="Ingresar número" type="text" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.numExterior.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4  form-group">
+            <span class="spanInput">Número interior*:</span>
+            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numInterior.errors }"
+              class="form-control matricula inputs" id="numInterior" formControlName="numInterior"
+              placeholder="Ingresar número" type="text" />
+            <small *ngIf="  submitted && formNuevaDonacion.controls.numInterior.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+      <div class="container seccion">
+        <div>
+          <span class="instrucciones">
+            Datos del paciente
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <span class="spanInput">Nombre:</span>
+            <input class="form-control matricula inputBloqueo" id="nombrePaciente" formControlName="nombrePaciente"
+              placeholder="Ingresar nombre" type="text" readonly="true" />
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">No. de Seguridad Social y agregado:</span>
+            <input class="form-control matricula inputBloqueo" id="desNSS" readonly="true" formControlName="desNSS"
+              placeholder="Ingresar no. de seguridad social" type="text" />
+          </div>
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Servicio*:</span>
+            <select [ngClass]="{
+              'form-control-error':
+                submitted && formNuevaDonacion.controls.idServicio.errors
+            }" class="form-control styleselect" id="idServicio" formControlName="idServicio">
+              <option [value]="''" selected disabled class="select-font optionSelect ">
+                Seleccionar servicio
+              </option>
+              <option class="select-font optionSelect" [value]="item.cve_especialidad"
+                *ngFor="let item of listaServicios">
+                {{ item.des_especialidad }}
+              </option>
+            </select>
+            <small *ngIf="submitted && formNuevaDonacion.controls.idServicio.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha internamiento*:</span>
+              <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.fecha2.errors }"
+                class="form-control calendario" formControlName="fecha2" id="fecha2" type="text"
+                placeholder="Ingresar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+              <small *ngIf="submitted && formNuevaDonacion.controls.fecha2.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha cirugia*:</span>
+              <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.fecha3.errors }"
+                class="form-control calendario" formControlName="fecha3" id="fecha3" type="text"
+                placeholder="Ingresar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+              <small *ngIf="submitted && formNuevaDonacion.controls.fecha3.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Teléfono:</span>
+            <input maxlength="10"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoPaciente.errors }"
+              class="form-control" formControlName="numTelefonoPaciente" id="numTelefonoPaciente" type="text"
+              placeholder="Ingresar teléfono">
+            <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoPaciente.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="container seccion">
+        <div>
+          <span class="instrucciones">
+            Datos del Trabajador social
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Nombre completo*:</span>
+            <input maxlength="100"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.nombreTrabajadorSocial.errors }"
+              class="form-control matricula inputs" id="nombreTrabajadorSocial" formControlName="nombreTrabajadorSocial"
+              placeholder="Ingresar nombre" type="text" />
+            <small *ngIf="submitted && formNuevaDonacion.controls.nombreTrabajadorSocial.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Matrícula*:</span>
+            <input maxlength="40"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.matriculaTrabajadorSocial.errors }"
+              class="form-control matricula inputs" id="matriculaTrabajadorSocial"
+              formControlName="matriculaTrabajadorSocial" placeholder="Ingresar matrícula" type="text" />
+            <small *ngIf="submitted && formNuevaDonacion.controls.matriculaTrabajadorSocial.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-4 form-group">
+            <span class="spanInput">Teléfono*:</span>
+            <input maxlength="10"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors }"
+              class="form-control matricula inputs" id="numTelefonoTrabajadorSocial"
+              formControlName="numTelefonoTrabajadorSocial" placeholder="Ingresar teléfono" type="text" />
+            <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <span class="spanInput">Observaciones*:</span>
+            <input maxlength="100"
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.observaciones.errors }"
+              class="form-control matricula inputs" id="observaciones" formControlName="observaciones"
+              placeholder="Ingresar observaciones" type="text" />
+            <small *ngIf="submitted && formNuevaDonacion.controls.observaciones.errors"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="ml-3">
+        <span class="instrucciones">
+          *Campos obligatorios
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-md-12 divBotones">
+          <button class="btn btn-primary buttonL btnGuardar">
+            Guardar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="modalcarga()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-card-template>
+
+<div class="modal fade" role="dialog" id="content" #content>
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header text-center modalAtencion" fxLayoutAlign="space-between center" fxLayout="column">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="lineaSeparador"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+
+        <label class="tituloModal textConfirmacion">¿Desea salir sin guardar</label>
+        <br>
+        <label class="textConfirmacion"> los cambios?</label>
+      </div>
+      <div class="col-md12 row divBtnModal">
+        <div class="col-md10" width="495px" height="118px" aling="center" style="padding-right: 20%;">
+          <button type="button" (click)="salirModal()" class="btn btn-primary buttonL btnGuardar">
+            Aceptar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="cancelarModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-info-bottom></app-info-bottom>

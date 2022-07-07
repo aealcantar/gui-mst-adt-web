@@ -40,7 +40,6 @@ th {
   border-radius: 50%;
 }
 
-
 .pagination a {
   border: none;
 }
@@ -59,7 +58,7 @@ a {
   border: solid 1px #9d2449;
 }
 
-.consultaVolantesDonacion {
+.consultaControlDeArticulos {
   font-family: 'Montserrat';
   font-size: 24px;
   font-stretch: normal;
@@ -73,8 +72,19 @@ a {
   color: #222;
 }
 
+.errorimg {
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
 .div-container-image {
   margin-left: 25%;
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tituloServicio {
@@ -98,15 +108,26 @@ a {
   transform: translateY(-8%);
   background-size: 10px 12px;
   background-repeat: no-repeat;
-  margin: 0px 0px 3px 18.2px;
-  padding: 0 20px 0 18.2px;
-  height: 30px;
+  margin: -1.4px 1px 2px 14.2px;
+  padding: 0 20.2px 0 18.2px;
+  height: 29.5px;
   border-radius: 2px 2px 2px 2px;
-  top: 29px!important;
+}
+
+
+.fonde{
+  font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
 }
 
 .imgCalendar {
-  background-image: url("../../assets/images/calendario.svg");
+  background-image: url("../../../assets/images/calendario.svg");
   background-repeat: no-repeat;
   color: #191919;
   position: absolute;
@@ -144,6 +165,7 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
 }
+
 .bordesTablaFecha {
   border: 1px solid #ddd;
   text-align: center !important;
@@ -161,21 +183,20 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 11%;
-
 }
 
 .bordesTablaTotalParticipantes {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 13%;
-
 }
+
 .bordesTablaAsistieron {
   border: 1px solid #ddd;
   text-align: center !important;
   width: 13%;
-
 }
+
 .bordesTablaDescripcion {
   border: 1px solid #ddd;
   text-align: left !important;
@@ -205,7 +226,6 @@ a {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-
 }
 
 .my-pagination ::ng-deep .current {
@@ -236,23 +256,42 @@ a {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
 }
 
+.form-control {
+  font-size: 14px !important;
+  border-radius: 5px;
+  width: 340px;
+  height: 30px;
+  top: 272px;
+  left: 10px;
+  font-size: 14px;
+}
+.form-control-txt {
+  font-size: 14px !important;
+  height: 60px;
+  width: 500px;
+  left: 10px;
+  top: 235px;
+  border-radius: 5px;
+  border-color: #DDDDDD
+}
+
 .tabla>tbody>tr>td,
 .tabla>tbody>tr>th,
 .tabla>tfoot>tr>td,
 .tabla>tfoot>tr>th,
 .tabla>thead>tr>td,
 .tabla>thead>tr>th {
-    padding: 1.8px;
-    line-height: 1.428571429;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+  padding: 1.8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
 }
 
 .buttonL {
   width: 120px;
-  height: 35.87px;
+  height: 30px;
   border-radius: 3px;
-  margin: 10px 15px 0 10px !important;
+  margin: 5px 15px 0 10px !important;
   padding: 5px;
   align-self: stretch;
   flex-grow: 1;
@@ -275,5 +314,47 @@ a {
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
+}
 
+.redColor {
+  color: #E10000 !important;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 45px;
+  /* or 450% */
+  display: flex;
+  align-items: center;
+}
+
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
+
+.visualizarDatos {
+  width: 109px;
+  height: 17px;
+  flex-grow: 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #222;
+  margin-right: 17px;
+  float: right;
+  margin-top: 10px;
 }

@@ -28,7 +28,8 @@ export class BusquedaNssComponent implements AfterContentInit {
 
 
 
-  txtNSS = "4382641109";
+  // txtNSS = "4382641109";
+  txtNSS = "";
 
   listaPacientes: any[] = [];
 
