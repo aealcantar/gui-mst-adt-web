@@ -73,6 +73,10 @@ export class CargaComponent implements OnInit {
 
     }, 3000);
 
+    if(localStorage.getItem('origen')){
+      localStorage.removeItem('origen');
+    }
+
   }
 
 
@@ -124,7 +128,7 @@ export class CargaComponent implements OnInit {
         this.obtenerEstatusCarga(true);
 
       }
-      
+
     });
 
     dialogo1.componentInstance.onAlert.subscribe(dats => {
@@ -137,6 +141,7 @@ export class CargaComponent implements OnInit {
     switch (catalogo.idCatalogos) {
       case 3:
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
+          localStorage.setItem('origen', this.router.url);
           this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones", { skipLocationChange: true });
         } else {
           // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
@@ -146,6 +151,7 @@ export class CargaComponent implements OnInit {
         break;
       case 7:
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
+          localStorage.setItem('origen', this.router.url);
           this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
         } else {
           // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
@@ -216,7 +222,7 @@ export class CargaComponent implements OnInit {
       if(mensajeCarga){
         this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
       }
-      
+
     }
   }
 

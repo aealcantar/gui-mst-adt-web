@@ -473,7 +473,7 @@ export class CitaguardaComponent implements OnInit {
                           //   'Error'
                           // );
 
-                          this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+                          this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                           this.citaagendada = false;
                         }
 

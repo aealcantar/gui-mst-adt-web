@@ -215,7 +215,14 @@ export class UserbuscaComponent implements OnInit  {
   }
 
   regresar(){
-    this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
+    const org = localStorage.getItem('origen');
+    if(org){
+      localStorage.removeItem('origen');
+      this.router.navigateByUrl(org, { skipLocationChange: true });
+    } else{
+      this.router.navigateByUrl("busqueda", { skipLocationChange: true });
+    }
+
   }
 
   private msjLoading(titulo: string) {
