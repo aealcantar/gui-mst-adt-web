@@ -108,8 +108,7 @@ textarea {
   margin-left: 186px;
 }
 
-
-.fondocalendar2 {
+.fondocalendar {
   background-color: #eeeeee;
   transform: translateY(-8%);
   background-size: 10px 12px;
@@ -118,9 +117,8 @@ textarea {
   padding: 0 20px 0 18.2px;
   height: 30px;
   border-radius: 2px 2px 2px 2px;
+  margin-top: 28.4px;
   margin-right: 0.1px;
-  margin-top: 8.3%;
-  top: 29px!important;
 }
 
 .imgCalendar {
