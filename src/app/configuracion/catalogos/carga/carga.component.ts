@@ -119,8 +119,12 @@ export class CargaComponent implements OnInit {
 
     dialogo1.afterClosed().subscribe(art => {
       console.log("result: ", art);
-      //if (art != undefined)
-      this.obtenerEstatusCarga();
+      if (art?.iscancel == false){
+
+        this.obtenerEstatusCarga(true);
+
+      }
+      
     });
 
     dialogo1.componentInstance.onAlert.subscribe(dats => {
@@ -157,7 +161,7 @@ export class CargaComponent implements OnInit {
   }
 
   //Estatus Cargas
-  private obtenerEstatusCarga(): void {
+  private obtenerEstatusCarga(mensajeCarga:boolean = false): void {
     this.blnErrores = false;
     this.blnPendientes = false;
     this.blnCompletos = false;
@@ -170,7 +174,7 @@ export class CargaComponent implements OnInit {
         if (resp.code == 200) {
           this.cargaCatalogos = resp;
           this.lstCatalogo = resp.data.lstCatalogos;
-          this.validaCargaCompleta(this.lstCatalogo);
+          this.validaCargaCompleta(this.lstCatalogo, mensajeCarga);
           Swal.close();
 
         } else {
@@ -187,7 +191,7 @@ export class CargaComponent implements OnInit {
       });
   }
 
-  private validaCargaCompleta(lst: CatalogoData[]) {
+  private validaCargaCompleta(lst: CatalogoData[],mensajeCarga:boolean = false) {
     let tot = lst.length;
     let completos = 0;
     this.blnCompletos = false;
@@ -209,7 +213,10 @@ export class CargaComponent implements OnInit {
     }
     if (tot == completos) {
       this.blnContinuar = true;
-      this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
+      if(mensajeCarga){
+        this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
+      }
+      
     }
   }
 
