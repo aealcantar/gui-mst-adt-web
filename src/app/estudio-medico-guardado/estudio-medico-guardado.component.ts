@@ -8,7 +8,7 @@ import { EstudioMedico } from '../models/estudio-medico.model';
 import { Ocupacion } from '../models/ocupacion.model';
 import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
 import { formatDate } from '@angular/common';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-estudio-medico-guardado',
   templateUrl: './estudio-medico-guardado.component.html',
@@ -174,7 +174,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       datosEconomicos: this.estudioMedico.datoEconomico,
       municipio: this.estudioMedico.nombreDelegacionMunicipio,
       estudioSolicitado: this.estudioMedico.nombreSolicitante?.toUpperCase(),
-      fechaEstudio: this.estudioMedico.fecFecha,
+      fechaEstudio: moment(this.estudioMedico.fecFecha, "YYYY-MM-DD").format("DD/MM/YYYY"),
     };
 
     console.log("DATA REPORT: ", reporteEstudioMedicoSocial);
