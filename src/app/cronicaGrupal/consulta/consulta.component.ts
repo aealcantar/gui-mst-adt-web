@@ -120,7 +120,8 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Servicio
-  onChangeServicio(valueSelect: Event) {
+  onChangeServicio() {
+    console.log("ENTRAMOS A SERVICIO");
     //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
     this.cronicaGrupalService.getCatGrupo(this.servicioSelected).subscribe(
       (grupos) => {
@@ -145,27 +146,31 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Turno
-  onChangeTurno(valueSelect: Event) {
+  onChangeTurno() {
+    console.log("ENTRAMOS A TURNO");
     this.getCronicasGrupales();
   }
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Grupo
-  onChangeGrupo(valueSelect: Event) {
+  onChangeGrupo() {
+    console.log("ENTRAMOS A GRUPO");
     this.getCronicasGrupales();
   }
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Lugar
-  onChangeLugar(valueSelect: Event) {
+  onChangeLugar() {
+    console.log("ENTRAMOS A LUGAR");
     this.getCronicasGrupales();
   }
 
   onChangeRadioBoton(value: Event) {
+    console.log("ENTRAMOS A RADIOBOTON");
     this.getCronicasGrupales();
   }
 
   validateAllDataFull(): boolean {
-    if (this.servicioSelected !== '-1' && this.turnoSelected !== '-1'
-      && this.grupoSelected !== '-1' && this.lugarSelected !== '-1'
+    if (this.servicioSelected !== '' && this.turnoSelected !== ''
+      && this.grupoSelected !== '' && this.lugarSelected !== ''
       && this.fechaSelected !== null && this.radioBtnSelected) {
       return true;
     }
@@ -173,12 +178,13 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   getCronicasGrupales() {
+    console.log("ENTRAMOS");
     this.cronicasGrupales = [];
     let fechaConvertedFormat;
     if(this.fechaSelected) {
       fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
     }
-    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '-1' ? this.servicioSelected : '-', this.turnoSelected !== '-1' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '-1' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '-1' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
+    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '' ? this.servicioSelected : '-', this.turnoSelected !== '' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
       (cronicasGrupales: any) => {
         console.log("RESPUESTA CRONICAS: ", cronicasGrupales);
         this.cronicasGrupales = cronicasGrupales;
@@ -196,26 +202,8 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       'cronica': JSON.stringify(cronicaGrupal),
     }
     console.log("OBJETO DETALLE: ", cronicaGrupal);
-    // if (this.radioBtnSelected === 'Si') {
-    //   console.log(" ENTRAMOS A SI ");
-    //   if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
-    //     console.log("NO HAY INFO");
-    //     this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
-    //   } else {
-    //     console.log("SI HAY INFO");
-    //     this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
-    //   }
-    // } else if (this.radioBtnSelected === 'No') {
-    //   console.log(" ENTRAMOS A NO ");
-    //   if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
-    //     console.log("NO HAY INFO");
-    //     this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
-    //   } else {
-    //     console.log("SI HAY INFO");
-    //     this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
-    //   }
-    // } else {
-      // console.log(" ENTRAMOS SIN VALOR ");
+    if (this.radioBtnSelected === 'Si') {
+      console.log(" ENTRAMOS A SI ");
       if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
         console.log("NO HAY INFO");
         this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
@@ -223,7 +211,25 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.log("SI HAY INFO");
         this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
       }
-    // }
+    } else if (this.radioBtnSelected === 'No') {
+      console.log(" ENTRAMOS A NO ");
+      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
+        console.log("NO HAY INFO");
+        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+      } else {
+        console.log("SI HAY INFO");
+        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+      }
+    } else {
+      console.log(" ENTRAMOS SIN VALOR ");
+      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
+        console.log("NO HAY INFO");
+        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
+      } else {
+        console.log("SI HAY INFO");
+        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
+      }
+    }
   }
 
   sortBy(columnaId: string, order: string, type: string) {
