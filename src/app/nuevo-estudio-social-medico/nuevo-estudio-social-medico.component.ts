@@ -40,7 +40,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
 
   formEstudioSocial: any = this.formBuilder.group({
     solicitadoPor: ['', Validators.required],
-    fecha: [null, Validators.required],
+    fecha: ['', Validators.required],
     cp: ['', Validators.required],
     estado: ['', Validators.required],
     municipio: ['', Validators.required],
@@ -99,6 +99,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.datosExploracionCaso = false;
     this.loadCatalogos();
     this.loadCatalogosFamiliar();
+    this.formEstudioSocial.get('fecha').patchValue(moment().format('DD/MM/YYYY'));
   }
 
   ngAfterViewInit(): void {
@@ -106,7 +107,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+          // date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.formEstudioSocial.get('fecha')?.patchValue(date);
         }
       },
@@ -306,7 +307,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   guardarEstudioSocial() {
     let estudioMedicoData: EstudioMedico = {
       nombreSolicitante: this.formEstudioSocial.get('solicitadoPor').value,
-      fecFecha: moment().format('YYYY-MM-DD'),
+      fecFecha: moment(this.formEstudioSocial.get('fecha').value, "DD/MM/YYYY").format('YYYY-MM-DD'),
       timHora: moment().format('HH:mm:ss'),
       codigoPostal: this.formEstudioSocial.get('cp').value,
       idEstado: this.formEstudioSocial.get('estado').value,
