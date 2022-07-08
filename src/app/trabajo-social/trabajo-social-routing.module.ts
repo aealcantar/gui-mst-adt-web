@@ -24,6 +24,8 @@ import { NuevoAvisoMpComponent } from './avisos-mp/nuevo-aviso-mp/nuevo-aviso-mp
 import { ConsultaAvisoMpComponent } from './avisos-mp/consulta-aviso-mp/consulta-aviso-mp.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 
+import { ConsultaInformeServiciosComponent } from './informe-servicios-profesionales/consulta-informe-servicios/consulta-informe-servicios.component';
+
 
 //las rutas serian
 // :4200/trabajo-social/nuevo-control-articulos
@@ -62,6 +64,10 @@ const routes: Routes = [
 
   { path: 'agregar-aviso-mp', component: NuevoVdonacionSangreComponent },
   { path: 'consulta-aviso-mp', component: ConsultaVolantesDonacionComponent },
+
+  //Informe servicios profecionales
+  { path: 'consulta-informe-servicios', component:   ConsultaInformeServiciosComponent},
+
 
 ];
 
