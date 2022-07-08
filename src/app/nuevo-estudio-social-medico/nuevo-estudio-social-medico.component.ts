@@ -99,7 +99,6 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.datosExploracionCaso = false;
     this.loadCatalogos();
     this.loadCatalogosFamiliar();
-    this.formEstudioSocial.controls['fecha'].disable();
   }
 
   ngAfterViewInit(): void {
