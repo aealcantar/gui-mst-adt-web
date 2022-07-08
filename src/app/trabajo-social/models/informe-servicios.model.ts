@@ -9,4 +9,10 @@ export class InformeServicios {
     desUbicacion?: string | null;
     idResponsable?: number;
     desResponsable?: string | null;
+    numero?: string;
+    paciente?: string;
+    horaCita?: string;
+    agregadoMedico?: string;
+    primeraVez?: string;
+    citado?: string;
 }

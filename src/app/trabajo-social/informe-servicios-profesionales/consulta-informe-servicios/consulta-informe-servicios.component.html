@@ -1,3 +1,4 @@
+<app-menu [activeItem]="1"></app-menu>
 <app-card-template>
     <div header class="flex justify-content-between align-items-center consultaControlDeArticulos">
         <label>
@@ -129,9 +130,9 @@
                                 <tr>
                                     <td class="bordesTablaFecha" style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;" (click)="irDetalle(item);">{{ item.numero }}</td>
                                     <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.paciente}} </td>
-                                    <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.hora}} </td>
-                                    <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.medico}} </td>
-                                    <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.primera}} </td>
+                                    <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.horaCita}} </td>
+                                    <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.agregadoMedico}} </td>
+                                    <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.primeraVez}} </td>
                                     <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.citado}} </td>
                                 </tr>
                             </tbody>
