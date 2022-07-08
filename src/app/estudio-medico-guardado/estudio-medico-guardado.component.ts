@@ -173,7 +173,8 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       datosFamiliares: this.estudioMedico.datoFamiliar,
       datosEconomicos: this.estudioMedico.datoEconomico,
       municipio: this.estudioMedico.nombreDelegacionMunicipio,
-      estudioSolicitado: this.estudioMedico.nombreSolicitante?.toUpperCase()
+      estudioSolicitado: this.estudioMedico.nombreSolicitante?.toUpperCase(),
+      fechaEstudio: this.estudioMedico.fecFecha,
     };
 
     console.log("DATA REPORT: ", reporteEstudioMedicoSocial);
