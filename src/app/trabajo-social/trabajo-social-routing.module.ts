@@ -67,7 +67,7 @@ const routes: Routes = [
 
   //Informe servicios profecionales
   { path: 'consulta-informe-servicios', component:   ConsultaInformeServiciosComponent},
-
+  { path: 'detalle-informe-servicios/:id', component: DetalleControlArticulosComponent },
 
 ];
 

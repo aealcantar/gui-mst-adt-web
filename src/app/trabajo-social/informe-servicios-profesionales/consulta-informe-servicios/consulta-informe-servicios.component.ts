@@ -41,6 +41,25 @@ export class ConsultaInformeServiciosComponent implements OnInit, AfterViewInit 
   radioBtnSelected: any;
   datosBusqueda: Array<any> = [];
 
+  public datosPrueba =  [
+    { 
+    "numero": "12345",
+    "paciente": "Miguel Sanchez",
+    "horaCita": "10:00:00",
+    "agregadoMedico": "Nataly",
+    "primeraVez": "true",
+    "citado": "11",
+    },
+    { 
+    "numero": "67890",
+    "paciente": "Angel Hernandez",
+    "horaCita": "10:00:00",
+    "agregadoMedico": "Nataly",
+    "primeraVez": "true",
+    "citado": "12",
+    }
+    ];
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -137,9 +156,13 @@ export class ConsultaInformeServiciosComponent implements OnInit, AfterViewInit 
   }
 
   buscar() {
-    
+    this.getInformesTest();
   }
   
+  getInformesTest() {
+    this.datosBusqueda = this.datosPrueba;
+  }
+
   getInformes() {
     this.datosBusqueda = [];
     let fechaConvertedFormat;
@@ -157,8 +180,12 @@ export class ConsultaInformeServiciosComponent implements OnInit, AfterViewInit 
     );
   }
 
-  irDetalle(cronicaGrupal: any) {
-
+   //redirecciona al detalle
+   irDetalle(informeServicios: InformeServicios) {
+    let params = {
+      'controlArticulos': JSON.stringify(informeServicios),
+    }
+    this.router.navigateByUrl("/detalle-informe-servicios/" + informeServicios.numero, { skipLocationChange: true })
   }
 
   //ordenamiento
