@@ -414,87 +414,71 @@ export class CitaguardaComponent implements OnInit {
             this.submitted = true;
             if (this.citadata.valid) {
               this.msjLoading("Cargando...");
-              this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
+
+              interface LooseObject {
+                [key: string]: any
+              }
+
+              var req: LooseObject = {
+                "cveCalendarioAnual": this.citadata.value.hora.cve_calendario_anual,
+                "nss": this.paciente ? this.paciente.nss : 0,
+                "DescripcionServicio": this.citadata.value.servicio.des_especialidad,
+                "grupoPrograma": this.citadata.value.programa.des_grupo_programa,
+                "fechaInicio": this.citadata.value.hora.fec_inicio,
+                "horaInicio": this.citadata.value.hora.tim_hora_inicio,
+                "fechaFin": this.citadata.value.hora.fec_fin,
+                "horaFin": this.citadata.value.hora.tim_hora_fin,
+                "duracion": this.citadata.value.hora.num_duracion,
+                "ubicacion": this.datoscita['Ubicación (Lugar de atención)'],
+                "trabajadorSocial": this.datoscita['Trabajadora social responsable'] ? this.datoscita['Trabajadora social responsable'] : "",
+                "unidadMedica": this.datoscita.Unidad,
+                "direccion": this.datoscita.Dirección,
+                "turno": this.datoscita.Turno,
+                "ocasionServicio": this.citadata.value.ocasion,
+                "modalidad": this.citadata.value.modalidad,
+                "tipoCita": this.datoscita['Tipo de cita'],
+                //"participantes": []
+              };
+
+              let arrparts = [];
+              this.lstParticipantes.forEach(val => {
+                arrparts.push({ "nombre": val, "tipo": 3 });
+              })
+
+              for (var oj of this.checkedList) {
+                arrparts.push({ "nombre": oj.value, "tipo": oj.isfam ? "2" : "1" });
+              }
+              req['participantes'] = arrparts;
+
+              this.citaservice.guardacita(req).subscribe({
                 next: (resp: any) => {
-                  //console.log(resp);
-                  if (resp) {
-
-                    interface LooseObject {
-                      [key: string]: any
-                    }
-
-                    var req: LooseObject = {
-                      "cveCalendarioAnual": this.citadata.value.hora.cve_calendario_anual,
-                      "nss": this.paciente ? this.paciente.nss : 0,
-                      "DescripcionServicio": this.citadata.value.servicio.des_especialidad,
-                      "grupoPrograma": this.citadata.value.programa.des_grupo_programa,
-                      "fechaInicio": this.citadata.value.hora.fec_inicio,
-                      "horaInicio": this.citadata.value.hora.tim_hora_inicio,
-                      "fechaFin": this.citadata.value.hora.fec_fin,
-                      "horaFin": this.citadata.value.hora.tim_hora_fin,
-                      "duracion": this.citadata.value.hora.num_duracion,
-                      "ubicacion": this.datoscita['Ubicación (Lugar de atención)'],
-                      "trabajadorSocial": this.datoscita['Trabajadora social responsable'] ? this.datoscita['Trabajadora social responsable'] : "",
-                      "unidadMedica": this.datoscita.Unidad,
-                      "direccion": this.datoscita.Dirección,
-                      "turno": this.datoscita.Turno,
-                      "ocasionServicio": this.citadata.value.ocasion,
-                      "modalidad": this.citadata.value.modalidad,
-                      "tipoCita": this.datoscita['Tipo de cita'],
-                      //"participantes": []
-                    };
-
-                    let arrparts = [];
-
-                    this.lstParticipantes.forEach(val => {
-                      arrparts.push({ "nombre": val, "tipo": 3 });
-                    })
-
-                    for (var oj of this.checkedList) {
-                      arrparts.push({ "nombre": oj.value, "tipo": oj.isfam ? "2" : "1" });
-                    }
-
-                    req['participantes'] = arrparts;
-
-                    this.citaservice.guardacita(req).subscribe({
+                  if (resp.estatus == true) {
+                    this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
                       next: (resp: any) => {
-                        //console.log(resp);
                         Swal.close();
-                        if (resp.estatus == true) {
-                          this.muestraAlerta(this._Mensajes.MSJ_EXITO_AGENDA_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO);
-
+                        if(resp){
                           this.citaagendada = true;
-
+                          this.muestraAlerta(this._Mensajes.MSJ_EXITO_AGENDA_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO);
                         } else {
-
-                          // this.muestraAlerta(
-                          //   'El espacio de cita seleccionado se encuentra bloqueado y no puede agendar citas. Favor de seleccionar otro espacio.',
-                          //   'alert-danger',
-                          //   'Error'
-                          // );
-
-                          this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                           this.citaagendada = false;
+                          this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                         }
-
                       },
                       error: (err) => {
-                        //console.log(err);
                         Swal.close();
-
+                        this.citaagendada = false;
                         this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                       }
                     })
                   } else {
                     Swal.close();
-
-                    this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+                    this.citaagendada = false;
+                    this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                   }
                 },
                 error: (err) => {
-                  //console.log(err);
                   Swal.close();
-
+                  this.citaagendada = false;
                   this.muestraAlerta(this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                 }
               })
