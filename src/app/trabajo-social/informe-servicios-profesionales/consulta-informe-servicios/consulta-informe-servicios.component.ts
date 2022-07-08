@@ -183,7 +183,7 @@ export class ConsultaInformeServiciosComponent implements OnInit, AfterViewInit 
    //redirecciona al detalle
    irDetalle(informeServicios: InformeServicios) {
     let params = {
-      'controlArticulos': JSON.stringify(informeServicios),
+      'informeServicios': JSON.stringify(informeServicios),
     }
     this.router.navigateByUrl("/detalle-informe-servicios/" + informeServicios.numero, { skipLocationChange: true })
   }

@@ -1,0 +1,168 @@
+.tituloHeader {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px !important;
+    line-height: 29px !important;
+    padding-left: 44px !important;
+    /* margin-bottom: 20px !important;
+  padding-top:  20px !important; */
+}
+
+.capText {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    font-family: 'Montserrat';
+    color: #222222;
+}
+
+.rectangule {
+    box-sizing: border-box;
+    width: 1170px;
+    height: 154px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.fondocalendar {
+    background-color: #eeeeee;
+    transform: translateY(-8%);
+    background-size: 10px 12px;
+    background-repeat: no-repeat;
+    margin: 0.6px 1px 3px 18.2px;
+    padding: 0 20.2px 0 18.2px;
+    height: 36.5px;
+    border-radius: 2px 2px 2px 2px;
+}
+
+.imgCalendar {
+    background-image: url("src/assets/images/calendario.svg");
+    background-repeat: no-repeat;
+    color: #191919;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-49%);
+    background-size: 20px 19px;
+    margin-left: -1.6px;
+}
+
+.datepicker-group .glyphicon {
+    color: #EEEEEE !important;
+}
+
+.labelTitle {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #222222;
+}
+
+input {
+    height: 30px;
+}
+
+input,
+textarea,
+select {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.height154 {
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.labelDetail {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    /* Untitled/Negro */
+    color: #222222;
+}
+
+.instText {
+    font-family: 'Montserrat';
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 17px !important;
+    /* identical to box height */
+    color: #222222 !important;
+}
+
+.labels {
+    font-family: 'Montserrat' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    color: #222222 !important;
+}
+
+.minHeight381 {
+    min-height: 381px !important;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.title1 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #222222;
+}
+
+.tableArticulos thead th {
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 5px 5px 0px 0px;
+    border: 0.576942px solid #EEEEEE;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 14px;
+}
+
+.tableArticulos tbody td {
+    border: 0.576942px solid #EEEEEE;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 14px;
+    color: #000000;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    background-color: #9D2449!important;
+}
+
+.table>tbody>tr>td {
+    padding: 0px !important;
+}
+
+.table>thead>tr>th {
+    padding: 3px !important;
+}

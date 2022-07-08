@@ -26,6 +26,7 @@ import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { ConsultaInformeServiciosComponent } from './informe-servicios-profesionales/consulta-informe-servicios/consulta-informe-servicios.component';
+import { DetalleInformeServiciosComponent } from './informe-servicios-profesionales/detalle-informe-servicios/detalle-informe-servicios.component';
  
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ConsultaInformeServiciosComponent } from './informe-servicios-profesion
     ConsultaVolantesDonacionComponent,
     DetalleVolantesDonacionSangreComponent,
     ConsultaInformeServiciosComponent,
+    DetalleInformeServiciosComponent,
   ],
   imports: [
     MatDialogModule,

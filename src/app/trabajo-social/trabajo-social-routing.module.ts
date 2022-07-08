@@ -25,6 +25,7 @@ import { ConsultaAvisoMpComponent } from './avisos-mp/consulta-aviso-mp/consulta
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 
 import { ConsultaInformeServiciosComponent } from './informe-servicios-profesionales/consulta-informe-servicios/consulta-informe-servicios.component';
+import { DetalleInformeServiciosComponent } from './informe-servicios-profesionales/detalle-informe-servicios/detalle-informe-servicios.component';
 
 
 //las rutas serian
@@ -67,7 +68,7 @@ const routes: Routes = [
 
   //Informe servicios profecionales
   { path: 'consulta-informe-servicios', component:   ConsultaInformeServiciosComponent},
-  { path: 'detalle-informe-servicios/:id', component: DetalleControlArticulosComponent },
+  { path: 'detalle-informe-servicios/:id', component: DetalleInformeServiciosComponent },
 
 ];
 
