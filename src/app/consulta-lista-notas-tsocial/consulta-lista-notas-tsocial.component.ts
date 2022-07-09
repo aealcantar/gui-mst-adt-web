@@ -73,14 +73,16 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
       }
-    );
-       if(this.tabla.length  == 0){
-        this.muestraAlerta(
-          'Verifique los filtros',
-          'alert-warning',
-          'Sin resultados',
-        );
-      }
+      ).add( ()=>{
+        if(this.tabla.length  == 0){
+          debugger
+          this.muestraAlerta(
+            'Verifique los filtros',
+            'alert-warning',
+            'Sin resultados',
+          );
+        }
+      });
     // }
   }
 
