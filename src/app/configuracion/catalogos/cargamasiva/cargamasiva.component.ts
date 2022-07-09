@@ -263,7 +263,7 @@ export class CargamasivaComponent implements OnInit {
             this.unidadMedica[index].entidad = element[this.confCarga.col31];
             this.unidadMedica[index].claveJurisdiccionSanitaria = element[this.confCarga.col32];
             this.unidadMedica[index].jurisdiccionSanitaria = element[this.confCarga.col33];
-            this.unidadMedica[index].jurisdiccionSanitaria = element[this.confCarga.col34];
+            this.unidadMedica[index].latitud = element[this.confCarga.col34];
             this.unidadMedica[index].longitud = element[this.confCarga.col35];
             this.unidadMedica[index].inicioProductividad = element[this.confCarga.col36];
             this.unidadMedica[index].gradoMArginacion = element[this.confCarga.col37];
@@ -310,6 +310,7 @@ export class CargamasivaComponent implements OnInit {
             this.responsable[index].nombre = element[this.confCarga.col2];
             this.responsable[index].ubicacion = element[this.confCarga.col3];
             this.responsable[index].turno = element[this.confCarga.col4];
+            this.responsable[index].servicioEspecialidad = element[this.confCarga.col5];
             break;
           case 5:
             this.programasTS[index] = new ProgramaTS();
@@ -322,7 +323,7 @@ export class CargamasivaComponent implements OnInit {
 
           case 6:
             this.calendarioDias[index] = new CalendarioDias();
-            this.calendarioDias[index].cveServicio = element[this.confCarga.col1];
+            this.calendarioDias[index].cvePrograma = element[this.confCarga.col1];
             this.calendarioDias[index].cveUbicacion = element[this.confCarga.col2];
             let jsDateIn = XLSX.SSF.parse_date_code(element[this.confCarga.col3]);
             let fechaInicio = this.generateDate(jsDateIn.d, jsDateIn.m, jsDateIn.y);
