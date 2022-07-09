@@ -6,6 +6,8 @@ import { NotasService } from 'src/app/service/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Nota } from '../models/notas.model';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
+import { isEmpty } from 'rxjs';
 
 declare var $: any;
 
@@ -26,6 +28,8 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
+  alert!: AlertInfo;
+  errorBusqueda: boolean = false;
   // tabla = [{ "Fecha": "20/06/2022", "Descripcion": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
 
   constructor(
@@ -70,6 +74,14 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
         console.error(httpErrorResponse);
       }
     );
+       if(this.tabla.length  == 0){
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    // }
   }
 
   ngAfterViewInit(): void {
@@ -164,5 +176,26 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
         break;
     }
     return data;
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 }
