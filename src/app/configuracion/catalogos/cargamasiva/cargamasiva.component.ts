@@ -360,7 +360,7 @@ export class CargamasivaComponent implements OnInit {
             this.persona[index].email = element[this.confCarga.col8];
 
             this.persona[index].escuelaProcedencia = element[this.confCarga.col9];
-            this.persona[index].contraseña = this.persona[index].matricula+"";
+            this.persona[index].contrasena = this.persona[index].matricula+"";
             this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
             this.persona[index].usuario = this.persona[index].matricula;
             break;
