@@ -262,7 +262,7 @@ export class UbicacionesComponent implements OnInit {
   }
 
   muestraHorarios(cveUbicacion: number) {
-    debugger
+    //debugger
     // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion, { skipLocationChange: true });
     this.router.navigate(['/catalogos/horarios/' + cveUbicacion], { skipLocationChange: true });
 
