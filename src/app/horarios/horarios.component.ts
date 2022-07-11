@@ -181,10 +181,8 @@ export class HorariosComponent implements OnInit {
         case 200:
           if (resp.data.length > 0) {
             this.agregarHorarioBtn=false;     
-            this.validarDia();          
-            
             //this.lblBtnHabilitar = 'Inhabilitar día';
-           
+            this.validarDia();//se valida el día solo cuando hay elementos, sino siempre inicia deshabilitado
             this.diaSeleccionado.horarios.forEach(data => {
 
               data.horaInicial = data.horaInicial.trim();
@@ -236,10 +234,10 @@ export class HorariosComponent implements OnInit {
   }
 
 
-  private obtenerHorarioporDia(dia: string) {
+  private obtenerHorarioporDia(cveUbicacion:number,dia: string) {
     this.diaSeleccionado.horarios = [];
     this.msjLoading("Cargando...");
-    this.horarioService.getHorariosByDia(dia).subscribe((resp: HorarioResponse) => {
+    this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
       this.diaSeleccionado.horarios = resp.data;
       console.log(this.diaSeleccionado.horarios);
       switch (resp.code) {
@@ -250,9 +248,9 @@ export class HorariosComponent implements OnInit {
               data.horaInicial = data.horaInicial.trim();
               data.horaFinal = data.horaFinal.trim();
             });
-
             console.log("horarios: ", this.diaSeleccionado.horarios);
           }
+          this.validarDia()//se valida, existan horarios o no, al actualizar el estatus
           Swal.close();
           break;
         case 204:
@@ -278,8 +276,6 @@ export class HorariosComponent implements OnInit {
           Swal.close();
           break;
       }
-
-     
     }, (error: HttpErrorResponse) => {
       this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
       Swal.close();
@@ -294,22 +290,36 @@ export class HorariosComponent implements OnInit {
         cont = cont + 1;
       }
     }
-
     if (cont != 0) {
-      this.blnHabil = false;
+      this.blnHabil = true;
       this.lblBtnHabilitar = 'Habilitar día';
       this.lblHabilitar = 'habilitar';
+      this.agregarHorarioBtn=true; 
     } else {
-      this.blnHabil = true;
-      this.lblBtnHabilitar = 'Inhabilitar día';
-      this.lblHabilitar = 'inhabilitar';
+
+      if(!this.blnHabil){
+        this.blnHabil = true;
+        this.lblBtnHabilitar = 'Habilitar día';
+        this.lblHabilitar = 'habilitar';
+        this.agregarHorarioBtn=true; 
+        console.log('cambiar boton habilitado');
+
+      }else{
+        this.blnHabil = false;
+        this.lblBtnHabilitar = 'Inhabilitar día';
+        this.lblHabilitar = 'inhabilitar';
+        this.agregarHorarioBtn=false;
+        console.log('cambiar boton Deshabilitado');
+      }
 
     }
+    
 
     this.diainhabil = {
-      dia: this.diaNb,
-      inhabil: !this.blnHabil
+      dia: this.diaNb+1, 
+      inhabil: this.blnHabil
     };
+    console.log('dia estado',this.diainhabil);
 
   }
 
@@ -317,26 +327,29 @@ export class HorariosComponent implements OnInit {
     this.msjLoading(this.lblBtnHabilitar + "...");
     this.request = new HorarioRequest();
     this.request.dia = this.semana[this.diaNb];
-
     let result = this.diaSeleccionado.horarios.find(horario => horario.estatus.cveClave == "DIA_DESHABILITADO");
-    if (result == null) {
-      this.request.estatus = "DIA_DESHABILITADO";
-
+    console.log({result});
+    if (result) {
+      this.request.estatus = "DIA_HABILITADO";
+      
     }
     else {
-
-     this.request.estatus = "DIA_HABILITADO";
-
+      // console.log('total horarios',this.diaSeleccionado.horarios.length);
+      this.request.estatus = "DIA_DESHABILITADO";
+      
     }
-
+    console.log('actualización',this.request);
     this.horarioService.modificarEstatusDia(this.request).subscribe((resp) => {
+      console.log('respuesta update',resp.type);
       switch (resp.body.code) {
         case 200:
 
-
+          
           console.log("pintar alerta de exito");
-
-          this.obtenerHorarioporDia(this.dia);
+          
+          // console.log('dia',this.dia);
+          this.obtenerHorarioporDia(this.cveUbicacion,this.dia);
+          
 
           Swal.close();
           break;
@@ -525,7 +538,7 @@ export class HorariosComponent implements OnInit {
         $('#horario').modal('hide')
         Swal.close();
       }
-      this.obtenerHorarioporDia(this.dia);
+      this.obtenerHorarioporDia(this.cveUbicacion,this.dia);
     }, (error: HttpErrorResponse) => {
       this.lstTurnos = new Array();
       this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
@@ -556,7 +569,7 @@ export class HorariosComponent implements OnInit {
         $('#content').modal('hide')
         Swal.close();
       }
-      this.obtenerHorarioporDia(this.dia);
+      this.obtenerHorarioporDia(this.cveUbicacion,this.dia);
     }, (error: HttpErrorResponse) => {
       $('#content').modal('hide')
 
@@ -631,6 +644,7 @@ export class HorariosComponent implements OnInit {
       backdrop: 'static'
     })
     $('#inhabilitar').modal('show')
+    //console.log('botón habilitar');
   }
 
   btnHabilitarDeshabilitar() {
@@ -733,7 +747,7 @@ export class HorariosComponent implements OnInit {
     estatus.cveNombre = "Activo";
 
     this.horarioNuevo.estatus = estatus;
-    debugger
+    // debugger
     if (this.dia1) {
       let h = new Horario();
       h.duracion = this.horarioNuevo.duracion;
