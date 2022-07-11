@@ -33,13 +33,15 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   delegaciones: Municipio[] = [];
   ciudades: Ciudad[] = [];
   estadosFamiliar: Estado[] = [];
+  delegacionesFamiliar: Municipio[] = [];
+  ciudadesFamiliar: Ciudad[] = [];
   datetimeFormat = '';
   dateToday= new Date();
 
   constructor(
     private route: ActivatedRoute,
     private estudioMedicoService: EstudioSocialMedicoService
-  ) { 
+  ) {
     this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
   }
 
