@@ -23,10 +23,11 @@
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de defunción*:</span>
               <input
-                id="fechaDefuncion"
-                formControlName="fhDefuncion"
+                autocomplete="off"
+                id="fhDefuncion"
+                formControlName="fechaDefuncion"
                 class="form-control"
-                type="text"
+               
               />
 
               <span
@@ -42,7 +43,7 @@
               <span class="spanInput">Hora de defunción*:</span>
               <input
                 class="form-control"
-                formControlName="hrDefuncion"
+                formControlName="horaDefuncion"
                 type="text"
               />
               <span
@@ -56,7 +57,11 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Folio del certificado*:</span>
-              <input class="form-control" formControlName="folio" type="text" />
+              <input
+                class="form-control"
+                formControlName="foliofuncion"
+                type="text"
+              />
             </div>
           </div>
         </div>
@@ -74,13 +79,17 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">No. de Seguridad Social*:</span>
-              <input class="form-control" formControlName="nss" type="text" />
+              <input
+                class="form-control"
+                formControlName="nssPaciente"
+                type="text"
+              />
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Servicio*:</span>
-              <mat-select class="form-control" formControlName="servicio">
+              <mat-select class="form-control" formControlName="cveServicio">
                 <mat-option
                   *ngFor="let servicio of listaServicios"
                   [value]="servicio.cve_especialidad"
@@ -97,7 +106,8 @@
               <span class="spanInput">Fecha la entrega de certificado*:</span>
               <input
                 id="entregaCertificado"
-                formControlName="fhEntrega"
+                autocomplete="off"
+                formControlName="fechaDeEntregaDeCertificado"
                 class="form-control"
                 type="text"
               />
@@ -114,7 +124,7 @@
               <span class="spanInput">Hora de entrega del certificado*:</span>
               <input
                 class="form-control"
-                formControlName="hrEntrega"
+                formControlName="horaDeEntregaDeCertificado"
                 type="text"
               />
               <span
@@ -130,7 +140,7 @@
               <span class="spanInput">Funeraria*:</span>
               <input
                 class="form-control"
-                formControlName="funeraria"
+                formControlName="nombreFuneraria"
                 type="text"
               />
             </div>
@@ -144,7 +154,7 @@
               >
               <input
                 class="form-control"
-                formControlName="familiar"
+                formControlName="nombreFamiliar"
                 type="text"
               />
             </div>
@@ -156,7 +166,7 @@
               >
               <input
                 class="form-control"
-                formControlName="parentesco"
+                formControlName="parentescoFamiliar"
                 type="text"
               />
             </div>
@@ -201,9 +211,7 @@
           <div class="col-12 text-right">
             <button type="button" class="btn" (click)="cancelar()">
               Cancelar</button
-            ><button class="btn" type="submit" >
-              Guardar
-            </button>
+            ><button class="btn" type="submit">Guardar</button>
           </div>
         </div>
       </div>

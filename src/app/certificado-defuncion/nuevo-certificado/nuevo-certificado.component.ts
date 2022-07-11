@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
+import { CertificadoDefuncionService } from 'src/app/service/certificado-defuncion.service';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 
 @Component({
@@ -15,25 +16,27 @@ import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 })
 export class NuevoCertificadoComponent implements OnInit {
   formAdd;
+  certificado : CertificadoDefuncion;
   constructor(
     private formBuilder: FormBuilder,
-    private cronicaGrupalService: CronicaGrupalService
+    private cronicaGrupalService: CronicaGrupalService,
+    private certificadoService : CertificadoDefuncionService
   ) {
     this.formAdd = formBuilder.group({
-      fhDefuncion: ['', Validators.required],
-      hrDefuncion: ['', Validators.required],
-      folio: ['', Validators.required],
-      nss: ['', Validators.required],
-      servicio: ['', Validators.required],
-      nombreAsegurado: ['', Validators.required],
-      fhEntrega: ['', Validators.required],
-      hrEntrega: ['', Validators.required],
-      funeraria: ['', Validators.required],
-      familiar: ['', Validators.required],
-      parentesco: ['', Validators.required],
-      observaciones: ['', Validators.required],
-      trabajadorSocial: [''],
-      matricula: [''],
+      fechaDefuncion:new FormControl ('', Validators.required),
+      horaDefuncion:new FormControl ('', Validators.required),
+      foliofuncion:new FormControl ('', Validators.required),
+      nssPaciente:new FormControl ('', Validators.required),
+      cveServicio:new FormControl ('', Validators.required),
+      nombreAsegurado:new FormControl ('', Validators.required),
+      fechaDeEntregaDeCertificado:new FormControl ('', Validators.required),
+      horaDeEntregaDeCertificado:new FormControl ('', Validators.required),
+      nombreFuneraria:new FormControl ('', Validators.required),
+      nombreFamiliar:new FormControl ('', Validators.required),
+      parentescoFamiliar:new FormControl ('', Validators.required),
+      observaciones:new FormControl ('', Validators.required),
+      trabajadorSocial:new FormControl (''),
+      matricula:new FormControl (''),
     });
   }
 
@@ -49,11 +52,18 @@ export class NuevoCertificadoComponent implements OnInit {
   }
 
   guardar() {
-    if (!this.formAdd.valid) {
-      const certificado = new CertificadoDefuncion();
-      console.log(this.formAdd.get('fhDefuncion').value);
+    if (this.formAdd.valid) {
+      const certificado = this.formAdd.value as CertificadoDefuncion;
+      console.log(certificado);
+      this.certificadoService.insert(certificado).subscribe(response=>{
+        console.log(response)
+        this.certificado = certificado
+      })
+      
     } else {
-      alert('formulario no valido');
+      console.log(
+        `'formulario no valido' ${JSON.stringify(this.formAdd.value)}`
+      );
     }
   }
   cancelar() {
