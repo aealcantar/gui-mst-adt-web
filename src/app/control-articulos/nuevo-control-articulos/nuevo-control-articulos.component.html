@@ -106,7 +106,7 @@
               class="form-text form-text-error Campo-obligatorio "
             >
               Campo obligatorio
-            </small> 
+            </small>
           </div>
         </div>
       </div>
@@ -244,7 +244,7 @@
                 }" class="form-control hasDatepicker" id="horarioEntregaArticulo"
                 formControlName="horarioEntregaArticulo" placeholder="Ingresa hora" maxlength="5" />
               <span class="glyphicon fontIcono" aria-hidden="true">
-                <img src="assets/images/clock.svg" height="21px" class="icono" /></span>
+                <img src="assets/images/reloj.svg" height="21px" style="width: 20px;" class="icono" /></span>
             </div>
             <small *ngIf="
                 submitted && formNuevoArticulo.controls.resguardoHora.errors
@@ -297,7 +297,7 @@
                 }" class="form-control hasDatepicker" id="resguardoHora" formControlName="resguardoHora"
                 placeholder="Ingresa hora" maxlength="5" />
               <span class="glyphicon fontIcono" aria-hidden="true">
-                <img src="assets/images/clock.svg" height="21px" class="icono" /></span>
+                <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;"/></span>
             </div>
             <small *ngIf="
                 submitted && formNuevoArticulo.controls.resguardoHora.errors
@@ -364,7 +364,7 @@
                 }" class="calendario form-control" id="recepcionHora" formControlName="recepcionHora"
                 placeholder="Ingresa hora" maxlength="5" />
               <span class="glyphicon fontIcono" aria-hidden="true">
-                <img src="assets/images/clock.svg" height="21px" class="icono" /></span>
+                <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;"/></span>
             </div>
             <small *ngIf="
                submitted && formNuevoArticulo.controls.recepcionHora.errors
@@ -437,7 +437,7 @@
           Campo obligatorio
         </small>
           </div>
-         
+
 
           <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Horario para entregar artículos*:</span>
@@ -464,14 +464,28 @@
 
       <div class="row">
         <div class="col-md-8"></div>
-        <div class="col-sm-4" style="padding-left: 3.27em !important">
+        <!-- <div class="col-sm-4" style="padding-left: 3.27em !important">
           <button class="btn btn-danger btuser" type="button" (click)="cancelar(cancelarModal)">
             Cancelar
           </button>
           <button type="submit" class="btn btn-primary btn-guardar">
             Guardar
           </button>
+        </div> -->
+
+
+        <div class="col-md-4" style="padding-top: 29px; padding-right: 17px;  margin-top: -1.4%;">
+          <button type="submit" class="btn btn-primary buttonL"
+            style="float: right;border: solid 1px #9d2449;">
+            Guardar
+          </button>
+          <button type="button" class="btn btn-danger buttonL" (click)="cancelar(cancelarModal)"
+          style="float: right; border: solid 1px #b38e5d;">
+          Cancelar
+        </button>
         </div>
+
+
       </div>
     </form>
   </div>
@@ -496,7 +510,7 @@
     <button class="btn btn-danger btuser" type="button" mat-dialog-close>
       Cancelar
     </button>
-    <button type="button" (click)="cancelarSinGuardar()" class="btn btn-primary buttonL btnGuardar" mat-dialog-close>
+    <button type="button" (click)="cancelarSinGuardar()" class="btn btn-primary  btnGuardar" mat-dialog-close>
       Aceptar
     </button>
   </div>

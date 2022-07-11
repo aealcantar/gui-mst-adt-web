@@ -84,7 +84,7 @@
                 </span>:
               </label>
               <select class="form-control captura" id="horafin" name="horafin" formControlName="horafin"
-              [(ngModel)]="horarioNuevo.horaFinal"  (change)="pintarTurno()"
+              [(ngModel)]="horarioNuevo.horaFinal" 
               [ngClass]="{'form-control-error': formfields.controls.horafin.errors}" required>
                 <option value="" disabled selected hidden>Seleccionar horario</option>
                 <option [value]="objeto" *ngFor="let objeto of lstHorarioFinal">{{objeto}}</option> -->
@@ -99,8 +99,10 @@
                 <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.turno.errors}">*
                 </span>:
               </label>
+              
+              
               <select class="form-control captura" id="turno" name="turno" formControlName="turno"
-              [(ngModel)]="turnoNuevo.des_turno"   (change)="pintarTurno()"
+              [(ngModel)]="turnoNuevo.des_turno"   (change)="cambiarTurnoAdd()"
               [ngClass]="{'form-control-error': formfields.controls.turno.errors}" required>
                 <option value="" disabled selected hidden>Seleccionar turno</option>
                 <option [value]="objeto.des_turno" *ngFor="let objeto of lstTurnos">{{objeto.des_turno}}</option>

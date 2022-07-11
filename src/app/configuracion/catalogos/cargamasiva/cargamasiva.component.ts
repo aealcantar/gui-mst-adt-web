@@ -120,6 +120,8 @@ export class CargamasivaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log('clave usuario',JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']);
+    this.idUser = JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']
     const taghtml = document.querySelector('html');
     taghtml.style.cssText += 'top: 0px;';
 

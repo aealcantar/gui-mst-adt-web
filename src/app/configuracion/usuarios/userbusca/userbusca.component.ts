@@ -203,7 +203,10 @@ export class UserbuscaComponent implements OnInit  {
 
     dialogo1.afterClosed().subscribe(art => {
       console.log("result: ", art);
-      //if (art != undefined)
+      if (!art['iscancel']){
+        console.log('cargado');
+        this.buscarusuario();
+      }
 
     });
 
@@ -218,6 +221,7 @@ export class UserbuscaComponent implements OnInit  {
     const org = localStorage.getItem('origen');
     if(org){
       localStorage.removeItem('origen');
+      console.log('origen',org);
       this.router.navigateByUrl(org, { skipLocationChange: true });
     } else{
       this.router.navigateByUrl("busqueda", { skipLocationChange: true });

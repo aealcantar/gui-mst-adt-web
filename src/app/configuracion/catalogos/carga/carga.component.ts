@@ -74,6 +74,7 @@ export class CargaComponent implements OnInit {
     }, 3000);
 
     if(localStorage.getItem('origen')){
+      console.log('quita origen');
       localStorage.removeItem('origen');
     }
 
@@ -141,7 +142,8 @@ export class CargaComponent implements OnInit {
     switch (catalogo.idCatalogos) {
       case 3:
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
-          localStorage.setItem('origen', this.router.url);
+          // localStorage.setItem('origen', this.router.url);
+          // console.log('origen ruta',localStorage.getItem('origen'));
           this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones", { skipLocationChange: true });
         } else {
           // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
@@ -151,7 +153,8 @@ export class CargaComponent implements OnInit {
         break;
       case 7:
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
-          localStorage.setItem('origen', this.router.url);
+          // localStorage.setItem('origen', this.router.url);
+          // console.log('origen ruta',localStorage.getItem('origen'));
           this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
         } else {
           // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
