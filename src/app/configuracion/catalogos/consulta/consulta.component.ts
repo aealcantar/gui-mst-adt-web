@@ -494,7 +494,7 @@ export class ConsultaComponent implements OnInit {
             this.persona[index].puesto = element[this.confCarga.col6]
             this.persona[index].nombreCompleto = element[this.confCarga.col7];
             this.persona[index].usuario = element[this.confCarga.col8];
-            this.persona[index].contraseña = element[this.confCarga.col9];
+            this.persona[index].contrasena = element[this.confCarga.col9];
             this.persona[index].turno = element[this.confCarga.col10]; 
             break;
 
