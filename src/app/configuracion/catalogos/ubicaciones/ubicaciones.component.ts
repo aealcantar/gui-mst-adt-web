@@ -258,7 +258,15 @@ export class UbicacionesComponent implements OnInit {
 
 
   btnAtras() {
-    this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
+    const org = localStorage.getItem('origen');
+    if(org){
+      localStorage.removeItem('origen');
+      console.log('origen',org);
+      this.router.navigateByUrl(org, { skipLocationChange: true });
+    } else{
+      this.router.navigateByUrl("busqueda", { skipLocationChange: true });
+    }
+    // this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
   }
 
   muestraHorarios(cveUbicacion: number) {
