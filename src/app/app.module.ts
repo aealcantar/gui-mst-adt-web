@@ -76,7 +76,6 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
-// import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 //import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
@@ -139,22 +138,20 @@ registerLocaleData('es');
     EstudioMedicoGuardadoComponent,
     ConsultaVolantesDonacionComponent,
     CardTemplateExpandibleComponent,
-    // ConsultaControlArticulosComponent,
+    ConsultaControlArticulosComponent,
     CatalogosComponent,
     CargaComponent,
     HorariosComponent,
     MenuhorariosComponent,
     TrabajoSocialComponent,
-    
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
     UbicacionesComponent,
     CargamasivaComponent,
-    ConsultaControlArticulosComponent,
     DetalleControlArticulosComponent,
     NuevoControlArticulosComponent,
     //volantes donacion
-    NuevoVdonacionSangreComponent, 
+    NuevoVdonacionSangreComponent,
     ConsultaVolantesDonacionComponent,
     DetalleVolantesDonacionSangreComponent,
   ],

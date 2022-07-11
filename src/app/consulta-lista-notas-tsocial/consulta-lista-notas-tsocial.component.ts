@@ -28,8 +28,8 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
-  alert!: AlertInfo;
-  errorBusqueda: boolean = false;
+  public alert!: AlertInfo;
+  public errorBusqueda: boolean = false;
   // tabla = [{ "Fecha": "20/06/2022", "Descripcion": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
 
   constructor(
@@ -75,7 +75,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
       }
       ).add( ()=>{
         if(this.tabla.length  == 0){
-          debugger
           this.muestraAlerta(
             'Verifique los filtros',
             'alert-warning',
@@ -83,7 +82,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
           );
         }
       });
-    // }
   }
 
   ngAfterViewInit(): void {

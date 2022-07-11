@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 import * as momment from 'moment';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 
 declare var $: any;
 
@@ -36,6 +37,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   radioBtnSelected: any;
 
   cronicasGrupales: any[] = [];
+  alert!: AlertInfo;
 
   constructor(
     private router: Router,
@@ -54,6 +56,13 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
     this.authService.setProjectObs("Trabajo social");
+    this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
+      (cronicasGrupales: any) => {
+        this.cronicasGrupales = [];
+        this.cronicasGrupales = cronicasGrupales;
+        console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
+      }
+    );
     this.loadCatalogos();
   }
 
@@ -108,13 +117,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
-      }
-    );
-    this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
-      (cronicasGrupales: any) => {
-        this.cronicasGrupales = [];
-        this.cronicasGrupales = cronicasGrupales;
-        console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
       }
     );
   }
@@ -190,7 +192,15 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         this.cronicasGrupales = cronicasGrupales;
         console.log("CRONICAS GRUPALES BY FILTROS: ", this.cronicasGrupales);
       }
-    );
+    ).add( ()=>{
+      if(this.cronicasGrupales.length  == 0){
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    });;
   }
 
   addCronica() {
@@ -261,6 +271,27 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         break;
     }
     return data;
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
 }

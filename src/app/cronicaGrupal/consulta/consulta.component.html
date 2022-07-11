@@ -1,3 +1,4 @@
+<app-app-alerts [alert]="alert"></app-app-alerts>
 <app-menu [activeItem]="1"></app-menu>
 <app-card-template>
   <div header class="flex justify-content-between align-items-center consultaCronicasGrupales">
@@ -17,14 +18,6 @@
           <label class="control-label tituloServicio">
             Servicio:
           </label>
-          <!-- <select class="form-control" style="background-position-y: 10px;" aria-label="Servicio"
-            [(ngModel)]="this.servicioSelected" (change)="onChangeServicio($event)">
-            <option class="select-font" [value]="''" selected>Seleccionar servicio</option>
-            <option class="select-font" [value]="servicio.cve_especialidad"
-              *ngFor="let servicio of serviciosEspecialidad">
-              {{ servicio.des_especialidad }}</option>
-          </select> -->
-
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.servicioSelected" (selectionChange)="onChangeServicio()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar servicio</mat-option>
@@ -41,13 +34,6 @@
           <label class="control-label tituloServicio">
             Turno:
           </label>
-          <!-- <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
-            [(ngModel)]="this.turnoSelected" (change)="onChangeTurno($event)">
-            <option class="select-font" [value]="''" selected>Seleccionar turno</option>
-            <option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{ turno.des_turno }}
-            </option>
-          </select> -->
-
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.turnoSelected" (selectionChange)="onChangeTurno()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar turno</mat-option>
@@ -55,23 +41,13 @@
               {{ item.des_turno }}
             </mat-option>
           </mat-select>
-
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="form-group">
           <label class="control-label tituloServicio">
             Grupo:
           </label>
-          <!-- <select style="background-position-y: 10px;" class="form-control" aria-label="Servicio"
-            [(ngModel)]="this.grupoSelected" (change)="onChangeGrupo($event)">
-            <option class="select-font" [value]="''" selected>Seleccionar grupo</option>
-            <option class="select-font" [value]="grupo.cve_especialidad" *ngFor="let grupo of grupos">
-              {{ grupo.des_actividad }}
-            </option>
-          </select> -->
-
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.grupoSelected" (selectionChange)="onChangeGrupo()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar grupo</mat-option>
@@ -79,7 +55,6 @@
               {{ grupo.des_grupo_programa }}
             </mat-option>
           </mat-select>
-
         </div>
       </div>
     </div>
@@ -89,15 +64,6 @@
           <label class="control-label tituloServicio">
             Lugar:
           </label>
-          <!-- <select class="form-control" style="background-position-y: 10px;" aria-label="Servicio"
-            [(ngModel)]="this.lugarSelected" (change)="onChangeLugar($event)">
-            <option class="select-font" [value]="''" style="background-position-y: 10px;" selected>Seleccionar lugar
-            </option>
-            <option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
-              {{ lugar.des_completa_ubicacion }}
-            </option>
-          </select> -->
-
           <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.lugarSelected" (selectionChange)="onChangeLugar()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar lugar</mat-option>
@@ -107,7 +73,6 @@
           </mat-select>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="form-group datepicker-group">
           <label class="control-label tituloServicio" for="calendar">Fecha:</label>
@@ -117,7 +82,6 @@
           </span>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="form-group">
           <label class="control-label tituloServicio">
@@ -140,34 +104,20 @@
       <div class="col-md-6">
         <label class="control-label">Búsquedas anteriores</label>
       </div>
-      <!-- <div class="col-md-6 flex justify-content-end">
-        <div class="form-group">
-          <label class="control-label">Visualizar datos</label>
-          <select class="form-select ml-5 select-view-data" [(ngModel)]="pageSize">
-            <option [ngValue]="15">15</option>
-            <option [ngValue]="20">20</option>
-            <option [ngValue]="25">25</option>
-          </select>
-        </div>
-      </div> -->
-
       <div class="col-md-6 flex justify-content-end">
         <div style="position: relative; float: right; display: flex;">
           <span class="visDatos" style="width: auto; float: right;">
             Visualizar datos
           </span>
-
           <mat-select
             class="form-select mat-select-table"
             [disableOptionCentering]="true"
             aria-label="Servicio"
-            [(ngModel)]="pageSize"
-          >
+            [(ngModel)]="pageSize">
             <mat-option class="select-font" [value]="15">15</mat-option>
             <mat-option class="select-font" [value]="20">20</mat-option>
             <mat-option class="select-font" [value]="25">25</mat-option>
           </mat-select>
-
         </div>
       </div>
     </div>

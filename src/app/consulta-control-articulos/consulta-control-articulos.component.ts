@@ -5,6 +5,7 @@ import { ControlArticuloService } from '../service/control-articulo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
+import { AlertInfo } from '../app-alerts/app-alert.interface';
 
 declare var $: any;
 
@@ -27,17 +28,17 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
-
+  public alert!: AlertInfo;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private Artservice: ControlArticuloService ,
+    private Artservice: ControlArticuloService,
     private fb: FormBuilder,
   ) {
 
 
-   }
+  }
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
@@ -61,14 +62,49 @@ export class ConsultaControlArticulosComponent implements OnInit {
   getNotasByFecha() {
     this.Artservice.getArticulosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
       (res) => {
-        if (res && res.ArrayList.length > 0) {
-          this.tabla = res.ArrayList;
+        if (res && res.listaControlArticulosDto.length > 0) {
+          this.tabla = res.listaControlArticulosDto;
+        } else if (res && res.listaControlArticulosDto.length === 0) {
+          this.muestraAlerta(
+            'Verifique los filtros',
+            'alert-warning',
+            'Sin resultados',
+          );
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
       }
-    );
+    ).add(() => {
+      if (this.tabla.length == 0) {
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    });
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
   ngAfterViewInit(): void {
