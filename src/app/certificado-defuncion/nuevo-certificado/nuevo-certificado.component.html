@@ -1,0 +1,138 @@
+<app-header-menu></app-header-menu>
+
+<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-card-template>
+  <div header class="flex justify-content-between aling-intems-center"><span>
+      Control TS - Certificado de defunción
+    </span></div>
+  <div content>
+    <div><span class="instrucciones">
+        Por favor capture los siguientes datos:
+      </span></div>
+    <form novalidate class="formInfo">
+      <div class="container seccion">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha de defunción*:</span>
+              <input id="fechaDefuncion" class="form-control" type="text">
+
+              <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Hora de defunción*:</span>
+              <input class="form-control" type="text">
+              <span class="glyphicon glyphicon-calendar fontIcono fondocalendar" aria-hidden="true">
+                <div class="imgClock"></div>
+
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Folio del certificado*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Nombre del asegurado*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">No. de Seguridad Social*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <mat-select class="form-control">
+                <mat-option *ngFor="let servicio of listaServicios" [value]="servicio.cve_especialidad">
+                  {{servicio.des_especialidad}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput ">Fecha la entrega de certificado*:</span>
+              <input class="form-control" type="text">
+              <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Hora de entrega del certificado*:</span>
+              <input class="form-control" type="text">
+              <span class="glyphicon glyphicon-calendar fontIcono fondocalendar" aria-hidden="true">
+                <div class="imgClock"></div>
+
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Funeraria*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Nombre del familiar que recibe certificado*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Parentesco del familiar que recibe certificado*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Observaciones*:</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Nombre del Trabajador social</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Matricula del Trabajador social</span>
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div><span class="instrucciones">
+              *Campos obligatorios
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</app-card-template>

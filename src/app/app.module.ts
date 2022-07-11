@@ -95,6 +95,7 @@ import { NuevoControlArticulosComponent } from './control-articulos/nuevo-contro
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 
 registerLocaleData('es');
 
@@ -154,6 +155,7 @@ registerLocaleData('es');
     NuevoVdonacionSangreComponent,
     ConsultaVolantesDonacionComponent,
     DetalleVolantesDonacionSangreComponent,
+    NuevoCertificadoComponent,
   ],
   imports: [
     BrowserModule,

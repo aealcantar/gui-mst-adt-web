@@ -26,9 +26,9 @@ import { UserguardaComponent } from './configuracion/usuarios/userguarda/usergua
 import { CitabuscaComponent } from './citas/citabusca/citabusca.component';
 import { CitaconsultaComponent } from './citas/citaconsulta/citaconsulta.component';
 import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
-import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component'
-import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component'
-import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component'
+import { NuevoControlArticulosComponent } from './control-articulos/nuevo-control-articulos/nuevo-control-articulos.component';
+import { DetalleControlArticulosComponent } from './control-articulos/detalle-control-articulos/detalle-control-articulos.component';
+import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
 // import { ConsultaControlArticulosComponent } from './consulta-control-articulos/consulta-control-articulos.component';
 
 import { CargaComponent } from './configuracion/catalogos/carga/carga.component';
@@ -40,11 +40,11 @@ import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 
-
-//donacion de sangre 
-import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';  
-import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component'; 
+//donacion de sangre
+import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
+import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
+import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -52,53 +52,69 @@ const routes: Routes = [
   { path: 'recuperarpassword', component: RegistroComponent },
   { path: 'busqueda', component: BusquedaNssComponent },
   { path: 'tarjeta', component: AppTarjetaPresentacionComponent },
-  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent},
-  { path: 'nuevaCronica', component: NuevaCronicaComponent},
-  { path: 'cronicaGuardada', component: CronicaGuardadaComponent},
-  { path: 'consulta-cronica-grupal', component: ConsultaComponent},
-  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent},
-  { path: 'nueva-nota', component: NuevaNotaTSocialComponent},
-  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent},
-  { path: 'consulta-estudios-medicos', component: ConsultaEstudiosMedicosComponent },
-  { path: 'nuevo-estudio-social-medico', component: NuevoEstudioSocialMedicoComponent },
-  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent},
-  { path: 'buscauser', component: UserbuscaComponent},
- // { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
-  { path: 'consultauser/:id', component: UserconsultaComponent},
-  { path: 'guardauser', component: UserguardaComponent},
-  { path: 'editauser/:id', component: UserguardaComponent},
-  { path: 'buscacita', component: CitabuscaComponent},
-  { path: 'consultacita/:id', component: CitaconsultaComponent},
-  { path: 'guardacita', component: CitaguardaComponent},
-  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent},
-  { path: 'detalle-articulos/:id', component: DetalleControlArticulosComponent},
-  { path: 'nuevo-articulo', component: NuevoControlArticulosComponent},
- // { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
+  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent },
+  { path: 'nuevaCronica', component: NuevaCronicaComponent },
+  { path: 'cronicaGuardada', component: CronicaGuardadaComponent },
+  { path: 'consulta-cronica-grupal', component: ConsultaComponent },
+  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent },
+  { path: 'nueva-nota', component: NuevaNotaTSocialComponent },
+  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent },
+  {
+    path: 'consulta-estudios-medicos',
+    component: ConsultaEstudiosMedicosComponent,
+  },
+  {
+    path: 'nuevo-estudio-social-medico',
+    component: NuevoEstudioSocialMedicoComponent,
+  },
+  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent },
+  { path: 'buscauser', component: UserbuscaComponent },
+  // { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
+  { path: 'consultauser/:id', component: UserconsultaComponent },
+  { path: 'guardauser', component: UserguardaComponent },
+  { path: 'editauser/:id', component: UserguardaComponent },
+  { path: 'buscacita', component: CitabuscaComponent },
+  { path: 'consultacita/:id', component: CitaconsultaComponent },
+  { path: 'guardacita', component: CitaguardaComponent },
+  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent },
+  {
+    path: 'detalle-articulos/:id',
+    component: DetalleControlArticulosComponent,
+  },
+  { path: 'nuevo-articulo', component: NuevoControlArticulosComponent },
+  // { path: 'nvdonacion-sangre', component: NuevoVdonacionSangreComponent },
   { path: 'nuevo-aviso-mp', component: NuevoAvisoMpComponent },
   { path: 'consulta-aviso-mp', component: ConsultaAvisoMpComponent },
-    //volanteDonacion
-    { path: 'agregar-volante-donacion-sangre', component: NuevoVdonacionSangreComponent },
-    { path: 'consulta-volantes-donacion', component: ConsultaVolantesDonacionComponent },
-    { path: 'detalle-volante-donacion-sangre/:id', component: DetalleVolantesDonacionSangreComponent },
+  //volanteDonacion
+  {
+    path: 'agregar-volante-donacion-sangre',
+    component: NuevoVdonacionSangreComponent,
+  },
+  {
+    path: 'consulta-volantes-donacion',
+    component: ConsultaVolantesDonacionComponent,
+  },
+  {
+    path: 'detalle-volante-donacion-sangre/:id',
+    component: DetalleVolantesDonacionSangreComponent,
+  },
   //{ path: '**', redirectTo: 'login' },
   {
-    path: 'catalogos', component: CatalogosComponent, children: [
+    path: 'catalogos',
+    component: CatalogosComponent,
+    children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
       { path: 'cargaCatalogos', component: CargaComponent },
       { path: 'ConfiguracionUbicaciones', component: UbicacionesComponent },
-      { path: 'horarios/:cveUbicacion', component: HorariosComponent }
-    ]
-  }
+      { path: 'horarios/:cveUbicacion', component: HorariosComponent },
+    ],
+  },
+  { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),
-    HttpClientModule
-  ],
-  exports: [
-    RouterModule,
-    HttpClientModule
-  ],
-  providers: [SeguridadRouter]
+  imports: [RouterModule.forRoot(routes), HttpClientModule],
+  exports: [RouterModule, HttpClientModule],
+  providers: [SeguridadRouter],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
