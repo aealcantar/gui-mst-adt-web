@@ -285,6 +285,7 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     this.lstCatResponsables = [];
     this.lstCatProgramas = [];
     this.lstCatLugares = [];
+    this.buscarcita();
   }
 
   buscarcita(){
