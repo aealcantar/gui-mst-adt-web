@@ -106,6 +106,18 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
   imprimir() {
     if (this.certificado !== undefined) {
+      this.certificadoService.imprimir(this.certificado).subscribe(
+        (response) => {
+          (response: Blob) => {
+            const file = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(file);
+            window.open(url);
+          };
+        },
+        (error) => {
+          console.log(`Error en certificado de defuncnion`, error);
+        }
+      );
     }
   }
   guardar() {
