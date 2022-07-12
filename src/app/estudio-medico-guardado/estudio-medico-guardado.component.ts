@@ -42,7 +42,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     private route: ActivatedRoute,
     private estudioMedicoService: EstudioSocialMedicoService
   ) {
-    this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
+    this.datetimeFormat = formatDate(this.dateToday, 'dd/MM/yyyy hh:mm:ss aa', 'en-ES');
   }
 
   async ngOnInit() {
@@ -184,26 +184,22 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   }
 
   convertDate(fechaNacimiento: String): string  {
-    let months;
-    if (!this.executed) {
-      this.executed = true;
-      let stringDate = fechaNacimiento.substring(3, 5) + "-" + fechaNacimiento.substring(0, 2) + "-" + fechaNacimiento.substring(6, 10);
-      let birthDate = new Date(stringDate);
-      console.log("FECHA: ", birthDate);
-      let today = new Date();
-      let age = today.getFullYear() - birthDate.getFullYear();
-      months = today.getMonth() - birthDate.getMonth();
-      if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      console.log("EDAD: ", age);
-      if (months > 0) {
-        console.log("MESES: ", months);
-        months = months;
-      } else {
-        months = months + 12;
-        console.log("MESES: ", months);
-      }
+    let stringDate = fechaNacimiento.substring(3, 5) + "-" + fechaNacimiento.substring(0, 2) + "-" + fechaNacimiento.substring(6, 10);
+    let birthDate = new Date(stringDate);
+    console.log("FECHA: ", birthDate);
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    console.log("EDAD: ", age);
+    if (months > 0) {
+      console.log("MESES: ", months);
+      months = months;
+    } else {
+      months = months + 12;
+      console.log("MESES: ", months);
     }
     return months + " meses";
   }
