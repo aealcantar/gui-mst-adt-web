@@ -205,11 +205,11 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent, canActivate: [SeguridadRouter] },
+  { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent,  },
   {
     path: 'detalle-certificado-defuncion',
     component: DetalleCertificadoComponent,
-    canActivate: [SeguridadRouter]
+ 
   },
 ];
 

@@ -141,15 +141,14 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       );
     }
   }
-  cancelar() {
-    console.log(this.formAdd.valid);
-    console.log(this.formAdd.value);
-  }
-
-  cancelarSinGuardar(modal:any){
+  cancelar(modal:any) {
     this.dialog.open(modal, {
       width: "450px",
      maxHeight: "350px"
    });
+  }
+
+  cancelarSinGuardar(){
+    
   }
 }
