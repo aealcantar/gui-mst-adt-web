@@ -198,13 +198,13 @@ export class HorariosComponent implements OnInit {
               dia: index + 1,
               inhabil: true
             };
-            this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
+            // this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
           }
           Swal.close();
           break;
         case 204:
           this.diaSeleccionado = null;
-          this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
+          // this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
           Swal.close();
           break;
         default:

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SeguridadService } from '../seguridad.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { objAlert } from '../../common/alerta/alerta.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { Aplicacion } from 'src/app/models/aplicacion.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -12,6 +11,7 @@ import { MailService } from 'src/app/service/mail-service.service';
 import { RecaptchaResponse } from 'src/app/models/recaptcha-response-model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 
 declare var $: any;
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   correodata: any = this.formBuilder.group({
     correornv: ['', [Validators.required, Validators.email]]
   });
-  alert!: objAlert;
+  alert!: AlertInfo;
   showPassword: boolean = false;
   recaptchaResponse: RecaptchaResponse = new RecaptchaResponse();
   token: string | undefined;
@@ -73,12 +73,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
-    //   this.aplicacion = resp;
-    //   console.log(" app " + this.aplicacion.cveUsuario);
-    // }, (error: HttpErrorResponse) => {
-    //   console.error("Error: ", error.message);
-    // });
+    this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
+      this.aplicacion = resp;
+      console.log(" app " + this.aplicacion.cveUsuario);
+    }, (error: HttpErrorResponse) => {
+      console.error("Error: ", error);
+    });
   }
 
   public send(form: NgForm): void {
@@ -113,76 +113,61 @@ export class LoginComponent implements OnInit {
       try {
         console.log(`Token [${this.token}] generated`);
         this.usuario.strEmail = this.logindata.get("usuario")?.value;
-        // this.usuario.strPassword = this.logindata.get("password")?.value;
-        // this.authService.login(this.usuario, this.aplicacion).subscribe(
-        //   (result) => {
-        //     console.log(result);
-            // this.authService.getUserData(this.usuario.strEmail).subscribe(
-            //   (response: any) => {
-            //     this.authService.guardarUsuarioEnSesion(response);
-            //     this.authService.userLogged$.next(true);
-            //     this.authService.isAuthenticatedObs$.next(true);
-            //   }
-            // );
-            let usuario:any;
-            this.authService.guardarUsuarioEnSesion(usuario);
-            this.authService.userLogged$.next(true);
-            this.authService.isAuthenticatedObs$.next(true);
-            // this.authService.guardarToken(result.access_token);
-            // this.seguridadService.registrarUsuario(this.usuario);
+        this.usuario.strPassword = this.logindata.get("password")?.value;
+        this.authService.login(this.usuario, this.aplicacion).subscribe(
+          (result) => {
+            console.log(result);
+            this.authService.getUserData(this.usuario.strEmail).subscribe(
+              (response: any) => {
+                this.authService.guardarUsuarioEnSesion(response);
+                this.authService.userLogged$.next(true);
+                this.authService.isAuthenticatedObs$.next(true);
+              }
+            );
+            this.authService.guardarToken(result.access_token);
+            this.seguridadService.registrarUsuario(this.usuario);
             this.router.navigate(["/catalogos"], { skipLocationChange: true });
-          // },
-          // (err: HttpErrorResponse) => {
-          //   window.scroll(0,0);
-          //   console.log("error " + err.error.message);
-          //   if (err.error.message == undefined) {
-          //     this.showError("<strong>Error.</strong> Servicio no esta disponible. Favor de reportarlo!.");
-          //     return;
-            // }
-      //       if (err.status == 400) {
-      //         this.strMsjError = "" + err.status;
-      //       } else {
-      //         this.strMsjError = "" + err.status;
-      //       }
-      //       this.showError(err.error.message);
-      //     }
-      //   );
+          },
+          (err: HttpErrorResponse) => {
+            window.scroll(0,0);
+            console.log("error " + err.error.message);
+            if (err.error.message == undefined) {
+              this.muestraAlerta('Servicio no esta disponible. Favor de reportarlo!','alert-danger','Error');
+              return;
+            }
+            if (err.status == 400) {
+              this.strMsjError = "" + err.status;
+            } else {
+              this.strMsjError = "" + err.status;
+            }
+            this.muestraAlerta(err.error.message,'alert-danger','Error');
+          }
+        );
       } catch (error) {
-        // this.showError();
+        // this.muestraAlerta();
       }
     } else {
-      this.showError('<strong>Error.</strong> Ingresa los datos obligatorios');
+      this.muestraAlerta('Ingresa los datos obligatorios','alert-danger','Error');
     }
   }
 
-  //Error
-  private showError(error: string) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+    this.alert = new AlertInfo;
     this.alert = {
-      message: error,
-      type: 'error',
-      visible: true
-    }
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
     setTimeout(() => {
       this.alert = {
         message: '',
         type: 'custom',
-        visible: false
-      }
-    }, 5000);
-  }
-
-  //Success
-  private showSucces(msg: string) {
-    this.alert = {
-      message: '<strong>Estatus.</strong>' + msg,
-      type: 'success',
-      visible: true
-    }
-    setTimeout(() => {
-      this.alert = {
-        message: '',
-        type: 'custom',
-        visible: false
+        visible: false,
+      };
+      if(funxion != null){
+        funxion();
       }
     }, 2000);
   }
@@ -211,18 +196,18 @@ export class LoginComponent implements OnInit {
       this.mailService.recuperarPassword(correo).subscribe(
         (result) => {
           $('#content').modal('hide');
-          if (result.status == '200') this.showSucces(" Correo enviado satisfactoriamente!");
-          else this.showError(result.status);
+          if (result.status == '200') this.muestraAlerta('¡Correo enviado satisfactoriamente!','alert-success',null);
+          else this.muestraAlerta(result.status,'alert-danger','Error');
         },
         (err: HttpErrorResponse) => {
           console.log("eror " + err.error.status);
           $('#content').modal('hide');
-          this.showError(" Correo no registrado!");
+          this.muestraAlerta('¡Correo no registrado!','alert-danger','Error');
         }
       );
     } else {
       $('#content').modal('hide');
-      this.showError(" ¡La cuenta de correo no contiene una estructura válida!");
+      this.muestraAlerta('¡La cuenta de correo no contiene una estructura válida!','alert-danger','Error');
     }
     this.correodata.reset();
   }

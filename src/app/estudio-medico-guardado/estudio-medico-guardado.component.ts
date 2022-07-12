@@ -9,6 +9,9 @@ import { Ocupacion } from '../models/ocupacion.model';
 import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
 import { formatDate } from '@angular/common';
 import * as moment from 'moment';
+import { Estado } from '../models/estado.model';
+import { Ciudad } from '../models/ciudad.model';
+import { Municipio } from '../models/municipio.model';
 @Component({
   selector: 'app-estudio-medico-guardado',
   templateUrl: './estudio-medico-guardado.component.html',
@@ -26,21 +29,27 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   pacienteSeleccionado!: pacienteSeleccionado;
   ocupaciones: Ocupacion[] = [];
   catEstadosCiviles: EstadoCivil[] = [];
+  estados: Estado[] = [];
+  delegaciones: Municipio[] = [];
+  ciudades: Ciudad[] = [];
+  estadosFamiliar: Estado[] = [];
+  delegacionesFamiliar: Municipio[] = [];
+  ciudadesFamiliar: Ciudad[] = [];
   datetimeFormat = '';
   dateToday= new Date();
 
   constructor(
     private route: ActivatedRoute,
     private estudioMedicoService: EstudioSocialMedicoService
-  ) { 
+  ) {
     this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.datosGenerales = true;
     this.datosFamiliar = false;
     this.datosExploracionCaso = false;
-    this.loadCatalogos();
+    await this.loadCatalogos();
     this.route.queryParamMap.subscribe((params: any) => {
       if (params.getAll('estudioMedico').length > 0) {
         this.estudioMedico = JSON.parse(params.getAll('estudioMedico'));
@@ -51,6 +60,8 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
             '',
           );
         }
+        this.estudioMedico.nombreEstado = this.getNombreEstado(this.estudioMedico.idEstado, false);
+        this.getMunicipiosByEstado(parseInt(this.estudioMedico.idEstado), false);
       }
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.estudioMedico);
     });
@@ -96,6 +107,60 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
         console.error(httpErrorResponse);
       }
     );
+    await this.estudioMedicoService.getCatEstados().toPromise().then(
+      (estados: Estado[]) => {
+        this.estados = estados;
+      },
+
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }
+
+  getMunicipiosByEstado(idEstado: number, esFamiliar: boolean): void {
+    this.estudioMedicoService.getCatMunicipiosByEstado(idEstado).toPromise().then(
+      (delegaciones: Municipio[]) => {
+        this.delegaciones = delegaciones;
+
+        this.estudioMedico.nombreDelegacionMunicipio = this.getNombreMunicipio(this.estudioMedico.idDelegacionMunicipio, false);
+        this.getCiudadByEstadoMunicipo(idEstado, parseInt(this.estudioMedico.idDelegacionMunicipio));
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }
+
+  getCiudadByEstadoMunicipo(idEstado: number, idMunicipio: number): void {
+    this.estudioMedicoService.getCiudadByEstadoMunicipio(idEstado, idMunicipio).toPromise().then(
+      (ciudades: Ciudad[]) => {
+        this.ciudades = ciudades;
+        console.log("CIUDADES: ", this.ciudades);
+        if (this.ciudades.length === 1) {
+          this.estudioMedico.nombreCiudad = this.ciudades[0].des_ciudad;
+        }
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }
+
+  getNombreEstado(idEstado: string, esFamiliar: boolean) {
+    if (esFamiliar) {
+      return this.estadosFamiliar.find(e => e.cve_estado === idEstado)?.des_nombre_completo;
+    } else {
+      return this.estados.find(e => e.cve_estado === idEstado)?.des_nombre_completo;
+    }
+  }
+
+  getNombreMunicipio(idMunicipio: string, esFamiliar: boolean) {
+    if (esFamiliar) {
+      return this.delegaciones.find(d => d.cve_delegacion_municipio === idMunicipio)?.des_municipio;
+    } else {
+      return this.delegaciones.find(m => parseInt(m.cve_delegacion_municipio) === parseInt(idMunicipio))?.des_municipio;
+    }
   }
 
   getNombreOcupacion(idOcupacion: number | string) {
