@@ -11,10 +11,24 @@ export class CertificadoDefuncionService {
 
   insert(certificado: CertificadoDefuncion) {
     return this.http.post<CertificadoDefuncion>(
-      environment.msmtsControlInterno + 'insert',
+      environment.msmtsControlInterno + '/insert',
       certificado
     );
   }
-  findById() {}
+  imprimir(certificado: CertificadoDefuncion) {
+    return this.http.post<any>(
+      environment.msmtsControlInterno + '/reporteCertificadoDefuncion',
+      certificado
+    );
+  }
+  findById(idDefuncion: number) {
+    const body = {
+      idDefuncion,
+    };
+    return this.http.post<CertificadoDefuncion>(
+      environment.msmtsControlInterno + '/id',
+      body
+    );
+  }
   list() {}
 }

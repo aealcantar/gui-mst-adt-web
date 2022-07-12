@@ -96,6 +96,7 @@ import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 registerLocaleData('es');
 
@@ -180,6 +181,7 @@ registerLocaleData('es');
     MatInputModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
+    NgxMaterialTimepickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
