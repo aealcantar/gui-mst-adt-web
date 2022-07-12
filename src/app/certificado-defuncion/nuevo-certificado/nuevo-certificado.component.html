@@ -283,7 +283,7 @@
               type="button"
               id="btnCancelarCertificado"
               class="btn btn-danger"
-              (click)="cancelar()"
+              (click)="cancelar(cancelarModal)"
             >
               Cancelar</button
             ><button
@@ -311,3 +311,26 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
+
+<ng-template #cancelarModal>
+  <div class="col-sm m-3 text-center">
+    <img src="assets/images/Group 2082.png" class="Group-2082" alt="" />
+    <div class="modal-title Atencin pt-3">Atención</div>
+
+  </div>
+  <div class="lineaSeparador"></div>
+  <div class="col-sm text-center mt-4 mb-4">
+    <label class="tituloModal fontEmergenteTitle">¿Desea salir sin guardar</label>
+    <br />
+    <label class="fontEmergenteTitle"> los cambios?</label>
+    <br /><br />
+  </div>
+  <div class="col-sm text-center mb-4">
+    <button class="btn btn-danger btuser" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+    <button type="button" (click)="cancelarSinGuardar()" class="btn btn-primary  btnGuardar" mat-dialog-close>
+      Aceptar
+    </button>
+  </div>
+</ng-template>

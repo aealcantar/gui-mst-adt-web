@@ -5,6 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
 import { Paciente } from 'src/app/models/paciente.model';
@@ -26,6 +28,8 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   hasCertificado: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private router: Router,
     private cronicaGrupalService: CronicaGrupalService,
     private certificadoService: CertificadoDefuncionService
   ) {
@@ -106,13 +110,12 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
   imprimir() {
     if (this.certificado !== undefined) {
-      this.certificadoService.imprimir(this.certificado).subscribe(
+      this.certificadoService.imprimir(this.certificado,this.usuario.matricula,this.usuario.strNombres).subscribe(
         (response) => {
-          (response: Blob) => {
-            const file = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(file);
-            window.open(url);
-          };
+          console.log(response);
+          const file = new Blob([response], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(file);
+          window.open(url);
         },
         (error) => {
           console.log(`Error en certificado de defuncnion`, error);
@@ -128,7 +131,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       this.hasCertificado = true;
       this.certificadoService.insert(certificado).subscribe((response) => {
         console.log(response);
-        this.certificado = response;
+        this.certificado = response.certificadoDeDefuncion;
 
         this.hasCertificado = true;
       });
@@ -141,5 +144,12 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   cancelar() {
     console.log(this.formAdd.valid);
     console.log(this.formAdd.value);
+  }
+
+  cancelarSinGuardar(modal:any){
+    this.dialog.open(modal, {
+      width: "450px",
+     maxHeight: "350px"
+   });
   }
 }
