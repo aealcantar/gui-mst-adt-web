@@ -45,68 +45,172 @@ import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/co
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
+import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'recuperarpassword', component: RegistroComponent },
-  { path: 'busqueda', component: BusquedaNssComponent, canActivate: [SeguridadRouter] },
-  { path: 'tarjeta', component: AppTarjetaPresentacionComponent, canActivate: [SeguridadRouter] },
-  { path: 'busquedaEspecifica', component: CCGrupalEspecificaComponent, canActivate: [SeguridadRouter] },
-  { path: 'nuevaCronica', component: NuevaCronicaComponent, canActivate: [SeguridadRouter] },
-  { path: 'cronicaGuardada', component: CronicaGuardadaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-cronica-grupal', component: ConsultaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-notas', component: ConsultaListaNotasTSocialComponent, canActivate: [SeguridadRouter] },
-  { path: 'nueva-nota', component: NuevaNotaTSocialComponent, canActivate: [SeguridadRouter] },
-  { path: 'detalle-nota', component: ConsultaNotaTSocialComponent, canActivate: [SeguridadRouter] },
+  { path: 'busqueda', component: BusquedaNssComponent },
+  {
+    path: 'tarjeta',
+    component: AppTarjetaPresentacionComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'busquedaEspecifica',
+    component: CCGrupalEspecificaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'nuevaCronica',
+    component: NuevaCronicaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'cronicaGuardada',
+    component: CronicaGuardadaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'consulta-cronica-grupal',
+    component: ConsultaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'consulta-notas',
+    component: ConsultaListaNotasTSocialComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'nueva-nota',
+    component: NuevaNotaTSocialComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'detalle-nota',
+    component: ConsultaNotaTSocialComponent,
+    canActivate: [SeguridadRouter],
+  },
   {
     path: 'consulta-estudios-medicos',
-    component: ConsultaEstudiosMedicosComponent, canActivate: [SeguridadRouter],
+    component: ConsultaEstudiosMedicosComponent,
+    canActivate: [SeguridadRouter],
   },
   {
     path: 'nuevo-estudio-social-medico',
-    component: NuevoEstudioSocialMedicoComponent, canActivate: [SeguridadRouter],
+    component: NuevoEstudioSocialMedicoComponent,
+    canActivate: [SeguridadRouter],
   },
-  { path: 'detalle-estudio-medico', component: EstudioMedicoGuardadoComponent, canActivate: [SeguridadRouter] },
-  { path: 'buscauser', component: UserbuscaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consultauser/:id', component: UserconsultaComponent, canActivate: [SeguridadRouter] },
-  { path: 'guardauser', component: UserguardaComponent, canActivate: [SeguridadRouter] },
-  { path: 'editauser/:id', component: UserguardaComponent, canActivate: [SeguridadRouter] },
-  { path: 'buscacita', component: CitabuscaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consultacita/:id', component: CitaconsultaComponent, canActivate: [SeguridadRouter] },
-  { path: 'guardacita', component: CitaguardaComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-articulos', component: ConsultaControlArticulosComponent, canActivate: [SeguridadRouter] },
+  {
+    path: 'detalle-estudio-medico',
+    component: EstudioMedicoGuardadoComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'buscauser',
+    component: UserbuscaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'consultauser/:id',
+    component: UserconsultaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'guardauser',
+    component: UserguardaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'editauser/:id',
+    component: UserguardaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'buscacita',
+    component: CitabuscaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'consultacita/:id',
+    component: CitaconsultaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'guardacita',
+    component: CitaguardaComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'consulta-articulos',
+    component: ConsultaControlArticulosComponent,
+    canActivate: [SeguridadRouter],
+  },
   {
     path: 'detalle-articulos/:id',
-    component: DetalleControlArticulosComponent, canActivate: [SeguridadRouter],
+    component: DetalleControlArticulosComponent,
+    canActivate: [SeguridadRouter],
   },
-  { path: 'nuevo-articulo', component: NuevoControlArticulosComponent, canActivate: [SeguridadRouter] },
-  { path: 'nuevo-aviso-mp', component: NuevoAvisoMpComponent, canActivate: [SeguridadRouter] },
-  { path: 'consulta-aviso-mp', component: ConsultaAvisoMpComponent, canActivate: [SeguridadRouter] },
+  {
+    path: 'nuevo-articulo',
+    component: NuevoControlArticulosComponent,
+    canActivate: [SeguridadRouter]
+  },
+  {
+    path: 'nuevo-aviso-mp',
+    component: NuevoAvisoMpComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'consulta-aviso-mp',
+    component: ConsultaAvisoMpComponent,
+    canActivate: [SeguridadRouter],
+  },
   //volanteDonacion
   {
     path: 'agregar-volante-donacion-sangre',
-    component: NuevoVdonacionSangreComponent, canActivate: [SeguridadRouter],
+    component: NuevoVdonacionSangreComponent,
+    canActivate: [SeguridadRouter],
   },
   {
     path: 'consulta-volantes-donacion',
-    component: ConsultaVolantesDonacionComponent, canActivate: [SeguridadRouter],
+    component: ConsultaVolantesDonacionComponent,
+    canActivate: [SeguridadRouter],
   },
   {
     path: 'detalle-volante-donacion-sangre/:id',
-    component: DetalleVolantesDonacionSangreComponent, canActivate: [SeguridadRouter],
+    component: DetalleVolantesDonacionSangreComponent,
+    canActivate: [SeguridadRouter],
   },
   {
     path: 'catalogos',
     component: CatalogosComponent,
     children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
-      { path: 'cargaCatalogos', component: CargaComponent, canActivate: [SeguridadRouter] },
-      { path: 'ConfiguracionUbicaciones', component: UbicacionesComponent, canActivate: [SeguridadRouter] },
-      { path: 'horarios/:cveUbicacion', component: HorariosComponent, canActivate: [SeguridadRouter] },
+      {
+        path: 'cargaCatalogos',
+        component: CargaComponent,
+        canActivate: [SeguridadRouter],
+      },
+      {
+        path: 'ConfiguracionUbicaciones',
+        component: UbicacionesComponent,
+        canActivate: [SeguridadRouter],
+      },
+      {
+        path: 'horarios/:cveUbicacion',
+        component: HorariosComponent,
+        canActivate: [SeguridadRouter],
+      },
     ],
   },
   { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent, canActivate: [SeguridadRouter] },
+  {
+    path: 'detalle-certificado-defuncion',
+    component: DetalleCertificadoComponent,
+    canActivate: [SeguridadRouter]
+  },
 ];
 
 @NgModule({
@@ -114,4 +218,4 @@ const routes: Routes = [
   exports: [RouterModule, HttpClientModule],
   providers: [SeguridadRouter],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

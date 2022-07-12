@@ -77,7 +77,7 @@ export class CronicaGrupalService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
-    return this.http.post<any>(`${environment.msmtsCronicas}/reporteCronica`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
+    return this.http.post(`${environment.msmtsCronicas}/reporteCronica`, JSON.stringify(data), {responseType : 'blob'});
   }
 
 }

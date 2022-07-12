@@ -97,6 +97,7 @@ import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sang
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 
 registerLocaleData('es');
 
@@ -157,6 +158,7 @@ registerLocaleData('es');
     ConsultaVolantesDonacionComponent,
     DetalleVolantesDonacionSangreComponent,
     NuevoCertificadoComponent,
+    DetalleCertificadoComponent,
   ],
   imports: [
     BrowserModule,
