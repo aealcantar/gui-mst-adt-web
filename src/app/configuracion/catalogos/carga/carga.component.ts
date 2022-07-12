@@ -253,7 +253,7 @@ export class CargaComponent implements OnInit {
 
   btnContinuar() {
     if (this.blnContinuar) {
-      this.router.navigate(['busqueda']);
+      this.router.navigateByUrl("/busqueda", { skipLocationChange: true });
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, 'Debe completar la carga de Catálogos', this._Mensajes.ERROR);
     }
