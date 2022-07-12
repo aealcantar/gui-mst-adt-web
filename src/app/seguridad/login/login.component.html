@@ -75,7 +75,7 @@
             </label>
             <input type="text" formControlName="usuario" id="usuario" class="form-control"
               [ngClass]="{'form-control-error': logindata.controls?.usuario?.dirty && logindata.controls?.usuario?.errors}"
-              placeholder="Ingresar usuario" maxlength="10" required />
+              placeholder="Ingresar usuario" maxlength="9" required />
             <small *ngIf="logindata.controls?.usuario?.dirty && logindata.controls?.usuario?.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -90,7 +90,7 @@
             </label>
             <input [type]="showPassword?'text':'password'" formControlName="password" id="password" class="form-control"
               [ngClass]="{'form-control-error': logindata.controls?.password?.dirty && logindata.controls?.password?.errors}"
-              placeholder="Ingresar contraseña" maxlength="10" required aria-describedby="inputSuccess2Status" />
+              placeholder="Ingresar contraseña" maxlength="9" required aria-describedby="inputSuccess2Status" />
             <span class="glyphicon form-control-feedback" style="pointer-events: auto;padding-top: 7px;">
               <mat-icon svgIcon="eye-off" id="togglePassword" *ngIf="!showPassword"
                 (click)="showPassword = !showPassword"></mat-icon>
