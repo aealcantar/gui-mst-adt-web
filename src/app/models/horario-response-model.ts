@@ -4,6 +4,7 @@ import { Horario } from "./horario.model";
 export class HorarioResponse {
 	
   	 public  code:number;
-	 public message:string;	 
+	 public estatus: boolean;
+	 public mensaje:string;	 
      public data: Horario[];
 }
