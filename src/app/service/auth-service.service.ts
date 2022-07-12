@@ -70,15 +70,15 @@ export class AuthService {
   }
   
   actualizarPassword(admonPasswordRequest:AdmonPasswordRequest){
-     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}actualizarPassword/`, admonPasswordRequest);
+     return this.http.post<AdmonPasswordResponse>(`${environment.msmtsOauth}/actualizarPassword/`, admonPasswordRequest);
   }
  
   getAppAccesbyAppName(name:string){
-    return this.http.get<Aplicacion>(`${environment.msmtsOauth}app?appName=${name}`);
+    return this.http.get<Aplicacion>(`${environment.msmtsOauth}/app?appName=${name}`);
   }
 
   getUserData(aliasUsuario?:string){
-    return this.http.get<Usuario>(`${environment.msmtsOauth}getUserSession?aliasUsuario=${aliasUsuario}`);
+    return this.http.get<Usuario>(`${environment.msmtsOauth}/getUserSession?aliasUsuario=${aliasUsuario}`);
   }
 
   validateRecaptcha(response: string) {
