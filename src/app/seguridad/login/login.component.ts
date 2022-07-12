@@ -23,13 +23,13 @@ declare var $: any;
 export class LoginComponent implements OnInit {
 
   signin: FormGroup = new FormGroup({
-    usuario: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    usuario: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(9)])),
+    password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(9)])),
   });
 
   logindata: any = this.formBuilder.group({
-    usuario: ['', Validators.required],
-    password: ['', Validators.required],
+    usuario: ['', Validators.compose([Validators.required, Validators.maxLength(9)])],
+    password: ['',Validators.compose([Validators.required, Validators.maxLength(9)])],
     token: ['', Validators.required]
   });
 
