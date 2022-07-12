@@ -161,7 +161,7 @@ export class AuthService {
     this._usuario.puesto = usuario.puesto;
     this._usuario.unidadMedica = usuario.unidadMedica;
     this.usuario.cedulaProfesional = usuario.cedulaProfesional;
-    this._usuario.cveUsuario = 1;
+    this._usuario.cveUsuario = usuario.idUsuario;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
