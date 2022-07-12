@@ -25,6 +25,8 @@ import { ConsultaControlArticulosComponent } from './control-articulos/consulta-
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { objAlert } from '../shared-modules/models/alerta.interface';
+import { ConsultaCertificadosDefuncionComponent } from './certificados-defuncion/consulta-certificados-defuncion/consulta-certificados-defuncion.component';
+import { NuevoCertificadoDefuncionComponent } from './certificados-defuncion/nuevo-certificado-defuncion/nuevo-certificado-defuncion.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { objAlert } from '../shared-modules/models/alerta.interface';
     ConsultaControlArticulosComponent,
     NuevoVdonacionSangreComponent,
     ConsultaVolantesDonacionComponent,
+    ConsultaCertificadosDefuncionComponent,
+    NuevoCertificadoDefuncionComponent,
   ],
   imports: [
     MatDialogModule,

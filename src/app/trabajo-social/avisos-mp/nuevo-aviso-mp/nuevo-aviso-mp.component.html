@@ -91,8 +91,8 @@
               <span class="spanInput spanInputCustom">Hora*</span>
               <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="hora" selected [value]="'0'">00</option>
-                <option class="select-font" [value]="1">01</option>
-                <option class="select-font" [value]="2">02</option>
+                <option class="select-font" [value]="01"
+                 *ngFor="let hora of horasArray"> {{hora}}</option>
               </select>
             </div>
           </div>
@@ -102,8 +102,8 @@
               <span class="spanInput spanInputCustom">Minutos*</span>
               <select class="form-control styleselect" formControlName="minutos" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="minutos" selected [value]="'0'">00</option>
-                <option class="select-font" [value]="1">01</option>
-                <option class="select-font" [value]="2">02</option>
+                <option class="select-font" [value]="1"
+                 *ngFor="let minuto of minutosArray"> {{minuto}}</option>
               </select>
             </div>
           </div>

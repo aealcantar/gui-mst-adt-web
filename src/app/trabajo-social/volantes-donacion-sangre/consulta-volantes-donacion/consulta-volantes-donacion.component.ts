@@ -26,7 +26,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
-  public prueba =  [{ "fecFecha": "20/06/2022", "nomTrabajadorSocial": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
+  //public prueba =  [{ "fecFecha": "20/06/2022", "nomTrabajadorSocial": "lorem imput dolor sit amen lorem imput dolor sit amen lorem imput dolor sit amen lorem imput", }];
 
   constructor(
     private router: Router,

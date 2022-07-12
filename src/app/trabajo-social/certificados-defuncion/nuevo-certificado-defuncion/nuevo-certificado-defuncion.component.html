@@ -1,0 +1,160 @@
+<app-datos-generales-usuario></app-datos-generales-usuario>
+<app-menu></app-menu>
+<app-datos-generales-paciente></app-datos-generales-paciente>
+<app-card-template>
+  <div header class="nuevoCertificadoDefuncion">
+    <span class="spantitulo">
+      Control TS - Certificado de defunción
+    </span>
+  </div>
+  <div content>
+   <div>
+     <span class="instrucciones">
+       Por favor capture los siguientes datos:
+     </span>
+   </div>
+   <form novalidate class="formInfo" [formGroup]="formNuevoCertDefuncion">
+     <div class="container seccion">
+         <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha de defunción*:</span>
+              <input class="form-control" id="notasInit" type="text" placeholder="Seleccionar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput" for="calendarYear">Hora de defunción*:</span>
+              <input type="time" class="form-control hasDatepicker" id="horaDefuncion" formControlName="horaDefuncion" placeholder="Ingresa hora" />
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true"> 
+                  <div class="imgHora"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Folio del certificado*:</span>
+               <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Folio del certificado" formControlName="folioCertificado"
+                 type="text" readonly="true" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4">    
+            <span class="spanInput">Nombre del asegurado*:</span>
+            <input class="form-control matricula" id="txtconsulta" placeholder="Ingresar nombre del asegurado" formControlName="nombreAsegurado"
+              type="text" maxlength="50" />
+          </div>
+          <div class="col-md-4">    
+            <span class="spanInput">No. de Seguridad Social:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de seguridad social" formControlName="numSs"
+              type="text" readonly="true" />
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <select class="form-control styleselect" formControlName="servicio" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Seleccionar servicio" selected [value]="'-1'">
+                  Seleccionar servicio</option>
+                <option class="select-font" [value]="1">Servicio 1</option>
+              </select>
+            </div>
+           </div>
+        </div>
+        
+         <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha la entrega del certificado*:</span>
+              <input class="form-control" id="notasInit" type="text" placeholder="Seleccionar fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput" for="calendarYear">Hora de entrega del certificado*:</span>
+              <input type="time" class="form-control hasDatepicker" id="horaDefuncion" formControlName="horaCertificado" placeholder="Ingresa hora" />
+              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true"> 
+                  <div class="imgHora"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Funeraria*:</span>
+               <input class="form-control matricula" id="txtconsulta" placeholder="Ingresar nombre de la funeraria" formControlName="nombreFuneraria"
+                 type="text" maxlength="100" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Nombre del familiar que recibe el certificado*:</span>
+               <input class="form-control matricula" id="txtconsulta" placeholder="Ingresar nombre del familiar" formControlName="nombreFamiliar"
+                 type="text" maxlength="100" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Parentesco del familiar que recibe certificado*:</span>
+               <input class="form-control matricula" id="txtconsulta" placeholder="Parentesco del familiar" formControlName="parentescoFamiliar"
+                 type="text" maxlength="100" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Observaciones*:</span>
+               <input class="form-control matricula" id="txtconsulta" placeholder="Ingresar observaciones" formControlName="observaciones"
+                 type="text" maxlength="200" />
+            </div>
+          </div>
+        </div>
+        
+         <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Nombre del Trabajador social:</span>
+               <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Nombre del Trabajador social" formControlName="nombreTrabajador" 
+                 type="text" readonly="true" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+               <span class="spanInput">Matrícula del Trabajador social*:</span>
+               <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Matrícula del trabajador social" formControlName="matriculaTrabajador" 
+                 type="text" readonly="true" />
+            </div>
+          </div>
+        </div>  
+        
+     </div>
+       <div>
+        <span class="instrucciones">
+          *Campos obligatorios
+        </span>
+      </div>
+   
+      <div class="row">
+      <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
+        <button [disabled]="formNuevoCertDefuncion.valid == false" type="button" (click)="guardar();"
+          class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449">
+          Guardar
+        </button>
+        <button type="button" class="btn btn-danger buttonL"
+          style="float: right; border: solid 1px #b38e5d;">
+          Cancelar
+        </button>
+      </div>
+    </div>
+    </form>
+  </div>
+</app-card-template>
+<app-info-bottom></app-info-bottom>
