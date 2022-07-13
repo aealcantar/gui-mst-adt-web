@@ -46,6 +46,10 @@ import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
+import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
+import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
+
+// informe servicios profesionales
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -211,6 +215,15 @@ const routes: Routes = [
     component: DetalleCertificadoComponent,
  
   },
+  // informe servicios profesionales
+  {
+    path: 'consulta-informe-servicios-profesionales', 
+    component: ConsultaInformeServiciosProfesionalesComponent
+  },
+  {
+    path: 'detalle-informe-servicios-profesionales', 
+    component: DetalleInformeServiciosProfesionalesComponent
+  }
 ];
 
 @NgModule({

@@ -98,6 +98,8 @@ import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/co
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
+import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
+import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
 
 registerLocaleData('es');
 
@@ -159,6 +161,9 @@ registerLocaleData('es');
     DetalleVolantesDonacionSangreComponent,
     NuevoCertificadoComponent,
     DetalleCertificadoComponent,
+    // informe servicios profesionales
+    ConsultaInformeServiciosProfesionalesComponent,
+    DetalleInformeServiciosProfesionalesComponent
   ],
   imports: [
     BrowserModule,
