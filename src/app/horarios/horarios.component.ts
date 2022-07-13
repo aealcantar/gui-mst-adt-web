@@ -345,7 +345,7 @@ export class HorariosComponent implements OnInit {
         case 200:
 
 
-          console.log("pintar alerta de exito");
+          console.log("pintar alerta de exito", resp.body.mensaje);
 
           // console.log('dia',this.dia);
           this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
@@ -357,7 +357,7 @@ export class HorariosComponent implements OnInit {
         default:
           let error: HttpErrorResponse = {
             status: resp.body.code,
-            message: resp.body.message,
+            message: resp.body.mensaje,
             name: 'HttpErrorResponse',
             error: undefined,
             ok: false,
@@ -368,7 +368,7 @@ export class HorariosComponent implements OnInit {
           };
 
 
-          this.mensajesError(error, resp.body.message);
+          this.mensajesError(error, resp.body.mensaje);
           Swal.close();
           break;
       }
@@ -551,17 +551,22 @@ export class HorariosComponent implements OnInit {
 
 
     this.msjLoading("Guardando...");
+    this.lstHorariosNuevos['idUbicacion'] = Number(this.cveUbicacion);
     this.horarioService.saveLstHorarios(this.lstHorariosNuevos).subscribe((resp: HttpResponse<HorarioResponse>) => {
 
 
       if (resp) {
-        switch (resp.body.code) {
+        switch (resp.status) {
           case 200:
-            this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, "El horario se creó exitosamente", this._Mensajes.EXITO);
+            if(resp.body.estatus){
+              this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, "El horario se creó exitosamente", this._Mensajes.EXITO);
+            }else{
+              this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
+            }
             break;
 
           default:
-            this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.message, this._Mensajes.ERROR);
+            this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
             break;
         }
         console.log(resp);

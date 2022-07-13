@@ -152,16 +152,17 @@ export class AuthService {
     this._usuario = new Usuario();
     this._usuario.strEmail = usuario.correo;
     this._usuario.strRol = usuario.strRol;
-    this._usuario.strNombres = usuario.nombre;
+    this._usuario.strNombres = usuario.aliasNombre;
     this._usuario.strApellidoP = usuario.apellidoPaterno;
     this._usuario.strApellidoM = usuario.apellidoMaterno;
     this._usuario.matricula = usuario.matricula;
-    this._usuario.rolUser = usuario.rol.cveRol;
-    this._usuario.nameRolUser = usuario.rol.nomRol;
-    this._usuario.puesto = usuario.puesto;
+    this._usuario.rolUser = usuario.rol.idRol;
+    //this._usuario.nameRolUser = usuario.rol.nomRol;
+    this._usuario.nameRolUser = usuario.rol.nombreRol;
+    this._usuario.puesto = usuario.puesto.nombrePuesto;
     this._usuario.unidadMedica = usuario.unidadMedica;
     this.usuario.cedulaProfesional = usuario.cedulaProfesional;
-    this._usuario.cveUsuario = 1;
+    this._usuario.cveUsuario = usuario.idUsuario;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 

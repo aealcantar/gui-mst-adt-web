@@ -15,6 +15,7 @@ import { UsuariosService } from '../usuarios.service';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../../services/helper.mensajes.service';
 import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/models/usuario.model';
 
 declare var $gmx: any;
 
@@ -59,6 +60,7 @@ export class UserguardaComponent implements OnInit {
   };
 
   public keepOriginalOrder = (a: { key: any }, b: any) => a.key;
+  private _usuario!: Usuario;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,13 +74,14 @@ export class UserguardaComponent implements OnInit {
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
     this.consultarRoles();
-
+    this._usuario = JSON.parse(sessionStorage.getItem('usuario') as string) as Usuario;
     this.varid = this.activerouter.snapshot.paramMap.get('id');
     this.currentroute = this.router.url;
     this.isedit = this.router.url.indexOf('guarda') > 0 ? false : true;
-     this.userdata.controls['usuario'].setValue('');
-     this.userdata.controls['password'].setValue('');
-     this.userdata.controls['estatus'].setValue("true");
+    this.userdata.controls['usuario'].setValue('');
+    this.userdata.controls['password'].setValue('');
+    this.userdata.controls['estatus'].setValue("true");
+    this.userdata.controls['unidadmedica'].setValue(this._usuario.unidadMedica);
     if (this.isedit) {
       this.buscarusuario(this.varid);
     }

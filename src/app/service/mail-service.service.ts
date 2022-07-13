@@ -11,6 +11,6 @@ export class MailService {
   constructor(private http: HttpClient) { }
 
   recuperarPassword(correo:string){
-    return this.http.get<MailResponse>(`${environment.msmtsOauth}/api/aplicacion/recuperarPassword/${correo}/`);
+    return this.http.get<MailResponse>(`${environment.msmtsOauth}/recuperarPassword/${correo}/`);
   }
 }
