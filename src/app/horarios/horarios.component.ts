@@ -530,7 +530,7 @@ export class HorariosComponent implements OnInit {
             break;
 
           default:
-            this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
+            this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.message, this._Mensajes.ERROR);
             break;
         }
         console.log(resp);
@@ -551,6 +551,7 @@ export class HorariosComponent implements OnInit {
 
 
     this.msjLoading("Guardando...");
+    this.lstHorariosNuevos['idUbicacion'] = Number(this.cveUbicacion);
     this.horarioService.saveLstHorarios(this.lstHorariosNuevos).subscribe((resp: HttpResponse<HorarioResponse>) => {
 
 
