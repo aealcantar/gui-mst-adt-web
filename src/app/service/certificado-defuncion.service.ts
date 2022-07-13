@@ -31,7 +31,7 @@ export class CertificadoDefuncionService {
     const data = {
       fecDefuncion: certificado.fechaDefuncion,
       hrDefuncion: certificado.horaDefuncion,
-      folio: certificado.folioCertificado,
+      folio: certificado.foliofuncion,
       nomAsegurado: certificado.nombreAsegurado,
       nss: certificado.nssPaciente,
       fecEntrega: certificado.fechaDeEntregaDeCertificado,

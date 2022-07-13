@@ -2,7 +2,7 @@ export class CertificadoDefuncion {
   idDefuncion: number;
   fechaDefuncion: string;
   horaDefuncion: string;
-  folioCertificado: string;
+  foliofuncion: string;
   nombreAsegurado: string;
   nssPaciente: string;
   cveServicio: string;

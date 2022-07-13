@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -26,6 +32,9 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   usuario!: Usuario;
   paciente!: Paciente;
   hasCertificado: boolean = false;
+  validarCampos: boolean = false;
+  @ViewChild('btnGuardar') btnGuardar: ElementRef;
+
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -94,13 +103,22 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       this.usuario = new Usuario();
       this.usuario.cveUsuario = 12;
       this.usuario.matricula = 'XXXX-XXXX-XX';
-      this.usuario.strNombres = 'Alan Isaac Villafan';
+      this.usuario.strNombres = 'Alan Isaac';
+      this.usuario.strApellidoP = 'Villafan';
+      this.usuario.strApellidoM = 'Folres';
     }
     this.cargarServicios();
-    this.formAdd.get('trabajadorSocial').setValue(this.usuario.strNombres);
+    this.formAdd
+      .get('trabajadorSocial')
+      .setValue(
+        `${this.usuario.strNombres} ${this.usuario.strApellidoP} ${this.usuario.strApellidoM}`
+      );
     this.formAdd.get('matricula').setValue(this.usuario.matricula);
     this.formAdd.get('nssPaciente').setValue(this.paciente.nss);
     this.formAdd.get('cvePersonalQueElaboro').setValue(this.usuario.cveUsuario);
+    this.formAdd.controls['trabajadorSocial'].disable();
+    this.formAdd.controls['nssPaciente'].disable();
+    this.formAdd.controls['matricula'].disable();
     //cvePersonalQueElaboro
   }
   async cargarServicios() {
@@ -110,45 +128,65 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
   imprimir() {
     if (this.certificado !== undefined) {
-      this.certificadoService.imprimir(this.certificado,this.usuario.matricula,this.usuario.strNombres).subscribe(
-        (response) => {
-          console.log(response);
-          const file = new Blob([response], { type: 'application/pdf' });
-          const url = window.URL.createObjectURL(file);
-          window.open(url);
-        },
-        (error) => {
-          console.log(`Error en certificado de defuncnion`, error);
-        }
-      );
+      this.certificadoService
+        .imprimir(
+          this.certificado,
+          this.usuario.matricula,
+          this.usuario.strNombres
+        )
+        .subscribe(
+          (response) => {
+            console.log(response);
+            const file = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(file);
+            window.open(url);
+          },
+          (error) => {
+            console.log(`Error en certificado de defuncnion`, error);
+          }
+        );
     }
   }
-  guardar() {
+  async guardar() {
     if (this.formAdd.valid) {
+      this.validarCampos = false;
       const certificado = this.formAdd.value as CertificadoDefuncion;
       console.log(certificado);
       //  this.certificado = certificado;
-      this.hasCertificado = true;
-      this.certificadoService.insert(certificado).subscribe((response) => {
-        console.log(response);
-        this.certificado = response.certificadoDeDefuncion;
 
-        this.hasCertificado = true;
-      });
+      this.certificadoService
+        .insert(certificado)
+        .subscribe(async (response) => {
+          console.log(response);
+          this.certificado = response.certificadoDeDefuncion;
+          sessionStorage.setItem(
+            'certificadoDefuncion',
+            await JSON.stringify(this.certificado)
+          );
+          this.router.navigate(['detalle-certificado-defuncion']);
+        });
     } else {
-      console.log(
-        `'formulario no valido' ${JSON.stringify(this.formAdd.value)}`
-      );
+      this.validarCampos = true;
+      this.btnGuardar.nativeElement.this.onFormChanges();
     }
   }
-  cancelar(modal:any) {
+  onFormChanges() {
+    this.formAdd.valueChanges.subscribe((change) => {
+      if (this.formAdd.valid) {
+        this.validarCampos = false;
+      } else {
+        console.log('el fomulario sigue siendo invalido', this.formAdd.value);
+      }
+    });
+  }
+  cancelar(modal: any) {
     this.dialog.open(modal, {
-      width: "450px",
-     maxHeight: "350px"
-   });
+      width: '450px',
+      maxHeight: '350px',
+    });
   }
 
-  cancelarSinGuardar(){
-    
+  cancelarSinGuardar() {
+    this.router.navigate(['login']);
   }
 }
