@@ -45,11 +45,8 @@ import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/co
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
-<<<<<<< Updated upstream
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
-=======
-// import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
->>>>>>> Stashed changes
+import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -209,17 +206,14 @@ const routes: Routes = [
       },
     ],
   },
-<<<<<<< Updated upstream
   { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent,  },
   {
     path: 'detalle-certificado-defuncion',
     component: DetalleCertificadoComponent,
  
   },
-=======
   { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent, canActivate: [SeguridadRouter] },
-/*  { path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent,canActivate: [SeguridadRouter] },*/
->>>>>>> Stashed changes
+{ path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent,canActivate: [SeguridadRouter] },
 ];
 
 @NgModule({
