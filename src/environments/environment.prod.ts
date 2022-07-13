@@ -12,13 +12,13 @@ export const environment = {
     urlMSADTUSUARIOS: 'msedsc-usuarios/api',
 
     //Trabajo Social
-    msmtsPacientes: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
     msmtsCatalogos: 'msedsc-catalogos',
-    msmtsCronicas: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
-    msmtsNotas: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-notas/api',
-    msmtsEstudioMedicos: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
+    msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
+    msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
+    msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
     msmtsOauth: 'msadt-auth/api/aplicacion',
-    msmtsControlArticulos: 'https://mts-uat.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
+    msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
     msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api",
     urlServOauth: 'msadt-auth/',
