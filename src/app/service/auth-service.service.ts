@@ -103,7 +103,7 @@ export class AuthService {
   login(usuario: Usuario, aplicacion:Aplicacion) {
     
     sessionStorage.clear();
-    const urlEndpoint = environment.urlServOauth + '/oauth/token';
+    const urlEndpoint = environment.urlServOauth + 'oauth/token';
     
     console.log(" usuario app  "+ aplicacion.cveUsuario);
     console.log(" pass app  "+ aplicacion.cvePassword);
@@ -150,18 +150,19 @@ export class AuthService {
 
   guardarUsuarioEnSesion(usuario: any): void {
     this._usuario = new Usuario();
-    this._usuario.strEmail = "antonio.alcantar@people-media.com.mx";
-    this._usuario.strRol = "Trabajador social";
-    this._usuario.strNombres = "Antonio Esteban";
-    this._usuario.strApellidoP = "Alcántar";
-    this._usuario.strApellidoM = "Valencia";
-    this._usuario.matricula = "15008669";
-    this._usuario.rolUser = 1;
-    this._usuario.nameRolUser = "Asistente Social";
-    this._usuario.puesto = "Asistente";
-    this._usuario.unidadMedica = "UMF 7";
-    this.usuario.cedulaProfesional = "24021992";
-    this._usuario.cveUsuario = 1;
+    this._usuario.strEmail = usuario.correo;
+    this._usuario.strRol = usuario.strRol;
+    this._usuario.strNombres = usuario.aliasNombre;
+    this._usuario.strApellidoP = usuario.apellidoPaterno;
+    this._usuario.strApellidoM = usuario.apellidoMaterno;
+    this._usuario.matricula = usuario.matricula;
+    this._usuario.rolUser = usuario.rol.idRol;
+    //this._usuario.nameRolUser = usuario.rol.nomRol;
+    this._usuario.nameRolUser = usuario.rol.nombreRol;
+    this._usuario.puesto = usuario.puesto.nombrePuesto;
+    this._usuario.unidadMedica = usuario.unidadMedica;
+    this.usuario.cedulaProfesional = usuario.cedulaProfesional;
+    this._usuario.cveUsuario = usuario.idUsuario;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 

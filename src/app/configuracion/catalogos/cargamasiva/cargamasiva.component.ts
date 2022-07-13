@@ -120,6 +120,8 @@ export class CargamasivaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log('clave usuario',JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']);
+    this.idUser = JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']
     const taghtml = document.querySelector('html');
     taghtml.style.cssText += 'top: 0px;';
 
@@ -133,8 +135,8 @@ export class CargamasivaComponent implements OnInit {
     this.modalcarga(this.dataparams.nombreCatalogo, this.dataparams.sheetName);
   }
 
-  cancelar() {
-    this.dialogRef.close();
+  cancelar(iscancel: boolean) {
+    this.dialogRef.close({'iscancel': iscancel});
   }
 
 
@@ -263,7 +265,7 @@ export class CargamasivaComponent implements OnInit {
             this.unidadMedica[index].entidad = element[this.confCarga.col31];
             this.unidadMedica[index].claveJurisdiccionSanitaria = element[this.confCarga.col32];
             this.unidadMedica[index].jurisdiccionSanitaria = element[this.confCarga.col33];
-            this.unidadMedica[index].jurisdiccionSanitaria = element[this.confCarga.col34];
+            this.unidadMedica[index].latitud = element[this.confCarga.col34];
             this.unidadMedica[index].longitud = element[this.confCarga.col35];
             this.unidadMedica[index].inicioProductividad = element[this.confCarga.col36];
             this.unidadMedica[index].gradoMArginacion = element[this.confCarga.col37];
@@ -310,6 +312,7 @@ export class CargamasivaComponent implements OnInit {
             this.responsable[index].nombre = element[this.confCarga.col2];
             this.responsable[index].ubicacion = element[this.confCarga.col3];
             this.responsable[index].turno = element[this.confCarga.col4];
+            this.responsable[index].servicioEspecialidad = element[this.confCarga.col5];
             break;
           case 5:
             this.programasTS[index] = new ProgramaTS();
@@ -322,7 +325,7 @@ export class CargamasivaComponent implements OnInit {
 
           case 6:
             this.calendarioDias[index] = new CalendarioDias();
-            this.calendarioDias[index].cveServicio = element[this.confCarga.col1];
+            this.calendarioDias[index].cvePrograma = element[this.confCarga.col1];
             this.calendarioDias[index].cveUbicacion = element[this.confCarga.col2];
             let jsDateIn = XLSX.SSF.parse_date_code(element[this.confCarga.col3]);
             let fechaInicio = this.generateDate(jsDateIn.d, jsDateIn.m, jsDateIn.y);
@@ -357,9 +360,9 @@ export class CargamasivaComponent implements OnInit {
             this.persona[index].puesto = element[this.confCarga.col6]
             this.persona[index].turno = element[this.confCarga.col7];
             this.persona[index].email = element[this.confCarga.col8];
-            
+
             this.persona[index].escuelaProcedencia = element[this.confCarga.col9];
-            this.persona[index].contraseña = this.persona[index].matricula+"";
+            this.persona[index].contrasena = this.persona[index].matricula+"";
             this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
             this.persona[index].usuario = this.persona[index].matricula;
             break;
@@ -860,20 +863,20 @@ export class CargamasivaComponent implements OnInit {
 
     this.reset();
 
-    this.cancelar();
+    this.cancelar(true);
   }
   btnAceptar() {
     this.cleanVar();
 
     this.reset();
 
-    this.cancelar();
+    this.cancelar(false);
   }
 
   btnClose() {
     this.cleanVar();
     this.reset();
-    this.cancelar();
+    this.cancelar(true);
   }
 
   private mostrarMensaje(tipo: string, msj: string, tipoMsj?: string) {

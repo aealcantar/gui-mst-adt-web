@@ -16,6 +16,8 @@ export class HeaderMenuComponent implements OnInit {
   nombre: string | undefined;
   matricula: string | undefined;
   proyecto: string = "";
+  rol: string;
+  puesto: string = "";
 
   isAuthenticated$!: Observable<boolean>;
 
@@ -28,9 +30,11 @@ export class HeaderMenuComponent implements OnInit {
     this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
     this.authenticationService.isAuthenticatedObs$.subscribe(
       (isAuthiticated: boolean) => {
-        this.nombre = isAuthiticated ? this.authenticationService.usuario.strNombres + " " + this.authenticationService.usuario.strApellidoP : "";
+        this.nombre = isAuthiticated ? this.authenticationService.usuario.strNombres + " " + this.authenticationService.usuario.strApellidoP + " " + this.authenticationService.usuario.strApellidoM : "";
         this.email = isAuthiticated ? this.authenticationService.usuario.strEmail : "";
-        this.matricula = isAuthiticated ? this.authenticationService.usuario.strUserName : "";
+        this.matricula = isAuthiticated ? this.authenticationService.usuario.matricula : "";
+        this.rol = isAuthiticated ? this.authenticationService.usuario.nameRolUser : "";
+        this.puesto = isAuthiticated ? this.authenticationService.usuario.puesto : "";
       }
     )
     this.authenticationService.getProjectObs().subscribe(

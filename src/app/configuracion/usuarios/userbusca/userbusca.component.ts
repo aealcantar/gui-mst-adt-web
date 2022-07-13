@@ -102,77 +102,50 @@ export class UserbuscaComponent implements OnInit  {
 
         console.log(resp);
         this.lstUsuarios = resp;
-
-
-
-        // table = $('#tblusuarios').DataTable({
-        //   pagingType: 'simple_numbers',
-        //   pageLength: this.numitems,
-        //   processing: true,
-        //   info: false,
-        //   searching: false,
-        //   "lengthChange": false,
-        //   "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
-        //   "language": {
-        //     "paginate": {
-        //       "first": "First page",
-        //       "previous": '<span class="glyphicon glyphicon-menu-left paginacion-icon-navegacion" aria-hidden="true"></span>',
-        //       "next": '<span class="glyphicon glyphicon-menu-right paginacion-icon-navegacion" aria-hidden="true"></span>',
-        //       "last": "last"
-        //     }
-        //   }
-        // });
-
-        //this.dtTrigger.next('#tblusuarios');
-
-        setTimeout(()=>{
-          table = $('#tblusuarios').DataTable();
-          //$('#tblusuarios').DataTable().page.len( this.numitems ).draw();
-          this.dtOptions.pageLength = this.numitems;
-
-          const app = document.getElementById("cargalay");
-
-          if(document.querySelector(".cargalayout")){
-            document.querySelector(".cargalayout").remove();
-          }
-
-          // // 2. Create a new <p></p> element programmatically
-          // const p = document.createElement('div');
-          // // 3. Add the text content
-          // p.className = 'cargalayout';
-          // p.innerHTML = '<span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>';
-          // // 4. Append the p element to the div element
-          // app?.appendChild(p);
-          // //app?.appendChild("")
-
-          const recaptchaContainer = this.renderer.createElement('div');
-          // Set the id of the div
-          this.renderer.setProperty(recaptchaContainer, 'className', 'cargalayout');
-          this.renderer.setProperty(recaptchaContainer, 'innerHTML', '<span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>');
-
-          // Append the created div to the body element
-          this.renderer.appendChild(app, recaptchaContainer);
-
-
-          this.elementRef.nativeElement.querySelector('.cargalayout')
-                                  .addEventListener('click', this.cargalayoutusuarios.bind(this));
-
-          // const dm = document.getElementById("nopag");
-          // const dv = document.createElement('div');
-          // dv.className = "nopag";
-          // dv.textContent = "Página";
-          // dv.innerHTML = 'Página<span class="bg-nopag" (innerText)="pagactual"></span>';
-          // dm?.appendChild(dv);
+        if(this.lstUsuarios.length > 0){
 
           setTimeout(()=>{
-            table.on( 'page', ()=> {
-              console.log('Page: ' + table.page.info().page );
-              paginaactual = table.page.info().page;
-              this.pagactual = paginaactual + 1;
-              } );
+            table = $('#tblusuarios').DataTable();
+            //$('#tblusuarios').DataTable().page.len( this.numitems ).draw();
+            this.dtOptions.pageLength = this.numitems;
+
+            const app = document.getElementById("cargalay");
+
+            if(document.querySelector(".cargalayout")){
+              document.querySelector(".cargalayout").remove();
+            }
+
+            const recaptchaContainer = this.renderer.createElement('div');
+            // Set the id of the div
+            this.renderer.setProperty(recaptchaContainer, 'className', 'cargalayout');
+            this.renderer.setProperty(recaptchaContainer, 'innerHTML', '<span (click)="cargalayoutusuarios()">Carga de personal: <img src="../../../../assets/images/icon-upload.png"> </span>');
+
+            // Append the created div to the body element
+            this.renderer.appendChild(app, recaptchaContainer);
+
+
+            this.elementRef.nativeElement.querySelector('.cargalayout')
+                                    .addEventListener('click', this.cargalayoutusuarios.bind(this));
+
+            // const dm = document.getElementById("nopag");
+            // const dv = document.createElement('div');
+            // dv.className = "nopag";
+            // dv.textContent = "Página";
+            // dv.innerHTML = 'Página<span class="bg-nopag" (innerText)="pagactual"></span>';
+            // dm?.appendChild(dv);
+
+            setTimeout(()=>{
+              table.on( 'page', ()=> {
+                console.log('Page: ' + table.page.info().page );
+                paginaactual = table.page.info().page;
+                this.pagactual = paginaactual + 1;
+                } );
+            },1000);
+            Swal.close();
           },1000);
+        } else {
           Swal.close();
-        },1000);
+        }
       },
       error: (err) => {
         this.lstUsuarios = [];
@@ -203,7 +176,10 @@ export class UserbuscaComponent implements OnInit  {
 
     dialogo1.afterClosed().subscribe(art => {
       console.log("result: ", art);
-      //if (art != undefined)
+      if (!art['iscancel']){
+        console.log('cargado');
+        this.buscarusuario();
+      }
 
     });
 
@@ -215,7 +191,15 @@ export class UserbuscaComponent implements OnInit  {
   }
 
   regresar(){
-    this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
+    const org = localStorage.getItem('origen');
+    if(org){
+      localStorage.removeItem('origen');
+      console.log('origen',org);
+      this.router.navigateByUrl(org, { skipLocationChange: true });
+    } else{
+      this.router.navigateByUrl("busqueda", { skipLocationChange: true });
+    }
+
   }
 
   private msjLoading(titulo: string) {

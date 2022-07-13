@@ -55,9 +55,11 @@ export class EstudioSocialMedicoService {
   }
 
   downloadPdf(data: any): Observable<Blob> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'blob' });
-    return this.http.post<Blob>(`${environment.msmtsEstudioMedicos}/reporteEstudiosMedicos`, JSON.stringify(data),
-    { headers: headers, responseType: 'blob' as 'json'});
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    return this.http.post<any>(`${environment.msmtsEstudioMedicos}/reporteEstudiosMedicos`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
   }
 
 }

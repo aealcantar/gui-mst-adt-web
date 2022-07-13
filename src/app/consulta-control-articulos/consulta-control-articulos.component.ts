@@ -4,10 +4,15 @@ import { AuthService } from 'src/app/service/auth-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
+<<<<<<< HEAD
 import * as momment from 'moment';
 import { ControlArticuloService } from '../service/control-articulo.service';
 import { ControlArticulos } from './../models/control-articulo.model';
 import { DatePipe } from '@angular/common';
+=======
+import { AlertInfo } from '../app-alerts/app-alert.interface';
+
+>>>>>>> cc7ccbad3fa4d2fbcc4bc1cb1e63537a7574ebb0
 declare var $: any;
 
 @Component({
@@ -28,6 +33,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
+<<<<<<< HEAD
   public columnaId: string = 'fecha';
   public findCtrolArt: any[] = [];
   public valores: ControlArticulos;
@@ -39,6 +45,20 @@ export class ConsultaControlArticulosComponent implements OnInit {
     private fb: FormBuilder,
     private datePipe: DatePipe
   ) { }
+=======
+  public columnaId: string = 'fecFecha';
+  public alert!: AlertInfo;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private Artservice: ControlArticuloService,
+    private fb: FormBuilder,
+  ) {
+
+
+  }
+>>>>>>> cc7ccbad3fa4d2fbcc4bc1cb1e63537a7574ebb0
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
@@ -60,6 +80,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
     );
   }
 
+<<<<<<< HEAD
 
   getArticulos(): void {
     this.Artservice.getArticulos().subscribe(
@@ -67,12 +88,54 @@ export class ConsultaControlArticulosComponent implements OnInit {
         if (articulos && articulos.List.length > 0) {
           this.tabla = articulos.List;
           console.log("CONTROL DE ARTICULOS: ", this.tabla);
+=======
+  getNotasByFecha() {
+    this.Artservice.getArticulosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+      (res) => {
+        if (res && res.listaControlArticulosDto.length > 0) {
+          this.tabla = res.listaControlArticulosDto;
+        } else if (res && res.listaControlArticulosDto.length === 0) {
+          this.muestraAlerta(
+            'Verifique los filtros',
+            'alert-warning',
+            'Sin resultados',
+          );
+>>>>>>> cc7ccbad3fa4d2fbcc4bc1cb1e63537a7574ebb0
         }
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
       }
-    );
+    ).add(() => {
+      if (this.tabla.length == 0) {
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    });
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
   
   getArticulosByFecha(): void {

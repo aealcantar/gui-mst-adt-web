@@ -134,7 +134,7 @@ select::-ms-expand {
 
 .row {
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: -20px;
 }
 
 input {
@@ -227,7 +227,7 @@ textarea {
 
 
 .pacienteNombreSpan {
-  width: 320px;
+  width: 420px;
   height: 27px;
   flex-grow: 0;
   margin: 4px 0 0 0px;

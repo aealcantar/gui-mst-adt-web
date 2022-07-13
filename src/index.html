@@ -1,60 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="utf-8">
-  <title>Ecosistema Digital</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style type="text/css">
-    #ui-datepicker-div {
-      z-index: 999 !important;
-    }
-    .ui-datepicker .ui-datepicker-header {
-      background-color: rgb(125 27 57) !important;
-    }
-  </style>
-</head>
-
-<body>
-  <app-root></app-root>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
-  <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
-  <script>
-    nIntervId = setInterval(function () {
-      if (document.querySelector(".main-footer")) {
-        document.querySelector(".main-footer").remove();
-        clearInterval(nIntervId);
+  <head>
+    <meta charset="utf-8" />
+    <title>Ecosistema Digital</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      href="https://framework-gb.cdn.gob.mx/assets/styles/main.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/primeflex@3.1.2/primeflex.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      #ui-datepicker-div {
+        z-index: 999 !important;
       }
+      .ui-datepicker .ui-datepicker-header {
+        background-color: rgb(125 27 57) !important;
+      }
+    </style>
+  </head>
 
-    }, 1000);
-    $gmx(document).ready(function () {
-      $('#calendar').datepicker();
-      $('#calendarCronica').datepicker();
-      $('#notasInit').datepicker();
-      $('#notasFinal').datepicker();
-      $('#volantesInit').datepicker();
-      $('#volantesFinal').datepicker();
-      $('#avisompFec').datepicker();
-      $('#avisompIng').datepicker();
-      $('#calendarCESM1').datepicker();
-      $('#calendarCESM2').datepicker();
-      $('#calendarCESM3').datepicker();
-      $('#fechaUnidadMedica').datepicker();
-      $('#fechaInternamiento').datepicker();
-      $('#fechaCirugia').datepicker();
-    });
-
-  </script>
-</body>
-<footer>
-  <img src="../assets/images/footer.png" class="footer">
-</footer>
-
+  <body>
+    <app-root></app-root>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+    <script>
+      nIntervId = setInterval(function () {
+        if (document.querySelector(".main-footer")) {
+          document.querySelector(".main-footer").remove();
+          clearInterval(nIntervId);
+        }
+      }, 1000);
+      $gmx(document).ready(function () {
+        $("#calendar").datepicker();
+        $("#calendarCronica").datepicker();
+        $("#notasInit").datepicker();
+        $("#notasFinal").datepicker();
+        $("#volantesInit").datepicker();
+        $("#volantesFinal").datepicker();
+        $("#avisompFec").datepicker();
+        $("#avisompIng").datepicker();
+        $("#calendarCESM1").datepicker();
+        $("#calendarCESM2").datepicker();
+        $("#calendarCESM3").datepicker();
+        $("#fechaUnidadMedica").datepicker();
+        $("#fechaInternamiento").datepicker();
+        $("#fechaCirugia").datepicker();
+        $("#fhDefuncion").datepicker();
+        $("#entregaCertificado").datepicker();
+      });
+    </script>
+  </body>
+  <footer>
+    <img src="../assets/images/footer.png" class="footer" />
+  </footer>
 </html>

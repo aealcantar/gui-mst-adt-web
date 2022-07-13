@@ -7,4 +7,5 @@ export class CalendarioDias {
 	public horaFin:string;
 	public duracion:number;
 	public numParticipantes:number;
+  public cvePrograma:string;
 }

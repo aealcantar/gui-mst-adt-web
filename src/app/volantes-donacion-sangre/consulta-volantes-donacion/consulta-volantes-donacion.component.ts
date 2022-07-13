@@ -5,8 +5,8 @@ import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-
-import { VolantesDonacionService } from   'src/app/service/volantes-donacion.service'; 
+import { VolantesDonacionService } from   'src/app/service/volantes-donacion.service';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 declare var $: any;
 
 @Component({
@@ -31,6 +31,7 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   rolUser = "";
   cveUsuario = "";
   nombre = "";
+  public alert!: AlertInfo;
 
   constructor(
     private router: Router,
@@ -132,7 +133,15 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
           (httpErrorResponse: HttpErrorResponse) => {
             console.error(httpErrorResponse);
           }
-        );
+        ).add(() => {
+          if (this.datosBusqueda.length == 0) {
+            this.muestraAlerta(
+              'Valide los filtros',
+              'alert-warning',
+              'Sin resultados',
+            )
+          }
+        });
 
       }
 
@@ -187,6 +196,31 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         break;
     }
     return data;
+  }
+
+  muestraAlerta(
+    mensaje: string,
+    estilo: string,
+    tipoMsj?: string,
+    funxion?: any,
+  ) {
+    this.alert = new AlertInfo()
+    this.alert = {
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj,
+    }
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      }
+      if (funxion != null) {
+        funxion()
+      }
+    }, 5000)
   }
 
 }

@@ -2,30 +2,33 @@
 <app-card-template>
   <div header class="nuevoAvisoMP">
     <span class="spantitulo">
-      Aviso al Ministerio Público
+      Aviso a Ministerio Público
     </span>
   </div>
-   <div content>
+  <div content>
     <div>
       <span class="instrucciones">
         Por favor capture los siguientes datos:
       </span>
     </div>
-    <form novalidate class="formInfo" [formGroup]="formNuevoAvisoMP">
+    <form novalidate class="formInfo" [formGroup]="formEdit">
       <div class="container seccion">
         <div class="row">
+
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input avisompFec class="form-control" id="avisompFec" type="text" placeholder="Seleccionar fecha">
-              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+              <input avisompFec class="form-control" id="avisompFec" type="text" placeholder="Seleccionar fecha"
+                formControlName="fecha">
+              <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
             </div>
           </div>
+
           <div class="col-md-4">
             <div class="form-group">
-              <span class="spanInput">Alcaldia*:</span>
+              <span class="spanInput">Alcaldía*:</span>
 
               <!-- <select class="form-control styleselect" formControlName="alcaldia" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Seleccionar alcaldia" selected [value]="'-1'">
@@ -33,54 +36,44 @@
                 <option class="select-font" [value]="1">Alcaldia 1</option>
               </select> -->
 
-              <mat-select
-                class="form-control form-control-mat-select"
-                id="alcaldia"
-                formControlName="alcaldia"
-                [disableOptionCentering]="true"
-                aria-label="Servicio"
-              >
-                <mat-option class="select-font" [value]="''" selected>Seleccionar alcaldia</mat-option>
-                <mat-option class="select-font" [value]="1">Alcaldia 1</mat-option>
+              <mat-select class="form-control form-control-mat-select" id="alcaldia" formControlName="alcaldia"
+                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar alcaldía">
+                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar alcaldía</mat-option> -->
+                <mat-option class="select-font" [value]="1">Alcaldía 1</mat-option>
               </mat-select>
 
             </div>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Agencia del Ministerio público*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar agencia" formControlName="agenciaMP"
-              type="text" />
-          </div>   
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar agencia"
+              formControlName="agenciaMP" type="text" />
+          </div>
         </div>
-        
+
         <div class="row">
-           <div class="col-md-4">
+          <div class="col-md-4">
             <span class="spanInput">Nombre del paciente*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre del paciente" formControlName="nomPaciente"
-              type="text" />
-           </div>
-           <div class="col-md-4">
+            <input class="form-control matricula inputBloqueo" id="txtconsulta"
+              placeholder="Ingresar nombre del paciente" formControlName="nombrePaciente" type="text" />
+          </div>
+          <div class="col-md-4">
             <div class="form-group">
-              <span class="spanInput">Nombre y número de hospital*:</span>
+              <span class="spanInput">Nombre y número del hospital*:</span>
               <!-- <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
                   Seleccionar hospital</option>
                 <option class="select-font" [value]="1">Hospital 1</option>
               </select> -->
 
-              <mat-select
-                class="form-control form-control-mat-select"
-                id="hospital"
-                formControlName="hospital"
-                [disableOptionCentering]="true"
-                aria-label="Servicio"
-              >
-                <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option>
+              <mat-select class="form-control form-control-mat-select" id="hospital" formControlName="nombreHospital"
+                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar hospital">
+                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option> -->
                 <mat-option class="select-font" [value]="1">Hospital 1</mat-option>
               </mat-select>
             </div>
-           </div>
-           <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Servicio*:</span>
               <!-- <select class="form-control styleselect" formControlName="servicio" aria-label="Servicio">
@@ -89,31 +82,27 @@
                 <option class="select-font" [value]="1">Servicio 1</option>
               </select> -->
 
-              <mat-select
-                class="form-control form-control-mat-select"
-                id="servicio"
-                formControlName="servicio"
-                [disableOptionCentering]="true"
-                aria-label="Servicio"
-              >
-                <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option>
+              <mat-select class="form-control form-control-mat-select" id="servicio" formControlName="servicio"
+                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
+                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option> -->
                 <mat-option class="select-font" [value]="1">Servicio 1</mat-option>
               </mat-select>
             </div>
-           </div>
+          </div>
         </div>
-        
+
         <div class="row">
-           <div class="col-md-4">
+          <div class="col-md-4">
             <span class="spanInput">Número de cama*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar cama" formControlName="numCama"
-              type="text" />
-           </div>
-           <div class="col-md-4">
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar cama"
+              formControlName="numeroCama" type="text" />
+          </div>
+          <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de ingreso*:</span>
-              <input avisompIng class="form-control" id="avisompIng" type="text" placeholder="Seleccionar fecha">
-              <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
+              <input avisompIng class="form-control" id="avisompIng" type="text" placeholder="Seleccionar fecha"
+                formControlName="fechaIngreso">
+              <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
             </div>
@@ -125,13 +114,9 @@
               <option class="select-font" [value]="1">10:00:00</option>
             </select> -->
 
-            <mat-select
-              class="form-control form-control-mat-select"
-              formControlName="hora"
-              [disableOptionCentering]="true"
-              aria-label="Servicio"
-            >
-              <mat-option class="select-font" [value]="''" selected>Hora inicial</mat-option>
+            <mat-select class="form-control form-control-mat-select" formControlName="horaInicial"
+              [disableOptionCentering]="true" aria-label="Servicio" placeholder="Hora inicial">
+              <!-- <mat-option class="select-font" [value]="''" selected>Hora inicial</mat-option> -->
               <mat-option class="select-font" [value]="1">10:00:00</mat-option>
             </mat-select>
           </div>
@@ -142,61 +127,56 @@
               <option class="select-font" [value]="1">11:00:00</option>
             </select> -->
 
-            <mat-select
-              class="form-control form-control-mat-select"
-              formControlName="hora"
-              [disableOptionCentering]="true"
-              aria-label="Servicio"
-            >
-              <mat-option class="select-font" [value]="''" selected>Hora final</mat-option>
+            <mat-select class="form-control form-control-mat-select" formControlName="horaFinal"
+              [disableOptionCentering]="true" aria-label="Servicio" placeholder="Hora final">
+              <!-- <mat-option class="select-font" [value]="''" selected>Hora final</mat-option> -->
               <mat-option class="select-font" [value]="1">11:00:00</mat-option>
             </mat-select>
           </div>
         </div>
-        
+
         <div class="row">
-           <div class="col-md-12">
+          <div class="col-md-12">
             <span class="spanInput">Lesiones presentadas por el paciente*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones" formControlName="lesionesPaciente"
-              type="text" />
-           </div>
-        </div>
-        
-        <div class="row">
-           <div class="col-md-6">
-            <span class="spanInput">Nombre médico tratante*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre" formControlName="nomMedico"
-              type="text" />
-           </div>
-           <div class="col-md-6">
-            <span class="spanInput">Matricula del médico tratante*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula" formControlName="matMedico"
-              type="text" />
-           </div>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
+              formControlName="lesionesPresentadas" type="text" />
+          </div>
         </div>
 
-         <div class="row">
-           <div class="col-md-6">
-            <span class="spanInput">Nombre Trabajador(a) social*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre" formControlName="nomTrabajador"
-              type="text" />
-           </div>
-           <div class="col-md-6">
-            <span class="spanInput">Matricula del(a) trabajadora social*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula" formControlName="matTrabajador"
-              type="text" />
-           </div>
+        <div class="row">
+          <div class="col-md-6">
+            <span class="spanInput">Nombre médico tratante*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
+              formControlName="nombreMedico" type="text" />
+          </div>
+          <div class="col-md-6">
+            <span class="spanInput">Matrícula del médico tratante*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
+              formControlName="matriculaMedico" type="text" />
+          </div>
         </div>
-    </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <span class="spanInput">Nombre Trabajador(a) social*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
+              formControlName="nombreTrabajador" type="text" />
+          </div>
+          <div class="col-md-6">
+            <span class="spanInput">Matricula del(a) Trabajador(a) social*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
+              formControlName="matriculaTrabajador" type="text" />
+          </div>
+        </div>
+      </div>
     </form>
-      <div class="row">
+    <div class="row">
       <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
-        <button [disabled]="formNuevoAvisoMP.valid == false" type="button" (click)="guardar();"
+        <button [disabled]="formEdit.invalid" type="button" (click)="guardar();"
           class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>
-        <button type="button" class="btn btn-danger buttonL"
-          style="float: right; border: solid 1px #b38e5d;">
+        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;">
           Cancelar
         </button>
       </div>

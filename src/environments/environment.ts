@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlLogin: 'http://localhost:4200/login',
+    urlLogin: 'https://mts-qa.cloudapps.imss.gob.mx/login',
+
     //Agenda
     urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
     //urlMSADCargasCatalogos: 'http://localhost:8080/msedsc-carga-catalogos',
@@ -16,7 +17,6 @@ export const environment = {
     urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
 
-
     //Trabajo Social
     msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
     msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
@@ -24,22 +24,18 @@ export const environment = {
     msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
-    msmtsOauth: 'http://localhost:8081/msadt-auth/api/aplicacion',
-    urlServOauth: 'http://localhost:8081/msadt-auth',
+    msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/api/aplicacion',
+    urlServOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
-    
-
-  urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
-  recaptcha: {
-    siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
-  },
-  siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
-  secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
-  urlServArticulos: 'http://localhost:8088/msmts-ctrl-articulos',
-  urlServVolantes: 'http://localhost:8088/msmts-donacion-sangre',
-
-
+   // msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api",
+   msmtsControlInterno:"http://localhost:8088/msmts-ctrl-articulos/api",
+    urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
+    recaptcha: {
+      siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
+    },
+    siteKey: '6LcjT7wfAAAAAJtcZyGa0K44UBogPnXoeCd2RAuC',
+    secretKey: '6LcjT7wfAAAAAGj4dG-nQ258Nf8i2gEEqFIwZxC5',
 };
 
 /*

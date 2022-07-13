@@ -136,6 +136,7 @@ select::-ms-expand {
 .row {
   margin-top: 5px;
   margin-bottom: 5px;
+  padding-right: 10px;
 }
 
 input {
@@ -197,6 +198,7 @@ select {
   color: #222;
 }
 
+
 .texto{
   width: 187%;
   height: 40px;
@@ -211,7 +213,7 @@ select {
   letter-spacing: normal;
   text-align: left;
   color: #545454;
-
+  word-wrap: break-word;
 }
 
 .container {
@@ -260,7 +262,7 @@ margin-left: -60%;
   width: 320px;
   height: 27px;
   flex-grow: 0;
-  margin: 4px 0 0 0px;
+  margin: -1px 0 0 0px;
   font-family: Montserrat;
   font-size: 24px;
   font-weight: 600;

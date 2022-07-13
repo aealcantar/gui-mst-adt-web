@@ -219,10 +219,30 @@ export class CitaconsultaComponent implements OnInit {
       })
 
     } else {
-      //this.mod_mensaje = "";
-      this.objmodal.mensaje = "";
-      this.objmodal.tipo = 0;
-      $('#content').modal('hide');
+      this.citaservice.confirmarasistencia(this.varid).subscribe({
+        next: (resp: any) => {
+          console.log(resp);
+
+          this.objmodal.mensaje = "";
+          this.objmodal.tipo = 0;
+          $('#content').modal('hide');
+
+          if(resp.estatus == true){
+            this.muestraAlerta(this._Mensajes.MSJ_EXITO_CONFIRMAR_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO, this.callback);
+          } else {
+            this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_CONFIRMAR_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+          }
+
+
+        },
+        error: (err) => {
+          this.objmodal.mensaje = "";
+          this.objmodal.tipo = 0;
+          $('#content').modal('hide');
+
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_CONFIRMAR_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+        }
+      })
     }
 
   }

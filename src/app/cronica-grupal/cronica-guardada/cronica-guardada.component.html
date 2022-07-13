@@ -1,31 +1,29 @@
 <app-app-alerts [alert]="alert"></app-app-alerts>
 <app-menu [activeItem]="1"></app-menu>
 <app-card-template>
-  <div header class="justify-content-between align-items-center">
-    <div header class="flex justify-content-between row">
-      <div class="col-md-1">
-        <img
-          (click)="regresar()"
-          class="botonRegresar"
-          src="../../../assets/hu003-tarjeta/volver (1).ico"
-        />
+
+  <div header class="justify-content-between row">
+    <div class="col-md-1">
+      <img
+        (click)="regresar()"
+        class="botonRegresar"
+        src="../../../assets/hu003-tarjeta/volver (1).ico"/>
+    </div>
+    <div class="col-md-5" style="">
+      <div style="text-align: left;">
+        <span style="margin-left: -30px" class="pacienteNombreSpan">{{"Nueva crónica grupal específica"}}  </span>
       </div>
-      <div class="col-md-12">
-        <div style="display: grid; text-align: left; margin-left: -25px">
-          <span class="pacienteNombreSpan">{{ "Nueva crónica grupal" }}</span>
-        </div>
+    </div>
+    <div class="col-md-4 ">
+      <div style=" clear:bloth; white-space: nowrap;">
+        <span class="tituloDosSpam" style="white-space: nowrap;display:block; text-align: left;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{today | date: "EEEE" }} {{ day }} de {{ month }} de {{ year }} {{ this.cronica?.timHora}} </span>
+        <!-- <span class="tituloDosSpam" >|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ today | date: "EEEE" }} {{ day }} de {{ months[month] }} de {{ year }} {{ rxTime | date: "hh:mm:ss" }}</span> -->
       </div>
-      <!-- <hr class="hrCronica" style="margin-left: -7%" />
-      <div class="col-md-5" style="text-align: left; padding-top: 8px">
-        <span class="tituloDosSpam"
-          >{{ today | date: "EEEE" }} {{ day }} de {{ months[month] }} de
-          {{ year }} {{ rxTime | date: "hh:mm:ss" }}</span
-        >
+    </div>
+    <div class="col-md-2" style="text-align: right;">
+      <div style="display: grid; white-space: nowrap; text-align: left; display:block;">
+        <span class="tituloDosServicioSpam">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cronica?.desGrupo }}</span>
       </div>
-      <hr class="hrCronica" style="margin-left: -15%" />
-      <div class="col-md-2" style="padding-top: 8px">
-        <span class="tituloDosServicioSpam">{{ "Tour quirúrgico" }}</span>
-      </div> -->
     </div>
   </div>
 
@@ -75,10 +73,10 @@
           </div>
 
           <div class="col-md-6">
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px; margin-left: 15px;">
               Desarrollo de la sesión:
             </label>
-            <label class="texto">{{ cronica.desDesarrolloSesion }}</label>
+            <label style="margin-left: 26px;" class="texto">{{ cronica.desDesarrolloSesion }}</label>
           </div>
         </div>
         <div class="col-md-12">
@@ -90,10 +88,10 @@
           </div>
 
           <div class="col-md-6">
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            <label class="titulo2" style="font-weight: bold; font-size: 16px;margin-left: 15px;">
               Observaciones:
             </label>
-            <label class="texto">{{ cronica.desObservaciones }}</label>
+            <label style="margin-left: 26px;" class="texto">{{ cronica.desObservaciones }}</label>
           </div>
         </div>
       </div>

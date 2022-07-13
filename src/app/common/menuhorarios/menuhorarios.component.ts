@@ -17,7 +17,7 @@ export class MenuhorariosComponent implements OnInit,OnChanges  {
   public diasSemanaInhabil:Array <boolean>= [false,false,false,false,false,false,false];
   public dia:number;
   @Output() messageEvent = new EventEmitter<number>();
-  @Input() diainhabil: LooseObject = {dia: 0, inhabil: false};
+  @Input() diainhabil: LooseObject = {dia: 0, inhabil: true};
 
   constructor() { }
 
@@ -27,7 +27,7 @@ export class MenuhorariosComponent implements OnInit,OnChanges  {
     this.diasSemana[this.dia]=true;
 
     //TEMPORAL -- CAMBIAR CUANDO SE TENGA EL DIA QUE SE DESEA INHABILITAR
-    // this.diasSemanaInhabil[this.diainhabil['dia']]=this.diainhabil['inhabil'];
+    //this.diasSemanaInhabil[this.diainhabil['dia']]=this.diainhabil['inhabil'];
 
   }
 
@@ -35,7 +35,7 @@ export class MenuhorariosComponent implements OnInit,OnChanges  {
 
   clickDay(diaClicked:number){
     for (let index = 0; index < this.diasSemana.length; index++) {
-       this.diasSemana[index]=false;
+        this.diasSemana[index]=false;
     }
     this.diasSemana[diaClicked]=true;
     this.messageEvent.emit(diaClicked);

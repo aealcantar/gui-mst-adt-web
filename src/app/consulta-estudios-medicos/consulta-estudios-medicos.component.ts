@@ -8,6 +8,7 @@ import { EstudioMedico } from '../models/estudio-medico.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as momment from 'moment';
 import { DatePipe } from '@angular/common';
+import { AlertInfo } from '../app-alerts/app-alert.interface';
 declare var $: any;
 
 @Component({
@@ -27,6 +28,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   numitems: number = 15;
   order: string = 'desc';
   columnaId: string = 'fecFecha';
+  alert!: AlertInfo;
 
   public datesForm!: FormGroup;
 
@@ -91,7 +93,15 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
       }
-    );
+    ).add( ()=>{
+      if(this.estudioMedicos.length == 0){
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    });
     this.dtOptions = {
       order: [[2, 'desc']],
       ordering: false,
@@ -155,6 +165,27 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
         break;
     }
     return data;
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
 }

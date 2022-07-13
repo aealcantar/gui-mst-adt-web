@@ -111,5 +111,10 @@ export class CitasService {
     return this.http.get<any>(direccion);
   }
 
+  confirmarasistencia(id: number):Observable<any>{
+    let direccion = this.baseApiUrl2 + '/confirmarCita/' + id;
+    return this.http.put(direccion,{headers: this.header});
+  }
+
 
 }

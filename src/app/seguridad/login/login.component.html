@@ -39,7 +39,7 @@
 </div><!-- /.modal -->
 
 
-<app-alerta [objAlerta]="alert"></app-alerta>
+<app-app-alerts [alert]="alert"></app-app-alerts>
 
 <div class="container-fluid logn">
   <div class="bg" style="width: 100%;">
@@ -64,7 +64,7 @@
           <div class="title">
             Inicio de sesión
           </div>
-          <div class="description"  style="white-space: nowrap; margin-left: -8.7px;">
+          <div class="description" style="white-space: nowrap; margin-left: -8.7px;">
             Captura tu usuario y contraseña para ingresar
           </div>
           <div class="form-group">
@@ -75,7 +75,7 @@
             </label>
             <input type="text" formControlName="usuario" id="usuario" class="form-control"
               [ngClass]="{'form-control-error': logindata.controls?.usuario?.dirty && logindata.controls?.usuario?.errors}"
-              placeholder="Ingresar usuario" maxlength="10" required />
+              placeholder="Ingresar usuario" maxlength="9" required numbersOnly />
             <small *ngIf="logindata.controls?.usuario?.dirty && logindata.controls?.usuario?.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -90,7 +90,7 @@
             </label>
             <input [type]="showPassword?'text':'password'" formControlName="password" id="password" class="form-control"
               [ngClass]="{'form-control-error': logindata.controls?.password?.dirty && logindata.controls?.password?.errors}"
-              placeholder="Ingresar contraseña" maxlength="10" required aria-describedby="inputSuccess2Status" />
+              placeholder="Ingresar contraseña" maxlength="9" required aria-describedby="inputSuccess2Status" />
             <span class="glyphicon form-control-feedback" style="pointer-events: auto;padding-top: 7px;">
               <mat-icon svgIcon="eye-off" id="togglePassword" *ngIf="!showPassword"
                 (click)="showPassword = !showPassword"></mat-icon>
@@ -110,12 +110,11 @@
               </a>
             </p>
           </div>
-          <br />
-          <div>
+          <div style="margin-top: -3px;">
             <label class="label">*Campos obligatorios</label>
           </div>
 
-          <div class="container-fluid py-3">
+          <div class="container-fluid py-3" style="margin-top: -3px;">
             <div class="row mt-3">
               <div class="col-sm-12 mb-2">
                 <re-captcha id="recaptcha" name="recaptcha" formControlName="token" required
@@ -129,9 +128,8 @@
               </div>
             </div>
           </div>
-
           <div class="form-group d-grid gap-2 d-md-flex justify-content-md-end"
-            style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end;align-content: flex-end; margin-top: 10px;">
+            style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end;align-content: flex-end; margin-top: -3px;">
             <button type="submit" class="btn btn-primary pull-right btuser" (click)="loginusuario()"
               [disabled]="logindata.valid == false">
               Acceder

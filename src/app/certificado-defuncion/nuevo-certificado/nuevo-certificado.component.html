@@ -1,0 +1,336 @@
+<app-header-menu></app-header-menu>
+
+<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-card-template>
+  <div header class="flex justify-content-between aling-intems-center">
+    <span> Control TS - Certificado de defunción </span>
+  </div>
+  <div content>
+    <div>
+      <span class="instrucciones">
+        Por favor capture los siguientes datos:
+      </span>
+    </div>
+    <form
+      novalidate
+      [formGroup]="formAdd"
+      (submit)="guardar()"
+      class="formInfo"
+    >
+      <div class="container seccion">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha de defunción*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                autocomplete="off"
+                id="fhDefuncion"
+                formControlName="fechaDefuncion"
+                class="form-control"
+              />
+              <span
+                *ngIf="!hasCertificado"
+                class="glyphicon glyphicon-calendar fondocalendar"
+                aria-hidden="true"
+              >
+                <div class="imgCalendar"></div>
+              </span>
+              <span class="labelDetalle" *ngIf="hasCertificado">{{
+                certificado?.fechaDefuncion
+              }}</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Hora de defunción*:</span>
+
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                [ngxTimepicker]="hrDefuncionPicker"
+                formControlName="horaDefuncion"
+                type="text"
+              />
+              <ngx-material-timepicker
+                #hrDefuncionPicker
+              ></ngx-material-timepicker>
+              <span
+                *ngIf="!hasCertificado"
+                class="glyphicon glyphicon-calendar fontIcono fondocalendar"
+                aria-hidden="true"
+              >
+                <div class="imgClock"></div>
+              </span>
+              <span class="labelDetalle" *ngIf="hasCertificado">{{
+                certificado?.horaDefuncion
+              }}</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Folio del certificado*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="foliofuncion"
+                type="text"
+              />
+            </div>
+            <span class="labelDetalle" *ngIf="hasCertificado">
+              {{ certificado?.folioCertificado }}
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Nombre del asegurado*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="nombreAsegurado"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.nombreAsegurado }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">No. de Seguridad Social:</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="nssPaciente"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.nssPaciente }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <mat-select
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="cveServicio"
+              >
+                <mat-option
+                  *ngFor="let servicio of listaServicios"
+                  [value]="servicio.cve_especialidad"
+                >
+                  {{ servicio.des_especialidad }}
+                </mat-option>
+              </mat-select>
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.cveServicio }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha la entrega de certificado*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                id="entregaCertificado"
+                autocomplete="off"
+                formControlName="fechaDeEntregaDeCertificado"
+                class="form-control"
+                type="text"
+              />
+              <span
+                *ngIf="!hasCertificado"
+                class="glyphicon glyphicon-calendar fondocalendar"
+                aria-hidden="true"
+              >
+                <div class="imgCalendar"></div>
+              </span>
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.fechaDeEntregaDeCertificado }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Hora de entrega del certificado*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                [ngxTimepicker]="hrEntregaPicker"
+                formControlName="horaDeEntregaDeCertificado"
+                type="text"
+              />
+              <ngx-material-timepicker
+                #hrEntregaPicker
+              ></ngx-material-timepicker>
+              <span
+                *ngIf="!hasCertificado"
+                class="glyphicon glyphicon-calendar fontIcono fondocalendar"
+                aria-hidden="true"
+              >
+                <div class="imgClock"></div>
+              </span>
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.horaDeEntregaDeCertificado }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Funeraria*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="nombreFuneraria"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.nombreFuneraria }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput"
+                >Nombre del familiar que recibe certificado*:</span
+              >
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="nombreFamiliar"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.nombreFamiliar }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput"
+                >Parentesco del familiar que recibe certificado*:</span
+              >
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="parentescoFamiliar"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.parentescoFamiliar }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Observaciones*:</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="observaciones"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.observaciones }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Nombre del Trabajador social</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                type="text"
+                formControlName="trabajadorSocial"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.cvePersonalQueElaboro }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Matricula del Trabajador social</span>
+              <input
+                *ngIf="!hasCertificado"
+                class="form-control"
+                formControlName="matricula"
+                type="text"
+              />
+              <span class="labelDetalle" *ngIf="hasCertificado">
+                {{ certificado?.cvePersonalQueElaboro }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div><span class="instrucciones"> *Campos obligatorios </span></div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-right" *ngIf="!hasCertificado">
+            <button
+              type="button"
+              id="btnCancelarCertificado"
+              class="btn btn-danger"
+              (click)="cancelar(cancelarModal)"
+            >
+              Cancelar</button
+            ><button
+              class="btn btn-primary"
+              id="btnGuardarCertificado"
+              [disabled]="formAdd.invalid"
+              type="submit"
+            >
+              Guardar
+            </button>
+          </div>
+          <div class="col-12 text-right" *ngIf="hasCertificado">
+            <button
+              class="btn btn-primary"
+              (click)="imprimir()"
+              id="btnGuardarCertificado"
+              type="button"
+            >
+              Imprimir
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-card-template>
+<app-info-bottom></app-info-bottom>
+
+<ng-template #cancelarModal>
+  <div class="col-sm m-3 text-center">
+    <img src="assets/images/Group 2082.png" class="Group-2082" alt="" />
+    <div class="modal-title Atencin pt-3">Atención</div>
+
+  </div>
+  <div class="lineaSeparador"></div>
+  <div class="col-sm text-center mt-4 mb-4">
+    <label class="tituloModal fontEmergenteTitle">¿Desea salir sin guardar</label>
+    <br />
+    <label class="fontEmergenteTitle"> los cambios?</label>
+    <br /><br />
+  </div>
+  <div class="col-sm text-center mb-4">
+    <button class="btn btn-danger btuser" type="button" mat-dialog-close>
+      Cancelar
+    </button>
+    <button type="button" (click)="cancelarSinGuardar()" class="btn btn-primary  btnGuardar" mat-dialog-close>
+      Aceptar
+    </button>
+  </div>
+</ng-template>

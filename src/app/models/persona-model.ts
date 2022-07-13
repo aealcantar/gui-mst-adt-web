@@ -8,7 +8,7 @@ export class Persona {
     public rol: string;
     public nombreCompleto: string;
     public usuario: number;
-    public contraseña: string;
+    public contrasena: string;
     public turno: string;
     public email: string;
     public unidadMedica?: string;

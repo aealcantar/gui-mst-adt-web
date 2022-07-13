@@ -96,10 +96,10 @@ export class HelperCatalogosService {
       col7: 'UNIDAD MEDICA',
 
     },
-   
-   
-    
-    
+
+
+
+
     {
       idCatalogos: 4,
       nombreCatalogo: 'Responsables',
@@ -109,6 +109,7 @@ export class HelperCatalogosService {
       col2: 'NOMBRE',
       col3: 'UBICACIÓN',
       col4: 'TURNO',
+      col5: 'SERVICIO/ESPECIALIDAD'
 
     },
     {
@@ -130,7 +131,7 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Configuración de Calendario Anual',
       rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
       idCatPadre: [2,3],
-      col1: 'PROGRAMA',
+      col1: 'SERVICIOS / ESPECIALIDADES',
       col2: 'UBICACIÓN',
       col3: 'FECHA INICIO',
       col4: 'HORA INICIO',
@@ -153,11 +154,11 @@ export class HelperCatalogosService {
       col4: 'MATRÍCULA',
       col5: 'ROL EN EL SISTEMA',
       col6: 'PUESTO',
-      
+
       col7: 'TURNO',
       col8: 'EMAIL',
       col9: 'ESCUELA_PROCEDENCIA',
-     
+
     },
 
     {
@@ -165,7 +166,7 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Turnos',
       rutaPlantilla: '../../../../assets/files/11.Turnos.xlsx',
       idCatPadre: undefined,
-      
+
       col1: 'Descripción de turno',
       col2: '4_30_6',
 
