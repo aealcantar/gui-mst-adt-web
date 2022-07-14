@@ -6,6 +6,8 @@ import { DatePipe } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { formatDate } from '@angular/common';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-cronica-guardada',
@@ -15,27 +17,36 @@ import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 
 export class CronicaGuardadaComponent implements OnInit, OnDestroy {
 
-  alert!: AlertInfo;
-
-  time = new Date();
-  rxTime = new Date();
-  intervalId: any;
-  subscription: Subscription | undefined;
-  months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-  today:any;
-  day:any;
-  month:any;
-  year:any;
-
-  cronica: any;
+  public alert!: AlertInfo;
+  public time = new Date();
+  public rxTime = new Date();
+  public intervalId: any;
+  public subscription: Subscription | undefined;
+  public months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  public today:any;
+  public day:any;
+  public month:any;
+  public year:any;
+  public usuario!: Usuario;
+  public cronica: any;
+  public datetimeFormat = '';
+  public dateToday= new Date();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService
-  ) { }
+  ) {
+    this.datetimeFormat = formatDate(this.dateToday, 'dd/MM/yyyy hh:mm:ss aa', 'en-ES');
+  }
 
   ngOnInit(): void {
+    let userTmp = sessionStorage.getItem('usuario') || '';
+    if (userTmp !== '') {
+      this.usuario = JSON.parse(userTmp);
+      console.log("USER DATA: ", this.usuario);
+    }
+
     this.muestraAlerta(
       '¡La información se guardó con éxito!',
       'alert-success',
@@ -89,25 +100,26 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
 
   imprimir() {
     let data: any = {
-        ooad: "CDMX NORTE",
-        unidad: "HGZ 48 SAN PEDRO XALAPA",
-        clavePtal: "35E1011D2153",
-        turno: "MATUTINO",
-        servicio: "GRUPO",
-        grupo: "TOUR QUIRURJICO",
-        // grupo : this.cronica.desGrupo !== null ? this.cronica.desGrupo : "",
-        fecha: this.cronica.fecFechaCorta !== null ? this.cronica.fecFechaCorta : "",
-        hora: this.cronica.timHora !== null ? this.cronica.timHora : "",
-        ponentes: this.cronica.descPonentes !== null ? this.cronica.descPonentes : "",
-        numAsistentes: this.cronica.numTotalParticipantes !== null ? this.cronica.numTotalParticipantes : "",
-        tecnicaDidactica: this.cronica.desTecnicaDidactica !== null ? this.cronica.desTecnicaDidactica : "",
-        materialApoyo: this.cronica.desMaterialApoyo !== null ? this.cronica.desMaterialApoyo : "",
-        objetivoSesion: this.cronica.desObjetivosSesion !== null ? this.cronica.desObjetivosSesion : "",
-        contenido: this.cronica.desDesarrolloSesion !== null ? this.cronica.desDesarrolloSesion : "",
-        perfilGrupo: this.cronica.desPerfilGrupo !== null ? this.cronica.desPerfilGrupo : "",
-        observaciones: this.cronica.desObservaciones !== null ? this.cronica.desObservaciones : "",
-        trabajadorSocial: "Antonio Esteban Alcántar",
-        participantes: this.cronica.participanteList
+      ooad: "CDMX NORTE",
+      unidad: "HGZ 48 SAN PEDRO XALAPA",
+      clavePtal: "35E1011D2153",
+      turno: "MATUTINO",
+      servicio: "GRUPO",
+      grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
+      fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
+      hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",
+      ponentes: this.cronica?.descPonentes !== null ? this.cronica?.descPonentes : "",
+      numAsistentes: this.cronica?.numTotalParticipantes !== null ? this.cronica?.numTotalParticipantes : "",
+      tecnicaDidactica: this.cronica?.desTecnicaDidactica !== null ? this.cronica?.desTecnicaDidactica : "",
+      materialApoyo: this.cronica?.desMaterialApoyo !== null ? this.cronica?.desMaterialApoyo : "",
+      objetivoSesion: this.cronica?.desObjetivosSesion !== null ? this.cronica?.desObjetivosSesion : "",
+      contenido: this.cronica?.desDesarrolloSesion !== null ? this.cronica?.desDesarrolloSesion : "",
+      perfilGrupo: this.cronica?.desPerfilGrupo !== null ? this.cronica?.desPerfilGrupo : "",
+      observaciones: this.cronica?.desObservaciones !== null ? this.cronica?.desObservaciones : "",
+      fecImpresion: this.datetimeFormat,
+      trabajadorSocial: this.usuario?.strNombres + " " + this.usuario?.strApellidoP + " " + this.usuario?.strApellidoM,
+      participantes: this.cronica.participanteList
+
     };
     console.log("DATA REPORT: ", data);
     this.cronicaGrupalService.downloadPdf(data).subscribe(

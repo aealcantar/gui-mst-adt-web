@@ -28,7 +28,7 @@ export class CCGrupalEspecificaComponent implements OnInit {
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService
   ) { 
-    this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
+    this.datetimeFormat = formatDate(this.dateToday, 'dd/MM/yyyy hh:mm:ss aa', 'en-ES');
   }
 
   ngOnInit(): void {
@@ -101,23 +101,23 @@ export class CCGrupalEspecificaComponent implements OnInit {
     let fechaTransformada = this.datetimeFormat;
     let data: any = {
       ooad: "CDMX NORTE",
-        unidad: "HGZ 48 SAN PEDRO XALAPA",
-        clavePtal: "35E1011D2153",
-        turno: "MATUTINO",
-        servicio: "GRUPO",
-        grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
-        fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
-        hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",
-        ponentes: this.cronica?.descPonentes !== null ? this.cronica?.descPonentes : "",
-        numAsistentes: this.cronica?.numTotalParticipantes !== null ? this.cronica?.numTotalParticipantes : "",
-        tecnicaDidactica: this.cronica?.desTecnicaDidactica !== null ? this.cronica?.desTecnicaDidactica : "",
-        materialApoyo: this.cronica?.desMaterialApoyo !== null ? this.cronica?.desMaterialApoyo : "",
-        objetivoSesion: this.cronica?.desObjetivosSesion !== null ? this.cronica?.desObjetivosSesion : "",
-        contenido: this.cronica?.desDesarrolloSesion !== null ? this.cronica?.desDesarrolloSesion : "",
-        perfilGrupo: this.cronica?.desPerfilGrupo !== null ? this.cronica?.desPerfilGrupo : "",
-        observaciones: this.cronica?.desObservaciones !== null ? this.cronica?.desObservaciones : "",
-        fecImpresion: fechaTransformada,
-        trabajadorSocial: this.usuario?.strNombres + " " + this.usuario?.strApellidoP + " " + this.usuario?.strApellidoM
+      unidad: "HGZ 48 SAN PEDRO XALAPA",
+      clavePtal: "35E1011D2153",
+      turno: "MATUTINO",
+      servicio: "GRUPO",
+      grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
+      fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
+      hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",
+      ponentes: this.cronica?.descPonentes !== null ? this.cronica?.descPonentes : "",
+      numAsistentes: this.cronica?.numTotalParticipantes !== null ? this.cronica?.numTotalParticipantes : "",
+      tecnicaDidactica: this.cronica?.desTecnicaDidactica !== null ? this.cronica?.desTecnicaDidactica : "",
+      materialApoyo: this.cronica?.desMaterialApoyo !== null ? this.cronica?.desMaterialApoyo : "",
+      objetivoSesion: this.cronica?.desObjetivosSesion !== null ? this.cronica?.desObjetivosSesion : "",
+      contenido: this.cronica?.desDesarrolloSesion !== null ? this.cronica?.desDesarrolloSesion : "",
+      perfilGrupo: this.cronica?.desPerfilGrupo !== null ? this.cronica?.desPerfilGrupo : "",
+      observaciones: this.cronica?.desObservaciones !== null ? this.cronica?.desObservaciones : "",
+      fecImpresion: fechaTransformada,
+      trabajadorSocial: this.usuario?.strNombres + " " + this.usuario?.strApellidoP + " " + this.usuario?.strApellidoM
     };
     console.log("DATA REPORT: ", data);
     this.cronicaGrupalService.downloadPdf(data).subscribe(
