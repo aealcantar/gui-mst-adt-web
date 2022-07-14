@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, } from '@angular/forms' 
+import { FormBuilder, FormControl, FormGroup, } from '@angular/forms'
 import { Validators } from '@angular/forms';
 import { Municipio } from '../../models/municipio.model';
-import { EstudioSocialMedicoService } from 'src/app/service/estudio-social-medico.service';  
+import { EstudioSocialMedicoService } from 'src/app/service/estudio-social-medico.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Ciudad } from '../../models/ciudad.model';
 import { Estado } from '../../models/estado.model';
-import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';  
-import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';  
+import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
-import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service' 
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import * as moment from 'moment';
 declare var $: any;
@@ -98,7 +98,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       let nombre = usuario?.strNombres + " " + usuario?.strApellidoP + " " + usuario?.strApellidoM;
       let matricula= usuario?.matricula;
       this.formNuevaDonacion.controls['nombreTrabajadorSocial'].setValue(nombre);
-      this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(matricula);       
+      this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(matricula);
       }
 
     this.buscarBancosSangre();
@@ -181,7 +181,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     if (formNuevaDonacion.status != "INVALID") {
 
       //validando que los campos no vayan vacios
-      if (this.formNuevaDonacion.value.umh.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.umh.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['umh'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -191,7 +191,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.fecha1.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.fecha1.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['fecha1'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -201,7 +201,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.horaInicialAtencion1.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.horaInicialAtencion1.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['horaInicialAtencion1'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -211,7 +211,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.horaFinalAtencion1.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.horaFinalAtencion1.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['horaFinalAtencion1'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -222,7 +222,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       }
 
 
-      if (this.formNuevaDonacion.value.codigoPostal.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.codigoPostal.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['codigoPostal'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -234,7 +234,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
 
 
 
-      if (this.formNuevaDonacion.value.codigoPostal.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.codigoPostal.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['codigoPostal'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -244,7 +244,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.colonia.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.colonia.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['colonia'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -255,7 +255,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       }
 
 
-      if (this.formNuevaDonacion.value.calle.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.calle.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['calle'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -265,7 +265,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.numExterior.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.numExterior.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['numExterior'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -275,7 +275,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.fecha2.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.fecha2.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['fecha2'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -285,7 +285,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.fecha3.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.fecha3.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['fecha3'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -298,7 +298,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
 
 
 
-      if (this.formNuevaDonacion.value.nombreTrabajadorSocial.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.nombreTrabajadorSocial.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['nombreTrabajadorSocial'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -308,7 +308,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.matriculaTrabajadorSocial.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.matriculaTrabajadorSocial.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -318,7 +318,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.numTelefonoTrabajadorSocial.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.numTelefonoTrabajadorSocial.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['numTelefonoTrabajadorSocial'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
@@ -328,7 +328,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return;
       }
 
-      if (this.formNuevaDonacion.value.observaciones.trim().length == 0 ? true : false) {
+      if (this.formNuevaDonacion.value.observaciones.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['observaciones'].setValue(null);
         this.muestraAlerta(
           'Verificar datos capturados',
