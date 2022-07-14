@@ -117,6 +117,7 @@ export class RegistroComponent implements OnInit {
             console.log(result)
             this.admonResponse = result
             if (this.admonResponse.status == '200') {
+              this.showSucces('¡Éxito Contraseña guardada correctamente!', true);
               this.muestraAlerta(
                 '¡Éxito Contraseña guardada correctamente!',
                 'alert-success',
@@ -167,6 +168,26 @@ export class RegistroComponent implements OnInit {
   }
   //success
 
+
+  private showSucces(msg:string, redirect:boolean) {
+
+    this.alert = {
+      message:'<strong>Estatus.</strong>'+msg,
+      type: 'success',
+      visible: true
+    }
+    setTimeout(() => {
+      this.alert = {
+        message:'',
+        type: 'custom',
+        visible: false
+      }
+      if(redirect){
+        this.router.navigate(["/login"]);
+      }
+    }, 2000);
+  }
+
   muestraAlerta(
     mensaje: string,
     estilo: string,
@@ -186,9 +207,9 @@ export class RegistroComponent implements OnInit {
         type: 'custom',
         visible: false,
       }
-      if (funxion != null) {
-        funxion()
-      }
+      // if (funxion != null) {
+      //   funxion()
+      // }
     }, 2000)
   }
 }
