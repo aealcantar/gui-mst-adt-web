@@ -43,18 +43,51 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
     private certificadoService: CertificadoDefuncionService
   ) {
     this.formAdd = formBuilder.group({
-      fechaDefuncion: new FormControl('', Validators.required),
-      horaDefuncion: new FormControl('', Validators.required),
-      foliofuncion: new FormControl('', Validators.required),
+      fechaDefuncion: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(10),
+      ]),
+      horaDefuncion: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(10),
+      ]),
+      foliofuncion: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(10),
+      ]),
       nssPaciente: new FormControl(''),
-      cveServicio: new FormControl('', Validators.required),
-      nombreAsegurado: new FormControl('', Validators.required),
-      fechaDeEntregaDeCertificado: new FormControl('', Validators.required),
-      horaDeEntregaDeCertificado: new FormControl('', Validators.required),
-      nombreFuneraria: new FormControl('', Validators.required),
-      nombreFamiliar: new FormControl('', Validators.required),
-      parentescoFamiliar: new FormControl('', Validators.required),
-      observaciones: new FormControl('', Validators.required),
+      cveServicio: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
+      nombreAsegurado: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      fechaDeEntregaDeCertificado: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(10),
+      ]),
+      horaDeEntregaDeCertificado: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(10),
+      ]),
+      nombreFuneraria: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
+      nombreFamiliar: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
+      parentescoFamiliar: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
+      observaciones: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(1500),
+      ]),
       trabajadorSocial: new FormControl(''),
       matricula: new FormControl(''),
       cvePersonalQueElaboro: new FormControl(''),
@@ -150,14 +183,14 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   async guardar() {
     if (this.formAdd.valid) {
       this.validarCampos = false;
-      const certificado = this.formAdd.value as CertificadoDefuncion;
-      console.log(certificado);
+      const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
+      console.log('antes de guardar', certificado);
       //  this.certificado = certificado;
 
       this.certificadoService
         .insert(certificado)
         .subscribe(async (response) => {
-          console.log(response);
+          console.log('despues de guardar', response);
           this.certificado = response.certificadoDeDefuncion;
           sessionStorage.setItem(
             'certificadoDefuncion',
@@ -167,7 +200,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         });
     } else {
       this.validarCampos = true;
-      this.btnGuardar.nativeElement.this.onFormChanges();
+      this.onFormChanges();
     }
   }
   onFormChanges() {
