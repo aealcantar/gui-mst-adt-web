@@ -183,9 +183,9 @@ export class RegistroComponent implements OnInit {
         visible: false
       }
       if(redirect){
-        this.router.navigate(["/login"], { skipLocationChange: true });
+        this.router.navigate(["/login"]);
       }
-    }, 5000);
+    }, 2000);
   }
 
   muestraAlerta(
