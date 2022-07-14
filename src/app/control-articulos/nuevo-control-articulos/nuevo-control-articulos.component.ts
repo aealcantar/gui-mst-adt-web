@@ -125,6 +125,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     }
 
     this.servicios();
+    this.ubicacion();
     this.formNuevoArticulo.controls['fecha'].setValue(this.fecha);
     this.formNuevoArticulo.controls['recepcionFecha'].setValue(this.fecha);
     this.formNuevoArticulo.controls['resguardoFecha'].setValue(this.fecha);
@@ -178,11 +179,11 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       );
   }
 
-  //busca la ubicacion relacionada con el servicio
-  ubicacion(idServicio: string) {
-    this.cronicaGrupalService.getCatLugar(idServicio).subscribe(
-      (lugares) => {
-        this.listaUbicacion = lugares;
+  //busca las ubicaciones
+  ubicacion() {
+    this.controlArticulosService.getCatUbicaciones().subscribe(
+      (response) => {
+        this.listaUbicacion = response.filter( (r:any) => r.tipoUbicacionEntity.cveTipoUbicacion === 3);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -378,7 +379,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
             let id = res.idCa + "nuevo";
             console.log (id);
-            await this.router.navigateByUrl("/detalle-articulos/" + id, { skipLocationChange: true });
+            await this.router.navigateByUrl("/detalle-articulos/" + id);
 
           } catch (error) {
             this.muestraAlerta(
@@ -433,7 +434,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
   //al dar click en la ventana emergente y da en la opcion de aceptar se redirecciona
    cancelarSinGuardar() {
-    this.router.navigateByUrl("/consulta-articulos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-articulos");
 
   }
 
@@ -483,10 +484,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   //si selecciona un servicio diferente cambia la ubicacion
   onChangeServicio() {
     let idServicio = this.formNuevoArticulo.value.servicio;
-    if (idServicio != '' && idServicio != null) {
-      //  idServicio = '1';
-      this.ubicacion(idServicio);
-    }
+    console.log("SERVICIO: ", idServicio);
   }
 
 

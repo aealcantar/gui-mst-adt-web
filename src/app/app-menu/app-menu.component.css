@@ -105,7 +105,23 @@
 }
 
 .blq-2-selected {
-  background: url("../../assets/images/Subtract-sm.svg");
+  background: url("../../assets/images/Subtract.svg");
+}
+
+.blq-3-selected img:nth-child(3) {
+  display: block !important;
+}
+
+.blq-3-selected img:nth-child(1) {
+  display: block !important;
+}
+
+.blq-3-selected img:nth-child(2) {
+  display: none !important;
+}
+
+.blq-3-selected {
+  background: url("../../assets/images/Subtract.svg");
 }
 
 .blq-2:hover img:nth-child(2) {

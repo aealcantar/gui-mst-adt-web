@@ -144,7 +144,7 @@ export class CargaComponent implements OnInit {
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
           // localStorage.setItem('origen', this.router.url);
           // console.log('origen ruta',localStorage.getItem('origen'));
-          this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones", { skipLocationChange: true });
+          this.router.navigateByUrl("/catalogos/ConfiguracionUbicaciones");
         } else {
           // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
           this.validacionAbrirModal(catalogo);
@@ -155,7 +155,7 @@ export class CargaComponent implements OnInit {
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
           // localStorage.setItem('origen', this.router.url);
           // console.log('origen ruta',localStorage.getItem('origen'));
-          this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
+          this.router.navigateByUrl("/buscauser");
         } else {
           // this.abrirdialog(catalogo.idCatalogos, catalogo.nombreCatalogo, catalogo.sheetName);
           this.validacionAbrirModal(catalogo);
@@ -253,7 +253,7 @@ export class CargaComponent implements OnInit {
 
   btnContinuar() {
     if (this.blnContinuar) {
-      this.router.navigateByUrl("/busqueda", { skipLocationChange: true });
+      this.router.navigateByUrl("/busqueda");
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, 'Debe completar la carga de Catálogos', this._Mensajes.ERROR);
     }

@@ -85,12 +85,12 @@ export class UserconsultaComponent implements OnInit {
 
   editarusuario() {
     if(this.items.Matrícula != ''){
-      this.router.navigateByUrl("/editauser/" + this.varid, { skipLocationChange: true });
+      this.router.navigateByUrl("/editauser/" + this.varid);
     }
   }
 
   regresaconsulta(){
-    this.router.navigateByUrl("/buscauser", { skipLocationChange: true });
+    this.router.navigateByUrl("/buscauser");
   }
 
   private msjLoading(titulo: string) {

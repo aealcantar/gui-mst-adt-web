@@ -67,23 +67,23 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   }
 
   irNotasDeTrabajo() {
-    this.router.navigateByUrl("/consulta-notas", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-notas");
   }
 
 
   irEstudioSocialMedico() {
-    this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-estudios-medicos");
   }
 
   irControlDeArticulos(){
-    this.router.navigateByUrl("/consulta-articulos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-articulos");
   }
 
   irAgenda(){
-    this.router.navigateByUrl("/buscacita", { skipLocationChange: true });
+    this.router.navigateByUrl("/buscacita");
   }
 
   iraVolantesSangre(){
-    this.router.navigateByUrl("/consulta-volantes-donacion", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-volantes-donacion");
   }
 }

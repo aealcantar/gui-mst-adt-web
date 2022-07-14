@@ -1,5 +1,5 @@
 import { ServiceService } from './busqueda-nss.service';
-import { AfterContentInit, Component } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { pacienteSeleccionado } from './paciente.interface';
 import { Router } from '@angular/router';
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
@@ -13,7 +13,7 @@ import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
   styleUrls: ['./busqueda-nss.component.css']
 })
 
-export class BusquedaNssComponent implements AfterContentInit {
+export class BusquedaNssComponent implements OnInit {
   pacienteSeleccionado!: pacienteSeleccionado;
 
   isCollapsed: boolean[] = [];
@@ -51,14 +51,16 @@ export class BusquedaNssComponent implements AfterContentInit {
     this.authService.isAuthenticatedObs$.next(true);
   }
 
-  ngAfterContentInit(): void {
-    this.authService.setProjectObs("Trabajo social");
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
   }
 
   elementoSeleccionado(elemento: any) {
     this.pacienteSeleccionado = elemento;
     this.tarjetaService.add(this.pacienteSeleccionado);
-    this.router.navigate(['consulta-notas'], { skipLocationChange: true });
+    this.router.navigate(['consulta-notas']);
   }
 
   muestra(i: number) {
