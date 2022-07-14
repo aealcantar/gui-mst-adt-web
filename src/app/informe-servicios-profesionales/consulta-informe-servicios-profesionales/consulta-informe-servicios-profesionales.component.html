@@ -1,1 +1,93 @@
-<h1>Consulta Informe Servicio Works!</h1>
+<app-menu [activeItem]="4"></app-menu>
+<app-card-template>
+    <header header class="flex justify-content-between align-items-center title">
+        <label>
+            Consulta de Informe servicios profesionales Administración
+        </label>
+    </header>
+    <section content>
+        <form [formGroup]="formularioBusqueda" (submit)="buscar()">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="calendar">Fecha:</label>
+                        <input calendar class="form-control" id="calendar" type="text" placeholder="dd/mm/aaaa">
+                        <span class="glyphicon fondocalendar" aria-hidden="true">
+                            <div class="imgCalendar"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Servicio:
+                        </label>
+                        <select class="form-control" aria-label="Servicio" formControlName="servicio">
+                            <option class="select-font" [value]="''" selected>Seleccionar</option>
+                            <option class="select-font" [value]="servicio.cve_especialidad"
+                                *ngFor="let servicio of serviciosEspecialidad">
+                                {{ servicio.des_especialidad }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Turno:
+                        </label>
+                        <select class="form-control" aria-label="Servicio" formControlName="turno">
+                            <option class="select-font" [value]="''" selected>Seleccionar</option>
+                            <option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{
+                                turno.des_turno }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Lugar:
+                        </label>
+                        <select class="form-control" aria-label="Servicio" formControlName="lugar">
+                            <option class="select-font" [value]="''" selected>
+                                Seleccionar
+                            </option>
+                            <option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
+                                {{ lugar.des_completa_ubicacion }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Responsable:
+                        </label>
+                        <select class="form-control" aria-label="Servicio" formControlName="responsable">
+                            <option class="select-font" [value]="''" selected>
+                                Ingresar Responsable
+                            </option>
+                            <option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
+                                {{ lugar.des_completa_ubicacion }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="col-auto mt-5 buttons">
+                        <button class="btn btn-default btuser" id="btnLimpiar" type="button" (click)="limpiar()">
+                            Limpiar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-guardar buttonL" id="btnBuscar">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</app-card-template>
