@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-4 ">
       <div style=" clear:bloth; white-space: nowrap;">
-        <span class="tituloDosSpam" style="white-space: nowrap;display:block; text-align: left;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{today | date: "EEEE" }} {{ day }} de {{ month }} de {{ year }} {{ this.cronica?.timHora}} </span>
+        <span class="tituloDosSpam" style="white-space: nowrap;display:block; text-align: left;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{this.cronica?.fechaCorta | date: "EEEE" }} {{ day }} de {{ months[month] }} de {{ year }} {{ this.cronica?.timHora}} </span>
         <!-- <span class="tituloDosSpam" >|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ today | date: "EEEE" }} {{ day }} de {{ months[month] }} de {{ year }} {{ rxTime | date: "hh:mm:ss" }}</span> -->
       </div>
     </div>
