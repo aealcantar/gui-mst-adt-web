@@ -12,6 +12,7 @@ import { ArchivoCarga, CargasCatalogos, CatalogoData, ConfiguracionCarga } from 
 
 import { Ubicacion } from 'src/app/models/ubicacion-model';
 import { UbicacionRequest } from 'src/app/models/ubicacion-request-model';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalogos.service';
 import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
@@ -69,13 +70,14 @@ export class UbicacionesComponent implements OnInit {
 
   mensaje!: objAlert;
 
-  constructor(private ubicaciones: UbicacionesService,
+  constructor(private ubicaciones: UbicacionesService,private authService: AuthService,
     private router: Router, private _Mensajes: HelperMensajesService,
     private matIconRegistry: MatIconRegistry,
     private _HelperCatalogos: HelperCatalogosService,
     public dialog: MatDialog,
     private domSanitizer: DomSanitizer) {
-
+      this.authService.userLogged$.next(true);
+      this.authService.isAuthenticatedObs$.next(true);
     this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
     this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
     this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
