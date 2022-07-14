@@ -157,11 +157,11 @@ export class UserbuscaComponent implements OnInit  {
   }
 
   nuevousuario(){
-    this.router.navigateByUrl("/guardauser", { skipLocationChange: true });
+    this.router.navigateByUrl("/guardauser");
   }
 
   muestrausuario(id: number){
-    this.router.navigateByUrl("/consultauser/" + id, { skipLocationChange: true });
+    this.router.navigateByUrl("/consultauser/" + id);
   }
 
   cargalayoutusuarios(){
@@ -195,9 +195,9 @@ export class UserbuscaComponent implements OnInit  {
     if(org){
       localStorage.removeItem('origen');
       console.log('origen',org);
-      this.router.navigateByUrl(org, { skipLocationChange: true });
+      this.router.navigateByUrl(org);
     } else{
-      this.router.navigateByUrl("busqueda", { skipLocationChange: true });
+      this.router.navigateByUrl("busqueda");
     }
 
   }

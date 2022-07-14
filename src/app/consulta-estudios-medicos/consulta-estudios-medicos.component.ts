@@ -45,7 +45,9 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
       fechaInicial: [null, Validators.required],
       fechaFinal: [null, Validators.required],
     });
-    this.authService.setProjectObs("Trabajo social");
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
   }
 
   ngAfterViewInit(): void {
@@ -122,7 +124,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   }
 
   irNuevoEstudio() {
-    this.router.navigate(["nuevo-estudio-social-medico"], { skipLocationChange: true });
+    this.router.navigate(["nuevo-estudio-social-medico"]);
   }
 
   handleDatesChange() {

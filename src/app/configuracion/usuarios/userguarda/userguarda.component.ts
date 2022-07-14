@@ -266,7 +266,7 @@ export class UserguardaComponent implements OnInit {
     if (this.isedit) {
       ruta = '/consultauser/' + this.varid;
     }
-    this.router.navigateByUrl(ruta, { skipLocationChange: true });
+    this.router.navigateByUrl(ruta);
   }
 
   onKeyUpEvent(event: any) {

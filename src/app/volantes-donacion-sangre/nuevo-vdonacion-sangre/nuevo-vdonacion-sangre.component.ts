@@ -358,7 +358,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         let estatus = res.status;
         if (estatus == "OK") {
           let id = res.idVolanteDonacionSangre + "nuevo";
-          await this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + id, { skipLocationChange: true });
+          await this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + id);
         } else {
           this.muestraAlerta(
             '¡La información no se pudo guardar, intente más tarde!',
@@ -445,7 +445,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/consulta-volantes-donacion", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-volantes-donacion");
     $('#content').modal('hide');
   }
 

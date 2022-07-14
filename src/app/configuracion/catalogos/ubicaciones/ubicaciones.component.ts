@@ -262,17 +262,17 @@ export class UbicacionesComponent implements OnInit {
     if(org){
       localStorage.removeItem('origen');
       console.log('origen',org);
-      this.router.navigateByUrl(org, { skipLocationChange: true });
+      this.router.navigateByUrl(org);
     } else{
-      this.router.navigateByUrl("busqueda", { skipLocationChange: true });
+      this.router.navigateByUrl("busqueda");
     }
-    // this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
+    // this.router.navigateByUrl("/catalogos/cargaCatalogos");
   }
 
   muestraHorarios(cveUbicacion: number) {
     //debugger
-    // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion, { skipLocationChange: true });
-    this.router.navigate(['/catalogos/horarios/' + cveUbicacion], { skipLocationChange: true });
+    // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion);
+    this.router.navigate(['/catalogos/horarios/' + cveUbicacion]);
 
   }
 

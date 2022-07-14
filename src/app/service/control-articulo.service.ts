@@ -19,6 +19,10 @@ export class ControlArticuloService {
     private router: Router
   ) { }
 
+  getCatUbicaciones() {
+    return this.http.get<any>(`${environment.msmtsCatalogos}/ubicacion/getAll`);
+  }
+
   getArticulosByFechas(fechaInicial: string, fechaFinal: string) {
     return this.http.get<any>(`${urlServArticulo}/findNotasByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
   }

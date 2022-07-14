@@ -94,7 +94,7 @@ export class CCGrupalEspecificaComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigateByUrl("/consulta-cronica-grupal", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-cronica-grupal");
   }
 
   imprimir() {

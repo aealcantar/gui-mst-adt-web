@@ -27,19 +27,19 @@ export class RegistroComponent implements OnInit {
   logindata: any = this.formBuilder.group({
     nvacontrasenia: ['', Validators.required],
     confirmacontrasenia: ['', Validators.required],
-  })
-  submitted: boolean = false
-  validaPassRegex: boolean = false
-  correosubmitted: boolean = false
-  staticAlertClosed: boolean = true
-  mail: string = ''
-  admonRequest: AdmonPasswordRequest = new AdmonPasswordRequest()
-  admonResponse: AdmonPasswordResponse = new AdmonPasswordResponse()
+  });
+  submitted: boolean = false;
+  validaPassRegex: boolean = false;
+  correosubmitted: boolean = false;
+  staticAlertClosed: boolean = true;
+  mail: string = '';
+  admonRequest: AdmonPasswordRequest = new AdmonPasswordRequest();
+  admonResponse: AdmonPasswordResponse = new AdmonPasswordResponse();
 
-  alert!: objAlert
+  alert!: objAlert;
 
-  showPassword1: boolean = false
-  showPassword2: boolean = false
+  showPassword1: boolean = false;
+  showPassword2: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,

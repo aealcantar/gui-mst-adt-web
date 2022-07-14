@@ -152,7 +152,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/consulta-cronica-grupal", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-cronica-grupal");
     $('#content').modal('hide');
   }
 
@@ -252,7 +252,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
 
   cancelar() {
-    this.router.navigateByUrl("/consulta-cronica-grupal", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-cronica-grupal");
   }
 
 }
