@@ -1,4 +1,4 @@
-<!-- <app-app-alerts [alert]="alert"></app-app-alerts> -->
+<app-app-alerts [alert]="alert"></app-app-alerts>
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
   <!-- <div header class="flex justify-content-between align-items-center consultaControlDeArticulos"> copie esta linea para cambiar el nombre igual al del componente-->
@@ -7,41 +7,59 @@
       Consulta de controlTS - Certificado de defunción
     </label>
     <div class="botones">
-      <button type=" submit " class="btn btn-primary btn-guardar buttonL" (click)="irNuevoRegistro() ">
-        Nuevo Registro
+      <button type=" button" class="btn btn-primary btn-guardar buttonL" (click)="irNuevoRegistro() " style= "width: 150px">
+        Nuevo Certificado
       </button>
     </div>
   </div>
   <div content style="padding-bottom: 3.7%;">
-    <div class="formInfo">
+    <div class="formInfo" [formGroup]="formAdd" (submit)="buscar()" novalidate>
       <div class="row">
         <div class="col-md-4">
           <div class="form-group datepicker-group">
             <label class="control-label tituloServicio" for="articulosInit">Fecha desde:</label>
-            <input class="form-control calendario" id="fechaDesde" [(ngModel)]="fechaDesde" type="text"
-              placeholder="dd/mm/aaaa">
+            <input [placeholder]="'dd/mm/aaaa'" id="consultaDefuncionIni" autocomplete="off"
+              formControlName="consultaDefuncionIni" class="form-control" type="text" />
             <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
               <div class="imgCalendar"></div>
             </span>
+            <mat-error 
+            *ngIf="
+              validarCampos &&
+              formAdd
+                .get('consultaDefuncionIni')
+                .hasError('required')
+            "
+          >
+            Campo Obligatorio
+          </mat-error>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group datepicker-group">
             <label class="control-label tituloServicio" for="articulosFinal">Fecha hasta:</label>
-            <!-- <input [(ngModel)]="fechaHasta" type="text" class="form-control calendario" placeholder="dd/mm/aaaa"
-              id="fechaHasta"> comente esta linea para hacer pruebas modificar obs se creo la variable fechaHasta-->
-            <input [(ngModel)]="fechaHasta" type="text" class="form-control calendario" placeholder="dd/mm/aaaa"
-              id="fechaHasta">
+             <input [placeholder]="'dd/mm/aaaa'" id="consultaDefuncionFin" autocomplete="off"
+              formControlName="consultaDefuncionFin" class="form-control" type="text" />
             <span class="glyphicon glyphicon-calendar fondocalendar " aria-hidden="true ">
               <div class="imgCalendar "></div>
             </span>
+            <mat-error 
+            *ngIf="
+              validarCampos &&
+              formAdd
+                .get('consultaDefuncionFin')
+                .hasError('required')
+            "
+          >
+            Campo Obligatorio
+          </mat-error>
           </div>
         </div>
         <div class="col-auto mt-5 " style="padding-right: 0.1em !important ">
           <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()">
             Limpiar
           </button>
-          <button type="button" class="btn btn-primary btn-guardar buttonL " (click)="buscar()">
+          <button type="submit" class="btn btn-primary btn-guardar buttonL " (click)="buscar()">
             Buscar
           </button>
         </div>
@@ -76,7 +94,7 @@
       </div>
 
       <!-- <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados"> -->
-      <ng-container *ngIf="tabla.length> 0 else mostrarSeccionSinResultados">
+      <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
         <div class="row">
           <div class="col-md-12">
             <table class="tabla" style="width: 100%;">
@@ -106,17 +124,17 @@
               </thead>
 
               <!-- <tbody *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index"> -->
-              <tbody *ngFor="let item of tabla | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+              <tbody *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
 
                 <tr>
                   <td class="bordesTablaFecha"
                     style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
                     (click)="irDetalle(item);">{{ item.fecha }}
                   </td>
-                  <td class="bordesTablaNombre" style="padding-left: 30px;text-align: left !important; width: 70px">
+                  <td class="bordesTablaNombre" style="padding-left: 30px;text-align: left !important; width: 557px">
                     {{item.nombre}}
                   </td>
-                  <td class="bordesTablaNSS" style="padding-left: 30px; text-align: left !important;width: 70px">
+                  <td class="bordesTablaNSS" style="padding-left: 30px; text-align: left !important;width: 377px">
                     {{item.nss}}
                   </td>
                   <!-- <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
