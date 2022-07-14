@@ -9,6 +9,7 @@ import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { DatePipe } from '@angular/common'
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface'
+import { AuthService } from 'src/app/service/auth-service.service'
 
 declare var $: any
 
@@ -41,11 +42,15 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
     private router: Router,
     private Artservice: ControlArticulosService,
     private tarjetaService: AppTarjetaPresentacionService,
+    private authService: AuthService
   ) {
 
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
     let userTmp = sessionStorage.getItem('usuario') || '';
     this.paciente = this.tarjetaService.get();
     if (this.paciente !== null && this.paciente !== undefined) {
@@ -163,13 +168,13 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
     let params = {
       'controlArticulos': JSON.stringify(controlArticulos),
     }
-    this.router.navigateByUrl("/detalle-articulos/" + controlArticulos.idCa, { skipLocationChange: true })
+    this.router.navigateByUrl("/detalle-articulos/" + controlArticulos.idCa)
   }
 
 
   //redirecciona a la pantalla de nuevo control de articulos
   irNuevoRegistro() {
-    this.router.navigateByUrl("/nuevo-articulo", { skipLocationChange: true });
+    this.router.navigateByUrl("/nuevo-articulo");
   }
 
   //ordenamiento

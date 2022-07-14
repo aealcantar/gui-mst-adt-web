@@ -1058,7 +1058,7 @@ export class ConsultaComponent implements OnInit {
   btnContinuar() {
 
     if (this.blnContinuar) {
-      this.router.navigate(['busqueda'], { skipLocationChange: true });
+      this.router.navigate(['busqueda']);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, 'Debe completar la carga de Catálogos', this._Mensajes.ERROR);
     }

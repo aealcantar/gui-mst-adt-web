@@ -87,13 +87,11 @@ export class HelperCatalogosService {
       sheetName: 'B_4_UBICACIONES',
       rutaPlantilla: '../../../../assets/files/9.Ubicaciones.xlsx',
       idCatPadre: [1, 2],
-      col1: 'CLAVE DE UBICACIÓN',
-      col2: 'DESCRIPCION COMPLETA DE UBICACION',
-      col3: 'DESCRIPCION ABREVIADA',
-      col4: 'TIPO',
-      col5: 'NIVEL DE ATENCIÓN',
-      col6: 'SERVICIO/ESPECIALIDAD',
-      col7: 'UNIDAD MEDICA',
+      
+      col1: 'DESCRIPCION COMPLETA DE UBICACION',
+      col2: 'DESCRIPCION ABREVIADA',
+      col3: 'TIPO',
+      col4: 'SERVICIO/ESPECIALIDAD',
 
     },
 

@@ -236,7 +236,8 @@ select {
   text-align: left;
   color: #222;
   text-align: center;
-margin-left: -20%;
+  margin-left: -23%;
+  margin-top: 2px;
 }
 
 .tituloDosServicioSpam{
@@ -254,7 +255,7 @@ margin-left: -20%;
   text-align: left;
   color: #222;
   text-align: center;
-margin-left: -60%;
+  margin-left: -47%;
 }
 
 

@@ -42,7 +42,7 @@
               <label class="form-check-label" for="inlineCheckbox7">Domingo</label>
             </div>
           </div>
-
+          
           <form novalidate [formGroup]="formfields" class="form-inline" role="form" autocomplete="off"
             style="display: flex; flex-wrap:wrap;">
 
@@ -78,7 +78,7 @@
               </small>
             </div>
 
-            <div class="form-group lstcampos pull-left">
+            <!-- <div class="form-group lstcampos pull-left">
               <label for="horafin" class="titulo">Horario final de atención
                 <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horafin.errors}">*
                 </span>:
@@ -87,11 +87,17 @@
               [(ngModel)]="horarioNuevo.horaFinal" 
               [ngClass]="{'form-control-error': formfields.controls.horafin.errors}" required>
                 <option value="" disabled selected hidden>Seleccionar horario</option>
-                <option [value]="objeto" *ngFor="let objeto of lstHorarioFinal">{{objeto}}</option> -->
+                <option [value]="objeto" *ngFor="let objeto of lstHorarioFinal">{{objeto}}</option>
               </select>
               <small *ngIf="formfields.controls.horafin.errors" class="form-text form-text-error">
                 {{formfields.controls.horafin.errors?.required? "Campo obligatorio" : "Formato inválido"}}
               </small>
+            </div> -->
+            <div class="form-group lstcampos pull-left">
+              <label for="horafin" class="titulo">Horario final de atención:
+              </label>
+              <input type="text" class="form-control captura" id="horaFinal" placeholder=""
+              [(ngModel)]="horarioNuevo.horaFinal" [ngModelOptions]="{standalone: true}" readonly />
             </div>
 
             <div class="form-group lstcampos pull-left">
@@ -168,7 +174,7 @@
               </small>
             </div>
 
-            <div class="form-group lstcampos pull-left">
+            <!-- <div class="form-group lstcampos pull-left">
               <label for="horafin" class="titulo">Horario final de atención
                 <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horafin.errors}">*
                 </span>:
@@ -184,6 +190,13 @@
               <small *ngIf="formfields.controls.horafin.errors" class="form-text form-text-error">
                 {{formfields.controls.horafin.errors?.required? "Campo obligatorio" : "Formato inválido"}}
               </small>
+            </div> -->
+
+            <div class="form-group lstcampos pull-left">
+              <label for="horafin" class="titulo">Horario final de atención:
+              </label>
+              <input type="text" class="form-control captura" id="horaFinal" placeholder=""
+              [(ngModel)]="horarioSeleccionado.horaFinal" [ngModelOptions]="{standalone: true}" readonly />
             </div>
 
             <div class="form-group lstcampos pull-left">

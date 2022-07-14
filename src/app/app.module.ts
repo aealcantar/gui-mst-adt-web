@@ -59,7 +59,6 @@ import { CitasService } from './citas/citas.service';
 import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
 import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
 import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
-//import { ConsultaVolantesDonacionComponent } from './consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { CardTemplateExpandibleComponent } from './commons/card-template-expandible/card-template-expandible.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';
@@ -76,7 +75,6 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { MyFilterPipe } from './directives/my-filter.pipe';
-//import { NuevoVdonacionSangreComponent } from './nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { MomentDateModule } from '@angular/material-moment-adapter';
@@ -223,6 +221,6 @@ registerLocaleData('es');
 })
 export class AppModule {
   constructor() {
-    sessionStorage.setItem('token', 'token is null');
+    // sessionStorage.setItem('token', 'token is null');
   }
 }

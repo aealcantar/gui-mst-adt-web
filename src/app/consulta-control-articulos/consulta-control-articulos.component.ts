@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { AlertInfo } from '../app-alerts/app-alert.interface';
+import { AuthService } from '../service/auth-service.service';
 
 declare var $: any;
 
@@ -32,7 +33,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private Artservice: ControlArticuloService,
     private fb: FormBuilder,
   ) {
@@ -41,6 +42,9 @@ export class ConsultaControlArticulosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],

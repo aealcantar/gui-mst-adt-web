@@ -38,7 +38,9 @@ export class ConsultaNotaTSocialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.setProjectObs("Trabajo social");
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
     this.route.queryParamMap.subscribe((params: any) => {
       if (params.getAll('nota').length > 0) {
         this.nota = JSON.parse(params.getAll('nota'))
