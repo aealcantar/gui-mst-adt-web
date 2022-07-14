@@ -30,7 +30,10 @@
     width: 100%;
 }
 
-.datepicker-group .has-feedback label~.glyphicon, .datepicker-group label~.form-control-feedback, .datepicker-group label~.glyphicon, .has-feedback label~.form-control-feedback {
+.datepicker-group .has-feedback label~.glyphicon,
+.datepicker-group label~.form-control-feedback,
+.datepicker-group label~.glyphicon,
+.has-feedback label~.form-control-feedback {
     top: 21px
 }
 
@@ -79,4 +82,122 @@
     letter-spacing: normal;
     text-align: center;
     margin-bottom: 0 !important;
+}
+
+.busqueda-label {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #666666;
+}
+
+.pages {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.div-container-image {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.tabla {
+    width: 100%;
+}
+
+.tabla>tbody>tr>td,
+.tabla>tbody>tr>th,
+.tabla>tfoot>tr>td,
+.tabla>tfoot>tr>th,
+.tabla>thead>tr>td,
+.tabla>thead>tr>th {
+    padding: 1.8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.encabezadoTable {
+    width: 150;
+    text-align: left;
+    background-color: rgba(196, 196, 196, 0.1);
+    border: 1px solid #EEEEEE;
+    text-align: center;
+}
+
+.encabezadoTableCentro {
+    width: 150;
+    text-align: left;
+    background-color: rgba(196, 196, 196, 0.1);
+    border: 1px solid #EEEEEE;
+    text-align: center;
+    padding-top: 13px;
+}
+
+.bordesTabla {
+    border: 1px solid #ddd;
+    text-align: center !important;
+}
+
+.bordesTablaFecha {
+    border: 1px solid #ddd;
+    text-align: center !important;
+    padding-top: 14px;
+    width: 17%;
+}
+
+.bordesTablaHora {
+    border: 1px solid #ddd;
+    text-align: center !important;
+    width: 13%;
+}
+
+.bordesTablaModalidad {
+    border: 1px solid #ddd;
+    text-align: center !important;
+    width: 11%;
+}
+
+.bordesTablaTotalParticipantes {
+    border: 1px solid #ddd;
+    text-align: center !important;
+    width: 13%;
+}
+
+.bordesTablaAsistieron {
+    border: 1px solid #ddd;
+    text-align: center !important;
+    width: 13%;
+}
+
+.bordesTablaDescripcion {
+    border: 1px solid #ddd;
+    text-align: left !important;
+    width: 70%;
+}
+
+td,
+th {
+    font-size: 14px;
+}
+
+.encabezadoTablaPrincipal {
+    padding: 8px 30px 5px;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    gap: 25px;
+}
+
+.tituloTablaPrincipal {
+    margin-left: -15px;
+}
+
+.encabezadoTablaSecundario {
+    padding: 8px 30px 5px;
+    text-align: left;
 }

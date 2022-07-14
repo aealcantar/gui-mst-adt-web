@@ -60,7 +60,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="control-label tituloServicio">
@@ -76,7 +75,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="col-auto mt-5 buttons">
                         <button class="btn btn-default btuser" id="btnLimpiar" type="button" (click)="limpiar()">
@@ -89,5 +87,59 @@
                 </div>
             </div>
         </form>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="busqueda-label">Búsquedas anteriores</label>
+            </div>
+            <div class="col-md-6 flex justify-content-end">
+                <div class="form-group pages">
+                    <label class="control-label">Visualizar datos</label>
+                    <select class="form-select ml-5 select-view-data" [(ngModel)]="pageSize">
+                        <option [ngValue]="5 ">5</option>
+                        <option [ngValue]="10 ">10</option>
+                        <option [ngValue]="15 ">15</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="formInfo">
+            <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="tabla">
+                            <thead>
+                                <tr>
+                                    <th class="encabezadoTable encabezadoTablaPrincipal">
+                                        <div class="tituloTablaPrincipal">Número</div>
+                                        <div>
+                                            <i class="fa-solid fa-caret-up arrow arrow-up"
+                                                [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'asc'}">
+                                            </i>
+                                            <i class="fa-solid fa-caret-down arrow arrow-down"
+                                                [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'desc'}">
+                                            </i>
+                                        </div>
+                                    </th>
+                                    <th class="encabezadoTable encabezadoTablaSecundario">Paciente</th>
+                                    <th class="encabezadoTable  encabezadoTablaSecundario">Hora de la cita
+                                    </th>
+                                    <th class="encabezadoTable  encabezadoTablaSecundario">Agregado médico
+                                    </th>
+                                    <th class="encabezadoTable  encabezadoTablaSecundario">Primera vez</th>
+                                    <th class="encabezadoTable  encabezadoTablaSecundario">Citado</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <ng-template #mostrarSeccionSinResultados>
+            <div class="row">
+                <div class="div-container-image">
+                    <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
+                </div>
+            </div>
+        </ng-template>
     </section>
 </app-card-template>

@@ -11,11 +11,19 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     public alert!: AlertInfo;
 
+    // catalogos
     grupos: any[] = [];
     lugares: any[] = [];
     responsables: any[] = [];
     serviciosEspecialidad: any[] = [];
     turnos: any[] = [];
+    // paginado
+    pageSize: number = 15;
+    // datos
+    datosBusqueda: Array<any> = [];
+
+    order: string = 'desc';
+    columnaId: string = 'fecha';
 
     // Formulario
     formularioBusqueda = new FormGroup({
