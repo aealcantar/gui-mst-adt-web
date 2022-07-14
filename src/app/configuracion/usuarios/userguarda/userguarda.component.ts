@@ -69,7 +69,10 @@ export class UserguardaComponent implements OnInit {
     private activerouter: ActivatedRoute,
     private userservice: UsuariosService,
     private _Mensajes: HelperMensajesService,
-  ) {}
+  ) {
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+  }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
@@ -266,7 +269,7 @@ export class UserguardaComponent implements OnInit {
     if (this.isedit) {
       ruta = '/consultauser/' + this.varid;
     }
-    this.router.navigateByUrl(ruta, { skipLocationChange: true });
+    this.router.navigateByUrl(ruta);
   }
 
   onKeyUpEvent(event: any) {

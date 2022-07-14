@@ -48,7 +48,7 @@ import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certifi
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'recuperarpassword', component: RegistroComponent },
   { path: 'busqueda', component: BusquedaNssComponent },
@@ -186,22 +186,21 @@ const routes: Routes = [
   {
     path: 'catalogos',
     component: CatalogosComponent,
+    canActivate: [SeguridadRouter],
+    canActivateChild: [SeguridadRouter],
     children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
       {
         path: 'cargaCatalogos',
         component: CargaComponent,
-        canActivate: [SeguridadRouter],
       },
       {
         path: 'ConfiguracionUbicaciones',
         component: UbicacionesComponent,
-        canActivate: [SeguridadRouter],
       },
       {
         path: 'horarios/:cveUbicacion',
         component: HorariosComponent,
-        canActivate: [SeguridadRouter],
       },
     ],
   },

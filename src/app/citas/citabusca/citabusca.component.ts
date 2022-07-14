@@ -109,19 +109,13 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     public datePipe: DatePipe,
     private overlayContainer: OverlayContainer,
     private _Mensajes: HelperMensajesService
-    ) { }
+    ) {
+      this.authService.userLogged$.next(true);
+      this.authService.isAuthenticatedObs$.next(true);
+    }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    const el = window.document.querySelector('.cdk-overlay-container') as HTMLElement | null;
-    //if (el) {
-      //el.remove();
-      // const p = document.createElement('div');
-      // p.className = 'cdk-overlay-container';
-      // const elm = window.document.body as HTMLElement | null;
-      // elm.appendChild(p);
-      //window.location.reload();
-    //}
 
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -342,11 +336,11 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   }
 
   agendarcita(){
-    this.router.navigateByUrl('/guardacita', {skipLocationChange: true});
+    this.router.navigateByUrl('/guardacita');
   }
 
   muestracita(id: number){
-    this.router.navigateByUrl('/consultacita/' + id, {skipLocationChange: true});
+    this.router.navigateByUrl('/consultacita/' + id);
   }
 
   weekendsDatesFilter = (d: Date): boolean => {

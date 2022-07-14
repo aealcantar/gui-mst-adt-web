@@ -11,6 +11,10 @@ export class ControlArticulosService {
 
   constructor(private httpsClient: HttpClient) { }
 
+  getCatUbicaciones() {
+    return this.httpsClient.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion`);
+  }
+
   setControlArticulos(datos: any) {
     return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/insert`, datos);
   }

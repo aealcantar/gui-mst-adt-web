@@ -64,32 +64,19 @@ export class CitaconsultaComponent implements OnInit {
     private activerouter: ActivatedRoute,
     private citaservice: CitasService,
     public datePipe: DatePipe,
-    private _Mensajes: HelperMensajesService) { }
+    private _Mensajes: HelperMensajesService) {
+      this.authService.userLogged$.next(true);
+      this.authService.isAuthenticatedObs$.next(true);
+    }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    // this.datoscita = {
-    //   'Fecha y hora de inicio de cita': '29/03/2022 - 10:00:00',
-    //   'Fecha y hora de finalización de cita': '10:30:00',
-    //   'Duración de cita': '30:00',
-    //   'Ubicación (Lugar de atención)': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusumod',
-    //   'Dirección': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusumod tempor',
-    //   'Unidad médica': 'Lorem ipsum dolor sit amet, consectetur',
-    //   'Estatus de cita': 'Lorem ipsum',
-    //   'Turno': 'Lorem ipsum',
-    //   'Servicio': 'Adrian Cristian',
-    //   'Programa': 'Lorem ipsum',
-    //   'Ocasión de servicio': 'Inicial',
-    //   'Tipo de cita': 'Individual',
-    //   'Trabajadora social responsable': 'Roberto Garcia',
-    //   'Modalidad': 'Presencial'
-    // };
     this.varid = this.activerouter.snapshot.paramMap.get('id');
     this.buscarcita(this.varid);
   }
 
   regresar() {
-    this.router.navigateByUrl('/buscacita', {skipLocationChange: true});
+    this.router.navigateByUrl('/buscacita');
   }
 
   citaResponse: CitaResponse;
@@ -106,23 +93,6 @@ export class CitaconsultaComponent implements OnInit {
         this.citaResponse.cita.fechaInicio = this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') ;
         this.citaResponse.cita.fechaFin = this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') ;
         this.varidcalendario = resp.cita.cveCalendarioAnual;
-        // this.datoscita = {
-        //   'Fecha y hora de inicio de cita': resp.cita.fechaInicio ? this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') : "",
-        //   'Fecha y hora de finalización de cita': resp.cita.fechaFin ? this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') : "",
-        //   'Duración de cita': resp.cita.duracion,
-        //   'Ubicación (Lugar de atención)': resp.cita.ubicacion,
-        //   'Dirección': resp.cita.direccion,
-        //   'Unidad médica': resp.cita.unidadMedica,
-        //   'Estatus de cita': resp.cita.estatus,
-        //   'Turno': resp.cita.turno,
-        //   'Servicio': resp.cita.descripcionServicio,
-        //   'Programa': resp.cita.grupoPrograma,
-        //   'Ocasión de servicio': resp.cita.ocasionServicio,
-        //   'Tipo de cita': resp.cita.tipoCita,
-        //   'Trabajadora social responsable': resp.cita.trabajadorSocial,
-        //   'Modalidad': resp.cita.modalidad
-        // };
-
 
         /*
         El campo tipo en el objeto participantes se desglosa de la siguiente manera.
@@ -158,7 +128,6 @@ export class CitaconsultaComponent implements OnInit {
       keyboard: false,
       backdrop: 'static'
     })
-    //this.mod_mensaje="¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?"
     this.objmodal.mensaje = "¿Está seguro de confirmar<br/>la asistencia de la cita seleccionada?";
     this.objmodal.tipo = 1;
     $('#content').modal('show')
@@ -169,7 +138,6 @@ export class CitaconsultaComponent implements OnInit {
       keyboard: false,
       backdrop: 'static'
     })
-    //this.mod_mensaje="¿Está seguro de cancelar<br/>la cita seleccionada?"
     this.objmodal.mensaje = "¿Está seguro de cancelar<br/>la cita seleccionada?";
     this.objmodal.tipo = 2;
     $('#content').modal('show')
@@ -178,7 +146,6 @@ export class CitaconsultaComponent implements OnInit {
   imprimir() { }
 
   cancelarmod() {
-    //this.mod_mensaje = "";
     this.objmodal.mensaje = "";
     this.objmodal.tipo = 0;
     $('#content').modal('hide');

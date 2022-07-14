@@ -150,13 +150,13 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
 
   //redirecciona al detalle
   irDetalle(idVolanteDonacionSangre: string) {
-    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre, { skipLocationChange: true })
+    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre)
   }
 
 
   //redirecciona a la pantalla de nuevo control de articulos
   irNuevoRegistro() {
-    this.router.navigateByUrl("/agregar-volante-donacion-sangre", { skipLocationChange: true });
+    this.router.navigateByUrl("/agregar-volante-donacion-sangre");
   }
 
   //ordenamiento

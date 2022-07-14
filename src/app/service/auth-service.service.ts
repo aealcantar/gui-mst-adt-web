@@ -30,7 +30,9 @@ export class AuthService {
     public webService: WebImssService,
     private jwtHelper: JwtHelperService,
     private router: Router
-    ) { }
+    ) { 
+      this.isAuthenticatedObs$ = new BehaviorSubject<boolean>(false);
+    }
 
   public get usuario(): Usuario {
     if (this._usuario != null) {
@@ -57,7 +59,6 @@ export class AuthService {
   }
 
   setProjectObs(proyecto: string) {
-    this.project$.next("");
     this.project$.next(proyecto);
   }
 
@@ -195,7 +196,7 @@ export class AuthService {
 
   isAuthenticatedUser(): boolean {
     const tokenJR = sessionStorage.getItem('token');
-    if (tokenJR == '' || tokenJR == null || tokenJR == 'token is null') {
+    if (tokenJR == '' || tokenJR == null) {
       this.isAuthenticatedObs$.next(false);
       return false;
     }
@@ -212,8 +213,7 @@ export class AuthService {
     sessionStorage.removeItem('usuario');
     this.userLogged$.next(false);
     this.isAuthenticatedObs$.next(false);
-    sessionStorage.setItem('token','token is null'); 
-    this.router.navigate(["/login"], { skipLocationChange: true });
+    this.router.navigate(["/login"]);
   }
 
   async obtenerUsuario(usuario: string, contrasena: string) {
