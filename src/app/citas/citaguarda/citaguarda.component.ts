@@ -117,7 +117,10 @@ export class CitaguardaComponent implements OnInit {
     public datePipe: DatePipe,
     private tarjetaService: AppTarjetaPresentacionService,
     private _Mensajes: HelperMensajesService
-  ) { }
+  ) {
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+  }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
