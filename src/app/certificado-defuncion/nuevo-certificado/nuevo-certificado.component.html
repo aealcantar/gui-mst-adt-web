@@ -92,12 +92,17 @@
                 type="text"
               />
               <mat-error
+                *ngIf="validarCampos && formAdd.get('foliofuncion').invalid"
+              >
+                Campo Obligatorio Maximo de caracteres: 10
+              </mat-error>
+              <mat-error
                 *ngIf="
                   validarCampos &&
-                  formAdd.get('foliofuncion').hasError('required')
+                  formAdd.get('foliofuncion').hasError('maxLength')
                 "
               >
-                Campo Obligatorio
+                Maximo de caracteres: 10
               </mat-error>
             </div>
           </div>

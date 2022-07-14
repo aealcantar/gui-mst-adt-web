@@ -51,10 +51,10 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.maxLength(10),
       ]),
-      foliofuncion: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
+      foliofuncion: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(10)])
+      ),
       nssPaciente: new FormControl(''),
       cveServicio: new FormControl('', [
         Validators.required,
