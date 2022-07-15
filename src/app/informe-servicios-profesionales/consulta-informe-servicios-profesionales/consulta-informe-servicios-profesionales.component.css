@@ -98,11 +98,18 @@
     justify-content: flex-end;
 }
 
-.div-container-image {
-    width: 50%;
+.errorimg {
+    width: 289px;
+    height: 197px;
     margin-left: auto;
     margin-right: auto;
-    display: flex;
+    margin-top: 50px;
+}
+
+.div-container-image {
+    width: 289px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tabla {
@@ -121,26 +128,17 @@
     border-top: 1px solid #ddd;
 }
 
+td,
+th {
+    font-size: 14px;
+}
+
 .encabezadoTable {
     width: 150;
     text-align: left;
     background-color: rgba(196, 196, 196, 0.1);
     border: 1px solid #EEEEEE;
-    text-align: center;
-}
-
-.encabezadoTableCentro {
-    width: 150;
     text-align: left;
-    background-color: rgba(196, 196, 196, 0.1);
-    border: 1px solid #EEEEEE;
-    text-align: center;
-    padding-top: 13px;
-}
-
-.bordesTabla {
-    border: 1px solid #ddd;
-    text-align: center !important;
 }
 
 .bordesTablaFecha {
@@ -150,54 +148,7 @@
     width: 17%;
 }
 
-.bordesTablaHora {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 13%;
-}
-
-.bordesTablaModalidad {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 11%;
-}
-
-.bordesTablaTotalParticipantes {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 13%;
-}
-
-.bordesTablaAsistieron {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 13%;
-}
-
 .bordesTablaDescripcion {
     border: 1px solid #ddd;
     text-align: left !important;
-    width: 70%;
-}
-
-td,
-th {
-    font-size: 14px;
-}
-
-.encabezadoTablaPrincipal {
-    padding: 8px 30px 5px;
-    justify-content: center;
-    position: relative;
-    display: flex;
-    gap: 25px;
-}
-
-.tituloTablaPrincipal {
-    margin-left: -15px;
-}
-
-.encabezadoTablaSecundario {
-    padding: 8px 30px 5px;
-    text-align: left;
 }

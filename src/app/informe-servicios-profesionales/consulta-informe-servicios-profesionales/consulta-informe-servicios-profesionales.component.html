@@ -103,43 +103,74 @@
             </div>
         </div>
         <div class="formInfo">
-            <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
+            <!-- <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados"> -->
+            <ng-container>
                 <div class="row">
                     <div class="col-md-12">
                         <table class="tabla">
                             <thead>
                                 <tr>
-                                    <th class="encabezadoTable encabezadoTablaPrincipal">
-                                        <div class="tituloTablaPrincipal">Número</div>
+                                    <th class="encabezadoTable"
+                                        style="padding: 8px 30px 5px; justify-content: center; position: relative; display: flex; gap: 25px;">
+                                        <div style="margin-left: -15px;">Número</div>
                                         <div>
                                             <i class="fa-solid fa-caret-up arrow arrow-up"
-                                                [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'asc'}">
+                                                [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'asc'}"
+                                                (click)="sortBy('numero', 'asc', 'numero')">
                                             </i>
                                             <i class="fa-solid fa-caret-down arrow arrow-down"
-                                                [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'desc'}">
+                                                [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'desc'}"
+                                                (click)="sortBy('numero', 'desc', 'numero')">
                                             </i>
                                         </div>
                                     </th>
-                                    <th class="encabezadoTable encabezadoTablaSecundario">Paciente</th>
-                                    <th class="encabezadoTable  encabezadoTablaSecundario">Hora de la cita
+                                    <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        Paciente</th>
+                                    <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">Hora de
+                                        la cita
                                     </th>
-                                    <th class="encabezadoTable  encabezadoTablaSecundario">Agregado médico
+                                    <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        Agregado médico
                                     </th>
-                                    <th class="encabezadoTable  encabezadoTablaSecundario">Primera vez</th>
-                                    <th class="encabezadoTable  encabezadoTablaSecundario">Citado</th>
+                                    <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">Primera
+                                        vez</th>
+                                    <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">Citado
+                                    </th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+                                    <td class="bordesTablaFecha"
+                                        style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                                        (click)="irDetalle(item);">{{ item.numero }}</td>
+                                    <td class="bordesTablaDescripcion"
+                                        style="padding-left: 30px; text-align: left !important;"> {{item.paciente}}
+                                    </td>
+                                    <td class="bordesTablaDescripcion"
+                                        style="padding-left: 30px; text-align: left !important;"> {{item.horaCita}}
+                                    </td>
+                                    <td class="bordesTablaDescripcion"
+                                        style="padding-left: 30px; text-align: left !important;">
+                                        {{item.agregadoMedico}} </td>
+                                    <td class="bordesTablaDescripcion"
+                                        style="padding-left: 30px; text-align: left !important;"> {{item.primeraVez}}
+                                    </td>
+                                    <td class="bordesTablaDescripcion"
+                                        style="padding-left: 30px; text-align: left !important;"> {{item.citado}} </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </ng-container>
         </div>
-        <ng-template #mostrarSeccionSinResultados>
+        <!-- <ng-template #mostrarSeccionSinResultados>
             <div class="row">
                 <div class="div-container-image">
                     <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
                 </div>
             </div>
-        </ng-template>
+        </ng-template> -->
     </section>
 </app-card-template>

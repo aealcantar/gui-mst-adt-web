@@ -1,3 +1,4 @@
+// TODO: Eliminar datos prueba
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
@@ -17,7 +18,10 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     responsables: any[] = [];
     serviciosEspecialidad: any[] = [];
     turnos: any[] = [];
+    // tabla
+    dtOptions: DataTables.Settings = {};
     // paginado
+    page: number = 1;
     pageSize: number = 15;
     // datos
     datosBusqueda: Array<any> = [];
@@ -33,9 +37,39 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         turno: new FormControl('', Validators.required),
     })
 
+    // Datos prueba
+    public datosPrueba =  [
+        { 
+        "numero": "12345",
+        "paciente": "Miguel Sanchez",
+        "horaCita": "10:00:00",
+        "agregadoMedico": "Nataly",
+        "primeraVez": "true",
+        "citado": "11",
+        },
+        { 
+        "numero": "67890",
+        "paciente": "Angel Hernandez",
+        "horaCita": "10:00:00",
+        "agregadoMedico": "Nataly",
+        "primeraVez": "true",
+        "citado": "12",
+        }
+    ];
+
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.dtOptions = {
+            order: [[2, 'desc']],
+            ordering: false,
+            paging: false,
+            processing: false,
+            info: false,
+            searching: false,
+        };
+        this.datosBusqueda = this.datosPrueba
+    }
 
     limpiar(): void {
         this.formularioBusqueda.reset();
@@ -43,5 +77,12 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     buscar(): void {
         console.log('Submit works')
+    }
+
+    sortBy(columnaId: string, order: string, type: string): void {
+    }
+
+    irDetalle(informeServicios: any): void {
+
     }
 }
