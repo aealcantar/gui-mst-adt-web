@@ -91,7 +91,7 @@ export class HelperCatalogosService {
       col1: 'DESCRIPCION COMPLETA DE UBICACION',
       col2: 'DESCRIPCION ABREVIADA',
       col3: 'TIPO',
-      col4: 'SERVICIO/ESPECIALIDAD',
+      col4: 'CLAVE SERVICIO/ESPECIALIDAD',
 
     },
 
