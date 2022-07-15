@@ -44,57 +44,24 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
     private certificadoService: CertificadoDefuncionService
   ) {
     this.formAdd = formBuilder.group({
-      fechaDefuncion: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
+      fechaDefuncion: new FormControl('', Validators.required),
       nombreServicio: new FormControl(''),
-      horaDefuncion: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
-      folioCertificacion: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(10)])
-      ),
+      horaDefuncion: new FormControl('', Validators.required),
+      folioCertificacion: new FormControl('', Validators.required),
       nssPaciente: new FormControl(''),
-      cveServicio: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(100),
-      ]),
-      nombreAsegurado: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      fechaDeEntregaDeCertificado: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
-      horaDeEntregaDeCertificado: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
-      nombreFuneraria: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(100),
-      ]),
-      nombreFamiliar: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(200),
-      ]),
-      parentescoFamiliar: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(200),
-      ]),
-      observaciones: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(1500),
-      ]),
+      cveServicio: new FormControl('', Validators.required),
+      nombreAsegurado: new FormControl('', Validators.required),
+      fechaDeEntregaDeCertificado: new FormControl('', Validators.required),
+      horaDeEntregaDeCertificado: new FormControl('', Validators.required),
+      nombreFuneraria: new FormControl('', Validators.required),
+      nombreFamiliar: new FormControl('', Validators.required),
+      parentescoFamiliar: new FormControl('', Validators.required),
+      observaciones: new FormControl('', Validators.required),
       nombrePersonalElaboro: new FormControl(''),
       matriculaPersonalElaboro: new FormControl(''),
       cvePersonalQueElaboro: new FormControl(''),
-      fechaDeAlta:new FormControl(''),
-      fechaDeActualizacion: new FormControl('')
+      fechaDeAlta: new FormControl(''),
+      fechaDeActualizacion: new FormControl(''),
     });
   }
   ngAfterViewInit(): void {
@@ -131,8 +98,8 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
 
   onServicioSelect(select: MatSelectChange) {
-   const nombreDeServicio = select.source.triggerValue
-    this.formAdd.controls['nombreServicio'].setValue(nombreDeServicio)
+    const nombreDeServicio = select.source.triggerValue;
+    this.formAdd.controls['nombreServicio'].setValue(nombreDeServicio);
   }
 
   listaServicios: Array<any> = [];
@@ -167,23 +134,23 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
   async cargarServicios() {
     this.cronicaGrupalService.getCatServicios().subscribe((servicios) => {
-      console.log(servicios)
+      console.log(servicios);
       this.listaServicios = servicios;
     });
   }
- 
+
   async guardar() {
     if (this.formAdd.valid) {
       this.validarCampos = false;
-      const date = moment().format('YYYY-MM-DD HH:mm:ss')
-      this.formAdd.controls['fechaDeAlta'].setValue(date)
-      this.formAdd.controls['fechaDeActualizacion'].setValue(date)
+      const date = moment().format('YYYY-MM-DD HH:mm:ss');
+      this.formAdd.controls['fechaDeAlta'].setValue(date);
+      this.formAdd.controls['fechaDeActualizacion'].setValue(date);
       const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
       this.certificadoService
         .insert(certificado)
         .subscribe(async (response) => {
           this.certificado = response;
-          await sessionStorage.removeItem('certificadoDefuncion')
+          await sessionStorage.removeItem('certificadoDefuncion');
           sessionStorage.setItem(
             'certificadoDefuncion',
             await JSON.stringify(this.certificado)
