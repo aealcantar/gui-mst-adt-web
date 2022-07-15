@@ -17,6 +17,17 @@ export class ControlArticuloService {
     private http: HttpClient
   ) { }
 
+<<<<<<< HEAD
+=======
+  getCatUbicaciones() {
+    return this.http.get<any>(`${environment.msmtsCatalogos}/ubicacion/getAll`);
+  }
+
+  getArticulosByFechas(fechaInicial: string, fechaFinal: string) {
+    return this.http.get<any>(`${urlServArticulo}/findNotasByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+  }
+
+>>>>>>> 9a20813b13bc68bc810f64dc4b5db971dbc24466
   getArticuloById(id: number){
     return this.http.get<any>(`${urlServArticulo}/idCa/${id}`, { responseType: 'json'});
   }

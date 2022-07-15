@@ -290,6 +290,14 @@ select.captura{
   text-align: left;
   color: #222;
 }
+
+.captura[disabled],
+.captura[readonly]{
+
+  background-color: #eee !important;
+
+}
+
 select{
   -moz-appearance:none; /* Firefox */
   -webkit-appearance:none; /* Safari and Chrome */

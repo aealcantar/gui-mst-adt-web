@@ -17,10 +17,13 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   executed: boolean = false;
   months: any;
 
-  constructor(private tarjetaServce: AppTarjetaPresentacionService, private router: Router) { }
+  constructor(private tarjetaService: AppTarjetaPresentacionService, private router: Router) { }
 
   ngOnInit(): void {
-    this.paciente = this.tarjetaServce.get();
+    this.paciente = this.tarjetaService.get();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+    }
     this.convertDate();
   }
 
@@ -67,23 +70,27 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   }
 
   irNotasDeTrabajo() {
-    this.router.navigateByUrl("/consulta-notas", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-notas");
   }
 
 
   irEstudioSocialMedico() {
-    this.router.navigateByUrl("/consulta-estudios-medicos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-estudios-medicos");
   }
 
   irControlDeArticulos(){
-    this.router.navigateByUrl("/consulta-articulos", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-articulos");
   }
 
   irAgenda(){
-    this.router.navigateByUrl("/buscacita", { skipLocationChange: true });
+    this.router.navigateByUrl("/buscacita");
   }
 
   iraVolantesSangre(){
-    this.router.navigateByUrl("/consulta-volantes-donacion", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-volantes-donacion");
+  }
+
+  irAvisosMP(){
+    this.router.navigateByUrl("/consulta-aviso-mp");
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth-service.service';
-// import { AuthService } from './service/auth-service.service';
 
 @Component({
   selector: 'app-header-menu',
@@ -15,7 +14,7 @@ export class HeaderMenuComponent implements OnInit {
   email: string | undefined;
   nombre: string | undefined;
   matricula: string | undefined;
-  proyecto: string = "";
+  proyecto$: Observable<string>;
   rol: string;
   puesto: string = "";
 
@@ -37,11 +36,7 @@ export class HeaderMenuComponent implements OnInit {
         this.puesto = isAuthiticated ? this.authenticationService.usuario.puesto : "";
       }
     )
-    this.authenticationService.getProjectObs().subscribe(
-      (proyectoActual) => {
-        this.proyecto = proyectoActual;
-      }
-    );
+    this.proyecto$ = this.authenticationService.getProjectObs();
   }
 
   logOut() {

@@ -16,15 +16,19 @@ export class AppMenuComponent implements OnInit {
   ngOnInit(): void { }
 
   pacientesRuta() {
-    this.router.navigate(['busqueda'], { skipLocationChange: true });
+    this.router.navigate(['busqueda']);
   }
 
-  irCronicaGrupal() {
-    this.router.navigate(["consulta-cronica-grupal"], { skipLocationChange: true });
-  }
+  // irCronicaGrupal() {
+  //   this.router.navigate(["consulta-cronica-grupal"]);
+  // }
+
+  // irDonacionSangre() {
+  //   this.router.navigate(["consulta-volantes-donacion"]);
+  // }
 
   irBusquedaDePacientesPorNss() {
-    this.router.navigate(["busqueda"], { skipLocationChange: true });
+    this.router.navigate(["busqueda"]);
   }
 
 }

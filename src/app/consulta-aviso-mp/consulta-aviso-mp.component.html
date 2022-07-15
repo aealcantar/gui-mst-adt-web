@@ -1,3 +1,4 @@
+<app-app-alerts [alert]="alert"></app-app-alerts>
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
   <div header class="flex justify-content-between align-items-center consultaNotasTrabajoSocial">
@@ -14,8 +15,8 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group datepicker-group">
-          <label class="control-label tituloServicio" for="notasInit">Fecha desde:</label>
-          <input notasInit class="form-control" id="notasInit" type="text" placeholder="dd/mm/aaaa">
+          <label class="control-label tituloServicio" for="avisosInit">Fecha desde:</label>
+          <input avisosInit class="form-control" id="avisosInit" type="text" placeholder="dd/mm/aaaa">
           <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
             <div class="imgCalendar"></div>
           </span>
@@ -23,8 +24,8 @@
       </div>
       <div class="col-md-4">
         <div class="form-group datepicker-group">
-          <label class="control-label tituloServicio" for="notasFinal">Fecha hasta:</label>
-          <input notasFinal class="form-control" id="notasFinal" type="text" placeholder="dd/mm/aaaa">
+          <label class="control-label tituloServicio" for="avisosFinal">Fecha hasta:</label>
+          <input avisosFinal class="form-control" id="avisosFinal" type="text" placeholder="dd/mm/aaaa">
           <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
             <div class="imgCalendar"></div>
           </span>
@@ -100,13 +101,13 @@
               <tr>
                 <td class="bordesTablaFecha"
                   style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
-                  (click)="irDetalle(12);">{{ item.fecha }}</td>
+                  (click)="irDetalle(12);">{{ item.fechaElaboracion | date: 'dd / MM / yyyy'}}</td>
                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
-                  {{item.paciente}} </td>
+                  {{item.nombrePaciente}} </td>
                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
-                  {{item.medico}} </td>
+                  {{item.nombreMedicoTratante}} </td>
                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
-                  {{item.trabajadorSocial}} </td>
+                  {{item.nombreTrabajadorSocial}} </td>
               </tr>
             </tbody>
           </table>

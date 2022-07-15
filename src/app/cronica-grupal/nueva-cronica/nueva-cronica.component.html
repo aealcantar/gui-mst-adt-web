@@ -209,7 +209,7 @@
       </div>
 
       <div class="container seccion" *ngIf="listParticipantes.length > 0">
-        <div class="row col-md-12" style="margin-top: 20px;">
+        <div class="row col-md-12" style="margin-top: 20px; margin-bottom: 20px !important;">
           <span class="label-total-participantes" style="margin: 0px 10px;">
             Total de participantes
             <span class="label-atencion">
@@ -217,7 +217,7 @@
             </span>
           </span>
         </div>
-        <div class="row col-md-10">
+        <div class="row col-md-10" style="margin-bottom: 20px !important;">
           <table id="tblparticipante"
             class="tabla table-hover table-bordered table-gral table-participantes caption-top">
             <thead>
@@ -232,7 +232,7 @@
             </tbody>
           </table>
         </div>
-        <div class="row col-md-12">
+        <div class="row col-md-12" style="margin-bottom: 20px !important;">
           <button style="width: 170px; border: solid 1px #9d2449; margin-left: 0px !important;" type="button"
             class="btn btn-primary buttonL" (click)="addParticipanteDialog();">
             Agregar participante

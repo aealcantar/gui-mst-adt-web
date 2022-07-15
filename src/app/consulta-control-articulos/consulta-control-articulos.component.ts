@@ -11,6 +11,7 @@ import { ControlArticulos } from './../models/control-articulo.model';
 import { DatePipe } from '@angular/common';
 =======
 import { AlertInfo } from '../app-alerts/app-alert.interface';
+import { AuthService } from '../service/auth-service.service';
 
 >>>>>>> cc7ccbad3fa4d2fbcc4bc1cb1e63537a7574ebb0
 declare var $: any;
@@ -51,7 +52,7 @@ export class ConsultaControlArticulosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private Artservice: ControlArticuloService,
     private fb: FormBuilder,
   ) {
@@ -61,6 +62,9 @@ export class ConsultaControlArticulosComponent implements OnInit {
 >>>>>>> cc7ccbad3fa4d2fbcc4bc1cb1e63537a7574ebb0
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
     this.datesForm = this.fb.group({
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],

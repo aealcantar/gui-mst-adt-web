@@ -2,9 +2,153 @@
 
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
-{{certificado.folioCertificado}}
+  <div header class="flex justify-content-between aling-intems-center">
+    <label class="headerText"> Control TS - Certificado de defunción </label>
+  </div>
+  <div content>
+    <div class="container seccion">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group datepicker-group">
+            <span class="spanInput">Fecha de defunción:</span>
+            <span class="labelDetalle">
+              {{ certificado?.fechaDefuncion }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group datepicker-group">
+            <span class="spanInput">Hora de defunción:</span>
 
+            <span class="labelDetalle">
+              {{ certificado?.horaDefuncion }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Folio del certificado:</span>
+            <span class="labelDetalle">
+              {{ certificado?.folioCertificacion }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Nombre del asegurado:</span>
+            <span class="labelDetalle">
+              {{ certificado?.nombreAsegurado }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">No. de Seguridad Social:</span>
+            <span class="labelDetalle">
+              {{ certificado?.nssPaciente }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Servicio:</span>
+            <span class="labelDetalle">
+              {{ certificado?.nombreServicio }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group datepicker-group">
+            <span class="spanInput">Fecha la entrega de certificado:</span>
+            <span class="labelDetalle">
+              {{ certificado?.fechaDeEntregaDeCertificado }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group datepicker-group">
+            <span class="spanInput">Hora de entrega del certificado:</span>
+
+            <span class="labelDetalle">
+              {{ certificado?.horaDeEntregaDeCertificado }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Funeraria:</span>
+            <span class="labelDetalle">
+              {{ certificado?.nombreFuneraria }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput"
+              >Nombre del familiar que recibe certificado:</span
+            >
+            <span class="labelDetalle">
+              {{ certificado?.nombreFamiliar }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput"
+              >Parentesco del familiar que recibe certificado:</span
+            >
+            <span class="labelDetalle">
+              {{ certificado?.parentescoFamiliar }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Observaciones:</span>
+            <span class="labelDetalle">
+              {{ certificado?.observaciones }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Nombre del Trabajador social</span>
+            <span class="labelDetalle">
+              {{ certificado?.nombrePersonalElaboro }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <span class="spanInput">Matricula del Trabajador social</span>
+            <span class="labelDetalle">
+              {{ certificado?.matriculaPersonalElaboro }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-right">
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="imprimir()"
+            id="btnGuardarCertificado"
+            type="button"
+          >
+            Imprimir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-card-template>
-
 
 <app-info-bottom></app-info-bottom>

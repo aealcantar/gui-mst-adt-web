@@ -24,7 +24,7 @@
             </div>
 
 
-            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="btnLimpiarbusqueda();btnBuscarUbicacion()">Limpiar</button>
+            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="btnLimpiarbusqueda();">Limpiar</button>
             <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)="btnBuscarUbicacion()">Buscar</button>
 
           </form>
@@ -63,8 +63,8 @@
                   (click)="muestraHorarios(item.cveUbicacion)">
 
                   {{ item.descripcionAbreviada }}</td>
-                <td>{{item.tipo }}</td>
-                <td>{{ item.servicio }}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.des_especialidad}}</td>
               </tr>
             </tbody>
           </table>

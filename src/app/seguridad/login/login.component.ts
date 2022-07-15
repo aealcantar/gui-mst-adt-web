@@ -126,10 +126,20 @@ export class LoginComponent implements OnInit {
             );
             this.authService.guardarToken(result.access_token);
             this.seguridadService.registrarUsuario(this.usuario);
-            this.router.navigate(["/catalogos"], { skipLocationChange: true });
+            this.router.navigate(["/catalogos"]);
           },
           (err: HttpErrorResponse) => {
             window.scroll(0,0);
+            switch (err.error.message) {
+              case 'Usuario invalido':
+                err.error.message = "¡Usuario inválido!"
+                break;
+              case 'Credenciales incorrectas. Volver a intentar Solo tiene 3 intentos':
+                err.error.message = "¡Credenciales incorrectas. Volver a intentar, solo tiene 3 intentos!"
+                break;
+              default:
+                break;
+            }
             console.log("error " + err.error.message);
             if (err.error.message == undefined) {
               this.muestraAlerta('Servicio no esta disponible. Favor de reportarlo!','alert-danger','Error');
@@ -144,6 +154,7 @@ export class LoginComponent implements OnInit {
           }
         );
       } catch (error) {
+        console.error("ERROR: ", error);
         // this.muestraAlerta();
       }
     } else {
