@@ -328,7 +328,7 @@ export class HorariosComponent implements OnInit {
   updateEstatusDia() {
     this.msjLoading(this.lblBtnHabilitar + "...");
     this.request = new HorarioRequest();
-    this.request.idUbicacion = this.cveUbicacion;
+    this.request.idUbicacion = Number(this.cveUbicacion);
     this.request.dia = this.semana[this.diaNb];
     let result = this.diaSeleccionado.horarios.find(horario => horario.estatus.cveClave == "DIA_DESHABILITADO");
     console.log({ result });
