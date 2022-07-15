@@ -53,12 +53,13 @@ export class UbicacionesComponent implements OnInit {
   regOK: number = 0;
   blnProcedeCarga: boolean = true;
   idUser: number;// = 1; // 5 = Fer   33 = Ame
+  cveUnidad:string;
   blnPendientes: boolean = false;
   blnErrores: boolean = false;
   blnCompletos: boolean = false;
   cargaCatalogos: CargasCatalogos;
 
-  lstUbicaciones: Array<Cat_Ubicacion> = [];
+  lstUbicaciones: Array<Ubicacion> = [];
 
   txtbusca: string = '';
   numitems: number = 15;
@@ -89,6 +90,7 @@ export class UbicacionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']
+    this.cveUnidad = JSON.parse(sessionStorage.getItem('usuario'))['unidadMedica']
     this.mensaje = new objAlert;
     // this.getAll();
     this.getAllByUser(this.idUser);
@@ -177,12 +179,12 @@ export class UbicacionesComponent implements OnInit {
 
 
   getAllByUser(idUSer: number) {
-    this.lstUbicaciones = Array<Cat_Ubicacion>();
+    this.lstUbicaciones = Array<Ubicacion>();
     this.msjLoading("Buscando...");
 
     this.pagactual = 1;
     this.ubicaciones.getAllByIdUSer(idUSer).subscribe({
-      next: (resp: Cat_Ubicacion[]) => {
+      next: (resp: any) => {
 
         console.log("lst: ", resp);
 
@@ -268,17 +270,17 @@ export class UbicacionesComponent implements OnInit {
       if (this.txtbusca.trim().length >= 5) {
 
         this.msjLoading("Buscando...");
-        this.ubicaciones.getByDescAbv(this.txtbusca).subscribe({
+        this.ubicaciones.getByDescAbvbyUser(this.txtbusca, this.idUser).subscribe({
           next: (resp: any) => {
 
             console.log(resp);
-            // this.lstUbicaciones = resp.data;
+             this.lstUbicaciones = resp.data;
 
-            if (resp.data.length > 0)
+            if (resp.length > 0)
               this.resultados = true;
             else this.resultados = false;
 
-            this.convertirLStCat(resp.data);
+           // this.convertirLStCat(resp.data);
             this.totRegistros = this.lstUbicaciones.length;
             console.log(this.totRegistros);
             setTimeout(() => {
@@ -312,18 +314,21 @@ export class UbicacionesComponent implements OnInit {
 
 
   private convertirLStCat(lst: any) {
-    this.lstUbicaciones = new Array<Cat_Ubicacion>();
+    this.lstUbicaciones = new Array<Ubicacion>();
     for (let i of lst) {
-      let element = new Cat_Ubicacion;
+      let element = new Ubicacion;
       let tipo = new TipoUbicacion;
-      element.cve_ubicacion = i.cveUbicacion;
+  /*    element.cve = i.cveUbicacion;
       element.des_abreviada_ubicacion = i.descripcionAbreviada;
       tipo.desUbicacion = i.tipo;
       element.tipoUbicacionEntity = tipo;
       element.cve_especialidad = i.servicio;
-
+*/
       this.lstUbicaciones.push(element);
     }
+
+    
+   // this.lstUbicaciones.filter(x => x.cve_unidad_medica = this.cveUnidad);
   }
 
   btnAtras() {
