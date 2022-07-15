@@ -36,8 +36,11 @@
   height: 550px;
   /*margin: 117px 0 72px 140.8px;*/
   background-color: #fff;
-  width: 40.972%;
+  /* width: 40.972%; */
+  width: 42.972%;
+  margin-right: -5.4%;
 }
+
 .t-social{
   width: 113px;
   height: 14.2px;
@@ -261,7 +264,9 @@ input {
   display: inline;
   width: 850px;
   float: left;
-  width: 59.028%;
+  /* width: 59.028%; */
+  width: 68.4%;
+  margin-left: -6%;
 }
 
 /* .form-control + .glyphicon {
