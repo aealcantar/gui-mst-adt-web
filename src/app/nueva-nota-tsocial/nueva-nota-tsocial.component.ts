@@ -240,6 +240,12 @@ export class NuevaNotaTSocialComponent implements OnInit {
   //   }
   //   this.router.navigate(["consulta-nota"], { queryParams: params, skipLocationChange: true });
   // }
+  
+  onBlur() {
+    if(typeof this.formNuevaNota.get('diagnosticoMedico').value === 'string') {
+      this.formNuevaNota.get('diagnosticoMedico').patchValue(null);
+    }
+  }
 
   private _filter(value: string): string[] {
     const filterValue = value ? value.toLowerCase() : '';
