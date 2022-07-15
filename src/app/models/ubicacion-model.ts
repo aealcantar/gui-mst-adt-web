@@ -7,6 +7,7 @@ public tipo:string;
 public nivelAtencion:string;
 public servicioEspecialidad:string;
 public unidadMedica:string;
+public des_especialidad: string;
 }
 
 

@@ -60,11 +60,11 @@
               <tr *ngFor="let item of lstUbicaciones">
                 <td
                   class="link-texto"
-                  (click)="muestraHorarios(item.cve_ubicacion)">
+                  (click)="muestraHorarios(item.cveUbicacion)">
 
-                  {{ item.des_abreviada_ubicacion }}</td>
-                <td>{{item.tipoUbicacionEntity.desUbicacion}}</td>
-                <td>{{item.des_especialidad?item.des_especialidad:item.cve_especialidad }}</td>
+                  {{ item.descripcionAbreviada }}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.des_especialidad}}</td>
               </tr>
             </tbody>
           </table>

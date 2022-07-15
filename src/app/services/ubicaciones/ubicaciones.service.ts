@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cat_Ubicacion } from 'src/app/models/ubicacion-model';
+import { Cat_Ubicacion, Ubicacion } from 'src/app/models/ubicacion-model';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 @Injectable({
@@ -20,8 +20,8 @@ export class UbicacionesService {
 
 
 
-  getAllByIdUSer(idUser: number): Observable<Cat_Ubicacion[]> {
-    return this.http.get<Cat_Ubicacion[]>(this.serverEndPointURLCat + `/getAllUbicacion/${idUser}`, {
+  getAllByIdUSer(idUser: number): Observable<Ubicacion[]> {
+    return this.http.get<Ubicacion[]>(this.serverEndPointURLCat + `/getAllUbicacion/${idUser}`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json; charset=utf-8')
     });
@@ -32,6 +32,13 @@ export class UbicacionesService {
   getByDescAbv(descAbv: string) {
 
     return this.http.get(this.serverEndPointURLUbicaciones + `/search/${descAbv}/`);
+  }
+
+  getByDescAbvbyUser(descripcionCorta: string, idUser: number) : Observable<Ubicacion[]> {
+    return this.http.get<Ubicacion[]>(this.serverEndPointURLUbicaciones + `/search/${descripcionCorta}/${idUser}`,{
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json; charset=utf-8')
+    });
   }
 
   getHorariosByIdUbicacion(cveUbicacion: number, dia: string) {
