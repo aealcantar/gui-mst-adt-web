@@ -10,16 +10,12 @@ export class CertificadoDefuncionService {
   constructor(private http: HttpClient) {}
 
   insert(certificado: CertificadoDefuncion) {
-    return this.http.post<any>(
+    return this.http.post<CertificadoDefuncion>(
       environment.msmtsControlInterno + '/insert',
       certificado
     );
   }
-  imprimir(
-    certificado: CertificadoDefuncion,
-    matricula: string,
-    nomTSC: string
-  ) {
+  imprimir(certificadoId: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -27,39 +23,39 @@ export class CertificadoDefuncionService {
     const opt = {
       headers,
       responseType: 'blob' as 'json',
+      params: {
+        certificadoId,
+      },
     };
-    const data = {
-      fecDefuncion: certificado.fechaDefuncion,
-      hrDefuncion: certificado.horaDefuncion,
-      folio: certificado.foliofuncion,
-      nomAsegurado: certificado.nombreAsegurado,
-      nss: certificado.nssPaciente,
-      fecEntrega: certificado.fechaDeEntregaDeCertificado,
-      hrEntrega: certificado.horaDeEntregaDeCertificado,
-      servicio: certificado.cveServicio,
-      funeraria: certificado.nombreFuneraria,
-      observaciones: certificado.observaciones,
-      nomFamiliar: certificado.nombreFamiliar,
-      parentesco: certificado.parentescoFamiliar,
-      matricula,
-      nomTSC,
-    };
-    console.log(data);
-    console.log(certificado);
-    return this.http.post<any>(
-      environment.msmtsControlInterno + '/reporteCertificadoDefuncion',
-      JSON.stringify(data),
+
+    return this.http.get<any>(
+      environment.msmtsControlInterno + '/getReporte',
       opt
     );
   }
-  findById(idDefuncion: number) {
-    const body = {
-      idDefuncion,
+  findById(idDefuncion: any) {
+    const opt = {
+      params: {
+        idDefuncion,
+      },
     };
-    return this.http.post<CertificadoDefuncion>(
+    return this.http.get<CertificadoDefuncion>(
       environment.msmtsControlInterno + '/id',
-      body
+      opt
     );
   }
-  list() {}
+  list(fechaInicio: string, fechaFin: string, pagina: any, count: any) {
+    const opt = {
+      params: {
+        fechaInicio,
+        fechaFin,
+        pagina,
+        count,
+      },
+    };
+    return this.http.get<CertificadoDefuncion[]>(
+      environment.msmtsControlInterno + '/list',
+      opt
+    );
+  }
 }

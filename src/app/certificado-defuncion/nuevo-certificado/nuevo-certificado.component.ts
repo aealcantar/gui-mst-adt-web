@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
@@ -47,11 +48,12 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.maxLength(10),
       ]),
+      nombreServicio: new FormControl(''),
       horaDefuncion: new FormControl('', [
         Validators.required,
         Validators.maxLength(10),
       ]),
-      foliofuncion: new FormControl(
+      folioCertificacion: new FormControl(
         '',
         Validators.compose([Validators.required, Validators.maxLength(10)])
       ),
@@ -88,9 +90,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.maxLength(1500),
       ]),
-      trabajadorSocial: new FormControl(''),
-      matricula: new FormControl(''),
+      nombrePersonalElaboro: new FormControl(''),
+      matriculaPersonalElaboro: new FormControl(''),
       cvePersonalQueElaboro: new FormControl(''),
+      fechaDeAlta:new FormControl(''),
+      fechaDeActualizacion: new FormControl('')
     });
   }
   ngAfterViewInit(): void {
@@ -126,6 +130,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onServicioSelect(select: MatSelectChange) {
+   const nombreDeServicio = select.source.triggerValue
+    this.formAdd.controls['nombreServicio'].setValue(nombreDeServicio)
+  }
+
   listaServicios: Array<any> = [];
   ngOnInit(): void {
     const userTemp = sessionStorage.getItem('usuario') || '';
@@ -138,60 +147,43 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       this.usuario.matricula = 'XXXX-XXXX-XX';
       this.usuario.strNombres = 'Alan Isaac';
       this.usuario.strApellidoP = 'Villafan';
-      this.usuario.strApellidoM = 'Folres';
+      this.usuario.strApellidoM = 'Flores';
     }
     this.cargarServicios();
     this.formAdd
-      .get('trabajadorSocial')
+      .get('nombrePersonalElaboro')
       .setValue(
         `${this.usuario.strNombres} ${this.usuario.strApellidoP} ${this.usuario.strApellidoM}`
       );
-    this.formAdd.get('matricula').setValue(this.usuario.matricula);
+    this.formAdd
+      .get('matriculaPersonalElaboro')
+      .setValue(this.usuario.matricula);
     this.formAdd.get('nssPaciente').setValue(this.paciente.nss);
     this.formAdd.get('cvePersonalQueElaboro').setValue(this.usuario.cveUsuario);
-    this.formAdd.controls['trabajadorSocial'].disable();
+    this.formAdd.controls['nombrePersonalElaboro'].disable();
     this.formAdd.controls['nssPaciente'].disable();
-    this.formAdd.controls['matricula'].disable();
+    this.formAdd.controls['matriculaPersonalElaboro'].disable();
     //cvePersonalQueElaboro
   }
   async cargarServicios() {
     this.cronicaGrupalService.getCatServicios().subscribe((servicios) => {
+      console.log(servicios)
       this.listaServicios = servicios;
     });
   }
-  imprimir() {
-    if (this.certificado !== undefined) {
-      this.certificadoService
-        .imprimir(
-          this.certificado,
-          this.usuario.matricula,
-          this.usuario.strNombres
-        )
-        .subscribe(
-          (response) => {
-            console.log(response);
-            const file = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(file);
-            window.open(url);
-          },
-          (error) => {
-            console.log(`Error en certificado de defuncnion`, error);
-          }
-        );
-    }
-  }
+ 
   async guardar() {
     if (this.formAdd.valid) {
       this.validarCampos = false;
+      const date = moment().format('YYYY-MM-DD HH:mm:ss')
+      this.formAdd.controls['fechaDeAlta'].setValue(date)
+      this.formAdd.controls['fechaDeActualizacion'].setValue(date)
       const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
-      console.log('antes de guardar', certificado);
-      //  this.certificado = certificado;
-
       this.certificadoService
         .insert(certificado)
         .subscribe(async (response) => {
-          console.log('despues de guardar', response);
-          this.certificado = response.certificadoDeDefuncion;
+          this.certificado = response;
+          await sessionStorage.removeItem('certificadoDefuncion')
           sessionStorage.setItem(
             'certificadoDefuncion',
             await JSON.stringify(this.certificado)
@@ -220,6 +212,6 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
 
   cancelarSinGuardar() {
-    this.router.navigate(['login']);
+    this.router.navigate(['consulta-certificado-defuncion']);
   }
 }

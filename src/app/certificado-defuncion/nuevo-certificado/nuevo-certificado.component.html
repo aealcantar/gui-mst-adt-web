@@ -88,11 +88,11 @@
               <input
                 class="form-control"
                 [placeholder]="'Ingresa folio'"
-                formControlName="foliofuncion"
+                formControlName="folioCertificacion"
                 type="text"
               />
               <mat-error
-                *ngIf="validarCampos && formAdd.get('foliofuncion').invalid"
+                *ngIf="validarCampos && formAdd.get('folioCertificacion').invalid"
               >
                 Campo Obligatorio Maximo de caracteres: 10
               </mat-error>
@@ -145,10 +145,13 @@
                 class="form-control"
                 [placeholder]="'Seleccionar servicio'"
                 formControlName="cveServicio"
+                #servicios
+                (selectionChange)="onServicioSelect($event)"
               >
                 <mat-option
                   *ngFor="let servicio of listaServicios"
                   [value]="servicio.cve_especialidad"
+                  
                 >
                   {{ servicio.des_especialidad }}
                 </mat-option>
@@ -315,7 +318,7 @@
                 matInput
                 class="form-control"
                 type="text"
-                formControlName="trabajadorSocial"
+                formControlName="nombrePersonalElaboro"
               />
             </div>
           </div>
@@ -325,7 +328,7 @@
               <input
                 [disabled]="false"
                 class="form-control"
-                formControlName="matricula"
+                formControlName="matriculaPersonalElaboro"
                 type="text"
               />
             </div>

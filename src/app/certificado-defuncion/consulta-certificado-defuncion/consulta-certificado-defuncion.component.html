@@ -13,7 +13,7 @@
     </div>
   </div>
   <div content style="padding-bottom: 3.7%;">
-    <div class="formInfo" [formGroup]="formAdd" (submit)="buscar()" novalidate>
+    <form class="formInfo" [formGroup]="formAdd" (submit)="buscar()" novalidate>
       <div class="row">
         <div class="col-md-4">
           <div class="form-group datepicker-group">
@@ -75,7 +75,7 @@
                 Visualizar datos
               </span>
               <!-- <label class="control-label ">Visualizar datos</label> -->
-              <mat-select [(ngModel)]="pageSize" class="form-select mat-select-table" [disableOptionCentering]="true"
+              <mat-select formControlName="count" class="form-select mat-select-table" [disableOptionCentering]="true"
                 aria-label="Servicio">
                 <mat-option class="select-font" [value]="15" seleted>15</mat-option>
                 <mat-option class="select-font" [value]="20">20</mat-option>
@@ -129,13 +129,13 @@
                 <tr>
                   <td class="bordesTablaFecha"
                     style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
-                    (click)="irDetalle(item);">{{ item.fecha }}
+                    (click)="irDetalle(item);">{{ item.fechaDefuncion }}
                   </td>
                   <td class="bordesTablaNombre" style="padding-left: 30px;text-align: left !important; width: 557px">
-                    {{item.nombre}}
+                    {{item.nombreAsegurado}}
                   </td>
                   <td class="bordesTablaNSS" style="padding-left: 30px; text-align: left !important;width: 377px">
-                    {{item.nss}}
+                    {{item.nssPaciente}}
                   </td>
                   <!-- <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
                     {{item.personalQueElaboro}} </td> -->
@@ -165,7 +165,7 @@
           </div>
         </div>
       </ng-container>
-    </div>
+    </form>
 
     <ng-template #mostrarSeccionSinResultados>
       <div class="row">

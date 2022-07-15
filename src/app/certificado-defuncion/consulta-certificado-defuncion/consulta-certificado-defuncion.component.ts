@@ -1,17 +1,25 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import * as moment from 'moment';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
+import { CertificadoDefuncionService } from 'src/app/service/certificado-defuncion.service';
+import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
 
 declare var $: any;
 @Component({
   selector: 'app-consulta-certificado-defuncion',
   templateUrl: './consulta-certificado-defuncion.component.html',
-  styleUrls: ['./consulta-certificado-defuncion.component.css']
+  styleUrls: ['./consulta-certificado-defuncion.component.css'],
 })
-export class ConsultaCertificadoDefuncionComponent implements OnInit, AfterViewInit {
-
+export class ConsultaCertificadoDefuncionComponent
+  implements OnInit, AfterViewInit
+{
   formAdd;
   validarCampos: boolean = false;
   public fechaSelected!: string;
@@ -21,12 +29,12 @@ export class ConsultaCertificadoDefuncionComponent implements OnInit, AfterViewI
   public dtOptions: DataTables.Settings = {};
   public numitems: number = 15;
   public order: string = 'desc';
- public tabla: [] = []; 
-    /* obs agrege estas 2 variables para pruebas*/
-  fechaDesde: string = "";
-  fechaHasta: string = "";
- /* obs agrege esta tabla para poner los datos dummie*/
-/*
+  public tabla: [] = [];
+  /* obs agrege estas 2 variables para pruebas*/
+  fechaDesde: string = '';
+  fechaHasta: string = '';
+  /* obs agrege esta tabla para poner los datos dummie*/
+  /*
   tabla=[
   {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
   {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
@@ -37,20 +45,21 @@ export class ConsultaCertificadoDefuncionComponent implements OnInit, AfterViewI
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
-  datosBusqueda: Array<any> = [];
+  datosBusqueda: Array<CertificadoDefuncion> = [];
   public alert!: AlertInfo;
-
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
-  ) {this.formAdd = fb.group({
-    consultaDefuncionIni: new FormControl('', Validators.required),
-    consultaDefuncionFin: new FormControl('', Validators.required),
-  });
-
-
+    private certificadoService: CertificadoDefuncionService,
+    private fb: FormBuilder
+  ) {
+    this.formAdd = fb.group({
+      consultaDefuncionIni: new FormControl('', Validators.required),
+      consultaDefuncionFin: new FormControl('', Validators.required),
+      count: new FormControl(15, Validators.required),
+      pagina: new FormControl(1, Validators.required),
+    });
   }
 
   ngOnInit(): void {
@@ -60,31 +69,44 @@ export class ConsultaCertificadoDefuncionComponent implements OnInit, AfterViewI
     });
   }
 
-  irNuevoCertificado(){
-    this.router.navigate(["nuevo-certificado-defuncion"]);
+  async irDetalle(extras: CertificadoDefuncion) {
+    await sessionStorage.removeItem('certificadoDefuncion');
+    sessionStorage.setItem(
+      'certificadoDefuncion',
+      await JSON.stringify(extras)
+    );
+    this.router.navigate(['detalle-certificado-defuncion']);
   }
-  irDetalle(extras: any){
-
-  }
-
 
   irNuevoRegistro() {
-    let params = {}
-    this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
+    sessionStorage.removeItem('certificadoDefuncion');
+    this.router.navigate(['nuevo-certificado-defuncion']);
   }
-  buscar(){
-      if (this.datosBusqueda.length == 0) {
-        this.muestraAlerta(
-          'Valide los filtros',
-          'alert-warning',
-          'Sin resultados',
-        )
-      };
+  buscar() {
+    const datos = this.formAdd.value;
+    this.certificadoService
+      .list(
+        datos.consultaDefuncionIni,
+        datos.consultaDefuncionFin,
+        datos.pagina,
+        datos.count
+      )
+      .subscribe((response) => {
+        this.datosBusqueda = response;
+      });
+
+    if (this.datosBusqueda.length == 0) {
+      this.muestraAlerta(
+        'Valide los filtros',
+        'alert-warning',
+        'Sin resultados'
+      );
+    }
   }
 
-  limpiar(){
-    this.formAdd.controls["consultaDefuncionIni"].setValue("");
-    this.formAdd.controls["consultaDefuncionFin"].setValue("");
+  limpiar() {
+    this.formAdd.controls['consultaDefuncionIni'].setValue('');
+    this.formAdd.controls['consultaDefuncionFin'].setValue('');
   }
   sortBy(columnaId: string, order: string, type: string) {
     console.log(columnaId, order, type);
@@ -168,25 +190,24 @@ export class ConsultaCertificadoDefuncionComponent implements OnInit, AfterViewI
     mensaje: string,
     estilo: string,
     tipoMsj?: string,
-    funxion?: any,
+    funxion?: any
   ) {
-    this.alert = new AlertInfo()
+    this.alert = new AlertInfo();
     this.alert = {
       message: mensaje,
       type: estilo,
       visible: true,
       typeMsg: tipoMsj,
-    }
+    };
     setTimeout(() => {
       this.alert = {
         message: '',
         type: 'custom',
         visible: false,
-      }
+      };
       if (funxion != null) {
-        funxion()
+        funxion();
       }
-    }, 5000)
+    }, 5000);
   }
-
 }

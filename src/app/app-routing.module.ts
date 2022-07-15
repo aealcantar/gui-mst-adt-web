@@ -211,8 +211,7 @@ const routes: Routes = [
     component: DetalleCertificadoComponent,
  
   },
-  { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent, canActivate: [SeguridadRouter] },
-{ path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent,canActivate: [SeguridadRouter] },
+{ path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent },
 ];
 
 @NgModule({

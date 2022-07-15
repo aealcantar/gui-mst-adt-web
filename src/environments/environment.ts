@@ -29,7 +29,8 @@ export const environment = {
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
    // msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api",
-   msmtsControlInterno:"http://localhost:8088/msmts-ctrl-articulos/api",
+   //msmtsControlInterno:"http://localhost:8088/msmts-ctrl-articulos/api", //--viejo endpoint que tiene detalles
+   msmtsControlInterno:"http://localhost:8088/api/certificado-defuncion",
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
     recaptcha: {
       siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',
