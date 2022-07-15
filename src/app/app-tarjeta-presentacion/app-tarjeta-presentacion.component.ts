@@ -17,10 +17,13 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   executed: boolean = false;
   months: any;
 
-  constructor(private tarjetaServce: AppTarjetaPresentacionService, private router: Router) { }
+  constructor(private tarjetaService: AppTarjetaPresentacionService, private router: Router) { }
 
   ngOnInit(): void {
-    this.paciente = this.tarjetaServce.get();
+    this.paciente = this.tarjetaService.get();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+    }
     this.convertDate();
   }
 
