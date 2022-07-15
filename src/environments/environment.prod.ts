@@ -21,6 +21,7 @@ export const environment = {
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
     msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api",
+    msmtsAvisosMP:"https://mts-qa.cloudapps.imss.gob.mx/msmts-avisos-mp/api",
     urlServOauth: 'msadt-auth/',
 
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
