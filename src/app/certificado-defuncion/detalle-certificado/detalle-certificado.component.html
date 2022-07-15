@@ -29,7 +29,7 @@
           <div class="form-group">
             <span class="spanInput">Folio del certificado:</span>
             <span class="labelDetalle">
-              {{ certificado?.foliofuncion }}
+              {{ certificado?.folioCertificacion }}
             </span>
           </div>
         </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-md-4">
           <div class="form-group">
-            <span class="spanInput">No?. de Seguridad Social:</span>
+            <span class="spanInput">No. de Seguridad Social:</span>
             <span class="labelDetalle">
               {{ certificado?.nssPaciente }}
             </span>
@@ -55,7 +55,7 @@
           <div class="form-group">
             <span class="spanInput">Servicio:</span>
             <span class="labelDetalle">
-              {{ servicio?.des_especialidad }}
+              {{ certificado?.nombreServicio }}
             </span>
           </div>
         </div>
@@ -122,7 +122,7 @@
           <div class="form-group">
             <span class="spanInput">Nombre del Trabajador social</span>
             <span class="labelDetalle">
-              {{ usuario?.strNombres }}
+              {{ certificado?.nombrePersonalElaboro }}
             </span>
           </div>
         </div>
@@ -130,7 +130,7 @@
           <div class="form-group">
             <span class="spanInput">Matricula del Trabajador social</span>
             <span class="labelDetalle">
-              {{ usuario?.matricula }}
+              {{ certificado?.matriculaPersonalElaboro }}
             </span>
           </div>
         </div>

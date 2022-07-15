@@ -46,6 +46,7 @@ import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
+import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -210,6 +211,7 @@ const routes: Routes = [
     component: DetalleCertificadoComponent,
  
   },
+{ path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent },
 ];
 
 @NgModule({
