@@ -8,3 +8,28 @@ public nivelAtencion:string;
 public servicioEspecialidad:string;
 public unidadMedica:string;
 }
+
+
+
+export class Cat_Ubicacion {
+    public cve_ubicacion:string;
+        
+    public des_completa_ubicacion:string;
+    public des_abreviada_ubicacion:string;
+    public cve_tipo_unidad_medica:string;
+    public cve_nivel:string;
+    public cve_especialidad:string;
+    public des_especialidad:string;
+    public cve_unidad_medica:string;
+    public tipoUbicacionEntity: TipoUbicacion;
+    public lstHorarioEntity:[];
+    }
+
+
+    export class TipoUbicacion {
+        public cveTipoUbicacion:string;
+            
+        public desUbicacion:string;
+        
+       
+        }

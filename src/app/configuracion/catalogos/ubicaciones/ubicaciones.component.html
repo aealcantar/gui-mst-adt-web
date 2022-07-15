@@ -24,7 +24,7 @@
             </div>
 
 
-            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="btnLimpiarbusqueda();btnBuscarUbicacion()">Limpiar</button>
+            <button class="btn btn-default btuser" style="margin-left: 30px;" (click)="btnLimpiarbusqueda();">Limpiar</button>
             <button class="btn btn-primary btuser" style="margin-left: 30px;" (click)="btnBuscarUbicacion()">Buscar</button>
 
           </form>
@@ -60,11 +60,11 @@
               <tr *ngFor="let item of lstUbicaciones">
                 <td
                   class="link-texto"
-                  (click)="muestraHorarios(item.cveUbicacion)">
+                  (click)="muestraHorarios(item.cve_ubicacion)">
 
-                  {{ item.descripcionAbreviada }}</td>
-                <td>{{item.tipo }}</td>
-                <td>{{ item.servicio }}</td>
+                  {{ item.des_abreviada_ubicacion }}</td>
+                <td>{{item.tipoUbicacionEntity.desUbicacion}}</td>
+                <td>{{item.des_especialidad?item.des_especialidad:item.cve_especialidad }}</td>
               </tr>
             </tbody>
           </table>
