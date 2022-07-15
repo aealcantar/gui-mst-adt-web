@@ -86,4 +86,8 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   iraVolantesSangre(){
     this.router.navigateByUrl("/consulta-volantes-donacion");
   }
+
+  irAvisosMP(){
+    this.router.navigateByUrl("/consulta-aviso-mp");
+  }
 }
