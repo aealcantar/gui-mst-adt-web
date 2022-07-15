@@ -92,7 +92,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       });
-      this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
+      this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
         (grupos) => {
           this.grupos = grupos;
           console.log("GRUPOS: ", this.grupos);
