@@ -49,109 +49,109 @@ import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-cer
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'recuperarpassword', component: RegistroComponent },
-  { path: 'busqueda', component: BusquedaNssComponent },
+  { path: 'busqueda', component: BusquedaNssComponent, canActivate: [SeguridadRouter] },
   {
     path: 'tarjeta',
     component: AppTarjetaPresentacionComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'busquedaEspecifica',
     component: CCGrupalEspecificaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'nuevaCronica',
     component: NuevaCronicaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'cronicaGuardada',
     component: CronicaGuardadaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consulta-cronica-grupal',
     component: ConsultaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consulta-notas',
     component: ConsultaListaNotasTSocialComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'nueva-nota',
     component: NuevaNotaTSocialComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'detalle-nota',
     component: ConsultaNotaTSocialComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consulta-estudios-medicos',
     component: ConsultaEstudiosMedicosComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'nuevo-estudio-social-medico',
     component: NuevoEstudioSocialMedicoComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'detalle-estudio-medico',
     component: EstudioMedicoGuardadoComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'buscauser',
     component: UserbuscaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consultauser/:id',
     component: UserconsultaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'guardauser',
     component: UserguardaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'editauser/:id',
     component: UserguardaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'buscacita',
     component: CitabuscaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consultacita/:id',
     component: CitaconsultaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'guardacita',
     component: CitaguardaComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consulta-articulos',
     component: ConsultaControlArticulosComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'detalle-articulos/:id',
     component: DetalleControlArticulosComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'nuevo-articulo',
@@ -161,28 +161,28 @@ const routes: Routes = [
   {
     path: 'nuevo-aviso-mp',
     component: NuevoAvisoMpComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consulta-aviso-mp',
     component: ConsultaAvisoMpComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   //volanteDonacion
   {
     path: 'agregar-volante-donacion-sangre',
     component: NuevoVdonacionSangreComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'consulta-volantes-donacion',
     component: ConsultaVolantesDonacionComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'detalle-volante-donacion-sangre/:id',
     component: DetalleVolantesDonacionSangreComponent,
-    canActivate: [SeguridadRouter],
+    canActivate: [SeguridadRouter]
   },
   {
     path: 'catalogos',
@@ -205,13 +205,13 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent,  },
+  { path: 'nuevo-certificado-defuncion', component: NuevoCertificadoComponent, canActivate: [SeguridadRouter] },
   {
     path: 'detalle-certificado-defuncion',
     component: DetalleCertificadoComponent,
- 
+    canActivate: [SeguridadRouter]
   },
-{ path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent },
+  { path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent, canActivate: [SeguridadRouter] },
 ];
 
 @NgModule({
@@ -219,4 +219,4 @@ const routes: Routes = [
   exports: [RouterModule, HttpClientModule],
   providers: [SeguridadRouter],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
