@@ -70,16 +70,16 @@ export class HorariosComponent implements OnInit {
     private activerouter: ActivatedRoute,
     private router: Router,
     private http: HttpClient, private modalService: NgbModal) {
-      this.authService.userLogged$.next(true);
-      this.authService.isAuthenticatedObs$.next(true);   
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
 
-      this.diaNb = (new Date()).getDay();
-      this.obtieneDia(this.diaNb)
+    this.diaNb = (new Date()).getDay();
+    this.obtieneDia(this.diaNb)
 
 
-      console.log("dia: ", this.diaNb);
-      this.authService.setProjectObs("Agenda Digital Transversal");
-      this.turnoNuevo = new HorarioTurno();
+    console.log("dia: ", this.diaNb);
+    this.authService.setProjectObs("Agenda Digital Transversal");
+    this.turnoNuevo = new HorarioTurno();
 
 
   }
@@ -237,8 +237,9 @@ export class HorariosComponent implements OnInit {
 
 
   private obtenerHorarioporDia(cveUbicacion: number, dia: string) {
+    debugger
     this.diaSeleccionado.horarios = [];
-    this.msjLoading("Cargando...");
+    this.msjLoading("Cargando horarios...");
     this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
       this.diaSeleccionado.horarios = resp.data;
       console.log(this.diaSeleccionado.horarios);
@@ -326,6 +327,7 @@ export class HorariosComponent implements OnInit {
   }
 
   updateEstatusDia() {
+    debugger
     this.msjLoading(this.lblBtnHabilitar + "...");
     this.request = new HorarioRequest();
     this.request.idUbicacion = Number(this.cveUbicacion);
@@ -342,17 +344,18 @@ export class HorariosComponent implements OnInit {
 
     }
     console.log('actualización', this.request);
+
     this.horarioService.modificarEstatusDia(this.request).subscribe((resp) => {
-      console.log('respuesta update', resp.type);
-      switch (resp.body.code) {
-        case 200:
+      console.log('respuesta update', resp);
+      switch (resp.body.estatus) {
+        case true:
 
 
           console.log("pintar alerta de exito", resp.body.mensaje);
-
+          this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, resp.body.mensaje, this._Mensajes.EXITO);
           // console.log('dia',this.dia);
-          this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
-
+          // this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
+          this.obtenerHorarioporUbicacionDia(this.cveUbicacion, this.request.dia);
 
           Swal.close();
           break;
@@ -445,7 +448,7 @@ export class HorariosComponent implements OnInit {
     this.obtenerLstHorarioFinal(true);
   }
 
-  public obtenerLstHorarioFinal(editado:boolean = false) {
+  public obtenerLstHorarioFinal(editado: boolean = false) {
     // console.log('cambia horario final');
     this.lstHorarioFinal = new Array();
 
@@ -464,9 +467,9 @@ export class HorariosComponent implements OnInit {
       aux = this.horarioSeleccionado.horaInicial.split(':');
       tiempo = Number(this.horarioSeleccionado.duracion);
     }
-    
+
     if (horarioAux.duracion) {
-      this.setHoraFinal(horarioAux.duracion,aux,editado);
+      this.setHoraFinal(horarioAux.duracion, aux, editado);
       // console.log('con duración');
       this.horaFinal = new Date();
 
@@ -499,24 +502,24 @@ export class HorariosComponent implements OnInit {
     Swal.close();
   }
 
-  private setHoraFinal(duracion:number,horaInicial:any,editado:boolean = false){
+  private setHoraFinal(duracion: number, horaInicial: any, editado: boolean = false) {
 
     let fechaInicio = new Date()
-    fechaInicio.setHours(Number(horaInicial[0]),Number(horaInicial[1]),0)//hora,minutos
+    fechaInicio.setHours(Number(horaInicial[0]), Number(horaInicial[1]), 0)//hora,minutos
     let fechaFin = new Date();
     fechaFin.setTime(fechaInicio.getTime() + (duracion * 60 * 1000));
-    if(editado){      
+    if (editado) {
       this.horarioSeleccionado.horaFinal = fechaFin.getHours() + ":" + this.addZero(fechaFin.getMinutes());
       // console.log('hora final:',this.horarioSeleccionado.horaFinal);
-    }else{
+    } else {
       this.horarioNuevo.horaFinal = fechaFin.getHours() + ":" + this.addZero(fechaFin.getMinutes());
       // console.log('hora final:',this.horarioNuevo.horaFinal);
     }
-    
+
   }
 
-  addZero(i:any) {
-    return i < 10 ? "0" + i: i;
+  addZero(i: any) {
+    return i < 10 ? "0" + i : i;
   }
 
 
@@ -584,9 +587,9 @@ export class HorariosComponent implements OnInit {
       if (resp) {
         switch (resp.status) {
           case 200:
-            if(resp.body.estatus){
+            if (resp.body.estatus) {
               this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, "El horario se creó exitosamente", this._Mensajes.EXITO);
-            }else{
+            } else {
               this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
             }
             break;
@@ -894,7 +897,7 @@ export class HorariosComponent implements OnInit {
 
   }
 
-  nungunDiaSeleccionado(){
+  nungunDiaSeleccionado() {
     return !(this.dia1 || this.dia2 || this.dia3 || this.dia4 || this.dia5 || this.dia6 || this.dia7)
   }
 
