@@ -180,7 +180,10 @@ export class UserbuscaComponent implements OnInit  {
     dialogo1.afterClosed().subscribe(art => {
       console.log("result: ", art);
       if (!art['iscancel']){
-        console.log('cargado');
+        console.log('Aceptar Carga');
+        this.buscarusuario();
+      }else if(art['statusCarga']){
+        console.log('Cerrar carga exitosa');
         this.buscarusuario();
       }
 
