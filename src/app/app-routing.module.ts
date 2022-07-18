@@ -38,6 +38,7 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 
 //donacion de sangre
@@ -167,6 +168,11 @@ const routes: Routes = [
     path: 'consulta-aviso-mp',
     component: ConsultaAvisoMpComponent,
     canActivate: [SeguridadRouter]
+  },
+  {
+    path: 'consulta-aviso-mp-administracion',
+    component: ConsultaMpAdministracionComponent,
+    // canActivate: [SeguridadRouter]
   },
   //volanteDonacion
   {
