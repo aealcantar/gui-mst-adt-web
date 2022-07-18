@@ -192,7 +192,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
       {
-        path: 'cargaCatalogos',
+        path: 'cargaCatalogos/:idOrigen',
         component: CargaComponent,
       },
       {

@@ -126,7 +126,8 @@ export class LoginComponent implements OnInit {
                 let usuario: Usuario = new Usuario();
                 usuario = JSON.parse(sessionStorage.getItem('usuario'));
                 if (usuario.nameRolUser.toLocaleLowerCase() === 'administrador') {
-                  this.router.navigate(["/catalogos"]);
+                  this.router.navigate(['/catalogos/cargaCatalogos/0']);
+                  
                 } else {
                   this.router.navigate(["/busqueda"]);
                 }

@@ -47,7 +47,8 @@ export class HeaderMenuComponent implements OnInit {
     var ruta:string;
     switch(val){
       case 1:
-        ruta = '/catalogos/cargaCatalogos';
+        
+        ruta = '/catalogos/cargaCatalogos/1';
         break;
       case 2:
         ruta = '/buscauser';
