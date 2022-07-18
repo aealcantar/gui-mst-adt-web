@@ -117,7 +117,10 @@ export class CitaguardaComponent implements OnInit {
     public datePipe: DatePipe,
     private tarjetaService: AppTarjetaPresentacionService,
     private _Mensajes: HelperMensajesService
-  ) { }
+  ) {
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+  }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
@@ -257,7 +260,7 @@ export class CitaguardaComponent implements OnInit {
   }
 
   regresar() {
-    this.router.navigateByUrl('/buscacita', { skipLocationChange: true });
+    this.router.navigateByUrl('/buscacita');
   }
 
   agregaparticipante(otrop: any) {
@@ -524,7 +527,7 @@ export class CitaguardaComponent implements OnInit {
     this.objmodal.mensaje = "";
     this.objmodal.tipo = 0;
     $('#content').modal('hide');
-    this.router.navigateByUrl('/buscacita', { skipLocationChange: true });
+    this.router.navigateByUrl('/buscacita');
   }
 
 

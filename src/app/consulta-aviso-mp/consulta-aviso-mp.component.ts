@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AvisoMinisterioPublicoService } from 'src/app/service/aviso-mp.service';
+import { AvisoMP } from '../models/aviso-mp.model';
+import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 declare var $: any;
 
 @Component({
@@ -22,23 +26,24 @@ export class ConsultaAvisoMpComponent implements OnInit {
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
+  public alert!: AlertInfo;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    // private Artservice: ControlArticuloService ,
+    private avisoMinisterioPublicoService: AvisoMinisterioPublicoService,
     private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.datesForm = this.fb.group({
-      fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
-      fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
+      fechaInicial: [null, Validators.required],
+      fechaFinal: [null, Validators.required],
     });
   }
 
   ngAfterViewInit(): void {
-    $('#avisomp').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#avisosInit').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -54,7 +59,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
       }
     });
 
-    $('#notasFinal').val(moment().format('DD/MM/YYYY')).datepicker({
+    $('#avisosFinal').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
@@ -78,7 +83,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
       this.datesForm.get('fechaInicial')?.value !== '' &&
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
-      // this.getNotasByFecha();
+      this.getAvisosByFecha();
     }
   }
 
@@ -116,6 +121,58 @@ export class ConsultaAvisoMpComponent implements OnInit {
         break;
     }
     return data;
+  }
+
+  getAvisosById(id: number) {
+    this.avisoMinisterioPublicoService.getAvisoById(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.tabla = res;
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }
+
+  getAvisosByFecha() {
+    this.tabla = [];
+    this.avisoMinisterioPublicoService.getAvisosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+      (res) => {
+        this.tabla = res.datosAvisosMp;
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    ).add(() => {
+      if (this.tabla.length == 0) {
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    });
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
   irNuevoAvisoMP() {

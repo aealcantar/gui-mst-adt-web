@@ -1,4 +1,4 @@
-import {  HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -10,8 +10,9 @@ import { objAlert } from 'src/app/common/alerta/alerta.interface';
 import { CargasResponse } from 'src/app/models/carga-response-model';
 import { ArchivoCarga, CargasCatalogos, CatalogoData, ConfiguracionCarga } from 'src/app/models/catalogos.model';
 
-import { Ubicacion } from 'src/app/models/ubicacion-model';
+import { Cat_Ubicacion, TipoUbicacion, Ubicacion } from 'src/app/models/ubicacion-model';
 import { UbicacionRequest } from 'src/app/models/ubicacion-request-model';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalogos.service';
 import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
@@ -51,13 +52,14 @@ export class UbicacionesComponent implements OnInit {
   regERROR: number = 0;
   regOK: number = 0;
   blnProcedeCarga: boolean = true;
-  idUser: number = 1; // 5 = Fer   33 = Ame
+  idUser: number;// = 1; // 5 = Fer   33 = Ame
+  cveUnidad:string;
   blnPendientes: boolean = false;
   blnErrores: boolean = false;
   blnCompletos: boolean = false;
   cargaCatalogos: CargasCatalogos;
 
-  lstUbicaciones: Array<any> = [];
+  lstUbicaciones: Array<Ubicacion> = [];
 
   txtbusca: string = '';
   numitems: number = 15;
@@ -69,13 +71,14 @@ export class UbicacionesComponent implements OnInit {
 
   mensaje!: objAlert;
 
-  constructor(private ubicaciones: UbicacionesService,
+  constructor(private ubicaciones: UbicacionesService, private authService: AuthService,
     private router: Router, private _Mensajes: HelperMensajesService,
     private matIconRegistry: MatIconRegistry,
     private _HelperCatalogos: HelperCatalogosService,
     public dialog: MatDialog,
     private domSanitizer: DomSanitizer) {
-
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
     this.matIconRegistry.addSvgIcon("upload", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload.svg"));
     this.matIconRegistry.addSvgIcon("upload2", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/upload2.svg"));
     this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/download.svg"));
@@ -86,8 +89,11 @@ export class UbicacionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.idUser = JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']
+    this.cveUnidad = JSON.parse(sessionStorage.getItem('usuario'))['unidadMedica']
     this.mensaje = new objAlert;
-    this.getAll();
+    // this.getAll();
+    this.getAllByUser(this.idUser);
     this.dtOptions = {
       pagingType: 'simple_numbers',
       pageLength: this.numitems,
@@ -171,9 +177,56 @@ export class UbicacionesComponent implements OnInit {
 
   }
 
+
+  getAllByUser(idUSer: number) {
+    this.lstUbicaciones = Array<Ubicacion>();
+    this.msjLoading("Buscando...");
+
+    this.pagactual = 1;
+    this.ubicaciones.getAllByIdUSer(idUSer).subscribe({
+      next: (resp: any) => {
+
+        console.log("lst: ", resp);
+
+        if (resp.length > 0)
+          this.resultados = true;
+        else this.resultados = false;
+
+        this.lstUbicaciones = resp;
+
+        this.totRegistros = this.lstUbicaciones.length;
+        console.log(this.totRegistros);
+
+        setTimeout(() => {
+          table = $('#tblusuarios').DataTable();
+          this.dtOptions.pageLength = this.numitems;
+
+
+          setTimeout(() => {
+            table.on('page', () => {
+              console.log('Page: ' + table.page.info().page);
+              paginaactual = table.page.info().page;
+              this.pagactual = paginaactual + 1;
+            });
+          }, 1000);
+        }, 1000);
+        Swal.close();
+
+      },
+      error: (err: HttpErrorResponse) => {
+        Swal.close();
+        this.lstUbicaciones = [];
+        this.mensajesError(err, this._Mensajes.MSJ_ERROR_CONEXION_UBICACION);
+        //this.muestraAlerta(err.error.message.toString(),'alert-danger','Error');
+      }
+    })
+
+  }
+
   btnLimpiarbusqueda() {
     this.lstUbicaciones = [];
     this.txtbusca = '';
+    this.getAllByUser(this.idUser);
   }
 
 
@@ -208,23 +261,26 @@ export class UbicacionesComponent implements OnInit {
   totRegistros: number = 0;
   btnBuscarUbicacion() {
     this.lstUbicaciones = [];
-    if (this.txtbusca == "") {
-      this.getAll();
+ /*   if (this.txtbusca == "") {
+      // this.getAll();
+      this.getAllByUser(this.idUser);
 
     } else {
+      */
       if (this.txtbusca.trim().length >= 5) {
 
         this.msjLoading("Buscando...");
-        this.ubicaciones.getByDescAbv(this.txtbusca).subscribe({
+        this.ubicaciones.getByDescAbvbyUser(this.txtbusca, this.idUser).subscribe({
           next: (resp: any) => {
 
             console.log(resp);
-            this.lstUbicaciones = resp.data;
-            if (resp.data.length > 0)
+             this.lstUbicaciones = resp.data;
+
+            if (resp.length > 0)
               this.resultados = true;
             else this.resultados = false;
 
-
+           // this.convertirLStCat(resp.data);
             this.totRegistros = this.lstUbicaciones.length;
             console.log(this.totRegistros);
             setTimeout(() => {
@@ -253,26 +309,44 @@ export class UbicacionesComponent implements OnInit {
       } else {
         this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Ingrese mínimo 5 caracteres para buscar" + this.catFaltante, this._Mensajes.ERROR);
       }
-    }
+   // }
   }
 
+
+  private convertirLStCat(lst: any) {
+    this.lstUbicaciones = new Array<Ubicacion>();
+    for (let i of lst) {
+      let element = new Ubicacion;
+      let tipo = new TipoUbicacion;
+  /*    element.cve = i.cveUbicacion;
+      element.des_abreviada_ubicacion = i.descripcionAbreviada;
+      tipo.desUbicacion = i.tipo;
+      element.tipoUbicacionEntity = tipo;
+      element.cve_especialidad = i.servicio;
+*/
+      this.lstUbicaciones.push(element);
+    }
+
+    
+   // this.lstUbicaciones.filter(x => x.cve_unidad_medica = this.cveUnidad);
+  }
 
   btnAtras() {
     const org = localStorage.getItem('origen');
-    if(org){
+    if (org) {
       localStorage.removeItem('origen');
-      console.log('origen',org);
-      this.router.navigateByUrl(org, { skipLocationChange: true });
-    } else{
-      this.router.navigateByUrl("busqueda", { skipLocationChange: true });
+      console.log('origen', org);
+      this.router.navigateByUrl(org);
+    } else {
+      this.router.navigateByUrl("busqueda");
     }
-    // this.router.navigateByUrl("/catalogos/cargaCatalogos", { skipLocationChange: true });
+    // this.router.navigateByUrl("/catalogos/cargaCatalogos");
   }
 
-  muestraHorarios(cveUbicacion: number) {
+  muestraHorarios(cveUbicacion: string) {
     //debugger
-    // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion, { skipLocationChange: true });
-    this.router.navigate(['/catalogos/horarios/' + cveUbicacion], { skipLocationChange: true });
+    // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion);
+    this.router.navigate(['/catalogos/horarios/' + Number(cveUbicacion.trim())]);
 
   }
 

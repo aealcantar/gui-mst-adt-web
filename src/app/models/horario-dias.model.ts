@@ -6,4 +6,5 @@ export class HorarioDias {
 
 export class HorarioNuevoRequest {
 	public  lstHorarios:Horario[];
+	public idUbicacion: number;
 }

@@ -14,7 +14,19 @@
   margin-top: 5px;
   margin-left: 10px;
 }
-
+.headerText {
+  font-family: Montserrat;
+  color: #0a0a0a !important;
+  font-size: 24px;
+}
+.inputError {
+  border: 1px solid #e10000;
+}
+mat-error {
+  font-family: Montserrat;
+  color: #e10000;
+  font-size: 10px;
+}
 .formInfo {
   margin-left: -22px;
   margin-right: -22px;
@@ -137,3 +149,56 @@
 
   color: #222222;
 }
+
+::ng-deep .timepicker__header {
+  background-color: #ffffff !important;
+}
+::ng-deep .timepicker-dial__item_active.timepicker-dial__control {
+  color: #222222 !important;
+}
+::ng-deep .timepicker-dial__control {
+  color: #9b9a9a !important;
+}
+::ng-deep .timepicker-button {
+  color: #222222 !important;
+  background-color: #e5e6e6 !important;
+}
+::ng-deep .timepicker-period__btn {
+  color: #525050 !important;
+}
+::ng-deep .timepicker-period__btn.timepicker-dial__item_active {
+  color: #9b9a9a !important;
+}
+::ng-deep .clock-face_clock-hand.clock-face_number--outer {
+  color: blue !important;
+}
+::ng-deep .clock-face__clock-hand{
+  background-color:#0101F3!important;
+}
+::ng-deep .clock-face__number--outer>span.active {
+  background-color:#0101F3!important;
+}
+::ng-deep span.clock-face__clock-hand{
+  border-color:#0101F3!important;
+}
+/* .clock-face__clock-hand {
+    background-color: $someColor !important;
+
+    &::after {
+      background-color: $someColor !important;
+    }
+
+    &::before {
+      border-color: $someColor !important;
+    }
+  }
+
+  .clock-face__number {
+    > span.active {
+      background-color: $someColor !important;
+    }
+  }
+
+  button:not(.timepicker-dial__item) {
+    color: $someColor !important;
+  } */

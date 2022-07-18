@@ -15,7 +15,7 @@
       <div class="container seccion">
         <div class="row">
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
               <input avisompFec class="form-control" id="avisompFec" type="text" placeholder="Seleccionar fecha"
@@ -26,25 +26,52 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
-              <span class="spanInput">Alcaldía*:</span>
-
-              <!-- <select class="form-control styleselect" formControlName="alcaldia" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Seleccionar alcaldia" selected [value]="'-1'">
-                  Seleccionar alcaldia</option>
-                <option class="select-font" [value]="1">Alcaldia 1</option>
-              </select> -->
-
-              <mat-select class="form-control form-control-mat-select" id="alcaldia" formControlName="alcaldia"
-                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar alcaldía">
-                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar alcaldía</mat-option> -->
-                <mat-option class="select-font" [value]="1">Alcaldía 1</mat-option>
+              <span class="spanInput">Estado*:</span>
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': submitted && formEdit.controls.idEstado.errors}"
+                id="idEstado" formControlName="idEstado"
+                [disableOptionCentering]="true" 
+                aria-label="Servicio"
+                placeholder="Seleccionar estado"
+                (selectionChange)="onChangeEstado()">
+                <mat-option [value]="''" selected class="select-font">Seleccionar estado</mat-option>
+                <mat-option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of catEstados">
+                  {{ estado.des_nombre_completo}}
+                </mat-option>
               </mat-select>
-
+              <small *ngIf="submitted && formEdit.controls.idEstado.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
             </div>
           </div>
-          <div class="col-md-4">
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="spanInput">Alcaldía o municipio*:</span>
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': submitted && formEdit.controls.alcaldia.errors}"
+                id="alcaldia" formControlName="alcaldia"
+                [disableOptionCentering]="true" 
+                aria-label="Servicio"
+                placeholder="Seleccionar alcaldía">
+                <mat-option [value]="''" selected class="select-font">Seleccionar alcaldía</mat-option>
+                <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio" *ngFor="let municipio of catMunicipios">
+                  {{ municipio.des_municipio}}
+                </mat-option>
+              </mat-select>
+              <small *ngIf="submitted && formEdit.controls.alcaldia.errors"
+                class="form-text form-text-error Campo-obligatorio">
+                Campo obligatorio
+              </small>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
             <span class="spanInput">Agencia del Ministerio público*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar agencia"
               formControlName="agenciaMP" type="text" />
@@ -53,13 +80,13 @@
 
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">Nombre del paciente*:</span>
+            <span class="spanInput">A disposición*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta"
               placeholder="Ingresar nombre del paciente" formControlName="nombrePaciente" type="text" />
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <span class="spanInput">Nombre y número del hospital*:</span>
+              <span class="spanInput">Hospital*:</span>
               <!-- <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
                   Seleccionar hospital</option>
@@ -74,30 +101,36 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">Servicio*:</span>
-              <!-- <select class="form-control styleselect" formControlName="servicio" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Seleccionar servicio" selected [value]="'-1'">
-                  Seleccionar servicio</option>
-                <option class="select-font" [value]="1">Servicio 1</option>
-              </select> -->
-
-              <mat-select class="form-control form-control-mat-select" id="servicio" formControlName="servicio"
-                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
-                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option> -->
-                <mat-option class="select-font" [value]="1">Servicio 1</mat-option>
-              </mat-select>
-            </div>
+            <span class="spanInput">Ubicado en*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar ubicación"
+              formControlName="agenciaMP" type="text" />
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-4">
-            <span class="spanInput">Número de cama*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar cama"
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="spanInput">En el servicio de*:</span>
+              <mat-select class="form-control form-control-mat-select" id="servicio" formControlName="servicio"
+                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
+                <mat-option [value]="''" selected class="select-font optionSelect ">
+                  Seleccionar servicio
+                </mat-option>
+                <mat-option class="select-font optionSelect" [value]="item.cve_especialidad"
+                  *ngFor="let item of listaServicios">
+                  {{ item.des_especialidad }}
+                </mat-option>
+                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option> -->
+                <!-- <mat-option class="select-font" [value]="1">Servicio 1</mat-option>listaServicios -->
+              </mat-select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <span class="spanInput">En la cama*:</span>
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de cama"
               formControlName="numeroCama" type="text" />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de ingreso*:</span>
               <input avisompIng class="form-control" id="avisompIng" type="text" placeholder="Seleccionar fecha"
@@ -107,37 +140,32 @@
               </span>
             </div>
           </div>
-          <div class="col-md-2">
+
+          <div class="col-md-2 divCustomHours">
             <span class="spanInput">Hora de ingreso*:</span>
-            <!-- <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Hora inicial " selected [value]="'-1'">Hora inicial</option>
-              <option class="select-font" [value]="1">10:00:00</option>
-            </select> -->
-
-            <mat-select class="form-control form-control-mat-select" formControlName="horaInicial"
-              [disableOptionCentering]="true" aria-label="Servicio" placeholder="Hora inicial">
-              <!-- <mat-option class="select-font" [value]="''" selected>Hora inicial</mat-option> -->
-              <mat-option class="select-font" [value]="1">10:00:00</mat-option>
-            </mat-select>
+            <div style="display: flex;">
+              <span class="spanInput spanInputCustom">Hora*</span>
+              <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="hora" selected [value]="'0'">00</option>
+                <option class="select-font" [value]="1">01</option>
+              </select>
+            </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 divCustomMinutes">
             <br>
-            <!-- <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
-              <option class="select-font optionSelect" placeholder="Hora final" selected [value]="'-1'">Hora final</option>
-              <option class="select-font" [value]="1">11:00:00</option>
-            </select> -->
-
-            <mat-select class="form-control form-control-mat-select" formControlName="horaFinal"
-              [disableOptionCentering]="true" aria-label="Servicio" placeholder="Hora final">
-              <!-- <mat-option class="select-font" [value]="''" selected>Hora final</mat-option> -->
-              <mat-option class="select-font" [value]="1">11:00:00</mat-option>
-            </mat-select>
+            <div style="display: flex;">
+              <span class="spanInput spanInputCustom">Minutos*</span>
+              <select class="form-control styleselect" formControlName="minutos" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="minutos" selected [value]="'0'">00</option>
+                <option class="select-font" [value]="1">01</option>
+              </select>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-12">
-            <span class="spanInput">Lesiones presentadas por el paciente*:</span>
+            <span class="spanInput">El (la) lesionado presenta*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
               formControlName="lesionesPresentadas" type="text" />
           </div>
@@ -163,7 +191,7 @@
               formControlName="nombreTrabajador" type="text" />
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matricula del(a) Trabajador(a) social*:</span>
+            <span class="spanInput">Matrícula*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
               formControlName="matriculaTrabajador" type="text" />
           </div>
@@ -172,8 +200,8 @@
     </form>
     <div class="row">
       <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
-        <button [disabled]="formEdit.invalid" type="button" (click)="guardar();"
-          class="btn btn-primary buttonL" style="float: right; border: solid 1px #9d2449">
+        <button [disabled]="formEdit.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
+          style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>
         <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;">

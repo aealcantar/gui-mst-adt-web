@@ -122,6 +122,7 @@ export class CargamasivaComponent implements OnInit {
   ngOnInit(): void {
     // console.log('clave usuario',JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']);
     this.idUser = JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']
+   //this.idUser = 276;
     const taghtml = document.querySelector('html');
     taghtml.style.cssText += 'top: 0px;';
 
@@ -298,13 +299,12 @@ export class CargamasivaComponent implements OnInit {
 
           case 3:
             this.ubicacion[index] = new Ubicacion();
-            this.ubicacion[index].cveUbicacion = element[this.confCarga.col1];
-            this.ubicacion[index].descripcionCompleta = element[this.confCarga.col2];
-            this.ubicacion[index].descripcionAbreviada = element[this.confCarga.col3];
-            this.ubicacion[index].tipo = element[this.confCarga.col4];
-            this.ubicacion[index].nivelAtencion = element[this.confCarga.col5];
-            this.ubicacion[index].servicioEspecialidad = element[this.confCarga.col6];
-            this.ubicacion[index].unidadMedica = element[this.confCarga.col7];
+           // this.ubicacion[index].cveUbicacion = element[this.confCarga.col1];
+            this.ubicacion[index].descripcionCompleta = element[this.confCarga.col1];
+            this.ubicacion[index].descripcionAbreviada = element[this.confCarga.col2];
+            this.ubicacion[index].tipo = element[this.confCarga.col3];
+            this.ubicacion[index].servicioEspecialidad = element[this.confCarga.col4];
+            
             break;
           case 4:
             this.responsable[index] = new Responsable();
@@ -396,7 +396,7 @@ export class CargamasivaComponent implements OnInit {
         }
 
       }
-      this.percentDone = 85;
+      this.percentDone = 75;
       if (data.length != 0) {
         setTimeout(() => {
 

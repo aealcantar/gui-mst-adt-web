@@ -142,3 +142,19 @@ textarea {
 .glyphicon-calendar:before {
   display: none;
 }
+
+.divCustomHours {
+  width: 13% !important;
+}
+
+.divCustomMinutes {
+  float: right;
+  width: 15% !important;
+}
+
+.spanInputCustom {
+  margin: auto !important;
+  padding-right: 5px;
+  padding-top: 3px;
+  width: fit-content !important;
+}

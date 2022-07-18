@@ -3,7 +3,9 @@
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
   <div header class="flex justify-content-between aling-intems-center">
-    <span> Control TS - Certificado de defunción </span>
+    <div>
+      <label class="headerText"> Control TS - Certificado de defunción </label>
+    </div>
   </div>
   <div content>
     <div>
@@ -23,32 +25,54 @@
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de defunción*:</span>
               <input
-                *ngIf="!hasCertificado"
                 autocomplete="off"
                 id="fhDefuncion"
+                [placeholder]="'Selecciona fecha'"
+                [maxLength]="10"
+                [minLength]="10"
+                [ngClass]="{
+                  inputError:
+                    (validarCampos && formAdd.get('fechaDefuncion').invalid) ||
+                    (formAdd.get('fechaDefuncion').value.length < 10 &&
+                      validarCampos)
+                }"
+                matInput
                 formControlName="fechaDefuncion"
                 class="form-control"
               />
               <span
-                *ngIf="!hasCertificado"
                 class="glyphicon glyphicon-calendar fondocalendar"
                 aria-hidden="true"
               >
                 <div class="imgCalendar"></div>
               </span>
-              <span class="labelDetalle" *ngIf="hasCertificado">{{
-                certificado?.fechaDefuncion
-              }}</span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('fechaDefuncion').hasError('required')
+                "
+              >
+                <Strong><strong>Campo Obligatorio</strong></Strong>
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('fechaDefuncion').value.length < 10
+                "
+              >
+                <strong>Fecha no Valida</strong>
+              </mat-error>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Hora de defunción*:</span>
-
               <input
-                *ngIf="!hasCertificado"
                 class="form-control"
+                [placeholder]="'Ingresa Hora'"
                 [ngxTimepicker]="hrDefuncionPicker"
+                [maxLength]="8"
+                [minLength]="8"
                 formControlName="horaDefuncion"
                 type="text"
               />
@@ -56,30 +80,60 @@
                 #hrDefuncionPicker
               ></ngx-material-timepicker>
               <span
-                *ngIf="!hasCertificado"
                 class="glyphicon glyphicon-calendar fontIcono fondocalendar"
                 aria-hidden="true"
               >
                 <div class="imgClock"></div>
               </span>
-              <span class="labelDetalle" *ngIf="hasCertificado">{{
-                certificado?.horaDefuncion
-              }}</span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('horaDefuncion').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('horaDefuncion').value.length != 8
+                "
+              >
+                <strong>Formato de hora no valido</strong>
+              </mat-error>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Folio del certificado*:</span>
               <input
-                *ngIf="!hasCertificado"
+                #folioInput
                 class="form-control"
-                formControlName="foliofuncion"
+                [placeholder]="'Ingresa folio'"
+                formControlName="folioCertificacion"
+                [maxLength]="10"
                 type="text"
               />
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('folioCertificacion').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('folioCertificacion').value.length > 10
+                "
+              >
+                <strong
+                  >Maximo de caracteres: 10
+                  {{ folioInput.value.length }}</strong
+                >
+              </mat-error>
             </div>
-            <span class="labelDetalle" *ngIf="hasCertificado">
-              {{ certificado?.folioCertificado }}
-            </span>
           </div>
         </div>
         <div class="row">
@@ -87,37 +141,42 @@
             <div class="form-group">
               <span class="spanInput">Nombre del asegurado*:</span>
               <input
-                *ngIf="!hasCertificado"
+                [placeholder]="'Ingresa nombre del asegurado'"
                 class="form-control"
                 formControlName="nombreAsegurado"
+                [maxlength]="50"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.nombreAsegurado }}
-              </span>
             </div>
+            <mat-error
+              *ngIf="
+                validarCampos &&
+                formAdd.get('nombreAsegurado').hasError('required')
+              "
+            >
+              <strong>Campo Obligatorio</strong>
+            </mat-error>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">No. de Seguridad Social:</span>
               <input
-                *ngIf="!hasCertificado"
+                [disabled]="true"
                 class="form-control"
                 formControlName="nssPaciente"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.nssPaciente }}
-              </span>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Servicio*:</span>
               <mat-select
-                *ngIf="!hasCertificado"
                 class="form-control"
+                [placeholder]="'Seleccionar servicio'"
                 formControlName="cveServicio"
+                #servicios
+                (selectionChange)="onServicioSelect($event)"
               >
                 <mat-option
                   *ngFor="let servicio of listaServicios"
@@ -126,9 +185,14 @@
                   {{ servicio.des_especialidad }}
                 </mat-option>
               </mat-select>
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.cveServicio }}
-              </span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('cveServicio').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
             </div>
           </div>
         </div>
@@ -137,32 +201,50 @@
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha la entrega de certificado*:</span>
               <input
-                *ngIf="!hasCertificado"
+                [placeholder]="'selecciona fecha'"
                 id="entregaCertificado"
                 autocomplete="off"
+                [maxlength]="10"
                 formControlName="fechaDeEntregaDeCertificado"
                 class="form-control"
                 type="text"
               />
               <span
-                *ngIf="!hasCertificado"
                 class="glyphicon glyphicon-calendar fondocalendar"
                 aria-hidden="true"
               >
                 <div class="imgCalendar"></div>
               </span>
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.fechaDeEntregaDeCertificado }}
-              </span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd
+                    .get('fechaDeEntregaDeCertificado')
+                    .hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
+              <mat-error
+              *ngIf="
+                validarCampos &&
+                formAdd
+                  .get('fechaDeEntregaDeCertificado')
+                  .value.length != 10
+              "
+            >
+              <strong>Formato de fecha Invalido</strong>
+            </mat-error>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Hora de entrega del certificado*:</span>
               <input
-                *ngIf="!hasCertificado"
+                [placeholder]="'Ingresa hora'"
                 class="form-control"
                 [ngxTimepicker]="hrEntregaPicker"
+                [maxLength]="8"
                 formControlName="horaDeEntregaDeCertificado"
                 type="text"
               />
@@ -170,29 +252,47 @@
                 #hrEntregaPicker
               ></ngx-material-timepicker>
               <span
-                *ngIf="!hasCertificado"
                 class="glyphicon glyphicon-calendar fontIcono fondocalendar"
                 aria-hidden="true"
               >
                 <div class="imgClock"></div>
               </span>
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.horaDeEntregaDeCertificado }}
-              </span>
             </div>
+            <mat-error
+              *ngIf="
+                validarCampos &&
+                formAdd.get('horaDeEntregaDeCertificado').hasError('required')
+              "
+            >
+              <strong>Campo Obligatorio</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                validarCampos &&
+                formAdd.get('horaDeEntregaDeCertificado').value.length!=8
+              "
+            >
+              <strong>Formato de fecha Invalido</strong>
+            </mat-error>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Funeraria*:</span>
               <input
-                *ngIf="!hasCertificado"
+                [placeholder]="'Ingresa nombre de la funeraria'"
                 class="form-control"
+                [maxlength]="100"
                 formControlName="nombreFuneraria"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.nombreFuneraria }}
-              </span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('nombreFuneraria').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
             </div>
           </div>
         </div>
@@ -203,14 +303,20 @@
                 >Nombre del familiar que recibe certificado*:</span
               >
               <input
-                *ngIf="!hasCertificado"
+                [placeholder]="'Ingresa nombre del familiar'"
                 class="form-control"
+                [maxlength]="200"
                 formControlName="nombreFamiliar"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.nombreFamiliar }}
-              </span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('nombreFamiliar').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
             </div>
           </div>
           <div class="col-md-4">
@@ -219,28 +325,40 @@
                 >Parentesco del familiar que recibe certificado*:</span
               >
               <input
-                *ngIf="!hasCertificado"
                 class="form-control"
+                [placeholder]="'Parentesco del familiar'"
+                [maxLength]="200"
                 formControlName="parentescoFamiliar"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.parentescoFamiliar }}
-              </span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('parentescoFamiliar').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Observaciones*:</span>
               <input
-                *ngIf="!hasCertificado"
+                [placeholder]="'Ingresa observaciones'"
                 class="form-control"
+                [maxlength]="1500"
                 formControlName="observaciones"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.observaciones }}
-              </span>
+              <mat-error
+                *ngIf="
+                  validarCampos &&
+                  formAdd.get('observaciones').hasError('required')
+                "
+              >
+                <strong>Campo Obligatorio</strong>
+              </mat-error>
             </div>
           </div>
         </div>
@@ -249,28 +367,23 @@
             <div class="form-group">
               <span class="spanInput">Nombre del Trabajador social</span>
               <input
-                *ngIf="!hasCertificado"
+                [disabled]="true"
+                matInput
                 class="form-control"
                 type="text"
-                formControlName="trabajadorSocial"
+                formControlName="nombrePersonalElaboro"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.cvePersonalQueElaboro }}
-              </span>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Matricula del Trabajador social</span>
               <input
-                *ngIf="!hasCertificado"
+                [disabled]="false"
                 class="form-control"
-                formControlName="matricula"
+                formControlName="matriculaPersonalElaboro"
                 type="text"
               />
-              <span class="labelDetalle" *ngIf="hasCertificado">
-                {{ certificado?.cvePersonalQueElaboro }}
-              </span>
             </div>
           </div>
         </div>
@@ -282,27 +395,18 @@
             <button
               type="button"
               id="btnCancelarCertificado"
-              class="btn btn-danger"
+              class="btn btn-danger btn-sm"
               (click)="cancelar(cancelarModal)"
             >
               Cancelar</button
             ><button
-              class="btn btn-primary"
+              #btnGuardar
+              [disabled]="validarCampos && formAdd.invalid"
+              class="btn btn-primary btn-sm"
               id="btnGuardarCertificado"
-              [disabled]="formAdd.invalid"
               type="submit"
             >
               Guardar
-            </button>
-          </div>
-          <div class="col-12 text-right" *ngIf="hasCertificado">
-            <button
-              class="btn btn-primary"
-              (click)="imprimir()"
-              id="btnGuardarCertificado"
-              type="button"
-            >
-              Imprimir
             </button>
           </div>
         </div>
@@ -316,11 +420,12 @@
   <div class="col-sm m-3 text-center">
     <img src="assets/images/Group 2082.png" class="Group-2082" alt="" />
     <div class="modal-title Atencin pt-3">Atención</div>
-
   </div>
   <div class="lineaSeparador"></div>
   <div class="col-sm text-center mt-4 mb-4">
-    <label class="tituloModal fontEmergenteTitle">¿Desea salir sin guardar</label>
+    <label class="tituloModal fontEmergenteTitle"
+      >¿Desea salir sin guardar</label
+    >
     <br />
     <label class="fontEmergenteTitle"> los cambios?</label>
     <br /><br />
@@ -329,7 +434,12 @@
     <button class="btn btn-danger btuser" type="button" mat-dialog-close>
       Cancelar
     </button>
-    <button type="button" (click)="cancelarSinGuardar()" class="btn btn-primary  btnGuardar" mat-dialog-close>
+    <button
+      type="button"
+      (click)="cancelarSinGuardar()"
+      class="btn btn-primary btnGuardar"
+      mat-dialog-close
+    >
       Aceptar
     </button>
   </div>

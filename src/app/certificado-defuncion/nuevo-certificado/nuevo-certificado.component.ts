@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
@@ -26,6 +33,9 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   usuario!: Usuario;
   paciente!: Paciente;
   hasCertificado: boolean = false;
+  validarCampos: boolean = false;
+  @ViewChild('btnGuardar') btnGuardar: ElementRef;
+
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -35,8 +45,9 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   ) {
     this.formAdd = formBuilder.group({
       fechaDefuncion: new FormControl('', Validators.required),
+      nombreServicio: new FormControl(''),
       horaDefuncion: new FormControl('', Validators.required),
-      foliofuncion: new FormControl('', Validators.required),
+      folioCertificacion: new FormControl('', Validators.required),
       nssPaciente: new FormControl(''),
       cveServicio: new FormControl('', Validators.required),
       nombreAsegurado: new FormControl('', Validators.required),
@@ -46,9 +57,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       nombreFamiliar: new FormControl('', Validators.required),
       parentescoFamiliar: new FormControl('', Validators.required),
       observaciones: new FormControl('', Validators.required),
-      trabajadorSocial: new FormControl(''),
-      matricula: new FormControl(''),
+      nombrePersonalElaboro: new FormControl(''),
+      matriculaPersonalElaboro: new FormControl(''),
       cvePersonalQueElaboro: new FormControl(''),
+      fechaDeAlta: new FormControl(''),
+      fechaDeActualizacion: new FormControl(''),
     });
   }
   ngAfterViewInit(): void {
@@ -84,6 +97,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onServicioSelect(select: MatSelectChange) {
+    const nombreDeServicio = select.source.triggerValue;
+    this.formAdd.controls['nombreServicio'].setValue(nombreDeServicio);
+  }
+
   listaServicios: Array<any> = [];
   ngOnInit(): void {
     const userTemp = sessionStorage.getItem('usuario') || '';
@@ -94,61 +112,73 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       this.usuario = new Usuario();
       this.usuario.cveUsuario = 12;
       this.usuario.matricula = 'XXXX-XXXX-XX';
-      this.usuario.strNombres = 'Alan Isaac Villafan';
+      this.usuario.strNombres = 'Alan Isaac';
+      this.usuario.strApellidoP = 'Villafan';
+      this.usuario.strApellidoM = 'Flores';
     }
     this.cargarServicios();
-    this.formAdd.get('trabajadorSocial').setValue(this.usuario.strNombres);
-    this.formAdd.get('matricula').setValue(this.usuario.matricula);
+    this.formAdd
+      .get('nombrePersonalElaboro')
+      .setValue(
+        `${this.usuario.strNombres} ${this.usuario.strApellidoP} ${this.usuario.strApellidoM}`
+      );
+    this.formAdd
+      .get('matriculaPersonalElaboro')
+      .setValue(this.usuario.matricula);
     this.formAdd.get('nssPaciente').setValue(this.paciente.nss);
     this.formAdd.get('cvePersonalQueElaboro').setValue(this.usuario.cveUsuario);
+    this.formAdd.controls['nombrePersonalElaboro'].disable();
+    this.formAdd.controls['nssPaciente'].disable();
+    this.formAdd.controls['matriculaPersonalElaboro'].disable();
     //cvePersonalQueElaboro
   }
   async cargarServicios() {
     this.cronicaGrupalService.getCatServicios().subscribe((servicios) => {
+      console.log(servicios);
       this.listaServicios = servicios;
     });
   }
-  imprimir() {
-    if (this.certificado !== undefined) {
-      this.certificadoService.imprimir(this.certificado,this.usuario.matricula,this.usuario.strNombres).subscribe(
-        (response) => {
-          console.log(response);
-          const file = new Blob([response], { type: 'application/pdf' });
-          const url = window.URL.createObjectURL(file);
-          window.open(url);
-        },
-        (error) => {
-          console.log(`Error en certificado de defuncnion`, error);
-        }
-      );
-    }
-  }
-  guardar() {
+
+  async guardar() {
     if (this.formAdd.valid) {
-      const certificado = this.formAdd.value as CertificadoDefuncion;
-      console.log(certificado);
-      //  this.certificado = certificado;
-      this.hasCertificado = true;
-      this.certificadoService.insert(certificado).subscribe((response) => {
-        console.log(response);
-        this.certificado = response.certificadoDeDefuncion;
-
-        this.hasCertificado = true;
-      });
+      this.validarCampos = false;
+      const date = moment().format('YYYY-MM-DD HH:mm:ss');
+      this.formAdd.controls['fechaDeAlta'].setValue(date);
+      this.formAdd.controls['fechaDeActualizacion'].setValue(date);
+      const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
+      this.certificadoService
+        .insert(certificado)
+        .subscribe(async (response) => {
+          this.certificado = response;
+          await sessionStorage.removeItem('certificadoDefuncion');
+          sessionStorage.setItem(
+            'certificadoDefuncion',
+            await JSON.stringify(this.certificado)
+          );
+          this.router.navigate(['detalle-certificado-defuncion']);
+        });
     } else {
-      console.log(
-        `'formulario no valido' ${JSON.stringify(this.formAdd.value)}`
-      );
+      this.validarCampos = true;
+      this.onFormChanges();
     }
   }
-  cancelar(modal:any) {
+  onFormChanges() {
+    this.formAdd.valueChanges.subscribe((change) => {
+      if (this.formAdd.valid) {
+        this.validarCampos = false;
+      } else {
+        console.log('el fomulario sigue siendo invalido', this.formAdd.value);
+      }
+    });
+  }
+  cancelar(modal: any) {
     this.dialog.open(modal, {
-      width: "450px",
-     maxHeight: "350px"
-   });
+      width: '450px',
+      maxHeight: '350px',
+    });
   }
 
-  cancelarSinGuardar(){
-    
+  cancelarSinGuardar() {
+    this.router.navigate(['consulta-certificado-defuncion']);
   }
 }

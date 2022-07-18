@@ -46,6 +46,9 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
     this.dtOptions = {
       order: [[2, 'desc']],
       ordering: false,
@@ -55,7 +58,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-    this.authService.setProjectObs("Trabajo social");
     this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
       (cronicasGrupales: any) => {
         this.cronicasGrupales = [];
@@ -101,7 +103,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
+    this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
       (grupos) => {
         this.grupos = grupos;
         console.log("GRUPOS: ", this.grupos);
@@ -110,7 +112,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatLugar('CS01').toPromise().then(
+    this.cronicaGrupalService.getCatLugar('15').toPromise().then(
       (lugares) => {
         this.lugares = lugares;
         console.log("LUGARES: ", this.lugares);
@@ -204,7 +206,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   addCronica() {
-    this.router.navigate(["nuevaCronica"], { skipLocationChange: true });
+    this.router.navigate(["nuevaCronica"]);
   }
 
   irDetalle(cronicaGrupal: any) {

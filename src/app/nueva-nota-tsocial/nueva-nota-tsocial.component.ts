@@ -170,7 +170,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
   }
 
   salirModal() {
-    this.router.navigateByUrl("/consulta-notas", { skipLocationChange: true });
+    this.router.navigateByUrl("/consulta-notas");
     $('#content').modal('hide');
   }
 
@@ -231,7 +231,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
   //   null,
   // );
   // setTimeout(() => {
-  //   this.router.navigate(["consulta-nota"], { skipLocationChange: true });
+  //   this.router.navigate(["consulta-nota"]);
   // }, 2000);
 
   // irConsultaNota() {
@@ -240,6 +240,12 @@ export class NuevaNotaTSocialComponent implements OnInit {
   //   }
   //   this.router.navigate(["consulta-nota"], { queryParams: params, skipLocationChange: true });
   // }
+  
+  onBlur() {
+    if(typeof this.formNuevaNota.get('diagnosticoMedico').value === 'string') {
+      this.formNuevaNota.get('diagnosticoMedico').patchValue(null);
+    }
+  }
 
   private _filter(value: string): string[] {
     const filterValue = value ? value.toLowerCase() : '';

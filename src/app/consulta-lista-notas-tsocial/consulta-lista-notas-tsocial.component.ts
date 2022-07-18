@@ -46,6 +46,9 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.authService.setProjectObs("Trabajo Social");
+    }, 0);
     this.datesForm = this.fb.group({
       fechaInicial: [null, Validators.required],
       fechaFinal: [null, Validators.required],

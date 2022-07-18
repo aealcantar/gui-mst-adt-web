@@ -6,7 +6,6 @@
     <div [innerHTML]="alertMensaje"></div>
   </div>
 </div>
-
 <!-- Modal btn cancelar eduardo Flores-->
 <div class="modal fade" role="dialog" id="content" #content>
   <div class="modal-dialog" role="document">
@@ -19,17 +18,14 @@
       </div>
       <div class="line62" style="border-bottom: black;"></div>
       <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
-
         <label class="titulo" style="font-weight: 500; font-size: 24px;
           line-height: 21.94px; text-align: center;">¿Desea salir sin guardar</label>
         <br>
         <label style="font-weight: 500; font-size: 24px;
           line-height: 21.94px; text-align: center;"> los cambios?</label>
-
       </div>
       <div class="col-md12 row" style="width:495px; height: 118px; text-align: center; margin: auto;
           padding: 15px; background-color: #FAFAFA; border-radius: 10px;">
-
         <div class="col-md10" width="495px" height="118px" aling="center">
           <button type="button" class="btn btn-danger buttonL" style="border: solid 1px #b38e5d;" (click)="cancelar()">
             Cancelar
@@ -45,7 +41,6 @@
   </div>
 </div>
 <!-- fin modal btn cancelar-->
-
 <div style="margin-bottom: 1%"></div>
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
@@ -61,7 +56,6 @@
       </div>
     </div>
   </div>
-
   <div content>
     <div>
       <span class="instrucciones">
@@ -74,30 +68,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Tipo de nota*:</span>
-
-              <!-- <select class="form-control select"
+              <mat-select class="form-control form-control-mat-select"
                 [ngClass]="{'form-control-error': formNuevaNota.controls?.idTipoNota?.dirty && formNuevaNota.controls?.idTipoNota?.errors }"
-                formControlName="idTipoNota" id="idTipoNota" aria-label="Servicio">
-                <option class="select-font" [value]="''" selected>Ingresar tipo de nota</option>
-                <option class="select-font" [value]="item.id" *ngFor="let item of catTiposNotas">
-                  {{ item.descripcion }}
-                </option>
-              </select> -->
-
-              <mat-select
-                class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': formNuevaNota.controls?.idTipoNota?.dirty && formNuevaNota.controls?.idTipoNota?.errors }"
-                id="idTipoNota"
-                formControlName="idTipoNota"
-                [disableOptionCentering]="true"
-                aria-label="Servicio"
-              >
+                id="idTipoNota" formControlName="idTipoNota" [disableOptionCentering]="true" aria-label="Servicio">
                 <mat-option class="select-font" [value]="''" selected>Ingresar tipo de nota</mat-option>
                 <mat-option class="select-font" [value]="item.id" *ngFor="let item of catTiposNotas">
                   {{ item.descripcion }}
                 </mat-option>
               </mat-select>
-
               <small *ngIf="
                   formNuevaNota.controls?.idTipoNota?.dirty &&
                   formNuevaNota.controls?.idTipoNota?.errors
@@ -106,31 +84,12 @@
               </small>
             </div>
           </div>
-
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Red de apoyo con la que cuenta el paciente*:</span>
-
-              <!-- <select [ngClass]="{
-                  'form-control-error':
-                    formNuevaNota.controls?.idRedApoyo?.dirty &&
-                    formNuevaNota.controls?.idRedApoyo?.errors
-                }" class="form-control select" formControlName="idRedApoyo" id="idRedApoyo" style="background-position-y: 5px"
-                aria-label="Servicio">
-                <option class="select-font" [value]="''" selected>Seleccionar red de apoyo</option>
-                <option class="select-font" [value]="item.id" *ngFor="let item of catRedesApoyo">
-                  {{ item.descripcion }}
-                </option>
-              </select> -->
-
-              <mat-select
-                class="form-control form-control-mat-select"
+              <mat-select class="form-control form-control-mat-select"
                 [ngClass]="{'form-control-error':formNuevaNota.controls?.idRedApoyo?.dirty &&formNuevaNota.controls?.idRedApoyo?.errors}"
-                id="idRedApoyo"
-                formControlName="idRedApoyo"
-                [disableOptionCentering]="true"
-                aria-label="Servicio"
-              >
+                id="idRedApoyo" formControlName="idRedApoyo" [disableOptionCentering]="true" aria-label="Servicio">
                 <mat-option class="select-font" [value]="''" selected>Seleccionar red de apoyo</mat-option>
                 <mat-option class="select-font" [value]="item.id" *ngFor="let item of catRedesApoyo">
                   {{ item.descripcion }}
@@ -145,23 +104,21 @@
               </small>
             </div>
           </div>
-
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Actividad técnica*:</span>
-
               <mat-select [ngClass]="{
                 'form-control-error':
                   formNuevaNota.controls?.idActividadTecnica?.dirty &&
                   formNuevaNota.controls?.idActividadTecnica?.errors
-              }" class="form-control form-control-mat-select" id="idActividadTecnica" formControlName="idActividadTecnica" [disableOptionCentering]="true"
-              style="background-position-y: 5px" aria-label="Servicio">
+              }" class="form-control form-control-mat-select" id="idActividadTecnica"
+                formControlName="idActividadTecnica" [disableOptionCentering]="true" style="background-position-y: 5px"
+                aria-label="Servicio">
                 <mat-option class="select-font" [value]="''">Seleccionar actividad técnica</mat-option>
                 <mat-option class="select-font" [value]="item.id" *ngFor="let item of catActividadesTecnicas">
                   {{ item.descripcion }}
                 </mat-option>
               </mat-select>
-
               <small *ngIf="
                   formNuevaNota.controls?.idActividadTecnica?.dirty &&
                   formNuevaNota.controls?.idActividadTecnica?.errors
@@ -170,14 +127,16 @@
               </small>
             </div>
           </div>
-          <div  style="margin-left: -1.1% ">
+          <div style="margin-left: -1.1% ">
             <div class="col-md-4" style="margin-left: 9px;">
               <div class="form-group">
                 <span class="spanInput ">Diagnóstico médico*:</span>
                 <img src="../../assets/icons/select-indicador.svg" class="iconoSelect" alt="">
-                <input type=" input" class="form-control select" placeholder="Seleccionar diagnóstico médico" aria-label="Number"
-                  matInput formControlName="diagnosticoMedico" [matAutocomplete]="auto" (keyup)="handleChangeDiagnostico();" maxlength="19">
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText" (optionSelected)="onSelectionChanged($event)">
+                <input type=" input" class="form-control select" placeholder="Seleccionar diagnóstico médico"
+                  aria-label="Number" matInput formControlName="diagnosticoMedico" [matAutocomplete]="auto"
+                  (keyup)="handleChangeDiagnostico();" maxlength="19" (blur)="onBlur()">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
+                  (optionSelected)="onSelectionChanged($event)">
                   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option?.nDiagnosticoMedicoCie}}
                   </mat-option>
@@ -185,7 +144,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <div class="separador"></div>
       </div>
@@ -198,9 +156,8 @@
                 'form-control-error':
                   formNuevaNota.controls?.redaccion?.dirty &&
                   formNuevaNota.controls?.redaccion?.errors
-              }" class="form-control" id="redaccion"
-              placeholder="Ingresar redaci&oacute;n cronol&oacute;gica" style="height: 65px"
-              formControlName="redaccion" #objetivosRef maxlength="4096" required rows="4">
+              }" class="form-control" id="redaccion" placeholder="Ingresar redaci&oacute;n cronol&oacute;gica"
+              style="height: 65px" formControlName="redaccion" #objetivosRef maxlength="4096" required rows="4">
             </textarea>
             <span class="spanCaracteres">{{ objetivosRef.value?.length }} /
               {{ objetivosRef.getAttribute("maxlength") }} caracteres</span>
@@ -212,16 +169,14 @@
               Campo obligatorio
             </small>
           </div>
-
           <div class="col-md-12 form-group">
             <span class="spanInput">Diagnóstico social*:</span>
             <textarea [ngClass]="{
                 'form-control-error':
                   formNuevaNota.controls?.diagnostico?.dirty &&
                   formNuevaNota.controls?.diagnostico?.errors
-              }" class="form-control" id="diagnostico" placeholder="Ingresar diagnóstico social"
-              style="height: 65px" formControlName="diagnostico" #desarrolloRef maxlength="4096"
-              rows="4"></textarea>
+              }" class="form-control" id="diagnostico" placeholder="Ingresar diagnóstico social" style="height: 65px"
+              formControlName="diagnostico" #desarrolloRef maxlength="4096" rows="4"></textarea>
             <span class="spanCaracteres">{{ desarrolloRef.value?.length }} /
               {{ desarrolloRef.getAttribute("maxlength") }} caracteres</span>
             <br>
@@ -250,3 +205,4 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
+
