@@ -9,7 +9,7 @@ import { HelperCatalogosService } from 'src/app/services/catalogos/helper.catalo
 import { HelperMensajesService } from 'src/app/services/helper.mensajes.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from "@angular/material/icon";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CargamasivaComponent } from '../cargamasiva/cargamasiva.component';
@@ -22,6 +22,7 @@ declare var $: any;
   styleUrls: ['./carga.component.css']
 })
 export class CargaComponent implements OnInit {
+  idOrigen: string;
 
   idUser: number = 1; // 5 = Fer   33 = Ame
   cargaCatalogos: CargasCatalogos;
@@ -39,14 +40,16 @@ export class CargaComponent implements OnInit {
   blnContinuar: boolean = false;
 
   constructor(private authService: AuthService,
-    private router: Router,
+    private router: Router, private activerouter: ActivatedRoute,
     private _CargasService: CargasService,
     private _Mensajes: HelperMensajesService,
     private matIconRegistry: MatIconRegistry, private _HelperCatalogos: HelperCatalogosService,
     private domSanitizer: DomSanitizer,
     public dialog: MatDialog) {
-      this.authService.userLogged$.next(true);
-      this.authService.isAuthenticatedObs$.next(true);
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+
+    this.idOrigen = this.activerouter.snapshot.paramMap.get('idOrigen');
     this.matIconRegistry.addSvgIcon("circle_naranja", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse1.svg"));
     this.matIconRegistry.addSvgIcon("circle_rojo", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse2.svg"));
     this.matIconRegistry.addSvgIcon("circle_verde", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/images/Ellipse3.svg"));
@@ -65,6 +68,9 @@ export class CargaComponent implements OnInit {
     this.obtenerEstatusCarga();
     this.blnDeshabilitar = false;
 
+
+
+
     setTimeout(() => {
       $('#tblCatalogos').DataTable({
         "paging": false,
@@ -75,7 +81,7 @@ export class CargaComponent implements OnInit {
 
     }, 3000);
 
-    if(localStorage.getItem('origen')){
+    if (localStorage.getItem('origen')) {
       console.log('quita origen');
       localStorage.removeItem('origen');
     }
@@ -126,7 +132,7 @@ export class CargaComponent implements OnInit {
 
     dialogo1.afterClosed().subscribe(art => {
       console.log("result: ", art);
-      if (art?.iscancel == false){
+      if (art?.iscancel == false) {
 
         this.obtenerEstatusCarga(true);
 
@@ -141,6 +147,7 @@ export class CargaComponent implements OnInit {
   }
 
   public btnAccionesCatalogos(catalogo: CatalogoData) {
+    localStorage.setItem('origen',this.router.routerState.snapshot.url);
     switch (catalogo.idCatalogos) {
       case 3:
         if (catalogo.estatusCarga.cveIdEstatus == 1) {
@@ -172,7 +179,7 @@ export class CargaComponent implements OnInit {
   }
 
   //Estatus Cargas
-  private obtenerEstatusCarga(mensajeCarga:boolean = false): void {
+  private obtenerEstatusCarga(mensajeCarga: boolean = false): void {
     this.blnErrores = false;
     this.blnPendientes = false;
     this.blnCompletos = false;
@@ -202,7 +209,7 @@ export class CargaComponent implements OnInit {
       });
   }
 
-  private validaCargaCompleta(lst: CatalogoData[],mensajeCarga:boolean = false) {
+  private validaCargaCompleta(lst: CatalogoData[], mensajeCarga: boolean = false) {
     let tot = lst.length;
     let completos = 0;
     this.blnCompletos = false;
@@ -224,10 +231,13 @@ export class CargaComponent implements OnInit {
     }
     if (tot == completos) {
       this.blnContinuar = true;
-      if(mensajeCarga){
+      if (mensajeCarga) {
         this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
       }
 
+      if (this.idOrigen === '0' && this.blnContinuar) {
+        this.router.navigate(["/busqueda"]);
+      }
     }
   }
 
