@@ -62,6 +62,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       cvePersonalQueElaboro: new FormControl(''),
       fechaDeAlta: new FormControl(''),
       fechaDeActualizacion: new FormControl(''),
+      indActivo: new FormControl(0),
     });
   }
   ngAfterViewInit(): void {
@@ -145,10 +146,18 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       const date = moment().format('YYYY-MM-DD HH:mm:ss');
       this.formAdd.controls['fechaDeAlta'].setValue(date);
       this.formAdd.controls['fechaDeActualizacion'].setValue(date);
+      //convertif fechas a hora aceptada por el servidor
+      const horaDefuncnion = moment(
+        this.formAdd.controls['horaDefuncion'].value
+      ,'hh:mm A').format('hh:mm:ss');
+      const horaEntrega = moment(
+        this.formAdd.controls['horaDeEntregaDeCertificado'].value ,'hh:mm A'
+      ).format('hh:mm:ss');
+      this.formAdd.controls['horaDefuncion'].setValue(horaDefuncnion);
+      this.formAdd.controls['horaDeEntregaDeCertificado'].setValue(horaEntrega);
       const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
-      this.certificadoService
-        .insert(certificado)
-        .subscribe(async (response) => {
+      this.certificadoService.insert(certificado).subscribe(
+        async (response) => {
           this.certificado = response;
           await sessionStorage.removeItem('certificadoDefuncion');
           sessionStorage.setItem(
@@ -156,7 +165,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
             await JSON.stringify(this.certificado)
           );
           this.router.navigate(['detalle-certificado-defuncion']);
-        });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     } else {
       this.validarCampos = true;
       this.onFormChanges();
