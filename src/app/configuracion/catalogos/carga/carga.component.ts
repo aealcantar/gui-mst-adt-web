@@ -147,6 +147,7 @@ export class CargaComponent implements OnInit {
   }
 
   public btnAccionesCatalogos(catalogo: CatalogoData) {
+    localStorage.setItem('origen',this.router.routerState.snapshot.url);
     switch (catalogo.idCatalogos) {
       case 3:
         if (catalogo.estatusCarga.cveIdEstatus == 1) {

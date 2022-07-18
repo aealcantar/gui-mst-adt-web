@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterState } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth-service.service';
 
@@ -76,6 +76,7 @@ export class HeaderMenuComponent implements OnInit {
         ruta = '/login';
         break;
     }
+    localStorage.setItem('origen',this.router.routerState.snapshot.url);
     this.router.navigate([ruta]);
   }
 
