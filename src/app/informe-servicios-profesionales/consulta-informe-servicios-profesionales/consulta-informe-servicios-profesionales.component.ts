@@ -1,6 +1,6 @@
 // TODO: Eliminar datos prueba
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
 
 @Component({
@@ -56,6 +56,23 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         "citado": "12",
         }
     ];
+
+    // getters
+    get lugar(): AbstractControl {
+        return this.formularioBusqueda.get('lugar')
+    }
+
+    get responsable(): AbstractControl {
+        return this.formularioBusqueda.get('responsable')
+    }
+
+    get servicio(): AbstractControl {
+        return this.formularioBusqueda.get('servicio')
+    }
+
+    get turno(): AbstractControl {
+        return this.formularioBusqueda.get('turno')
+    }
 
     constructor() { }
 

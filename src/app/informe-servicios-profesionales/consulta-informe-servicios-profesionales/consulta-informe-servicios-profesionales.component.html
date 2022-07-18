@@ -53,7 +53,7 @@
                         <select class="form-control" aria-label="Servicio" formControlName="lugar">
                             <option class="select-font" [value]="''" selected>
                                 Seleccionar
-                            </option>
+                            </option>'
                             <option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
                                 {{ lugar.des_completa_ubicacion }}
                             </option>
@@ -103,8 +103,7 @@
             </div>
         </div>
         <div class="formInfo">
-            <!-- <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados"> -->
-            <ng-container>
+            <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
                 <div class="container-busqueda">
                     <div class="row">
                         <div class="col-md-12">
@@ -194,12 +193,12 @@
                 </div>
             </ng-container>
         </div>
-        <!-- <ng-template #mostrarSeccionSinResultados>
+        <ng-template #mostrarSeccionSinResultados>
             <div class="row">
                 <div class="div-container-image">
                     <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
                 </div>
             </div>
-        </ng-template> -->
+        </ng-template>
     </section>
 </app-card-template>

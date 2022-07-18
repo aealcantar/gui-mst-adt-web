@@ -206,3 +206,37 @@ th {
     -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
 }
+
+
+.spanCaracteres {
+    font-size: 14px;
+    font-weight: 200;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.redColor {
+    color: #E10000 !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 45px;
+    /* or 450% */
+    display: flex;
+    align-items: center;
+}
+
+.Campo-obligatorio {
+    width: 101px;
+    height: 14px;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #e10000;
+}
