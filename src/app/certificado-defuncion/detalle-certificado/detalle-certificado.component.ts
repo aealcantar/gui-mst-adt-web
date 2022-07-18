@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { CertificadoDefuncionService } from 'src/app/service/certificado-defuncion.service';
@@ -29,8 +30,22 @@ export class DetalleCertificadoComponent implements OnInit, OnDestroy {
     this.certificado = await JSON.parse(
       sessionStorage.getItem('certificadoDefuncion')
     );
+    const hrDefuncion = moment(
+      this.certificado.horaDefuncion,
+      'hh:mm:ss'
+    ).format('hh:mm A');
+
+    const hrEntrega= moment(
+      this.certificado.horaDeEntregaDeCertificado,
+      'hh:mm:ss'
+    ).format('hh:mm A');
+
+    this.certificado.horaDefuncion = hrDefuncion;
+    this.certificado.horaDeEntregaDeCertificado = hrEntrega;
+
+    
   }
-  cancelarSinGuardar() {}
+
 
   imprimir() {
     if (this.certificado !== undefined) {
