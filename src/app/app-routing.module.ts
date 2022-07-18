@@ -219,11 +219,14 @@ const routes: Routes = [
   // informe servicios profesionales
   {
     path: 'consulta-informe-servicios-profesionales', 
-    component: ConsultaInformeServiciosProfesionalesComponent
+    component: ConsultaInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+
   },
   {
     path: 'detalle-informe-servicios-profesionales', 
-    component: DetalleInformeServiciosProfesionalesComponent
+    component: DetalleInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
   },
 ];
 
