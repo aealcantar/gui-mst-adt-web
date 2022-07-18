@@ -99,6 +99,7 @@ import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certifi
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
+import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
 
 registerLocaleData('es');
 
@@ -162,6 +163,7 @@ registerLocaleData('es');
     NuevoCertificadoComponent,
     DetalleCertificadoComponent,
     ConsultaCertificadoDefuncionComponent,
+    ConsultaMpAdministracionComponent,
   ],
   imports: [
     BrowserModule,

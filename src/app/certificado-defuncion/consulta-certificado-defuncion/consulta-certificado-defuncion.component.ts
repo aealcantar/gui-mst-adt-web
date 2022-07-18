@@ -93,20 +93,22 @@ export class ConsultaCertificadoDefuncionComponent
       )
       .subscribe((response) => {
         this.datosBusqueda = response;
+        if (this.datosBusqueda.length == 0) {
+          this.muestraAlerta(
+            'Valide los filtros',
+            'alert-warning',
+            'Sin resultados'
+          );
+        }
       });
 
-    if (this.datosBusqueda.length == 0) {
-      this.muestraAlerta(
-        'Valide los filtros',
-        'alert-warning',
-        'Sin resultados'
-      );
-    }
+   
   }
 
   limpiar() {
     this.formAdd.controls['consultaDefuncionIni'].setValue('');
     this.formAdd.controls['consultaDefuncionFin'].setValue('');
+    this.datosBusqueda = [];
   }
   sortBy(columnaId: string, order: string, type: string) {
     console.log(columnaId, order, type);

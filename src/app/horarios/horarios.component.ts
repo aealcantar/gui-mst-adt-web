@@ -173,7 +173,7 @@ export class HorariosComponent implements OnInit {
     //this.obtenerHorarioporDia(this.dia);
   }
 
-  private obtenerHorarioporUbicacionDia(cveUbicacion: number, dia: string) {
+  private obtenerHorarioporUbicacionDia(cveUbicacion: number, dia: string, update: boolean = false) {
     this.msjLoading("Cargando...");
     this.diaSeleccionado.horarios = [];
     this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
@@ -200,6 +200,9 @@ export class HorariosComponent implements OnInit {
               dia: index + 1,
               inhabil: true
             };
+            if(update){
+              this.validarDia();
+            }
             // this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
           }
           Swal.close();
@@ -237,7 +240,7 @@ export class HorariosComponent implements OnInit {
 
 
   private obtenerHorarioporDia(cveUbicacion: number, dia: string) {
-    debugger
+    // debugger
     this.diaSeleccionado.horarios = [];
     this.msjLoading("Cargando horarios...");
     this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
@@ -327,7 +330,7 @@ export class HorariosComponent implements OnInit {
   }
 
   updateEstatusDia() {
-    debugger
+    // debugger
     this.msjLoading(this.lblBtnHabilitar + "...");
     this.request = new HorarioRequest();
     this.request.idUbicacion = Number(this.cveUbicacion);
@@ -350,12 +353,11 @@ export class HorariosComponent implements OnInit {
       switch (resp.body.estatus) {
         case true:
 
-
           console.log("pintar alerta de exito", resp.body.mensaje);
           this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, resp.body.mensaje, this._Mensajes.EXITO);
           // console.log('dia',this.dia);
           // this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
-          this.obtenerHorarioporUbicacionDia(this.cveUbicacion, this.request.dia);
+          this.obtenerHorarioporUbicacionDia(this.cveUbicacion, this.request.dia, true);//Se pasa true, cuando se actualiza un día, para evaluar el estatus del día (si está vacío solo se habilita el botón)
 
           Swal.close();
           break;
