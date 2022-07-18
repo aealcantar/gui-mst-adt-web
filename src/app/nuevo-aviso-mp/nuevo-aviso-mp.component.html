@@ -11,15 +11,15 @@
         Por favor capture los siguientes datos:
       </span>
     </div>
-    <form novalidate class="formInfo" [formGroup]="formEdit">
+    <form novalidate class="formInfo" [formGroup]="editForm">
       <div class="container seccion">
         <div class="row">
 
           <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input avisompFec class="form-control" id="avisompFec" type="text" placeholder="Seleccionar fecha"
-                formControlName="fecha">
+              <input fechaAvisoMP class="form-control" id="fechaAvisoMP" type="text" placeholder="Seleccionar fecha"
+                formControlName="fechaRegistroAviso">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -31,7 +31,7 @@
               <span class="spanInput">Estado*:</span>
               <mat-select
                 class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': submitted && formEdit.controls.idEstado.errors}"
+                [ngClass]="{'form-control-error': submitted && editForm.controls.idEstado.errors}"
                 id="idEstado" formControlName="idEstado"
                 [disableOptionCentering]="true" 
                 aria-label="Servicio"
@@ -42,7 +42,7 @@
                   {{ estado.des_nombre_completo}}
                 </mat-option>
               </mat-select>
-              <small *ngIf="submitted && formEdit.controls.idEstado.errors"
+              <small *ngIf="submitted && editForm.controls.idEstado.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
@@ -54,7 +54,7 @@
               <span class="spanInput">Alcaldía o municipio*:</span>
               <mat-select
                 class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': submitted && formEdit.controls.alcaldia.errors}"
+                [ngClass]="{'form-control-error': submitted && editForm.controls.alcaldia.errors}"
                 id="alcaldia" formControlName="alcaldia"
                 [disableOptionCentering]="true" 
                 aria-label="Servicio"
@@ -64,7 +64,7 @@
                   {{ municipio.des_municipio}}
                 </mat-option>
               </mat-select>
-              <small *ngIf="submitted && formEdit.controls.alcaldia.errors"
+              <small *ngIf="submitted && editForm.controls.alcaldia.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
@@ -93,17 +93,19 @@
                 <option class="select-font" [value]="1">Hospital 1</option>
               </select> -->
 
-              <mat-select class="form-control form-control-mat-select" id="hospital" formControlName="nombreHospital"
+              <!-- <mat-select class="form-control form-control-mat-select" id="hospital" formControlName="idUnidadHospital"
                 [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar hospital">
-                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option> -->
+                <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option>
                 <mat-option class="select-font" [value]="1">Hospital 1</mat-option>
-              </mat-select>
+              </mat-select> -->
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar hospital"
+              formControlName="idUnidadHospital" type="text" />
             </div>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Ubicado en*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar ubicación"
-              formControlName="agenciaMP" type="text" />
+              formControlName="ubicacionHospital" type="text" />
           </div>
         </div>
 
@@ -111,7 +113,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">En el servicio de*:</span>
-              <mat-select class="form-control form-control-mat-select" id="servicio" formControlName="servicio"
+              <mat-select class="form-control form-control-mat-select" id="cveServicio" formControlName="cveServicio"
                 [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
                 <mat-option [value]="''" selected class="select-font optionSelect ">
                   Seleccionar servicio
@@ -128,12 +130,12 @@
           <div class="col-md-2">
             <span class="spanInput">En la cama*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de cama"
-              formControlName="numeroCama" type="text" />
+              formControlName="numCama" type="text" />
           </div>
           <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de ingreso*:</span>
-              <input avisompIng class="form-control" id="avisompIng" type="text" placeholder="Seleccionar fecha"
+              <input fechaIngresoAvisoMP class="form-control" id="fechaIngresoAvisoMP" type="text" placeholder="Seleccionar fecha"
                 formControlName="fechaIngreso">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
@@ -145,20 +147,46 @@
             <span class="spanInput">Hora de ingreso*:</span>
             <div style="display: flex;">
               <span class="spanInput spanInputCustom">Hora*</span>
-              <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+              <mat-select class="form-control form-control-mat-select" id="horaIngresoTmp" formControlName="horaIngresoTmp"
+                [disableOptionCentering]="true" aria-label="Servicio" (selectionChange)="horaIngresoChange();">
+                <mat-option [value]="00" selected class="select-font optionSelect ">00</mat-option>
+                <mat-option [value]="01" selected class="select-font optionSelect ">01</mat-option>
+                <mat-option [value]="02" selected class="select-font optionSelect ">02</mat-option>
+                <mat-option [value]="03" selected class="select-font optionSelect ">03</mat-option>
+                <mat-option [value]="04" selected class="select-font optionSelect ">04</mat-option>
+                <mat-option [value]="05" selected class="select-font optionSelect ">05</mat-option>
+              </mat-select>
+              <!-- <select class="form-control styleselect" formControlName="horaIngresoTmp" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="hora" selected [value]="'0'">00</option>
                 <option class="select-font" [value]="1">01</option>
-              </select>
+                <option class="select-font" [value]="1">02</option>
+                <option class="select-font" [value]="1">03</option>
+                <option class="select-font" [value]="1">04</option>
+                <option class="select-font" [value]="1">05</option>
+              </select> -->
             </div>
           </div>
           <div class="col-md-2 divCustomMinutes">
             <br>
             <div style="display: flex;">
               <span class="spanInput spanInputCustom">Minutos*</span>
-              <select class="form-control styleselect" formControlName="minutos" aria-label="Servicio">
+              <mat-select class="form-control form-control-mat-select" id="minutosIngresoTmp" formControlName="minutosIngresoTmp"
+                [disableOptionCentering]="true" aria-label="Servicio" (selectionChange)="horaIngresoChange();">
+                <mat-option [value]="00" selected class="select-font optionSelect ">00</mat-option>
+                <mat-option [value]="01" selected class="select-font optionSelect ">01</mat-option>
+                <mat-option [value]="02" selected class="select-font optionSelect ">02</mat-option>
+                <mat-option [value]="03" selected class="select-font optionSelect ">03</mat-option>
+                <mat-option [value]="04" selected class="select-font optionSelect ">04</mat-option>
+                <mat-option [value]="05" selected class="select-font optionSelect ">05</mat-option>
+              </mat-select>
+              <!-- <select class="form-control styleselect" formControlName="minutosIngresoTmp" aria-label="Servicio">
                 <option class="select-font optionSelect" placeholder="minutos" selected [value]="'0'">00</option>
                 <option class="select-font" [value]="1">01</option>
-              </select>
+                <option class="select-font" [value]="1">02</option>
+                <option class="select-font" [value]="1">03</option>
+                <option class="select-font" [value]="1">04</option>
+                <option class="select-font" [value]="1">05</option>
+              </select> -->
             </div>
           </div>
         </div>
@@ -167,7 +195,7 @@
           <div class="col-md-12">
             <span class="spanInput">El (la) lesionado presenta*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
-              formControlName="lesionesPresentadas" type="text" />
+              formControlName="lesionesPaciente" type="text" />
           </div>
         </div>
 
@@ -175,32 +203,37 @@
           <div class="col-md-6">
             <span class="spanInput">Nombre médico tratante*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
-              formControlName="nombreMedico" type="text" />
+              formControlName="nombreMedicoTratante" type="text" />
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matrícula del médico tratante*:</span>
+            <span class="spanInput">Matrícula*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
-              formControlName="matriculaMedico" type="text" />
+              formControlName="matriculaMedicoTratante" type="text" />
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6">
-            <span class="spanInput">Nombre Trabajador(a) social*:</span>
+            <span class="spanInput">Nombre Trabajador(a) social:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
-              formControlName="nombreTrabajador" type="text" />
+              formControlName="nombreTrabajadorSocial" type="text" />
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matrícula*:</span>
+            <span class="spanInput">Matrícula del(a) Trabajador(a) social:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
-              formControlName="matriculaTrabajador" type="text" />
+              formControlName="matriculaTrabajadorSocial" type="text" />
           </div>
+        </div>
+        <div style="padding-bottom: 9px; padding-top: 13px;">
+          <span class="instrucciones label-obligatorios" style="margin-left: 0em !important;">
+            *Campos obligatorios
+          </span>
         </div>
       </div>
     </form>
     <div class="row">
       <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
-        <button [disabled]="formEdit.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
+        <button [disabled]="editForm.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
           style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>

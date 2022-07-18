@@ -14,6 +14,7 @@ export const environment = {
     urlMSEDSCatalogosHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
     //urlMSEDSCHorarios: 'http://localhost:8080/msedsc-catalogos',
     urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+
     urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
 
@@ -30,7 +31,7 @@ export const environment = {
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
     // msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api",
     msmtsControlInterno:"http://localhost:8088/api/certificado-defuncion",
-    msmtsAvisosMP:"https://mts-qa.cloudapps.imss.gob.mx/msmts-avisos-mp/api",
+    msmtsAvisosMP:"https://mts-qa.cloudapps.imss.gob.mx/msmts-minis-publico/api",
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
     recaptcha: {
       siteKey: '6LdbfOUfAAAAACVHNAE5P66uCngEas0k6VpEywJR',

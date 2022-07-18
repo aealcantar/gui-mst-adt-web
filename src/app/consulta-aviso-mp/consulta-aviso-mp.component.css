@@ -277,3 +277,11 @@ a {
   text-align: left;
 
 }
+
+.errorimg {
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}

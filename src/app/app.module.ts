@@ -85,6 +85,8 @@ import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.compon
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avisos-mp/detalle-avisos-mp.component';
+
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 import { CargamasivaComponent } from './configuracion/catalogos/cargamasiva/cargamasiva.component';
 import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
@@ -148,6 +150,7 @@ registerLocaleData('es');
     TrabajoSocialComponent,
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
+    DetalleAvisoMpComponent,
     UbicacionesComponent,
     CargamasivaComponent,
     DetalleControlArticulosComponent,

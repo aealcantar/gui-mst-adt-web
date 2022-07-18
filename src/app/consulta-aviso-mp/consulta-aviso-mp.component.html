@@ -101,13 +101,13 @@
               <tr>
                 <td class="bordesTablaFecha"
                   style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
-                  (click)="irDetalle(12);">{{ item.fechaElaboracion | date: 'dd / MM / yyyy'}}</td>
+                  (click)="irDetalle(item.idAvisoMp);">{{item.fechaElaboracion}}</td>
                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
                   {{item.nombrePaciente}} </td>
                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
-                  {{item.nombreMedicoTratante}} </td>
+                  {{item.medicoTratante}} </td>
                 <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
-                  {{item.nombreTrabajadorSocial}} </td>
+                  {{item.TrabajadorSocial}} </td>
               </tr>
             </tbody>
           </table>
