@@ -22,12 +22,16 @@
                         <label class="control-label tituloServicio">
                             Servicio:
                         </label>
-                        <select class="form-control" aria-label="Servicio" formControlName="servicio">
+                        <select class="form-control" aria-label="Servicio" formControlName="servicio"
+                        [ngClass]="{'form-control-error': servicio.invalid && (servicio.dirty || servicio.touched )}">
                             <option class="select-font" [value]="''" selected>Seleccionar</option>
                             <option class="select-font" [value]="servicio.cve_especialidad"
                                 *ngFor="let servicio of serviciosEspecialidad">
                                 {{ servicio.des_especialidad }}</option>
                         </select>
+                        <small *ngIf="servicio.invalid && (servicio.dirty || servicio.touched)" class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -35,12 +39,16 @@
                         <label class="control-label tituloServicio">
                             Turno:
                         </label>
-                        <select class="form-control" aria-label="Servicio" formControlName="turno">
+                        <select class="form-control" aria-label="Servicio" formControlName="turno"
+                        [ngClass]="{'form-control-error': turno.invalid && (turno.dirty || turno.touched )}">
                             <option class="select-font" [value]="''" selected>Seleccionar</option>
                             <option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{
                                 turno.des_turno }}
                             </option>
                         </select>
+                        <small *ngIf="turno.invalid && (turno.dirty || turno.touched)" class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
                     </div>
                 </div>
             </div>
@@ -50,7 +58,8 @@
                         <label class="control-label tituloServicio">
                             Lugar:
                         </label>
-                        <select class="form-control" aria-label="Servicio" formControlName="lugar">
+                        <select class="form-control" aria-label="Servicio" formControlName="lugar"
+                        [ngClass]="{'form-control-error': lugar.invalid && (lugar.dirty || lugar.touched )}">
                             <option class="select-font" [value]="''" selected>
                                 Seleccionar
                             </option>'
@@ -58,6 +67,9 @@
                                 {{ lugar.des_completa_ubicacion }}
                             </option>
                         </select>
+                        <small *ngIf="lugar.invalid && (lugar.dirty || lugar.touched)" class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -65,7 +77,8 @@
                         <label class="control-label tituloServicio">
                             Responsable:
                         </label>
-                        <select class="form-control" aria-label="Servicio" formControlName="responsable">
+                        <select class="form-control" aria-label="Servicio" formControlName="responsable"
+                        [ngClass]="{'form-control-error': responsable.invalid && (responsable.dirty || responsable.touched )}">
                             <option class="select-font" [value]="''" selected>
                                 Ingresar Responsable
                             </option>
@@ -73,6 +86,9 @@
                                 {{ lugar.des_completa_ubicacion }}
                             </option>
                         </select>
+                        <small *ngIf="responsable.invalid && (responsable.dirty || responsable.touched)" class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
                     </div>
                 </div>
                 <div class="col-md-4">

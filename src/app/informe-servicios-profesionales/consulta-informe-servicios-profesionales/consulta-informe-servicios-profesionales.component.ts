@@ -38,22 +38,22 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     })
 
     // Datos prueba
-    public datosPrueba =  [
-        { 
-        "numero": "12345",
-        "paciente": "Miguel Sanchez",
-        "horaCita": "10:00:00",
-        "agregadoMedico": "Nataly",
-        "primeraVez": "true",
-        "citado": "11",
+    public datosPrueba = [
+        {
+            "numero": "12345",
+            "paciente": "Miguel Sanchez",
+            "horaCita": "10:00:00",
+            "agregadoMedico": "Nataly",
+            "primeraVez": "true",
+            "citado": "11",
         },
-        { 
-        "numero": "67890",
-        "paciente": "Angel Hernandez",
-        "horaCita": "10:00:00",
-        "agregadoMedico": "Nataly",
-        "primeraVez": "true",
-        "citado": "12",
+        {
+            "numero": "67890",
+            "paciente": "Angel Hernandez",
+            "horaCita": "10:00:00",
+            "agregadoMedico": "Nataly",
+            "primeraVez": "true",
+            "citado": "12",
         }
     ];
 
@@ -85,7 +85,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
             info: false,
             searching: false,
         };
-        this.datosBusqueda = this.datosPrueba
+        // this.datosBusqueda = this.datosPrueba
     }
 
     limpiar(): void {
@@ -93,7 +93,10 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     }
 
     buscar(): void {
-        console.log('Submit works')
+        Object.keys(this.formularioBusqueda.controls).forEach(field => { // {1}
+            const control = this.formularioBusqueda.get(field);            // {2}
+            control.markAsTouched({ onlySelf: true });       // {3}
+          });
     }
 
     sortBy(columnaId: string, order: string, type: string): void {
