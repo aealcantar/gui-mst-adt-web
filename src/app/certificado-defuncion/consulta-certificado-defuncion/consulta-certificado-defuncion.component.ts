@@ -108,6 +108,7 @@ export class ConsultaCertificadoDefuncionComponent
   limpiar() {
     this.formAdd.controls['consultaDefuncionIni'].setValue('');
     this.formAdd.controls['consultaDefuncionFin'].setValue('');
+    this.datosBusqueda = [];
   }
   sortBy(columnaId: string, order: string, type: string) {
     console.log(columnaId, order, type);
