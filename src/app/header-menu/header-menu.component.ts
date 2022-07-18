@@ -23,7 +23,7 @@ export class HeaderMenuComponent implements OnInit {
   constructor(
     private authenticationService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
@@ -37,17 +37,33 @@ export class HeaderMenuComponent implements OnInit {
       }
     )
     this.proyecto$ = this.authenticationService.getProjectObs();
+    this.verCatalogos();
+    this.verUsuarios();
+  }
+
+  blnCatalogos: boolean = false;
+  private verCatalogos() {
+    if (this.rol.trim().toLowerCase() === 'administrador' || this.rol.trim().toLowerCase() === 'trabajador social') {
+      this.blnCatalogos = true;
+    }
+  }
+
+  blnUsuarios: boolean = false;
+  private verUsuarios() {
+    if (this.rol.trim().toLowerCase() === 'administrador' ) {
+      this.blnUsuarios = true;
+    }
   }
 
   logOut() {
     this.authenticationService.logout();
   }
 
-  redirecciona(val: number){
-    var ruta:string;
-    switch(val){
+  redirecciona(val: number) {
+    var ruta: string;
+    switch (val) {
       case 1:
-        
+
         ruta = '/catalogos/cargaCatalogos/1';
         break;
       case 2:
