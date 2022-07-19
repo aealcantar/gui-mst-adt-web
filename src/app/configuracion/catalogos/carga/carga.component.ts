@@ -231,6 +231,7 @@ export class CargaComponent implements OnInit {
     }
     if (tot == completos) {
       this.blnContinuar = true;
+      localStorage.setItem('catalogosCompletos','true');
       if (mensajeCarga) {
         this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGAS, this._Mensajes.EXITO);
       }
@@ -238,6 +239,8 @@ export class CargaComponent implements OnInit {
       if (this.idOrigen === '0' && this.blnContinuar) {
         this.router.navigate(["/busqueda"]);
       }
+    }else{
+      localStorage.setItem('catalogosCompletos','false');
     }
   }
 
