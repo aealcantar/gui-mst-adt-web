@@ -145,11 +145,12 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       const horaDefuncnion = moment(
         this.formAdd.controls['horaDefuncion'].value,
         'hh:mm A'
-      ).format('hh:mm:ss');
+      ).format('HH:mm:ss');
+      console.log(`Fecha Nuevo Formato: ${horaDefuncnion}`,`Formato anterior ${ this.formAdd.controls['horaDefuncion'].value}`)
       const horaEntrega = moment(
         this.formAdd.controls['horaDeEntregaDeCertificado'].value,
         'hh:mm A'
-      ).format('hh:mm:ss');
+      ).format('HH:mm:ss');
       const fechaDefuncion = moment(
         certificadoDefuncion.fechaDefuncion,
         'DD/MM/YYYY'
