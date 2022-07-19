@@ -111,12 +111,9 @@ export class ConsultaCertificadoDefuncionComponent
     this.datosBusqueda = [];
   }
   sortBy(columnaId: string, order: string, type: string) {
-    console.log(columnaId, order, type);
-
     this.columnaId = columnaId;
     this.order = order;
-
-    this.tabla.sort((a: any, b: any) => {
+    this.datosBusqueda.sort((a: any, b: any) => {
       let c: any = this.converType(a[columnaId], type);
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
@@ -131,7 +128,7 @@ export class ConsultaCertificadoDefuncionComponent
     let data;
     switch (type) {
       case 'fecha':
-        data = moment(val, 'DD/MM/YYYY');
+        data = moment(val, 'YYYY/MM/DD');
         break;
       case 'hora':
         data = moment(val, 'HH:mm:ss');
