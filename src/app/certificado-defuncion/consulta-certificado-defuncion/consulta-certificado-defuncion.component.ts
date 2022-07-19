@@ -30,18 +30,6 @@ export class ConsultaCertificadoDefuncionComponent
   public numitems: number = 15;
   public order: string = 'desc';
   public tabla: [] = [];
-  /* obs agrege estas 2 variables para pruebas*/
-  fechaDesde: string = '';
-  fechaHasta: string = '';
-  /* obs agrege esta tabla para poner los datos dummie*/
-  /*
-  tabla=[
-  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
-  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
-  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
-  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
-  ];
-*/
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
