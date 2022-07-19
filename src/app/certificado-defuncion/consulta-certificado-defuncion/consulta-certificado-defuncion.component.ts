@@ -102,7 +102,7 @@ export class ConsultaCertificadoDefuncionComponent
         }
       });
 
-   
+
   }
 
   limpiar() {
@@ -150,7 +150,7 @@ export class ConsultaCertificadoDefuncionComponent
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
           this.formAdd.get('consultaDefuncionIni')?.patchValue(date);
           // this.handleDatesChange();
         }
@@ -165,7 +165,7 @@ export class ConsultaCertificadoDefuncionComponent
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
           this.formAdd.get('consultaDefuncionFin')?.patchValue(date);
           // this.handleDatesChange();
         }
