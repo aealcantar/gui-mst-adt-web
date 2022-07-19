@@ -25,7 +25,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
-  public columnaId: string = 'fecFecha';
+  public columnaId: string = 'fechaElaboracion';
   public alert!: AlertInfo;
 
   constructor(
