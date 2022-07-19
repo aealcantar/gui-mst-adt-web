@@ -93,20 +93,22 @@ export class ConsultaCertificadoDefuncionComponent
       )
       .subscribe((response) => {
         this.datosBusqueda = response;
+        if (this.datosBusqueda.length == 0) {
+          this.muestraAlerta(
+            'Valide los filtros',
+            'alert-warning',
+            'Sin resultados'
+          );
+        }
       });
 
-    if (this.datosBusqueda.length == 0) {
-      this.muestraAlerta(
-        'Valide los filtros',
-        'alert-warning',
-        'Sin resultados'
-      );
-    }
+   
   }
 
   limpiar() {
     this.formAdd.controls['consultaDefuncionIni'].setValue('');
     this.formAdd.controls['consultaDefuncionFin'].setValue('');
+    this.datosBusqueda = [];
   }
   sortBy(columnaId: string, order: string, type: string) {
     console.log(columnaId, order, type);
@@ -148,7 +150,7 @@ export class ConsultaCertificadoDefuncionComponent
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.formAdd.get('consultaDefuncionIni')?.patchValue(date);
           // this.handleDatesChange();
         }
@@ -163,7 +165,7 @@ export class ConsultaCertificadoDefuncionComponent
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.formAdd.get('consultaDefuncionFin')?.patchValue(date);
           // this.handleDatesChange();
         }
