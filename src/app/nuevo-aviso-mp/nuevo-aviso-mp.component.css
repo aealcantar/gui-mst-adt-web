@@ -158,3 +158,8 @@ textarea {
   padding-top: 3px;
   width: fit-content !important;
 }
+
+.form-control[readonly] {
+  background-color: white;
+  cursor: default;
+}
