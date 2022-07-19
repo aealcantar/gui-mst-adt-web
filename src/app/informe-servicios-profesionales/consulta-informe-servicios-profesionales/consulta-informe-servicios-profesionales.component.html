@@ -116,7 +116,7 @@
                     </div>
                 </div> -->
                 <div class="col-md-4">
-                    <div class="col-auto mt-5 " style="padding-right: 0.1em !important ">
+                    <div class="col-auto mt-5 buttons-L">
                         <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()" id="btnLimpiar">
                                 Limpiar
                               </button>
@@ -150,9 +150,8 @@
                             <table class="tabla">
                                 <thead>
                                     <tr>
-                                        <th class="encabezadoTable"
-                                            style="padding: 8px 30px 5px; justify-content: center; position: relative; display: flex; gap: 25px;">
-                                            <div style="margin-left: -15px;">Número</div>
+                                        <th class="encabezadoTable celdaEncabezadoTable">
+                                            <div class="labelEncabezadoTable">Número</div>
                                             <div>
                                                 <i class="fa-solid fa-caret-up arrow arrow-up"
                                                     [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'asc'}"
@@ -164,19 +163,19 @@
                                                 </i>
                                             </div>
                                         </th>
-                                        <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
                                             Paciente</th>
-                                        <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
                                             Hora de
                                             la cita
                                         </th>
-                                        <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
                                             Agregado médico
                                         </th>
-                                        <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
                                             Primera
                                             vez</th>
-                                        <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left;">
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
                                             Citado
                                         </th>
                                     </tr>

@@ -31,6 +31,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     order: string = 'desc';
     columnaId: string = 'fecha';
 
+
     // Formulario
     formularioBusqueda = new FormGroup({
         fecha: new FormControl('', Validators.required),
