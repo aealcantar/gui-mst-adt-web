@@ -16,7 +16,8 @@
       <div class="col-md-4">
         <div class="form-group datepicker-group">
           <label class="control-label tituloServicio" for="avisosInit">Fecha desde:</label>
-          <input avisosInit class="form-control" id="avisosInit" type="text" placeholder="dd/mm/aaaa" autocomplete="off">
+          <input avisosInit class="form-control" id="avisosInit" type="text" placeholder="dd/mm/aaaa"
+            autocomplete="off">
           <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
             <div class="imgCalendar"></div>
           </span>
@@ -25,7 +26,8 @@
       <div class="col-md-4">
         <div class="form-group datepicker-group">
           <label class="control-label tituloServicio" for="avisosFinal">Fecha hasta:</label>
-          <input avisosFinal class="form-control" id="avisosFinal" type="text" placeholder="dd/mm/aaaa" autocomplete="off">
+          <input avisosFinal class="form-control" id="avisosFinal" type="text" placeholder="dd/mm/aaaa"
+            autocomplete="off">
           <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
             <div class="imgCalendar"></div>
           </span>
@@ -55,12 +57,8 @@
             Visualizar datos
           </span>
 
-          <mat-select
-            class="form-select mat-select-table"
-            [disableOptionCentering]="true"
-            aria-label="Servicio"
-            [(ngModel)]="pageSize"
-          >
+          <mat-select class="form-select mat-select-table" [disableOptionCentering]="true" aria-label="Servicio"
+            [(ngModel)]="pageSize">
             <mat-option class="select-font" [value]="15">15</mat-option>
             <mat-option class="select-font" [value]="20">20</mat-option>
             <mat-option class="select-font" [value]="25">25</mat-option>
@@ -75,25 +73,24 @@
           <table class="tabla" style="width: 100%;">
             <thead>
               <tr>
-                <th class="encabezadoTable" style="padding: 8px 30px 5px; justify-content: center; ">
-                  <div style="margin-left: -15px;">Fecha</div>
-                  <div>
-                    <i class="fa-solid fa-caret-up arrow arrow-up" style="margin-left: 46px;
-
-                  margin-top: -12px;" [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'asc'}"
-                      (click)="sortBy('fecFecha', 'asc', 'fecha')">
-                    </i>
-                    <i class="fa-solid fa-caret-down arrow arrow-down" style="    margin-top: -13px;
-                  margin-left: 46px;" [ngClass]="{'active-opacity': columnaId === 'fecFecha' && order === 'desc'}"
-                      (click)="sortBy('fecFecha', 'desc', 'fecha')">
-                    </i>
-                  </div>
+                <th class="encabezadoTable" style="padding-top: 13px;">
+                  Fecha
+                  <i class="fa-solid fa-caret-up arrow arrow-up"
+                    [ngClass]="{'active-opacity': columnaId === 'fechaElaboracion' && order === 'asc'}"
+                    (click)="sortBy('fechaElaboracion', 'asc', 'fecha')">
+                  </i>
+                  <i class="fa-solid fa-caret-down arrow arrow-down"
+                    [ngClass]="{'active-opacity': columnaId === 'fechaElaboracion' && order === 'desc'}"
+                    (click)="sortBy('fechaElaboracion', 'desc', 'fecha')">
+                  </i>
                 </th>
                 <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 30px;">Paciente
                 </th>
-                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 30px;">Médico tratante
+                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 30px;">Médico
+                  tratante
                 </th>
-                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 30px;">Trabajador social
+                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 30px;">Trabajador
+                  social
                 </th>
               </tr>
             </thead>
@@ -136,7 +133,7 @@
     </ng-container>
     <ng-template #mostrarSeccionSinResultados>
       <div class="row">
-        <div class="div-container-image">
+        <div class="div-container-image" style="margin-left: 38%;">
           <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { objAlert } from '../../common/alerta/alerta.interface';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
@@ -12,21 +12,21 @@ import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/
 import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
 import { DatePipe } from '@angular/common';
 
-import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxMatDateAdapter, NgxMatDateFormats, NGX_MAT_DATE_FORMATS } from '@angular-material-components/datetime-picker';
 import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular-material-components/moment-adapter';
-import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
+import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../services/helper.mensajes.service';
 import Swal from 'sweetalert2';
 
 //import { rootCertificates } from 'tls';
-declare var $:any;
-declare var $gmx:any;
+declare var $: any;
+declare var $gmx: any;
 var listo: boolean;
-var table:any;
-var paginaactual:number=0;
+var table: any;
+var paginaactual: number = 0;
 
 class CustomDateAdapter extends MomentDateAdapter {
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow') {
@@ -72,7 +72,7 @@ export const MY_DATE_FORMATS = {
     { provide: NGX_MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ]
 })
-export class CitabuscaComponent implements OnInit,OnDestroy {
+export class CitabuscaComponent implements OnInit, OnDestroy {
   @ViewChild('picker') picker: any;
   alert!: objAlert;
 
@@ -109,48 +109,54 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     public datePipe: DatePipe,
     private overlayContainer: OverlayContainer,
     private _Mensajes: HelperMensajesService
-    ) {
-      this.authService.userLogged$.next(true);
-      this.authService.isAuthenticatedObs$.next(true);
-    }
+  ) {
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+  }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
 
-    this.dtOptions = {
-      pagingType: 'simple_numbers',
-      pageLength: this.numitems,
-      processing: true,
-      info: false,
-      searching: false,
-      "lengthChange": false,
-      "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
-      "language": {
-        "paginate": {
-          "first": "First page",
-          "previous": '<span class="glyphicon glyphicon-menu-left paginacion-icon-navegacion" aria-hidden="true"></span>',
-          "next": '<span class="glyphicon glyphicon-menu-right paginacion-icon-navegacion" aria-hidden="true"></span>',
-          "last": "last"
-        }
-      }
-    };
+    let estatus = localStorage.getItem('catalogosCompletos');
+    if (estatus === 'false') {
+      this.router.navigate(["/catalogos/cargaCatalogos/1"],{skipLocationChange: true});
+    } else {
 
-      this.paciente = this.tarjetaService.get()? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
+      this.dtOptions = {
+        pagingType: 'simple_numbers',
+        pageLength: this.numitems,
+        processing: true,
+        info: false,
+        searching: false,
+        "lengthChange": false,
+        "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
+        "language": {
+          "paginate": {
+            "first": "First page",
+            "previous": '<span class="glyphicon glyphicon-menu-left paginacion-icon-navegacion" aria-hidden="true"></span>',
+            "next": '<span class="glyphicon glyphicon-menu-right paginacion-icon-navegacion" aria-hidden="true"></span>',
+            "last": "last"
+          }
+        }
+      };
+
+      this.paciente = this.tarjetaService.get() ? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
       console.log("paciente:", this.paciente);
       this.llenacatalogos();
       this.buscarcita();
+    }
   }
 
-  llenacatalogos(){
+  llenacatalogos() {
     this.llenacatalogoturnos();
     this.llenacatalogoservicios();
   }
 
 
-  llenacatalogoservicios(){
+  llenacatalogoservicios() {
     this.msjLoading("Cargando...");
     this.citaservice.getlistservicios().subscribe({
-      next: (resp:any) => {
+      next: (resp: any) => {
         console.log(resp);
         this.lstCatServicios = resp;
         Swal.close();
@@ -164,10 +170,10 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     })
   }
 
-  llenacatalogoturnos(){
+  llenacatalogoturnos() {
     this.msjLoading("Cargando...");
     this.citaservice.getlistturnos().subscribe({
-      next: (resp:any) => {
+      next: (resp: any) => {
         console.log(resp);
         this.lstCatTurnos = resp;
         Swal.close();
@@ -181,10 +187,10 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     })
   }
 
-  llenacatalogoprogramas(cve_especialidad: number){
+  llenacatalogoprogramas(cve_especialidad: number) {
     this.msjLoading("Cargando...");
     this.citaservice.getlistprogramas(cve_especialidad).subscribe({
-      next: (resp:any) => {
+      next: (resp: any) => {
         console.log(resp);
         this.lstCatProgramas = resp;
         Swal.close();
@@ -197,10 +203,10 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
       }
     })
   }
-  llenacatalogolugares(cve_especialidad: number){
+  llenacatalogolugares(cve_especialidad: number) {
     this.msjLoading("Cargando...");
     this.citaservice.getlistlugares(cve_especialidad).subscribe({
-      next: (resp:any) => {
+      next: (resp: any) => {
         console.log(resp);
         this.lstCatLugares = resp;
         Swal.close();
@@ -213,10 +219,10 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
       }
     })
   }
-  llenacatalogoresponsables(cve_ubicacion:number, cve_turno: number){
+  llenacatalogoresponsables(cve_ubicacion: number, cve_turno: number) {
     this.msjLoading("Cargando...");
     this.citaservice.getlistresponsables(cve_ubicacion, cve_turno).subscribe({
-      next: (resp:any) => {
+      next: (resp: any) => {
         console.log(resp);
         this.lstCatResponsables = resp;
         Swal.close();
@@ -230,45 +236,45 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     })
   }
 
-  onchangeservicio(e: any){
+  onchangeservicio(e: any) {
     console.log(e);
     let cve_especialidad = e.cve_especialidad;
     this.llenacatalogoprogramas(cve_especialidad);
     this.llenacatalogolugares(cve_especialidad);
-    if(this.citadata.value.programa != ""){
+    if (this.citadata.value.programa != "") {
       this.citadata.controls['programa'].setValue('');
     }
-    if(this.citadata.value.lugar != ""){
+    if (this.citadata.value.lugar != "") {
       this.citadata.controls['lugar'].setValue('');
       this.citadata.controls['responsable'].setValue('');
     }
   }
 
-  onchangelugar(e: any){
+  onchangelugar(e: any) {
     this.validapeticionresp();
   }
 
-  onchangeturno(e: any){
+  onchangeturno(e: any) {
     this.validapeticionresp();
   }
 
-  validapeticionresp(){
-    if(this.citadata.value.turno != "" && this.citadata.value.lugar != ""){
+  validapeticionresp() {
+    if (this.citadata.value.turno != "" && this.citadata.value.lugar != "") {
       this.llenacatalogoresponsables(this.citadata.value.lugar.cve_ubicacion, this.citadata.value.turno.cve_turno);
-      if(this.citadata.value.responsable != ""){
+      if (this.citadata.value.responsable != "") {
         this.citadata.controls['responsable'].setValue('');
       }
     }
   }
 
 
-  limpiarbusqueda(){
+  limpiarbusqueda() {
     this.lstCitas = [];
     this.lstCatResponsables = [];
     this.lstCatProgramas = [];
     this.lstCatLugares = [];
     this.citadata.controls['responsable'].setValue('');
-    this.lstCatResponsables.splice(0,this.lstCatResponsables.length);
+    this.lstCatResponsables.splice(0, this.lstCatResponsables.length);
     this.citadata.controls['servicio'].setValue('');
     this.citadata.controls['fechahora'].setValue('');
     this.citadata.controls['programa'].setValue('');
@@ -282,44 +288,44 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     this.buscarcita();
   }
 
-  buscarcita(){
+  buscarcita() {
     this.msjLoading("Cargando...");
 
     this.lstCitas = [];
     this.pagactual = 1;
 
     let data = {
-      "nss": this.paciente? this.paciente.nss : 0,
+      "nss": this.paciente ? this.paciente.nss : 0,
       //"fechaInicio": this.citadata.value.fechahora,
-      "fechaInicio": this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd')  : "",
-      "horaInicio": this.citadata.value.fechahora? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'HH:mm:ss')  : "",
-      "descripcionServicio": this.citadata.value.servicio? this.citadata.value.servicio.des_especialidad : "",
-      "grupoPrograma": this.citadata.value.programa? this.citadata.value.programa.des_grupo_programa : "",
-      "ubicacion": this.citadata.value.lugar? this.citadata.value.lugar.des_completa_ubicacion : "",
-      "trabajadorSocial": this.citadata.value.responsable? this.citadata.value.responsable.nom_nombre : "",
-      "turno": this.citadata.value.turno? this.citadata.value.turno.des_turno : ""
+      "fechaInicio": this.citadata.value.fechahora ? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd') : "",
+      "horaInicio": this.citadata.value.fechahora ? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'HH:mm:ss') : "",
+      "descripcionServicio": this.citadata.value.servicio ? this.citadata.value.servicio.des_especialidad : "",
+      "grupoPrograma": this.citadata.value.programa ? this.citadata.value.programa.des_grupo_programa : "",
+      "ubicacion": this.citadata.value.lugar ? this.citadata.value.lugar.des_completa_ubicacion : "",
+      "trabajadorSocial": this.citadata.value.responsable ? this.citadata.value.responsable.nom_nombre : "",
+      "turno": this.citadata.value.turno ? this.citadata.value.turno.des_turno : ""
     }
 
     this.citaservice.buscacitas(data).subscribe({
-      next: (resp:any) => {
+      next: (resp: any) => {
 
         console.log(resp);
         this.lstCitas = resp;
-        setTimeout(()=>{
+        setTimeout(() => {
           table = $('#tblcitas').DataTable();
           //$('#tblusuarios').DataTable().page.len( this.numitems ).draw();
           this.dtOptions.pageLength = this.numitems;
 
 
-          setTimeout(()=>{
-            table.on( 'page', ()=> {
-              console.log('Page: ' + table.page.info().page );
+          setTimeout(() => {
+            table.on('page', () => {
+              console.log('Page: ' + table.page.info().page);
               paginaactual = table.page.info().page;
               this.pagactual = paginaactual + 1;
-              } );
-          },1000);
+            });
+          }, 1000);
           Swal.close();
-        },1000);
+        }, 1000);
 
       },
       error: (err) => {
@@ -331,15 +337,15 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   }
 
 
-  regresar(){
+  regresar() {
 
   }
 
-  agendarcita(){
+  agendarcita() {
     this.router.navigateByUrl('/guardacita');
   }
 
-  muestracita(id: number){
+  muestracita(id: number) {
     this.router.navigateByUrl('/consultacita/' + id);
   }
 
@@ -364,7 +370,7 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     })
   }
 
-  muestraAlerta(mensaje: string, estilo: string, type: string){
+  muestraAlerta(mensaje: string, estilo: string, type: string) {
     this.alert = new objAlert();
     this.alert = {
       message: mensaje,
@@ -374,16 +380,16 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
     }
     setTimeout(() => {
       this.alert = {
-        message:'',
+        message: '',
         type: 'custom',
         visible: false
       }
     }, 2000);
   }
 
-  cambiatotalpaginas(numpag:number){
+  cambiatotalpaginas(numpag: number) {
     this.numitems = numpag;
-    table.page.len( this.numitems ).draw();
+    table.page.len(this.numitems).draw();
     paginaactual = table.page.info().page;
     this.pagactual = paginaactual + 1;
   }

@@ -66,6 +66,7 @@ import { FooterComponent } from './components/templates/footer/footer.component'
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { NgxMaskModule } from 'ngx-mask'
 import {
   NgxMatDateFormats,
   NgxMatDatetimePickerModule,
@@ -196,6 +197,7 @@ registerLocaleData('es');
     MomentDateModule,
     MatRadioModule,
     MatSelectModule,
+    NgxMaskModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
