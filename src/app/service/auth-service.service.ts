@@ -211,6 +211,7 @@ export class AuthService {
     sessionStorage.clear();
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('usuario');
+    localStorage.removeItem('catalogosCompletos');
     this.userLogged$.next(false);
     this.isAuthenticatedObs$.next(false);
     this.router.navigate(["/login"]);

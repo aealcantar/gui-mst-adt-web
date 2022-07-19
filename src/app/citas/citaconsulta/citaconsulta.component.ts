@@ -65,14 +65,19 @@ export class CitaconsultaComponent implements OnInit {
     private citaservice: CitasService,
     public datePipe: DatePipe,
     private _Mensajes: HelperMensajesService) {
-      this.authService.userLogged$.next(true);
-      this.authService.isAuthenticatedObs$.next(true);
-    }
+    this.authService.userLogged$.next(true);
+    this.authService.isAuthenticatedObs$.next(true);
+  }
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    this.varid = this.activerouter.snapshot.paramMap.get('id');
-    this.buscarcita(this.varid);
+    let estatus = localStorage.getItem('catalogosCompletos');
+    if (estatus === 'false') {
+      this.router.navigate(["/catalogos/cargaCatalogos/1"], { skipLocationChange: true });
+    } else {
+      this.varid = this.activerouter.snapshot.paramMap.get('id');
+      this.buscarcita(this.varid);
+    }
   }
 
   regresar() {
@@ -82,7 +87,7 @@ export class CitaconsultaComponent implements OnInit {
   citaResponse: CitaResponse;
   buscarcita(id: number) {
     this.msjLoading("Cargando...");
-    this.strpaciente= "";
+    this.strpaciente = "";
     this.citaResponse = new CitaResponse();
     this.citaservice.consultacita(id).subscribe({
       next: (resp: CitaResponse) => {
@@ -90,8 +95,8 @@ export class CitaconsultaComponent implements OnInit {
 
         //console.log("inicio: ",this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') );
         this.citaResponse = resp;
-        this.citaResponse.cita.fechaInicio = this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') ;
-        this.citaResponse.cita.fechaFin = this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss') ;
+        this.citaResponse.cita.fechaInicio = this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss');
+        this.citaResponse.cita.fechaFin = this.datePipe.transform(new Date(resp.cita.fechaFin + " " + resp.cita.horaFin), 'dd-MM-yyyy - HH:mm:ss');
         this.varidcalendario = resp.cita.cveCalendarioAnual;
 
         /*
@@ -194,10 +199,10 @@ export class CitaconsultaComponent implements OnInit {
           this.objmodal.tipo = 0;
           $('#content').modal('hide');
 
-          if(resp.estatus == true){
+          if (resp.estatus == true) {
             this.muestraAlerta(this._Mensajes.MSJ_EXITO_CONFIRMAR_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO, this.callback);
           } else {
-            this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_CONFIRMAR_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+            this.muestraAlerta(resp.mensaje ? resp.mensaje : this._Mensajes.MSJ_ERROR_CONFIRMAR_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
           }
 
 
