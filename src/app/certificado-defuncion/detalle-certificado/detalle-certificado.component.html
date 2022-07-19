@@ -12,7 +12,7 @@
           <div class="form-group datepicker-group">
             <span class="spanInput">Fecha de defunción:</span>
             <span class="labelDetalle">
-              {{ certificado?.fechaDefuncion }}
+              {{ certificado?.fechaDefuncion |date:"dd/MM/yyyy" }}
             </span>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <div class="form-group datepicker-group">
             <span class="spanInput">Fecha la entrega de certificado:</span>
             <span class="labelDetalle">
-              {{ certificado?.fechaDeEntregaDeCertificado }}
+              {{ certificado?.fechaDeEntregaDeCertificado |date:"dd/MM/yyyy" }}
             </span>
           </div>
         </div>
