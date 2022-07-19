@@ -1,7 +1,9 @@
 // TODO: Eliminar datos prueba
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
+declare var $: any;
 
 @Component({
     selector: 'app-consulta-informe-servicios-profesionales',
@@ -31,6 +33,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     // Formulario
     formularioBusqueda = new FormGroup({
+        fecha: new FormControl('', Validators.required),
         lugar: new FormControl('', Validators.required),
         responsable: new FormControl('', Validators.required),
         servicio: new FormControl('', Validators.required),
@@ -58,6 +61,10 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     ];
 
     // getters
+    get fecha(): AbstractControl {
+        return this.formularioBusqueda.get('fecha')
+    }
+
     get lugar(): AbstractControl {
         return this.formularioBusqueda.get('lugar')
     }
@@ -76,7 +83,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.dtOptions = {
             order: [[2, 'desc']],
             ordering: false,
@@ -88,21 +95,66 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         // this.datosBusqueda = this.datosPrueba
     }
 
+    ngAfterViewInit(): void {
+        this.actualizarFecha();
+    }
+
+    actualizarFecha(): void {
+        $('#calendar').datepicker({
+            dateFormat: 'dd/mm/yy',
+            onSelect: (date: any) => {
+                if (date == '') return
+                date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                this.formularioBusqueda.get('fecha')?.patchValue(date)
+            },
+            onClose: (date: any) => {
+                if (date) return
+                this.formularioBusqueda.get('fecha')?.patchValue('')
+            }
+        })
+    }
+
+    asignarValoresDefault(): void {
+        this.formularioBusqueda = new FormGroup({
+            fecha: new FormControl('', Validators.required),
+            lugar: new FormControl('', Validators.required),
+            responsable: new FormControl('', Validators.required),
+            servicio: new FormControl('', Validators.required),
+            turno: new FormControl('', Validators.required),
+        })
+    }
+
     limpiar(): void {
-        this.formularioBusqueda.reset();
+        this.asignarValoresDefault()
+        this.formularioBusqueda.reset(this.formularioBusqueda.value);
     }
 
     buscar(): void {
-        Object.keys(this.formularioBusqueda.controls).forEach(field => { // {1}
-            const control = this.formularioBusqueda.get(field);            // {2}
-            control.markAsTouched({ onlySelf: true });       // {3}
-          });
+        this.validarCamposObligatorios();
+        console.log(this.formularioBusqueda.value)
+        this.revisarCamposVacios();
     }
 
     sortBy(columnaId: string, order: string, type: string): void {
     }
 
     irDetalle(informeServicios: any): void {
+
+    }
+
+    cargarCatalogos(): void {
+        
+    }
+
+    validarCamposObligatorios(): void {
+        const campos = Object.keys(this.formularioBusqueda.controls);
+        campos.forEach(campo => {
+            const control = this.formularioBusqueda.get(campo);
+            control.markAsTouched({ onlySelf: true });
+        });
+    }
+
+    revisarCamposVacios(): void {
 
     }
 }
