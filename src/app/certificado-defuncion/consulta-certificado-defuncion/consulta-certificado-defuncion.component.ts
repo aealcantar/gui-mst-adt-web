@@ -71,11 +71,15 @@ export class ConsultaCertificadoDefuncionComponent
     this.router.navigate(['nuevo-certificado-defuncion']);
   }
   buscar() {
+    
     const datos = this.formAdd.value;
+    const fechaIni = moment(datos.consultaDefuncionIni, "DD/MM/YYYY").format("YYYY-MM-DD");
+    const fechaFin = moment(datos.consultaDefuncionFin, "DD/MM/YYYY").format("YYYY-MM-DD");
+    
     this.certificadoService
       .list(
-        datos.consultaDefuncionIni,
-        datos.consultaDefuncionFin,
+        fechaIni,
+        fechaFin,
         datos.pagina,
         datos.count
       )
