@@ -81,17 +81,6 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Hospital*:</span>
-              <!-- <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
-                  Seleccionar hospital</option>
-                <option class="select-font" [value]="1">Hospital 1</option>
-              </select> -->
-
-              <!-- <mat-select class="form-control form-control-mat-select" id="hospital" formControlName="idUnidadHospital"
-                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar hospital">
-                <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option>
-                <mat-option class="select-font" [value]="1">Hospital 1</mat-option>
-              </mat-select> -->
               <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar hospital"
                 formControlName="idUnidadHospital" type="text" readonly />
             </div>
@@ -116,8 +105,6 @@
                   *ngFor="let item of listaServicios">
                   {{ item.des_especialidad }}
                 </mat-option>
-                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option> -->
-                <!-- <mat-option class="select-font" [value]="1">Servicio 1</mat-option>listaServicios -->
               </mat-select>
             </div>
           </div>

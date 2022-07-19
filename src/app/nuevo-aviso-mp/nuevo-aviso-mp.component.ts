@@ -61,8 +61,7 @@ export class NuevoAvisoMpComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerCatalogos();
     this.paciente = this.tarjetaService.get();
-    if (!this.paciente) {
-      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+    if (this.paciente) {
       this.getCatUnidadesMedicas();
     }
   }
@@ -141,7 +140,7 @@ export class NuevoAvisoMpComponent implements OnInit {
 
     this.avisoMinisterioPublico.agregarAvisoMP(this.avisoMP).subscribe(
       (response: any) => {
-        debugger;  
+        debugger;
         if (response && response?.idAvisoMp) {
           let idAvisoMp = response?.idAvisoMp;
           let params = { idAvisoMp };
@@ -151,7 +150,7 @@ export class NuevoAvisoMpComponent implements OnInit {
         console.log(resp);
       }
     );
-    
+
   }
 
   modalcarga(content: any) {
@@ -174,7 +173,7 @@ export class NuevoAvisoMpComponent implements OnInit {
     const minutos = this.editForm.get('minutosIngresoTmp').value;
     if (hora && minutos) {
       this.editForm.get('horaIngreso').patchValue(moment(`${hora} ${minutos}`, 'HH:mm').format('HH:mm:SSS'));
-      
+
     }
   }
 
