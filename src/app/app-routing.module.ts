@@ -46,6 +46,8 @@ import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avi
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
+import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
+
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
@@ -200,6 +202,10 @@ const routes: Routes = [
     path: 'detalle-volante-donacion-sangre/:id',
     component: DetalleVolantesDonacionSangreComponent,
     canActivate: [SeguridadRouter]
+  },
+  {
+    path: 'consulta-donacion-sangre-administracion',
+    component: ConsultaDonacionSangreAdministracionComponent
   },
   // informe servicios profesionales
   {
