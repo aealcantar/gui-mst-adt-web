@@ -46,7 +46,7 @@ export class ConsultaCertificadoDefuncionComponent
     this.formAdd = fb.group({
       consultaDefuncionIni: new FormControl('', Validators.required),
       consultaDefuncionFin: new FormControl('', Validators.required),
-      count: new FormControl(5, Validators.required),
+      count: new FormControl(15, Validators.required),
       pagina: new FormControl(1, Validators.required),
     });
   }
@@ -71,8 +71,24 @@ export class ConsultaCertificadoDefuncionComponent
     sessionStorage.removeItem('certificadoDefuncion');
     this.router.navigate(['nuevo-certificado-defuncion']);
   }
+  onSelectChange() {
+    const datos = this.formAdd.value;
+    const fechaIni = moment(datos.consultaDefuncionIni, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    this.page = 1;
+    this.certificadoService
+
+      .list(fechaIni, fechaFin, 0, datos.count)
+      .subscribe((response) => {
+        this.datosBusqueda = response;
+      });
+  }
   onPagechange(event: any) {
-    this.page = event
+    this.page = event;
     const datos = this.formAdd.value;
     const fechaIni = moment(datos.consultaDefuncionIni, 'DD/MM/YYYY').format(
       'YYYY-MM-DD'
@@ -82,7 +98,7 @@ export class ConsultaCertificadoDefuncionComponent
     );
 
     this.certificadoService
-      .list(fechaIni, fechaFin, event, datos.count)
+      .list(fechaIni, fechaFin, this.page - 1, datos.count)
       .subscribe((response) => {
         console.log(response);
         this.datosBusqueda = response;
@@ -102,7 +118,7 @@ export class ConsultaCertificadoDefuncionComponent
 
     console.log(this.paginacion);
     this.certificadoService
-      .list(fechaIni, fechaFin, datos.pagina, datos.count)
+      .list(fechaIni, fechaFin, datos.pagina - 1, datos.count)
       .subscribe((response) => {
         this.datosBusqueda = response;
         console.log(response);
