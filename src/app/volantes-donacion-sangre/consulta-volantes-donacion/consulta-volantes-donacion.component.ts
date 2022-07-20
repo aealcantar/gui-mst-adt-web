@@ -5,7 +5,7 @@ import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { VolantesDonacionService } from   'src/app/service/volantes-donacion.service';
+import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 declare var $: any;
 
@@ -107,7 +107,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
       }
 
       if (validaFechaDesde && validaFechaHasta) {
-
         let fechaDesdeArray = fechaDesde.split("/");
         let fechaInicial = fechaDesdeArray[2] + "-" + fechaDesdeArray[1] + "-" + fechaDesdeArray[0];
         let fechaHastaArray = fechaHasta.split("/");
@@ -135,17 +134,23 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
           }
         ).add(() => {
           if (this.datosBusqueda.length == 0) {
-            this.muestraAlerta(
-              'Valide los filtros',
-              'alert-warning',
-              'Sin resultados',
-            )
+            this.mostrarAlertaFiltros();
           }
         });
-
+      } else {
+        this.mostrarAlertaFiltros();
       }
-
+    } else {
+      this.mostrarAlertaFiltros();
     }
+  }
+
+  mostrarAlertaFiltros() {
+    this.muestraAlerta(
+      'Valide los filtros',
+      'alert-warning',
+      'Sin resultados',
+    )
   }
 
   //redirecciona al detalle
