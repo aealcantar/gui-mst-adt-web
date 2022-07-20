@@ -50,6 +50,11 @@ import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certifi
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
+// informe servicios profesionales
+ import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
+ import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
+// import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -196,6 +201,19 @@ const routes: Routes = [
     component: DetalleVolantesDonacionSangreComponent,
     canActivate: [SeguridadRouter]
   },
+  // informe servicios profesionales
+  {
+    path: 'consulta-informe-servicios-profesionales',
+    component: ConsultaInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+
+  },
+  {
+    path: 'detalle-informe-servicios-profesionales',
+    component: DetalleInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+  },
+
   {
     path: 'catalogos',
     component: CatalogosComponent,
