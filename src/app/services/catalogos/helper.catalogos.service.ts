@@ -104,9 +104,9 @@ export class HelperCatalogosService {
       rutaPlantilla: '../../../../assets/files/14.Responsables.xlsx',
       idCatPadre: [3,7,8],
       col1: 'MATRICULA',
-      col2: 'NOMBRE',
-      col3: 'UBICACIÓN',
-      col4: 'TURNO',
+      col2: 'UBICACIÓN',
+      col3: 'TURNO',
+      col4: 'CLAVE ESPECIALIDAD',
       col5: 'SERVICIO/ESPECIALIDAD'
 
     },

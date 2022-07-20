@@ -310,9 +310,10 @@ export class CargamasivaComponent implements OnInit {
           case 4:
             this.responsable[index] = new Responsable();
             this.responsable[index].matricula = element[this.confCarga.col1];
-            this.responsable[index].nombre = element[this.confCarga.col2];
-            this.responsable[index].ubicacion = element[this.confCarga.col3];
-            this.responsable[index].turno = element[this.confCarga.col4];
+            
+            this.responsable[index].ubicacion = element[this.confCarga.col2];
+            this.responsable[index].turno = element[this.confCarga.col3];
+            this.responsable[index].cve_especialidad = element[this.confCarga.col4];
             this.responsable[index].servicioEspecialidad = element[this.confCarga.col5];
             break;
           case 5:
