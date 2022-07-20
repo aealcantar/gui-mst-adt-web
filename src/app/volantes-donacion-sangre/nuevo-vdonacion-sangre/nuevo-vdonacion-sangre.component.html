@@ -72,7 +72,7 @@
           </div>
           <div class="col-md-2 form-group">
             <span class="spanInput">Horario de atención*:</span>
-            <input maxlength="5"
+            <input maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" [validation]="true" autocomplete="off"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion1.errors }"
               class="form-control matricula inputs" id="horaInicialAtencion1" formControlName="horaInicialAtencion1"
               placeholder="Hora inicial" type="text" />
@@ -83,7 +83,7 @@
           </div>
           <div class="col-md-2 form-group">
             <br>
-            <input maxlength="5"
+            <input maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" [validation]="true" autocomplete="off"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaFinalAtencion1.errors }"
               class="form-control matricula inputs" id="horaFinalAtencion1" formControlName="horaFinalAtencion1"
               placeholder="Hora final" type="text" />

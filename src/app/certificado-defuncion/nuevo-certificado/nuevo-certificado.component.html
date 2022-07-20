@@ -69,7 +69,7 @@
               <span class="spanInput">Hora de defunción*:</span>
               <input
                 class="form-control"
-                [placeholder]="'Ingresa Hora'"
+                [placeholder]="'Ingresa hora'"
                 [ngxTimepicker]="hrDefuncionPicker"
                 [maxLength]="8"
                 [minLength]="8"
@@ -96,7 +96,7 @@
               <mat-error
                 *ngIf="
                   validarCampos &&
-                  formAdd.get('horaDefuncion').value.length != 8
+                  formAdd.get('horaDefuncion').value.length > 8
                 "
               >
                 <strong>Formato de hora no valido</strong>

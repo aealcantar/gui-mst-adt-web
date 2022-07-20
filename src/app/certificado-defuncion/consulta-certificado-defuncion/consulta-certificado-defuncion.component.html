@@ -1,7 +1,6 @@
 <app-app-alerts [alert]="alert"></app-app-alerts>
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
-  <!-- <div header class="flex justify-content-between align-items-center consultaControlDeArticulos"> copie esta linea para cambiar el nombre igual al del componente-->
   <div header class="flex justify-content-between align-items-center consultaCertificadoDefuncion">
     <label>
       Consulta de controlTS - Certificado de defunción
@@ -74,7 +73,6 @@
               <span class="visualizarDatos" style="width: auto; float: right;">
                 Visualizar datos
               </span>
-              <!-- <label class="control-label ">Visualizar datos</label> -->
               <mat-select formControlName="count" class="form-select mat-select-table" [disableOptionCentering]="true"
                 aria-label="Servicio">
                 <mat-option class="select-font" [value]="15" seleted>15</mat-option>
@@ -82,18 +80,9 @@
                 <mat-option class="select-font" [value]="25">25</mat-option>
               </mat-select>
             </div>
-            <!-- <label class="control-label ">Visualizar datos</label>
-                        <select class="form-select ml-5 select-view-data " [(ngModel)]="pageSize">
-                          <option [ngValue]="10 ">10</option>
-                          <option [ngValue]="15 ">15</option>
-                          <option [ngValue]="20 ">20</option>
-                          <option [ngValue]="25 ">25</option>
-                        </select> -->
           </div>
         </div>
       </div>
-
-      <!-- <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados"> -->
       <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
         <div class="row">
           <div class="col-md-12">
@@ -105,12 +94,12 @@
                     <div style="margin-left: -15px;">Fecha</div>
                     <div>
                       <i class="fa-solid fa-caret-up arrow arrow-up"
-                        [ngClass]="{'active-opacity': columnaId === 'fecha' && order === 'asc'}"
-                        (click)="sortBy('fecha', 'asc', 'fecha')">
+                        [ngClass]="{'active-opacity': columnaId === 'fechaDefuncion' && order === 'asc'}"
+                        (click)="sortBy('fechaDefuncion', 'asc', 'fecha')">
                       </i>
                       <i class="fa-solid fa-caret-down arrow arrow-down"
-                        [ngClass]="{'active-opacity': columnaId === 'fecha' && order === 'desc'}"
-                        (click)="sortBy('fecha', 'desc', 'fecha')">
+                        [ngClass]="{'active-opacity': columnaId === 'fechaDefuncion' && order === 'desc'}"
+                        (click)="sortBy('fechaDefuncion', 'desc', 'fecha')">
                       </i>
                     </div>
                   </th>
@@ -122,10 +111,7 @@
                   </th>
                 </tr>
               </thead>
-
-              <!-- <tbody *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index"> -->
-              <tbody *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
-
+              <tbody *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:formAdd.controls['count'].value, currentPage:page}; let i = index">
                 <tr>
                   <td class="bordesTablaFecha"
                     style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
@@ -137,8 +123,6 @@
                   <td class="bordesTablaNSS" style="padding-left: 30px; text-align: left !important;width: 377px">
                     {{item.nssPaciente}}
                   </td>
-                  <!-- <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
-                    {{item.personalQueElaboro}} </td> -->
                 </tr>
               </tbody>
             </table>

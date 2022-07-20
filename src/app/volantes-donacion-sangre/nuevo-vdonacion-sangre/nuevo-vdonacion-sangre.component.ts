@@ -178,6 +178,11 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   registarDonacion(formNuevaDonacion: FormGroup) {
     this.submitted = true;
 
+    const horaInicial = moment(this.formNuevaDonacion.get('horaInicialAtencion1').value, 'HHmm').format('HH:mm')
+    const horaFinal = moment(this.formNuevaDonacion.get('horaFinalAtencion1').value, 'HHmm').format('HH:mm')
+    this.formNuevaDonacion.get('horaInicialAtencion1').patchValue(horaInicial);
+    this.formNuevaDonacion.get('horaFinalAtencion1').patchValue(horaFinal);
+
     if (formNuevaDonacion.status != "INVALID") {
 
       //validando que los campos no vayan vacios
