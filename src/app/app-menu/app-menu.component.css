@@ -1,3 +1,5 @@
+/* TODO Adjust CSS blq-5  */
+
 .Subtract {
   height: 100%;
   flex-grow: 0;
@@ -269,6 +271,23 @@
 .blq-5:hover img:nth-child(1),
 .blq-5:hover img:nth-child(3) {
   display: block;
+}
+
+.blq-5-selected img:nth-child(3),
+.blq-5-selected img:nth-child(1) {
+  display: block;
+}
+
+.blq-5-selected img:nth-child(2) {
+  display: none;
+}
+
+.blq-5-selected {
+  color: #0e7b77;
+  background: url("../../assets/images/Subtract-lg.svg");
+  background-position: left;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .blq-2>img,

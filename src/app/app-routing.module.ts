@@ -47,7 +47,11 @@ import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/co
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
+import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
+
+// informe servicios profesionales
+import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 const routes: Routes = [
@@ -224,6 +228,18 @@ const routes: Routes = [
     canActivate: [SeguridadRouter]
   },
   { path: 'consulta-certificado-defuncion', component: ConsultaCertificadoDefuncionComponent, canActivate: [SeguridadRouter] },
+  // informe servicios profesionales
+  {
+    path: 'consulta-informe-servicios-profesionales', 
+    component: ConsultaInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+
+  },
+  {
+    path: 'detalle-informe-servicios-profesionales', 
+    component: DetalleInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,243 @@
+<app-menu></app-menu>
+<app-card-template>
+    <header header class="flex justify-content-between align-items-center title">
+        <label>
+            Consulta de Informe servicios profesionales Administración
+        </label>
+    </header>
+    <section content>
+        <form [formGroup]="formularioBusqueda" (submit)="buscar()">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="calendar">Fecha:</label>
+                        <input calendar class="form-control" id="calendar" type="text" placeholder="dd/mm/aaaa"
+                            [ngClass]="{'form-control-error': fecha.invalid && (fecha.dirty || fecha.touched )}"
+                            formControlName="fecha">
+                        <span class="glyphicon fondocalendar" aria-hidden="true">
+                            <div class="imgCalendar"></div>
+                        </span>
+                        <small class="form-text form-text-error Campo-obligatorio"
+                            *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Servicio:
+                        </label>
+                        <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
+                            formControlName="servicio" [disableOptionCentering]="true"
+                            [ngClass]="{'form-control-error': servicio.invalid && (servicio.dirty || servicio.touched )}">
+                            <mat-option class="select-font" [value]="''" selected>Seleccionar</mat-option>
+                            <mat-option class="select-font" [value]="servicio.cve_especialidad"
+                                *ngFor="let servicio of serviciosEspecialidad">
+                                {{ servicio.des_especialidad }}</mat-option>
+                        </mat-select>
+                        <small *ngIf="servicio.invalid && (servicio.dirty || servicio.touched)"
+                            class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Turno:
+                        </label>
+                        <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
+                            formControlName="turno" [disableOptionCentering]="true"
+                            [ngClass]="{'form-control-error': turno.invalid && (turno.dirty || turno.touched )}">
+                            <mat-option class="select-font" [value]="''" selected>Seleccionar</mat-option>
+                            <mat-option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{
+                                turno.des_turno }}
+                            </mat-option>
+                        </mat-select>
+                        <small *ngIf="turno.invalid && (turno.dirty || turno.touched)"
+                            class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Lugar:
+                        </label>
+                        <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
+                            formControlName="lugar" [disableOptionCentering]="true"
+                            [ngClass]="{'form-control-error': lugar.invalid && (lugar.dirty || lugar.touched )}">
+                            <mat-option class="select-font" [value]="''" selected>
+                                Seleccionar
+                            </mat-option>
+                            <mat-option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
+                                {{ lugar.des_completa_ubicacion }}
+                            </mat-option>
+                        </mat-select>
+                        <small *ngIf="lugar.invalid && (lugar.dirty || lugar.touched)"
+                            class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label tituloServicio">
+                            Responsable:
+                        </label>
+                        <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
+                            formControlName="responsable" [disableOptionCentering]="true"
+                            [ngClass]="{'form-control-error': responsable.invalid && (responsable.dirty || responsable.touched )}">
+                            <mat-option class="select-font" [value]="''" selected>
+                                Ingresar Responsable
+                            </mat-option>
+                            <mat-option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
+                                {{ lugar.des_completa_ubicacion }}
+                            </mat-option>
+                        </mat-select>
+                        <small *ngIf="responsable.invalid && (responsable.dirty || responsable.touched)"
+                            class="form-text form-text-error Campo-obligatorio">
+                            Campo obligatorio
+                        </small>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="col-auto mt-5 buttons">
+                        <button class="btn btn-default btuser" id="btnLimpiar" type="button" (click)="limpiar()">
+                            Limpiar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-guardar buttonL" id="btnBuscar">
+                            Buscar
+                        </button>
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="col-auto mt-5 buttons-L">
+                        <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()" id="btnLimpiar">
+                                Limpiar
+                              </button>
+                        <button type="submit" class="btn btn-primary btn-guardar buttonL" (click)="buscar()" id="btnBuscar">
+                                Buscar
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="busqueda-label">Búsquedas anteriores</label>
+            </div>
+            <div class="col-md-6 flex justify-content-end">
+                <div class="form-group pages">
+                    <label class="control-label">Visualizar datos</label>
+                    <select class="form-select ml-5 select-view-data" [(ngModel)]="pageSize">
+                        <option [ngValue]="5 ">5</option>
+                        <option [ngValue]="10 ">10</option>
+                        <option [ngValue]="15 ">15</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="formInfo">
+            <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
+                <div class="container-busqueda">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="tabla">
+                                <thead>
+                                    <tr>
+                                        <th class="encabezadoTable celdaEncabezadoTable">
+                                            <div class="labelEncabezadoTable">Número</div>
+                                            <div>
+                                                <i class="fa-solid fa-caret-up arrow arrow-up"
+                                                    [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'asc'}"
+                                                    (click)="sortBy('numero', 'asc', 'numero')">
+                                                </i>
+                                                <i class="fa-solid fa-caret-down arrow arrow-down"
+                                                    [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'desc'}"
+                                                    (click)="sortBy('numero', 'desc', 'numero')">
+                                                </i>
+                                            </div>
+                                        </th>
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
+                                            Paciente</th>
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
+                                            Hora de
+                                            la cita
+                                        </th>
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
+                                            Agregado médico
+                                        </th>
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
+                                            Primera
+                                            vez</th>
+                                        <th class="encabezadoTable" class="celdaEncabezadoTableSec">
+                                            Citado
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+                                        <td class="bordesTablaFecha"
+                                            style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                                            (click)="irDetalle(item);">{{ item.numero }}</td>
+                                        <td class="bordesTablaDescripcion"
+                                            style="padding-left: 30px; text-align: left !important;"> {{item.paciente}}
+                                        </td>
+                                        <td class="bordesTablaDescripcion"
+                                            style="padding-left: 30px; text-align: left !important;"> {{item.horaCita}}
+                                        </td>
+                                        <td class="bordesTablaDescripcion"
+                                            style="padding-left: 30px; text-align: left !important;">
+                                            {{item.agregadoMedico}} </td>
+                                        <td class="bordesTablaDescripcion"
+                                            style="padding-left: 30px; text-align: left !important;">
+                                            {{item.primeraVez}}
+                                        </td>
+                                        <td class="bordesTablaDescripcion"
+                                            style="padding-left: 30px; text-align: left !important;"> {{item.citado}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row col-md-12"
+                        style="height: 40px; border: 1px solid #ddd; margin-top: 0%; margin-left: 0px;">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div class="Rectangle-9601" style="margin-top: 0px !important;  justify-content: center; ">
+                                <div class="">
+                                    <pagination-controls style="margin-left: auto; margin-right: auto;content: '>';"
+                                        class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""
+                                        screenReaderPaginationLabel="Pagination">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="flex align-items-center justify-content-end content-page">
+                                <label class="control-label page-label">Página</label>
+                                <div class="form .wa-3 " style="text-align: center; width: 13%;">
+                                    <div class="page"> {{page}} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <ng-template #mostrarSeccionSinResultados>
+            <div class="row">
+                <div class="div-container-image">
+                    <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
+                </div>
+            </div>
+        </ng-template>
+    </section>
+</app-card-template>

@@ -1,0 +1,276 @@
+:host {
+    font-family: Montserrat;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #222222;
+}
+
+.control-label {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.form-control {
+    font-size: 14px;
+    line-height: 17px;
+}
+
+#calendar-input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.datepicker-group .has-feedback label~.glyphicon,
+.datepicker-group label~.form-control-feedback,
+.datepicker-group label~.glyphicon,
+.has-feedback label~.form-control-feedback {
+    top: 21px
+}
+
+.fondocalendar {
+    background-color: #eeeeee;
+    transform: translateY(2%);
+    background-size: 10px 12px;
+    background-repeat: no-repeat;
+    height: 30px;
+    border-radius: 2px 2px 2px 2px;
+}
+
+.imgCalendar {
+    background-image: url("../../../assets/images/calendario.svg");
+    background-repeat: no-repeat;
+    color: #191919;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-49%);
+    background-size: 20px 19px;
+    margin-left: -1.6px;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.buttons-L {
+    padding-right: 0.1em !important;
+}
+
+#btnLimpiar,
+#btnBuscar {
+    /* min-width: 83px !important;
+    min-height: 39px !important;
+    border-radius: 3px;
+    padding: 5px;
+    align-self: stretch;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    margin-bottom: 0 !important; */
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    margin: 5px 15px 0 10px !important;
+    padding: 5px;
+    align-self: stretch;
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+}
+
+.busqueda-label {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #666666;
+}
+
+.pages {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.errorimg {
+    width: 289px;
+    height: 197px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.div-container-image {
+    width: 289px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tabla {
+    width: 100%;
+}
+
+.tabla>tbody>tr>td,
+.tabla>tbody>tr>th,
+.tabla>tfoot>tr>td,
+.tabla>tfoot>tr>th,
+.tabla>thead>tr>td,
+.tabla>thead>tr>th {
+    padding: 1.8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+td,
+th {
+    font-size: 14px;
+}
+
+.encabezadoTable {
+    width: 150;
+    text-align: left;
+    background-color: rgba(196, 196, 196, 0.1);
+    border: 1px solid #EEEEEE;
+    text-align: left;
+}
+
+.celdaEncabezadoTable {
+    padding: 8px 30px 5px;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    gap: 25px;
+}
+
+.celdaEncabezadoTableSec {
+    padding: 8px 30px 5px; text-align: left;
+}
+
+.labelEncabezadoTable {
+    margin-left: -15px;
+}
+
+.bordesTablaFecha {
+    border: 1px solid #ddd;
+    text-align: center !important;
+    padding-top: 14px;
+    width: 17%;
+}
+
+.bordesTablaDescripcion {
+    border: 1px solid #ddd;
+    text-align: left !important;
+}
+
+.my-pagination ::ng-deep .current {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+    background: rgb(143, 4, 4);
+    margin: 0 1em;
+    display: inline-block;
+    color: white;
+    font-size: 17.47px;
+    position: relative;
+    margin-top: 1%;
+    text-decoration: none;
+}
+
+.container-busqueda {
+    padding-bottom: 3.7%;
+}
+
+.page-label {
+    padding-top: 4px;
+    margin-right: 10px;
+}
+
+.content-page {
+    margin-right: -7%;
+    margin-top: 1.3%;
+}
+
+.page {
+    float: right;
+    margin-right: 24%;
+    margin-top: -26%;
+    color: gray;
+}
+
+.div-page {
+    text-align: center;
+    width: 13%;
+}
+
+.form {
+    width: 60%;
+    height: 29px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+
+
+.spanCaracteres {
+    font-size: 14px;
+    font-weight: 200;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.redColor {
+    color: #E10000 !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 45px;
+    /* or 450% */
+    display: flex;
+    align-items: center;
+}
+
+.Campo-obligatorio {
+    width: 101px;
+    height: 14px;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #e10000;
+}
