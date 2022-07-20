@@ -45,6 +45,7 @@ import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/co
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
+import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -84,6 +85,10 @@ const routes: Routes = [
   { path: 'nuevo-aviso-mp', component: NuevoAvisoMpComponent, canActivate: [SeguridadRouter] },
   { path: 'consulta-aviso-mp', component: ConsultaAvisoMpComponent, canActivate: [SeguridadRouter] },
   //volanteDonacion
+  {
+    path: 'consulta-donacion-sangre-administracion',
+    component: ConsultaDonacionSangreAdministracionComponent
+  },
   {
     path: 'agregar-volante-donacion-sangre',
     component: NuevoVdonacionSangreComponent, canActivate: [SeguridadRouter],

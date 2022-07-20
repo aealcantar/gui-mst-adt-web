@@ -23,6 +23,10 @@ export class AppMenuComponent implements OnInit {
     this.router.navigate(["consulta-cronica-grupal"], { skipLocationChange: true });
   }
 
+  irVolanteDonacionSangre() {
+    this.router.navigate(["consulta-donacion-sangre-administracion"], { skipLocationChange: true });
+  }
+
   irBusquedaDePacientesPorNss() {
     this.router.navigate(["busqueda"], { skipLocationChange: true });
   }
