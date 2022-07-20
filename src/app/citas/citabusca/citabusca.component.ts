@@ -129,7 +129,7 @@ export class CitabuscaComponent implements OnInit, OnDestroy {
         info: false,
         searching: false,
         "lengthChange": false,
-        "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
+        "dom": "t<'table-pie' <'#cargalay.col-md-3'><'col-md-6 col-lg-6 text-center'p><'#nopag.col-md-3'>>",
         "language": {
           "paginate": {
             "first": "First page",
