@@ -59,4 +59,13 @@ export class CertificadoDefuncionService {
       opt
     );
   }
+  getPagination(fechaInicio: string, fechaFin: string){
+    const opt = {
+      params : {
+        fechaInicio,
+        fechaFin
+      }
+    }
+    return this.http.get<any>(environment.msmtsControlInterno+'/getPagination',opt)
+  }
 }
