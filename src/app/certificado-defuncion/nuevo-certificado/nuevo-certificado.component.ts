@@ -156,7 +156,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         'DD/MM/YYYY'
       ).format('YYYY-MM-DD');
       const fechaEntrega = moment(
-        certificadoDefuncion.fechaDefuncion,
+        certificadoDefuncion.fechaDeEntregaDeCertificado,
         'DD/MM/YYYY'
       ).format('YYYY-MM-DD');
       certificadoDefuncion.horaDefuncion = horaDefuncnion;
