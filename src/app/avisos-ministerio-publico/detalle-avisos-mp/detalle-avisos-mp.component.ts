@@ -89,13 +89,14 @@ export class DetalleAvisoMpComponent implements OnInit {
       servicio: this.avisoMp?.especialidad,
       cama: this.avisoMp?.cama,
       fecIngreso: this.avisoMp?.fechaIngreso,
-      hrIngreso: this.avisoMp?.horaIngreso,
+      hrIngreso: moment(this.avisoMp?.horaIngreso, 'HH:mm:ss').format('HH:mm:ss a'),
       observaciones: this.avisoMp?.lesionesPaciente,
       nomMedico: this.avisoMp?.nombreMedico,
       matriculaMed: this.avisoMp?.matriculaMedico,
       nomTS: this.avisoMp?.nombreTrabajadorSocial,
       matTS: this.avisoMp?.matriculaTrabajadorSocial,
     }
+    
     this.avisoMinisterioPublicoService.downloadPdf(imprimirAvisoObj).subscribe(
       (response: any) => {
         var file = new Blob([response], { type: 'application/pdf' });
