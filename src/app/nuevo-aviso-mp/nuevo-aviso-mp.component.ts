@@ -153,10 +153,6 @@ export class NuevoAvisoMpComponent implements OnInit {
 
   }
 
-  modalcarga(content: any) {
-
-  }
-
   onChangeEstado(): void {
     this.estudioSocialService.getCatMunicipiosByEstado(this.editForm.get('idEstado').value).toPromise().then(
       (municipios: Municipio[]) => {
@@ -177,4 +173,20 @@ export class NuevoAvisoMpComponent implements OnInit {
     }
   }
 
+  modalcarga() {
+    $('#content').modal({
+      keyboard: false,
+      backdrop: 'static'
+    })
+    $('#content').modal('show');
+  }
+
+  cancelarModal() {
+    $('#content').modal('hide');
+  }
+
+  salirModal() {
+    this.router.navigateByUrl("/consulta-aviso-mp");
+    $('#content').modal('hide');
+  }
 }

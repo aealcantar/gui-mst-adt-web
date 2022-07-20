@@ -204,7 +204,7 @@
           style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>
-        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;">
+        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;" (click)="modalcarga()">
           Cancelar
         </button>
       </div>
@@ -212,3 +212,30 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
+
+<div class="modal fade" role="dialog" id="content" #content>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center modalAtencion" fxLayoutAlign="space-between center" fxLayout="column">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="lineaSeparador"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+        <label class="tituloModal textConfirmacion">¿Desea salir sin guardar</label>
+        <br>
+        <label class="textConfirmacion"> los cambios?</label>
+      </div>
+      <div class="col-md12 row divBtnModal">
+        <div class="col-md10" width="495px" height="118px" aling="center" style="padding-right: 20%;">
+          <button type="button" (click)="salirModal()" class="btn btn-primary buttonL btnGuardar">
+            Aceptar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="cancelarModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
