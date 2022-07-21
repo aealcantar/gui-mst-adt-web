@@ -144,12 +144,15 @@ textarea {
 }
 
 .divCustomHours {
-  width: 13.5% !important;
+  width: 67% !important;
+  margin-left: -29px;
 }
 
 .divCustomMinutes {
-  float: right;
-  width: 15% !important;
+  width: 68% !important;
+  margin-left: 90px;
+  /* background-color: beige; */
+  position: absolute;
 }
 
 .spanInputCustom {
@@ -195,4 +198,26 @@ textarea {
   width:495px; height: 118px; text-align: center; margin: auto;
   padding: 15px; background-color: #FAFAFA; border-radius: 10px;
 
+}
+
+.caracteres {
+  width: 145px;
+  height: 10px;
+  top: 295px;
+  left: 10px;
+  font-family: 'Montserrat';
+  font-weight: 300;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 17px;
+  line-height: 100%;
+  vertical-align: top;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+.separacion{
+  padding-bottom: 15px;
 }
