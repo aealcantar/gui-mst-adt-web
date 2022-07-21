@@ -303,7 +303,12 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       fechaEstudio: moment(this.estudioMedico.fecFecha, 'YYYY-MM-DD').format(
         'DD/MM/YYYY',
       ),
-      
+      datosComplement: this.estudioMedico.datoComplementario,
+      diagSocialPac: this.estudioMedico.diagSocialPaciente,
+      diagSocialFam: this.estudioMedico.diagSocialFamilia,
+      planTratSocial: this.estudioMedico.planTratSocial,
+      accRealizadas: this.estudioMedico.accionRealizada,
+      condicHogar: this.estudioMedico.condicionHogar,
     }
 
     console.log('DATA REPORT: ', reporteEstudioMedicoSocial)
