@@ -3,6 +3,7 @@ import { HorarioTurno } from "./horario.turno.model";
 
 export class Horario {
   	public  horario:number;
+	public idUbicacion: number;
 	public estatus:HorarioStatus;
 	public dia:string;
 	public turno:HorarioTurno;
