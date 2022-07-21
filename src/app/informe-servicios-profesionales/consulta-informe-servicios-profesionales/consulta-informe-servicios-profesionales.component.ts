@@ -1,8 +1,10 @@
 // TODO: Eliminar datos prueba
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import * as moment from "moment";
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
+import { InformeServiciosProfesionalesService } from "src/app/service/informe-servicios-profesionales.service";
 declare var $: any;
 
 @Component({
@@ -61,7 +63,24 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         }
     ];
 
-    constructor() { }
+    // observers
+    lugaresObserver = {
+        next: (response: any) => console.log(response),
+        error: (error: HttpErrorResponse) => console.log(error),
+        finally: () => console.log('end')
+    }
+    serviciosObserver = {
+        next: (servicios: any) => this.serviciosEspecialidad = servicios,
+        error: (error: HttpErrorResponse) => console.log(error),
+        finally: () => console.log('end')
+    }
+    turnosObserver = {
+        next: (turnos: any) => this.turnos = turnos,
+        error: (error: HttpErrorResponse) => console.log(error),
+        finally: () => console.log('end')
+    }
+
+    constructor(private informeServProfService: InformeServiciosProfesionalesService) { }
 
     ngOnInit(): void {
         this.dtOptions = {
@@ -73,6 +92,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
             searching: false,
         };
         // this.datosBusqueda = this.datosPrueba
+        this.cargarCatalogos();
     }
 
     ngAfterViewInit(): void {
@@ -84,7 +104,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
             dateFormat: 'dd/mm/yy',
             onSelect: (date: any) => {
                 if (date == '') return
-                date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                // date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
                 this.formularioBusqueda.get('fecha')?.patchValue(date)
             },
             onClose: (date: any) => {
@@ -123,7 +143,9 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     }
 
     cargarCatalogos(): void {
-        
+        this.informeServProfService.getCatTurnos().subscribe(this.turnosObserver);
+        this.informeServProfService.getCatServicios().subscribe(this.serviciosObserver);
+        // this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
     }
 
     validarCamposObligatorios(): void {
