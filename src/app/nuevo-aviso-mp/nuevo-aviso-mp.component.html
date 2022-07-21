@@ -108,7 +108,7 @@
               </mat-select>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <span class="spanInput">En la cama*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de cama"
               maxlength="3" formControlName="numCama" type="text" numbersOnly />
@@ -124,37 +124,34 @@
             </div>
           </div>
 
-          <div class="col-md-2 divCustomHours">
+          <div class="row col-md-3" style="padding-left: 31px;">
             <span class="spanInput">Hora de ingreso*:</span>
-            <div style="display: flex;">
-              <span class="spanInput spanInputCustom">Hora*</span>
-              <mat-select class="form-control form-control-mat-select" id="horaIngresoTmp"
-                formControlName="horaIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
-                (selectionChange)="horaIngresoChange();">
-                <mat-option [value]="00" selected class="select-font optionSelect ">00</mat-option>
-                <mat-option [value]="01" selected class="select-font optionSelect ">01</mat-option>
-                <mat-option [value]="02" selected class="select-font optionSelect ">02</mat-option>
-                <mat-option [value]="03" selected class="select-font optionSelect ">03</mat-option>
-                <mat-option [value]="04" selected class="select-font optionSelect ">04</mat-option>
-                <mat-option [value]="05" selected class="select-font optionSelect ">05</mat-option>
-              </mat-select>
+            <div class="col-md-12">
+            <div class="divCustomHours col-md-6 " style="width: 20%;">
+
+                <span class="spanInput spanInputCustom">Hora*</span>
+                <mat-select class="form-control form-control-mat-select" style="width: 62px; overflow: revert;" id="horaIngresoTmp"
+                  formControlName="horaIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
+                  (selectionChange)="horaIngresoChange();"  placeholder="00">
+                  <mat-option [value]="''" selected class="select-font">00</mat-option>
+                  <mat-option selected class="select-font optionSelect " [value]="horas"
+                  *ngFor="let hora of horas">{{hora.hora}}</mat-option>
+                </mat-select>
+
+            </div>
+            <div class="divCustomMinutes col-md-6">
+
+                <span class="spanInput spanInputCustom">Minutos*</span>
+                <mat-select class="form-control form-control-mat-select"  style="width: 62px; overflow: revert;" id="minutosIngresoTmp"
+                  formControlName="minutosIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
+                  (selectionChange)="horaIngresoChange();"  placeholder="00">
+                  <mat-option [value]="''" selected class="select-font">00</mat-option>
+                  <mat-option selected class="select-font optionSelect " [value]="minutos"
+                  *ngFor="let minuto of minutos">{{minuto.minuto}}</mat-option>
+                </mat-select>
+
             </div>
           </div>
-          <div class="col-md-2 divCustomMinutes">
-            <br>
-            <div style="display: flex;">
-              <span class="spanInput spanInputCustom">Minutos*</span>
-              <mat-select class="form-control form-control-mat-select" id="minutosIngresoTmp"
-                formControlName="minutosIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
-                (selectionChange)="horaIngresoChange();">
-                <mat-option [value]="00" selected class="select-font optionSelect ">00</mat-option>
-                <mat-option [value]="01" selected class="select-font optionSelect ">01</mat-option>
-                <mat-option [value]="02" selected class="select-font optionSelect ">02</mat-option>
-                <mat-option [value]="03" selected class="select-font optionSelect ">03</mat-option>
-                <mat-option [value]="04" selected class="select-font optionSelect ">04</mat-option>
-                <mat-option [value]="05" selected class="select-font optionSelect ">05</mat-option>
-              </mat-select>
-            </div>
           </div>
         </div>
 
@@ -162,11 +159,13 @@
           <div class="col-md-12">
             <span class="spanInput">El (la) lesionado presenta*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
-              formControlName="lesionesPaciente" type="text" />
+              formControlName="lesionesPaciente" type="text" maxlength="2000" #datosAccionesRef />
+            <span class="caracteres">{{ datosAccionesRef.value?.length }} /
+              {{ datosAccionesRef.getAttribute("maxlength") }} caracteres</span>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row separacion">
           <div class="col-md-6">
             <span class="spanInput">Nombre médico tratante*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
@@ -204,7 +203,8 @@
           style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>
-        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;" (click)="modalcarga()">
+        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;"
+          (click)="modalcarga()">
           Cancelar
         </button>
       </div>

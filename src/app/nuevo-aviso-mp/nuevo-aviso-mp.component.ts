@@ -26,6 +26,17 @@ export class NuevoAvisoMpComponent implements OnInit {
   public listaServicios: Array<any> = [];
   public catEstados: Estado[] = [];
   public catMunicipios: Municipio[] = [];
+  horas = [{"hora":"00"},{"hora":"01"},{"hora":"02"},{"hora":"03"},{"hora":"04"}, {"hora":"05"},{"hora":"06"},{"hora":"07"},
+    {"hora":"08"}, {"hora":"09"},{"hora":"10"},{"hora":"11"},{"hora":"12"},{"hora":"13"},{"hora":"14"},{"hora":"15"},
+    {"hora":"16"},{"hora":"17"},{"hora":"18"},{"hora":"19"},{"hora":"20"},{"hora":"21"},{"hora":"22"},{"hora":"23"},
+    {"hora":"24"},];
+    minutos = [{"minuto":"00"},{"minuto":"01"},{"minuto":"02"},{"minuto":"03"},{"minuto":"04"}, {"minuto":"05"},{"minuto":"06"},{"minuto":"07"},
+    {"minuto":"08"}, {"minuto":"09"},{"minuto":"10"},{"minuto":"11"},{"minuto":"12"},{"minuto":"13"},{"minuto":"14"},{"minuto":"15"},
+    {"minuto":"16"},{"minuto":"17"},{"minuto":"18"},{"minuto":"19"},{"minuto":"20"},{"minuto":"21"},{"minuto":"22"},
+    {"minuto":"23"},{"minuto":"24"},{"minuto":"25"},{"minuto":"26"},{"minuto":"27"},{"minuto":"28"},{"minuto":"29"},
+    {"minuto":"30"},{"minuto":"31"},{"minuto":"32"},{"minuto":"33"},{"minuto":"34"},{"minuto":"35"},{"minuto":"36"},{"minuto":"37"},{"minuto":"38"},{"minuto":"39"},
+    {"minuto":"40"},{"minuto":"41"},{"minuto":"42"},{"minuto":"43"},{"minuto":"44"},{"minuto":"45"},{"minuto":"46"},{"minuto":"47"},{"minuto":"48"},{"minuto":"49"},
+    {"minuto":"50"},{"minuto":"51"},{"minuto":"52"},{"minuto":"53"},{"minuto":"54"},{"minuto":"55"},{"minuto":"56"},{"minuto":"57"},{"minuto":"58"},{"minuto":"59"},]
 
   constructor(
     private router: Router,

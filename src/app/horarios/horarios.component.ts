@@ -196,6 +196,8 @@ export class HorariosComponent implements OnInit {
           } else {
             this.agregarHorarioBtn = true;
             this.lblBtnHabilitar = 'Habilitar día';
+            this.lblHabilitar = 'habilitar';
+            
             let index = this.semana.findIndex(diasemana => diasemana == dia);
             this.diainhabil = {
               dia: index + 1,
@@ -546,6 +548,7 @@ export class HorariosComponent implements OnInit {
     this.cambiarTurno();
     this.cambiarEstatus();
     this.horarioSeleccionado.turno = this.turnoSeleccionado;
+    this.horarioSeleccionado.idUbicacion = Number(this.cveUbicacion);
     console.log(this.horarioSeleccionado);
     this.msjLoading("Guardando...");
     this.horarioService.save(this.horarioSeleccionado).subscribe((resp: HttpResponse<HorarioResponse>) => {

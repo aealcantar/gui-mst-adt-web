@@ -30,5 +30,5 @@ export class VolantesDonacion {
 	desObservaciones?:string;
 	nss?:string;
 	nssCompleto?:string;
-
+	tipoSangre?:string;
 }

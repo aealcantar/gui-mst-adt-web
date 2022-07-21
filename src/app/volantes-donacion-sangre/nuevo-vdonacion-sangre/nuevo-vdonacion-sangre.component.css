@@ -31,8 +31,10 @@
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: center;
+  text-align: left;
   color: #222222;
+  margin-top: 5px;
+  margin-left: 0px;
 }
 
 .Bg {
@@ -79,23 +81,6 @@
   letter-spacing: normal;
   text-align: left;
   color: #222;
-}
-
-.instrucciones {
-  width: 270px;
-  height: 17px;
-  margin: 14.5px 711px 10px 10px;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #222;
-  margin-top: 5px;
-  margin-left: 10px;
 }
 
 .seccion {
@@ -427,4 +412,9 @@ background-position-y: 5px;
   left: 10px;
   font-size: 14px;
   color: #222222;
+}
+
+.label-obligatorios {
+  font-weight: 400 !important;
+  margin-left: 2px !important;
 }
