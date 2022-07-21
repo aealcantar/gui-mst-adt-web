@@ -9,15 +9,15 @@
     <div class="container seccion">
       <div class="row">
         <div class="col-md-4">
-          <div class="form-group datepicker-group">
+          <div class="form-group wrap-text datepicker-group">
             <span class="spanInput">Fecha de defunción:</span>
             <span class="labelDetalle">
-              {{ certificado?.fechaDefuncion }}
+              {{ certificado?.fechaDefuncion |date:"dd/MM/yyyy" }}
             </span>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group datepicker-group">
+          <div class="form-group wrap-text datepicker-group">
             <span class="spanInput">Hora de defunción:</span>
 
             <span class="labelDetalle">
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">Folio del certificado:</span>
             <span class="labelDetalle">
               {{ certificado?.folioCertificacion }}
@@ -36,7 +36,7 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">Nombre del asegurado:</span>
             <span class="labelDetalle">
               {{ certificado?.nombreAsegurado }}
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">No. de Seguridad Social:</span>
             <span class="labelDetalle">
               {{ certificado?.nssPaciente }}
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">Servicio:</span>
             <span class="labelDetalle">
               {{ certificado?.nombreServicio }}
@@ -62,24 +62,24 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <div class="form-group datepicker-group">
+          <div class="form-group wrap-text datepicker-group">
             <span class="spanInput">Fecha la entrega de certificado:</span>
             <span class="labelDetalle">
-              {{ certificado?.fechaDeEntregaDeCertificado }}
+              {{ certificado?.fechaDeEntregaDeCertificado |date:"dd/MM/yyyy" }}
             </span>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group datepicker-group">
+          <div class="form-group wrap-text datepicker-group">
             <span class="spanInput">Hora de entrega del certificado:</span>
 
             <span class="labelDetalle">
-              {{ certificado?.horaDeEntregaDeCertificado }}
+              {{ certificado?.horaDeEntregaDeCertificado  }}
             </span>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">Funeraria:</span>
             <span class="labelDetalle">
               {{ certificado?.nombreFuneraria }}
@@ -89,7 +89,7 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput"
               >Nombre del familiar que recibe certificado:</span
             >
@@ -99,7 +99,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput"
               >Parentesco del familiar que recibe certificado:</span
             >
@@ -109,7 +109,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div style=" word-break: break-word;" class="form-group wrap-text">
             <span class="spanInput">Observaciones:</span>
             <span class="labelDetalle">
               {{ certificado?.observaciones }}
@@ -119,7 +119,7 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">Nombre del Trabajador social</span>
             <span class="labelDetalle">
               {{ certificado?.nombrePersonalElaboro }}
@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
+          <div class="form-group wrap-text">
             <span class="spanInput">Matricula del Trabajador social</span>
             <span class="labelDetalle">
               {{ certificado?.matriculaPersonalElaboro }}

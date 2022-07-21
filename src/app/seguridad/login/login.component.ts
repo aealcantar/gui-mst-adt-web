@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   logindata: any = this.formBuilder.group({
     usuario: ['', Validators.compose([Validators.required, Validators.maxLength(9)])],
-    password: ['',Validators.compose([Validators.required, Validators.maxLength(9)])],
+    password: ['', Validators.compose([Validators.required, Validators.maxLength(9)])],
     token: ['', Validators.required]
   });
 
@@ -122,14 +122,23 @@ export class LoginComponent implements OnInit {
                 this.authService.guardarUsuarioEnSesion(response);
                 this.authService.userLogged$.next(true);
                 this.authService.isAuthenticatedObs$.next(true);
+
+                let usuario: Usuario = new Usuario();
+                usuario = JSON.parse(sessionStorage.getItem('usuario'));
+                if (usuario.nameRolUser.toLocaleLowerCase() === 'administrador') {
+                  this.router.navigate(['/catalogos/cargaCatalogos/0']);
+                  
+                } else {
+                  this.router.navigate(["/busqueda"]);
+                }
+
               }
             );
             this.authService.guardarToken(result.access_token);
             this.seguridadService.registrarUsuario(this.usuario);
-            this.router.navigate(["/catalogos"]);
-          },
+                      },
           (err: HttpErrorResponse) => {
-            window.scroll(0,0);
+            window.scroll(0, 0);
             switch (err.error.message) {
               case 'Usuario invalido':
                 err.error.message = "¡Usuario inválido!"
@@ -142,7 +151,7 @@ export class LoginComponent implements OnInit {
             }
             console.log("error " + err.error.message);
             if (err.error.message == undefined) {
-              this.muestraAlerta('Servicio no esta disponible. Favor de reportarlo!','alert-danger','Error');
+              this.muestraAlerta('Servicio no esta disponible. Favor de reportarlo!', 'alert-danger', 'Error');
               return;
             }
             if (err.status == 400) {
@@ -150,7 +159,7 @@ export class LoginComponent implements OnInit {
             } else {
               this.strMsjError = "" + err.status;
             }
-            this.muestraAlerta(err.error.message,'alert-danger','Error');
+            this.muestraAlerta(err.error.message, 'alert-danger', 'Error');
           }
         );
       } catch (error) {
@@ -158,11 +167,11 @@ export class LoginComponent implements OnInit {
         // this.muestraAlerta();
       }
     } else {
-      this.muestraAlerta('Ingresa los datos obligatorios','alert-danger','Error');
+      this.muestraAlerta('Ingresa los datos obligatorios', 'alert-danger', 'Error');
     }
   }
 
-  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?:any) {
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
     this.alert = new AlertInfo;
     this.alert = {
 
@@ -177,7 +186,7 @@ export class LoginComponent implements OnInit {
         type: 'custom',
         visible: false,
       };
-      if(funxion != null){
+      if (funxion != null) {
         funxion();
       }
     }, 2000);
@@ -207,18 +216,18 @@ export class LoginComponent implements OnInit {
       this.mailService.recuperarPassword(correo).subscribe(
         (result) => {
           $('#content').modal('hide');
-          if (result.status == '200') this.muestraAlerta('¡Correo enviado satisfactoriamente!','alert-success',null);
-          else this.muestraAlerta(result.status,'alert-danger','Error');
+          if (result.status == '200') this.muestraAlerta('¡Correo enviado satisfactoriamente!', 'alert-success', null);
+          else this.muestraAlerta(result.status, 'alert-danger', 'Error');
         },
         (err: HttpErrorResponse) => {
           console.log("eror " + err.error.status);
           $('#content').modal('hide');
-          this.muestraAlerta('¡Correo no registrado!','alert-danger','Error');
+          this.muestraAlerta('¡Correo no registrado!', 'alert-danger', 'Error');
         }
       );
     } else {
       $('#content').modal('hide');
-      this.muestraAlerta('¡La cuenta de correo no contiene una estructura válida!','alert-danger','Error');
+      this.muestraAlerta('¡La cuenta de correo no contiene una estructura válida!', 'alert-danger', 'Error');
     }
     this.correodata.reset();
   }

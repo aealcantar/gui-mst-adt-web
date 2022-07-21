@@ -28,12 +28,16 @@ export class AvisoMinisterioPublicoService {
     return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisosMpByFechas/${fechaInicial}/${fechaFinal}`);
   }
 
+  getCatUnidadesMedicas() {
+    return this.http.get<any>(`${environment.msmtsCatalogos}/api/lisUnidades`);
+  }
+
   downloadPdf(data: any): Observable<Blob> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
-    return this.http.post(`${environment.msmtsCronicas}/reporteCronica`, JSON.stringify(data), {responseType : 'blob'});
+    return this.http.post(`${environment.msmtsAvisosMP}/reporteAvisoMP`, JSON.stringify(data), {responseType : 'blob'});
   }
 
 }

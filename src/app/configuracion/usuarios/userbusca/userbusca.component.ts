@@ -66,7 +66,7 @@ export class UserbuscaComponent implements OnInit  {
       info: false,
       searching: false,
       "lengthChange": false,
-      "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
+      "dom": "t<'table-pie' <'#cargalay.col-md-3'><'col-md-6 col-lg-6 text-center'p><'#nopag.col-md-3'>>",
       "language": {
         "paginate": {
           "first": "First page",
@@ -180,7 +180,10 @@ export class UserbuscaComponent implements OnInit  {
     dialogo1.afterClosed().subscribe(art => {
       console.log("result: ", art);
       if (!art['iscancel']){
-        console.log('cargado');
+        console.log('Aceptar Carga');
+        this.buscarusuario();
+      }else if(art['statusCarga']){
+        console.log('Cerrar carga exitosa');
         this.buscarusuario();
       }
 

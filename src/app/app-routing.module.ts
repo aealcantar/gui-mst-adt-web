@@ -38,7 +38,9 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
+import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avisos-mp/detalle-avisos-mp.component';
 
 //donacion de sangre
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
@@ -172,6 +174,16 @@ const routes: Routes = [
     component: ConsultaAvisoMpComponent,
     canActivate: [SeguridadRouter]
   },
+  {
+    path: 'detalle-aviso-mp',
+    component: DetalleAvisoMpComponent,
+    canActivate: [SeguridadRouter]
+  },
+  {
+    path: 'consulta-aviso-mp-administracion',
+    component: ConsultaMpAdministracionComponent,
+    // canActivate: [SeguridadRouter]
+  },
   //volanteDonacion
   {
     path: 'agregar-volante-donacion-sangre',
@@ -196,7 +208,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
       {
-        path: 'cargaCatalogos',
+        path: 'cargaCatalogos/:idOrigen',
         component: CargaComponent,
       },
       {
