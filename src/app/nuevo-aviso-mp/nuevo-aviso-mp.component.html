@@ -11,15 +11,15 @@
         Por favor capture los siguientes datos:
       </span>
     </div>
-    <form novalidate class="formInfo" [formGroup]="editForm">
+    <form novalidate class="formInfo" [formGroup]="formEdit">
       <div class="container seccion">
         <div class="row">
 
           <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input fechaAvisoMP class="form-control" id="fechaAvisoMP" type="text" placeholder="Seleccionar fecha"
-                formControlName="fechaRegistroAviso" autocomplete="off">
+              <input avisompFec class="form-control" id="avisompFec" type="text" placeholder="Seleccionar fecha"
+                formControlName="fecha">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -29,16 +29,20 @@
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Estado*:</span>
-              <mat-select class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': submitted && editForm.controls.idEstado.errors}" id="idEstado"
-                formControlName="idEstado" [disableOptionCentering]="true" aria-label="Servicio"
-                placeholder="Seleccionar estado" (selectionChange)="onChangeEstado()">
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': submitted && formEdit.controls.idEstado.errors}"
+                id="idEstado" formControlName="idEstado"
+                [disableOptionCentering]="true" 
+                aria-label="Servicio"
+                placeholder="Seleccionar estado"
+                (selectionChange)="onChangeEstado()">
                 <mat-option [value]="''" selected class="select-font">Seleccionar estado</mat-option>
                 <mat-option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of catEstados">
                   {{ estado.des_nombre_completo}}
                 </mat-option>
               </mat-select>
-              <small *ngIf="submitted && editForm.controls.idEstado.errors"
+              <small *ngIf="submitted && formEdit.controls.idEstado.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
@@ -48,23 +52,25 @@
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Alcaldía o municipio*:</span>
-              <mat-select class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': submitted && editForm.controls.alcaldia.errors}" id="alcaldia"
-                formControlName="alcaldia" [disableOptionCentering]="true" aria-label="Servicio"
+              <mat-select
+                class="form-control form-control-mat-select"
+                [ngClass]="{'form-control-error': submitted && formEdit.controls.alcaldia.errors}"
+                id="alcaldia" formControlName="alcaldia"
+                [disableOptionCentering]="true" 
+                aria-label="Servicio"
                 placeholder="Seleccionar alcaldía">
                 <mat-option [value]="''" selected class="select-font">Seleccionar alcaldía</mat-option>
-                <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio"
-                  *ngFor="let municipio of catMunicipios">
+                <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio" *ngFor="let municipio of catMunicipios">
                   {{ municipio.des_municipio}}
                 </mat-option>
               </mat-select>
-              <small *ngIf="submitted && editForm.controls.alcaldia.errors"
+              <small *ngIf="submitted && formEdit.controls.alcaldia.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
               </small>
             </div>
           </div>
-
+          
           <div class="col-md-3">
             <span class="spanInput">Agencia del Ministerio público*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar agencia"
@@ -81,14 +87,23 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Hospital*:</span>
-              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar hospital"
-                formControlName="idUnidadHospital" type="text" readonly />
+              <!-- <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
+                  Seleccionar hospital</option>
+                <option class="select-font" [value]="1">Hospital 1</option>
+              </select> -->
+
+              <mat-select class="form-control form-control-mat-select" id="hospital" formControlName="nombreHospital"
+                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar hospital">
+                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option> -->
+                <mat-option class="select-font" [value]="1">Hospital 1</mat-option>
+              </mat-select>
             </div>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Ubicado en*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar ubicación"
-              formControlName="ubicacionHospital" type="text" readonly />
+              formControlName="agenciaMP" type="text" />
           </div>
         </div>
 
@@ -96,7 +111,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">En el servicio de*:</span>
-              <mat-select class="form-control form-control-mat-select" id="cveServicio" formControlName="cveServicio"
+              <mat-select class="form-control form-control-mat-select" id="servicio" formControlName="servicio"
                 [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
                 <mat-option [value]="''" selected class="select-font optionSelect ">
                   Seleccionar servicio
@@ -105,19 +120,21 @@
                   *ngFor="let item of listaServicios">
                   {{ item.des_especialidad }}
                 </mat-option>
+                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option> -->
+                <!-- <mat-option class="select-font" [value]="1">Servicio 1</mat-option>listaServicios -->
               </mat-select>
             </div>
           </div>
           <div class="col-md-2">
             <span class="spanInput">En la cama*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de cama"
-              maxlength="3" formControlName="numCama" type="text" numbersOnly />
+              formControlName="numeroCama" type="text" />
           </div>
           <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de ingreso*:</span>
-              <input fechaIngresoAvisoMP class="form-control" id="fechaIngresoAvisoMP" type="text"
-                placeholder="Seleccionar fecha" formControlName="fechaIngreso" autocomplete="off">
+              <input avisompIng class="form-control" id="avisompIng" type="text" placeholder="Seleccionar fecha"
+                formControlName="fechaIngreso">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -128,32 +145,20 @@
             <span class="spanInput">Hora de ingreso*:</span>
             <div style="display: flex;">
               <span class="spanInput spanInputCustom">Hora*</span>
-              <mat-select class="form-control form-control-mat-select" id="horaIngresoTmp"
-                formControlName="horaIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
-                (selectionChange)="horaIngresoChange();">
-                <mat-option [value]="00" selected class="select-font optionSelect ">00</mat-option>
-                <mat-option [value]="01" selected class="select-font optionSelect ">01</mat-option>
-                <mat-option [value]="02" selected class="select-font optionSelect ">02</mat-option>
-                <mat-option [value]="03" selected class="select-font optionSelect ">03</mat-option>
-                <mat-option [value]="04" selected class="select-font optionSelect ">04</mat-option>
-                <mat-option [value]="05" selected class="select-font optionSelect ">05</mat-option>
-              </mat-select>
+              <select class="form-control styleselect" formControlName="hora" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="hora" selected [value]="'0'">00</option>
+                <option class="select-font" [value]="1">01</option>
+              </select>
             </div>
           </div>
           <div class="col-md-2 divCustomMinutes">
             <br>
             <div style="display: flex;">
               <span class="spanInput spanInputCustom">Minutos*</span>
-              <mat-select class="form-control form-control-mat-select" id="minutosIngresoTmp"
-                formControlName="minutosIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
-                (selectionChange)="horaIngresoChange();">
-                <mat-option [value]="00" selected class="select-font optionSelect ">00</mat-option>
-                <mat-option [value]="01" selected class="select-font optionSelect ">01</mat-option>
-                <mat-option [value]="02" selected class="select-font optionSelect ">02</mat-option>
-                <mat-option [value]="03" selected class="select-font optionSelect ">03</mat-option>
-                <mat-option [value]="04" selected class="select-font optionSelect ">04</mat-option>
-                <mat-option [value]="05" selected class="select-font optionSelect ">05</mat-option>
-              </mat-select>
+              <select class="form-control styleselect" formControlName="minutos" aria-label="Servicio">
+                <option class="select-font optionSelect" placeholder="minutos" selected [value]="'0'">00</option>
+                <option class="select-font" [value]="1">01</option>
+              </select>
             </div>
           </div>
         </div>
@@ -162,7 +167,7 @@
           <div class="col-md-12">
             <span class="spanInput">El (la) lesionado presenta*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
-              formControlName="lesionesPaciente" type="text" />
+              formControlName="lesionesPresentadas" type="text" />
           </div>
         </div>
 
@@ -170,41 +175,36 @@
           <div class="col-md-6">
             <span class="spanInput">Nombre médico tratante*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
-              formControlName="nombreMedicoTratante" type="text" />
+              formControlName="nombreMedico" type="text" />
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matrícula*:</span>
+            <span class="spanInput">Matrícula del médico tratante*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
-              formControlName="matriculaMedicoTratante" type="text" numbersOnly maxlength="11" />
+              formControlName="matriculaMedico" type="text" />
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6">
-            <span class="spanInput">Nombre Trabajador(a) social:</span>
+            <span class="spanInput">Nombre Trabajador(a) social*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
-              formControlName="nombreTrabajadorSocial" type="text" />
+              formControlName="nombreTrabajador" type="text" />
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matrícula del(a) Trabajador(a) social:</span>
+            <span class="spanInput">Matrícula*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
-              maxlength="11" formControlName="matriculaTrabajadorSocial" type="text" numbersOnly />
+              formControlName="matriculaTrabajador" type="text" />
           </div>
-        </div>
-        <div style="padding-bottom: 9px; padding-top: 13px;">
-          <span class="instrucciones label-obligatorios" style="margin-left: 0em !important;">
-            *Campos obligatorios
-          </span>
         </div>
       </div>
     </form>
     <div class="row">
       <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
-        <button [disabled]="editForm.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
+        <button [disabled]="formEdit.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
           style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>
-        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;" (click)="modalcarga()">
+        <button type="button" class="btn btn-danger buttonL" style="float: right; border: solid 1px #b38e5d;">
           Cancelar
         </button>
       </div>
@@ -212,30 +212,3 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
-
-<div class="modal fade" role="dialog" id="content" #content>
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center modalAtencion" fxLayoutAlign="space-between center" fxLayout="column">
-        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
-        <div class="modal-title Atencin">Atención</div>
-      </div>
-      <div class="lineaSeparador"></div>
-      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
-        <label class="tituloModal textConfirmacion">¿Desea salir sin guardar</label>
-        <br>
-        <label class="textConfirmacion"> los cambios?</label>
-      </div>
-      <div class="col-md12 row divBtnModal">
-        <div class="col-md10" width="495px" height="118px" aling="center" style="padding-right: 20%;">
-          <button type="button" (click)="salirModal()" class="btn btn-primary buttonL btnGuardar">
-            Aceptar
-          </button>
-          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="cancelarModal()">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

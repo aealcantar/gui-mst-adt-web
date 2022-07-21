@@ -97,7 +97,6 @@ export class CargamasivaComponent implements OnInit {
   catFaltante: string = '';
   dataparams: any;
   onAlert = new EventEmitter();
-  cargaExitosa: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<CargamasivaComponent>,
@@ -138,7 +137,7 @@ export class CargamasivaComponent implements OnInit {
   }
 
   cancelar(iscancel: boolean) {
-    this.dialogRef.close({'iscancel': iscancel, 'statusCarga': this.cargaExitosa});
+    this.dialogRef.close({'iscancel': iscancel});
   }
 
 
@@ -698,8 +697,6 @@ export class CargamasivaComponent implements OnInit {
     if (this.regERROR != 0) {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_CARGA + msj, this._Mensajes.ERROR);
     } else {
-      this.cargaExitosa = true
-      console.log('exito');
       this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGA + msj, this._Mensajes.EXITO);
     }
 

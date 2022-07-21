@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterState } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth-service.service';
 
@@ -23,7 +23,7 @@ export class HeaderMenuComponent implements OnInit {
   constructor(
     private authenticationService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authenticationService.isAuthenticatedObs$;
@@ -37,34 +37,17 @@ export class HeaderMenuComponent implements OnInit {
       }
     )
     this.proyecto$ = this.authenticationService.getProjectObs();
-    this.verCatalogos();
-    this.verUsuarios();
-  }
-
-  blnCatalogos: boolean = false;
-  private verCatalogos() {
-    if (this.rol.trim().toLowerCase() === 'administrador' || this.rol.trim().toLowerCase() === 'trabajador social') {
-      this.blnCatalogos = true;
-    }
-  }
-
-  blnUsuarios: boolean = false;
-  private verUsuarios() {
-    if (this.rol.trim().toLowerCase() === 'administrador' ) {
-      this.blnUsuarios = true;
-    }
   }
 
   logOut() {
     this.authenticationService.logout();
   }
 
-  redirecciona(val: number) {
-    var ruta: string;
-    switch (val) {
+  redirecciona(val: number){
+    var ruta:string;
+    switch(val){
       case 1:
-
-        ruta = '/catalogos/cargaCatalogos/1';
+        ruta = '/catalogos/cargaCatalogos';
         break;
       case 2:
         ruta = '/buscauser';
@@ -76,7 +59,6 @@ export class HeaderMenuComponent implements OnInit {
         ruta = '/login';
         break;
     }
-    localStorage.setItem('origen',this.router.routerState.snapshot.url);
     this.router.navigate([ruta]);
   }
 

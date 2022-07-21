@@ -10,7 +10,6 @@ export class CertificadoDefuncionService {
   constructor(private http: HttpClient) {}
 
   insert(certificado: CertificadoDefuncion) {
-    console.log(JSON.stringify(certificado));
     return this.http.post<CertificadoDefuncion>(
       environment.msmtsControlInterno + '/insert',
       certificado

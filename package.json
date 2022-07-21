@@ -39,7 +39,6 @@
     "material-design-icons": "^3.0.1",
     "moment": "^2.29.3",
     "ng-recaptcha": "^9.0.0",
-    "ngx-mask": "^13.0.0",
     "ngx-material-timepicker": "^5.5.3",
     "ngx-pagination": "^5.1.1",
     "rxjs": "~7.5.0",

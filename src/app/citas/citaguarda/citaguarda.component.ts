@@ -124,15 +124,11 @@ export class CitaguardaComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    let estatus = localStorage.getItem('catalogosCompletos');
-    if (estatus === 'false') {
-      this.router.navigate(["/catalogos/cargaCatalogos/1"], { skipLocationChange: true });
-    } else {
-      this.paciente = this.tarjetaService.get() ? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
-      //console.log("paciente:" + this.paciente);
-      this.llenaparticipantes();
-      this.llenacatalogoservicios();
-    }
+    this.paciente = this.tarjetaService.get()? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
+    //console.log("paciente:" + this.paciente);
+    this.llenaparticipantes();
+    this.llenacatalogoservicios();
+
   }
 
   llenaparticipantes() {
@@ -463,7 +459,7 @@ export class CitaguardaComponent implements OnInit {
                     this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
                       next: (resp: any) => {
                         Swal.close();
-                        if (resp) {
+                        if(resp){
                           this.citaagendada = true;
                           this.muestraAlerta(this._Mensajes.MSJ_EXITO_AGENDA_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO);
                         } else {
@@ -480,7 +476,7 @@ export class CitaguardaComponent implements OnInit {
                   } else {
                     Swal.close();
                     this.citaagendada = false;
-                    this.muestraAlerta(resp.mensaje ? resp.mensaje : this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+                    this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                   }
                 },
                 error: (err) => {

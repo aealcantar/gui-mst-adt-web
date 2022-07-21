@@ -30,6 +30,18 @@ export class ConsultaCertificadoDefuncionComponent
   public numitems: number = 15;
   public order: string = 'desc';
   public tabla: [] = [];
+  /* obs agrege estas 2 variables para pruebas*/
+  fechaDesde: string = '';
+  fechaHasta: string = '';
+  /* obs agrege esta tabla para poner los datos dummie*/
+  /*
+  tabla=[
+  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
+  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
+  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
+  {"fecha":"20/06/1996","nombre":"arturo","nss":"213456"},
+  ];
+*/
   public extras: any;
   public datesForm!: FormGroup;
   public columnaId: string = 'fecFecha';
@@ -71,41 +83,38 @@ export class ConsultaCertificadoDefuncionComponent
     this.router.navigate(['nuevo-certificado-defuncion']);
   }
   buscar() {
-    
     const datos = this.formAdd.value;
-    const fechaIni = moment(datos.consultaDefuncionIni, "DD/MM/YYYY").format("YYYY-MM-DD");
-    const fechaFin = moment(datos.consultaDefuncionFin, "DD/MM/YYYY").format("YYYY-MM-DD");
-    
     this.certificadoService
       .list(
-        fechaIni,
-        fechaFin,
+        datos.consultaDefuncionIni,
+        datos.consultaDefuncionFin,
         datos.pagina,
         datos.count
       )
       .subscribe((response) => {
         this.datosBusqueda = response;
-        if (this.datosBusqueda.length == 0) {
-          this.muestraAlerta(
-            'Valide los filtros',
-            'alert-warning',
-            'Sin resultados'
-          );
-        }
       });
 
-
+    if (this.datosBusqueda.length == 0) {
+      this.muestraAlerta(
+        'Valide los filtros',
+        'alert-warning',
+        'Sin resultados'
+      );
+    }
   }
 
   limpiar() {
     this.formAdd.controls['consultaDefuncionIni'].setValue('');
     this.formAdd.controls['consultaDefuncionFin'].setValue('');
-    this.datosBusqueda = [];
   }
   sortBy(columnaId: string, order: string, type: string) {
+    console.log(columnaId, order, type);
+
     this.columnaId = columnaId;
     this.order = order;
-    this.datosBusqueda.sort((a: any, b: any) => {
+
+    this.tabla.sort((a: any, b: any) => {
       let c: any = this.converType(a[columnaId], type);
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
@@ -120,7 +129,7 @@ export class ConsultaCertificadoDefuncionComponent
     let data;
     switch (type) {
       case 'fecha':
-        data = moment(val, 'YYYY/MM/DD');
+        data = moment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
         data = moment(val, 'HH:mm:ss');
@@ -139,7 +148,7 @@ export class ConsultaCertificadoDefuncionComponent
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.formAdd.get('consultaDefuncionIni')?.patchValue(date);
           // this.handleDatesChange();
         }
@@ -154,7 +163,7 @@ export class ConsultaCertificadoDefuncionComponent
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.formAdd.get('consultaDefuncionFin')?.patchValue(date);
           // this.handleDatesChange();
         }

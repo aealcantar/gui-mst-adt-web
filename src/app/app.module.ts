@@ -66,7 +66,6 @@ import { FooterComponent } from './components/templates/footer/footer.component'
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { NgxMaskModule } from 'ngx-mask'
 import {
   NgxMatDateFormats,
   NgxMatDatetimePickerModule,
@@ -86,8 +85,6 @@ import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.compon
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
-import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avisos-mp/detalle-avisos-mp.component';
-
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
 import { CargamasivaComponent } from './configuracion/catalogos/cargamasiva/cargamasiva.component';
 import { ConsultaControlArticulosComponent } from './control-articulos/consulta-control-articulos/consulta-control-articulos.component';
@@ -102,7 +99,6 @@ import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-cer
 import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
 import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
-import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
 
 registerLocaleData('es');
 
@@ -154,7 +150,6 @@ registerLocaleData('es');
     TrabajoSocialComponent,
     NuevoAvisoMpComponent,
     ConsultaAvisoMpComponent,
-    DetalleAvisoMpComponent,
     UbicacionesComponent,
     CargamasivaComponent,
     DetalleControlArticulosComponent,
@@ -166,7 +161,6 @@ registerLocaleData('es');
     NuevoCertificadoComponent,
     DetalleCertificadoComponent,
     ConsultaCertificadoDefuncionComponent,
-    ConsultaMpAdministracionComponent,
     // informe servicios profesionales
     ConsultaInformeServiciosProfesionalesComponent,
     DetalleInformeServiciosProfesionalesComponent
@@ -202,7 +196,6 @@ registerLocaleData('es');
     MomentDateModule,
     MatRadioModule,
     MatSelectModule,
-    NgxMaskModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {

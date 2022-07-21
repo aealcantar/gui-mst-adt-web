@@ -34,15 +34,12 @@
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Horario de atención:</span>
-          <span class="labelDetail horario-atencion">
-            <span>{{ volantesDonacion?.timHoraInicialAtencion }}</span> 
-            <span>{{ volantesDonacion?.timHoraFinalAtencion }} final</span>
-          </span>
+          <span class="labelDetail"> {{ volantesDonacion?.timHoraInicialAtencion }}    {{ volantesDonacion?.timHoraFinalAtencion }}</span>
         </div>
       </div> 
       <div class="row p-5"> 
         <div class="col-sm-4 form-group  ">
-          <span class="labels pb-1">Código Postal:</span>
+          <span class="labels pb-1">Código Postal::</span>
           <span class="labelDetail"> {{ volantesDonacion?.desCodigoPostal }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
