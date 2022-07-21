@@ -13,6 +13,7 @@ import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import * as moment from 'moment';
+import { AvisoMinisterioPublicoService } from 'src/app/service/aviso-mp.service';
 declare var $: any;
 
 @Component({
@@ -38,27 +39,27 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     idCiudad: new FormControl('', Validators.required),
     colonia: new FormControl('', Validators.required),
     calle: new FormControl('', Validators.required),
-    numExterior: new FormControl('', Validators.required),
-    numInterior: new FormControl('', Validators.required),
+    numExterior: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)])),
+    numInterior: new FormControl('', Validators.maxLength(10)),
     nombrePaciente: new FormControl(''),
     desNSS: new FormControl(''),
     idServicio: new FormControl('', Validators.required),
     fechaInternamiento: new FormControl(''),
     fechaCirugia: new FormControl(''),
-    numTelefonoPaciente: new FormControl('', Validators.required),
+    numTelefonoPaciente: new FormControl(''),
     nombreTrabajadorSocial: new FormControl('', Validators.required),
     matriculaTrabajadorSocial: new FormControl('', Validators.required),
     numTelefonoTrabajadorSocial: new FormControl('', Validators.required),
     observaciones: new FormControl('', Validators.required),
+    tipoSangre: new FormControl('', Validators.compose([Validators.required, Validators.pattern("([AaBbOo]|[Aa][Bb])[\+-]")])),
     fecha1: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
     fecha2: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
     fecha3: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
-
-
   });
+
   estadosFamiliar: Estado[] = [];
   ciudadesFamiliar: Ciudad[] = [];
   delegaciones: Municipio[] = [];
@@ -75,6 +76,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     private cronicaGrupalService: CronicaGrupalService,
     private volantesDonacionService: VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
+    private avisoMinisterioPublico: AvisoMinisterioPublicoService,
   ) { }
 
   ngOnInit(): void {
@@ -89,6 +91,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       let nombrePaciente = this.paciente.paciente;
       this.formNuevaDonacion.controls['nombrePaciente'].setValue(nombrePaciente);
       this.formNuevaDonacion.controls['desNSS'].setValue(nss + " " + nssAgregado);
+      this.getCatUnidadesMedicas();
     }
     this.formNuevaDonacion.controls['fecha1'].setValue(this.fecha);
 
@@ -102,6 +105,19 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       }
 
     this.buscarBancosSangre();
+  }
+
+  getCatUnidadesMedicas(): void {
+    this.formNuevaDonacion.get('umh').patchValue(`UMF${this.paciente.unidadMedica}`);
+    // this.avisoMinisterioPublico.getCatUnidadesMedicas().toPromise().then(
+    //   (unidadesMedicas: any[]) => {
+    //     const unidadMedica = unidadesMedicas.filter(e => e.cve_unidad_medica === `UMF${this.paciente.unidadMedica}`) || [];
+    //     this.formNuevaDonacion.get('umh').patchValue(unidadMedica[0]?.cve_unidad_medica);
+    //   },
+    //   (httpErrorResponse: HttpErrorResponse) => {
+    //     console.error(httpErrorResponse);
+    //   }
+    // );
   }
 
   buscarBancosSangre() {
@@ -177,6 +193,8 @@ export class NuevoVdonacionSangreComponent implements OnInit {
 
   registarDonacion(formNuevaDonacion: FormGroup) {
     this.submitted = true;
+    console.log(this.formNuevaDonacion.value);
+    
 
     const horaInicial = moment(this.formNuevaDonacion.get('horaInicialAtencion1').value, 'HHmm').format('HH:mm')
     const horaFinal = moment(this.formNuevaDonacion.get('horaFinalAtencion1').value, 'HHmm').format('HH:mm')

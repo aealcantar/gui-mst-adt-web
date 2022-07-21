@@ -303,6 +303,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       fechaEstudio: moment(this.estudioMedico.fecFecha, 'YYYY-MM-DD').format(
         'DD/MM/YYYY',
       ),
+      
     }
 
     console.log('DATA REPORT: ', reporteEstudioMedicoSocial)
