@@ -73,19 +73,6 @@
 
 #btnLimpiar,
 #btnBuscar {
-    /* min-width: 83px !important;
-    min-height: 39px !important;
-    border-radius: 3px;
-    padding: 5px;
-    align-self: stretch;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    margin-bottom: 0 !important; */
     width: 120px;
     height: 30px;
     border-radius: 3px;
@@ -261,16 +248,4 @@ th {
     /* or 450% */
     display: flex;
     align-items: center;
-}
-
-.Campo-obligatorio {
-    width: 101px;
-    height: 14px;
-    font-size: 10px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #e10000;
 }

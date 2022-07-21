@@ -61,27 +61,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         }
     ];
 
-    // getters
-    get fecha(): AbstractControl {
-        return this.formularioBusqueda.get('fecha')
-    }
-
-    get lugar(): AbstractControl {
-        return this.formularioBusqueda.get('lugar')
-    }
-
-    get responsable(): AbstractControl {
-        return this.formularioBusqueda.get('responsable')
-    }
-
-    get servicio(): AbstractControl {
-        return this.formularioBusqueda.get('servicio')
-    }
-
-    get turno(): AbstractControl {
-        return this.formularioBusqueda.get('turno')
-    }
-
     constructor() { }
 
     ngOnInit(): void {
