@@ -136,12 +136,7 @@ export class RegistroComponent implements OnInit {
           },
         )
       } else {
-        this.showSucces('¡Éxito Contraseña guardada correctamente!', true);
-         this.muestraAlerta(
-           '¡Éxito Contraseña guardada correctamente!',
-           'alert-success',
-           null,
-         )
+        this.muestraAlerta('¡Contraseña inválida!', 'alert-danger', 'Error')
       }
     } else {
       this.muestraAlerta('¡Contraseña inválida!', 'alert-danger', 'Error')
