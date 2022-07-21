@@ -36,6 +36,8 @@ export class ConsultaCertificadoDefuncionComponent
   public columnaId: string = 'fecFecha';
   datosBusqueda: Array<CertificadoDefuncion> = [];
   public alert!: AlertInfo;
+  //se utiliza para el Sort desde el back end
+  criteriosDeOrden: Array<any> = [];
 
   constructor(
     private router: Router,
@@ -82,7 +84,13 @@ export class ConsultaCertificadoDefuncionComponent
     this.page = 1;
     this.certificadoService
 
-      .list(fechaIni, fechaFin, 0, datos.count)
+      .list(
+        fechaIni,
+        fechaFin,
+        0,
+        datos.count,
+        JSON.stringify(this.criteriosDeOrden)
+      )
       .subscribe((response) => {
         this.datosBusqueda = response;
       });
@@ -98,7 +106,13 @@ export class ConsultaCertificadoDefuncionComponent
     );
 
     this.certificadoService
-      .list(fechaIni, fechaFin, this.page - 1, datos.count)
+      .list(
+        fechaIni,
+        fechaFin,
+        this.page - 1,
+        datos.count,
+        JSON.stringify(this.criteriosDeOrden)
+      )
       .subscribe((response) => {
         console.log(response);
         this.datosBusqueda = response;
@@ -140,15 +154,43 @@ export class ConsultaCertificadoDefuncionComponent
   sortBy(columnaId: string, order: string, type: string) {
     this.columnaId = columnaId;
     this.order = order;
-    this.datosBusqueda.sort((a: any, b: any) => {
-      let c: any = this.converType(a[columnaId], type);
-      let d: any = this.converType(b[columnaId], type);
-      if (order === 'desc') {
-        return d - c; // Descendiente
-      } else {
-        return c - d; // Ascendiente
-      }
-    });
+    const criterio = {
+      propiedad: columnaId,
+      ordenar: true,
+      orden: order,
+    };
+    this.addCriterio(criterio);
+    console.log('ordenando propiedad', criterio);
+    const datos = this.formAdd.value;
+    const fechaIni = moment(datos.consultaDefuncionIni, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    this.certificadoService
+      .list(
+        fechaIni,
+        fechaFin,
+        this.page - 1,
+        datos.count,
+        JSON.stringify(this.criteriosDeOrden)
+      )
+      .subscribe((response) => {
+        console.log(response);
+        this.datosBusqueda = response;
+      });
+    // this.columnaId = columnaId;
+    // this.order = order;
+    // this.datosBusqueda.sort((a: any, b: any) => {
+    //   let c: any = this.converType(a[columnaId], type);
+    //   let d: any = this.converType(b[columnaId], type);
+    //   if (order === 'desc') {
+    //     return d - c; // Descendiente
+    //   } else {
+    //     return c - d; // Ascendiente
+    //   }
+    // });
   }
 
   converType(val: any, type: string) {
@@ -235,5 +277,18 @@ export class ConsultaCertificadoDefuncionComponent
         funxion();
       }
     }, 5000);
+  }
+  addCriterio(criterio: any) {
+    const index = this.criteriosDeOrden.findIndex(item => 
+      item.propiedad === criterio.propiedad
+    );
+    console.log(index)
+    if (index > -1) {
+      this.criteriosDeOrden.splice(index);
+      this.criteriosDeOrden.push(criterio);
+    } else {
+      this.criteriosDeOrden.push(criterio);
+    }
+    console.log(this.criteriosDeOrden);
   }
 }
