@@ -196,6 +196,8 @@ export class HorariosComponent implements OnInit {
           } else {
             this.agregarHorarioBtn = true;
             this.lblBtnHabilitar = 'Habilitar día';
+            this.lblHabilitar = 'habilitar';
+            
             let index = this.semana.findIndex(diasemana => diasemana == dia);
             this.diainhabil = {
               dia: index + 1,

@@ -45,4 +45,8 @@ export class VolantesDonacionService {
       { headers: headers, responseType: 'blob' as 'json' },
     )
   }
+
+  getVolantesAdministracion(fechaInicial: string, fechaFinal: string, tipoSangre: string) {
+    return this.httpsClient.get<any>(`${environment.msmtsVolantesDonacion}/findVolantesAdministracion/${fechaInicial}/${fechaFinal}/${tipoSangre}`);
+  }
 }

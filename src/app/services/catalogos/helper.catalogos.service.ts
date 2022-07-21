@@ -104,9 +104,9 @@ export class HelperCatalogosService {
       rutaPlantilla: '../../../../assets/files/14.Responsables.xlsx',
       idCatPadre: [3,7,8],
       col1: 'MATRICULA',
-      col2: 'NOMBRE',
-      col3: 'UBICACIÓN',
-      col4: 'TURNO',
+      col2: 'UBICACIÓN',
+      col3: 'TURNO',
+      col4: 'CLAVE ESPECIALIDAD',
       col5: 'SERVICIO/ESPECIALIDAD'
 
     },
@@ -129,7 +129,7 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Configuración de Calendario Anual',
       rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
       idCatPadre: [2,3],
-      col1: 'PROGRAMA',
+      col1: 'PROGRAMA DE TRABAJO SOCIAL',
       col2: 'UBICACIÓN',
       col3: 'FECHA INICIO',
       col4: 'HORA INICIO',

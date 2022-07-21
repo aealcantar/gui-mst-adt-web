@@ -23,6 +23,7 @@ export class ConsultaCertificadoDefuncionComponent
   formAdd;
   validarCampos: boolean = false;
   public fechaSelected!: string;
+  paginacion: any;
   public page: number = 1;
   public pageSize: number = 15;
   public resultadoTotal: number = 0;
@@ -70,21 +71,57 @@ export class ConsultaCertificadoDefuncionComponent
     sessionStorage.removeItem('certificadoDefuncion');
     this.router.navigate(['nuevo-certificado-defuncion']);
   }
-  buscar() {
-    
+  onSelectChange() {
     const datos = this.formAdd.value;
-    const fechaIni = moment(datos.consultaDefuncionIni, "DD/MM/YYYY").format("YYYY-MM-DD");
-    const fechaFin = moment(datos.consultaDefuncionFin, "DD/MM/YYYY").format("YYYY-MM-DD");
-    
+    const fechaIni = moment(datos.consultaDefuncionIni, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    this.page = 1;
     this.certificadoService
-      .list(
-        fechaIni,
-        fechaFin,
-        datos.pagina,
-        datos.count
-      )
+
+      .list(fechaIni, fechaFin, 0, datos.count)
       .subscribe((response) => {
         this.datosBusqueda = response;
+      });
+  }
+  onPagechange(event: any) {
+    this.page = event;
+    const datos = this.formAdd.value;
+    const fechaIni = moment(datos.consultaDefuncionIni, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+
+    this.certificadoService
+      .list(fechaIni, fechaFin, this.page - 1, datos.count)
+      .subscribe((response) => {
+        console.log(response);
+        this.datosBusqueda = response;
+      });
+  }
+  async buscar() {
+    const datos = this.formAdd.value;
+    const fechaIni = moment(datos.consultaDefuncionIni, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD'
+    );
+    this.paginacion = await this.certificadoService
+      .getPagination(fechaIni, fechaFin)
+      .toPromise();
+
+    console.log(this.paginacion);
+    this.certificadoService
+      .list(fechaIni, fechaFin, datos.pagina - 1, datos.count)
+      .subscribe((response) => {
+        this.datosBusqueda = response;
+        console.log(response);
         if (this.datosBusqueda.length == 0) {
           this.muestraAlerta(
             'Valide los filtros',
@@ -93,8 +130,6 @@ export class ConsultaCertificadoDefuncionComponent
           );
         }
       });
-
-
   }
 
   limpiar() {
