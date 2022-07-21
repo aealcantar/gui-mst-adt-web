@@ -133,9 +133,33 @@
                 <mat-select class="form-control form-control-mat-select" style="width: 62px; overflow: revert;" id="horaIngresoTmp"
                   formControlName="horaIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
                   (selectionChange)="horaIngresoChange();"  placeholder="00">
-                  <mat-option [value]="''" selected class="select-font">00</mat-option>
-                  <mat-option selected class="select-font optionSelect " [value]="horas"
-                  *ngFor="let hora of horas">{{hora.hora}}</mat-option>
+                  <mat-option [value]="'00'" selected class="select-font">00</mat-option>
+                  <mat-option [value]="'01'" selected class="select-font">01</mat-option>
+                  <mat-option [value]="'02'" selected class="select-font">02</mat-option>
+                  <mat-option [value]="'03'" selected class="select-font">03</mat-option>
+                  <mat-option [value]="'04'" selected class="select-font">04</mat-option>
+                  <mat-option [value]="'05'" selected class="select-font">05</mat-option>
+                  <mat-option [value]="'06'" selected class="select-font">06</mat-option>
+                  <mat-option [value]="'07'" selected class="select-font">07</mat-option>
+                  <mat-option [value]="'08'" selected class="select-font">08</mat-option>
+                  <mat-option [value]="'09'" selected class="select-font">09</mat-option>
+                  <mat-option [value]="'10'" selected class="select-font">10</mat-option>
+                  <mat-option [value]="'11'" selected class="select-font">11</mat-option>
+                  <mat-option [value]="'12'" selected class="select-font">12</mat-option>
+                  <mat-option [value]="'13'" selected class="select-font">13</mat-option>
+                  <mat-option [value]="'14'" selected class="select-font">14</mat-option>
+                  <mat-option [value]="'15'" selected class="select-font">15</mat-option>
+                  <mat-option [value]="'16'" selected class="select-font">16</mat-option>
+                  <mat-option [value]="'17'" selected class="select-font">17</mat-option>
+                  <mat-option [value]="'18'" selected class="select-font">18</mat-option>
+                  <mat-option [value]="'19'" selected class="select-font">19</mat-option>
+                  <mat-option [value]="'20'" selected class="select-font">20</mat-option>
+                  <mat-option [value]="'21'" selected class="select-font">21</mat-option>
+                  <mat-option [value]="'22'" selected class="select-font">22</mat-option>
+                  <mat-option [value]="'23'" selected class="select-font">23</mat-option>
+                  <mat-option [value]="'24'" selected class="select-font">24</mat-option>
+                  <!-- <mat-option selected class="select-font optionSelect " [value]="hora"
+                  *ngFor="let hora of horas">{{hora.hora}}</mat-option> -->
                 </mat-select>
 
             </div>
@@ -145,9 +169,68 @@
                 <mat-select class="form-control form-control-mat-select"  style="width: 62px; overflow: revert;" id="minutosIngresoTmp"
                   formControlName="minutosIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
                   (selectionChange)="horaIngresoChange();"  placeholder="00">
-                  <mat-option [value]="''" selected class="select-font">00</mat-option>
-                  <mat-option selected class="select-font optionSelect " [value]="minutos"
-                  *ngFor="let minuto of minutos">{{minuto.minuto}}</mat-option>
+                  <mat-option [value]="'00'" selected class="select-font">00</mat-option>
+                  <mat-option [value]="'01'" selected class="select-font">01</mat-option>
+                  <mat-option [value]="'02'" selected class="select-font">02</mat-option>
+                  <mat-option [value]="'03'" selected class="select-font">03</mat-option>
+                  <mat-option [value]="'04'" selected class="select-font">04</mat-option>
+                  <mat-option [value]="'05'" selected class="select-font">05</mat-option>
+                  <mat-option [value]="'06'" selected class="select-font">06</mat-option>
+                  <mat-option [value]="'07'" selected class="select-font">07</mat-option>
+                  <mat-option [value]="'08'" selected class="select-font">08</mat-option>
+                  <mat-option [value]="'09'" selected class="select-font">09</mat-option>
+                  <mat-option [value]="'10'" selected class="select-font">10</mat-option>
+                  <mat-option [value]="'11'" selected class="select-font">11</mat-option>
+                  <mat-option [value]="'12'" selected class="select-font">12</mat-option>
+                  <mat-option [value]="'13'" selected class="select-font">13</mat-option>
+                  <mat-option [value]="'14'" selected class="select-font">14</mat-option>
+                  <mat-option [value]="'15'" selected class="select-font">15</mat-option>
+                  <mat-option [value]="'16'" selected class="select-font">16</mat-option>
+                  <mat-option [value]="'17'" selected class="select-font">17</mat-option>
+                  <mat-option [value]="'18'" selected class="select-font">18</mat-option>
+                  <mat-option [value]="'19'" selected class="select-font">19</mat-option>
+                  <mat-option [value]="'20'" selected class="select-font">20</mat-option>
+                  <mat-option [value]="'21'" selected class="select-font">21</mat-option>
+                  <mat-option [value]="'22'" selected class="select-font">22</mat-option>
+                  <mat-option [value]="'23'" selected class="select-font">23</mat-option>
+                  <mat-option [value]="'24'" selected class="select-font">24</mat-option>
+                  <mat-option [value]="'25'" selected class="select-font">25</mat-option>
+                  <mat-option [value]="'26'" selected class="select-font">26</mat-option>
+                  <mat-option [value]="'27'" selected class="select-font">27</mat-option>
+                  <mat-option [value]="'28'" selected class="select-font">28</mat-option>
+                  <mat-option [value]="'29'" selected class="select-font">29</mat-option>
+                  <mat-option [value]="'30'" selected class="select-font">30</mat-option>
+                  <mat-option [value]="'31'" selected class="select-font">31</mat-option>
+                  <mat-option [value]="'32'" selected class="select-font">32</mat-option>
+                  <mat-option [value]="'33'" selected class="select-font">33</mat-option>
+                  <mat-option [value]="'34'" selected class="select-font">34</mat-option>
+                  <mat-option [value]="'35'" selected class="select-font">35</mat-option>
+                  <mat-option [value]="'36'" selected class="select-font">36</mat-option>
+                  <mat-option [value]="'37'" selected class="select-font">37</mat-option>
+                  <mat-option [value]="'38'" selected class="select-font">38</mat-option>
+                  <mat-option [value]="'39'" selected class="select-font">39</mat-option>
+                  <mat-option [value]="'40'" selected class="select-font">40</mat-option>
+                  <mat-option [value]="'41'" selected class="select-font">41</mat-option>
+                  <mat-option [value]="'42'" selected class="select-font">42</mat-option>
+                  <mat-option [value]="'43'" selected class="select-font">43</mat-option>
+                  <mat-option [value]="'44'" selected class="select-font">44</mat-option>
+                  <mat-option [value]="'45'" selected class="select-font">45</mat-option>
+                  <mat-option [value]="'46'" selected class="select-font">46</mat-option>
+                  <mat-option [value]="'47'" selected class="select-font">47</mat-option>
+                  <mat-option [value]="'48'" selected class="select-font">48</mat-option>
+                  <mat-option [value]="'49'" selected class="select-font">49</mat-option>
+                  <mat-option [value]="'50'" selected class="select-font">50</mat-option>
+                  <mat-option [value]="'51'" selected class="select-font">51</mat-option>
+                  <mat-option [value]="'52'" selected class="select-font">52</mat-option>
+                  <mat-option [value]="'53'" selected class="select-font">53</mat-option>
+                  <mat-option [value]="'54'" selected class="select-font">54</mat-option>
+                  <mat-option [value]="'55'" selected class="select-font">55</mat-option>
+                  <mat-option [value]="'56'" selected class="select-font">56</mat-option>
+                  <mat-option [value]="'57'" selected class="select-font">57</mat-option>
+                  <mat-option [value]="'58'" selected class="select-font">58</mat-option>
+                  <mat-option [value]="'59'" selected class="select-font">59</mat-option>
+                  <!-- <mat-option selected class="select-font optionSelect " [value]="minuto"
+                  *ngFor="let minuto of minutos">{{minuto.minuto}}</mat-option> -->
                 </mat-select>
 
             </div>
