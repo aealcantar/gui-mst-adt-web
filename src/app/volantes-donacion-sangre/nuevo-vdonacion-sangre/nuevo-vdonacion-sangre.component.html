@@ -58,7 +58,7 @@
               <mat-select class="form-control2 form-control form-control-mat-select "
                 [ngClass]="{'form-control-error': submitted && formNuevaDonacion.controls.idBancoSangre.errors}"
                 id="idBancoSangre" formControlName="idBancoSangre">
-                <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                <mat-option [value]="''" selected class="select-font optionSelect ">
                   Seleccionar servicio</mat-option>
                 <mat-option class="select-font" [value]="item.idBancoSangre" *ngFor="let item of bancosSangre">
                   {{ item.detalleBancoSangre }}
@@ -110,7 +110,7 @@
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idEstado.errors}" id="idEstado"
               formControlName="idEstado" (selectionChange)="onChangeEstado()">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar estado</mat-option>
               <mat-option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
                 {{ estadoF.des_nombre_completo}}
@@ -126,7 +126,7 @@
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idDelegacion.errors }"
               id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar delegación o municipio</mat-option>
               <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                 *ngFor="let delegacion of delegaciones">
@@ -146,7 +146,7 @@
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idCiudad.errors }"
               id="idCiudad" formControlName="idCiudad">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar ciudad</mat-option>
               <mat-option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
                 {{ ciudadF.des_ciudad}}
@@ -236,18 +236,16 @@
           </div>
           <div class="col-md-3 form-group">
             <span class="spanInput">Servicio*:</span>
-            <select [ngClass]="{
-              'form-control-error':
-                submitted && formNuevaDonacion.controls.idServicio.errors
-            }" class="form-control styleselect" id="idServicio" formControlName="idServicio">
-              <option [value]="''" selected disabled class="select-font optionSelect ">
+            <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idServicio.errors }"
+              id="idServicio" formControlName="idServicio">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Seleccionar servicio
-              </option>
-              <option class="select-font optionSelect" [value]="item.cve_especialidad"
-                *ngFor="let item of listaServicios">
+              </mat-option>
+              <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
                 {{ item.des_especialidad }}
-              </option>
-            </select>
+              </mat-option>
+            </mat-select>
             <small *ngIf="submitted && formNuevaDonacion.controls.idServicio.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
