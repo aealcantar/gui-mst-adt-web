@@ -1,5 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
@@ -9,7 +8,6 @@ import { VolantesDonacionService } from 'src/app/service/volantes-donacion.servi
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { ServiceService } from 'src/app/busqueda-nss/busqueda-nss.service';
-import { data } from 'jquery';
 declare var $: any;
 
 @Component({
@@ -18,37 +16,31 @@ declare var $: any;
   styleUrls: ['./consulta-donacion-sangre-administracion.component.css'],
   providers: [DatePipe]
 })
-export class ConsultaDonacionSangreAdministracionComponent implements AfterContentInit {
+export class ConsultaDonacionSangreAdministracionComponent implements OnInit, AfterViewInit {
   pacienteSeleccionado!: pacienteSeleccionado;
-  isCollapsed: boolean[] = [];
-  txtNSS = "16109184446";
   resultadoTotal: number = 0;
   errorBusqueda: boolean = false;
   totalResultados: number = 0;
   order: string = 'desc';
   columnaId: string = 'nss';
 
+  
 
   paciente!: pacienteSeleccionado;
   nomPaciente: any;
   rolPaciente: string;
   nssPaciente: string;
-  fechaDesde: string = "";
-  fechaHasta: string = "";
+  fechaDesde1: string = "";
+  fechaHasta1: string = "";
   tiposangre: string = "";
   tipoSangreSeleccionada: string = "";
   page: number = 1;
   pageSize: number = 15;
   datosBusqueda: Array<any> = [];
-  // columnaId: string = 'fecha';
-  // order: string = 'desc';
   rolUser = "";
   cveUsuario = "";
   nombre = "";
   public alert!: AlertInfo;
-
-
-
   listaPacientes: any[] = [];
   listaResultados: any[] = [];
 
@@ -56,18 +48,14 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
     private router: Router,
     private volantesDonacionService: VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
-    private datePipe: DatePipe,
-    private ServiceService: ServiceService,
     private authService: AuthService
   ) { }
 
   ngAfterContentInit(): void {
-    console.log("Entro al ngAfterContentInit...");
     this.authService.setProjectObs("Trabajo social");
   }
 
   ngOnInit(): void {
-    console.log("Entro al init...");
     let userTmp = sessionStorage.getItem('usuario') || '';
     this.paciente = this.tarjetaService.get();
     if (this.paciente !== null && this.paciente !== undefined) {
@@ -84,23 +72,23 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
   }
   //asignacion de inputs a fecha
   ngAfterViewInit(): void {
-    console.log("Entro ngAfterViewInit...");
-    $('#fechaDesde').datepicker({
+    $('#fechaDesde1').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          this.fechaDesde = date;
+          this.fechaDesde1 = date;
         }
       },
 
     });
 
-    $('#fechaHasta').datepicker({
+
+    $('#fechaHasta1').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
 
-          this.fechaHasta = date;
+          this.fechaHasta1 = date;
         }
       }
 
@@ -109,8 +97,8 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
 
 
   limpiar() {
-    this.fechaDesde = "";
-    this.fechaHasta = "";
+    this.fechaDesde1 = "";
+    this.fechaHasta1 = "";
     this.tiposangre = "";
     this.listaResultados = [];
     this.totalResultados = 0;
@@ -118,8 +106,8 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
 
   buscar() {
 
-    let fechaDesde = this.fechaDesde;
-    let fechaHasta = this.fechaHasta;
+    let fechaDesde = this.fechaDesde1;
+    let fechaHasta = this.fechaHasta1;
     let tipoSangre = this.tiposangre;
 
     if (fechaDesde == "" || fechaHasta == "" || tipoSangre == "") {
@@ -136,11 +124,11 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
         let validaFechaDesde = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
         let validaFechaHasta = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
         if (!validaFechaHasta) {
-          this.fechaDesde = "";
+          this.fechaDesde1 = "";
           return;
         }
         if (!validaFechaHasta) {
-          this.fechaHasta = "";
+          this.fechaHasta1 = "";
           return;
         }
 
@@ -168,43 +156,6 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
             }
           });
 
-          // this.ServiceService.getAll(this.txtNSS).subscribe({
-          //   next: (resp: any) => {
-          //     this.listaPacientes = resp.busquedanss.beneficiarios;
-          //     console.log("ListaPacientes: "+JSON.stringify(this.listaPacientes));
-          //     this.resultadoTotal = resp.busquedanss.registrosTotal;
-          //     console.log("Total: "+this.resultadoTotal);
-          //     if (this.resultadoTotal == 0) {
-
-          //       this.errorBusqueda = true;
-          //       this.muestraAlerta(
-          //         'Verifique los filtros',
-          //         'alert-warning',
-          //         'Sin resultados',
-          //       );
-
-          //     } else {
-          //       for (var i = 0; i < this.resultadoTotal; i++) {
-          //         this.isCollapsed[i] = true;
-          //       }
-          //     }
-
-          //     this.sortBy(this.columnaId, this.order, 'fecha');
-
-          //   }, error: (err) => {
-          //     this.muestraAlerta(
-          //       'No fue posible conectar con la API de busqueda',
-          //       'alert-danger',
-          //       'Error de red',
-          //     );
-
-          //     console.log(err)
-          //     this.errorBusqueda = true;
-
-
-          //   }
-          // });
-
         }
 
       }
@@ -214,7 +165,9 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
 
   //redirecciona al detalle
   irDetalle(idVolanteDonacionSangre: string) {
-    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre, { skipLocationChange: true })
+    console.log("idVolanteDonacionSangreAdmin: "+idVolanteDonacionSangre);
+    let verDetalle="true";
+    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre+"/"+verDetalle, { skipLocationChange: true })
   }
 
 
@@ -227,7 +180,6 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
     this.listaResultados.sort((a: any, b: any) => {
 
       let c: any = this.converType(a[columnaId], type);
-
       let d: any = this.converType(b[columnaId], type);
       if (order === 'desc') {
         return d - c; // Descendiente
@@ -238,7 +190,6 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
   }
 
   converType(val: any, type: string) {
-
     let data;
     switch (type) {
       case 'nss':
@@ -286,16 +237,6 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
   }
 
 
-  elementoSeleccionado(elemento: any) {
-    this.pacienteSeleccionado = elemento;
-    this.tarjetaService.add(this.pacienteSeleccionado);
-    this.router.navigate(['consulta-notas'], { skipLocationChange: true });
-  }
-
-  muestra(i: number) {
-    this.isCollapsed[i] = !this.isCollapsed[i];
-  }
-
   getTipoSangre(valor: string) {
     if (valor == "1") {
       this.tipoSangreSeleccionada = "a+";
@@ -313,5 +254,4 @@ export class ConsultaDonacionSangreAdministracionComponent implements AfterConte
       this.tipoSangreSeleccionada = "";
     }
   }
-
 }

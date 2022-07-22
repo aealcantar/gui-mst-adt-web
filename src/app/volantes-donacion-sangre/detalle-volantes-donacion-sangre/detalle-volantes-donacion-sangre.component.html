@@ -1,16 +1,16 @@
 <app-app-alerts [alert]="alert"></app-app-alerts>
-<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-menu [activeItem]="2" *ngIf="verDetalle=='true'"></app-menu>
+<app-tarjeta-presentacion *ngIf="verDetalle!='true'"></app-tarjeta-presentacion>
 <app-card-template>
-  <div
-    header
-    class="flex justify-content-between align-items-center nuevoEstudio"
-  >
-    <span class="tituloHeader pb-3 pt-5"> Nuevo volante de donación de sangre  </span>
+
+
+  <div header class="flex justify-content-between align-items-center nuevoEstudio">
+    <span class="tituloHeader pb-3 pt-5"> Nuevo volante de donación de sangre </span>
   </div>
 
   <div content>
     <div class="contenido height154 mt-4 mb-5">
-      <div class="row p-5"> 
+      <div class="row p-5">
         <div class="col-sm-8 form-group pt-5">
           <span class="labels pb-1">Unidad médica hospitalaria:</span>
           <span class="labelDetail"> {{ volantesDonacion?.desUnidadMedicaHospitalaria }}</span>
@@ -27,17 +27,18 @@
           </span>
         </div>
       </div>
-      <div class="row p-5"> 
+      <div class="row p-5">
         <div class="col-sm-8 form-group  ">
           <span class="labels pb-1">Nombre del Banco de Sangre:</span>
           <span class="labelDetail"> {{ volantesDonacion?.nombreBancoSangre }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Horario de atención:</span>
-          <span class="labelDetail"> {{ volantesDonacion?.timHoraInicialAtencion }}    {{ volantesDonacion?.timHoraFinalAtencion }}</span>
+          <span class="labelDetail"> {{ volantesDonacion?.timHoraInicialAtencion }} {{
+            volantesDonacion?.timHoraFinalAtencion }}</span>
         </div>
-      </div> 
-      <div class="row p-5"> 
+      </div>
+      <div class="row p-5">
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Código Postal::</span>
           <span class="labelDetail"> {{ volantesDonacion?.desCodigoPostal }}</span>
@@ -47,12 +48,12 @@
           <span class="labelDetail"> {{ volantesDonacion?.nombreEstado }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
-            <span class="labels pb-1">Delegación/Municipio:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.nombreDelegacionMunicipio }}</span>
-          </div>
-      </div> 
- 
-      <div class="row p-5"> 
+          <span class="labels pb-1">Delegación/Municipio:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nombreDelegacionMunicipio }}</span>
+        </div>
+      </div>
+
+      <div class="row p-5">
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Ciudad:</span>
           <span class="labelDetail"> {{ volantesDonacion?.nombreCiudad }}</span>
@@ -62,11 +63,11 @@
           <span class="labelDetail"> {{ volantesDonacion?.nomColonia }}</span>
         </div>
         <div class="col-sm-4 form-group  ">
-            <span class="labels pb-1">Calle:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.nomCalle }}</span>
-          </div>
+          <span class="labels pb-1">Calle:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nomCalle }}</span>
+        </div>
       </div>
-      <div class="row p-5"> 
+      <div class="row p-5">
         <div class="col-sm-4 form-group  ">
           <span class="labels pb-1">Número exterior:</span>
           <span class="labelDetail"> {{ volantesDonacion?.numExterior }}</span>
@@ -75,11 +76,11 @@
           <span class="labels pb-1">Número interior:</span>
           <span class="labelDetail"> {{ volantesDonacion?.numInterior }}</span>
         </div>
-         
+
       </div>
     </div>
 
- 
+
 
     <!-- datos paciente -->
     <div class="contenido height154   mb-5">
@@ -110,56 +111,53 @@
           <span class="labelDetail"> {{ volantesDonacion?.fecInternamiento }}</span>
         </div>
         <div class="col-sm-4 form-group ">
-            <span class="labels pb-1">Teléfono:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.numTelefonoPaciente }}</span>
-          </div>
-         
+          <span class="labels pb-1">Teléfono:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.numTelefonoPaciente }}</span>
+        </div>
+
       </div>
- 
- 
+
+
     </div>
 
     <!-- datos trabajador social -->
     <div class="contenido height154   mb-1">
-        <div class="row pl-5 pr-5 mt-5">
-          <div class="col-md-7 form-group  ">
-            <span class="title1">
-                Datos del Trabajador social
-            </span>
-          </div>
+      <div class="row pl-5 pr-5 mt-5">
+        <div class="col-md-7 form-group  ">
+          <span class="title1">
+            Datos del Trabajador social
+          </span>
         </div>
-        <div class="row pl-5 pr-5">
-          <div class="col-sm-6 form-group">
-            <span class="labels pb-1">Nombre completo:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.nomTrabajadorSocial }}</span>
-          </div>
-          <div class="col-sm-3 form-group">
-            <span class="labels pb-1">Matrícula:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.desMatriculaTrabajadorSocial }}</span>
-          </div>
-          <div class="col-sm-3 form-group">
-            <span class="labels pb-1">Teléfono:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.numTelefonoTrabajadorSocial }}</span>
-          </div>
-        </div>
-        <div class="row pl-5 pr-5 mb-5">
-          <div class="col-sm-12 form-group ">
-            <span class="labels pb-1">Observaciones:</span>
-            <span class="labelDetail"> {{ volantesDonacion?.desObservaciones }}</span>
-          </div>
-    
-        </div>
-   
-   
       </div>
-  
+      <div class="row pl-5 pr-5">
+        <div class="col-sm-6 form-group">
+          <span class="labels pb-1">Nombre completo:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.nomTrabajadorSocial }}</span>
+        </div>
+        <div class="col-sm-3 form-group">
+          <span class="labels pb-1">Matrícula:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.desMatriculaTrabajadorSocial }}</span>
+        </div>
+        <div class="col-sm-3 form-group">
+          <span class="labels pb-1">Teléfono:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.numTelefonoTrabajadorSocial }}</span>
+        </div>
+      </div>
+      <div class="row pl-5 pr-5 mb-5">
+        <div class="col-sm-12 form-group ">
+          <span class="labels pb-1">Observaciones:</span>
+          <span class="labelDetail"> {{ volantesDonacion?.desObservaciones }}</span>
+        </div>
+
+      </div>
+
+
+    </div>
+
 
     <div class="row mt-3">
       <div class="col mr-3">
-        <button
-          class="btn btn-primary btuser pull-right"
-          (click)="impirmiVolante()"
-        >
+        <button class="btn btn-primary btuser pull-right" (click)="impirmiVolante()">
           Imprimir
         </button>
       </div>
@@ -168,4 +166,4 @@
 </app-card-template>
 
 <app-info-bottom></app-info-bottom>
- 
+

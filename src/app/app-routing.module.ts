@@ -102,6 +102,10 @@ const routes: Routes = [
     component: DetalleVolantesDonacionSangreComponent, canActivate: [SeguridadRouter],
   },
   {
+    path: 'detalle-volante-donacion-sangre/:id/:verDetalle',
+    component: DetalleVolantesDonacionSangreComponent, canActivate: [SeguridadRouter],
+  },
+  {
     path: 'catalogos',
     component: CatalogosComponent,
     children: [
