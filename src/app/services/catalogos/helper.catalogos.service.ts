@@ -119,7 +119,8 @@ export class HelperCatalogosService {
       col1: 'DESCRIPCION GRUPO / PROGRAMA',
       col2: 'CODIGO',
       col3: 'DESCRIPCION ACTIVIDAD',
-      col4: 'SERVICIO/ESPECIALIDAD',
+      col4: 'CLAVE ESPECIALIDAD',
+      col5: 'SERVICIO/ESPECIALIDAD'
 
     },
 

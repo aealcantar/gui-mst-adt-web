@@ -7,4 +7,5 @@ export class ProgramaTS {
 	public descActividad:string;
 	
 	public cveServicio:string;
+	public servicioEspecialidad:string;
 }
