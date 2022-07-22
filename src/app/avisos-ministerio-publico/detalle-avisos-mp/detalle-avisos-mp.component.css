@@ -34,7 +34,7 @@
   text-align: left;
   color: #222;
   margin-top: 5px;
-  margin-left: 10px;
+  margin-left: 36px;
 }
 
 .formInfo {
@@ -148,3 +148,16 @@
   color: #222;
 }
 
+.nuevoAvisoMP {
+  font-family: 'Montserrat';
+  font-size: 24px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 29px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-align: left;
+  left: 3.45%;
+  right: 71.79%;
+  color: #222;
+}
