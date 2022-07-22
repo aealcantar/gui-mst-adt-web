@@ -73,16 +73,14 @@
             </option>
           </select> -->
 
-            <mat-select class="form-control2 form-control form-control-mat-select "
-            [ngClass]="{
+            <mat-select class="form-control2 form-control form-control-mat-select " [ngClass]="{
               'form-control-error':
                 submitted && formNuevoArticulo.controls.servicio.errors
             }" id="servicio" formControlName="servicio" (selectionChange)="onChangeServicio()">
               <mat-option [value]="''" selected disabled class="select-font optionSelect ">
                 Seleccionar servicio</mat-option>
-              <mat-option class="select-font"  [value]="item.cve_especialidad"
-              *ngFor="let item of listaServicios">
-              {{ item.des_especialidad }}
+              <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
+                {{ item.des_especialidad }}
               </mat-option>
             </mat-select>
 
@@ -101,10 +99,8 @@
                   submitted && formNuevoArticulo.controls.telefono.errors
               }" class="form-control" formControlName="telefono" id="telefono" type="text"
               placeholder="Ingresar teléfono" maxlength="10" />
-           <small
-              *ngIf="submitted && formNuevoArticulo.controls.telefono.errors"
-              class="form-text form-text-error Campo-obligatorio "
-            >
+            <small *ngIf="submitted && formNuevoArticulo.controls.telefono.errors"
+              class="form-text form-text-error Campo-obligatorio ">
               Campo obligatorio
             </small>
           </div>
@@ -193,12 +189,11 @@
 
             <mat-select class="form-controlUvicacionLista form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.ubicacion.errors}"
-              id="ubicacion" formControlName="ubicacion" >
+              id="ubicacion" formControlName="ubicacion">
               <mat-option [value]="''" selected disabled class="select-font optionSelect ">
                 Seleccionar ubicación</mat-option>
-              <mat-option class="select-font"  [value]="item.cve_ubicacion"
-              *ngFor="let item of listaUbicacion">
-              {{ item.des_completa_ubicacion }}
+              <mat-option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of listaUbicacion">
+                {{ item.des_completa_ubicacion }}
               </mat-option>
             </mat-select>
             <small *ngIf="submitted && formNuevoArticulo.controls.ubicacion.errors"
@@ -241,8 +236,8 @@
               <input type="text" [ngClass]="{
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.horarioEntregaArticulo.errors
-                }" class="form-control hasDatepicker" id="horarioEntregaArticulo"
-                formControlName="horarioEntregaArticulo" placeholder="Ingresa hora" maxlength="5" />
+                }" class="form-control hasDatepicker" id="horarioEntregaArticulo" mask="Hh:m0" [leadZeroDateTime]="true"
+                formControlName=" horarioEntregaArticulo" placeholder="Ingresa hora" maxlength="5" />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img src="assets/images/reloj.svg" height="21px" style="width: 20px;" class="icono" /></span>
             </div>
@@ -295,9 +290,9 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.resguardoHora.errors
                 }" class="form-control hasDatepicker" id="resguardoHora" formControlName="resguardoHora"
-                placeholder="Ingresa hora" maxlength="5" />
-              <span class="glyphicon fontIcono" aria-hidden="true">
-                <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;"/></span>
+                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" />
+              <span class=" glyphicon fontIcono" aria-hidden="true">
+              <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
             </div>
             <small *ngIf="
                 submitted && formNuevoArticulo.controls.resguardoHora.errors
@@ -362,9 +357,9 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.recepcionHora.errors
                 }" class="calendario form-control" id="recepcionHora" formControlName="recepcionHora"
-                placeholder="Ingresa hora" maxlength="5" />
+                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" />
               <span class="glyphicon fontIcono" aria-hidden="true">
-                <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;"/></span>
+                <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
             </div>
             <small *ngIf="
                submitted && formNuevoArticulo.controls.recepcionHora.errors
@@ -434,8 +429,8 @@
             submitted &&
             formNuevoArticulo.controls.recepcionUbicacion.errors
           " class="form-text form-text-error Campo-obligatorio">
-          Campo obligatorio
-        </small>
+              Campo obligatorio
+            </small>
           </div>
 
 
@@ -448,7 +443,7 @@
                     .errors
               }" class="form-control" id="recepcionHorarioEntregaArticulo"
               formControlName="recepcionHorarioEntregaArticulo" placeholder="Ingresa horario" type="text"
-              maxlength="5" />
+              maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" />
             <small *ngIf="
                 submitted &&
                 formNuevoArticulo.controls.recepcionHorarioEntregaArticulo
@@ -475,14 +470,13 @@
 
 
         <div class="col-md-4" style="padding-top: 29px; padding-right: 17px;  margin-top: -1.4%;">
-          <button type="submit" class="btn btn-primary buttonL"
-            style="float: right;border: solid 1px #9d2449;">
+          <button type="submit" class="btn btn-primary buttonL" style="float: right;border: solid 1px #9d2449;">
             Guardar
           </button>
           <button type="button" class="btn btn-danger buttonL" (click)="cancelar(cancelarModal)"
-          style="float: right; border: solid 1px #b38e5d;">
-          Cancelar
-        </button>
+            style="float: right; border: solid 1px #b38e5d;">
+            Cancelar
+          </button>
         </div>
 
 
