@@ -23,9 +23,9 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
   totalResultados: number = 0;
   order: string = 'desc';
   columnaId: string = 'nss';
-
-  
-
+  selectFechaInicio: boolean = false;
+  selectFechaFinal: boolean = false;
+  selectTipoSangre: boolean = false;
   paciente!: pacienteSeleccionado;
   nomPaciente: any;
   rolPaciente: string;
@@ -102,6 +102,9 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
     this.tiposangre = "";
     this.listaResultados = [];
     this.totalResultados = 0;
+    this.selectFechaInicio = false;
+    this.selectFechaFinal = false;
+    this.selectTipoSangre = false;
   }
 
   buscar() {
@@ -110,14 +113,56 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
     let fechaHasta = this.fechaHasta1;
     let tipoSangre = this.tiposangre;
 
-    if (fechaDesde == "" || fechaHasta == "" || tipoSangre == "") {
-      this.muestraAlerta(
-        'Verifique los filtros',
-        'alert-warning',
-        'Sin resultados'
-      );
-      this.limpiar();
-    } else {
+    if (fechaDesde == "" && fechaHasta == "" && tipoSangre == "") {
+      this.selectFechaInicio = true;
+      this.selectFechaFinal = true;
+      this.selectTipoSangre = true;
+    } else if (fechaDesde == "" && tipoSangre == "") {
+      this.selectFechaInicio = true;
+      this.selectTipoSangre = true;
+      this.selectFechaFinal = false;
+    }else if (fechaDesde == "" && fechaHasta == "") {
+      this.selectFechaInicio = true;
+      this.selectTipoSangre = false;
+      this.selectFechaFinal = true;
+    }
+
+    else if (fechaHasta == "" && tipoSangre == "") {
+      this.selectFechaFinal = true;
+      this.selectTipoSangre = true;
+      this.selectFechaInicio = false;
+
+    } else if (fechaHasta == "" && fechaDesde == "") {
+      this.selectFechaFinal = true;
+      this.selectFechaInicio = true;
+      this.selectTipoSangre = false;
+
+    } else if (fechaDesde == "") {
+      this.selectFechaInicio = true;
+      this.selectFechaFinal = false;
+      this.selectTipoSangre = false;
+    } else if (fechaHasta == "") {
+      this.selectFechaFinal = true;
+      this.selectFechaInicio = false;
+      this.selectTipoSangre = false;
+    } else if (tipoSangre == "") {
+      this.selectTipoSangre = true;
+      this.selectFechaFinal = false;
+      this.selectFechaInicio = false;
+    }
+
+    // if (fechaDesde == "" || fechaHasta == "" || tipoSangre == "") {
+    //   this.muestraAlerta(
+    //     'Verifique los filtros',
+    //     'alert-warning',
+    //     'Sin resultados'
+    //   );
+    //   this.limpiar();
+    // } 
+    else {
+      this.selectFechaInicio = false;
+      this.selectFechaFinal = false;
+      this.selectTipoSangre = false;
       this.getTipoSangre(tipoSangre);
       if (fechaDesde.trim() != "" && fechaHasta.trim() != "") {
         //valida que el formato de la fecha se correcto
@@ -165,9 +210,8 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
 
   //redirecciona al detalle
   irDetalle(idVolanteDonacionSangre: string) {
-    console.log("idVolanteDonacionSangreAdmin: "+idVolanteDonacionSangre);
-    let verDetalle="true";
-    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre+"/"+verDetalle, { skipLocationChange: true })
+    let verDetalle = "true";
+    this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre + "/" + verDetalle, { skipLocationChange: true })
   }
 
 

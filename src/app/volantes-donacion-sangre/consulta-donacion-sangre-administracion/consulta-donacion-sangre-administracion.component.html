@@ -23,7 +23,10 @@
                         <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                             <div class="imgCalendar"></div>
                         </span>
+                        <div *ngIf="selectFechaInicio==true"><span class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
+
                     </div>
+
                 </div>
                 <div class="col-md-3">
                     <div class="form-group datepicker-group">
@@ -33,8 +36,10 @@
                         <span class="glyphicon glyphicon-calendar fondocalendar " aria-hidden="true ">
                             <div class="imgCalendar "></div>
                         </span>
-
+                        <div *ngIf="selectFechaFinal==true"><span class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
                     </div>
+                   
+
                 </div>
                 <div class="col-md-3">
                     <label class="control-label tituloServicio" for="articulosFinal">Tipo de sangre:
@@ -72,12 +77,8 @@
                             O-
                         </mat-option>
                     </mat-select>
+                    <div *ngIf="selectTipoSangre==true"><span class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
 
-
-                    <!-- <small *ngIf="submitted && formNuevoArticulo.controls.servicio.errors"
-                        class="form-text form-text-error Campo-obligatorio">
-                        Campo obligatorio
-                    </small> -->
 
                 </div>
                 <div class="col-md-3 flex justify-content-end"
