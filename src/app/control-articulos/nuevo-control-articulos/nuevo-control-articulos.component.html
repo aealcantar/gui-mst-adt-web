@@ -443,7 +443,7 @@
                     .errors
               }" class="form-control" id="recepcionHorarioEntregaArticulo"
               formControlName="recepcionHorarioEntregaArticulo" placeholder="Ingresa horario" type="text"
-              maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" />
+              mask="Hh:m0 - Hh:m0" [showMaskTyped]="true" [leadZeroDateTime]="true"/>
             <small *ngIf="
                 submitted &&
                 formNuevoArticulo.controls.recepcionHorarioEntregaArticulo
