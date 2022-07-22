@@ -200,7 +200,7 @@
                     "
                     (click)="irDetalle(item)"
                   >
-                    {{ item.fechaDefuncion }}
+                    {{ item.fechaDefuncion | date: 'dd / MM / yyyy'}}
                   </td>
                   <td
                     class="bordesTablaNombre"
