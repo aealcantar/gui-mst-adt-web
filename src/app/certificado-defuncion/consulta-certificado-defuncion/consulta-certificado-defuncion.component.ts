@@ -126,24 +126,33 @@ export class ConsultaCertificadoDefuncionComponent
     const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
       'YYYY-MM-DD'
     );
-    this.paginacion = await this.certificadoService
-      .getPagination(fechaIni, fechaFin)
-      .toPromise();
+    if (fechaFin >= fechaIni) {
+      this.paginacion = await this.certificadoService
+        .getPagination(fechaIni, fechaFin)
+        .toPromise();
 
-    console.log(this.paginacion);
-    this.certificadoService
-      .list(fechaIni, fechaFin, datos.pagina - 1, datos.count)
-      .subscribe((response) => {
-        this.datosBusqueda = response;
-        console.log(response);
-        if (this.datosBusqueda.length == 0) {
-          this.muestraAlerta(
-            'Valide los filtros',
-            'alert-warning',
-            'Sin resultados'
-          );
-        }
-      });
+      console.log(this.paginacion);
+      this.certificadoService
+        .list(fechaIni, fechaFin, datos.pagina - 1, datos.count)
+        .subscribe((response) => {
+          this.datosBusqueda = response;
+          console.log(response);
+          if (this.datosBusqueda.length == 0) {
+            this.muestraAlerta(
+              'Valide los filtros',
+              'alert-warning',
+              'Sin resultados'
+            );
+          }
+        });
+    }else{
+      this.muestraAlerta(
+        'Valide los filtros',
+        'alert-warning',
+        'Sin resultados'
+      );
+         this.datosBusqueda = [];
+    }
   }
 
   limpiar() {
