@@ -1,5 +1,5 @@
 export class ProgramaTS {
-  public cveGrupo: string;
+  
 	public desPrograma:string;
 	
 	public cveCodigo:string;

@@ -115,11 +115,11 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Programas de Trabajo Social',
       rutaPlantilla: '../../../../assets/files/10.GruposProgramas O ProgramasTrabajoSocial.xlsx',
       idCatPadre: undefined,
-      col1: 'CLAVE GRUPO',
-      col2: 'DESCRIPCION GRUPO / PROGRAMA',
-      col3: 'CODIGO',
-      col4: 'DESCRIPCION ACTIVIDAD',
-      col5: 'SERVICIO/ESPECIALIDAD',
+      
+      col1: 'DESCRIPCION GRUPO / PROGRAMA',
+      col2: 'CODIGO',
+      col3: 'DESCRIPCION ACTIVIDAD',
+      col4: 'SERVICIO/ESPECIALIDAD',
 
     },
 

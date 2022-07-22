@@ -318,11 +318,11 @@ export class CargamasivaComponent implements OnInit {
             break;
           case 5:
             this.programasTS[index] = new ProgramaTS();
-            this.programasTS[index].cveGrupo = element[this.confCarga.col1];
-            this.programasTS[index].desPrograma = element[this.confCarga.col2];
-            this.programasTS[index].cveCodigo = element[this.confCarga.col3];
-            this.programasTS[index].descActividad = element[this.confCarga.col4];
-            this.programasTS[index].cveServicio = element[this.confCarga.col5];
+          
+            this.programasTS[index].desPrograma = element[this.confCarga.col1];
+            this.programasTS[index].cveCodigo = element[this.confCarga.col2];
+            this.programasTS[index].descActividad = element[this.confCarga.col3];
+            this.programasTS[index].cveServicio = element[this.confCarga.col4];
             break;
 
           case 6:
