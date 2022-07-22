@@ -116,5 +116,10 @@ export class CitasService {
     return this.http.put(direccion,{headers: this.header});
   }
 
+  obtinerutaimpresioncita(id: number, iduser: number){
+    let ruta = this.baseApiUrl2 + '/download/PDF/cita/' + id + '/genera/' + iduser;
+    return ruta;
+  }
+
 
 }
