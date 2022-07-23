@@ -19,10 +19,16 @@
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
               <input fechaAvisoMP class="form-control" id="fechaAvisoMP" type="text" placeholder="Seleccionar fecha"
+                [ngClass]="{'form-control-error':editForm.controls?.fechaRegistroAviso?.dirty && editForm.controls?.fechaRegistroAviso?.errors}"
                 formControlName="fechaRegistroAviso" autocomplete="off">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
+              <small
+                *ngIf="editForm.controls?.fechaRegistroAviso?.dirty && editForm.controls?.fechaRegistroAviso?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
             </div>
           </div>
 
@@ -30,16 +36,16 @@
             <div class="form-group">
               <span class="spanInput">Estado*:</span>
               <mat-select class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': submitted && editForm.controls.idEstado.errors}" id="idEstado"
-                formControlName="idEstado" [disableOptionCentering]="true" aria-label="Servicio"
+                [ngClass]="{'form-control-error':editForm.controls?.idEstado?.dirty && editForm.controls?.idEstado?.errors}"
+                id="idEstado" formControlName="idEstado" [disableOptionCentering]="true" aria-label="Servicio"
                 placeholder="Seleccionar estado" (selectionChange)="onChangeEstado()">
                 <mat-option [value]="''" selected class="select-font">Seleccionar estado</mat-option>
                 <mat-option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of catEstados">
                   {{ estado.des_nombre_completo}}
                 </mat-option>
               </mat-select>
-              <small *ngIf="submitted && editForm.controls.idEstado.errors"
-                class="form-text form-text-error Campo-obligatorio">
+              <small *ngIf="editForm.controls?.idEstado?.dirty && editForm.controls?.idEstado?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
                 Campo obligatorio
               </small>
             </div>
@@ -49,8 +55,8 @@
             <div class="form-group">
               <span class="spanInput">Alcaldía o municipio*:</span>
               <mat-select class="form-control form-control-mat-select"
-                [ngClass]="{'form-control-error': submitted && editForm.controls.alcaldia.errors}" id="alcaldia"
-                formControlName="alcaldia" [disableOptionCentering]="true" aria-label="Servicio"
+                [ngClass]="{'form-control-error':editForm.controls?.alcaldia?.dirty && editForm.controls?.alcaldia?.errors}"
+                id="alcaldia" formControlName="alcaldia" [disableOptionCentering]="true" aria-label="Servicio"
                 placeholder="Seleccionar alcaldía">
                 <mat-option [value]="''" selected class="select-font">Seleccionar alcaldía</mat-option>
                 <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio"
@@ -58,25 +64,39 @@
                   {{ municipio.des_municipio}}
                 </mat-option>
               </mat-select>
-              <small *ngIf="submitted && editForm.controls.alcaldia.errors"
-                class="form-text form-text-error Campo-obligatorio">
+              <small *ngIf="editForm.controls?.alcaldia?.dirty && editForm.controls?.alcaldia?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
                 Campo obligatorio
               </small>
             </div>
           </div>
 
           <div class="col-md-3">
-            <span class="spanInput">Agencia del Ministerio público*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar agencia"
-              formControlName="agenciaMP" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Agencia del Ministerio público*:</span>
+              <input class="form-control matricula inputBloqueo" id="agenciaMP" placeholder="Ingresar agencia"
+                [ngClass]="{'form-control-error':editForm.controls?.agenciaMP?.dirty && editForm.controls?.agenciaMP?.errors}"
+                formControlName="agenciaMP" type="text" />
+              <small *ngIf="editForm.controls?.agenciaMP?.dirty && editForm.controls?.agenciaMP?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-4">
-            <span class="spanInput">A disposición*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta"
-              placeholder="Ingresar nombre del paciente" formControlName="nombrePaciente" type="text" />
+            <div class="form-group">
+              <span class="spanInput">A disposición*:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta"
+                [ngClass]="{'form-control-error':editForm.controls?.nombrePaciente?.dirty && editForm.controls?.nombrePaciente?.errors}"
+                placeholder="Ingresar nombre del paciente" formControlName="nombrePaciente" type="text" />
+              <small *ngIf="editForm.controls?.nombrePaciente?.dirty && editForm.controls?.nombrePaciente?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
@@ -97,6 +117,7 @@
             <div class="form-group">
               <span class="spanInput">En el servicio de*:</span>
               <mat-select class="form-control form-control-mat-select" id="cveServicio" formControlName="cveServicio"
+                [ngClass]="{'form-control-error':editForm.controls?.cveServicio?.dirty && editForm.controls?.cveServicio?.errors}"
                 [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
                 <mat-option [value]="''" selected class="select-font optionSelect ">
                   Seleccionar servicio
@@ -106,12 +127,23 @@
                   {{ item.des_especialidad }}
                 </mat-option>
               </mat-select>
+              <small *ngIf="editForm.controls?.cveServicio?.dirty && editForm.controls?.cveServicio?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
             </div>
           </div>
           <div class="col-md-3">
-            <span class="spanInput">En la cama*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de cama"
-              maxlength="3" formControlName="numCama" type="text" numbersOnly />
+            <div class="form-group">
+              <span class="spanInput">En la cama*:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Número de cama"
+                maxlength="3" formControlName="numCama" type="text" numbersOnly
+                [ngClass]="{'form-control-error':editForm.controls?.numCama?.dirty && editForm.controls?.numCama?.errors}" />
+              <small *ngIf="editForm.controls?.numCama?.dirty && editForm.controls?.numCama?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-3">
             <div class="form-group datepicker-group">
@@ -127,48 +159,51 @@
           <div class="row col-md-3" style="padding-left: 31px;">
             <span class="spanInput">Hora de ingreso*:</span>
             <div class="col-md-12">
-            <div class="divCustomHours col-md-6 " style="width: 20%;">
-
-                <span class="spanInput spanInputCustom">Hora*</span>
-                <mat-select class="form-control form-control-mat-select" style="width: 62px; overflow: revert;" id="horaIngresoTmp"
-                  formControlName="horaIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
-                  (selectionChange)="horaIngresoChange();"  placeholder="00">
-                  <mat-option [value]="'00'" selected class="select-font">00</mat-option>
-                  <mat-option [value]="'01'" selected class="select-font">01</mat-option>
-                  <mat-option [value]="'02'" selected class="select-font">02</mat-option>
-                  <mat-option [value]="'03'" selected class="select-font">03</mat-option>
-                  <mat-option [value]="'04'" selected class="select-font">04</mat-option>
-                  <mat-option [value]="'05'" selected class="select-font">05</mat-option>
-                  <mat-option [value]="'06'" selected class="select-font">06</mat-option>
-                  <mat-option [value]="'07'" selected class="select-font">07</mat-option>
-                  <mat-option [value]="'08'" selected class="select-font">08</mat-option>
-                  <mat-option [value]="'09'" selected class="select-font">09</mat-option>
-                  <mat-option [value]="'10'" selected class="select-font">10</mat-option>
-                  <mat-option [value]="'11'" selected class="select-font">11</mat-option>
-                  <mat-option [value]="'12'" selected class="select-font">12</mat-option>
-                  <mat-option [value]="'13'" selected class="select-font">13</mat-option>
-                  <mat-option [value]="'14'" selected class="select-font">14</mat-option>
-                  <mat-option [value]="'15'" selected class="select-font">15</mat-option>
-                  <mat-option [value]="'16'" selected class="select-font">16</mat-option>
-                  <mat-option [value]="'17'" selected class="select-font">17</mat-option>
-                  <mat-option [value]="'18'" selected class="select-font">18</mat-option>
-                  <mat-option [value]="'19'" selected class="select-font">19</mat-option>
-                  <mat-option [value]="'20'" selected class="select-font">20</mat-option>
-                  <mat-option [value]="'21'" selected class="select-font">21</mat-option>
-                  <mat-option [value]="'22'" selected class="select-font">22</mat-option>
-                  <mat-option [value]="'23'" selected class="select-font">23</mat-option>
-                  <mat-option [value]="'24'" selected class="select-font">24</mat-option>
-                  <!-- <mat-option selected class="select-font optionSelect " [value]="hora"
+              <div class="divCustomHours col-md-6 " style="width: 20%;">
+                <div class="form-group">
+                  <span class="spanInput spanInputCustom">Hora*</span>
+                  <mat-select class="form-control form-control-mat-select" style="width: 62px; overflow: revert;"
+                    [ngClass]="{'form-control-error':editForm.controls?.horaIngresoTmp?.dirty && editForm.controls?.horaIngresoTmp?.errors}"
+                    id="horaIngresoTmp" formControlName="horaIngresoTmp" [disableOptionCentering]="true"
+                    aria-label="Servicio" (selectionChange)="horaIngresoChange();" placeholder="00">
+                    <mat-option [value]="'00'" selected class="select-font">00</mat-option>
+                    <mat-option [value]="'01'" selected class="select-font">01</mat-option>
+                    <mat-option [value]="'02'" selected class="select-font">02</mat-option>
+                    <mat-option [value]="'03'" selected class="select-font">03</mat-option>
+                    <mat-option [value]="'04'" selected class="select-font">04</mat-option>
+                    <mat-option [value]="'05'" selected class="select-font">05</mat-option>
+                    <mat-option [value]="'06'" selected class="select-font">06</mat-option>
+                    <mat-option [value]="'07'" selected class="select-font">07</mat-option>
+                    <mat-option [value]="'08'" selected class="select-font">08</mat-option>
+                    <mat-option [value]="'09'" selected class="select-font">09</mat-option>
+                    <mat-option [value]="'10'" selected class="select-font">10</mat-option>
+                    <mat-option [value]="'11'" selected class="select-font">11</mat-option>
+                    <mat-option [value]="'12'" selected class="select-font">12</mat-option>
+                    <mat-option [value]="'13'" selected class="select-font">13</mat-option>
+                    <mat-option [value]="'14'" selected class="select-font">14</mat-option>
+                    <mat-option [value]="'15'" selected class="select-font">15</mat-option>
+                    <mat-option [value]="'16'" selected class="select-font">16</mat-option>
+                    <mat-option [value]="'17'" selected class="select-font">17</mat-option>
+                    <mat-option [value]="'18'" selected class="select-font">18</mat-option>
+                    <mat-option [value]="'19'" selected class="select-font">19</mat-option>
+                    <mat-option [value]="'20'" selected class="select-font">20</mat-option>
+                    <mat-option [value]="'21'" selected class="select-font">21</mat-option>
+                    <mat-option [value]="'22'" selected class="select-font">22</mat-option>
+                    <mat-option [value]="'23'" selected class="select-font">23</mat-option>
+                    <mat-option [value]="'24'" selected class="select-font">24</mat-option>
+                    <!-- <mat-option selected class="select-font optionSelect " [value]="hora"
                   *ngFor="let hora of horas">{{hora.hora}}</mat-option> -->
-                </mat-select>
+                  </mat-select>
 
-            </div>
-            <div class="divCustomMinutes col-md-6">
+                </div>
+              </div>
+
+              <div class="divCustomMinutes col-md-6">
 
                 <span class="spanInput spanInputCustom">Minutos*</span>
-                <mat-select class="form-control form-control-mat-select"  style="width: 62px; overflow: revert;" id="minutosIngresoTmp"
-                  formControlName="minutosIngresoTmp" [disableOptionCentering]="true" aria-label="Servicio"
-                  (selectionChange)="horaIngresoChange();"  placeholder="00">
+                <mat-select class="form-control form-control-mat-select" style="width: 62px; overflow: revert;"
+                  id="minutosIngresoTmp" formControlName="minutosIngresoTmp" [disableOptionCentering]="true"
+                  aria-label="Servicio" (selectionChange)="horaIngresoChange();" placeholder="00">
                   <mat-option [value]="'00'" selected class="select-font">00</mat-option>
                   <mat-option [value]="'01'" selected class="select-font">01</mat-option>
                   <mat-option [value]="'02'" selected class="select-font">02</mat-option>
@@ -233,44 +268,84 @@
                   *ngFor="let minuto of minutos">{{minuto.minuto}}</mat-option> -->
                 </mat-select>
 
+              </div>
             </div>
-          </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-12">
-            <span class="spanInput">El (la) lesionado presenta*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
-              formControlName="lesionesPaciente" type="text" maxlength="2000" #datosAccionesRef />
-            <span class="caracteres">{{ datosAccionesRef.value?.length }} /
-              {{ datosAccionesRef.getAttribute("maxlength") }} caracteres</span>
+            <div class="form-group">
+              <span class="spanInput">El (la) lesionado presenta*:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar lesiones"
+                [ngClass]="{'form-control-error':editForm.controls?.lesionesPaciente?.dirty && editForm.controls?.lesionesPaciente?.errors}"
+                formControlName="lesionesPaciente" type="text" maxlength="2000" #datosAccionesRef />
+              <span class="caracteres">{{ datosAccionesRef.value?.length }} /
+                {{ datosAccionesRef.getAttribute("maxlength") }} caracteres</span>
+              <div style="height: 0px;"></div>
+              <small *ngIf="editForm.controls?.lesionesPaciente?.dirty && editForm.controls?.lesionesPaciente?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
 
         <div class="row separacion">
           <div class="col-md-6">
-            <span class="spanInput">Nombre médico tratante*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
-              formControlName="nombreMedicoTratante" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Nombre médico tratante*:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
+                [ngClass]="{'form-control-error':editForm.controls?.nombreMedicoTratante?.dirty && editForm.controls?.nombreMedicoTratante?.errors}"
+                formControlName="nombreMedicoTratante" type="text" />
+              <small
+                *ngIf="editForm.controls?.nombreMedicoTratante?.dirty && editForm.controls?.nombreMedicoTratante?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matrícula*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
-              formControlName="matriculaMedicoTratante" type="text" numbersOnly maxlength="11" />
+            <div class="form-group">
+              <span class="spanInput">Matrícula*:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
+                [ngClass]="{'form-control-error':editForm.controls?.matriculaMedicoTratante?.dirty && editForm.controls?.matriculaMedicoTratante?.errors}"
+                formControlName="matriculaMedicoTratante" type="text" numbersOnly maxlength="11" />
+              <small
+                *ngIf="editForm.controls?.matriculaMedicoTratante?.dirty && editForm.controls?.matriculaMedicoTratante?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6">
-            <span class="spanInput">Nombre Trabajador(a) social:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
-              formControlName="nombreTrabajadorSocial" type="text" />
+            <div class="form-group">
+              <span class="spanInput">Nombre Trabajador(a) social:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
+                [ngClass]="{'form-control-error':editForm.controls?.nombreTrabajadorSocial?.dirty && editForm.controls?.nombreTrabajadorSocial?.errors}"
+                formControlName="nombreTrabajadorSocial" type="text" />
+              <small
+                *ngIf="editForm.controls?.nombreTrabajadorSocial?.dirty && editForm.controls?.nombreTrabajadorSocial?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
           <div class="col-md-6">
-            <span class="spanInput">Matrícula del(a) Trabajador(a) social:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
-              maxlength="11" formControlName="matriculaTrabajadorSocial" type="text" numbersOnly />
+            <div class="form-group">
+              <span class="spanInput">Matrícula del(a) Trabajador(a) social:</span>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
+                [ngClass]="{'form-control-error':editForm.controls?.matriculaTrabajadorSocial?.dirty && editForm.controls?.matriculaTrabajadorSocial?.errors}"
+                maxlength="11" formControlName="matriculaTrabajadorSocial" type="text" numbersOnly />
+              <small
+                *ngIf="editForm.controls?.matriculaTrabajadorSocial?.dirty && editForm.controls?.matriculaTrabajadorSocial?.errors"
+                class="form-text form-text-error Campo-obligatorio" style="color: red;">
+                Campo obligatorio
+              </small>
+            </div>
           </div>
         </div>
         <div style="padding-bottom: 9px; padding-top: 13px;">

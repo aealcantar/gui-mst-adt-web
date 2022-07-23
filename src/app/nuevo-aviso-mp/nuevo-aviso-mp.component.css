@@ -221,3 +221,19 @@ textarea {
 .separacion{
   padding-bottom: 15px;
 }
+
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
+.error {
+  border: 1px solid #9d2449;
+}
