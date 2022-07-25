@@ -6,6 +6,7 @@ import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/
 import { AvisoMP } from 'src/app/models/aviso-mp.model';
 import { AvisoMinisterioPublicoService } from 'src/app/service/aviso-mp.service';
 import * as moment from 'moment';
+import { Hora } from 'src/app/models/hora-model';
 
 @Component({
   selector: 'app-detalle-avisos-mp',
@@ -15,6 +16,8 @@ import * as moment from 'moment';
 export class DetalleAvisoMpComponent implements OnInit {
   alert!: AlertInfo;
   avisoMp!: any;
+  hora:any;
+  minutos:any;
 
 
   constructor(
@@ -40,7 +43,8 @@ export class DetalleAvisoMpComponent implements OnInit {
           if (estatus == 'OK') {
             try {
               this.avisoMp = res.datosAvisoMp;
-              this.avisoMp.fechaIngreso = moment(this.avisoMp.fechaIngreso, 'YYYY-MM-DD').format('DD/MM/YYYY');
+              //this.avisoMp.fechaIngreso = moment(this.avisoMp.fechaIngreso, 'YYYY-MM-DD').format('DD/MM/YYYY');
+              this.getHoraMinutos();
             } catch (error) {
               console.error(error);
             }
@@ -76,6 +80,14 @@ export class DetalleAvisoMpComponent implements OnInit {
     }, 5000);
   }
 
+  getHoraMinutos(){
+  var horaCompleta= moment(this.avisoMp?.horaIngreso, 'HH:mm:ss').format('HH:mm:ss a');
+  var porciones = horaCompleta.split(':');
+  this.hora=porciones[0];
+  this.minutos=porciones[1];
+ 
+  }
+
   imprimirAvisoMp() {
     let imprimirAvisoObj = {
       estado: this.avisoMp?.estado,
@@ -97,6 +109,8 @@ export class DetalleAvisoMpComponent implements OnInit {
       matTS: this.avisoMp?.matriculaTrabajadorSocial,
     }
     
+    
+
     this.avisoMinisterioPublicoService.downloadPdf(imprimirAvisoObj).subscribe(
       (response: any) => {
         var file = new Blob([response], { type: 'application/pdf' });
