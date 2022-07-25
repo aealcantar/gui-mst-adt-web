@@ -329,27 +329,29 @@ export class CargamasivaComponent implements OnInit {
           case 6:
             this.calendarioDias[index] = new CalendarioDias();
             this.calendarioDias[index].cvePrograma = element[this.confCarga.col1];
-            this.calendarioDias[index].cveUbicacion = element[this.confCarga.col2];
-            let jsDateIn = XLSX.SSF.parse_date_code(element[this.confCarga.col3]);
+            this.calendarioDias[index].cveServicio = element[this.confCarga.col2];
+            this.calendarioDias[index].servicioEspecialidad = element[this.confCarga.col3];
+            this.calendarioDias[index].cveUbicacion = element[this.confCarga.col4];
+            let jsDateIn = XLSX.SSF.parse_date_code(element[this.confCarga.col5]);
             let fechaInicio = this.generateDate(jsDateIn.d, jsDateIn.m, jsDateIn.y);
-            let horaI = XLSX.SSF.parse_date_code(element[this.confCarga.col4]);
+            let horaI = XLSX.SSF.parse_date_code(element[this.confCarga.col6]);
             let horaInicio = this.generateHora(horaI.H, horaI.M);
 
 
             this.calendarioDias[index].fecInicio = fechaInicio;
             this.calendarioDias[index].horaInicio = horaInicio;
-            this.calendarioDias[index].duracion = element[this.confCarga.col5];
+            this.calendarioDias[index].duracion = element[this.confCarga.col7];
 
-            let jsDateFin = XLSX.SSF.parse_date_code(element[this.confCarga.col6]);
+            let jsDateFin = XLSX.SSF.parse_date_code(element[this.confCarga.col8]);
             let fechaFin = this.generateDate(jsDateFin.d, jsDateFin.m, jsDateFin.y);
 
             this.calendarioDias[index].fecFin = fechaFin;
 
-            let horaF = XLSX.SSF.parse_date_code(element[this.confCarga.col7]);
+            let horaF = XLSX.SSF.parse_date_code(element[this.confCarga.col9]);
             let horaFin = this.generateHora(horaF.H, horaF.M);
 
             this.calendarioDias[index].horaFin = horaFin;
-            this.calendarioDias[index].numParticipantes = element[this.confCarga.col8];
+            this.calendarioDias[index].numParticipantes = element[this.confCarga.col10];
             break;
 
           case 7:

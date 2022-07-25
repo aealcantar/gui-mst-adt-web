@@ -131,13 +131,15 @@ export class HelperCatalogosService {
       rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
       idCatPadre: [2,3],
       col1: 'PROGRAMA DE TRABAJO SOCIAL',
-      col2: 'UBICACIÓN',
-      col3: 'FECHA INICIO',
-      col4: 'HORA INICIO',
-      col5: 'DURACION',
-      col6: 'FECHA FIN',
-      col7: 'HORA FIN',
-      col8: 'MAXIMO DE PARTICIPANTES'
+      col2: 'CLAVE ESPECIALIDAD',
+      col3: 'SERVICIO/ESPECIALIDAD',
+      col4: 'UBICACIÓN',
+      col5: 'FECHA INICIO',
+      col6: 'HORA INICIO',
+      col7: 'DURACION',
+      col8: 'FECHA FIN',
+      col9: 'HORA FIN',
+      col10: 'MAXIMO DE PARTICIPANTES'
 
 
     },
