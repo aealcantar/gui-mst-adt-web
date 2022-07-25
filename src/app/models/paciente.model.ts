@@ -3,6 +3,7 @@ export class Paciente {
     nss?: number;
     paciente?: string;
     parentesco?: string;
+    Parentesco?: string;
     agregadoMedico?: string;
     unidadMedica?: string;
 }
