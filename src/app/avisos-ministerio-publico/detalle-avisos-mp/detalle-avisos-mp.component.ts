@@ -43,7 +43,7 @@ export class DetalleAvisoMpComponent implements OnInit {
           if (estatus == 'OK') {
             try {
               this.avisoMp = res.datosAvisoMp;
-              //this.avisoMp.fechaIngreso = moment(this.avisoMp.fechaIngreso, 'YYYY-MM-DD').format('DD/MM/YYYY');
+              this.avisoMp.fechaIngreso = moment(this.avisoMp.fechaIngreso, 'YYYY-MM-DD').format('DD/MM/YYYY');
               this.getHoraMinutos();
             } catch (error) {
               console.error(error);
@@ -85,7 +85,7 @@ export class DetalleAvisoMpComponent implements OnInit {
   var porciones = horaCompleta.split(':');
   this.hora=porciones[0];
   this.minutos=porciones[1];
- 
+
   }
 
   imprimirAvisoMp() {
@@ -108,8 +108,8 @@ export class DetalleAvisoMpComponent implements OnInit {
       nomTS: this.avisoMp?.nombreTrabajadorSocial,
       matTS: this.avisoMp?.matriculaTrabajadorSocial,
     }
-    
-    
+
+
 
     this.avisoMinisterioPublicoService.downloadPdf(imprimirAvisoObj).subscribe(
       (response: any) => {
