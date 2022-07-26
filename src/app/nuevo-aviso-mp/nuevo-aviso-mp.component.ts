@@ -26,6 +26,7 @@ declare var $: any
 })
 export class NuevoAvisoMpComponent implements OnInit {
   paciente!: pacienteSeleccionado
+  nss!: string
   public submitted: boolean = false
   public avisoMP: AvisoMP
   public listaServicios: Array<any> = []
@@ -60,11 +61,12 @@ export class NuevoAvisoMpComponent implements OnInit {
     private estudioSocialService: EstudioSocialMedicoService,
     private avisoMinisterioPublico: AvisoMinisterioPublicoService,
     private tarjetaService: AppTarjetaPresentacionService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.obtenerCatalogos()
     this.paciente = this.tarjetaService.get()
+    this.nss = this.tarjetaService.get().nss.toString();
     if (this.paciente) {
       this.getCatUnidadesMedicas()
     }
@@ -158,8 +160,9 @@ export class NuevoAvisoMpComponent implements OnInit {
         this.editForm.get('fechaIngreso').value,
         'DD/MM/YYYY',
       ).format('YYYY/MM/DD'),
+      desNss: this.nss,
     }
-    console.log(this.avisoMP)
+    console.log(this.avisoMP);
 
     this.avisoMinisterioPublico.agregarAvisoMP(this.avisoMP).subscribe(
       (response: any) => {
