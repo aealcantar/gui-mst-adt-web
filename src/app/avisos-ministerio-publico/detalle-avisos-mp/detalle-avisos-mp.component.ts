@@ -89,10 +89,11 @@ export class DetalleAvisoMpComponent implements OnInit {
   }
 
   imprimirAvisoMp() {
+    moment.locale('es');
     let imprimirAvisoObj = {
       estado: this.avisoMp?.estado,
       dia: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('DD'),
-      mes: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('MM'),
+      mes: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('MMMM'),
       año: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('YYYY'),
       alcaldia: this.avisoMp?.delegacionMunicipio,
       nombrePac: this.avisoMp?.nombrePaciente,
@@ -108,8 +109,6 @@ export class DetalleAvisoMpComponent implements OnInit {
       nomTS: this.avisoMp?.nombreTrabajadorSocial,
       matTS: this.avisoMp?.matriculaTrabajadorSocial,
     }
-
-
 
     this.avisoMinisterioPublicoService.downloadPdf(imprimirAvisoObj).subscribe(
       (response: any) => {
