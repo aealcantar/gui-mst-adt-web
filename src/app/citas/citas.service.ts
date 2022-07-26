@@ -90,8 +90,8 @@ export class CitasService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  getcomplementocita(cve_especialidad: string, cve_gpo: number):Observable<any>{
-    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo;
+  getcomplementocita(cve_especialidad: string, cve_gpo: number, idUnidadMedica: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo + '/'+idUnidadMedica;
     return this.http.get(direccion,{headers: this.header});
   }
 

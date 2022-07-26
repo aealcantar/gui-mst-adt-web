@@ -364,7 +364,7 @@ export class CitaguardaComponent implements OnInit {
   validaespaciocita(e: any) {
     this.msjLoading("Cargando...");
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
-      this.citadata.value.programa.cve_grupo_programa).subscribe({
+      this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica).subscribe({
         next: (resp: any) => {
           //console.log(resp);
           this.datoscita = {
