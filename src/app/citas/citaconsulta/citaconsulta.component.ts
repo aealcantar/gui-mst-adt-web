@@ -153,7 +153,6 @@ export class CitaconsultaComponent implements OnInit {
   }
 
   imprimir() {
-    debugger
     let blnImprimir = true;
     if (this.citaResponse.cita?.estatus == 'Cancelada') {
       this.muestraAlerta(this._Mensajes.MSJ_ERROR_IMPRIMIR_PDF_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);

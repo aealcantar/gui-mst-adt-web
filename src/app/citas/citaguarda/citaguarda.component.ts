@@ -151,12 +151,14 @@ export class CitaguardaComponent implements OnInit {
         for (var prt of resp.busquedanss.beneficiarios) {
           if (prt.Parentesco == "Beneficiario") {
             cont = cont + 1;
-            this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true })
+            this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true });
           } else if(prt.Parentesco == "Titular"){
+            this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: "chkpaciente", checked: true, isfam: false });
             this.titular = prt;
 
           }
         }
+        this.changeSelection();
         Swal.close();
       },
       error: (err) => {
