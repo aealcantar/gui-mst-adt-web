@@ -92,6 +92,7 @@ export class HelperMensajesService {
   public MSJ_EXITO_CONFIRMAR_CITA: string = 'La asistencia fue confirmada correctamente.';
   public MSJ_ERROR_CONFIRMAR_CITA: string = 'Ocurrió un error al confirmar la asistencia.';
   public MSJ_ERROR_IMPRIMIR_PDF_CITA: string = 'No se puede imprimir, la cita ya fue cancelada';
+  public MSJ_ERROR_IMPRIMIR_SIN_PACIENTE: string = 'No se puede imprimir, no hay paciente asociado a la cita';
 
 
   //Mensajes Usuarios
