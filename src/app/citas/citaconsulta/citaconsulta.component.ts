@@ -153,11 +153,21 @@ export class CitaconsultaComponent implements OnInit {
   }
 
   imprimir() {
-    if(this.varid && this._usuario.cveUsuario){
-      window.open(this.citaservice.obtinerutaimpresioncita(this.varid, this._usuario.cveUsuario), '_blank');
+
+    if(this.citaResponse.cita?.estatus != 'Cancelada'){
+      if(this.varid && this._usuario.cveUsuario && this.citaResponse.cita?.estatus != 'Cancelada'){
+        window.open(this.citaservice.obtinerutaimpresioncita(this.varid, this._usuario.cveUsuario), '_blank');
+      } else {
+        console.log("Warning!", "No se puede mostrar el PDF, falta un parámetro.");
+      }
     } else {
-      console.log("Warning!", "No se puede mostrar el PDF, falta un parámetro.")
+      this.muestraAlerta(this._Mensajes.MSJ_ERROR_IMPRIMIR_PDF_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+      
     }
+
+
+
+   
 
   }
 
