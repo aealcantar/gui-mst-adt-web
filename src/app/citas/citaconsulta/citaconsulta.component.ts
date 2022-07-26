@@ -166,7 +166,7 @@ export class CitaconsultaComponent implements OnInit {
     }
 
     if (blnImprimir) {
-      if (this.varid && this._usuario.cveUsuario ) {
+      if (this.varid && this._usuario.cveUsuario && this.citaResponse.cita?.estatus != 'Cancelada') {
         window.open(this.citaservice.obtinerutaimpresioncita(this.varid, this._usuario.cveUsuario), '_blank');
       } else {
         console.log("Warning!", "No se puede mostrar el PDF, falta un parámetro.");

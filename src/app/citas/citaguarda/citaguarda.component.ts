@@ -87,7 +87,8 @@ export class CitaguardaComponent implements OnInit {
     'Turno': '',
     'Servicio': '',
     'Programa': '',
-    'Tipo de cita': ''
+    'Tipo de cita': '',
+    'des_abreviada_ubicacion': ''
   }
   participantes: number = 0;
 
@@ -171,7 +172,7 @@ export class CitaguardaComponent implements OnInit {
 
   llenacatalogoservicios() {
     this.msjLoading("Cargando...");
-    this.citaservice.getlistservicios().subscribe({
+    this.citaservice.getlistservicios(this._usuario.unidadMedica).subscribe({
       next: (resp: any) => {
         //console.log(resp);
         this.lstCatServicios = resp;
@@ -375,7 +376,8 @@ export class CitaguardaComponent implements OnInit {
             'Turno': resp.cve_turno,
             'Servicio': this.citadata.value.servicio.des_especialidad,
             'Programa': this.citadata.value.programa.des_grupo_programa,
-            'Tipo de cita': 'Grupal'
+            'Tipo de cita': 'Grupal',
+            'des_abreviada_ubicacion': resp.des_abreviada_ubicacion
           };
 
           this.muestraresumen = true;
@@ -405,7 +407,8 @@ export class CitaguardaComponent implements OnInit {
       'Turno': '',
       'Servicio': '',
       'Programa': '',
-      'Tipo de cita': ''
+      'Tipo de cita': '',
+      'des_abreviada_ubicacion': ''
     }
   }
 
@@ -451,6 +454,7 @@ export class CitaguardaComponent implements OnInit {
                 "ocasionServicio": this.citadata.value.ocasion,
                 "modalidad": this.citadata.value.modalidad,
                 "tipoCita": this.datoscita['Tipo de cita'],
+                "des_abreviada_ubicacion": this.datoscita.des_abreviada_ubicacion
                 //"participantes": []
               };
 
