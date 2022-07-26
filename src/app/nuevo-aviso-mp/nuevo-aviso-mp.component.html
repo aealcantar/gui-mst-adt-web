@@ -324,7 +324,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <span class="spanInput">Nombre Trabajador(a) social:</span>
-              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre"
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar nombre" readonly
                 [ngClass]="{'form-control-error':editForm.controls?.nombreTrabajadorSocial?.dirty && editForm.controls?.nombreTrabajadorSocial?.errors}"
                 formControlName="nombreTrabajadorSocial" type="text" />
               <small
@@ -337,7 +337,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <span class="spanInput">Matrícula del(a) Trabajador(a) social:</span>
-              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar matrícula"
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" readonly
                 [ngClass]="{'form-control-error':editForm.controls?.matriculaTrabajadorSocial?.dirty && editForm.controls?.matriculaTrabajadorSocial?.errors}"
                 maxlength="11" formControlName="matriculaTrabajadorSocial" type="text" numbersOnly />
               <small
@@ -348,6 +348,7 @@
             </div>
           </div>
         </div>
+
         <div style="padding-bottom: 9px; padding-top: 13px;">
           <span class="instrucciones label-obligatorios" style="margin-left: 0em !important;">
             *Campos obligatorios
