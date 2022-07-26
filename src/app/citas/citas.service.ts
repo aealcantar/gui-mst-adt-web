@@ -97,7 +97,7 @@ export class CitasService {
 
   altacita(id: number):Observable<any>{
     let direccion = this.baseApiUrl + '/AltaCita/' + id;
-    return this.http.post(direccion,{headers: this.header});
+    return this.http.get(direccion,{headers: this.header});
   }
 
   guardacita(data: object):Observable<any>{
