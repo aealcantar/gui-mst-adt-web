@@ -26,8 +26,8 @@ export class CitasService {
 
   constructor(private http:HttpClient) { }
 
-  getlistservicios():Observable<any>{
-    let direccion = this.baseApiUrl + '/listservicios';
+  getlistservicios(unidadmedica: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/listserviciosUm/' + unidadmedica;
 
     return this.http.get(direccion,{headers: this.header});
   }

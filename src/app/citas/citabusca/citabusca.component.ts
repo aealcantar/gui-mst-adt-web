@@ -20,6 +20,7 @@ import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../services/helper.mensajes.service';
 import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/models/usuario.model';
 
 //import { rootCertificates } from 'tls';
 declare var $: any;
@@ -75,7 +76,7 @@ export const MY_DATE_FORMATS = {
 export class CitabuscaComponent implements OnInit, OnDestroy {
   @ViewChild('picker') picker: any;
   alert!: objAlert;
-
+  private _usuario!: Usuario;
   lstCitas: Array<any> = [];
 
   paciente!: pacienteSeleccionado;
@@ -121,7 +122,7 @@ export class CitabuscaComponent implements OnInit, OnDestroy {
     if (estatus === 'false') {
       this.router.navigate(["/catalogos/cargaCatalogos/1"],{skipLocationChange: true});
     } else {
-
+      this._usuario = JSON.parse(sessionStorage.getItem('usuario') as string) as Usuario;
       this.dtOptions = {
         pagingType: 'simple_numbers',
         pageLength: this.numitems,
@@ -155,7 +156,7 @@ export class CitabuscaComponent implements OnInit, OnDestroy {
 
   llenacatalogoservicios() {
     this.msjLoading("Cargando...");
-    this.citaservice.getlistservicios().subscribe({
+    this.citaservice.getlistservicios(this._usuario.unidadMedica).subscribe({
       next: (resp: any) => {
         console.log(resp);
         this.lstCatServicios = resp;
