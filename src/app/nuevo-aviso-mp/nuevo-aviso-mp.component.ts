@@ -166,10 +166,9 @@ export class NuevoAvisoMpComponent implements OnInit {
 
     this.avisoMinisterioPublico.agregarAvisoMP(this.avisoMP).subscribe(
       (response: any) => {
-        debugger
         if (response && response?.idAvisoMp) {
           let idAvisoMp = response?.idAvisoMp
-          let params = { idAvisoMp }
+          let params = { idAvisoMp, esNuevo: true }
           this.router.navigate(['detalle-aviso-mp'], {
             queryParams: params,
             skipLocationChange: true,

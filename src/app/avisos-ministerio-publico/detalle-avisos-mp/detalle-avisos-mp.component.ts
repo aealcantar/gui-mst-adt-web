@@ -16,8 +16,8 @@ import { Hora } from 'src/app/models/hora-model';
 export class DetalleAvisoMpComponent implements OnInit {
   alert!: AlertInfo;
   avisoMp!: any;
-  hora:any;
-  minutos:any;
+  hora: any;
+  minutos: any;
 
 
   constructor(
@@ -30,6 +30,17 @@ export class DetalleAvisoMpComponent implements OnInit {
       if (params.getAll('idAvisoMp').length > 0) {
         const idAvisoMp = JSON.parse(params.getAll('idAvisoMp'));
         this.obtenerAvisoById(idAvisoMp);
+      }
+
+      if (params.getAll('esNuevo').length > 0) {
+        const esNuevo = JSON.parse(params.getAll('esNuevo'));
+        if (esNuevo) {
+          this.muestraAlerta(
+            '¡La información se guardo con éxito!',
+            'alert-success',
+            ''
+          );
+        }
       }
     })
 
@@ -80,11 +91,11 @@ export class DetalleAvisoMpComponent implements OnInit {
     }, 5000);
   }
 
-  getHoraMinutos(){
-  var horaCompleta= moment(this.avisoMp?.horaIngreso, 'HH:mm:ss').format('HH:mm:ss a');
-  var porciones = horaCompleta.split(':');
-  this.hora=porciones[0];
-  this.minutos=porciones[1];
+  getHoraMinutos() {
+    var horaCompleta = moment(this.avisoMp?.horaIngreso, 'HH:mm:ss').format('HH:mm:ss a');
+    var porciones = horaCompleta.split(':');
+    this.hora = porciones[0];
+    this.minutos = porciones[1];
 
   }
 
