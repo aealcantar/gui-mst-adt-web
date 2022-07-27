@@ -17,7 +17,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   idVolanteDonacion: string = "";
   paciente!: pacienteSeleccionado;
   volantesDonacion!: VolantesDonacion;
-
+  verDetalle: string = "";
 
   constructor(private volantesService: VolantesDonacionService,
     private volantesDonacionService: VolantesDonacionService,
@@ -25,8 +25,15 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     private tarjetaService: AppTarjetaPresentacionService,) { }
 
   ngOnInit(): void {
-
     this.idVolanteDonacion = this.rutaActiva.snapshot.paramMap.get('id');
+    
+
+
+    this.rutaActiva.queryParamMap.subscribe((params: any) => {
+      this.verDetalle = params.getAll('verDetalle');
+    })
+
+
     this.paciente = this.tarjetaService.get();
     if (Number(this.idVolanteDonacion) > 0) {
       this.buscarDetalleVolanteDonacion();

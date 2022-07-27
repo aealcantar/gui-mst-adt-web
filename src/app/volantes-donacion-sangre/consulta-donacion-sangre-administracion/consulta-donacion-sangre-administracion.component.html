@@ -18,23 +18,30 @@
                 <div class="col-md-3">
                     <div class="form-group datepicker-group">
                         <label class="control-label tituloServicio" for="articulosInit">Fecha desde:</label>
-                        <input class="form-control calendario" id="fechaDesde" [(ngModel)]="fechaDesde" type="text"
+                        <input class="form-control calendario" id="fechaDesde1" [(ngModel)]="fechaDesde1" type="text"
                             placeholder="dd/mm/aaaa">
                         <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                             <div class="imgCalendar"></div>
                         </span>
+                        <div *ngIf="selectFechaInicio==true"><span
+                                class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
+
                     </div>
+
                 </div>
                 <div class="col-md-3">
                     <div class="form-group datepicker-group">
                         <label class="control-label tituloServicio" for="articulosFinal">Fecha hasta:</label>
-                        <input [(ngModel)]="fechaHasta" type="text" class="form-control calendario"
-                            placeholder="dd/mm/aaaa" id="fechaHasta">
+                        <input [(ngModel)]="fechaHasta1" type="text" class="form-control calendario"
+                            placeholder="dd/mm/aaaa" id="fechaHasta1">
                         <span class="glyphicon glyphicon-calendar fondocalendar " aria-hidden="true ">
                             <div class="imgCalendar "></div>
                         </span>
-
+                        <div *ngIf="selectFechaFinal==true"><span
+                                class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
                     </div>
+
+
                 </div>
                 <div class="col-md-3">
                     <label class="control-label tituloServicio" for="articulosFinal">Tipo de sangre:
@@ -72,12 +79,9 @@
                             O-
                         </mat-option>
                     </mat-select>
+                    <div *ngIf="selectTipoSangre==true"><span class="form-text form-text-error Campo-obligatorio">*Campo
+                            obligatorio</span></div>
 
-
-                    <!-- <small *ngIf="submitted && formNuevoArticulo.controls.servicio.errors"
-                        class="form-text form-text-error Campo-obligatorio">
-                        Campo obligatorio
-                    </small> -->
 
                 </div>
                 <div class="col-md-3 flex justify-content-end"
@@ -145,8 +149,8 @@
                                 *ngFor="let item of listaResultados | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
                                 <tr style="border-collapse: unset !important;">
                                     <td class="link-texto"
-                                        style="text-align: center !important; padding: 0px; color:#4D92DF;">
-                                        <!-- <span (click)="elementoSeleccionado(beneficiario)">{{beneficiario.nss}}</span> -->
+                                        style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                                        (click)="irDetalle(item.idVolanteDonacionSangre);">
                                         <span>{{item.nss}}</span>
                                     </td>
                                     <td style="padding: 0px!important; padding-left: 13px !important;">
@@ -165,22 +169,6 @@
 
                             </tbody>
                         </table>
-
-                        <!-- Ver paginacion en busqueda-nss -->
-                        <!-- <div class="Rectangle-9601" style="margin-top: 0px !important;  justify-content: center; padding-left: 100px;">
-                            <div class="centr">
-                              <pagination-controls style="margin-left: auto; margin-right: auto;" class="my-pagination"
-                                (pageChange)="page = $event" previousLabel="" nextLabel="" screenReaderPaginationLabel="Pagination">
-                              </pagination-controls>
-                            </div>
-                            <span class="pagina" style="float: right;">
-                              Página
-                            </span>
-                            <div class="paginanum" style="float: right;">{{page}} </div>
-                          </div> -->
-
-
-
                     </div>
                 </div>
 
@@ -188,7 +176,7 @@
                     style="height: 40px; border: 1px solid #ddd; margin-top: 0%; margin-left: 0px;">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <div class="Rectangle-9601" style="margin-top: 0px !important;  justify-content: center; ">
+                        <div style="margin-top: 0px !important;  justify-content: center; ">
                             <div class="">
                                 <pagination-controls style="margin-left: auto; margin-right: auto;content: '>';"
                                     class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""
