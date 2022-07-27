@@ -58,7 +58,8 @@
                     Carga masiva:</div>
                 </div>
                 <div class="col-6 col-sm-6">
-                  <div class="pull-right txtcarga-archivo mb-2 pull-right" *ngIf="archivoCarga.proceso != 'result' || regERROR > 0"
+                  
+                  <div class="pull-right txtcarga-archivo mb-2 pull-right" *ngIf="archivoCarga.proceso != 'result' &&  regERROR == 0"
                     (click)="fileInput.click()">
                     <div class="icono-add"></div>
 

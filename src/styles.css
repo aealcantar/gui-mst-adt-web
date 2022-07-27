@@ -698,7 +698,7 @@ table.dataTable.no-footer {
   background-image: url("./assets/images/Icon.png") !important;
   background-repeat: no-repeat;
   background-position-x: 99%;
-  padding-right: 20px;
+  padding-right: 0px;
   background-size: 20px 19px;
 }
 

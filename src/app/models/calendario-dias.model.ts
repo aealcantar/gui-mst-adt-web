@@ -1,5 +1,6 @@
 export class CalendarioDias {
   	public  cveServicio:string;
+	  public  servicioEspecialidad:string;
 	public cveUbicacion:string;
     public fecInicio:string;
 	public horaInicio:string;

@@ -20,6 +20,7 @@ import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../services/helper.mensajes.service';
 import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/models/usuario.model';
 
 //import { rootCertificates } from 'tls';
 declare var $:any;
@@ -75,7 +76,7 @@ export const MY_DATE_FORMATS = {
 export class CitabuscaComponent implements OnInit,OnDestroy {
   @ViewChild('picker') picker: any;
   alert!: objAlert;
-
+  private _usuario!: Usuario;
   lstCitas: Array<any> = [];
 
   paciente!: pacienteSeleccionado;
@@ -117,20 +118,26 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
 
-    this.dtOptions = {
-      pagingType: 'simple_numbers',
-      pageLength: this.numitems,
-      processing: true,
-      info: false,
-      searching: false,
-      "lengthChange": false,
-      "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
-      "language": {
-        "paginate": {
-          "first": "First page",
-          "previous": '<span class="glyphicon glyphicon-menu-left paginacion-icon-navegacion" aria-hidden="true"></span>',
-          "next": '<span class="glyphicon glyphicon-menu-right paginacion-icon-navegacion" aria-hidden="true"></span>',
-          "last": "last"
+    let estatus = localStorage.getItem('catalogosCompletos');
+    if (estatus === 'false') {
+      this.router.navigate(["/catalogos/cargaCatalogos/1"],{skipLocationChange: true});
+    } else {
+      this._usuario = JSON.parse(sessionStorage.getItem('usuario') as string) as Usuario;
+      this.dtOptions = {
+        pagingType: 'simple_numbers',
+        pageLength: this.numitems,
+        processing: true,
+        info: false,
+        searching: false,
+        "lengthChange": false,
+        "dom": "t<'table-pie' <'#cargalay.col-md-3'><'col-md-6 col-lg-6 text-center'p><'#nopag.col-md-3'>>",
+        "language": {
+          "paginate": {
+            "first": "First page",
+            "previous": '<span class="glyphicon glyphicon-menu-left paginacion-icon-navegacion" aria-hidden="true"></span>',
+            "next": '<span class="glyphicon glyphicon-menu-right paginacion-icon-navegacion" aria-hidden="true"></span>',
+            "last": "last"
+          }
         }
       }
     };
@@ -149,8 +156,8 @@ export class CitabuscaComponent implements OnInit,OnDestroy {
 
   llenacatalogoservicios(){
     this.msjLoading("Cargando...");
-    this.citaservice.getlistservicios().subscribe({
-      next: (resp:any) => {
+    this.citaservice.getlistservicios(this._usuario.unidadMedica).subscribe({
+      next: (resp: any) => {
         console.log(resp);
         this.lstCatServicios = resp;
         Swal.close();

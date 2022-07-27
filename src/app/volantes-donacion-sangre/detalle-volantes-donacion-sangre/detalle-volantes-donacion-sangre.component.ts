@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
-import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service' 
-import { VolantesDonacion } from 'src/app/models/volantes-donacion.model'; 
-import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';  
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
+import { VolantesDonacion } from 'src/app/models/volantes-donacion.model';
+import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';
 
 @Component({
   selector: 'app-detalle-volantes-donacion-sangre',
@@ -17,7 +17,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   idVolanteDonacion: string = "";
   paciente!: pacienteSeleccionado;
   volantesDonacion!: VolantesDonacion;
-
+  verDetalle: string = "";
 
   constructor(private volantesService: VolantesDonacionService,
     private volantesDonacionService: VolantesDonacionService,
@@ -25,8 +25,15 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     private tarjetaService: AppTarjetaPresentacionService,) { }
 
   ngOnInit(): void {
-
     this.idVolanteDonacion = this.rutaActiva.snapshot.paramMap.get('id');
+    
+
+
+    this.rutaActiva.queryParamMap.subscribe((params: any) => {
+      this.verDetalle = params.getAll('verDetalle');
+    })
+
+
     this.paciente = this.tarjetaService.get();
     if (Number(this.idVolanteDonacion) > 0) {
       this.buscarDetalleVolanteDonacion();
@@ -111,7 +118,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
       timHoraInicialAtencion = hora1[0] + ":" + hora1[1];
       let hora2 = this.volantesDonacion?.timHoraFinalAtencion.split(":");
       timHoraFinalAtencion = hora2[0] + ":" + hora2[1];
-      
+
     } catch (error) {
       console.log(error)
     }

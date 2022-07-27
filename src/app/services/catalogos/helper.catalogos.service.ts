@@ -104,9 +104,9 @@ export class HelperCatalogosService {
       rutaPlantilla: '../../../../assets/files/14.Responsables.xlsx',
       idCatPadre: [3,7,8],
       col1: 'MATRICULA',
-      col2: 'NOMBRE',
-      col3: 'UBICACIÓN',
-      col4: 'TURNO',
+      col2: 'UBICACIÓN',
+      col3: 'TURNO',
+      col4: 'CLAVE ESPECIALIDAD',
       col5: 'SERVICIO/ESPECIALIDAD'
 
     },
@@ -115,11 +115,12 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Programas de Trabajo Social',
       rutaPlantilla: '../../../../assets/files/10.GruposProgramas O ProgramasTrabajoSocial.xlsx',
       idCatPadre: undefined,
-      col1: 'CLAVE GRUPO',
-      col2: 'DESCRIPCION GRUPO / PROGRAMA',
-      col3: 'CODIGO',
-      col4: 'DESCRIPCION ACTIVIDAD',
-      col5: 'SERVICIO/ESPECIALIDAD',
+      
+      col1: 'DESCRIPCION GRUPO / PROGRAMA',
+      col2: 'CODIGO',
+      col3: 'DESCRIPCION ACTIVIDAD',
+      col4: 'CLAVE ESPECIALIDAD',
+      col5: 'SERVICIO/ESPECIALIDAD'
 
     },
 
@@ -129,14 +130,16 @@ export class HelperCatalogosService {
       nombreCatalogo: 'Configuración de Calendario Anual',
       rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
       idCatPadre: [2,3],
-      col1: 'SERVICIOS / ESPECIALIDADES',
-      col2: 'UBICACIÓN',
-      col3: 'FECHA INICIO',
-      col4: 'HORA INICIO',
-      col5: 'DURACION',
-      col6: 'FECHA FIN',
-      col7: 'HORA FIN',
-      col8: 'MAXIMO DE PARTICIPANTES'
+      col1: 'PROGRAMA DE TRABAJO SOCIAL',
+      col2: 'CLAVE ESPECIALIDAD',
+      col3: 'SERVICIO/ESPECIALIDAD',
+      col4: 'UBICACIÓN',
+      col5: 'FECHA INICIO',
+      col6: 'HORA INICIO',
+      col7: 'DURACION',
+      col8: 'FECHA FIN',
+      col9: 'HORA FIN',
+      col10: 'MAXIMO DE PARTICIPANTES'
 
 
     },

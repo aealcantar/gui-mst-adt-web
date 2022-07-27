@@ -119,10 +119,10 @@ export class RegistroComponent implements OnInit {
             if (this.admonResponse.status == '200') {
               this.showSucces('¡Éxito Contraseña guardada correctamente!', true);
               this.muestraAlerta(
-                '¡Éxito Contraseña guardada correctamente!',
-                'alert-success',
-                null,
-              )
+                 '¡Éxito Contraseña guardada correctamente!',
+                 'alert-success',
+                 null,
+               )
               return
             }
           },
@@ -136,11 +136,7 @@ export class RegistroComponent implements OnInit {
           },
         )
       } else {
-        this.muestraAlerta(
-          '¡Éxito Contraseña guardada correctamente!',
-          'alert-success',
-          null,
-        )
+        this.muestraAlerta('¡Contraseña inválida!', 'alert-danger', 'Error')
       }
     } else {
       this.muestraAlerta('¡Contraseña inválida!', 'alert-danger', 'Error')

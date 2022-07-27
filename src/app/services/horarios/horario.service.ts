@@ -9,6 +9,7 @@ import { HorarioResponse } from 'src/app/models/horario-response-model';
 import { Horario } from 'src/app/models/horario.model';
 import { environment } from 'src/environments/environment';
 import { HorarioRequest, NuevoHorarioRequest } from '../../models/horario-request.model';
+import { VerificarCitaResponse } from 'src/app/models/verificar-cita-response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,11 @@ private handleError(error: HttpErrorResponse) {
   console.log("Error", error.status);
   // Return an observable with a user-facing error message.
   return throwError(error);
+}
+
+verificarCitasAgendadas(request: HorarioRequest):Observable<HttpResponse<VerificarCitaResponse>> {
+  return this.http.post<VerificarCitaResponse>(`${this.serverEndPointURLHorarios}verificarCitasAgendadas`, request, { observe: 'response' });
+
 }
 
 }

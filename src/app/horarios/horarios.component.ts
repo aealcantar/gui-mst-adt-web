@@ -53,6 +53,7 @@ export class HorariosComponent implements OnInit {
 
   lblBtnHabilitar: string = 'Habilitar día';
   lblHabilitar: string = 'inhabilitar';
+  blnHabil: boolean = true;
 
   formfields: any = this.formBuilder.group({
     horainicio: ['', Validators.required],
@@ -195,6 +196,8 @@ export class HorariosComponent implements OnInit {
           } else {
             this.agregarHorarioBtn = true;
             this.lblBtnHabilitar = 'Habilitar día';
+            this.lblHabilitar = 'habilitar';
+            
             let index = this.semana.findIndex(diasemana => diasemana == dia);
             this.diainhabil = {
               dia: index + 1,
@@ -326,23 +329,19 @@ export class HorariosComponent implements OnInit {
 
   }
 
+  validarEstatusDia(): string{
+    let result = this.diaSeleccionado.horarios.find(horario => horario.estatus.cveClave == "DIA_DESHABILITADO");
+    console.log({ result });
+    return result ? "DIA_HABILITADO" : "DIA_DESHABILITADO"
+  }
+
   updateEstatusDia() {
     debugger
     this.msjLoading(this.lblBtnHabilitar + "...");
     this.request = new HorarioRequest();
     this.request.idUbicacion = Number(this.cveUbicacion);
     this.request.dia = this.semana[this.diaNb];
-    let result = this.diaSeleccionado.horarios.find(horario => horario.estatus.cveClave == "DIA_DESHABILITADO");
-    console.log({ result });
-    if (result) {
-      this.request.estatus = "DIA_HABILITADO";
-
-    }
-    else {
-      // console.log('total horarios',this.diaSeleccionado.horarios.length);
-      this.request.estatus = "DIA_DESHABILITADO";
-
-    }
+    this.request.estatus = this.validarEstatusDia(); 
     console.log('actualización', this.request);
 
     this.horarioService.modificarEstatusDia(this.request).subscribe((resp) => {
@@ -547,6 +546,7 @@ export class HorariosComponent implements OnInit {
     this.cambiarTurno();
     this.cambiarEstatus();
     this.horarioSeleccionado.turno = this.turnoSeleccionado;
+    this.horarioSeleccionado.idUbicacion = Number(this.cveUbicacion);
     console.log(this.horarioSeleccionado);
     this.msjLoading("Guardando...");
     this.horarioService.save(this.horarioSeleccionado).subscribe((resp: HttpResponse<HorarioResponse>) => {
@@ -668,22 +668,50 @@ export class HorariosComponent implements OnInit {
     })
   }
 
-
-
-  blnHabil: boolean = true;
   btnModalInhabilitar() {
 
-    $('#inhabilitar').modal({
-      keyboard: false,
-      backdrop: 'static'
-    })
-    $('#inhabilitar').modal('show')
+    //servicio de estatus
+    let requestCita= new HorarioRequest();
+    requestCita.idUbicacion = Number(this.cveUbicacion);
+    requestCita.dia = this.semana[this.diaNb];
+    requestCita.estatus = this.validarEstatusDia();
+    this.horarioService.verificarCitasAgendadas(requestCita).subscribe((resp) => {
+      console.log('respuesta verificar', resp);
+      if (resp.status == 200) {
+        if(resp.body.estatus){
+          // this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, resp.body.mensaje, this._Mensajes.EXITO);
+          $('#inhabilitar').modal({
+            keyboard: false,
+            backdrop: 'static'
+          })
+          $('#inhabilitar').modal('show')
+        }else{
+          let error: HttpErrorResponse = {
+            status: resp.status,
+            message: resp.body.mensaje,
+            name: 'HttpErrorResponse',
+            error: undefined,
+            ok: false,
+            headers: new HttpHeaders,
+            statusText: '',
+            url: '',
+            type: HttpEventType.ResponseHeader
+          };
+          this.mensajesError(error, resp.body.mensaje);
+          Swal.close();
+        }
+      } else {
+        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
+      }
+      
+    })   
     //console.log('botón habilitar');
   }
 
   btnHabilitarDeshabilitar() {
     this.updateEstatusDia();
   }
+  
   btnCancelarHabilitarDeshabilitar() {
 
     $('#inhabilitar').modal('hide')

@@ -142,13 +142,33 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   async guardar() {
     if (this.formAdd.valid) {
       this.validarCampos = false;
-      const date = moment().format('YYYY-MM-DD HH:mm:ss');
-      this.formAdd.controls['fechaDeAlta'].setValue(date);
-      this.formAdd.controls['fechaDeActualizacion'].setValue(date);
-      const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
-      this.certificadoService
-        .insert(certificado)
-        .subscribe(async (response) => {
+      const certificadoDefuncion =
+        this.formAdd.getRawValue() as CertificadoDefuncion;
+      // cambiar formato de fechas en para su guardado en la base de datos
+      const horaDefuncnion = moment(
+        this.formAdd.controls['horaDefuncion'].value,
+        'hh:mm A'
+      ).format('HH:mm:ss');
+      console.log(`Fecha Nuevo Formato: ${horaDefuncnion}`,`Formato anterior ${ this.formAdd.controls['horaDefuncion'].value}`)
+      const horaEntrega = moment(
+        this.formAdd.controls['horaDeEntregaDeCertificado'].value,
+        'hh:mm A'
+      ).format('HH:mm:ss');
+      const fechaDefuncion = moment(
+        certificadoDefuncion.fechaDefuncion,
+        'DD/MM/YYYY'
+      ).format('YYYY-MM-DD');
+      const fechaEntrega = moment(
+        certificadoDefuncion.fechaDeEntregaDeCertificado,
+        'DD/MM/YYYY'
+      ).format('YYYY-MM-DD');
+      certificadoDefuncion.horaDefuncion = horaDefuncnion;
+      certificadoDefuncion.horaDeEntregaDeCertificado = horaEntrega;
+      certificadoDefuncion.fechaDefuncion = fechaDefuncion;
+      certificadoDefuncion.fechaDeEntregaDeCertificado = fechaEntrega;
+
+      this.certificadoService.insert(certificadoDefuncion).subscribe(
+        async (response) => {
           this.certificado = response;
           await sessionStorage.removeItem('certificadoDefuncion');
           sessionStorage.setItem(

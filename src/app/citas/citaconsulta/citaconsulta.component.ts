@@ -13,6 +13,7 @@ import { CitaResponse, ParticipanteCita } from 'src/app/models/cita-model';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../services/helper.mensajes.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 
 declare var $: any;
@@ -28,6 +29,7 @@ export class CitaconsultaComponent implements OnInit {
   alert!: objAlert;
   varid!: any;
   varidcalendario!: any;
+  private _usuario!: Usuario;
 
   datoscita = {
     'Fecha y hora de inicio de cita': '',
@@ -71,8 +73,15 @@ export class CitaconsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    this.varid = this.activerouter.snapshot.paramMap.get('id');
-    this.buscarcita(this.varid);
+    let estatus = localStorage.getItem('catalogosCompletos');
+    if (estatus === 'false') {
+      this.router.navigate(["/catalogos/cargaCatalogos/1"], { skipLocationChange: true });
+    } else {
+      this.varid = this.activerouter.snapshot.paramMap.get('id');
+      this._usuario = JSON.parse(sessionStorage.getItem('usuario') as string) as Usuario;
+      //console.log("usr:", this._usuario);
+      this.buscarcita(this.varid);
+    }
   }
 
   regresar() {
@@ -86,7 +95,7 @@ export class CitaconsultaComponent implements OnInit {
     this.citaResponse = new CitaResponse();
     this.citaservice.consultacita(id).subscribe({
       next: (resp: CitaResponse) => {
-        console.log("buscarCita: ", resp);
+        //console.log("buscarCita: ", resp);
 
         //console.log("inicio: ",this.datePipe.transform(new Date(resp.cita.fechaInicio + " " + resp.cita.horaInicio), 'dd-MM-yyyy - HH:mm:ss') );
         this.citaResponse = resp;
@@ -112,8 +121,8 @@ export class CitaconsultaComponent implements OnInit {
         }
 
         Swal.close();
-        console.log("otros", this.participantes_otrs);
-        console.log("fam", this.participantes_fam);
+        //console.log("otros", this.participantes_otrs);
+        //console.log("fam", this.participantes_fam);
       },
       error: (err) => {
         Swal.close();
@@ -143,7 +152,29 @@ export class CitaconsultaComponent implements OnInit {
     $('#content').modal('show')
   }
 
-  imprimir() { }
+  imprimir() {
+    let blnImprimir = true;
+    if (this.citaResponse.cita?.estatus == 'Cancelada') {
+      this.muestraAlerta(this._Mensajes.MSJ_ERROR_IMPRIMIR_PDF_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+      blnImprimir = false;
+    }
+
+    if (this.strpaciente == '') {
+      this.muestraAlerta(this._Mensajes.MSJ_ERROR_IMPRIMIR_SIN_PACIENTE, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+      blnImprimir = false;
+    }
+
+    if (blnImprimir) {
+      if (this.varid && this._usuario.cveUsuario && this.citaResponse.cita?.estatus != 'Cancelada') {
+        window.open(this.citaservice.obtinerutaimpresioncita(this.varid, this._usuario.cveUsuario), '_blank');
+      } else {
+        console.log("Warning!", "No se puede mostrar el PDF, falta un parámetro.");
+      }
+    }
+
+
+
+  }
 
   cancelarmod() {
     this.objmodal.mensaje = "";
@@ -156,11 +187,11 @@ export class CitaconsultaComponent implements OnInit {
     if (this.objmodal.tipo == 2) {
       this.citaservice.cancelarcitacal(this.varidcalendario).subscribe({
         next: (resp: any) => {
-          console.log(resp);
+          //console.log(resp);
 
           this.citaservice.cancelarcita(this.varid).subscribe({
             next: (resp: any) => {
-              console.log(resp);
+              //console.log(resp);
               this.objmodal.mensaje = "";
               this.objmodal.tipo = 0;
               $('#content').modal('hide');
@@ -188,7 +219,7 @@ export class CitaconsultaComponent implements OnInit {
     } else {
       this.citaservice.confirmarasistencia(this.varid).subscribe({
         next: (resp: any) => {
-          console.log(resp);
+          //console.log(resp);
 
           this.objmodal.mensaje = "";
           this.objmodal.tipo = 0;

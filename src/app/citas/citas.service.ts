@@ -26,8 +26,8 @@ export class CitasService {
 
   constructor(private http:HttpClient) { }
 
-  getlistservicios():Observable<any>{
-    let direccion = this.baseApiUrl + '/listservicios';
+  getlistservicios(unidadmedica: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/listserviciosUm/' + unidadmedica;
 
     return this.http.get(direccion,{headers: this.header});
   }
@@ -90,14 +90,14 @@ export class CitasService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  getcomplementocita(cve_especialidad: string, cve_gpo: number):Observable<any>{
-    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo;
+  getcomplementocita(cve_especialidad: string, cve_gpo: number, idUnidadMedica: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo +'/'+idUnidadMedica;
     return this.http.get(direccion,{headers: this.header});
   }
 
   altacita(id: number):Observable<any>{
     let direccion = this.baseApiUrl + '/AltaCita/' + id;
-    return this.http.post(direccion,{headers: this.header});
+    return this.http.get(direccion,{headers: this.header});
   }
 
   guardacita(data: object):Observable<any>{
@@ -114,6 +114,11 @@ export class CitasService {
   confirmarasistencia(id: number):Observable<any>{
     let direccion = this.baseApiUrl2 + '/confirmarCita/' + id;
     return this.http.put(direccion,{headers: this.header});
+  }
+
+  obtinerutaimpresioncita(id: number, iduser: number){
+    let ruta = this.baseApiUrl2 + '/download/PDF/cita/' + id + '/genera/' + iduser;
+    return ruta;
   }
 
 
