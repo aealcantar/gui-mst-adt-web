@@ -21,8 +21,10 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   nomPaciente: any;
   rolPaciente: string;
   nssPaciente: string;
-  fechaDesde: string = "";
-  fechaHasta: string = "";
+  // fechaDesde: string = "";
+  vDonacionIni: string = "";
+  // fechaHasta: string = "";
+  vDonacionFin: string = "";
   page: number = 1;
   pageSize: number = 15;
   datosBusqueda: Array<any> = [];
@@ -59,22 +61,22 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
   }
   //asignacion de inputs a fecha
   ngAfterViewInit(): void {
-    $('#fechaDesde').datepicker({
+    $('#vDonacionIni').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          this.fechaDesde = date;
+          this.vDonacionIni = date;
         }
       },
 
     });
 
-    $('#fechaHasta').datepicker({
+    $('#vDonacionFin').datepicker({
       dateFormat: "dd/mm/yy",
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
 
-          this.fechaHasta = date;
+          this.vDonacionFin = date;
         }
       }
 
@@ -83,33 +85,33 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
 
 
   limpiar() {
-    this.fechaDesde = "";
-    this.fechaHasta = "";
+    this.vDonacionIni = "";
+    this.vDonacionFin = "";
     this.datosBusqueda = [];
   }
 
   buscar() {
 
-    let fechaDesde = this.fechaDesde;
-    let fechaHasta = this.fechaHasta;
+    let vDonacionIni = this.vDonacionIni;
+    let vDonacionFin = this.vDonacionFin;
 
-    if (fechaDesde.trim() != "" && fechaHasta.trim() != "") {
+    if (vDonacionIni.trim() != "" && vDonacionFin.trim() != "") {
       //valida que el formato de la fecha se correcto
-      let validaFechaDesde = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
-      let validaFechaHasta = moment(fechaDesde, 'DD/MM/YYYY', true).isValid();
+      let validaFechaDesde = moment(vDonacionIni, 'DD/MM/YYYY', true).isValid();
+      let validaFechaHasta = moment(vDonacionIni, 'DD/MM/YYYY', true).isValid();
       if (!validaFechaHasta) {
-        this.fechaDesde = "";
+        this.vDonacionIni = "";
         return;
       }
       if (!validaFechaHasta) {
-        this.fechaHasta = "";
+        this.vDonacionFin = "";
         return;
       }
 
       if (validaFechaDesde && validaFechaHasta) {
-        let fechaDesdeArray = fechaDesde.split("/");
+        let fechaDesdeArray = vDonacionIni.split("/");
         let fechaInicial = fechaDesdeArray[2] + "-" + fechaDesdeArray[1] + "-" + fechaDesdeArray[0];
-        let fechaHastaArray = fechaHasta.split("/");
+        let fechaHastaArray = vDonacionFin.split("/");
         let fechaFinal = fechaHastaArray[2] + "-" + fechaHastaArray[1] + "-" + fechaHastaArray[0];
 
         this.volantesDonacionService.getVolantesByFechas(fechaInicial, fechaFinal).subscribe(
