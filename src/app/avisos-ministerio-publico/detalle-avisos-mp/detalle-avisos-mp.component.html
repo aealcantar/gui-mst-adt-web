@@ -1,5 +1,6 @@
 <app-app-alerts [alert]="alert"></app-app-alerts>
-<app-tarjeta-presentacion></app-tarjeta-presentacion>
+<app-menu *ngIf="verDetalle=='true'"></app-menu>
+<app-tarjeta-presentacion *ngIf="verDetalle!='true'"></app-tarjeta-presentacion>
 <app-card-template>
 
   <div header class="nuevoAvisoMP">

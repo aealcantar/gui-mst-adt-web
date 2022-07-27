@@ -40,4 +40,8 @@ export class AvisoMinisterioPublicoService {
     return this.http.post(`${environment.msmtsAvisosMP}/reporteAvisoMP`, JSON.stringify(data), {responseType : 'blob'});
   }
 
+  getDatosAvisosMp(fechaInicial: string, fechaFinal: string) {
+    return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisosMpAdmin/${fechaInicial}/${fechaFinal}`);
+  }
+
 }

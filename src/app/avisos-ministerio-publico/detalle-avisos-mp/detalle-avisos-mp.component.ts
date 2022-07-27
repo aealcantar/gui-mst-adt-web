@@ -18,7 +18,7 @@ export class DetalleAvisoMpComponent implements OnInit {
   avisoMp!: any;
   hora: any;
   minutos: any;
-
+  verDetalle: string = "";
 
   constructor(
     private avisoMinisterioPublicoService: AvisoMinisterioPublicoService,
@@ -27,6 +27,8 @@ export class DetalleAvisoMpComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params: any) => {
+      this.verDetalle = params.getAll('verDetalle');
+
       if (params.getAll('idAvisoMp').length > 0) {
         const idAvisoMp = JSON.parse(params.getAll('idAvisoMp'));
         this.obtenerAvisoById(idAvisoMp);
