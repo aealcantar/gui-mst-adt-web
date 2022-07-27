@@ -5,6 +5,7 @@ import { ControlArticulosService } from 'src/app/service/control-articulos.servi
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface';
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+import { formatDate } from '@angular/common'
 
 @Component({
   selector: 'app-detalle-control-articulos',
@@ -14,6 +15,8 @@ import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/
 export class DetalleControlArticulosComponent implements OnInit {
 
   //declaracion de variables para el funcionamiento del aplicativo
+  datetimeFormat = '';
+  dateToday = new Date();
   detalle: any = {};
   alert!: AlertInfo;
   idControlArticulos: string = '';
@@ -34,7 +37,13 @@ export class DetalleControlArticulosComponent implements OnInit {
     private controlArticulosService: ControlArticulosService,
     private rutaActiva: ActivatedRoute,
     private tarjetaService: AppTarjetaPresentacionService,
-  ) { }
+  ) {
+    this.datetimeFormat = formatDate(
+      this.dateToday,
+      'dd/MM/yyyy hh:mm:ss aa',
+      'en-ES',
+    )
+  }
 
   ngOnInit(): void {
     this.idControlArticulos = this.rutaActiva.snapshot.paramMap.get('id');
@@ -116,6 +125,8 @@ export class DetalleControlArticulosComponent implements OnInit {
     }
 
     let splitNombre = nombrePaciente.split(" ");
+    let fechaTransformada = this.datetimeFormat;
+
     let tamanioNombre = splitNombre.length;
     let posicionAppMaterno = tamanioNombre - 1;
     let posicionAppPaterno = tamanioNombre - 2;
@@ -220,8 +231,9 @@ export class DetalleControlArticulosComponent implements OnInit {
       mesR: mesResguardo,
       añoR: anioRecepion,
       horaR: horaRecepcion,
+      fecImpresion: fechaTransformada,
       ubicacionEntrega: this.detalle.recepcionUbicacion,
-      horarioEntrega: rangoFechas.length > 0 ? 
+      horarioEntrega: rangoFechas.length > 0 ?
         `DE ${rangoFechas[0].trim()} A ${rangoFechas[1].trim()} HRS` :
         this.detalle.recepcionHorarioEntregaArticulo,
       nombreTSC: this.detalle.personalQueElaboro,
