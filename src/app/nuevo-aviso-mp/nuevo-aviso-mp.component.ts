@@ -15,6 +15,8 @@ import { Municipio } from '../models/municipio.model'
 import { AvisoMinisterioPublicoService } from '../service/aviso-mp.service'
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface'
+import { Paciente } from 'src/app/models/paciente.model';
+import { Usuario } from 'src/app/models/usuario.model';
 import * as moment from 'moment'
 import { Router } from '@angular/router'
 
@@ -26,6 +28,7 @@ declare var $: any
 })
 export class NuevoAvisoMpComponent implements OnInit {
   paciente!: pacienteSeleccionado
+  usuario!: Usuario;
   nss!: string
   public submitted: boolean = false
   public avisoMP: AvisoMP
@@ -70,6 +73,26 @@ export class NuevoAvisoMpComponent implements OnInit {
     if (this.paciente) {
       this.getCatUnidadesMedicas()
     }
+    const userTemp = sessionStorage.getItem('usuario') || '';
+    this.paciente = JSON.parse(localStorage.getItem('paciente'));
+    if (userTemp !== '') {
+      this.usuario = JSON.parse(userTemp);
+    }
+
+    this.editForm
+    .get('nombreTrabajadorSocial')
+    .setValue(
+      `${this.usuario.strNombres} ${this.usuario.strApellidoP} ${this.usuario.strApellidoM}`
+    );
+  this.editForm
+    .get('matriculaTrabajadorSocial')
+    .setValue(this.usuario.matricula);
+  this.editForm.get('nssPaciente').setValue(this.paciente.nss);
+  this.editForm.get('matriculaTrabajadorSocial').setValue(this.usuario.cveUsuario);
+  this.editForm.controls['nombreTrabajadorSocial'].disable();
+  this.editForm.controls['nssPaciente'].disable();
+  this.editForm.controls['matriculaTrabajadorSocial'].disable();
+
   }
 
   ngAfterViewInit(): void {
