@@ -28,6 +28,10 @@ export class AvisoMinisterioPublicoService {
     return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisosMpByFechas/${fechaInicial}/${fechaFinal}`);
   }
 
+  getCatUnidadesMedicas() {
+    return this.http.get<any>(`${environment.msmtsCatalogos}/api/lisUnidades`);
+  }
+
   downloadPdf(data: any): Observable<Blob> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

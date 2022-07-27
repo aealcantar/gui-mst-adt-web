@@ -11,7 +11,7 @@
         Por favor capture los siguientes datos:
       </span>
     </div>
-    <form novalidate class="formInfo" [formGroup]="formEdit">
+    <form novalidate class="formInfo" [formGroup]="editForm">
       <div class="container seccion">
         <div class="row">
 
@@ -59,7 +59,8 @@
                 id="alcaldia" formControlName="alcaldia" [disableOptionCentering]="true" aria-label="Servicio"
                 placeholder="Seleccionar alcaldía">
                 <mat-option [value]="''" selected class="select-font">Seleccionar alcaldía</mat-option>
-                <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio" *ngFor="let municipio of catMunicipios">
+                <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio"
+                  *ngFor="let municipio of catMunicipios">
                   {{ municipio.des_municipio}}
                 </mat-option>
               </mat-select>
@@ -69,7 +70,7 @@
               </small>
             </div>
           </div>
-          
+
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Agencia del Ministerio público*:</span>
@@ -100,23 +101,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Hospital*:</span>
-              <!-- <select class="form-control styleselect" formControlName="hospital" aria-label="Servicio">
-                <option class="select-font optionSelect" placeholder="Seleccionar hospital" selected [value]="'-1'">
-                  Seleccionar hospital</option>
-                <option class="select-font" [value]="1">Hospital 1</option>
-              </select> -->
-
-              <mat-select class="form-control form-control-mat-select" id="hospital" formControlName="nombreHospital"
-                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar hospital">
-                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar hospital</mat-option> -->
-                <mat-option class="select-font" [value]="1">Hospital 1</mat-option>
-              </mat-select>
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar hospital"
+                formControlName="idUnidadHospital" type="text" readonly />
             </div>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Ubicado en*:</span>
             <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar ubicación"
-              formControlName="agenciaMP" type="text" />
+              formControlName="ubicacionHospital" type="text" readonly />
           </div>
         </div>
 
@@ -134,8 +126,6 @@
                   *ngFor="let item of listaServicios">
                   {{ item.des_especialidad }}
                 </mat-option>
-                <!-- <mat-option class="select-font" [value]="''" selected>Seleccionar servicio</mat-option> -->
-                <!-- <mat-option class="select-font" [value]="1">Servicio 1</mat-option>listaServicios -->
               </mat-select>
               <small *ngIf="editForm.controls?.cveServicio?.dirty && editForm.controls?.cveServicio?.errors"
                 class="form-text form-text-error Campo-obligatorio" style="color: red;">
@@ -158,8 +148,8 @@
           <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha de ingreso*:</span>
-              <input avisompIng class="form-control" id="avisompIng" type="text" placeholder="Seleccionar fecha"
-                formControlName="fechaIngreso">
+              <input fechaIngresoAvisoMP class="form-control" id="fechaIngresoAvisoMP" type="text"
+                placeholder="Seleccionar fecha" formControlName="fechaIngreso" autocomplete="off">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -368,7 +358,7 @@
     </form>
     <div class="row">
       <div class="col-md-12" style="padding-top: 19px; margin-top: -1.4%">
-        <button [disabled]="formEdit.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
+        <button [disabled]="editForm.invalid" type="button" (click)="guardar();" class="btn btn-primary buttonL"
           style="float: right; border: solid 1px #9d2449">
           Guardar
         </button>
@@ -381,3 +371,30 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
+
+<div class="modal fade" role="dialog" id="content" #content>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center modalAtencion" fxLayoutAlign="space-between center" fxLayout="column">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="lineaSeparador"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+        <label class="tituloModal textConfirmacion">¿Desea salir sin guardar</label>
+        <br>
+        <label class="textConfirmacion"> los cambios?</label>
+      </div>
+      <div class="col-md12 row divBtnModal">
+        <div class="col-md10" width="495px" height="118px" aling="center" style="padding-right: 20%;">
+          <button type="button" (click)="salirModal()" class="btn btn-primary buttonL btnGuardar">
+            Aceptar
+          </button>
+          <button type="button" class="btn btn-danger buttonL btnCancelar" (click)="cancelarModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

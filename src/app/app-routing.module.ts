@@ -47,11 +47,7 @@ import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sang
 import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
 
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
-import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
-
-// informe servicios profesionales
-import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 // informe servicios profesionales
