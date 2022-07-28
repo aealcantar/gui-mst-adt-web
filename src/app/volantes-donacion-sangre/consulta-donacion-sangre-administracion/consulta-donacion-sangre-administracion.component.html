@@ -126,39 +126,47 @@
                           <table class="tabla" style="width: 100%;">
                             <thead>
                               <tr>
-                                <th class="encabezadoTable" style="padding: 8px 30px 5px;">
+                                <th class="encabezadoTable" style="padding: 8px 30px 5px; width: 14%;">
                                   <div style="margin-left: -15px;">NSS</div>
                                   <div>
                                     <i class="fa-solid fa-caret-up arrow flechaArriba"
-                                      [ngClass]="{'active-opacity': columnaId === 'nss1' && order === 'asc'}"
-                                      (click)="sortBy('nss1', 'asc', 'nss')">
+                                      [ngClass]="{'active-opacity': columnaId === 'fecEfec' && order === 'asc'}"
+                                      (click)="sortBy('fecEfec', 'asc', 'fecha')">
                                     </i>
                                     <i class="fa-solid fa-caret-down arrow flechaAbajo"
-                                      [ngClass]="{'active-opacity': columnaId === 'nss1' && order === 'desc'}"
-                                      (click)="sortBy('nss1', 'desc', 'nss')">
+                                      [ngClass]="{'active-opacity': columnaId === 'fecEfec' && order === 'desc'}"
+                                      (click)="sortBy('fecEfec', 'desc', 'fecha')">
                                     </i>
                                   </div>
                                 </th>
-                                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 5%;">Paciente</th>
-                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 25%;">
+                                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 26%;">Paciente</th>
+                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 20%;">
                                     Fecha de elaboración</th>
-                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 25%;">
+                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 20%;">
                                     Personal que elaboró</th>
-                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 24%;">
+                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 20%;">
                                   Tipo de sangre</th>
                               </tr>
                             </thead>
                             <tbody
                               *ngFor="let item of listaResultados | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
                               <tr>
-                                <td class="bordesNSS"
+                                <!-- <td class="bordesNSS"
                                   style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
                                   (click)="irDetalle(item.idVolanteDonacionSangre);">
-                                  {{ item.nss }}</td>
-                                <td class="bordesPACIENTE"> {{item.nombrePaciente}} </td>
-                                <td class="bordesfecEfec"> {{item.fecEfec}} </td>
-                                <td class="bordesnombreTrabajadorSocial"> {{item.nombreTrabajadorSocial}} </td>
-                                <td class="bordestipoSangre"> {{item.tipoSangre}} </td>
+                                  {{ item.nss }}</td> -->
+                                  <td class="bordesNSS"  style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                                  (click)="irDetalle(item.idVolanteDonacionSangre);"><div style="width: 84px; margin-left: 30px;
+                                    white-space: nowrap;
+                                    text-overflow: clip;
+                                    overflow: hidden;">
+                                    <span>{{item.nss}}</span>
+                                    </div></td>
+                                  
+                                <td  class="bordesnombrePaciente" style="padding-left: 30px; text-align: left;"> {{item.nombrePaciente}} </td>
+                                <td class="bordesfecEfec" style="padding-left: 30px; text-align: left;"> {{item.fecEfec}} </td>
+                                <td class="bordesnombreTrabajadorSocial" style="padding-left: 30px; text-align: left;"> {{item.nombreTrabajadorSocial}} </td>
+                                <td class="bordestipoSangre" style="padding-left: 30px; text-align: left;"> {{item.tipoSangre.toUpperCase()}} </td>
               
                               </tr>
                             </tbody>

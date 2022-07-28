@@ -162,31 +162,43 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
   padding-top: 14px;
-  width: 10%;
+  width: 12%;
 }
-.bordesPACIENTE {
+.bordesnombrePaciente{
   border: 1px solid #ddd;
-  text-align: center !important;
+  text-align: left !important;
   padding-top: 14px;
-  width: 30%;
+  width: 12%;
 }
 .bordesfecEfec {
   border: 1px solid #ddd;
-  text-align: center !important;
+  text-align: left !important;
   padding-top: 14px;
-  width: 10%;
+  width: 12%;
+}
+.bordesnombreTrabajadorSocial {
+  border: 1px solid #ddd;
+  text-align: left !important;
+  padding-top: 14px;
+  width: 12%;
+}
+.bordestipoSangre {
+  border: 1px solid #ddd;
+  text-align: left !important;
+  padding-top: 14px;
+  width: 12%;
 }
 .bordesTablaFecha {
   border: 1px solid #ddd;
   text-align: center !important;
   padding-top: 14px;
-  width: 22%;
+  width: 15%;
 }
 
 .bordesTablaPaciente {
   border: 1px solid #ddd;
   text-align: center !important;
-  width: 20%;
+  width: 12%;
 }
 
 .flechaArriba{
