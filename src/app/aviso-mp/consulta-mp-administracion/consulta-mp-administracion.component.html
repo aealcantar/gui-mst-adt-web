@@ -39,7 +39,7 @@
                 obligatorio</span></div>
           </div>
         </div>
-        <div class="col-auto mt-5 " style="padding-right: 0.1em !important ">
+        <div class="col-auto mt-5 " style="padding-right: 0.1em !important; text-align: right !important;">
           <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()">
             Limpiar
           </button>
@@ -74,7 +74,7 @@
             <table class="tabla" style="width: 100%;">
               <thead>
                 <tr>
-                  <th class="encabezadoTable" style="padding: 8px 30px 5px;">
+                  <th class="encabezadoTable" style="padding: 8px 30px 5px; width: 14%;">
                     <div style="margin-left: -15px;">Fecha</div>
                     <div>
                       <i class="fa-solid fa-caret-up arrow flechaArriba"
@@ -87,12 +87,12 @@
                       </i>
                     </div>
                   </th>
-                  <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 5%;">NSS</th>
+                  <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 15%;">NSS</th>
                   <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 25%;">
                     Paciente</th>
                   <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 25%;">
                     Médico tratante</th>
-                  <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 24%;">
+                  <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 25%;">
                     Trabajador social</th>
                 </tr>
               </thead>
@@ -103,10 +103,10 @@
                     style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
                     (click)="irDetalle(item.idAvisoMp);">
                     {{ item.fechaElaboracion }}</td>
-                  <td class="bordesTablaFecha"> {{item.nss}} </td>
-                  <td class="bordesTablaPaciente"> {{item.nombrePaciente}} </td>
-                  <td class="bordesTablaPaciente"> {{item.medicoTratante}} </td>
-                  <td class="bordesTablaPaciente"> {{item.TrabajadorSocial}} </td>
+                  <td class="bordesTablaPaciente" style="padding-left: 30px; text-align: left;"> {{item.nss}} </td>
+                  <td class="bordesTablaPaciente" style="padding-left: 30px; text-align: left;"> {{item.nombrePaciente}} </td>
+                  <td class="bordesTablaPaciente" style="padding-left: 30px; text-align: left;"> {{item.medicoTratante}} </td>
+                  <td class="bordesTablaPaciente" style="padding-left: 30px; text-align: left;"> {{item.TrabajadorSocial}} </td>
 
                 </tr>
               </tbody>
