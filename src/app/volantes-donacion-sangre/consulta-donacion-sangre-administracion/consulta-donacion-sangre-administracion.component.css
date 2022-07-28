@@ -1,658 +1,230 @@
 :host {
-    font-family: 'Montserrat';
-  }
-
-  .control-label {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: right;
-  }
-
-  .title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    color: #222222;
-  }
-
-  .radio-consulta {
-    top: 50%;
-    margin: 0 !important;
-    left: 0;
-    margin: 0;
-    transform: translate(0, -40%);
-  }
-
-  td,
-  th {
-    font-size: 14px;
-  }
-
-  .pagination>li>a:focus,
-  .pagination>li>a:hover,
-  .pagination>li>span:focus,
-  .pagination>li>span:hover {
-    z-index: 3;
-    color: #FFF;
-    background-color: #9D2449;
-    border-color: #ddd;
-    border-radius: 50%;
-  }
-
-  .pagination a {
-    border: none;
-  }
-
-  a {
-    cursor: pointer;
-  }
-
-  .botonRojo {
-    font-family: Montserrat;
-    font-size: 14px;
-    width: 100px;
-    height: 17px;
-    font-family: Montserrat;
-    border-radius: 1.8px !important;
-    border: solid 1px #9d2449;
-  }
-
-  .consultaControlDeArticulos {
-    font-family: 'Montserrat';
-    font-size: 24px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 29px;
-    font-weight: 700;
-    letter-spacing: normal;
-    text-align: left;
-    left: 3.45%;
-    right: 71.79%;
-    color: #222;
-  }
-
-  .errorimg {
-    width: 289px;
-    height: 197px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-  }
-
-  .div-container-image {
-    margin-left: 25%;
-    width: 289px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .tituloServicio {
-    color: #272829;
-    font-size: 14px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #272829;
-    width: 100%;
-    height: 17px;
-    margin: 0 242.5px 4px 0;
-    font-family: Montserrat;
-  }
-
-  .fondocalendar {
-    background-color: #eeeeee;
-    transform: translateY(-8%);
-    background-size: 10px 12px;
-    background-repeat: no-repeat;
-    margin: -0.9px 1px 0px 15.2px;
-    padding: 0 20.2px 0 18.2px;
-    height: 29.7px;
-    border-radius: 2px 2px 2px 2px;
-  }
-
-  .imgCalendar {
-    background-image: url("src/assets/images/calendario.svg");
-    background-repeat: no-repeat;
-    color: #191919;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-49%);
-    background-size: 20px 19px;
-    margin-left: -1.6px;
-  }
-
-  .datepicker-group .glyphicon {
-    color: #EEEEEE !important;
-  }
-
-  .encabezadoTable {
-    width: 150;
-    text-align: left;
-    background-color: rgba(196, 196, 196, 0.1);
-    border: 1px solid #EEEEEE;
-    text-align: center;
-  }
-
-  .encabezadoTableCentro {
-    width: 150;
-    text-align: left;
-    background-color: rgba(196, 196, 196, 0.1);
-    border: 1px solid #EEEEEE;
-    text-align: center;
-    padding-top: 13px;
-  }
-
-  .bordesTabla {
-    border: 1px solid #ddd;
-    text-align: center !important;
-  }
-
-  .bordesTablaFecha {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    padding-top: 14px;
-    width: 17%;
-  }
-
-  .bordesTablaHora {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 13%;
-  }
-
-  .bordesTablaModalidad {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 11%;
-  }
-
-  .bordesTablaTotalParticipantes {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 13%;
-  }
-
-  .bordesTablaAsistieron {
-    border: 1px solid #ddd;
-    text-align: center !important;
-    width: 13%;
-  }
-
-  .bordesTablaDescripcion {
-    border: 1px solid #ddd;
-    text-align: left !important;
-    width: 70%;
-  }
-
-  .links {
-    margin: 8px 0;
-    font-family: Montserrat;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #4d92df;
-    text-decoration: none;
-  }
-
-  .form-control {
-    font-size: 14px !important;
-  }
-
-  .centr {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-  }
-
-  .my-pagination ::ng-deep .current {
-    width: 2em;
-    height: 2em;
-    text-align: center;
-    line-height: 2em;
-    border-radius: 1em;
-    background: rgb(143, 4, 4);
-    margin: 0 1em;
-    display: inline-block;
-    color: white;
-    font-size: 17.47px;
-    position: relative;
-    margin-top: 1%;
-    text-decoration: none;
-  }
-
-  .form {
-    width: 60%;
-    height: 29px;
-    padding: 6px 12px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
-  }
-
-  .tabla>tbody>tr>td,
-  .tabla>tbody>tr>th,
-  .tabla>tfoot>tr>td,
-  .tabla>tfoot>tr>th,
-  .tabla>thead>tr>td,
-  .tabla>thead>tr>th {
-    padding: 1.8px;
-    line-height: 1.428571429;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-  }
-
-  .buttonL {
-    width: 120px;
-    height: 30px;
-    border-radius: 3px;
-    margin: 5px 15px 0 10px !important;
-    padding: 5px;
-    align-self: stretch;
-    flex-grow: 1;
-    font-family: Montserrat;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-  }
-
-  .spanCaracteres {
-    font-family: Montserrat;
-    font-size: 14px;
-    font-weight: 200;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-  }
-
-  .redColor {
-    color: #E10000 !important;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 45px;
-    /* or 450% */
-    display: flex;
-    align-items: center;
-  }
-
-  .Campo-obligatorio {
-    width: 101px;
-    height: 14px;
-    font-family: Montserrat;
-    font-size: 10px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #e10000;
-  }
-
-
-
-
-
-
-
-.resultados {
-  width: 109px;
-  height: 17px;
-  flex-grow: 0;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: right;
-  float: left;
-  color: #222;
-  margin-right: 17px;
-  margin-top: 10px;
+  font-family: 'Montserrat';
 }
 
-.resultados2 {
-
-  height: 17px;
-  flex-grow: 0;
-  font-family: Montserrat;
+.control-label {
+  font-weight: 400;
   font-size: 14px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  line-height: 17px;
   text-align: right;
-  float: left;
-  color: #222;
-  margin-top: 10px;
 }
 
-.table th,
-tr {
-  height: 24px;
-  border: solid 1px #eee;
-  /* background-color: rgba(252, 238, 231, 0.1); */
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #222222;
+}
+
+.radio-consulta {
+  top: 50%;
+  margin: 0 !important;
+  left: 0;
+  margin: 0;
+  transform: translate(0, -40%);
+}
+
+td,
+th {
+  font-size: 14px;
+  max-width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+  z-index: 3;
+  color: #FFF;
+  background-color: #9D2449;
+  border-color: #ddd;
+  border-radius: 50%;
+}
+
+.pagination a {
+  border: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+.botonRojo {
   font-family: Montserrat;
   font-size: 14px;
-  font-weight: 500;
+  width: 100px;
+  height: 17px;
+  font-family: Montserrat;
+  border-radius: 1.8px !important;
+  border: solid 1px #9d2449;
+}
+
+.consultaControlDeArticulos {
+  font-family: 'Montserrat';
+  font-size: 24px;
   font-stretch: normal;
   font-style: normal;
-  line-height: normal;
+  line-height: 29px;
+  font-weight: 700;
   letter-spacing: normal;
   text-align: left;
-  vertical-align: middle;
-}
-
-.table td {
-  height: 24px;
-  padding: 8px 51.5px 8px 21.9px;
-  border: solid 1px #eee;
-  background-color: rgba(252, 252, 252, 0.1);
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  vertical-align: middle;
-}
-
-.colorSubtabla{
-color: #FFFFFF;
-}
-
-.subtable {
-  width: 100%;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding: 5px 0px 5px 5px !important;
-}
-
-.tableTd {
-
-  padding: 0px 0px 0px 0px !important;
-  height: 0px !important;
-
-}
-
-.subtableTr {
-  padding: 0px 0px 0px 0px !important;
-  height: 25px !important;
-  border: transparent !important;
-
-}
-
-.subtableTd {
-
-  padding: 0px 0px 0px 0px !important;
-  height: 0px !important;
-  border: transparent !important;
-
-}
-
-.subtable Td {
-
-  padding: 0px 0px 0px 10px !important;
-  height: 0px !important;
-  border: transparent !important;
-
-}
-
-.subtable Th {
-
-  padding: 0px 0px 0px 10px !important;
-  height: 0px !important;
-  border: transparent !important;
-
-}
-
-
-.collapsedElement {
-  position: absolute;
-  right: 10px;
-  width: 13px;
-  height: 13px;
-  display: block;
-  border-left: 2px solid #9f2241;
-  border-bottom: 2px solid #9f2241;
-  transform: rotate(-45deg);
-  margin-top: 8px;
-  margin-right: 5px;
-}
-
-.pading1{
-  padding-top: 175px;
-}
-
-.errorimgdiv {
-width: 289px;
-margin-left: auto;
-margin-right: auto;
-
+  left: 3.45%;
+  right: 71.79%;
+  color: #222;
 }
 
 .errorimg {
-width: 289px;
-height: 197px;
-margin-left: auto;
-margin-right: auto;
-margin-top: 50px;
-}
-
-
-.Rectangle-9600 {
-  width: 100%;
-  height: 41px;
-  flex-grow: 0;
-  margin-top: -27px;
-  border: solid 1px #eee;
-}
-
-.sinInfolbl {
-  width: 209px;
-  flex-grow: 0;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  float: left;
-  color: #222;
-  margin-top: 10px;
-  margin-left: 32px;
-}
-
-.alertCompl {
-  border-radius: 8px;
-  width: 539px;
-  position: absolute;
-  margin-left: 336px;
+  width: 289px;
+  height: 197px;
+  margin-left: auto;
   margin-right: auto;
-  margin-top: 2px;
-  z-index: 4;
-  box-shadow: 3px 3px 3px #80808061;
-  padding: 4px 24px !important;
-  font-size: 15px;
-
+  margin-top: 50px;
 }
 
-.botonTabla {
-
-  margin-left: 20px;
-  background: transparent;
-  border: transparent;
-  position: absolute;
-  right: 10px;
-  width: 25px;
-  height: 18px;
-  display: block;
-  margin-top: -16px;
-  margin-right: 5px;
+.div-container-image {
+  margin-left: 25%;
+  width: 289px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.iconTabla {
-  position: absolute;
-  right: 37px;
-  width: 13px;
-  height: 13px;
-  display: block;
-  border-left: 2px solid #50a7ee;
-  border-bottom: 2px solid #50a7ee;
-  transform: rotate(-45deg);
-  margin-top: -12px;
-  margin-right: -5px;
-}
-
-.iconTablainv {
-  position: absolute;
-  right: 37px;
-  width: 13px;
-  height: 13px;
-  display: block;
-  border-left: 2px solid #50a7ee;
-  border-bottom: 2px solid #50a7ee;
-  transform: rotate(135deg);
-  margin-top: -4px;
-  margin-right: -5px;
-}
-
-.renglonTabla {
-
-  border: solid 1px #eee;
-  background-color: rgba(252, 252, 252, 0.1);
-  font-family: Montserrat;
+.tituloServicio {
+  color: #272829;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
-  padding: 8px 51.5px 8px 21.9px;
-
-}
-
-.link-texto {
-  cursor: pointer;
-
-}
-
-.my-pagination /deep/ .ngx-pagination .current {
-
-  width: 2em;
-  height: 2em;
-  text-align: center;
-  line-height: 2em;
-  border-radius: 1em;
-  background: rgb(143, 4, 4);
-  margin: 0 1em;
-  display: inline-block;
-  color: white;
-  position: relative;
-}
-
-.centr {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-
-}
-
-.pagina {
-  width: 50px;
+  color: #272829;
+  width: 100%;
   height: 17px;
-  flex-grow: 0;
-  margin: auto 12px auto 0;
+  margin: 0 242.5px 4px 0;
   font-family: Montserrat;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: right;
-  color: #3e3e3e;
-  padding-bottom: 0px !important;
 }
 
-.paginanum {
-
-  width: 37px;
-  height: 28px;
-  margin: auto 12px auto 0px;
-  padding: 0 0 0 14px;
-  border-radius: 6px;
-  border: solid 1px #ddd;
-  background-color: #fff;
-  color: #f8f8f8;
-
+.fondocalendar {
+  background-color: #eeeeee;
+  transform: translateY(-8%);
+  background-size: 10px 12px;
+  background-repeat: no-repeat;
+  margin: -0.9px 1px 0px 15.2px;
+  padding: 0 20.2px 0 18.2px;
+  height: 29.7px;
+  border-radius: 2px 2px 2px 2px;
 }
 
-/* .arrow-down {
-  top: 190px;
-  z-index: 9999;
-  margin-left: 43px;
-  margin-top: 10px;
-} */
+.imgCalendar {
+  background-image: url("src/assets/images/calendario.svg");
+  background-repeat: no-repeat;
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-49%);
+  background-size: 20px 19px;
+  margin-left: -1.6px;
+}
+
+.datepicker-group .glyphicon {
+  color: #EEEEEE !important;
+}
+
+.encabezadoTable {
+  width: 5px;
+  text-align: left;
+  background-color: rgba(196, 196, 196, 0.1);
+  border: 1px solid #EEEEEE;
+  text-align: center;
+}
+
+.encabezadoTablePaciente {
+  width: 150;
+  text-align: left;
+  background-color: rgba(196, 196, 196, 0.1);
+  border: 1px solid #EEEEEE;
+  text-align: center;
+}
+
+
+
+.bordesTabla {
+  border: 1px solid #ddd;
+  text-align: center !important;
+}
+.bordesNSS {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  padding-top: 14px;
+  width: 10%;
+}
+.bordesPACIENTE {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  padding-top: 14px;
+  width: 30%;
+}
+.bordesfecEfec {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  padding-top: 14px;
+  width: 10%;
+}
+.bordesTablaFecha {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  padding-top: 14px;
+  width: 22%;
+}
+
+.bordesTablaPaciente {
+  border: 1px solid #ddd;
+  text-align: center !important;
+  width: 20%;
+}
 
 .flechaArriba{
-margin-left: 43px; margin-top: -3px;
+  margin-top: -20px;
+  margin-left: 34px;
 }
+
 .flechaAbajo{
-  /* z-index: 9999; */
-  margin-left: 43px;
-  margin-top: 5px;
+  margin-top: -13px;
+  margin-left: 34px;
 }
 
-.Rectangle-9601 {
-  width: 100%;
-  height: 41px;
-  flex-grow: 0;
-  margin-top: 20px;
-  border: solid 1px #eee;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-
+.links {
+  margin: 8px 0;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4d92df;
+  text-decoration: none;
 }
+
+.form-control {
+  font-size: 14px !important;
+}
+
 .centr {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
-
 }
-.my-pagination /deep/ .ngx-pagination .current {
 
+.my-pagination ::ng-deep .current {
   width: 2em;
   height: 2em;
   text-align: center;
@@ -662,13 +234,44 @@ margin-left: 43px; margin-top: -3px;
   margin: 0 1em;
   display: inline-block;
   color: white;
+  font-size: 17.47px;
   position: relative;
+  margin-top: 1%;
+  text-decoration: none;
 }
-.pagina {
-  width: 50px;
-  height: 17px;
-  flex-grow: 0;
-  margin: auto 12px auto 0;
+
+.form {
+  width: 60%;
+  height: 29px;
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+
+.tabla>tbody>tr>td,
+.tabla>tbody>tr>th,
+.tabla>tfoot>tr>td,
+.tabla>tfoot>tr>th,
+.tabla>thead>tr>td,
+.tabla>thead>tr>th {
+  padding: 1.8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+.buttonL {
+  width: 120px;
+  height: 30px;
+  border-radius: 3px;
+  margin: 5px 15px 0 10px !important;
+  padding: 5px;
+  align-self: stretch;
+  flex-grow: 1;
   font-family: Montserrat;
   font-size: 14px;
   font-weight: normal;
@@ -676,23 +279,41 @@ margin-left: 43px; margin-top: -3px;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: right;
-  color: #3e3e3e;
-  padding-bottom: 0px !important;
+  text-align: center;
 }
 
-.paginanum {
-
-  width: 37px;
-  height: 28px;
-  margin: auto 12px auto 0px;
-  padding: 0 0 0 14px;
-  border-radius: 6px;
-  border: solid 1px #ddd;
-  background-color: #fff;
-  color: #f8f8f8;
-
+.spanCaracteres {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 200;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
 }
 
+.redColor {
+  color: #E10000 !important;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 45px;
+  /* or 450% */
+  display: flex;
+  align-items: center;
+}
 
-
+.Campo-obligatorio {
+  width: 101px;
+  height: 14px;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e10000;
+}
