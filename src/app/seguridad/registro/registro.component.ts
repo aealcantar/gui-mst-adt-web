@@ -79,12 +79,7 @@ export class RegistroComponent implements OnInit {
 
   loginusuario(): void {
     this.submitted = true
-    console.log('valid' + this.logindata.valid)
-
-    if (
-      this.logindata.value.nvacontrasenia !=
-      this.logindata.value.confirmacontrasenia
-    ) {
+    if (this.logindata.value.nvacontrasenia != this.logindata.value.confirmacontrasenia) {
       this.muestraAlerta(
         '¡La contraseña no coincide, favor de verificar!',
         'alert-danger',
@@ -93,22 +88,18 @@ export class RegistroComponent implements OnInit {
       return
     }
 
-    if (
-      this.logindata.valid &&
-      this.logindata.value.nvacontrasenia ==
-        this.logindata.value.confirmacontrasenia
-    ) {
-      const validate = (input: string) =>
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,10}$/.test(
-          input,
-        )
+    if (this.logindata.valid && this.logindata.value.nvacontrasenia == this.logindata.value.confirmacontrasenia) {
+      // const validate = (input: string) =>
+      //   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,10}$/.test(
+      //     input,
+      //   )
 
-      console.log(
-        `${this.logindata.value.nvacontrasenia} ${validate(
-          this.logindata.value.nvacontrasenia,
-        )}`,
-      )
-      if (validate(this.logindata.value.nvacontrasenia)) {
+      // console.log(
+      //   `${this.logindata.value.nvacontrasenia} ${validate(
+      //     this.logindata.value.nvacontrasenia,
+      //   )}`,
+      // )
+      if (this.logindata.value.nvacontrasenia) {
         this.admonRequest.email = this.mail
         this.admonRequest.password = this.logindata.value.nvacontrasenia
 

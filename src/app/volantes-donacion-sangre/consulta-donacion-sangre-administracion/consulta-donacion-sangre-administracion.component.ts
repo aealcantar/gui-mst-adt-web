@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { ServiceService } from 'src/app/busqueda-nss/busqueda-nss.service';
 declare var $: any;
 
 @Component({
@@ -22,7 +21,7 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
   errorBusqueda: boolean = false;
   totalResultados: number = 0;
   order: string = 'desc';
-  columnaId: string = 'nss';
+  columnaId: string = 'fecha';
   selectFechaInicio: boolean = false;
   selectFechaFinal: boolean = false;
   selectTipoSangre: boolean = false;
@@ -188,7 +187,7 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
               } else {
                 this.totalResultados = this.listaResultados.length;
               }
-              this.sortBy(this.columnaId, this.order, 'nss');
+              this.sortBy(this.columnaId, this.order, 'fecha');
             }
           });
 
@@ -201,9 +200,6 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
 
   //redirecciona al detalle
   irDetalle(idVolanteDonacionSangre: string) {
-    // let verDetalle = "true";
-    // this.router.navigateByUrl("/detalle-volante-donacion-sangre/" + idVolanteDonacionSangre + "/" + verDetalle, { skipLocationChange: true })
-
     let verDetalle = "true";
     let params = { idVolanteDonacionSangre,verDetalle };    
     this.router.navigate(["/detalle-volante-donacion-sangre/"+idVolanteDonacionSangre], { queryParams: params, skipLocationChange: true });
@@ -231,9 +227,6 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
   converType(val: any, type: string) {
     let data;
     switch (type) {
-      case 'nss':
-        data = parseInt(val);
-        break;
       case 'fecha':
         data = moment(val, 'DD/MM/YYYY');
         break;
