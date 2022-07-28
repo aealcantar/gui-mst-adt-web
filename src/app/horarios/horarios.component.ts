@@ -44,7 +44,7 @@ export class HorariosComponent implements OnInit {
   public dia: string = '';
   mensaje!: objAlert;
 
-  public HORA_INICIO: number = 9;
+  public HORA_INICIO: number = 0;
   public HORA_FIN: number = 18;
   horarioInicialSeleccionado: string;
   estatusActivoSeleccionado: boolean;
@@ -54,6 +54,8 @@ export class HorariosComponent implements OnInit {
   lblBtnHabilitar: string = 'Habilitar día';
   lblHabilitar: string = 'inhabilitar';
   blnHabil: boolean = true;
+
+  problemaCita: string = ""
 
   formfields: any = this.formBuilder.group({
     horainicio: ['', Validators.required],
@@ -70,17 +72,19 @@ export class HorariosComponent implements OnInit {
     private authService: AuthService,
     private activerouter: ActivatedRoute,
     private router: Router,
-    private http: HttpClient, private modalService: NgbModal) {
-    this.authService.userLogged$.next(true);
-    this.authService.isAuthenticatedObs$.next(true);
+    private http: HttpClient, 
+    private modalService: NgbModal
+    ) {
+      this.authService.userLogged$.next(true);
+      this.authService.isAuthenticatedObs$.next(true);
 
-    this.diaNb = (new Date()).getDay();
-    this.obtieneDia(this.diaNb)
+      this.diaNb = (new Date()).getDay();
+      this.obtieneDia(this.diaNb)
 
 
-    console.log("dia: ", this.diaNb);
-    this.authService.setProjectObs("Agenda Digital Transversal");
-    this.turnoNuevo = new HorarioTurno();
+      console.log("dia: ", this.diaNb);
+      this.authService.setProjectObs("Agenda Digital Transversal");
+      this.turnoNuevo = new HorarioTurno();
 
 
   }
@@ -402,9 +406,10 @@ export class HorariosComponent implements OnInit {
     this.horaInicial.setMinutes(0);
     console.log(this.horaInicial);
     let tiempo = 5;
+    const LIMITE = 295;
     let hora: string = "0" + this.horaInicial.getHours() + ":0" + this.horaInicial.getMinutes();
     this.lstHorarioInicial.push(hora);
-    for (let i = 9; i <= 30; i++) {
+    for (let i = 9; i <= LIMITE; i++) {
 
       this.horaInicial.setMinutes(this.horaInicial.getMinutes() + tiempo);
 
@@ -434,9 +439,13 @@ export class HorariosComponent implements OnInit {
   private obtenerLstDuracion() {
     this.msjLoading("Cargando...");
     this.lstDuracion = new Array();
-    let x = 10;
-    for (let i: number = 1; i <= 6; i++) {
-      x = x + 5;
+    // meter servicio para saber si es consultorio u otro
+    let x = 5;
+    let duracion = 5;
+    let ciclos = 11;//3 para cada 15 y 11 para cada 5
+    this.lstDuracion.push(x);
+    for (let i: number = 0; i < ciclos; i++) {
+      x = x + duracion;
       this.lstDuracion.push(Number(x));
     }
     Swal.close();
@@ -673,40 +682,57 @@ export class HorariosComponent implements OnInit {
   btnModalInhabilitar() {
 
     //servicio de estatus
-    let requestCita= new HorarioRequest();
-    requestCita.idUbicacion = Number(this.cveUbicacion);
-    requestCita.dia = this.semana[this.diaNb];
-    requestCita.estatus = this.validarEstatusDia();
-    this.horarioService.verificarCitasAgendadas(requestCita).subscribe((resp) => {
-      console.log('respuesta verificar', resp);
-      if (resp.status == 200) {
-        if(resp.body.estatus){
-          // this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, resp.body.mensaje, this._Mensajes.EXITO);
-          $('#inhabilitar').modal({
-            keyboard: false,
-            backdrop: 'static'
-          })
-          $('#inhabilitar').modal('show')
-        }else{
-          let error: HttpErrorResponse = {
-            status: resp.status,
-            message: resp.body.mensaje,
-            name: 'HttpErrorResponse',
-            error: undefined,
-            ok: false,
-            headers: new HttpHeaders,
-            statusText: '',
-            url: '',
-            type: HttpEventType.ResponseHeader
-          };
-          this.mensajesError(error, resp.body.mensaje);
-          Swal.close();
+
+    if(this.blnHabil){
+      let requestCita= new HorarioRequest();
+      requestCita.idUbicacion = Number(this.cveUbicacion);
+      requestCita.dia = this.semana[this.diaNb];
+      requestCita.estatus = this.validarEstatusDia();
+      this.horarioService.verificarCitasAgendadas(requestCita).subscribe((resp) => {
+        console.log('respuesta verificar', resp);
+        if (resp.status == 200) {
+          if(resp.body.estatus){
+            // this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, resp.body.mensaje, this._Mensajes.EXITO);
+            $('#inhabilitar').modal({
+              keyboard: false,
+              backdrop: 'static'
+            })
+            $('#inhabilitar').modal('show')
+          }else{
+            /* let error: HttpErrorResponse = {
+              status: resp.status,
+              message: resp.body.mensaje,
+              name: 'HttpErrorResponse',
+              error: undefined,
+              ok: false,
+              headers: new HttpHeaders,
+              statusText: '',
+              url: '',
+              type: HttpEventType.ResponseHeader
+            }; */
+            this.problemaCita = resp.body.mensaje;
+            $('#problemaCita').modal({
+              keyboard: false,
+              backdrop: 'static'
+            })
+            $('#problemaCita').modal('show')
+            // this.mensajesError(error, resp.body.mensaje);
+            Swal.close();
+          }
+        } else {
+          this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
         }
-      } else {
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
-      }
-      
-    })   
+        
+      })
+    }else{
+      $('#inhabilitar').modal({
+        keyboard: false,
+        backdrop: 'static'
+      })
+      $('#inhabilitar').modal('show')
+
+    }
+
     //console.log('botón habilitar');
   }
 
@@ -724,6 +750,10 @@ export class HorariosComponent implements OnInit {
 
     $('#content').modal('hide')
 
+  }
+
+  cerrarModalCita(){
+    $('#problemaCita').modal('hide')
   }
 
   dia1: boolean = false;

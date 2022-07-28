@@ -264,6 +264,32 @@
       </div>
     </div>
   </div>
+  <!-- Modal Error Cita -->
+  <div class="modal fade" id="problemaCita" >
+    <div class="modal-dialog" style="width: 450px;">
+      <div class="modal-content modal-dialog-centered" style="width: 450px;">
+        <div class="modal-header">
+          <img class="center" src="../../assets/images/Group 2082.png">
+          <h5 class="modal-title" id="agregarHorario">Atención</h5>
+        </div>
+        <div class="modal-body-horarios">
+
+          <div class="lblHabilitar" style="justify-content: center; font-size: 18px;  width: 227px;">
+            {{problemaCita}}
+          </div>
+
+
+        </div>
+        <div style="height: 30px;"></div>
+        <div class="modal-footer" style="text-align: center ;">
+          <button type="button" class="btn btn-danger btuser" aria-label="Close" data-bs-dismiss="modal"
+            (click)="cerrarModalCita()">Cancelar</button>
+          <button type="button" class="btn btn-primary btuser" aria-label="Close" data-dismiss="modal"
+            (click)="cerrarModalCita()" style="margin-bottom: 5px;margin-left: 30px;">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- <div class="container-fluid central"> -->
     <!-- <section class="section"> -->
       <div class="base-cont table-responsive">
