@@ -4,6 +4,8 @@ export class Nota {
     numNss?: string;
 	fecFecha?: string;
 	timHora?: string;
+  timHoraInicial?: string;
+  timHoraFinal?: string;
 	idTipoNota?: number;
 	idRedApoyo?: number;
 	idActividadTecnica?: number;
@@ -14,4 +16,10 @@ export class Nota {
 	nombreDiagnostico?: string;
 	nombreRedApoyo?: string;
 	nombreTipoNota?: string;
+  matriculaTs?: string;
+  nombreTs?: string;
+  desResponsable?: string;
+  cveTurno?: string;
+  desAgregadoMedico?: string;
+  nombrePaciente?: string;
 }
