@@ -682,8 +682,8 @@ export class HorariosComponent implements OnInit {
   btnModalInhabilitar() {
 
     //servicio de estatus
-
-    if(this.blnHabil){
+    // console.log('modal deshab, estatus ',this.blnHabil);
+    if(!this.blnHabil){
       let requestCita= new HorarioRequest();
       requestCita.idUbicacion = Number(this.cveUbicacion);
       requestCita.dia = this.semana[this.diaNb];
