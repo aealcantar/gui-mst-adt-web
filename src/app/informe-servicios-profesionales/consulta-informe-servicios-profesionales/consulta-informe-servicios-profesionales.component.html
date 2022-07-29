@@ -74,20 +74,23 @@
                             <mat-option class="select-font" [value]="''" selected>
                                 Ingresar Responsable
                             </mat-option>
-                            <mat-option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
-                                {{ lugar.des_completa_ubicacion }}
+                            <mat-option class="select-font" [value]="responsable.matriculaTs"
+                                *ngFor="let responsable of responsables">
+                                {{ responsable.nombreTs }}
                             </mat-option>
                         </mat-select>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="col-auto mt-5 buttons-L">
-                        <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()" id="btnLimpiar">
-                                Limpiar
-                              </button>
-                        <button type="submit" class="btn btn-primary btn-guardar buttonL" (click)="buscar()" id="btnBuscar">
-                                Buscar
-                            </button>
+                        <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()"
+                            id="btnLimpiar">
+                            Limpiar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-guardar buttonL" id="btnBuscar"
+                            [disabled]="!formularioBusqueda.valid">
+                            Buscar
+                        </button>
                     </div>
                 </div>
             </div>

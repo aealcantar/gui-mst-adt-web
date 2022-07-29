@@ -43,41 +43,27 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         turno: new FormControl('', Validators.required),
     })
 
-    // Datos prueba
-    public datosPrueba = [
-        {
-            "numero": "12345",
-            "paciente": "Miguel Sanchez",
-            "horaCita": "10:00:00",
-            "agregadoMedico": "Nataly",
-            "primeraVez": "true",
-            "citado": "11",
-        },
-        {
-            "numero": "67890",
-            "paciente": "Angel Hernandez",
-            "horaCita": "10:00:00",
-            "agregadoMedico": "Nataly",
-            "primeraVez": "true",
-            "citado": "12",
-        }
-    ];
-
     // observers
     lugaresObserver = {
-        next: (response: any) => console.log(response),
+        next: (lugares: any) => this.lugares = lugares,
         error: (error: HttpErrorResponse) => console.log(error),
-        finally: () => console.log('end')
     }
     serviciosObserver = {
         next: (servicios: any) => this.serviciosEspecialidad = servicios,
         error: (error: HttpErrorResponse) => console.log(error),
-        finally: () => console.log('end')
     }
     turnosObserver = {
         next: (turnos: any) => this.turnos = turnos,
         error: (error: HttpErrorResponse) => console.log(error),
-        finally: () => console.log('end')
+    }
+    responsablesObserver = {
+        next: (respuesta: any) => this.responsables = respuesta.responsables,
+        error: (error: HttpErrorResponse) => console.log(error),
+    }
+
+    consultaObserver = {
+        next: (respuesta: any) => this.datosBusqueda = respuesta,
+        error: (error: HttpErrorResponse) => console.log(error),
     }
 
     constructor(private informeServProfService: InformeServiciosProfesionalesService) { }
@@ -91,7 +77,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
             info: false,
             searching: false,
         };
-        // this.datosBusqueda = this.datosPrueba
         this.cargarCatalogos();
     }
 
@@ -104,7 +89,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
             dateFormat: 'dd/mm/yy',
             onSelect: (date: any) => {
                 if (date == '') return
-                // date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
                 this.formularioBusqueda.get('fecha')?.patchValue(date)
             },
             onClose: (date: any) => {
@@ -130,9 +115,9 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     }
 
     buscar(): void {
-        this.validarCamposObligatorios();
-        console.log(this.formularioBusqueda.value)
-        this.revisarCamposVacios();
+        const consultaBusqueda  = this.formularioBusqueda.value;
+        console.log(consultaBusqueda)
+        this.informeServProfService.getConsultaServicios(consultaBusqueda).subscribe(this.consultaObserver)
     }
 
     sortBy(columnaId: string, order: string, type: string): void {
@@ -145,18 +130,8 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     cargarCatalogos(): void {
         this.informeServProfService.getCatTurnos().subscribe(this.turnosObserver);
         this.informeServProfService.getCatServicios().subscribe(this.serviciosObserver);
-        // this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
+        this.informeServProfService.getCatResponsables().subscribe(this.responsablesObserver)
+        this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
     }
-
-    validarCamposObligatorios(): void {
-        const campos = Object.keys(this.formularioBusqueda.controls);
-        campos.forEach(campo => {
-            const control = this.formularioBusqueda.get(campo);
-            control.markAsTouched({ onlySelf: true });
-        });
-    }
-
-    revisarCamposVacios(): void {
-
-    }
+    
 }
