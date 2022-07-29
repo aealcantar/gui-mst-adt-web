@@ -129,7 +129,7 @@ export class HelperCatalogosService {
       idCatalogos: 6,
       nombreCatalogo: 'Configuración de Calendario Anual',
       rutaPlantilla: '../../../../assets/files/15.CalendarioAnual.xlsx',
-      idCatPadre: [2,3,4],
+      idCatPadre: [2,3,4,5],
       col1: 'PROGRAMA DE TRABAJO SOCIAL',
       col2: 'CLAVE ESPECIALIDAD',
       col3: 'SERVICIO/ESPECIALIDAD',

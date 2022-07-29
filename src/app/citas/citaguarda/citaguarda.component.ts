@@ -150,7 +150,7 @@ export class CitaguardaComponent implements OnInit {
         var cont: number = 0;
         for (var prt of resp.busquedanss.beneficiarios) {
 
-          if(this.paciente.paciente.trim().toUpperCase() === prt.paciente.trim().toUpperCase()){
+          if (this.paciente.paciente.trim().toUpperCase() === prt.paciente.trim().toUpperCase()) {
             this.lstchkparticipantes.push({ name: '', value: this.paciente.paciente, id: cont, checked: true, isfam: false });
           } else {
             this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true });
@@ -214,7 +214,7 @@ export class CitaguardaComponent implements OnInit {
 
   llenafechas(cve_gpo: number) {
     this.msjLoading("Cargando...");
-    this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo).subscribe({
+    this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo, this._usuario.unidadMedica).subscribe({
       next: (resp: any) => {
         //console.log(resp);
 
@@ -231,14 +231,22 @@ export class CitaguardaComponent implements OnInit {
 
   }
 
+  horarioOK: boolean = false;
   llenacatalogohorarios(fechaInicio: string) {
     this.msjLoading("Cargando...");
     this.citaservice.gethorarioscalanual(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa,
       fechaInicio).subscribe({
         next: (resp: any) => {
-          //console.log(resp);
-          this.lstCatHorarios = resp;
+          console.log(resp);
+
+          if (resp) {
+            this.horarioOK = true;
+            this.lstCatHorarios = resp;
+          } else {
+            this.lstCatHorarios = [];
+            this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATHORA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+          }
           Swal.close();
         },
         error: (err) => {
@@ -360,8 +368,11 @@ export class CitaguardaComponent implements OnInit {
         this.limpiavaloresresumencita();
 
         //Validar espacio cita
-        this.validaespaciocita(e);
-
+        if (this.horarioOK) {
+          this.validaespaciocita(e);
+        }else{
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATHORA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+        }
       }
     }
 
@@ -372,22 +383,23 @@ export class CitaguardaComponent implements OnInit {
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica).subscribe({
         next: (resp: any) => {
-          //console.log(resp);
-          this.datoscita = {
-            'Fecha y hora de inicio de la cita': e.fec_inicio ? this.datePipe.transform(new Date(e.fec_inicio + " " + e.tim_hora_inicio), 'dd-MM-yyyy - HH:mm:ss') : "",
-            'Fecha y hora de finalización de la cita': e.fec_fin ? this.datePipe.transform(new Date(e.fec_fin + " " + e.tim_hora_fin), 'dd-MM-yyyy - HH:mm:ss') : "",
-            'Duración': e.num_duracion,
-            'Ubicación (Lugar de atención)': resp.cve_ubicacion,
-            'Trabajadora social responsable': resp.des_trabajador_social, //e.des_trabajador_social,
-            'Unidad': this._usuario.unidadMedica, //resp.unidad_medica,
-            'Dirección': resp.direccion,
-            'Turno': resp.cve_turno,
-            'Servicio': this.citadata.value.servicio.des_especialidad,
-            'Programa': this.citadata.value.programa.des_grupo_programa,
-            'Tipo de cita': 'Grupal',
-            'des_abreviada_ubicacion': resp.des_abreviada_ubicacion
-          };
-
+          if (resp) {
+            //console.log(resp);
+            this.datoscita = {
+              'Fecha y hora de inicio de la cita': e.fec_inicio ? this.datePipe.transform(new Date(e.fec_inicio + " " + e.tim_hora_inicio), 'dd-MM-yyyy - HH:mm:ss') : "",
+              'Fecha y hora de finalización de la cita': e.fec_fin ? this.datePipe.transform(new Date(e.fec_fin + " " + e.tim_hora_fin), 'dd-MM-yyyy - HH:mm:ss') : "",
+              'Duración': e.num_duracion,
+              'Ubicación (Lugar de atención)': resp.cve_ubicacion,
+              'Trabajadora social responsable': resp.des_trabajador_social, //e.des_trabajador_social,
+              'Unidad': this._usuario.unidadMedica, //resp.unidad_medica,
+              'Dirección': resp.direccion,
+              'Turno': resp.cve_turno,
+              'Servicio': this.citadata.value.servicio.des_especialidad,
+              'Programa': this.citadata.value.programa.des_grupo_programa,
+              'Tipo de cita': 'Grupal',
+              'des_abreviada_ubicacion': resp.des_abreviada_ubicacion
+            };
+          }
           this.muestraresumen = true;
           this.submitted = false;
 
@@ -557,7 +569,7 @@ export class CitaguardaComponent implements OnInit {
 
 
   imprimircita() {
-    if(this.idcita && this._usuario.cveUsuario){
+    if (this.idcita && this._usuario.cveUsuario) {
       window.open(this.citaservice.obtinerutaimpresioncita(this.idcita, this._usuario.cveUsuario), '_blank');
     } else {
       console.log("Warning!", "No se puede mostrar el PDF, falta un parámetro.")

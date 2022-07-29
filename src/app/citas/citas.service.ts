@@ -68,8 +68,8 @@ export class CitasService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  getfechascalanual(cve_especialidad: number, cve_gpo: number):Observable<any>{
-    let direccion = this.baseApiUrl + '/listCalendarioAnualFecha/' + cve_especialidad + '/' + cve_gpo;
+  getfechascalanual(cve_especialidad: number, cve_gpo: number, idUnidadMedica: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/listCalendarioAnualFechaUM/' + cve_especialidad + '/' + cve_gpo+'/'+idUnidadMedica;
 
     return this.http.get(direccion,{headers: this.header});
   }
