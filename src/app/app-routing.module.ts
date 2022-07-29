@@ -236,7 +236,7 @@ const routes: Routes = [
         component: UbicacionesComponent,
       },
       {
-        path: 'horarios/:cveUbicacion',
+        path: 'horarios/:cveUbicacion/:esConsultorio',
         component: HorariosComponent,
       },
     ],

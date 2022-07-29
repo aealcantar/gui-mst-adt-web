@@ -46,4 +46,9 @@ export class UbicacionesService {
     return this.http.get(this.serverEndPointURLUbicaciones + `/getById/${cveUbicacion}/${dia}/`);
   }
 
+  getHorariosUbicacion(cveUbicacion: number) {
+
+    return this.http.get(this.serverEndPointURLUbicaciones + `/getHorariosUbicacion/${cveUbicacion}`);
+  }
+
 }

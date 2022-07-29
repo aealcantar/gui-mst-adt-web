@@ -343,10 +343,14 @@ export class UbicacionesComponent implements OnInit {
     // this.router.navigateByUrl("/catalogos/cargaCatalogos");
   }
 
-  muestraHorarios(cveUbicacion: string) {
+  muestraHorarios(cveUbicacion: string,tipo: string) {
     //debugger
     // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion);
-    this.router.navigate(['/catalogos/horarios/' + Number(cveUbicacion.trim())]);
+    // console.log({tipo});
+    let esConsultorio: number = tipo.trim().toLowerCase() == 'consultorio' ? 1 : 0
+    // sessionStorage.setItem('tipoUbicacion',tipo)
+    this.router.navigate([`/catalogos/horarios/${Number(cveUbicacion.trim())}/${esConsultorio}`]);
+    // this.router.navigate(['/catalogos/horarios/' + Number(cveUbicacion.trim())]+'/'+ esConsultorio );
 
   }
 

@@ -36,6 +36,7 @@ interface LooseObject {
 })
 export class HorariosComponent implements OnInit {
   cveUbicacion!: any;
+  esConsultorio!: number;
   agregarHorarioBtn: boolean;
   public diaSeleccionado: HorarioDias;
   public diaNb: number;
@@ -93,7 +94,8 @@ export class HorariosComponent implements OnInit {
   ngOnInit(): void {
 
     this.cveUbicacion = this.activerouter.snapshot.paramMap.get('cveUbicacion');
-    console.log(" id " + this.cveUbicacion);
+    this.esConsultorio = Number(this.activerouter.snapshot.paramMap.get('esConsultorio'));
+    console.log("datos ubicacion: id:",this.cveUbicacion, 'es consultorio:', this.esConsultorio);
 
     this.horarioNuevo = new Horario();
     this.horarioSeleccionado = new Horario();
@@ -183,7 +185,6 @@ export class HorariosComponent implements OnInit {
     this.diaSeleccionado.horarios = [];
     this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
       this.diaSeleccionado.horarios = resp.data;
-      console.log(this.diaSeleccionado.horarios);
       switch (resp.code) {
         case 200:
           if (resp.data.length > 0) {
@@ -210,7 +211,12 @@ export class HorariosComponent implements OnInit {
             if(update){
               this.validarDia();
             }
-            // this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
+            this.ubicacionService.getHorariosUbicacion(cveUbicacion).subscribe((resp: any) =>{
+              if(resp.code == 204){
+                this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
+              }
+            })
+            
           }
           Swal.close();
           break;
@@ -405,8 +411,16 @@ export class HorariosComponent implements OnInit {
     this.horaInicial.setHours(this.HORA_INICIO);
     this.horaInicial.setMinutes(0);
     console.log(this.horaInicial);
-    let tiempo = 5;
-    const LIMITE = 295;
+    let tiempo = 0;
+    let LIMITE = 0;
+    if(this.esConsultorio == 1){
+      tiempo = 5
+      LIMITE = 295;//103 para cada 15 y 295 para cada 5
+    }else{
+      tiempo = 15;
+      LIMITE = 103;//103 para cada 15 y 295 para cada 5
+    }
+    
     let hora: string = "0" + this.horaInicial.getHours() + ":0" + this.horaInicial.getMinutes();
     this.lstHorarioInicial.push(hora);
     for (let i = 9; i <= LIMITE; i++) {
@@ -424,7 +438,7 @@ export class HorariosComponent implements OnInit {
         hora = hora + this.horaInicial.getMinutes();
       }
       this.lstHorarioInicial.push(hora);
-      console.log(this.horaInicial.getHours() + ":" + this.horaInicial.getMinutes());
+      // console.log(this.horaInicial.getHours() + ":" + this.horaInicial.getMinutes());
     }
 
 
@@ -440,9 +454,19 @@ export class HorariosComponent implements OnInit {
     this.msjLoading("Cargando...");
     this.lstDuracion = new Array();
     // meter servicio para saber si es consultorio u otro
-    let x = 5;
-    let duracion = 5;
-    let ciclos = 11;//3 para cada 15 y 11 para cada 5
+    let x = 0;
+    let duracion = 0;
+    let ciclos = 0;//3 para cada 15 y 11 para cada 5
+    if(this.esConsultorio == 1){
+      x = 5;
+      duracion = 5;
+      ciclos = 11;//3 para cada 15 y 11 para cada 5
+    }else{
+      x = 15;
+      duracion = 15;
+      ciclos = 3;//3 para cada 15 y 11 para cada 5
+    }
+    
     this.lstDuracion.push(x);
     for (let i: number = 0; i < ciclos; i++) {
       x = x + duracion;
@@ -542,7 +566,6 @@ export class HorariosComponent implements OnInit {
 
       if (resp) {
         this.lstTurnos = resp;
-        console.log(this.lstTurnos);
         Swal.close();
       }
 
@@ -558,10 +581,8 @@ export class HorariosComponent implements OnInit {
     this.cambiarEstatus();
     this.horarioSeleccionado.turno = this.turnoSeleccionado;
     this.horarioSeleccionado.idUbicacion = Number(this.cveUbicacion);
-    console.log(this.horarioSeleccionado);
     this.msjLoading("Guardando...");
     this.horarioService.save(this.horarioSeleccionado).subscribe((resp: HttpResponse<HorarioResponse>) => {
-
 
       if (resp) {
         switch (resp.body.code) {
@@ -579,8 +600,8 @@ export class HorariosComponent implements OnInit {
         Swal.close();
       }
       this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
+      this.obtenerLstTurnos();
     }, (error: HttpErrorResponse) => {
-      this.lstTurnos = new Array();
       this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
       $('#horario').modal('hide')
       Swal.close();
@@ -615,6 +636,7 @@ export class HorariosComponent implements OnInit {
         Swal.close();
       }
       this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
+      this.obtenerLstTurnos();
     }, (error: HttpErrorResponse) => {
       $('#content').modal('hide')
 
@@ -710,13 +732,14 @@ export class HorariosComponent implements OnInit {
               url: '',
               type: HttpEventType.ResponseHeader
             }; */
+            
+            // this.mensajesError(error, resp.body.mensaje);
             this.problemaCita = resp.body.mensaje;
             $('#problemaCita').modal({
               keyboard: false,
               backdrop: 'static'
             })
             $('#problemaCita').modal('show')
-            // this.mensajesError(error, resp.body.mensaje);
             Swal.close();
           }
         } else {
@@ -787,21 +810,21 @@ export class HorariosComponent implements OnInit {
   }
   obtenerTurnoNuevo() {
     if (this.turnoNuevo.des_turno) {
-      this.turnoNuevo = this.lstTurnos.find(e => e.des_turno === this.turnoNuevo.des_turno);
+      this.turnoNuevo = this.lstTurnos.find(e => e.des_turno == this.turnoNuevo.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
     }
+    console.log(this.turnoNuevo)
   }
 
   cambiarTurno() {
     if (this.turnoSeleccionado.des_turno) {
-      this.turnoSeleccionado = this.lstTurnos.find(e => e.des_turno === this.turnoSeleccionado.des_turno);
+      this.turnoSeleccionado = this.lstTurnos.find(e => e.des_turno == this.turnoSeleccionado.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
     }
-    console.log(this.turnoSeleccionado);
   }
 
   cambiarEstatus() {
@@ -814,7 +837,6 @@ export class HorariosComponent implements OnInit {
 
     }
     this.horarioSeleccionado.estatus = estatus;
-    console.log(this.turnoSeleccionado);
   }
 
 
@@ -824,7 +846,7 @@ export class HorariosComponent implements OnInit {
     console.log(this.turnoNuevo);
 
     if (this.turnoNuevo.des_turno) {
-      this.turnoNuevo = this.lstTurnos.find(e => e.des_turno === this.turnoNuevo.des_turno);
+      this.turnoNuevo = this.lstTurnos.find(e => e.des_turno == this.turnoNuevo.des_turno);
     } else {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
