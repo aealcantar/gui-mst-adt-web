@@ -221,17 +221,25 @@
           </div>
           <div class="col-md-3  form-group">
             <span class="spanInput">Tipo de sangre*:</span>
-            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.tipoSangre.errors }"
-              maxlength="10" class="form-control matricula inputs" id="tipoSangre" formControlName="tipoSangre"
-              placeholder="Ingresar tipo de sangre" type="text" autocomplete="off" />
+              <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.tipoSangre.errors }"
+              maxlength="10" id="tipoSangre" formControlName="tipoSangre">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
+                Seleccionar tipo de sangre
+              </mat-option>
+              <mat-option class="select-font" [value]="'A+'">{{ 'A+'}}</mat-option>
+              <mat-option class="select-font" [value]="'B+'">{{ 'B+'}}</mat-option>
+              <mat-option class="select-font" [value]="'O+'">{{ 'O+'}}</mat-option>
+              <mat-option class="select-font" [value]="'AB+'">{{ 'AB+'}}</mat-option>
+              <mat-option class="select-font" [value]="'A-'">{{ 'A-'}}</mat-option>
+              <mat-option class="select-font" [value]="'B-'">{{ 'B-'}}</mat-option>
+              <mat-option class="select-font" [value]="'O-'">{{ 'O-'}}</mat-option>
+              <mat-option class="select-font" [value]="'AB-'">{{ 'AB-'}}</mat-option>
+            </mat-select>
             <small
               *ngIf="submitted && formNuevaDonacion.controls.tipoSangre.errors && !formNuevaDonacion.controls.tipoSangre.value"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
-            </small>
-            <small *ngIf="formNuevaDonacion.controls.tipoSangre.value && formNuevaDonacion.controls.tipoSangre.errors"
-              class="form-text form-text-error Campo-obligatorio">
-              Tipo de sangre no válido
             </small>
           </div>
           <div class="col-md-3 form-group">
