@@ -21,6 +21,7 @@ import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../services/helper.mensajes.service';
 import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/models/usuario.model';
 
 declare var $: any;
 declare var $gmx: any;
@@ -62,7 +63,7 @@ export class CitaguardaComponent implements OnInit {
   alert!: objAlert;
   txtotro: string
   lstParticipantes: Array<string> = [];
-
+  private _usuario!: Usuario;
 
   lstCatServicios: Array<any> = [];
   lstCatProgramas: Array<any> = [];
@@ -86,7 +87,8 @@ export class CitaguardaComponent implements OnInit {
     'Turno': '',
     'Servicio': '',
     'Programa': '',
-    'Tipo de cita': ''
+    'Tipo de cita': '',
+    'des_abreviada_ubicacion': ''
   }
   participantes: number = 0;
 
@@ -98,6 +100,8 @@ export class CitaguardaComponent implements OnInit {
 
   citaagendada: boolean = false;
   paciente!: pacienteSeleccionado;
+  idcita: number;
+  titular!: pacienteSeleccionado;
 
   public keepOriginalOrder = (a: { key: any; }, b: any) => a.key;
 
@@ -124,11 +128,16 @@ export class CitaguardaComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
-    this.paciente = this.tarjetaService.get()? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
-    //console.log("paciente:" + this.paciente);
-    this.llenaparticipantes();
-    this.llenacatalogoservicios();
-
+    let estatus = localStorage.getItem('catalogosCompletos');
+    if (estatus === 'false') {
+      this.router.navigate(["/catalogos/cargaCatalogos/1"], { skipLocationChange: true });
+    } else {
+      this._usuario = JSON.parse(sessionStorage.getItem('usuario') as string) as Usuario;
+      this.paciente = this.tarjetaService.get() ? this.tarjetaService.get() : JSON.parse(localStorage.getItem('paciente'));
+      //console.log("paciente:" + this.paciente);
+      this.llenaparticipantes();
+      this.llenacatalogoservicios();
+    }
   }
 
   llenaparticipantes() {
@@ -140,11 +149,22 @@ export class CitaguardaComponent implements OnInit {
         this.lstchkparticipantes = [];
         var cont: number = 0;
         for (var prt of resp.busquedanss.beneficiarios) {
-          if (prt.Parentesco == "Beneficiario") {
-            cont = cont + 1;
-            this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true })
+
+          if (this.paciente.paciente.trim().toUpperCase() === prt.paciente.trim().toUpperCase()) {
+            this.lstchkparticipantes.push({ name: '', value: this.paciente.paciente, id: cont, checked: true, isfam: false });
+          } else {
+            this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true });
           }
+          cont = cont + 1;
+
+          // if (prt.Parentesco == "Beneficiario") {
+          //   this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: true });
+          // } else if(prt.Parentesco == "Titular"){
+          //   this.lstchkparticipantes.push({ name: '', value: prt.paciente, id: cont, checked: false, isfam: false });
+          //   this.titular = prt;
+          // }
         }
+        this.changeSelection();
         Swal.close();
       },
       error: (err) => {
@@ -160,7 +180,7 @@ export class CitaguardaComponent implements OnInit {
 
   llenacatalogoservicios() {
     this.msjLoading("Cargando...");
-    this.citaservice.getlistservicios().subscribe({
+    this.citaservice.getlistservicios(this._usuario.unidadMedica).subscribe({
       next: (resp: any) => {
         //console.log(resp);
         this.lstCatServicios = resp;
@@ -194,7 +214,7 @@ export class CitaguardaComponent implements OnInit {
 
   llenafechas(cve_gpo: number) {
     this.msjLoading("Cargando...");
-    this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo).subscribe({
+    this.citaservice.getfechascalanual(this.citadata.value.servicio.cve_especialidad, cve_gpo, this._usuario.unidadMedica).subscribe({
       next: (resp: any) => {
         //console.log(resp);
 
@@ -211,14 +231,22 @@ export class CitaguardaComponent implements OnInit {
 
   }
 
+  horarioOK: boolean = false;
   llenacatalogohorarios(fechaInicio: string) {
     this.msjLoading("Cargando...");
     this.citaservice.gethorarioscalanual(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa,
       fechaInicio).subscribe({
         next: (resp: any) => {
-          //console.log(resp);
-          this.lstCatHorarios = resp;
+          console.log(resp);
+
+          if (resp) {
+            this.horarioOK = true;
+            this.lstCatHorarios = resp;
+          } else {
+            this.lstCatHorarios = [];
+            this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATHORA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+          }
           Swal.close();
         },
         error: (err) => {
@@ -240,7 +268,7 @@ export class CitaguardaComponent implements OnInit {
   }
 
   cambiacheck(event: any) {
-    console.log(event);
+    //console.log(event);
     if (event.target.checked) {
       this.lstchkparticipantes.push({ name: '', value: event.target.value, id: event.target.id, checked: true, isfam: false });
     } else {
@@ -340,8 +368,11 @@ export class CitaguardaComponent implements OnInit {
         this.limpiavaloresresumencita();
 
         //Validar espacio cita
-        this.validaespaciocita(e);
-
+        if (this.horarioOK) {
+          this.validaespaciocita(e);
+        }else{
+          this.muestraAlerta(this._Mensajes.MSJ_ERROR_CATHORA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+        }
       }
     }
 
@@ -350,23 +381,25 @@ export class CitaguardaComponent implements OnInit {
   validaespaciocita(e: any) {
     this.msjLoading("Cargando...");
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
-      this.citadata.value.programa.cve_grupo_programa).subscribe({
+      this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica).subscribe({
         next: (resp: any) => {
-          //console.log(resp);
-          this.datoscita = {
-            'Fecha y hora de inicio de la cita': e.fec_inicio ? this.datePipe.transform(new Date(e.fec_inicio + " " + e.tim_hora_inicio), 'dd-MM-yyyy - HH:mm:ss') : "",
-            'Fecha y hora de finalización de la cita': e.fec_fin ? this.datePipe.transform(new Date(e.fec_fin + " " + e.tim_hora_fin), 'dd-MM-yyyy - HH:mm:ss') : "",
-            'Duración': e.num_duracion,
-            'Ubicación (Lugar de atención)': resp.cve_ubicacion,
-            'Trabajadora social responsable': resp.des_trabajador_social, //e.des_trabajador_social,
-            'Unidad': resp.unidad_medica,
-            'Dirección': resp.direccion,
-            'Turno': resp.cve_turno,
-            'Servicio': this.citadata.value.servicio.des_especialidad,
-            'Programa': this.citadata.value.programa.des_grupo_programa,
-            'Tipo de cita': 'Grupal'
-          };
-
+          if (resp) {
+            //console.log(resp);
+            this.datoscita = {
+              'Fecha y hora de inicio de la cita': e.fec_inicio ? this.datePipe.transform(new Date(e.fec_inicio + " " + e.tim_hora_inicio), 'dd-MM-yyyy - HH:mm:ss') : "",
+              'Fecha y hora de finalización de la cita': e.fec_fin ? this.datePipe.transform(new Date(e.fec_fin + " " + e.tim_hora_fin), 'dd-MM-yyyy - HH:mm:ss') : "",
+              'Duración': e.num_duracion,
+              'Ubicación (Lugar de atención)': resp.cve_ubicacion,
+              'Trabajadora social responsable': resp.des_trabajador_social, //e.des_trabajador_social,
+              'Unidad': this._usuario.unidadMedica, //resp.unidad_medica,
+              'Dirección': resp.direccion,
+              'Turno': resp.cve_turno,
+              'Servicio': this.citadata.value.servicio.des_especialidad,
+              'Programa': this.citadata.value.programa.des_grupo_programa,
+              'Tipo de cita': 'Grupal',
+              'des_abreviada_ubicacion': resp.des_abreviada_ubicacion
+            };
+          }
           this.muestraresumen = true;
           this.submitted = false;
 
@@ -394,7 +427,8 @@ export class CitaguardaComponent implements OnInit {
       'Turno': '',
       'Servicio': '',
       'Programa': '',
-      'Tipo de cita': ''
+      'Tipo de cita': '',
+      'des_abreviada_ubicacion': ''
     }
   }
 
@@ -440,6 +474,7 @@ export class CitaguardaComponent implements OnInit {
                 "ocasionServicio": this.citadata.value.ocasion,
                 "modalidad": this.citadata.value.modalidad,
                 "tipoCita": this.datoscita['Tipo de cita'],
+                "des_abreviada_ubicacion": this.datoscita.des_abreviada_ubicacion
                 //"participantes": []
               };
 
@@ -455,11 +490,13 @@ export class CitaguardaComponent implements OnInit {
 
               this.citaservice.guardacita(req).subscribe({
                 next: (resp: any) => {
+                  //console.log("guardacita1:", resp);
                   if (resp.estatus == true) {
+                    this.idcita = resp.respuesta?.cveCita;
                     this.citaservice.altacita(this.citadata.value.hora.cve_calendario_anual).subscribe({
                       next: (resp: any) => {
                         Swal.close();
-                        if(resp){
+                        if (resp) {
                           this.citaagendada = true;
                           this.muestraAlerta(this._Mensajes.MSJ_EXITO_AGENDA_CITA, this._Mensajes.ALERT_SUCCESS, this._Mensajes.EXITO);
                         } else {
@@ -476,7 +513,7 @@ export class CitaguardaComponent implements OnInit {
                   } else {
                     Swal.close();
                     this.citaagendada = false;
-                    this.muestraAlerta(resp.mensaje ? resp.mensaje :this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
+                    this.muestraAlerta(resp.mensaje ? resp.mensaje : this._Mensajes.MSJ_ERROR_AGENDA_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
                   }
                 },
                 error: (err) => {
@@ -499,12 +536,12 @@ export class CitaguardaComponent implements OnInit {
   }
 
   updateCalcs(event: any) {
-    console.log(event);
+    //console.log(event);
   }
 
   onChangeEvent(event: any) {
-    console.log(event);
-    console.log(event.value);
+    // console.log(event);
+    // console.log(event.value);
   }
 
   cancelarcita() {
@@ -532,6 +569,11 @@ export class CitaguardaComponent implements OnInit {
 
 
   imprimircita() {
+    if (this.idcita && this._usuario.cveUsuario) {
+      window.open(this.citaservice.obtinerutaimpresioncita(this.idcita, this._usuario.cveUsuario), '_blank');
+    } else {
+      console.log("Warning!", "No se puede mostrar el PDF, falta un parámetro.")
+    }
 
   }
 

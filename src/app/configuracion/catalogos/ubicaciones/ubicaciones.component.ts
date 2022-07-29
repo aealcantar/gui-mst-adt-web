@@ -101,7 +101,7 @@ export class UbicacionesComponent implements OnInit {
       info: false,
       searching: false,
       "lengthChange": false,
-      "dom": "t<'table-pie' <'#cargalay.col-md-4'><'col-md-4 col-lg-4 text-center'p><'#nopag.col-md-4'>>",
+      "dom": "t<'table-pie' <'#cargalay.col-md-3'><'col-md-6 col-lg-6 text-center'p><'#nopag.col-md-3'>>",
       "language": {
         "paginate": {
           "first": "First page",
@@ -127,7 +127,7 @@ export class UbicacionesComponent implements OnInit {
             "searching": false,
             "aaSorting": []
           });
-    
+
         }, 3000);
     */
   }
@@ -327,7 +327,7 @@ export class UbicacionesComponent implements OnInit {
       this.lstUbicaciones.push(element);
     }
 
-    
+
    // this.lstUbicaciones.filter(x => x.cve_unidad_medica = this.cveUnidad);
   }
 

@@ -10,6 +10,7 @@ export class CertificadoDefuncionService {
   constructor(private http: HttpClient) {}
 
   insert(certificado: CertificadoDefuncion) {
+    console.log(JSON.stringify(certificado));
     return this.http.post<CertificadoDefuncion>(
       environment.msmtsControlInterno + '/insert',
       certificado
@@ -44,17 +45,36 @@ export class CertificadoDefuncionService {
       opt
     );
   }
-  list(fechaInicio: string, fechaFin: string, pagina: any, count: any) {
+  list(
+    fechaInicio: string,
+    fechaFin: string,
+    pagina: any,
+    count: any,
+    criterio?: any
+  ) {
     const opt = {
       params: {
         fechaInicio,
         fechaFin,
         pagina,
         count,
+        orden: criterio != undefined ? criterio : '',
       },
     };
     return this.http.get<CertificadoDefuncion[]>(
       environment.msmtsControlInterno + '/list',
+      opt
+    );
+  }
+  getPagination(fechaInicio: string, fechaFin: string) {
+    const opt = {
+      params: {
+        fechaInicio,
+        fechaFin,
+      },
+    };
+    return this.http.get<any>(
+      environment.msmtsControlInterno + '/getPagination',
       opt
     );
   }

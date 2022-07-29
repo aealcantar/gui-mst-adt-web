@@ -103,7 +103,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatGrupo('CS01').toPromise().then(
+    this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
       (grupos) => {
         this.grupos = grupos;
         console.log("GRUPOS: ", this.grupos);
@@ -112,7 +112,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-    this.cronicaGrupalService.getCatLugar('CS01').toPromise().then(
+    this.cronicaGrupalService.getCatLugar('15').toPromise().then(
       (lugares) => {
         this.lugares = lugares;
         console.log("LUGARES: ", this.lugares);

@@ -93,4 +93,8 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   irAvisosMP(){
     this.router.navigateByUrl("/consulta-aviso-mp");
   }
+
+  irSertificadoDefuncion(){
+    this.router.navigateByUrl("/consulta-certificado-defuncion");
+  }
 }

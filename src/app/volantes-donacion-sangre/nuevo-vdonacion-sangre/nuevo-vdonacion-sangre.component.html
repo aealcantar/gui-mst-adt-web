@@ -19,10 +19,10 @@
           <div class="col-md-8">
             <div class="form-group">
               <span class="spanInput">Unidad médica hospitalaria*:</span>
-              <input formControlName="umh" maxlength="100"
+              <input formControlName="umh" maxlength="100" style="background-color: white; cursor: default;"
                 [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.umh.errors }"
-                class="form-control matricula inputs" id="umh" placeholder="Ingresar unidad médica hostalaria"
-                type="text" />
+                class="form-control matricula inputs" id="umh" placeholder="Ingresar unidad médica hospitalaria"
+                type="text" readonly />
               <small *ngIf="  submitted && formNuevaDonacion.controls.umh.errors"
                 class="form-text form-text-error Campo-obligatorio">
                 Campo obligatorio
@@ -58,7 +58,7 @@
               <mat-select class="form-control2 form-control form-control-mat-select "
                 [ngClass]="{'form-control-error': submitted && formNuevaDonacion.controls.idBancoSangre.errors}"
                 id="idBancoSangre" formControlName="idBancoSangre">
-                <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                <mat-option [value]="''" selected class="select-font optionSelect ">
                   Seleccionar servicio</mat-option>
                 <mat-option class="select-font" [value]="item.idBancoSangre" *ngFor="let item of bancosSangre">
                   {{ item.detalleBancoSangre }}
@@ -72,10 +72,10 @@
           </div>
           <div class="col-md-2 form-group">
             <span class="spanInput">Horario de atención*:</span>
-            <input maxlength="5"
+            <input maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" [validation]="true" autocomplete="off"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaInicialAtencion1.errors }"
               class="form-control matricula inputs" id="horaInicialAtencion1" formControlName="horaInicialAtencion1"
-              placeholder="Hora inicial" type="text" />
+              placeholder="Horario inicial" type="text" />
             <small *ngIf="  submitted && formNuevaDonacion.controls.horaInicialAtencion1.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -83,10 +83,10 @@
           </div>
           <div class="col-md-2 form-group">
             <br>
-            <input maxlength="5"
+            <input maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" [validation]="true" autocomplete="off"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.horaFinalAtencion1.errors }"
               class="form-control matricula inputs" id="horaFinalAtencion1" formControlName="horaFinalAtencion1"
-              placeholder="Hora final" type="text" />
+              placeholder="Horario final" type="text" />
             <small *ngIf="  submitted && formNuevaDonacion.controls.horaFinalAtencion1.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -99,7 +99,7 @@
             <span class="spanInput">Código Postal*:</span>
             <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.codigoPostal.errors }"
               class="form-control matricula" id="codigoPostal" formControlName="codigoPostal"
-              placeholder="Ingresar código postal" type="text" maxlength="5" />
+              placeholder="Ingresar código postal" type="text" maxlength="5" numbersOnly />
             <small *ngIf="  submitted && formNuevaDonacion.controls.codigoPostal.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -110,7 +110,7 @@
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idEstado.errors}" id="idEstado"
               formControlName="idEstado" (selectionChange)="onChangeEstado()">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar estado</mat-option>
               <mat-option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
                 {{ estadoF.des_nombre_completo}}
@@ -126,7 +126,7 @@
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idDelegacion.errors }"
               id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar delegación o municipio</mat-option>
               <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                 *ngFor="let delegacion of delegaciones">
@@ -146,7 +146,7 @@
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idCiudad.errors }"
               id="idCiudad" formControlName="idCiudad">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar ciudad</mat-option>
               <mat-option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
                 {{ ciudadF.des_ciudad}}
@@ -187,21 +187,16 @@
             <span class="spanInput">Número exterior*:</span>
             <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numExterior.errors }"
               class="form-control matricula inputs" id="numExterior" formControlName="numExterior"
-              placeholder="Ingresar número" type="text" />
+              placeholder="Ingresar número" type="text" maxlength="10" numbersOnly />
             <small *ngIf="  submitted && formNuevaDonacion.controls.numExterior.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
             </small>
           </div>
           <div class="col-md-4  form-group">
-            <span class="spanInput">Número interior*:</span>
-            <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numInterior.errors }"
-              class="form-control matricula inputs" id="numInterior" formControlName="numInterior"
-              placeholder="Ingresar número" type="text" />
-            <small *ngIf="  submitted && formNuevaDonacion.controls.numInterior.errors"
-              class="form-text form-text-error Campo-obligatorio">
-              Campo obligatorio
-            </small>
+            <span class="spanInput">Número interior:</span>
+            <input class="form-control matricula inputs" id="numInterior" formControlName="numInterior"
+              placeholder="Ingresar número" type="text" maxlength="10" />
           </div>
           <div class="col-md-4">
           </div>
@@ -214,30 +209,51 @@
           </span>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="spanInput">Nombre:</span>
             <input class="form-control matricula inputBloqueo" id="nombrePaciente" formControlName="nombrePaciente"
               placeholder="Ingresar nombre" type="text" readonly="true" />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="spanInput">No. de Seguridad Social y agregado:</span>
             <input class="form-control matricula inputBloqueo" id="desNSS" readonly="true" formControlName="desNSS"
               placeholder="Ingresar no. de seguridad social" type="text" />
           </div>
-          <div class="col-md-4 form-group">
+          <div class="col-md-3  form-group">
+            <span class="spanInput">Tipo de sangre*:</span>
+              <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.tipoSangre.errors }"
+              maxlength="10" id="tipoSangre" formControlName="tipoSangre">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
+                Seleccionar tipo de sangre
+              </mat-option>
+              <mat-option class="select-font" [value]="'A+'">{{ 'A+'}}</mat-option>
+              <mat-option class="select-font" [value]="'B+'">{{ 'B+'}}</mat-option>
+              <mat-option class="select-font" [value]="'O+'">{{ 'O+'}}</mat-option>
+              <mat-option class="select-font" [value]="'AB+'">{{ 'AB+'}}</mat-option>
+              <mat-option class="select-font" [value]="'A-'">{{ 'A-'}}</mat-option>
+              <mat-option class="select-font" [value]="'B-'">{{ 'B-'}}</mat-option>
+              <mat-option class="select-font" [value]="'O-'">{{ 'O-'}}</mat-option>
+              <mat-option class="select-font" [value]="'AB-'">{{ 'AB-'}}</mat-option>
+            </mat-select>
+            <small
+              *ngIf="submitted && formNuevaDonacion.controls.tipoSangre.errors && !formNuevaDonacion.controls.tipoSangre.value"
+              class="form-text form-text-error Campo-obligatorio">
+              Campo obligatorio
+            </small>
+          </div>
+          <div class="col-md-3 form-group">
             <span class="spanInput">Servicio*:</span>
-            <select [ngClass]="{
-              'form-control-error':
-                submitted && formNuevaDonacion.controls.idServicio.errors
-            }" class="form-control styleselect" id="idServicio" formControlName="idServicio">
-              <option [value]="''" selected disabled class="select-font optionSelect ">
+            <mat-select class="form-control2 form-control form-control-mat-select "
+              [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idServicio.errors }"
+              id="idServicio" formControlName="idServicio">
+              <mat-option [value]="''" selected class="select-font optionSelect ">
                 Seleccionar servicio
-              </option>
-              <option class="select-font optionSelect" [value]="item.cve_especialidad"
-                *ngFor="let item of listaServicios">
+              </mat-option>
+              <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
                 {{ item.des_especialidad }}
-              </option>
-            </select>
+              </mat-option>
+            </mat-select>
             <small *ngIf="submitted && formNuevaDonacion.controls.idServicio.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -250,7 +266,7 @@
               <span class="spanInput">Fecha internamiento*:</span>
               <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.fecha2.errors }"
                 class="form-control calendario" formControlName="fecha2" id="fecha2" type="text"
-                placeholder="Ingresar fecha">
+                placeholder="Ingresar fecha" autocomplete="off">
               <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -265,7 +281,7 @@
               <span class="spanInput">Fecha cirugia*:</span>
               <input [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.fecha3.errors }"
                 class="form-control calendario" formControlName="fecha3" id="fecha3" type="text"
-                placeholder="Ingresar fecha">
+                placeholder="Ingresar fecha" autocomplete="off">
               <span class="glyphicon glyphicon-calendar fondocalendar2" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
@@ -280,7 +296,7 @@
             <input maxlength="10"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoPaciente.errors }"
               class="form-control" formControlName="numTelefonoPaciente" id="numTelefonoPaciente" type="text"
-              placeholder="Ingresar teléfono">
+              placeholder="Ingresar teléfono" numbersOnly>
             <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoPaciente.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -322,7 +338,7 @@
             <input maxlength="10"
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors }"
               class="form-control matricula inputs" id="numTelefonoTrabajadorSocial"
-              formControlName="numTelefonoTrabajadorSocial" placeholder="Ingresar teléfono" type="text" />
+              formControlName="numTelefonoTrabajadorSocial" placeholder="Ingresar teléfono" type="text" numbersOnly />
             <small *ngIf="submitted && formNuevaDonacion.controls.numTelefonoTrabajadorSocial.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -343,8 +359,8 @@
           </div>
         </div>
       </div>
-      <div class="ml-3">
-        <span class="instrucciones">
+      <div style="padding-bottom: 9px; padding-top: 3px;">
+        <span class="instrucciones label-obligatorios" style="margin-left: 1.1em !important;">
           *Campos obligatorios
         </span>
       </div>

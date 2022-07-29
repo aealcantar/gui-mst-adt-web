@@ -44,65 +44,33 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
     private certificadoService: CertificadoDefuncionService
   ) {
     this.formAdd = formBuilder.group({
-      fechaDefuncion: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
+      fechaDefuncion: new FormControl('', Validators.required),
       nombreServicio: new FormControl(''),
-      horaDefuncion: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
-      folioCertificacion: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(10)])
-      ),
+      horaDefuncion: new FormControl('', Validators.required),
+      folioCertificacion: new FormControl('', Validators.required),
       nssPaciente: new FormControl(''),
-      cveServicio: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(100),
-      ]),
-      nombreAsegurado: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      fechaDeEntregaDeCertificado: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
-      horaDeEntregaDeCertificado: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(10),
-      ]),
-      nombreFuneraria: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(100),
-      ]),
-      nombreFamiliar: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(200),
-      ]),
-      parentescoFamiliar: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(200),
-      ]),
-      observaciones: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(1500),
-      ]),
-      nombrePersonalElaboro: new FormControl(''),
-      matriculaPersonalElaboro: new FormControl(''),
-      cvePersonalQueElaboro: new FormControl(''),
-      fechaDeAlta:new FormControl(''),
-      fechaDeActualizacion: new FormControl('')
+      cveServicio: new FormControl('', Validators.required),
+      nombreAsegurado: new FormControl('', Validators.required),
+      fechaDeEntregaDeCertificado: new FormControl('', Validators.required),
+      horaDeEntregaDeCertificado: new FormControl('', Validators.required),
+      nombreFuneraria: new FormControl('', Validators.required),
+      nombreFamiliar: new FormControl('', Validators.required),
+      parentescoFamiliar: new FormControl('', Validators.required),
+      observaciones: new FormControl('', Validators.required),
+      nombrePersonalElaboro: new FormControl('', Validators.required),
+      matriculaPersonalElaboro: new FormControl('', Validators.required),
+      cvePersonalQueElaboro: new FormControl('', Validators.required),
+      fechaDeAlta: new FormControl('', Validators.required),
+      fechaDeActualizacion: new FormControl('', Validators.required),
+      indActivo: new FormControl(0),
     });
   }
   ngAfterViewInit(): void {
     $('#fhDefuncion').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'dd/mm/yyyy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
           this.formAdd.get('fechaDefuncion')?.patchValue(date);
           // this.handleDatesChange();
         }
@@ -114,10 +82,10 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       },
     });
     $('#entregaCertificado').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'dd/mm/yyyy',
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
-          date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+          date = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
           this.formAdd.get('fechaDeEntregaDeCertificado')?.patchValue(date);
           // this.handleDatesChange();
         }
@@ -131,25 +99,19 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
 
   onServicioSelect(select: MatSelectChange) {
-   const nombreDeServicio = select.source.triggerValue
-    this.formAdd.controls['nombreServicio'].setValue(nombreDeServicio)
+    const nombreDeServicio = select.source.triggerValue;
+    this.formAdd.controls['nombreServicio'].setValue(nombreDeServicio);
   }
 
   listaServicios: Array<any> = [];
   ngOnInit(): void {
+    this.cargarServicios();
     const userTemp = sessionStorage.getItem('usuario') || '';
     this.paciente = JSON.parse(localStorage.getItem('paciente'));
     if (userTemp !== '') {
       this.usuario = JSON.parse(userTemp);
-    } else {
-      this.usuario = new Usuario();
-      this.usuario.cveUsuario = 12;
-      this.usuario.matricula = 'XXXX-XXXX-XX';
-      this.usuario.strNombres = 'Alan Isaac';
-      this.usuario.strApellidoP = 'Villafan';
-      this.usuario.strApellidoM = 'Flores';
     }
-    this.cargarServicios();
+
     this.formAdd
       .get('nombrePersonalElaboro')
       .setValue(
@@ -167,30 +129,57 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
   async cargarServicios() {
     this.cronicaGrupalService.getCatServicios().subscribe((servicios) => {
-      console.log(servicios)
       this.listaServicios = servicios;
     });
   }
- 
+
   async guardar() {
+    const date = moment().format('YYYY-MM-DD HH:mm:ss');
+    this.formAdd.controls['fechaDeAlta'].setValue(date);
+    this.formAdd.controls['fechaDeActualizacion'].setValue(date);
     if (this.formAdd.valid) {
       this.validarCampos = false;
-      const date = moment().format('YYYY-MM-DD HH:mm:ss')
-      this.formAdd.controls['fechaDeAlta'].setValue(date)
-      this.formAdd.controls['fechaDeActualizacion'].setValue(date)
-      const certificado = this.formAdd.getRawValue() as CertificadoDefuncion;
-      this.certificadoService
-        .insert(certificado)
-        .subscribe(async (response) => {
+      const certificadoDefuncion =
+        this.formAdd.getRawValue() as CertificadoDefuncion;
+      // cambiar formato de fechas en para su guardado en la base de datos
+      const horaDefuncnion = moment(
+        this.formAdd.controls['horaDefuncion'].value,
+        'hh:mm A'
+      ).format('HH:mm:ss');
+      console.log(`Fecha Nuevo Formato: ${horaDefuncnion}`,`Formato anterior ${ this.formAdd.controls['horaDefuncion'].value}`)
+      const horaEntrega = moment(
+        this.formAdd.controls['horaDeEntregaDeCertificado'].value,
+        'hh:mm A'
+      ).format('HH:mm:ss');
+      const fechaDefuncion = moment(
+        certificadoDefuncion.fechaDefuncion,
+        'DD/MM/YYYY'
+      ).format('YYYY-MM-DD');
+      const fechaEntrega = moment(
+        certificadoDefuncion.fechaDeEntregaDeCertificado,
+        'DD/MM/YYYY'
+      ).format('YYYY-MM-DD');
+      certificadoDefuncion.horaDefuncion = horaDefuncnion;
+      certificadoDefuncion.horaDeEntregaDeCertificado = horaEntrega;
+      certificadoDefuncion.fechaDefuncion = fechaDefuncion;
+      certificadoDefuncion.fechaDeEntregaDeCertificado = fechaEntrega;
+
+      this.certificadoService.insert(certificadoDefuncion).subscribe(
+        async (response) => {
           this.certificado = response;
-          await sessionStorage.removeItem('certificadoDefuncion')
+          await sessionStorage.removeItem('certificadoDefuncion');
           sessionStorage.setItem(
             'certificadoDefuncion',
             await JSON.stringify(this.certificado)
           );
           this.router.navigate(['detalle-certificado-defuncion']);
-        });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     } else {
+      console.log(this.formAdd.getRawValue());
       this.validarCampos = true;
       this.onFormChanges();
     }

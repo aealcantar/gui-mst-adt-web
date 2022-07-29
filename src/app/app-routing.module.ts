@@ -38,15 +38,24 @@ import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.componen
 
 import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
+import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avisos-mp/detalle-avisos-mp.component';
 
 //donacion de sangre
 import { ConsultaVolantesDonacionComponent } from './volantes-donacion-sangre/consulta-volantes-donacion/consulta-volantes-donacion.component';
 import { NuevoVdonacionSangreComponent } from './volantes-donacion-sangre/nuevo-vdonacion-sangre/nuevo-vdonacion-sangre.component';
 import { DetalleVolantesDonacionSangreComponent } from './volantes-donacion-sangre/detalle-volantes-donacion-sangre/detalle-volantes-donacion-sangre.component';
+import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
+
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
+
+// informe servicios profesionales
+ import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
+ import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
+// import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -168,6 +177,16 @@ const routes: Routes = [
     component: ConsultaAvisoMpComponent,
     canActivate: [SeguridadRouter]
   },
+  {
+    path: 'detalle-aviso-mp',
+    component: DetalleAvisoMpComponent,
+    canActivate: [SeguridadRouter]
+  },
+  {
+    path: 'consulta-aviso-mp-administracion',
+    component: ConsultaMpAdministracionComponent,
+    // canActivate: [SeguridadRouter]
+  },
   //volanteDonacion
   {
     path: 'agregar-volante-donacion-sangre',
@@ -185,6 +204,23 @@ const routes: Routes = [
     canActivate: [SeguridadRouter]
   },
   {
+    path: 'consulta-donacion-sangre-administracion',
+    component: ConsultaDonacionSangreAdministracionComponent
+  },
+  // informe servicios profesionales
+  {
+    path: 'consulta-informe-servicios-profesionales',
+    component: ConsultaInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+
+  },
+  {
+    path: 'detalle-informe-servicios-profesionales',
+    component: DetalleInformeServiciosProfesionalesComponent,
+    canActivate: [SeguridadRouter]
+  },
+
+  {
     path: 'catalogos',
     component: CatalogosComponent,
     canActivate: [SeguridadRouter],
@@ -192,7 +228,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/catalogos/cargaCatalogos', pathMatch: 'full' },
       {
-        path: 'cargaCatalogos',
+        path: 'cargaCatalogos/:idOrigen',
         component: CargaComponent,
       },
       {

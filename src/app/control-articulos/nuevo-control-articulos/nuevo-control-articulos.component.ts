@@ -77,8 +77,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     recepcionNombreRecibe: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionNombreEntrega: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionUbicacion: new FormControl('', Validators.required),
-    recepcionHorarioEntregaArticulo: new FormControl('', [Validators.required,Validators.maxLength(5),
-    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    recepcionHorarioEntregaArticulo: new FormControl('', [Validators.required,Validators.maxLength(15)]),
 
   });
 
@@ -132,7 +131,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     this.formNuevoArticulo.controls['resguardoHora'].setValue(this.hora);
     this.formNuevoArticulo.controls['recepcionHora'].setValue(this.hora);
     this.formNuevoArticulo.controls['horarioEntregaArticulo'].setValue(this.hora);
-    this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].setValue(this.hora);
+    // this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].setValue(this.hora);
     // this.horarioEntrega();
 
 
@@ -218,7 +217,6 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
   //guarda los datos del formulario
   guardarControl() {
-
     this.submitted = true;
 
     let noArticulos = this.nuevosArticulosArray.length;
@@ -369,6 +367,15 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
         );
         return;
       }
+
+      // Formar descripcion rango horario
+      let rangoFecha1 = this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].value.substring(0, 4);
+      let rangoFecha2 = this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].value.substring(4, 8);
+      rangoFecha1 = moment(rangoFecha1, 'HHmm').format('HH:mm');
+      rangoFecha2 = moment(rangoFecha2, 'HHmm').format('HH:mm');
+      this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].patchValue(`${rangoFecha1} - ${rangoFecha2}`);
+      // this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].patchValue(`DE ${rangoFecha1} A ${rangoFecha2} HRS`);
+
       let datos = this.formNuevoArticulo.value;
       this.controlArticulosService.setControlArticulos(datos).subscribe(async (res: any) => {
 

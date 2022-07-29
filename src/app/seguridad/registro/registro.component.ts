@@ -78,69 +78,49 @@ export class RegistroComponent implements OnInit {
   }
 
   loginusuario(): void {
-    this.submitted = true
-    console.log('valid' + this.logindata.valid)
-
-    if (
-      this.logindata.value.nvacontrasenia !=
-      this.logindata.value.confirmacontrasenia
-    ) {
+    this.submitted = true;
+    console.log("Entramos a validar contraseñas correctas");
+    if (this.logindata.value.nvacontrasenia != this.logindata.value.confirmacontrasenia) {
       this.muestraAlerta(
         '¡La contraseña no coincide, favor de verificar!',
         'alert-danger',
         'Error',
       )
-      return
+      return;
     }
 
-    if (
-      this.logindata.valid &&
-      this.logindata.value.nvacontrasenia ==
-        this.logindata.value.confirmacontrasenia
-    ) {
-      const validate = (input: string) =>
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,10}$/.test(
-          input,
-        )
-
-      console.log(
-        `${this.logindata.value.nvacontrasenia} ${validate(
-          this.logindata.value.nvacontrasenia,
-        )}`,
-      )
-      if (validate(this.logindata.value.nvacontrasenia)) {
-        this.admonRequest.email = this.mail
-        this.admonRequest.password = this.logindata.value.nvacontrasenia
-
+    console.log("Sí coinciden las contraseñas");
+    if (this.logindata.valid && this.logindata.value.nvacontrasenia == this.logindata.value.confirmacontrasenia) {
+      console.log("Los form están llenos completamente y son correctos");
+      if (this.logindata.value.nvacontrasenia) {
+        this.admonRequest.email = this.mail;
+        this.admonRequest.password = this.logindata.value.nvacontrasenia;
         this.authService.actualizarPassword(this.admonRequest).subscribe(
           (result) => {
-            console.log(result)
-            this.admonResponse = result
+            console.log("Fue exitoso el cambio de contraseña");
+            console.log(result);
+            this.admonResponse = result;
             if (this.admonResponse.status == '200') {
               this.showSucces('¡Éxito Contraseña guardada correctamente!', true);
               this.muestraAlerta(
-                '¡Éxito Contraseña guardada correctamente!',
-                'alert-success',
-                null,
-              )
-              return
+                 '¡Éxito Contraseña guardada correctamente!',
+                 'alert-success',
+                 null,
+               );
+              return;
             }
           },
           (err: HttpErrorResponse) => {
-            console.log('eror ' + err.error.message)
+            console.log('Error ' + err.error.message);
             this.muestraAlerta(
               'Ocurrio un error favor de reportarlo.',
               'alert-danger',
               'Error',
-            )
+            );
           },
         )
       } else {
-        this.muestraAlerta(
-          '¡Éxito Contraseña guardada correctamente!',
-          'alert-success',
-          null,
-        )
+        this.muestraAlerta('¡Contraseña inválida!', 'alert-danger', 'Error')
       }
     } else {
       this.muestraAlerta('¡Contraseña inválida!', 'alert-danger', 'Error')

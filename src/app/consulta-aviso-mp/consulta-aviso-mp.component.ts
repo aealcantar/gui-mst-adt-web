@@ -25,7 +25,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
   public tabla: any[] = [];
   public extras: any;
   public datesForm!: FormGroup;
-  public columnaId: string = 'fecFecha';
+  public columnaId: string = 'fechaElaboracion';
   public alert!: AlertInfo;
 
   constructor(
@@ -181,11 +181,8 @@ export class ConsultaAvisoMpComponent implements OnInit {
   }
 
 
-  irDetalle(avisoMP: 12) {
-    let params = {
-      'estudioMedico': JSON.stringify(avisoMP),
-    }
-    this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
-
+  irDetalle(idAvisoMp: number) {
+    let params = { idAvisoMp };    
+    this.router.navigate(["detalle-aviso-mp"], { queryParams: params, skipLocationChange: true });
   }
 }

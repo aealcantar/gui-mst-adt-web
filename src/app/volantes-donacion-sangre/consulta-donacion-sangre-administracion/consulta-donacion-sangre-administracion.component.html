@@ -1,0 +1,220 @@
+<app-app-alerts [alert]="alert"></app-app-alerts>
+<!-- <app-tarjeta-presentacion></app-tarjeta-presentacion> -->
+<app-menu [activeItem]="2"></app-menu>
+<app-card-template>
+    <div header class="flex justify-content-between align-items-center consultaControlDeArticulos">
+        <label>
+            Consulta de Volante de Donación de Sangre Administración
+        </label>
+        <!-- <div class="botones">
+            <button type=" submit " class="btn btn-primary btn-guardar buttonL " (click)="irNuevoRegistro() ">
+                Nuevo Registro
+            </button>
+        </div> -->
+    </div>
+    <div content style="padding-bottom: 3.7%;">
+        <div class="formInfo">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="articulosInit">Fecha desde:</label>
+                        <input class="form-control calendario" id="fechaDesde1" [(ngModel)]="fechaDesde1" type="text"
+                            placeholder="dd/mm/aaaa">
+                        <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                            <div class="imgCalendar"></div>
+                        </span>
+                        <div *ngIf="selectFechaInicio==true"><span
+                                class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label tituloServicio" for="articulosFinal">Fecha hasta:</label>
+                        <input [(ngModel)]="fechaHasta1" type="text" class="form-control calendario"
+                            placeholder="dd/mm/aaaa" id="fechaHasta1">
+                        <span class="glyphicon glyphicon-calendar fondocalendar " aria-hidden="true ">
+                            <div class="imgCalendar "></div>
+                        </span>
+                        <div *ngIf="selectFechaFinal==true"><span
+                                class="form-text form-text-error Campo-obligatorio">*Campo obligatorio</span></div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-3">
+                    <label class="control-label tituloServicio" for="articulosFinal">Tipo de sangre:
+                    </label>
+                    <!-- <select class="form-control captura" [(ngModel)]="tiposangre">
+                        <option value="" selected>Seleccionar</option>
+                        <option [ngValue]="1">A+</option>
+                        <option [ngValue]="2">A-</option>
+                        <option [ngValue]="3">B+</option>
+                        <option [ngValue]="4">B-</option>
+                        <option [ngValue]="5">O+</option>
+                        <option [ngValue]="6">O-</option>
+                    </select> -->
+
+                    <mat-select class="form-control2 form-control form-control-mat-select " [(ngModel)]="tiposangre">
+                        <mat-option [value]="''" selected disabled class="select-font optionSelect ">
+                            Seleccionar
+                        </mat-option>
+                        <mat-option class="select-font" [value]="1">
+                            A+
+                        </mat-option>
+                        <mat-option class="select-font" [value]="2">
+                            A-
+                        </mat-option>
+                        <mat-option class="select-font" [value]="3">
+                            B+
+                        </mat-option>
+                        <mat-option class="select-font" [value]="4">
+                            B-
+                        </mat-option>
+                        <mat-option class="select-font" [value]="5">
+                            O+
+                        </mat-option>
+                        <mat-option class="select-font" [value]="6">
+                            O-
+                        </mat-option>
+                    </mat-select>
+                    <div *ngIf="selectTipoSangre==true"><span class="form-text form-text-error Campo-obligatorio">*Campo
+                            obligatorio</span></div>
+
+
+                </div>
+                <div class="col-md-3 flex justify-content-end"
+                    style="padding-right: 0.1em !important; padding-top: 21px;">
+                    <button class="btn btn-default btuser buttonL " type="button" (click)="limpiar()">
+                        Limpiar
+                    </button>
+                    <button type="button" class="btn btn-primary btn-guardar buttonL " (click)="buscar()">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="row ">
+                <div class="col-md-6 ">
+                    <label class="control-label " style="font-weight: 700; color: #666666;"
+                        *ngIf="totalResultados>0">Resultados
+                        {{totalResultados}}</label>
+                </div>
+                <div class="col-md-6 flex justify-content-end ">
+                    <div style="position: relative; float: right; display: flex;">
+                        <span class="visDatos" style="width: auto; float: right;">
+                            Visualizar datos
+                        </span>
+
+                        <mat-select class="form-select mat-select-table" [disableOptionCentering]="true"
+                            aria-label="Servicio" [(ngModel)]="pageSize">
+                            <mat-option class="select-font" [value]="15">15</mat-option>
+                            <mat-option class="select-font" [value]="20">20</mat-option>
+                            <mat-option class="select-font" [value]="25">25</mat-option>
+                        </mat-select>
+
+                    </div>
+                </div>
+            </div>
+
+            <ng-container *ngIf="listaResultados.length>0 else mostrarSeccionSinResultados">
+                <!-- <ng-container> -->
+                    <div class="row">
+                        <div class="col-md-12">
+                          <table class="tabla" style="width: 100%;">
+                            <thead>
+                              <tr>
+                                <th class="encabezadoTable" style="padding: 8px 30px 5px; width: 14%;">
+                                  <div style="margin-left: -15px;">NSS</div>
+                                  <div>
+                                    <i class="fa-solid fa-caret-up arrow flechaArriba"
+                                      [ngClass]="{'active-opacity': columnaId === 'fecEfec' && order === 'asc'}"
+                                      (click)="sortBy('fecEfec', 'asc', 'fecha')">
+                                    </i>
+                                    <i class="fa-solid fa-caret-down arrow flechaAbajo"
+                                      [ngClass]="{'active-opacity': columnaId === 'fecEfec' && order === 'desc'}"
+                                      (click)="sortBy('fecEfec', 'desc', 'fecha')">
+                                    </i>
+                                  </div>
+                                </th>
+                                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 26%;">Paciente</th>
+                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 20%;">
+                                    Fecha de elaboración</th>
+                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 20%;">
+                                    Personal que elaboró</th>
+                                <th class="encabezadoTablePaciente" style="padding: 8px 30px 5px; text-align: left; width: 20%;">
+                                  Tipo de sangre</th>
+                              </tr>
+                            </thead>
+                            <tbody
+                              *ngFor="let item of listaResultados | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+                              <tr>
+                                <!-- <td class="bordesNSS"
+                                  style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                                  (click)="irDetalle(item.idVolanteDonacionSangre);">
+                                  {{ item.nss }}</td> -->
+                                  <td class="bordesNSS"  style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
+                                  (click)="irDetalle(item.idVolanteDonacionSangre);"><div style="width: 84px; margin-left: 30px;
+                                    white-space: nowrap;
+                                    text-overflow: clip;
+                                    overflow: hidden;">
+                                    <span>{{item.nss}}</span>
+                                    </div></td>
+                                  
+                                <td  class="bordesnombrePaciente" style="padding-left: 30px; text-align: left;"> {{item.nombrePaciente}} </td>
+                                <td class="bordesfecEfec" style="padding-left: 30px; text-align: left;"> {{item.fecEfec}} </td>
+                                <td class="bordesnombreTrabajadorSocial" style="padding-left: 30px; text-align: left;"> {{item.nombreTrabajadorSocial}} </td>
+                                <td class="bordestipoSangre" style="padding-left: 30px; text-align: left;"> {{item.tipoSangre.toUpperCase()}} </td>
+              
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                <div class="row col-md-12"
+                    style="height: 40px; border: 1px solid #ddd; margin-top: 0%; margin-left: 0px;">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div style="margin-top: 0px !important;  justify-content: center; ">
+                            <div class="">
+                                <pagination-controls style="margin-left: auto; margin-right: auto;content: '>';"
+                                    class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""
+                                    screenReaderPaginationLabel="Pagination">
+                                </pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <span class="pagina" style="float: right;">
+                        Página
+                    </span>
+                    <div class="paginanum" style="float: right;">{{page}} </div> -->
+                    <div class="col-md-4">
+                        <div class="flex align-items-center justify-content-end"
+                            style="margin-right: -7%; margin-top: 1.3%;">
+                            <label class="control-label" style="padding-top: 4px; margin-right: 10px;">Página</label>
+                            <div class="form .wa-3 " style="text-align: center; width: 13%;">
+                                <div style="float: right; margin-right: 24%; margin-top: -26%; color: gray;">{{page}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </ng-container>
+        </div>
+
+        <ng-template #mostrarSeccionSinResultados>
+            <div class="row">
+                <div class="div-container-image">
+                    <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</app-card-template>

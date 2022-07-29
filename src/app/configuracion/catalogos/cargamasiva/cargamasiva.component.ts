@@ -33,6 +33,7 @@ import * as XLSX from 'xlsx';
 import { MatIconRegistry } from "@angular/material/icon";
 
 
+
 declare var $: any;
 
 @Component({
@@ -97,6 +98,7 @@ export class CargamasivaComponent implements OnInit {
   catFaltante: string = '';
   dataparams: any;
   onAlert = new EventEmitter();
+  cargaExitosa: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<CargamasivaComponent>,
@@ -122,7 +124,7 @@ export class CargamasivaComponent implements OnInit {
   ngOnInit(): void {
     // console.log('clave usuario',JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']);
     this.idUser = JSON.parse(sessionStorage.getItem('usuario'))['cveUsuario']
-   //this.idUser = 276;
+    //this.idUser = 276;
     const taghtml = document.querySelector('html');
     taghtml.style.cssText += 'top: 0px;';
 
@@ -137,7 +139,7 @@ export class CargamasivaComponent implements OnInit {
   }
 
   cancelar(iscancel: boolean) {
-    this.dialogRef.close({'iscancel': iscancel});
+    this.dialogRef.close({ 'iscancel': iscancel, 'statusCarga': this.cargaExitosa });
   }
 
 
@@ -299,54 +301,96 @@ export class CargamasivaComponent implements OnInit {
 
           case 3:
             this.ubicacion[index] = new Ubicacion();
-           // this.ubicacion[index].cveUbicacion = element[this.confCarga.col1];
+            // this.ubicacion[index].cveUbicacion = element[this.confCarga.col1];
             this.ubicacion[index].descripcionCompleta = element[this.confCarga.col1];
             this.ubicacion[index].descripcionAbreviada = element[this.confCarga.col2];
             this.ubicacion[index].tipo = element[this.confCarga.col3];
             this.ubicacion[index].servicioEspecialidad = element[this.confCarga.col4];
-            
+
             break;
           case 4:
             this.responsable[index] = new Responsable();
             this.responsable[index].matricula = element[this.confCarga.col1];
-            this.responsable[index].nombre = element[this.confCarga.col2];
-            this.responsable[index].ubicacion = element[this.confCarga.col3];
-            this.responsable[index].turno = element[this.confCarga.col4];
+
+            this.responsable[index].ubicacion = element[this.confCarga.col2];
+            this.responsable[index].turno = element[this.confCarga.col3];
+            this.responsable[index].cve_especialidad = element[this.confCarga.col4];
             this.responsable[index].servicioEspecialidad = element[this.confCarga.col5];
             break;
           case 5:
             this.programasTS[index] = new ProgramaTS();
-            this.programasTS[index].cveGrupo = element[this.confCarga.col1];
-            this.programasTS[index].desPrograma = element[this.confCarga.col2];
-            this.programasTS[index].cveCodigo = element[this.confCarga.col3];
-            this.programasTS[index].descActividad = element[this.confCarga.col4];
-            this.programasTS[index].cveServicio = element[this.confCarga.col5];
+
+            this.programasTS[index].desPrograma = element[this.confCarga.col1];
+            this.programasTS[index].cveCodigo = element[this.confCarga.col2];
+            this.programasTS[index].descActividad = element[this.confCarga.col3];
+            this.programasTS[index].cveServicio = element[this.confCarga.col4];
+            this.programasTS[index].servicioEspecialidad = element[this.confCarga.col5];
             break;
 
           case 6:
             this.calendarioDias[index] = new CalendarioDias();
             this.calendarioDias[index].cvePrograma = element[this.confCarga.col1];
-            this.calendarioDias[index].cveUbicacion = element[this.confCarga.col2];
-            let jsDateIn = XLSX.SSF.parse_date_code(element[this.confCarga.col3]);
-            let fechaInicio = this.generateDate(jsDateIn.d, jsDateIn.m, jsDateIn.y);
-            let horaI = XLSX.SSF.parse_date_code(element[this.confCarga.col4]);
-            let horaInicio = this.generateHora(horaI.H, horaI.M);
+            this.calendarioDias[index].cveServicio = element[this.confCarga.col2];
+            this.calendarioDias[index].servicioEspecialidad = element[this.confCarga.col3];
+            this.calendarioDias[index].cveUbicacion = element[this.confCarga.col4];
+            
 
+            debugger
+            let jsDateIn = null;
+            let fechaInicio: any = null;
+            if (element[this.confCarga.col5] != undefined) {
+              jsDateIn = XLSX.SSF.parse_date_code(element[this.confCarga.col5]);
+              fechaInicio = this.generateDate(jsDateIn.d, jsDateIn.m, jsDateIn.y);
+            } 
 
             this.calendarioDias[index].fecInicio = fechaInicio;
-            this.calendarioDias[index].horaInicio = horaInicio;
-            this.calendarioDias[index].duracion = element[this.confCarga.col5];
 
-            let jsDateFin = XLSX.SSF.parse_date_code(element[this.confCarga.col6]);
-            let fechaFin = this.generateDate(jsDateFin.d, jsDateFin.m, jsDateFin.y);
+            let horaI = null;
+            let horaInicio = null;
+           
+            if (element[this.confCarga.col6] != undefined) {
+              horaI = XLSX.SSF.parse_date_code(element[this.confCarga.col6]);
+              horaInicio = this.generateHora(horaI.H, horaI.M);
+            } 
+
+            this.calendarioDias[index].horaInicio = horaInicio;
+
+            if(Number.isInteger(element[this.confCarga.col7])) {
+              this.calendarioDias[index].duracion = element[this.confCarga.col7];
+            }else{
+              this.calendarioDias[index].duracion = undefined;
+            }
+          
+          
+
+            let jsDateFin;
+            let fechaFin;
+
+
+
+            if (element[this.confCarga.col8] != undefined) {
+              jsDateFin = XLSX.SSF.parse_date_code(element[this.confCarga.col8]);
+              fechaFin = this.generateDate(jsDateFin.d, jsDateFin.m, jsDateFin.y);
+            } else {
+              fechaFin = null;
+            }
 
             this.calendarioDias[index].fecFin = fechaFin;
 
-            let horaF = XLSX.SSF.parse_date_code(element[this.confCarga.col7]);
-            let horaFin = this.generateHora(horaF.H, horaF.M);
+            let horaF;
+            let horaFin;
+
+            if (!element[this.confCarga.col9] != undefined) {
+              horaF = XLSX.SSF.parse_date_code(element[this.confCarga.col9]);
+              horaFin = this.generateHora(horaF.H, horaF.M);
+            } else {
+              horaFin = null;
+            }
+
 
             this.calendarioDias[index].horaFin = horaFin;
-            this.calendarioDias[index].numParticipantes = element[this.confCarga.col8];
+            this.calendarioDias[index].numParticipantes = element[this.confCarga.col10];
+            console.log(this.calendarioDias[index]);
             break;
 
           case 7:
@@ -362,17 +406,17 @@ export class CargamasivaComponent implements OnInit {
             this.persona[index].email = element[this.confCarga.col8];
 
             this.persona[index].escuelaProcedencia = element[this.confCarga.col9];
-            this.persona[index].contrasena = this.persona[index].matricula+"";
+            this.persona[index].contrasena = this.persona[index].matricula + "";
             this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
             this.persona[index].usuario = this.persona[index].matricula;
             break;
-            //console.log("usuario: ", this.persona[index]);
+          //console.log("usuario: ", this.persona[index]);
 
 
 
           case 8:
             this.turnos[index] = new Turno();
-           // this.turnos[index].cveTurno = "1";
+            // this.turnos[index].cveTurno = "1";
             this.turnos[index].desTurno = element[this.confCarga.col1];
             this.turnos[index].des4306 = element[this.confCarga.col2];
 
@@ -697,6 +741,8 @@ export class CargamasivaComponent implements OnInit {
     if (this.regERROR != 0) {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_CARGA + msj, this._Mensajes.ERROR);
     } else {
+      this.cargaExitosa = true
+      console.log('exito');
       this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, this._Mensajes.MSJ_EXITO_CARGA + msj, this._Mensajes.EXITO);
     }
 

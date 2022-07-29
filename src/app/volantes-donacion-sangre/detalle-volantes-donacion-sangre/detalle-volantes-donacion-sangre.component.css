@@ -187,3 +187,8 @@
   .ui-datepicker .ui-datepicker-header{
     background-color: #9D2449!important;
   }
+
+  .horario-atencion {
+    width: 80%;
+    justify-content: space-between;
+  }
