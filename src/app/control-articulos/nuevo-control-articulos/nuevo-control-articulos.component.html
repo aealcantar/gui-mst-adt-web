@@ -237,12 +237,12 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.horarioEntregaArticulo.errors
                 }" class="form-control hasDatepicker" id="horarioEntregaArticulo" mask="Hh:m0" [leadZeroDateTime]="true"
-                formControlName=" horarioEntregaArticulo" placeholder="Ingresa hora" maxlength="5" />
+                formControlName="horarioEntregaArticulo" placeholder="Ingresa hora" maxlength="5" (blur)="ajustarHora('horarioEntregaArticulo');" />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img src="assets/images/reloj.svg" height="21px" style="width: 20px;" class="icono" /></span>
             </div>
             <small *ngIf="
-                submitted && formNuevoArticulo.controls.resguardoHora.errors
+                submitted && formNuevoArticulo.controls.horarioEntregaArticulo.errors
               " class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
             </small>
@@ -290,7 +290,7 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.resguardoHora.errors
                 }" class="form-control hasDatepicker" id="resguardoHora" formControlName="resguardoHora"
-                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" />
+                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" (blur)="ajustarHora('resguardoHora');" />
               <span class=" glyphicon fontIcono" aria-hidden="true">
               <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
             </div>
@@ -357,7 +357,7 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.recepcionHora.errors
                 }" class="calendario form-control" id="recepcionHora" formControlName="recepcionHora"
-                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" />
+                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" (blur)="ajustarHora('recepcionHora');" />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
             </div>
