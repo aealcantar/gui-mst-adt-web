@@ -232,7 +232,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
 
     if (this.nota?.id) {
       notaToSave.id = this.nota.id
-      let params = { nota: JSON.stringify(notaToSave) }
+      let params = { nota: JSON.stringify(notaToSave), nuevaNota: true }
 
       this.notasService.updateNota(notaToSave).subscribe(
         (response: any) => {
@@ -252,7 +252,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
         (response: any) => {
           if (response && response?.idNuevaNotaTS) {
             notaToSave.id = response?.idNuevaNotaTS
-            let params = { nota: JSON.stringify(notaToSave) }
+            let params = { nota: JSON.stringify(notaToSave), nuevaNota:true}
             this.router.navigate(['detalle-nota'], {
               queryParams: params,
               skipLocationChange: true,
@@ -265,22 +265,6 @@ export class NuevaNotaTSocialComponent implements OnInit {
       )
     }
   }
-
-  // this.muestraAlerta(
-  //   '¡La información se guardó con exito!',
-  //   'alert-danger',
-  //   null,
-  // );
-  // setTimeout(() => {
-  //   this.router.navigate(["consulta-nota"]);
-  // }, 2000);
-
-  // irConsultaNota() {
-  //   let params = {
-  //     'objetoAEnviar': null,
-  //   }
-  //   this.router.navigate(["consulta-nota"], { queryParams: params, skipLocationChange: true });
-  // }
 
   onBlur() {
     if (typeof this.formNuevaNota.get('diagnosticoMedico').value === 'string') {
