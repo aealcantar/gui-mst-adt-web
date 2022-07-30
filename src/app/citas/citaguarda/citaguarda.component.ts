@@ -61,7 +61,7 @@ export const MY_DATE_FORMATS = {
 export class CitaguardaComponent implements OnInit {
   @ViewChild('picker') picker: any;
   alert!: objAlert;
-  txtotro: string
+  txtotro: string = ""
   lstParticipantes: Array<string> = [];
   private _usuario!: Usuario;
 
@@ -294,12 +294,25 @@ export class CitaguardaComponent implements OnInit {
   agregaparticipante(otrop: any) {
     //console.log(this.txtotro);
     //console.log(otrop);
-    if (this.txtotro && this.txtotro.trim() != "" && otrop.control.status == "VALID") {
+    let regex = /^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$/g;
+
+    if (this.txtotro && this.txtotro.trim() != ""
+      && regex.test(this.txtotro.toString())
+      && !this.participanterepetido(this.txtotro) ) {
       this.lstParticipantes.push(this.txtotro);
       this.txtotro = "";
+      this.actualizacontador();
     }
-    this.actualizacontador();
+  }
 
+  participanterepetido(otro: string): boolean{
+    let repetido: boolean = false;
+    for(let nombre of this.lstParticipantes){
+      if(nombre.trim().toUpperCase() === otro.trim().toUpperCase()){
+        repetido = true;
+      }
+    }
+    return repetido;
   }
 
   eliminaparticipante(per: string) {
