@@ -5,6 +5,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/fo
 import * as moment from "moment";
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
 import { InformeServiciosProfesionalesService } from "src/app/service/informe-servicios-profesionales.service";
+
 declare var $: any;
 
 @Component({
@@ -62,7 +63,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     }
 
     consultaObserver = {
-        next: (respuesta: any) => this.datosBusqueda = respuesta,
+        next: (respuesta: any) => this.asignarResultadosConsulta(respuesta),
         error: (error: HttpErrorResponse) => console.log(error),
     }
 
@@ -99,6 +100,17 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         })
     }
 
+    asignarResultadosConsulta(respuesta: any): void {
+        if (respuesta.length === 0) {
+            this.muestraAlerta(
+                'Verifique los filtros',
+                'alert-warning',
+                'Sin Resultados'
+            )
+        }
+        this.datosBusqueda = respuesta
+    }
+
     asignarValoresDefault(): void {
         this.formularioBusqueda = new FormGroup({
             fecha: new FormControl('', Validators.required),
@@ -133,5 +145,26 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         this.informeServProfService.getCatResponsables().subscribe(this.responsablesObserver)
         this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
     }
+
+    muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+        this.alert = new AlertInfo;
+        this.alert = {
+    
+          message: mensaje,
+          type: estilo,
+          visible: true,
+          typeMsg: tipoMsj
+        };
+        setTimeout(() => {
+          this.alert = {
+            message: '',
+            type: 'custom',
+            visible: false,
+          };
+          if (funxion != null) {
+            funxion();
+          }
+        }, 5000);
+      }
     
 }
