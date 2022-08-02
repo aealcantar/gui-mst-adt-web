@@ -123,12 +123,12 @@
                                 <th class="encabezadoTableCenter" style="padding-top: 13px; width: 170px; padding-bottom: 5px;">
                                     Número
                                     <i class="fa-solid fa-caret-up arrow arrow-up"
-                                        [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'asc'}"
-                                        (click)="sortBy('numero', 'asc', 'fecha')">
+                                        [ngClass]="{'active-opacity': columnaId === 'id' && order === 'asc'}"
+                                        (click)="ordenarPor('id', 'asc', 'numero')">
                                     </i>
                                     <i class="fa-solid fa-caret-down arrow arrow-down"
-                                        [ngClass]="{'active-opacity': columnaId === 'numero' && order === 'desc'}"
-                                        (click)="sortBy('numero', 'desc', 'fecha')">
+                                        [ngClass]="{'active-opacity': columnaId === 'id' && order === 'desc'}"
+                                        (click)="ordenarPor('id', 'desc', 'numero')">
                                     </i>
                                 </th>
                                 <th class="encabezadoTable"

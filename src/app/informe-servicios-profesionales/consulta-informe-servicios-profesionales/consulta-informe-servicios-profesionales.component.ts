@@ -26,7 +26,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     // tabla
     dtOptions: DataTables.Settings = {};
     // paginado
-    columnaId: string = 'fecha';
+    columnaId: string = '';
     order: string = 'desc';
     page: number = 1;
     pageSize: number = 15;
@@ -100,7 +100,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     asignarResultadosConsulta(respuesta: any): void {
         if (respuesta.length === 0) {
-            this.muestraAlerta(
+            this.mostrarAlerta(
                 'Verifique los filtros',
                 'alert-warning',
                 'Sin Resultados'
@@ -129,8 +129,41 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         this.informeServProfService.getConsultaServicios(consultaBusqueda).subscribe(this.consultaObserver)
     }
 
-    sortBy(columnaId: string, order: string, type: string): void {
+    ordenarPor(columnaId: string, order: string, tipo: string): void {
+            this.columnaId = columnaId;
+            this.order = order;
+        
+            this.datosBusqueda = [...this.datosBusqueda].sort((a: any, b: any) => {
+              let c: any = this.convertirTipo(a[columnaId], tipo);
+              let d: any = this.convertirTipo(b[columnaId], tipo);
+              if (order === 'desc') {
+                return d - c; // Descendiente
+              } else {
+                return c - d; // Ascendiente
+              }
+            });
+            console.log(this.datosBusqueda)
     }
+
+    convertirTipo(valor: any, tipo: string) {
+        let data;
+        switch (tipo) {
+          case 'fecha':
+            data = moment(valor, 'DD/MM/YYYY');
+            break;
+          case 'hora':
+            data = moment(valor, 'HH:mm:ss');
+            break;
+          case 'numero':
+            data = parseInt(valor);
+            break;
+    
+          default:
+            break;
+        }
+        return data;
+      }
+    
 
     irDetalle(informeServicios: any): void {
 
@@ -143,7 +176,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
     }
 
-    muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    mostrarAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
         this.alert = new AlertInfo;
         this.alert = {
           message: mensaje,
