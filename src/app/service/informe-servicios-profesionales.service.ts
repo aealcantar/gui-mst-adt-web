@@ -10,7 +10,9 @@ export class InformeServiciosProfesionalesService {
   constructor(private http: HttpClient) { }
 
   getCatLugar() {
-    return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion/`);
+    return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion/`).pipe(
+      tap(console.log)
+    );
   }
   
   getCatServicios() {
