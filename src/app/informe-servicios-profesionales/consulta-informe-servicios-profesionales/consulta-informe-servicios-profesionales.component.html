@@ -6,7 +6,7 @@
             Consulta de Informe servicios profesionales Administración
         </label>
     </header>
-    <section content style="padding-bottom: 3.7%;">
+    <section content>
         <form [formGroup]="formularioBusqueda" (submit)="buscar()">
             <div class="row">
                 <div class="col-md-4">
@@ -99,8 +99,8 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="busqueda-label" *ngIf="datosBusqueda.length === 0">Búsquedas anteriores</label>
-                <label class="busqueda-label" *ngIf="datosBusqueda.length > 0">Resultados 
-                    <span style="margin-left: 20px; font-weight: bold; color: #000;">{{datosBusqueda.length}}</span>
+                <label class="busqueda-label" *ngIf="datosBusqueda.length > 0">Resultados
+                    <span class="label-counter">{{datosBusqueda.length}}</span>
                 </label>
             </div>
             <div class="col-md-6 flex justify-content-end">
@@ -117,10 +117,10 @@
         <ng-container *ngIf="datosBusqueda.length> 0 else mostrarSeccionSinResultados">
             <div class="row">
                 <div class="col-md-12">
-                    <table datatable [dtOptions]="dtOptions" class="tabla" style="width: 100%;">
+                    <table datatable [dtOptions]="dtOptions" class="tabla">
                         <thead>
                             <tr>
-                                <th class="encabezadoTableCenter" style="padding-top: 13px; width: 170px; padding-bottom: 5px;">
+                                <th class="encabezadoTableCenter">
                                     Número
                                     <i class="fa-solid fa-caret-up arrow arrow-up"
                                         [ngClass]="{'active-opacity': columnaId === 'id' && order === 'asc'}"
@@ -131,40 +131,28 @@
                                         (click)="ordenarPor('id', 'desc', 'numero')">
                                     </i>
                                 </th>
-                                <th class="encabezadoTable"
-                                    style="padding: 8px 16px 5px; text-align: left; width: 340px;">Paciente</th>
-                                <th class="encabezadoTable"
-                                    style="padding: 8px 16px 5px; text-align: left; width: 190px;">Hora de la cita</th>
-                                <th class="encabezadoTable"
-                                    style="padding: 8px 16px 5px; text-align: left; width: 240px;">Agregado médico</th>
-                                <th class="encabezadoTable"
-                                    style="padding: 8px 16px 5px; text-align: left; width: 130px;">Primera vez</th>
-                                <th class="encabezadoTable"
-                                    style="padding: 8px 16px 5px; text-align: left; width: 100px;">Citado</th>
+                                <th class="encabezadoTable w-340">Paciente</th>
+                                <th class="encabezadoTable w-190">Hora de la cita</th>
+                                <th class="encabezadoTable w-240">Agregado médico</th>
+                                <th class="encabezadoTable w-130">Primera vez</th>
+                                <th class="encabezadoTable w-100">Citado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
-                                <td class="bordesTablaFecha"
-                                    style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
-                                    (click)="irDetalle(item);">{{ item.id }}</td>
-                                <td class="bordesTablaDescripcion"
-                                    style="padding-left: 16px; text-align: left !important;">
+                                <td class="bordesTablaDetalle" (click)="irDetalle(item);">{{ item.id }}</td>
+                                <td class="bordesTabla">
                                     {{item.nombrePaciente}}
                                 </td>
-                                <td class="bordesTablaDescripcion"
-                                    style="padding-left: 16px; text-align: left !important;"> {{item.timHora}}
+                                <td class="bordesTabla"> {{item.timHora}}
                                 </td>
-                                <td class="bordesTablaDescripcion"
-                                    style="padding-left: 16px; text-align: left !important;">
+                                <td class="bordesTabla">
                                     {{item.desAgregadoMedico}} </td>
-                                <td class="bordesTablaDescripcion"
-                                    style="padding-left: 16px; text-align: left !important;">
+                                <td class="bordesTabla">
                                     {{item.tipoNota?.nombreTiponota }}
                                 </td>
-                                <td class="bordesTablaDescripcion"
-                                    style="padding-left: 16px; text-align: left !important;"> 
+                                <td class="bordesTabla">
                                     <!-- {{item.citado}} -->
                                 </td>
                             </tr>
@@ -173,12 +161,12 @@
                 </div>
             </div>
             <!-- end table -->
-            <div class="row col-md-12" style="height: 40px; border: 1px solid #ddd; margin-top: 0%; margin-left: 0px;">
+            <div class="row col-md-12 pagination-row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <div class="Rectangle-9601" style="margin-top: 0px !important;  justify-content: center; ">
+                    <div class="Rectangle-9601" >
                         <div class="">
-                            <pagination-controls style="margin-left: auto; margin-right: auto;content: '>';"
+                            <pagination-controls
                                 class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""
                                 screenReaderPaginationLabel="Pagination">
                             </pagination-controls>
