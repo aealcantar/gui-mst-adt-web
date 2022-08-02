@@ -1,7 +1,7 @@
 // TODO: Eliminar datos prueba
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import * as moment from "moment";
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
 import { InformeServiciosProfesionalesService } from "src/app/service/informe-servicios-profesionales.service";
@@ -26,14 +26,12 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     // tabla
     dtOptions: DataTables.Settings = {};
     // paginado
+    columnaId: string = 'fecha';
+    order: string = 'desc';
     page: number = 1;
     pageSize: number = 15;
     // datos
     datosBusqueda: Array<any> = [];
-
-    order: string = 'desc';
-    columnaId: string = 'fecha';
-
 
     // Formulario
     formularioBusqueda = new FormGroup({
@@ -44,9 +42,17 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         turno: new FormControl('', Validators.required),
     })
 
-    // observers
+    // Observers
+    consultaObserver = {
+        next: (respuesta: any) => this.asignarResultadosConsulta(respuesta),
+        error: (error: HttpErrorResponse) => console.log(error),
+    }
     lugaresObserver = {
         next: (lugares: any) => this.lugares = lugares,
+        error: (error: HttpErrorResponse) => console.log(error),
+    }
+    responsablesObserver = {
+        next: (respuesta: any) => this.responsables = respuesta.responsables,
         error: (error: HttpErrorResponse) => console.log(error),
     }
     serviciosObserver = {
@@ -57,28 +63,20 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         next: (turnos: any) => this.turnos = turnos,
         error: (error: HttpErrorResponse) => console.log(error),
     }
-    responsablesObserver = {
-        next: (respuesta: any) => this.responsables = respuesta.responsables,
-        error: (error: HttpErrorResponse) => console.log(error),
-    }
-
-    consultaObserver = {
-        next: (respuesta: any) => this.asignarResultadosConsulta(respuesta),
-        error: (error: HttpErrorResponse) => console.log(error),
-    }
 
     constructor(private informeServProfService: InformeServiciosProfesionalesService) { }
 
     ngOnInit(): void {
         this.dtOptions = {
+            info: false,
             order: [[2, 'desc']],
             ordering: false,
             paging: false,
             processing: false,
-            info: false,
             searching: false,
         };
         this.cargarCatalogos();
+        // this.informeServProfService.getConsultaServicios().subscribe(this.consultaObserver)
     }
 
     ngAfterViewInit(): void {
@@ -128,7 +126,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     buscar(): void {
         const consultaBusqueda  = this.formularioBusqueda.value;
-        console.log(consultaBusqueda)
         this.informeServProfService.getConsultaServicios(consultaBusqueda).subscribe(this.consultaObserver)
     }
 
@@ -149,7 +146,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
         this.alert = new AlertInfo;
         this.alert = {
-    
           message: mensaje,
           type: estilo,
           visible: true,

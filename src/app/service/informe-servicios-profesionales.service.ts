@@ -25,13 +25,17 @@ export class InformeServiciosProfesionalesService {
     return this.http.get<any>(`${environment.msmtsServsProfesionales}/responsables`)
   }
 
-  getConsultaServicios(query: any) {
+  getConsultaServicios(query?: any) {
+    if (!query) {
+      const request = {};
+      return this.http.post<any>(`${environment.msmtsServsProfesionales}/searchServiciosProfecionales`, request)
+    }
     const { turno, responsable, servicio, lugar, fecha } = query
      const request = {
-      idTurno: turno,
+      idTurno: parseInt(turno),
       responsable,
-      idServicio: servicio,
-      idLugar: lugar,
+      especialidad: parseInt(servicio),
+      idLugar: parseInt(lugar),
       fecha,
      }
     return this.http.post<any>(`${environment.msmtsServsProfesionales}/searchServiciosProfecionales`, request).pipe(

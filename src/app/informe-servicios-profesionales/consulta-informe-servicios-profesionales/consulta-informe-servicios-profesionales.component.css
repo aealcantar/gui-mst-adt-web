@@ -143,7 +143,13 @@ th {
     text-align: left;
     background-color: rgba(196, 196, 196, 0.1);
     border: 1px solid #EEEEEE;
-    text-align: left;
+}
+
+.encabezadoTableCenter {
+    width: 150;
+    text-align: center;
+    background-color: rgba(196, 196, 196, 0.1);
+    border: 1px solid #EEEEEE;
 }
 
 .celdaEncabezadoTable {
