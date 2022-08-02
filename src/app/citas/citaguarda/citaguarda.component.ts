@@ -395,8 +395,9 @@ export class CitaguardaComponent implements OnInit {
 
   validaespaciocita(e: any) {
     this.msjLoading("Cargando...");
+    let fechaIni = this.citadata.value.fechahora ? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd') : "";
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
-      this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica).subscribe({
+      this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica,fechaIni,this.citadata.value.hora.tim_hora_inicio,).subscribe({
         next: (resp: any) => {
           console.log(resp);
           if (resp) {
@@ -426,7 +427,7 @@ export class CitaguardaComponent implements OnInit {
         },
         error: (err) => {
           //console.log(err);
-          this.muestraresumen = true;
+        //  this.muestraresumen = true;
           this.submitted = false;
           Swal.close();
           this.muestraAlerta(this._Mensajes.MSJ_ERROR_COMPLEMENTO_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
@@ -655,7 +656,7 @@ export class CitaguardaComponent implements OnInit {
       if (funxion != null) {
         funxion();
       }
-    }, 2000);
+    }, 4000);
   }
 
 }
