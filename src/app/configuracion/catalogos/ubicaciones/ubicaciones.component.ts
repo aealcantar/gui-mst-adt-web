@@ -53,7 +53,7 @@ export class UbicacionesComponent implements OnInit {
   regOK: number = 0;
   blnProcedeCarga: boolean = true;
   idUser: number;// = 1; // 5 = Fer   33 = Ame
-  cveUnidad:string;
+  cveUnidad: string;
   blnPendientes: boolean = false;
   blnErrores: boolean = false;
   blnCompletos: boolean = false;
@@ -261,55 +261,55 @@ export class UbicacionesComponent implements OnInit {
   totRegistros: number = 0;
   btnBuscarUbicacion() {
     this.lstUbicaciones = [];
- /*   if (this.txtbusca == "") {
-      // this.getAll();
-      this.getAllByUser(this.idUser);
+    /*   if (this.txtbusca == "") {
+         // this.getAll();
+         this.getAllByUser(this.idUser);
+   
+       } else {
+         */
+    if (this.txtbusca.trim().length >= 5) {
 
-    } else {
-      */
-      if (this.txtbusca.trim().length >= 5) {
+      this.msjLoading("Buscando...");
+      this.ubicaciones.getByDescAbvbyUser(this.txtbusca, this.idUser).subscribe({
+        next: (resp: any) => {
 
-        this.msjLoading("Buscando...");
-        this.ubicaciones.getByDescAbvbyUser(this.txtbusca, this.idUser).subscribe({
-          next: (resp: any) => {
+          console.log(resp);
+          this.lstUbicaciones = resp.data;
 
-            console.log(resp);
-             this.lstUbicaciones = resp.data;
+          if (resp.length > 0)
+            this.resultados = true;
+          else this.resultados = false;
 
-            if (resp.length > 0)
-              this.resultados = true;
-            else this.resultados = false;
+          // this.convertirLStCat(resp.data);
+          this.totRegistros = this.lstUbicaciones.length;
+          console.log(this.totRegistros);
+          setTimeout(() => {
+            table = $('#tblusuarios').DataTable();
+            this.dtOptions.pageLength = this.numitems;
 
-           // this.convertirLStCat(resp.data);
-            this.totRegistros = this.lstUbicaciones.length;
-            console.log(this.totRegistros);
+
             setTimeout(() => {
-              table = $('#tblusuarios').DataTable();
-              this.dtOptions.pageLength = this.numitems;
-
-
-              setTimeout(() => {
-                table.on('page', () => {
-                  console.log('Page: ' + table.page.info().page);
-                  paginaactual = table.page.info().page;
-                  this.pagactual = paginaactual + 1;
-                });
-              }, 1000);
+              table.on('page', () => {
+                console.log('Page: ' + table.page.info().page);
+                paginaactual = table.page.info().page;
+                this.pagactual = paginaactual + 1;
+              });
             }, 1000);
+          }, 1000);
 
-            Swal.close();
+          Swal.close();
 
-          },
-          error: (err: HttpErrorResponse) => {
-            Swal.close();
-            this.lstUbicaciones = [];
-            this.mensajesError(err, this._Mensajes.MSJ_ERROR_CONEXION_UBICACION);
-          }
-        })
-      } else {
-        this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Ingrese mínimo 5 caracteres para buscar" + this.catFaltante, this._Mensajes.ERROR);
-      }
-   // }
+        },
+        error: (err: HttpErrorResponse) => {
+          Swal.close();
+          this.lstUbicaciones = [];
+          this.mensajesError(err, this._Mensajes.MSJ_ERROR_CONEXION_UBICACION);
+        }
+      })
+    } else {
+      this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Ingrese mínimo 5 caracteres para buscar" + this.catFaltante, this._Mensajes.ERROR);
+    }
+    // }
   }
 
 
@@ -318,17 +318,17 @@ export class UbicacionesComponent implements OnInit {
     for (let i of lst) {
       let element = new Ubicacion;
       let tipo = new TipoUbicacion;
-  /*    element.cve = i.cveUbicacion;
-      element.des_abreviada_ubicacion = i.descripcionAbreviada;
-      tipo.desUbicacion = i.tipo;
-      element.tipoUbicacionEntity = tipo;
-      element.cve_especialidad = i.servicio;
-*/
+      /*    element.cve = i.cveUbicacion;
+          element.des_abreviada_ubicacion = i.descripcionAbreviada;
+          tipo.desUbicacion = i.tipo;
+          element.tipoUbicacionEntity = tipo;
+          element.cve_especialidad = i.servicio;
+    */
       this.lstUbicaciones.push(element);
     }
 
 
-   // this.lstUbicaciones.filter(x => x.cve_unidad_medica = this.cveUnidad);
+    // this.lstUbicaciones.filter(x => x.cve_unidad_medica = this.cveUnidad);
   }
 
   btnAtras() {
@@ -343,7 +343,7 @@ export class UbicacionesComponent implements OnInit {
     // this.router.navigateByUrl("/catalogos/cargaCatalogos");
   }
 
-  muestraHorarios(cveUbicacion: string,tipo: string) {
+  muestraHorarios(cveUbicacion: string, tipo: string) {
     //debugger
     // this.router.navigateByUrl("/catalogos/horarios" + cveUbicacion);
     // console.log({tipo});
@@ -427,7 +427,7 @@ export class UbicacionesComponent implements OnInit {
     dialogo1.afterClosed().subscribe(art => {
       console.log("afterClosed: ", art);
       //if (art != undefined)
-
+      this.getAllByUser(this.idUser);
     });
 
     dialogo1.componentInstance.onAlert.subscribe(dats => {
