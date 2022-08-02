@@ -236,9 +236,8 @@ export class CitaguardaComponent implements OnInit {
     this.msjLoading("Cargando...");
     let cveEspecialidad:string = encodeURIComponent(this.citadata.value.servicio.cve_especialidad);
     let cvePrograma:string = encodeURIComponent( this.citadata.value.programa.cve_grupo_programa);
-    this.citaservice.gethorarioscalanual(cveEspecialidad,cvePrograma
-     ,
-      fechaInicio).subscribe({
+    let idUM:string = encodeURIComponent( this._usuario.unidadMedica);
+    this.citaservice.gethorarioscalanual(cveEspecialidad,cvePrograma,fechaInicio,idUM).subscribe({
         next: (resp: any) => {
           console.log(resp);
 
