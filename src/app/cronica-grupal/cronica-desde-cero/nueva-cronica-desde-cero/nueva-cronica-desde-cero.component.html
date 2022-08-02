@@ -1,0 +1,223 @@
+<app-app-alerts></app-app-alerts>
+<app-menu [activeItem]="1"></app-menu>
+<!-- Modal btn cancelar eduardo Flores-->
+<div class="modal fade" role="dialog" id="content" #content >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border: 1px solid #CCCCCC ;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16); border-radius: 10px;">
+      <div class="modal-header text-center" fxLayoutAlign="space-between center" fxLayout="column"
+      style="border: 1px solid #CCCCCC ; border-bottom: 1px;
+      border-radius: 10px 10px 0 0;">
+        <img src="../../../../assets/images/Group 2082.png" class="Group-2082" alt="">
+        <div class="modal-title Atencin">Atención</div>
+      </div>
+      <div class="line62" style="border-bottom: black;"></div>
+      <div class="col-md12" style="text-align: center; margin-top: 5%; height: 80px;">
+
+          <label class="titulo" style="font-weight: 500; font-size: 24px;
+          line-height: 21.94px; text-align: center;" >¿Desea salir sin guardar</label>
+          <br>
+          <label style="font-weight: 500; font-size: 24px;
+          line-height: 21.94px; text-align: center;"> los cambios?</label>
+
+      </div>
+      <div class="col-md12 row"
+          style="width:495px; height: 118px; text-align: center; margin: auto;
+          padding: 15px; background-color: #FAFAFA; border-radius: 10px;">
+
+          <div class="col-md10" width="495px" height="118px" aling="center" >
+              <button type="button" class="btn btn-danger buttonL" style="border: solid 1px #b38e5d;"
+                  (click)="cancelarModal()">
+                  Cancelar
+              </button>
+              <button type="button" class="btn btn-primary buttonL" style="border: solid 1px #9d2449;"
+                  (click)="salirModal()">
+                  Aceptar
+              </button>
+          </div>
+          </div>
+
+      </div>
+</div>
+</div>
+<app-card-template>
+
+
+  <div header class="justify-content-between row" >
+    <div class="col-md-4">
+      <div style="display: grid; text-align: left">
+        <span class="pacienteNombreSpan">{{ "Nueva crónica grupal desde cero" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div content>
+    <div>
+      <span class="instrucciones">
+        Por favor capture los siguientes datos:
+      </span>
+    </div>
+    <form novalidate [formGroup]="editForm" class="formInfo">
+      <div class="container seccion">
+        <div class="row" >
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Grupo*:</span>
+              <mat-select class="form-control form-control-mat-select" formControlName="grupo" [disableOptionCentering]="true"
+                style="background-position-y: 5px" aria-label="Servicio">
+                <mat-option class="select-font" [value]="''">Ingresar grupo</mat-option>
+                <mat-option class="select-font" [value]="item.cve_grupo_programa" *ngFor="let item of grupos">
+                  {{ item.des_grupo_programa }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group datepicker-group">
+              <span class="spanInput">Fecha*:</span>
+              <input class="form-control" formControlName="calendarCronicaCero" id="calendarCronicaCero" type="text"
+                placeholder="dd/mm/aaaa" maxlength="10">
+              <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+                <div class="imgCalendar"></div>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Hora*:</span>
+              <mat-select class="form-control form-control-mat-select" [disableOptionCentering]="true"
+                style="background-position-y: 5px" aria-label="Servicio">
+                <mat-option class="select-font" [value]="''">Ingresar hora</mat-option>
+                <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Pnentes*:</span>
+              <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
+              type="text" placeholder="Ingresar ponentes" maxlength="500"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" >
+          <div class="col-md-4">
+            <span class="spanInput">N&uacute;mero de asistentes*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="numParticipantesAsistieron"
+              placeholder="Ingresar n&uacute;mero de asistentes" type="number"/>
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
+              placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" maxlength="500"/>
+          </div>
+          <div class="col-md-4">
+            <span class="spanInput">Material apoyo*:</span>
+            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
+              placeholder="Ingresar material apoyo" type="text" maxlength="500"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="container seccion">
+        <div class="row">
+          <div class="col-md-6">
+            <span class="spanInput">Objetivos de la sesi&oacute;n*:</span>
+            <textarea class="form-control" placeholder="Ingresar objetivos de la sesi&oacute;n" style="height: 167px;"
+              formControlName="desObjetivosSesion" #objetivosRef maxlength="500" rows="4"></textarea>
+            <span class="spanCaracteres">{{objetivosRef.value?.length}} /
+              {{objetivosRef.getAttribute('maxlength')}} caracteres</span>
+          </div>
+          <div class="col-md-6">
+            <span class="spanInput">Desarrollo de la sesi&oacute;n*:</span>
+            <textarea class="form-control" placeholder="Ingresar desarrollo de la sesi&oacute;n" style="height: 167px;"
+              formControlName="desDesarrolloSesion" #desarrolloRef maxlength="500" rows="4"></textarea>
+            <span class="spanCaracteres">{{desarrolloRef.value?.length}} /
+              {{desarrolloRef.getAttribute('maxlength')}} caracteres</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <span class="spanInput">Perfil del grupo*:</span>
+            <textarea class="form-control" placeholder="Escribir NSS paciente" rows="4" style="height: 167px;"
+              formControlName="desPerfilGrupo" #perfilRef maxlength="500"></textarea>
+            <span class="spanCaracteres">{{perfilRef.value?.length}} /
+              {{perfilRef.getAttribute('maxlength')}} caracteres</span>
+          </div>
+          <div class="col-md-6">
+            <span class="spanInput">Observaciones*:</span>
+            <textarea class="form-control" placeholder="Ingresar observaciones" rows="4" style="height: 167px;"
+              formControlName="desObservaciones" #observacionesRef maxlength="500"></textarea>
+            <span class="spanCaracteres">{{observacionesRef.value?.length}} /
+              {{observacionesRef.getAttribute('maxlength')}} caracteres</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container" style="margin-bottom: 0px; margin-left: 3.62%;">
+        <span class="campo-obligatorio"> *Campos obligatorios </span>
+        <!-- <button *ngIf="listParticipantes.length === 0" -->
+        <button style="width: 170px; border: solid 1px #9d2449; margin-left: -10px !important;" type="button"
+          class="btn btn-primary buttonL" (click)="addParticipanteDialog();">
+          Agregar participante
+        </button>
+      </div>
+
+      <div class="container seccion" *ngIf="listParticipantes.length > 0">
+        <div class="row col-md-12" style="margin-top: 20px; margin-bottom: 20px !important;">
+          <span class="label-total-participantes" style="margin: 0px 10px;">
+            Total de participantes
+            <span class="label-atencion">
+              &nbsp; &nbsp; {{listParticipantes.length}}
+            </span>
+          </span>
+        </div>
+        <div class="row col-md-10" style="margin-bottom: 20px !important;">
+          <table id="tblparticipante"
+            class="tabla table-hover table-bordered table-gral table-participantes caption-top">
+            <thead>
+              <tr>
+                <th>Participantes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listParticipantes; let i=index">
+                <td>{{item.nombreParticipante}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row col-md-12" style="margin-bottom: 20px !important;">
+          <button style="width: 170px; border: solid 1px #9d2449; margin-left: 0px !important;" type="button"
+            class="btn btn-primary buttonL" (click)="addParticipanteDialog();">
+            Agregar participante
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12" style="padding-top: 19px; padding-right: 24px;  margin-top: -1.4%;">
+          <button [disabled]="!this.editForm.valid" type="button" class="btn btn-primary buttonL"
+            style="float: right;border: solid 1px #9d2449;" (click)="guardarCronica()">
+            Guardar
+          </button>
+          <button (click)="modalcarga(content)" type="button" class="btn btn-danger buttonL"
+          style="float: right; border: solid 1px #b38e5d;" >
+          Cancelar
+      </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-card-template>
+
+<app-info-bottom></app-info-bottom>
