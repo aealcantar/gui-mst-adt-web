@@ -81,6 +81,7 @@ export class HelperMensajesService {
   public MSJ_ERROR_CATFECHA: string = 'No fue posible consumir el catálogo de fechas disponibles.';
   public MSJ_ERROR_CATHORA: string = 'No fue posible consumir el catálogo de horarios disponibles.';
   public MSJ_ERROR_COMPLEMENTO_CITA: string = 'No fue posible conectar con el servicio de complemento.';
+  public MSJ_ERROR_DATOS_UM: string = 'No fue posible obtener los datos de la Unidad Médica.';
   public MSJ_ERROR_NUMPARTICIPANTES_CITA: string = 'Seleccione mínimo un participante.';
   public MSJ_ERROR_ESPACIO_CITA: string = 'El espacio seleccionado se encuentra al máximo de su cupo, por favor seleccionar otra fecha.';
   public MSJ_EXITO_AGENDA_CITA: string = 'La cita fue agendada correctamente. Favor de realizar la descarga del formato.';

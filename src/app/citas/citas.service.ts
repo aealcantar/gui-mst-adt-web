@@ -74,7 +74,7 @@ export class CitasService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  gethorarioscalanual(cve_especialidad: number, cve_gpo: number, fecha: string):Observable<any>{
+  gethorarioscalanual(cve_especialidad: string, cve_gpo: string, fecha: string):Observable<any>{
     let direccion = this.baseApiUrl + '/listCalendarioAnualHorarios/' + cve_especialidad + '/' + cve_gpo + '/' + fecha;
 
     return this.http.get(direccion,{headers: this.header});

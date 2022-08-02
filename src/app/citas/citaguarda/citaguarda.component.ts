@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { objAlert } from '../../common/alerta/alerta.interface';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse, HttpUrlEncodingCodec } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { DatePipe, KeyValue } from '@angular/common';
@@ -234,8 +234,10 @@ export class CitaguardaComponent implements OnInit {
   horarioOK: boolean = false;
   llenacatalogohorarios(fechaInicio: string) {
     this.msjLoading("Cargando...");
-    this.citaservice.gethorarioscalanual(this.citadata.value.servicio.cve_especialidad,
-      this.citadata.value.programa.cve_grupo_programa,
+    let cveEspecialidad:string = encodeURIComponent(this.citadata.value.servicio.cve_especialidad);
+    let cvePrograma:string = encodeURIComponent( this.citadata.value.programa.cve_grupo_programa);
+    this.citaservice.gethorarioscalanual(cveEspecialidad,cvePrograma
+     ,
       fechaInicio).subscribe({
         next: (resp: any) => {
           console.log(resp);
@@ -396,6 +398,7 @@ export class CitaguardaComponent implements OnInit {
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
       this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica).subscribe({
         next: (resp: any) => {
+          console.log(resp);
           if (resp) {
             //console.log(resp);
             this.datoscita = {
@@ -412,10 +415,13 @@ export class CitaguardaComponent implements OnInit {
               'Tipo de cita': 'Grupal',
               'des_abreviada_ubicacion': resp.des_abreviada_ubicacion
             };
+            this.muestraresumen = true;
+            this.submitted = false;
+  
+          }else{
+            this.muestraAlerta(this._Mensajes.MSJ_ERROR_DATOS_UM, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
           }
-          this.muestraresumen = true;
-          this.submitted = false;
-
+         
           Swal.close();
         },
         error: (err) => {
