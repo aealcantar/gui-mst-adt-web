@@ -39,7 +39,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    $('#calendarCronica').datepicker({
+    $('#fecha-cronica-cero').datepicker({
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.editForm.controls['fecha'].setValue(date);
@@ -150,8 +150,9 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       desUbicacion: null,
       fecFechaCorta: this.editForm.get('fecha')!.value,
       fecFechaCompleta: null,
-      timHora: '10:00:00',
-      desModalidad: null,
+      timHora: this.editForm.get('hora')!.value,
+      desModalidad: this.editForm.get('desModalidad')!.value,
+      desOcasionServicio: this.editForm.get('desOcasionServicio')!.value,
       numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
       numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
       idEstatusCronica: 1,
@@ -165,6 +166,9 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       desObservaciones: this.editForm.get('desObservaciones')!.value
     }
 
+    console.log(this.cronica);
+    
+
     this.editForm.markAllAsTouched();
     if (this.editForm.valid) {
       this.cronica = {
@@ -172,15 +176,15 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
         ...this.editForm.value,
         participanteList: this.listParticipantes
       };
-      // let params = {
-      //   'cronica': JSON.stringify(this.cronica),
-      // }
+      let params = {
+        'cronica': JSON.stringify(this.cronica),
+      }
       this.cronicaGrupalService.addCronica(this.cronica).subscribe(
         (response: any) => {
         }, (response: HttpErrorResponse) => {
           if (response.statusText === 'OK') {
-            // this.router.navigate(["cronicaGuardada"], { queryParams: params, skipLocationChange: true });
-            this.router.navigateByUrl('/detalle-cronica-cero');
+              this.router.navigate(["detalle-cronica-cero"], { queryParams: params, skipLocationChange: true });
+            // this.router.navigateByUrl('/detalle-cronica-cero');
           }
         }
       );

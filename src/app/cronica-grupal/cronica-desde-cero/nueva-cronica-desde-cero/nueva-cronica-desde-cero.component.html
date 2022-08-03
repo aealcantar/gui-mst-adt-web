@@ -75,7 +75,7 @@
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input class="form-control" formControlName="fecha" id="fecha" type="text"
+              <input class="form-control" formControlName="fecha" id="fecha-cronica-cero" type="text"
                 placeholder="dd/mm/aaaa" maxlength="10">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
@@ -85,41 +85,67 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Hora*:</span>
-              <mat-select class="form-control form-control-mat-select" [disableOptionCentering]="true"
+              <mat-select class="form-control form-control-mat-select" formControlName="hora" [disableOptionCentering]="true"
                 style="background-position-y: 5px" aria-label="Servicio">
                 <mat-option class="select-font" [value]="''">Ingresar hora</mat-option>
-                <mat-option [value]="'00'" selected class="select-font">00:00:00</mat-option>
-                <mat-option [value]="'01'" selected class="select-font">01:00:00</mat-option>
-                <mat-option [value]="'02'" selected class="select-font">02:00:00</mat-option>
-                <mat-option [value]="'03'" selected class="select-font">03:00:00</mat-option>
-                <mat-option [value]="'04'" selected class="select-font">04:00:00</mat-option>
-                <mat-option [value]="'05'" selected class="select-font">05:00:00</mat-option>
-                <mat-option [value]="'06'" selected class="select-font">06:00:00</mat-option>
-                <mat-option [value]="'07'" selected class="select-font">07:00:00</mat-option>
-                <mat-option [value]="'08'" selected class="select-font">08:00:00</mat-option>
-                <mat-option [value]="'09'" selected class="select-font">09:00:00</mat-option>
-                <mat-option [value]="'10'" selected class="select-font">10:00:00</mat-option>
-                <mat-option [value]="'11'" selected class="select-font">11:00:00</mat-option>
-                <mat-option [value]="'12'" selected class="select-font">12:00:00</mat-option>
-                <mat-option [value]="'13'" selected class="select-font">13:00:00</mat-option>
-                <mat-option [value]="'14'" selected class="select-font">14:00:00</mat-option>
-                <mat-option [value]="'15'" selected class="select-font">15:00:00</mat-option>
-                <mat-option [value]="'16'" selected class="select-font">16:00:00</mat-option>
-                <mat-option [value]="'17'" selected class="select-font">17:00:00</mat-option>
-                <mat-option [value]="'18'" selected class="select-font">18:00:00</mat-option>
-                <mat-option [value]="'19'" selected class="select-font">19:00:00</mat-option>
-                <mat-option [value]="'20'" selected class="select-font">20:00:00</mat-option>
-                <mat-option [value]="'21'" selected class="select-font">21:00:00</mat-option>
-                <mat-option [value]="'22'" selected class="select-font">22:00:00</mat-option>
-                <mat-option [value]="'23'" selected class="select-font">23:00:00</mat-option>
+                <mat-option [value]="'00:00:00'" selected class="select-font">00:00:00</mat-option>
+                <mat-option [value]="'01:00:00'" selected class="select-font">01:00:00</mat-option>
+                <mat-option [value]="'02:00:00'" selected class="select-font">02:00:00</mat-option>
+                <mat-option [value]="'03:00:00'" selected class="select-font">03:00:00</mat-option>
+                <mat-option [value]="'04:00:00'" selected class="select-font">04:00:00</mat-option>
+                <mat-option [value]="'05:00:00'" selected class="select-font">05:00:00</mat-option>
+                <mat-option [value]="'06:00:00'" selected class="select-font">06:00:00</mat-option>
+                <mat-option [value]="'07:00:00'" selected class="select-font">07:00:00</mat-option>
+                <mat-option [value]="'08:00:00'" selected class="select-font">08:00:00</mat-option>
+                <mat-option [value]="'09:00:00'" selected class="select-font">09:00:00</mat-option>
+                <mat-option [value]="'10:00:00'" selected class="select-font">10:00:00</mat-option>
+                <mat-option [value]="'11:00:00'" selected class="select-font">11:00:00</mat-option>
+                <mat-option [value]="'12:00:00'" selected class="select-font">12:00:00</mat-option>
+                <mat-option [value]="'13:00:00'" selected class="select-font">13:00:00</mat-option>
+                <mat-option [value]="'14:00:00'" selected class="select-font">14:00:00</mat-option>
+                <mat-option [value]="'15:00:00'" selected class="select-font">15:00:00</mat-option>
+                <mat-option [value]="'16:00:00'" selected class="select-font">16:00:00</mat-option>
+                <mat-option [value]="'17:00:00'" selected class="select-font">17:00:00</mat-option>
+                <mat-option [value]="'18:00:00'" selected class="select-font">18:00:00</mat-option>
+                <mat-option [value]="'19:00:00'" selected class="select-font">19:00:00</mat-option>
+                <mat-option [value]="'20:00:00'" selected class="select-font">20:00:00</mat-option>
+                <mat-option [value]="'21:00:00'" selected class="select-font">21:00:00</mat-option>
+                <mat-option [value]="'22:00:00'" selected class="select-font">22:00:00</mat-option>
+                <mat-option [value]="'23:00:00'" selected class="select-font">23:00:00</mat-option>
               </mat-select>
             </div>
           </div>
         </div>
         <div class="row" >
           <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Modalidad*:</span>
+              <div class="radio flex align-items-center">
+                <label class="inline-flex select-font align-items-center relative mr-5">
+                  <input type="radio" name="desModalidad" value="Presencial" formControlName="desModalidad"
+                    class="radio-consulta" checked="checked"> Presencial:
+                </label>
+                <label class="inline-flex select-font align-items-center ml-5 relative ">
+                  <input type="radio" name="desModalidad" value="A distancia" formControlName="desModalidad"
+                    class="radio-consulta" checked="checked"> A distancia:
+                </label>
+              </div>
+            </div>
           </div>
           <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Ocasión de servicio*:</span>
+              <div class="radio flex align-items-center">
+                <label class="inline-flex select-font align-items-center relative mr-5">
+                  <input type="radio" name="desOcasionServicio" value="Presencial" formControlName="desOcasionServicio"
+                    class="radio-consulta" checked="checked"> Inicial:
+                </label>
+                <label class="inline-flex select-font align-items-center ml-5 relative ">
+                  <input type="radio" name="desOcasionServicio" value="A distancia" formControlName="desOcasionServicio"
+                    class="radio-consulta" checked="checked"> Seguimiento:
+                </label>
+              </div>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
@@ -134,7 +160,7 @@
           <div class="col-md-4">
             <span class="spanInput">N&uacute;mero de asistentes*:</span>
             <input class="form-control matricula inputs" id="txtconsulta" formControlName="numParticipantesAsistieron"
-              placeholder="Ingresar n&uacute;mero de asistentes" type="number"/>
+              placeholder="Ingresar n&uacute;mero de asistentes" type="text" numbersOnly />
           </div>
           <div class="col-md-4">
             <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
@@ -188,7 +214,6 @@
 
       <div class="container" style="margin-bottom: 0px; margin-left: 3.62%;">
         <span class="campo-obligatorio"> *Campos obligatorios </span>
-        <!-- <button *ngIf="listParticipantes.length === 0" -->
         <button style="width: 170px; border: solid 1px #9d2449; margin-left: -10px !important;" type="button"
           class="btn btn-primary buttonL" (click)="addParticipanteDialog();">
           Agregar participante
