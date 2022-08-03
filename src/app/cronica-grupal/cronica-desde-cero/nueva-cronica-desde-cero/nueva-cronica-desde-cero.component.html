@@ -64,8 +64,8 @@
             <div class="form-group">
               <span class="spanInput">Servicio*:</span>
               <mat-select class="form-control form-control-mat-select" formControlName="servicio" [disableOptionCentering]="true"
-                style="background-position-y: 5px" aria-label="Servicio" (selectionChange)="obtenerGrupoPorServicio()" id="servicio">
-                <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar servicio</mat-option>
+                (selectionChange)="obtenerGrupoPorServicio()" id="servicio" placeholder="Seleccionar servicio">
+                <!-- <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar servicio</mat-option> -->
                 <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of serviciosEspecialidad">
                   {{ item.des_especialidad }}
                 </mat-option>
@@ -76,8 +76,8 @@
             <div class="form-group">
               <span class="spanInput">Grupo*:</span>
               <mat-select class="form-control form-control-mat-select" formControlName="grupo" [disableOptionCentering]="true"
-                style="background-position-y: 5px" aria-label="Grupo" id="grupo">
-                <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar grupo</mat-option>
+                id="grupo" placeholder="Seleccionar grupo">
+                <!-- <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar grupo</mat-option> -->
                 <mat-option class="select-font" [value]="item.cve_grupo_programa" *ngFor="let item of grupos">
                   {{ item.des_grupo_programa }}
                 </mat-option>
