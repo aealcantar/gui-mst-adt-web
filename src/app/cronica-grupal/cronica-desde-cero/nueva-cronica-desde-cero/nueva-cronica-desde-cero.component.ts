@@ -176,7 +176,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       desModalidad: this.editForm.get('desModalidad')!.value,
       desOcasionServicio: this.editForm.get('desOcasionServicio')!.value,
       numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
-      numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
+      // numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
       idEstatusCronica: 1,
       desEstatusCronica: null,
       descPonentes: this.editForm.get('descPonentes')!.value,
