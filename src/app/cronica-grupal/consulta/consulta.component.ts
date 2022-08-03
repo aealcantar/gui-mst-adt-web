@@ -173,11 +173,11 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.getCronicasGrupales();
   }
 
-  cronicaAsociada(){
+  cronicaAsociada() {
     this.cronicaGrupalAsociada = true;
   }
 
-  cronicaNoAsociada(){
+  cronicaNoAsociada() {
     this.cronicaGrupalAsociada = false;
   }
 
@@ -194,8 +194,8 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     console.log("ENTRAMOS");
     this.cronicasGrupales = [];
     let fechaConvertedFormat;
-    if(this.fechaSelected) {
-      fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2);
+    if (this.fechaSelected) {
+      fechaConvertedFormat = this.fechaSelected.substring(6, 10) + "-" + this.fechaSelected.substring(3, 5) + "-" + this.fechaSelected.substring(0, 2);
     }
     this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '' ? this.servicioSelected : '-', this.turnoSelected !== '' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
       (cronicasGrupales: any) => {
@@ -203,8 +203,8 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
         this.cronicasGrupales = cronicasGrupales;
         console.log("CRONICAS GRUPALES BY FILTROS: ", this.cronicasGrupales);
       }
-    ).add( ()=>{
-      if(this.cronicasGrupales.length  == 0){
+    ).add(() => {
+      if (this.cronicasGrupales.length == 0) {
         this.muestraAlerta(
           'Verifique los filtros',
           'alert-warning',
@@ -215,11 +215,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   addCronica() {
-    if(this.cronicaGrupalAsociada){
-      this.router.navigate(["nuevaCronica"]);
-    }else{
-      this.router.navigate(["nueva-cronica-cero"]);
-    }
+    this.router.navigate(["nueva-cronica-cero"]);
   }
 
   irDetalle(cronicaGrupal: any) {

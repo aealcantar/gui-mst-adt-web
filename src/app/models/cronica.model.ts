@@ -14,6 +14,7 @@ export class Cronica {
     fecFechaCompleta?: string | null;
     timHora?: string;
     desModalidad?: string | null;
+    desOcasionServicio?: string | null;
     numTotalParticipantes?: number;
     numParticipantesAsistieron?: string | null;
     idEstatusCronica?: number;

@@ -75,7 +75,7 @@
           <div class="col-md-4">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input class="form-control" formControlName="calendarCronicaCero" id="calendarCronicaCero" type="text"
+              <input class="form-control" formControlName="fecha" id="fecha" type="text"
                 placeholder="dd/mm/aaaa" maxlength="10">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
@@ -88,7 +88,30 @@
               <mat-select class="form-control form-control-mat-select" [disableOptionCentering]="true"
                 style="background-position-y: 5px" aria-label="Servicio">
                 <mat-option class="select-font" [value]="''">Ingresar hora</mat-option>
-                <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+                <mat-option [value]="'00'" selected class="select-font">00:00:00</mat-option>
+                <mat-option [value]="'01'" selected class="select-font">01:00:00</mat-option>
+                <mat-option [value]="'02'" selected class="select-font">02:00:00</mat-option>
+                <mat-option [value]="'03'" selected class="select-font">03:00:00</mat-option>
+                <mat-option [value]="'04'" selected class="select-font">04:00:00</mat-option>
+                <mat-option [value]="'05'" selected class="select-font">05:00:00</mat-option>
+                <mat-option [value]="'06'" selected class="select-font">06:00:00</mat-option>
+                <mat-option [value]="'07'" selected class="select-font">07:00:00</mat-option>
+                <mat-option [value]="'08'" selected class="select-font">08:00:00</mat-option>
+                <mat-option [value]="'09'" selected class="select-font">09:00:00</mat-option>
+                <mat-option [value]="'10'" selected class="select-font">10:00:00</mat-option>
+                <mat-option [value]="'11'" selected class="select-font">11:00:00</mat-option>
+                <mat-option [value]="'12'" selected class="select-font">12:00:00</mat-option>
+                <mat-option [value]="'13'" selected class="select-font">13:00:00</mat-option>
+                <mat-option [value]="'14'" selected class="select-font">14:00:00</mat-option>
+                <mat-option [value]="'15'" selected class="select-font">15:00:00</mat-option>
+                <mat-option [value]="'16'" selected class="select-font">16:00:00</mat-option>
+                <mat-option [value]="'17'" selected class="select-font">17:00:00</mat-option>
+                <mat-option [value]="'18'" selected class="select-font">18:00:00</mat-option>
+                <mat-option [value]="'19'" selected class="select-font">19:00:00</mat-option>
+                <mat-option [value]="'20'" selected class="select-font">20:00:00</mat-option>
+                <mat-option [value]="'21'" selected class="select-font">21:00:00</mat-option>
+                <mat-option [value]="'22'" selected class="select-font">22:00:00</mat-option>
+                <mat-option [value]="'23'" selected class="select-font">23:00:00</mat-option>
               </mat-select>
             </div>
           </div>
@@ -100,7 +123,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <span class="spanInput">Pnentes*:</span>
+              <span class="spanInput">Ponentes*:</span>
               <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
               type="text" placeholder="Ingresar ponentes" maxlength="500"/>
             </div>
