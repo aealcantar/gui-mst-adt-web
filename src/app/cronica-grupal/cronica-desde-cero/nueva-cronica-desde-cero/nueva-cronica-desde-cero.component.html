@@ -60,34 +60,45 @@
     <form novalidate [formGroup]="editForm" class="formInfo">
       <div class="container seccion">
         <div class="row" >
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <mat-select class="form-control form-control-mat-select" formControlName="servicio" [disableOptionCentering]="true"
+                style="background-position-y: 5px" aria-label="Servicio" (selectionChange)="obtenerGrupoPorServicio()" id="servicio">
+                <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar servicio</mat-option>
+                <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of serviciosEspecialidad">
+                  {{ item.des_especialidad }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Grupo*:</span>
               <mat-select class="form-control form-control-mat-select" formControlName="grupo" [disableOptionCentering]="true"
-                style="background-position-y: 5px" aria-label="Servicio">
-                <mat-option class="select-font" [value]="''">Ingresar grupo</mat-option>
+                style="background-position-y: 5px" aria-label="Grupo" id="grupo">
+                <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar grupo</mat-option>
                 <mat-option class="select-font" [value]="item.cve_grupo_programa" *ngFor="let item of grupos">
                   {{ item.des_grupo_programa }}
                 </mat-option>
               </mat-select>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
               <input class="form-control" formControlName="fecha" id="fecha-cronica-cero" type="text"
-                placeholder="dd/mm/aaaa" maxlength="10">
+                placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Hora*:</span>
               <mat-select class="form-control form-control-mat-select" formControlName="hora" [disableOptionCentering]="true"
-                style="background-position-y: 5px" aria-label="Servicio">
-                <mat-option class="select-font" [value]="''">Ingresar hora</mat-option>
+                placeholder="Seleccionar hora" style="background-position-y: 5px" aria-label="Hora">
                 <mat-option [value]="'00:00:00'" selected class="select-font">00:00:00</mat-option>
                 <mat-option [value]="'01:00:00'" selected class="select-font">01:00:00</mat-option>
                 <mat-option [value]="'02:00:00'" selected class="select-font">02:00:00</mat-option>
@@ -123,11 +134,11 @@
               <div class="radio flex align-items-center">
                 <label class="inline-flex select-font align-items-center relative mr-5">
                   <input type="radio" name="desModalidad" value="Presencial" formControlName="desModalidad"
-                    class="radio-consulta" checked="checked"> Presencial:
+                    class="radio-consulta" checked="checked"> Presencial
                 </label>
                 <label class="inline-flex select-font align-items-center ml-5 relative ">
                   <input type="radio" name="desModalidad" value="A distancia" formControlName="desModalidad"
-                    class="radio-consulta" checked="checked"> A distancia:
+                    class="radio-consulta" checked="checked"> A distancia
                 </label>
               </div>
             </div>
@@ -137,12 +148,12 @@
               <span class="spanInput">Ocasión de servicio*:</span>
               <div class="radio flex align-items-center">
                 <label class="inline-flex select-font align-items-center relative mr-5">
-                  <input type="radio" name="desOcasionServicio" value="Presencial" formControlName="desOcasionServicio"
-                    class="radio-consulta" checked="checked"> Inicial:
+                  <input type="radio" name="desOcasionServicio" value="Inicial" formControlName="desOcasionServicio"
+                    class="radio-consulta" checked="checked"> Inicial
                 </label>
                 <label class="inline-flex select-font align-items-center ml-5 relative ">
-                  <input type="radio" name="desOcasionServicio" value="A distancia" formControlName="desOcasionServicio"
-                    class="radio-consulta" checked="checked"> Seguimiento:
+                  <input type="radio" name="desOcasionServicio" value="Seguimiento" formControlName="desOcasionServicio"
+                    class="radio-consulta" checked="checked"> Seguimiento
                 </label>
               </div>
             </div>

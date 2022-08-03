@@ -12,7 +12,7 @@ import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
-const NUM_PARTICIPANTES: number = 5;
+const NUM_PARTICIPANTES: number = 0;
 
 @Component({
   selector: 'app-nueva-cronica-desde-cero',
@@ -24,6 +24,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
   public cronica!: Cronica;
   public editForm!: FormGroup;
   public grupos: any[] = [];
+  public serviciosEspecialidad: any[] = [];
 
   constructor(
     private router: Router,
@@ -50,21 +51,40 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
 
   initForm(): void {
     this.editForm = this.fb.group({
-      grupo: ["", Validators.required],
+      servicio: [null, Validators.required],
+      grupo: [null, Validators.required],
       fecha: [null, Validators.required],
-      hora: ["", Validators.required],
+      hora: [null, Validators.required],
       descPonentes: [null, Validators.required],
       numParticipantesAsistieron: [null, Validators.required],
       desTecnicaDidactica: [null, Validators.required],
       desMaterialApoyo: [null, Validators.required],
-      desModalidad: [null, Validators.required],
-      desOcasionServicio: [null, Validators.required],
+      desModalidad: ['Presencial', Validators.required],
+      desOcasionServicio: ['Inicial', Validators.required],
       desObjetivosSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       desDesarrolloSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
     });
-    this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
+
+    this.obtenerServicios();
+    this.getNumParticipantes();
+  }
+
+  obtenerServicios() {
+    this.cronicaGrupalService.getCatServicios().toPromise().then(
+      (servicios) => {
+        this.serviciosEspecialidad = servicios;
+        console.log("SERVICIOS: ", this.serviciosEspecialidad);
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse);
+      }
+    );
+  }  
+
+  obtenerGrupoPorServicio() {    
+    this.cronicaGrupalService.getCatGrupo(this.editForm.get('servicio').value).toPromise().then(
       (grupos) => {
         this.grupos = grupos;
       },
@@ -72,8 +92,6 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-
-    this.getNumParticipantes();
   }
 
   getNumParticipantes() {
@@ -126,6 +144,10 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
     $('#content').modal('hide');
   }
 
+  getNombreServicio(cveServicio: number | string) {
+    return this.serviciosEspecialidad.find(g => g.cve_especialidad === cveServicio)?.des_especialidad;
+  }
+
   getNombreGrupo(cveGrupo: number | string) {
     let idGrupoConverted: number;
     if (typeof cveGrupo === 'string') {
@@ -140,8 +162,8 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
     this.cronica = {
       id: null,
       idCalendarioAnual: null,
-      idEspecialidad: 'CS01',
-      desEspecialidad: null,
+      idEspecialidad: this.editForm.get('servicio').value,
+      desEspecialidad: this.getNombreServicio(this.editForm.get('servicio').value),
       idTurno: 1,
       desTurno: null,
       idGrupo: this.editForm.get('grupo')!.value,

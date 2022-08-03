@@ -89,7 +89,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatServicios().toPromise().then(
       (servicios) => {
         this.serviciosEspecialidad = servicios;
-        console.log("SERVICIOS: ", this.serviciosEspecialidad);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -98,7 +97,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatTurnos().toPromise().then(
       (turnos) => {
         this.turnos = turnos;
-        console.log("TURNOS: ", this.turnos);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -107,7 +105,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
       (grupos) => {
         this.grupos = grupos;
-        console.log("GRUPOS: ", this.grupos);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -116,7 +113,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatLugar('15').toPromise().then(
       (lugares) => {
         this.lugares = lugares;
-        console.log("LUGARES: ", this.lugares);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
