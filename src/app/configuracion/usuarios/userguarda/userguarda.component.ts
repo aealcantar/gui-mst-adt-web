@@ -169,7 +169,7 @@ export class UserguardaComponent implements OnInit {
           des_escuela_procedencia: this.userdata.value.escuelaprocd,
           adtc_roles: { cve_rol: this.rolselected },
         };
-        this.userservice.guardaUsuario(data).subscribe({
+        this.userservice.guardaUsuario(data, this._usuario.cveUsuario).subscribe({
           next: (resp: any) => {
             console.log(resp);
             Swal.close();
