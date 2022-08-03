@@ -236,12 +236,14 @@
               <div class="cuadro-resumen" *ngIf="muestraresumen">
                 <div class="txt-resumen">Resumen:</div>
                 <div class="row">
-                  <div class="col-md-4" *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
+                  <ng-container *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
+                  <div class="col-md-4" *ngIf="dato.key !== 'des_abreviada_ubicacion'">
                     <div class="lst-item pull-left">
                       <div class="lbel">{{dato.key}}:</div>
                       <div class="valor">{{dato.value}}</div>
                     </div>
                   </div>
+                </ng-container>
                 </div>
               </div>
 
