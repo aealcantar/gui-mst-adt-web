@@ -12,7 +12,7 @@ import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
-const NUM_PARTICIPANTES: number = 5;
+// const NUM_PARTICIPANTES: number = 0;
 
 @Component({
   selector: 'app-nueva-cronica',
@@ -51,6 +51,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     });
     this.initForm(cronicaParse);
   }
+
 
   ngAfterViewInit(): void {
     $('#calendarCronica').datepicker({
@@ -107,7 +108,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
 
   getNumParticipantes() {
-    // TO DO Implementar servicio para obtener Numero de Participantes 
+    // TO DO Implementar servicio para obtener Numero de Participantes
     // this.cronicaGrupalService.getNumParticipantes(idCita).subscribe((resp: any) => {
     //     if (resp) {
     //       this.editForm.get('numParticipantesAsistieron')?.patchValue(resp.numParticipantes || 0);
@@ -117,7 +118,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     //     console.error(httpErrorResponse);
     //   }
     // );
-    this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
+    this.editForm.get('numParticipantesAsistieron')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
   }
 
   addParticipanteDialog() {
@@ -133,7 +134,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((participantes: Participante[]) => {
       if (participantes && participantes.length > 0) {
         this.listParticipantes = participantes;
-        this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
+        this.editForm.get('numParticipantesAsistieron')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
       }
     });
   }
@@ -186,7 +187,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         timHora: this.cronicaRecibida.timHora,
         desModalidad: this.cronicaRecibida.desModalidad,
         numTotalParticipantes: this.cronicaRecibida.numTotalParticipantes,
-        numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
+        // numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: this.cronicaRecibida.idEstatusCronica,
         desEstatusCronica: this.cronicaRecibida.desEstatusCronica,
         descPonentes: this.editForm.get('descPonentes')!.value,
