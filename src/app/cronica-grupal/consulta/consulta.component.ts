@@ -22,7 +22,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   numitems: number = 15;
   order: string = 'desc';
   columnaId: string = 'fecFechaCorta';
-  cronicaGrupalAsociada = true;
+  // cronicaGrupalAsociada = true;
 
   catalogoEstatus: any[] = ['No impartida', 'Por impartir', 'Impartida'];
 
@@ -59,13 +59,13 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-    this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
-      (cronicasGrupales: any) => {
-        this.cronicasGrupales = [];
-        this.cronicasGrupales = cronicasGrupales;
-        console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
-      }
-    );
+     this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
+       (cronicasGrupales: any) => {
+         this.cronicasGrupales = [];
+        //  this.cronicasGrupales = cronicasGrupales;
+         console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
+       }
+     );
     this.loadCatalogos();
   }
 
@@ -171,14 +171,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   onChangeRadioBoton(value: Event) {
     console.log("ENTRAMOS A RADIOBOTON");
     this.getCronicasGrupales();
-  }
-
-  cronicaAsociada() {
-    this.cronicaGrupalAsociada = true;
-  }
-
-  cronicaNoAsociada() {
-    this.cronicaGrupalAsociada = false;
   }
 
   validateAllDataFull(): boolean {
