@@ -22,6 +22,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   numitems: number = 15;
   order: string = 'desc';
   columnaId: string = 'fecFechaCorta';
+  cronicaGrupalAsociada = true;
 
   catalogoEstatus: any[] = ['No impartida', 'Por impartir', 'Impartida'];
 
@@ -172,6 +173,14 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.getCronicasGrupales();
   }
 
+  cronicaAsociada(){
+    this.cronicaGrupalAsociada = true;
+  }
+
+  cronicaNoAsociada(){
+    this.cronicaGrupalAsociada = false;
+  }
+
   validateAllDataFull(): boolean {
     if (this.servicioSelected !== '' && this.turnoSelected !== ''
       && this.grupoSelected !== '' && this.lugarSelected !== ''
@@ -186,7 +195,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicasGrupales = [];
     let fechaConvertedFormat;
     if(this.fechaSelected) {
-      fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2); 
+      fechaConvertedFormat = this.fechaSelected.substring(6,10) + "-" + this.fechaSelected.substring(3,5) + "-" + this.fechaSelected.substring(0,2);
     }
     this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '' ? this.servicioSelected : '-', this.turnoSelected !== '' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
       (cronicasGrupales: any) => {
@@ -206,7 +215,11 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   addCronica() {
-    this.router.navigate(["nuevaCronica"]);
+    if(this.cronicaGrupalAsociada){
+      this.router.navigate(["nuevaCronica"]);
+    }else{
+      this.router.navigate(["nueva-cronica-cero"]);
+    }
   }
 
   irDetalle(cronicaGrupal: any) {
