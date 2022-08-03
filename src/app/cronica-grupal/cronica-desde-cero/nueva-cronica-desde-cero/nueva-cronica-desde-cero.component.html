@@ -150,27 +150,33 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Ponentes*:</span>
-              <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
+              <input formControlName="descPonentes" class="form-control matricula inputs" id="descPonentes"
               type="text" placeholder="Ingresar ponentes" maxlength="500"/>
             </div>
           </div>
         </div>
 
-        <div class="row" >
+        <div class="row" style="margin-right: -14px;">
           <div class="col-md-4">
-            <span class="spanInput">N&uacute;mero de asistentes*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="numParticipantesAsistieron"
-              placeholder="Ingresar n&uacute;mero de asistentes" type="text" numbersOnly />
+            <div class="form-group">
+              <span class="spanInput">N&uacute;mero de asistentes*:</span>
+              <input class="form-control matricula inputs" id="numParticipantesAsistieron" formControlName="numParticipantesAsistieron"
+                placeholder="Ingresar n&uacute;mero de asistentes" type="text" numbersOnly />
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" maxlength="500"/>
+            <div class="form-group">
+              <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
+              <input class="form-control matricula inputs" id="desTecnicaDidactica" formControlName="desTecnicaDidactica"
+                placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" maxlength="500"/>
+            </div>
           </div>
           <div class="col-md-4">
-            <span class="spanInput">Material apoyo*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar material apoyo" type="text" maxlength="500"/>
+            <div class="form-group">
+              <span class="spanInput">Material apoyo*:</span>
+              <input class="form-control matricula inputs" id="desMaterialApoyo" formControlName="desMaterialApoyo"
+                placeholder="Ingresar material apoyo" type="text" maxlength="500"/>
+            </div>
           </div>
         </div>
       </div>
@@ -214,7 +220,8 @@
 
       <div class="container" style="margin-bottom: 0px; margin-left: 3.62%;">
         <span class="campo-obligatorio"> *Campos obligatorios </span>
-        <button style="width: 170px; border: solid 1px #9d2449; margin-left: -10px !important;" type="button"
+        <button *ngIf="listParticipantes.length === 0" 
+          style="width: 170px; border: solid 1px #9d2449; margin-left: -10px !important;" type="button"
           class="btn btn-primary buttonL" (click)="addParticipanteDialog();">
           Agregar participante
         </button>
