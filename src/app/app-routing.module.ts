@@ -199,13 +199,13 @@ const routes: Routes = [
   {
     path: 'consulta-informe-servicios-profesionales',
     component: ConsultaInformeServiciosProfesionalesComponent,
-    canActivate: [SeguridadRouter]
+    // canActivate: [SeguridadRouter]
 
   },
   {
-    path: 'detalle-informe-servicios-profesionales',
+    path: 'detalle-informe-servicios-profesionales/:id',
     component: DetalleInformeServiciosProfesionalesComponent,
-    canActivate: [SeguridadRouter]
+    // canActivate: [SeguridadRouter]
   },
 
   {

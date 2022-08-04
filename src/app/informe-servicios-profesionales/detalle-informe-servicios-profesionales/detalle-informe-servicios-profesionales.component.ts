@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
 
 @Component({
     selector: 'app-detalle-informe-servicios-profesionales',
@@ -6,6 +7,8 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ['./detalle-informe-servicios-profesionales.component.css']
 })
 export class DetalleInformeServiciosProfesionalesComponent implements OnInit {
+
+    public alert!: AlertInfo;
 
     constructor() { }
 
