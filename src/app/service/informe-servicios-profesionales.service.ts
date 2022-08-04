@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { tap } from 'rxjs/operators'
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,9 +39,7 @@ export class InformeServiciosProfesionalesService {
       idLugar: parseInt(lugar),
       fecha,
     }
-    return this.http.post<any>(`${environment.msmtsServsProfesionales}/searchServiciosProfecionales`, request).pipe(
-      tap(console.log)
-    );
+    return this.http.post<any>(`${environment.msmtsServsProfesionales}/searchServiciosProfecionales`, request)
   }
 
   imprimirPdf(data: any): Observable<Blob> {

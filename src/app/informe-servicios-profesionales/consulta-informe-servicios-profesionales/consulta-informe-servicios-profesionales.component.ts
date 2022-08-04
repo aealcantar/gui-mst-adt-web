@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Router } from "@angular/router";
 import * as moment from "moment";
 
 import { AlertInfo } from "src/app/app-alerts/app-alert.interface";
@@ -67,7 +66,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
   constructor(
     private informeServProfService: InformeServiciosProfesionalesService,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -80,7 +78,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
       searching: false,
     };
     this.cargarCatalogos();
-    // this.informeServProfService.getConsultaServicios().subscribe(this.consultaObserver)
   }
 
   ngAfterViewInit(): void {
@@ -166,11 +163,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         break;
     }
     return data;
-  }
-
-
-  irDetalle(idInformeServicios: string): void {
-    this.router.navigateByUrl(`/detalle-informe-servicios-profesionales/` + idInformeServicios)
   }
 
   imprimirPdf(): void {
