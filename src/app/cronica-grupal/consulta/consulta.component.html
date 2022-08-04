@@ -89,11 +89,13 @@
           <div class="radio flex align-items-center">
             <label class="inline-flex select-font align-items-center relative mr-5">
               <input type="radio" name="radio-01" value="Si" [(ngModel)]="radioBtnSelected"
-                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"> Sí
+                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"
+                [disabled]="!servicioSelected || !grupoSelected"> Sí
             </label>
             <label class="inline-flex select-font align-items-center ml-5 relative ">
               <input type="radio" name="radio-01" value="No" [(ngModel)]="radioBtnSelected"
-                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"> No
+                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"
+                [disabled]="!servicioSelected || !grupoSelected"> No
             </label>
           </div>
         </div>

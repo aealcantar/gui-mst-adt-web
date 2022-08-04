@@ -165,7 +165,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   onChangeRadioBoton(value: Event) {
-    console.log("ENTRAMOS A RADIOBOTON");
+    console.log("ENTRAMOS A RADIOBOTON");    
     this.getCronicasGrupales();
   }
 
@@ -180,6 +180,11 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   getCronicasGrupales() {
     console.log("ENTRAMOS");
+
+    if (!this.servicioSelected || !this.grupoSelected) {
+      this.radioBtnSelected = undefined;
+    }
+
     this.cronicasGrupales = [];
     let fechaConvertedFormat;
     if (this.fechaSelected) {
