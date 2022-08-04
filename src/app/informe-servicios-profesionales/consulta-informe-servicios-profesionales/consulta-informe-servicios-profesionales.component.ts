@@ -173,6 +173,26 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     this.router.navigateByUrl(`/detalle-informe-servicios-profesionales/` + idInformeServicios)
   }
 
+  imprimirPdf(): void {
+    const data = {
+      "responsable": "987654321",
+      "idTurno": 1,
+      "especialidad": 1,
+      "idLugar": 207,
+      "fecha":"2022-08-01"
+  }
+    this.informeServProfService.imprimirPdf(data).subscribe({
+      next: (response) => {
+        var file = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(file);
+        window.open(url);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error(error)
+      }
+    })
+  }
+
   cargarCatalogos(): void {
     this.informeServProfService.getCatTurnos().subscribe(this.turnosObserver);
     this.informeServProfService.getCatServicios().subscribe(this.serviciosObserver);

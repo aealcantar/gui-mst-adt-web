@@ -141,7 +141,7 @@
                         <tbody>
                             <tr
                                 *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
-                                <td class="bordesTablaDetalle" (click)="irDetalle(item.id);">{{ item.id }}</td>
+                                <td class="bordesTablaDetalle" (click)="imprimirPdf();">{{ item.id }}</td>
                                 <td class="bordesTabla">
                                     {{item.nombrePaciente}}
                                 </td>

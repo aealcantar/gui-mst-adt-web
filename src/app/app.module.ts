@@ -102,7 +102,6 @@ import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-cer
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
 import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
-import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component';
 import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
 
 registerLocaleData('es');
@@ -169,7 +168,6 @@ registerLocaleData('es');
     ConsultaCertificadoDefuncionComponent,
     ConsultaMpAdministracionComponent,
     ConsultaInformeServiciosProfesionalesComponent,
-    DetalleInformeServiciosProfesionalesComponent,
     ConsultaDonacionSangreAdministracionComponent,
   ],
   imports: [
