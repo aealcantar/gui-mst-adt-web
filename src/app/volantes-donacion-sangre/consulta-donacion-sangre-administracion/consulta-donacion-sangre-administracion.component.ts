@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { VolantesDonacion } from 'src/app/models/volantes-donacion.model';
+import { HttpErrorResponse } from '@angular/common/http';
 declare var $: any;
 
 @Component({
@@ -16,6 +18,8 @@ declare var $: any;
   providers: [DatePipe]
 })
 export class ConsultaDonacionSangreAdministracionComponent implements OnInit, AfterViewInit {
+  idVolanteDonacion: string = "";
+  volantesDonacion!: VolantesDonacion;
   pacienteSeleccionado!: pacienteSeleccionado;
   resultadoTotal: number = 0;
   errorBusqueda: boolean = false;
@@ -47,7 +51,8 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
     private router: Router,
     private volantesDonacionService: VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private volantesService: VolantesDonacionService,
   ) { }
 
   ngAfterContentInit(): void {
@@ -190,21 +195,39 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
               this.sortBy(this.columnaId, this.order, 'fecha');
             }
           });
-
         }
-
       }
-
     }
   }
 
   //redirecciona al detalle
   irDetalle(idVolanteDonacionSangre: string) {
     let verDetalle = "true";
-    let params = { idVolanteDonacionSangre,verDetalle };    
-    this.router.navigate(["/detalle-volante-donacion-sangre/"+idVolanteDonacionSangre], { queryParams: params, skipLocationChange: true });
-  }
+      let params = { idVolanteDonacionSangre,verDetalle };
+      this.router.navigate(["/detalle-volante-donacion-sangre/"+idVolanteDonacionSangre], { queryParams: params, skipLocationChange: true });
 
+    this.volantesDonacionService.getDetatelleVolanteDonacion(idVolanteDonacionSangre).subscribe(
+      (res: any) => {
+        console.log(res)
+        try {
+          let estatus = res.status;
+          if (estatus == 'OK') {
+            try {
+              idVolanteDonacionSangre = res.datosVolantesDonacion;
+            } catch (error) {
+              console.error(error);
+            }
+
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
 
   //ordenamiento
   sortBy(columnaId: string, order: string, type: string) {
@@ -282,6 +305,10 @@ export class ConsultaDonacionSangreAdministracionComponent implements OnInit, Af
       this.tipoSangreSeleccionada = "o+";
     } else if (valor == "6") {
       this.tipoSangreSeleccionada = "o-";
+    } else if (valor == "7") {
+      this.tipoSangreSeleccionada = "ab+";
+    } else if (valor == "8"){
+      this.tipoSangreSeleccionada = "ab-";
     } else {
       this.tipoSangreSeleccionada = "";
     }

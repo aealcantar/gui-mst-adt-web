@@ -134,6 +134,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((participantes: Participante[]) => {
       if (participantes && participantes.length > 0) {
         this.listParticipantes = participantes;
+        // this.listParticipantes = this.listParticipantes.concat(participantes);
         this.editForm.get('numParticipantesAsistieron')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
       }
     });
