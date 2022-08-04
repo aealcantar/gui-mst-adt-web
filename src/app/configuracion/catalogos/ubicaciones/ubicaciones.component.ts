@@ -150,7 +150,6 @@ export class UbicacionesComponent implements OnInit {
 
         this.totRegistros = this.lstUbicaciones.length;
         console.log(this.totRegistros);
-
         setTimeout(() => {
           table = $('#tblusuarios').DataTable();
           this.dtOptions.pageLength = this.numitems;
@@ -426,8 +425,14 @@ export class UbicacionesComponent implements OnInit {
 
     dialogo1.afterClosed().subscribe(art => {
       console.log("afterClosed: ", art);
-      //if (art != undefined)
-      this.getAllByUser(this.idUser);
+      if (!art['iscancel']){
+        console.log('Aceptar Carga');
+        this.getAllByUser(this.idUser);
+      }else if(art['statusCarga']){
+        this.getAllByUser(this.idUser);
+      }
+      
+
     });
 
     dialogo1.componentInstance.onAlert.subscribe(dats => {

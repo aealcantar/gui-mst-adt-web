@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -74,7 +74,8 @@ export class HorariosComponent implements OnInit {
     private activerouter: ActivatedRoute,
     private router: Router,
     private http: HttpClient, 
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private changeDetector: ChangeDetectorRef
     ) {
       this.authService.userLogged$.next(true);
       this.authService.isAuthenticatedObs$.next(true);
@@ -83,7 +84,7 @@ export class HorariosComponent implements OnInit {
       this.obtieneDia(this.diaNb)
 
 
-      console.log("dia: ", this.diaNb);
+      // console.log("dia: ", this.diaNb);
       this.authService.setProjectObs("Agenda Digital Transversal");
       this.turnoNuevo = new HorarioTurno();
 
@@ -124,6 +125,8 @@ export class HorariosComponent implements OnInit {
 
     this.horarioSeleccionado = this.diaSeleccionado.horarios[fila];
     this.turnoSeleccionado = this.horarioSeleccionado.turno;
+    // console.log('horario',this.horarioSeleccionado,'turno',this.turnoSeleccionado,'lista horarios', this.diaSeleccionado.horarios);
+    this.changeDetector.detectChanges();
     if (this.horarioSeleccionado.estatus.cveIdEstatus == 6) {
       this.blnHabil = false;
     } else {
@@ -150,9 +153,9 @@ export class HorariosComponent implements OnInit {
         this.estatusBloqueadoSeleccionado = false;
       }
 
-      console.log("horario: ", this.horarioSeleccionado);
+      /* console.log("horario: ", this.horarioSeleccionado);
       console.log("estatusBloqueadoSeleccionado: ", this.estatusBloqueadoSeleccionado);
-      console.log("estatusActivoSeleccionado: ", this.estatusActivoSeleccionado);
+      console.log("estatusActivoSeleccionado: ", this.estatusActivoSeleccionado); */
 
       Swal.close();
     } else {
@@ -173,7 +176,7 @@ export class HorariosComponent implements OnInit {
     this.router.navigate(['/catalogos/ConfiguracionUbicaciones/']);
   }
   async receiveMessage(evento: number) {
-    console.log("recibimos el dia a consultar " + evento);
+    // console.log("recibimos el dia a consultar " + evento);
     this.diaNb = evento;
     this.obtieneDia(evento)
     this.obtenerHorarioporUbicacionDia(this.cveUbicacion, this.dia);
@@ -197,9 +200,10 @@ export class HorariosComponent implements OnInit {
               data.horaFinal = data.horaFinal.trim();
             });
 
-            console.log("horarios: ", this.diaSeleccionado.horarios);
+            // console.log("horarios: ", this.diaSeleccionado.horarios);
           } else {
             this.agregarHorarioBtn = true;
+            this.blnHabil = true;
             this.lblBtnHabilitar = 'Habilitar día';
             this.lblHabilitar = 'habilitar';
             
@@ -209,13 +213,17 @@ export class HorariosComponent implements OnInit {
               inhabil: true
             };
             if(update){
+              console.log('update vacio');
               this.validarDia();
+            }else{//se verifica si hay horarios en la ubicación si no es para habilitar y deshabilitar
+              this.ubicacionService.getHorariosUbicacion(cveUbicacion).subscribe((resp: any) =>{
+                if(resp.code == 204){
+                  this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
+                }
+              })
+
             }
-            this.ubicacionService.getHorariosUbicacion(cveUbicacion).subscribe((resp: any) =>{
-              if(resp.code == 204){
-                this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
-              }
-            })
+            
             
           }
           Swal.close();
@@ -258,7 +266,7 @@ export class HorariosComponent implements OnInit {
     this.msjLoading("Cargando horarios...");
     this.ubicacionService.getHorariosByIdUbicacion(cveUbicacion, dia).subscribe((resp: any) => {
       this.diaSeleccionado.horarios = resp.data;
-      console.log(this.diaSeleccionado.horarios);
+      // console.log(this.diaSeleccionado.horarios);
       switch (resp.code) {
         case 200:
           if (resp.data.length > 0) {
@@ -267,7 +275,7 @@ export class HorariosComponent implements OnInit {
               data.horaInicial = data.horaInicial.trim();
               data.horaFinal = data.horaFinal.trim();
             });
-            console.log("horarios: ", this.diaSeleccionado.horarios);
+            // console.log("horarios: ", this.diaSeleccionado.horarios);
           }
           this.validarDia()//se valida, existan horarios o no, al actualizar el estatus
           Swal.close();
@@ -321,14 +329,14 @@ export class HorariosComponent implements OnInit {
         this.lblBtnHabilitar = 'Habilitar día';
         this.lblHabilitar = 'habilitar';
         this.agregarHorarioBtn = true;
-        console.log('cambiar boton habilitado');
+        // console.log('cambiar boton habilitado');
 
       } else {
         this.blnHabil = false;
         this.lblBtnHabilitar = 'Inhabilitar día';
         this.lblHabilitar = 'inhabilitar';
         this.agregarHorarioBtn = false;
-        console.log('cambiar boton Deshabilitado');
+        // console.log('cambiar boton Deshabilitado');
       }
 
     }
@@ -338,13 +346,13 @@ export class HorariosComponent implements OnInit {
       dia: this.diaNb + 1,
       inhabil: this.blnHabil
     };
-    console.log('dia estado', this.diainhabil);
+    // console.log('dia estado', this.diainhabil);
 
   }
 
   validarEstatusDia(): string{
     let result = this.diaSeleccionado.horarios.find(horario => horario.estatus.cveClave == "DIA_DESHABILITADO");
-    console.log({ result });
+    // console.log({ result });
     return result ? "DIA_HABILITADO" : "DIA_DESHABILITADO"
   }
 
@@ -355,14 +363,13 @@ export class HorariosComponent implements OnInit {
     this.request.idUbicacion = Number(this.cveUbicacion);
     this.request.dia = this.semana[this.diaNb];
     this.request.estatus = this.validarEstatusDia(); 
-    console.log('actualización', this.request);
+    // console.log('actualización', this.request);
 
     this.horarioService.modificarEstatusDia(this.request).subscribe((resp) => {
-      console.log('respuesta update', resp);
+      // console.log('respuesta update', resp);
       switch (resp.body.estatus) {
         case true:
 
-          console.log("pintar alerta de exito", resp.body.mensaje);
           this.mostrarMensaje(this._Mensajes.ALERT_SUCCESS, resp.body.mensaje, this._Mensajes.EXITO);
           // console.log('dia',this.dia);
           // this.obtenerHorarioporDia(this.cveUbicacion, this.dia);
@@ -410,7 +417,7 @@ export class HorariosComponent implements OnInit {
     this.lstHorarioInicial = new Array();
     this.horaInicial.setHours(this.HORA_INICIO);
     this.horaInicial.setMinutes(0);
-    console.log(this.horaInicial);
+    // console.log(this.horaInicial);
     let tiempo = 0;
     let LIMITE = 0;
     if(this.esConsultorio == 1){
@@ -490,49 +497,57 @@ export class HorariosComponent implements OnInit {
     let horarioAux: Horario;
     let aux: any;
     let tiempo: number;
-    if (this.blnNuevo) {
-      // console.log('horario nuevo');
-      horarioAux = this.horarioNuevo;
-      aux = this.horarioNuevo.horaInicial.split(':');
-      tiempo = Number(this.horarioNuevo.duracion);
-    } else {
-      // console.log('horario editado');
-      horarioAux = this.horarioSeleccionado;
-      aux = this.horarioSeleccionado.horaInicial.split(':');
-      tiempo = Number(this.horarioSeleccionado.duracion);
-    }
+    if(this.horarioNuevo.horaInicial || this.horarioSeleccionado.horaInicial){//si no hay un horario inicial, no calcula el horario final
+      
 
-    if (horarioAux.duracion) {
-      this.setHoraFinal(horarioAux.duracion, aux, editado);
-      // console.log('con duración');
-      this.horaFinal = new Date();
-
-      this.horaFinal.setHours(Number(aux[0]));
-      this.horaFinal.setMinutes(Number(aux[1]));
-
-      let hora: string = this.horaFinal.getHours() + ":0" + this.horaFinal.getMinutes();
-
-      for (let i = 1; i <= 40; i++) {
-        this.horaFinal.setMinutes(this.horaFinal.getMinutes() + tiempo);
-        if (this.horaFinal.getHours() >= Number(aux[0]) && this.horaFinal.getHours() < this.HORA_FIN) {
-
-
-          if (this.horaFinal.getHours() < 10) {
-            hora = "0" + this.horaFinal.getHours() + ":";
+      if (this.blnNuevo) {
+        // console.log('horario nuevo');
+        horarioAux = this.horarioNuevo;
+        aux = this.horarioNuevo.horaInicial.split(':');
+        tiempo = Number(this.horarioNuevo.duracion);
+      } else {
+        // console.log('horario editado');
+        horarioAux = this.horarioSeleccionado;
+        aux = this.horarioSeleccionado.horaInicial.split(':');
+        tiempo = Number(this.horarioSeleccionado.duracion);
+      }
+      if (horarioAux.duracion) {
+        this.setHoraFinal(horarioAux.duracion, aux, editado);
+        // console.log('con duración');
+        this.horaFinal = new Date();
+  
+        this.horaFinal.setHours(Number(aux[0]));
+        this.horaFinal.setMinutes(Number(aux[1]));
+  
+        let hora: string = this.horaFinal.getHours() + ":0" + this.horaFinal.getMinutes();
+  
+        for (let i = 1; i <= 40; i++) {
+          this.horaFinal.setMinutes(this.horaFinal.getMinutes() + tiempo);
+          if (this.horaFinal.getHours() >= Number(aux[0]) && this.horaFinal.getHours() < this.HORA_FIN) {
+  
+  
+            if (this.horaFinal.getHours() < 10) {
+              hora = "0" + this.horaFinal.getHours() + ":";
+            } else {
+              hora = this.horaFinal.getHours() + ":";
+            }
+            if (this.horaFinal.getMinutes() < 10) {
+              hora = hora + '0' + this.horaFinal.getMinutes();
+            } else {
+              hora = hora + this.horaFinal.getMinutes();
+            }
+            this.lstHorarioFinal.push(" " + hora);
           } else {
-            hora = this.horaFinal.getHours() + ":";
+            break;
           }
-          if (this.horaFinal.getMinutes() < 10) {
-            hora = hora + '0' + this.horaFinal.getMinutes();
-          } else {
-            hora = hora + this.horaFinal.getMinutes();
-          }
-          this.lstHorarioFinal.push(" " + hora);
-        } else {
-          break;
+          // console.log(this.lstHorarioFinal);
         }
       }
+
     }
+    
+
+    
     Swal.close();
   }
 
@@ -543,11 +558,11 @@ export class HorariosComponent implements OnInit {
     let fechaFin = new Date();
     fechaFin.setTime(fechaInicio.getTime() + (duracion * 60 * 1000));
     if (editado) {
-      this.horarioSeleccionado.horaFinal = fechaFin.getHours() + ":" + this.addZero(fechaFin.getMinutes());
-      // console.log('hora final:',this.horarioSeleccionado.horaFinal);
+      this.horarioSeleccionado.horaFinal = this.addZero(fechaFin.getHours()) + ":" + this.addZero(fechaFin.getMinutes());
+      console.log('hora final:',this.horarioSeleccionado.horaFinal);
     } else {
-      this.horarioNuevo.horaFinal = fechaFin.getHours() + ":" + this.addZero(fechaFin.getMinutes());
-      // console.log('hora final:',this.horarioNuevo.horaFinal);
+      this.horarioNuevo.horaFinal = this.addZero(fechaFin.getHours()) + ":" + this.addZero(fechaFin.getMinutes());
+      console.log('hora final:',this.horarioNuevo.horaFinal);
     }
 
   }
@@ -594,7 +609,7 @@ export class HorariosComponent implements OnInit {
             this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.message, this._Mensajes.ERROR);
             break;
         }
-        console.log(resp);
+        // console.log(resp);
 
         $('#horario').modal('hide')
         Swal.close();
@@ -630,7 +645,7 @@ export class HorariosComponent implements OnInit {
             this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
             break;
         }
-        console.log(resp);
+        // console.log(resp);
 
         $('#content').modal('hide')
         Swal.close();
@@ -702,7 +717,6 @@ export class HorariosComponent implements OnInit {
   }
 
   btnModalInhabilitar() {
-
     //servicio de estatus
     // console.log('modal deshab, estatus ',this.blnHabil);
     if(!this.blnHabil){
@@ -721,19 +735,6 @@ export class HorariosComponent implements OnInit {
             })
             $('#inhabilitar').modal('show')
           }else{
-            /* let error: HttpErrorResponse = {
-              status: resp.status,
-              message: resp.body.mensaje,
-              name: 'HttpErrorResponse',
-              error: undefined,
-              ok: false,
-              headers: new HttpHeaders,
-              statusText: '',
-              url: '',
-              type: HttpEventType.ResponseHeader
-            }; */
-            
-            // this.mensajesError(error, resp.body.mensaje);
             this.problemaCita = resp.body.mensaje;
             $('#problemaCita').modal({
               keyboard: false,
@@ -746,7 +747,11 @@ export class HorariosComponent implements OnInit {
           this.mostrarMensaje(this._Mensajes.ALERT_DANGER, resp.body.mensaje, this._Mensajes.ERROR);
         }
         
-      })
+      },(error: HttpErrorResponse) => {
+        $('#inhabilitar').modal('hide')
+        this.mensajesError(error, this._Mensajes.MSJ_ERROR_CONEXION_HORARIO);
+        Swal.close();
+      });
     }else{
       $('#inhabilitar').modal({
         keyboard: false,
@@ -755,7 +760,6 @@ export class HorariosComponent implements OnInit {
       $('#inhabilitar').modal('show')
 
     }
-
     //console.log('botón habilitar');
   }
 
@@ -802,6 +806,8 @@ export class HorariosComponent implements OnInit {
     this.lstHorariosNuevos = new HorarioNuevoRequest();
     this.horarioNuevo = new Horario();
     this.horarioNuevo.turno = new HorarioTurno;
+    // console.log('horario',this.horarioSeleccionado,'turno',this.turnoSeleccionado,'lista horarios', this.diaSeleccionado.horarios);
+    this.changeDetector.detectChanges();
     $('#content').modal({
       keyboard: false,
       backdrop: 'static'
@@ -815,7 +821,7 @@ export class HorariosComponent implements OnInit {
       this.mostrarMensaje(this._Mensajes.ALERT_DANGER, "Seleccione un Turno", this._Mensajes.ERROR);
 
     }
-    console.log(this.turnoNuevo)
+    // console.log(this.turnoNuevo)
   }
 
   cambiarTurno() {
@@ -842,8 +848,8 @@ export class HorariosComponent implements OnInit {
 
 
   cambiarTurnoAdd() {
-    console.log(this.horarioNuevo);
-    console.log(this.turnoNuevo);
+    // console.log(this.horarioNuevo);
+    // console.log(this.turnoNuevo);
 
     if (this.turnoNuevo.des_turno) {
       this.turnoNuevo = this.lstTurnos.find(e => e.des_turno == this.turnoNuevo.des_turno);
@@ -852,18 +858,18 @@ export class HorariosComponent implements OnInit {
 
     }
 
-    console.log(this.turnoNuevo);
+    // console.log(this.turnoNuevo);
   }
   btnNuevoHorario() {
     this.lstHorariosNuevos.lstHorarios = new Array();
-    console.log("nuevo horario: ", this.horarioNuevo);
+    /* console.log("nuevo horario: ", this.horarioNuevo);
     console.log("nuevo dia1: ", this.dia1);
     console.log("nuevo dia2: ", this.dia2);
     console.log("nuevo dia3: ", this.dia3);
     console.log("nuevo dia4: ", this.dia4);
     console.log("nuevo dia5: ", this.dia5);
     console.log("nuevo dia6: ", this.dia6);
-    console.log("nuevo dia7: ", this.dia7);
+    console.log("nuevo dia7: ", this.dia7); */
 
     this.horarioNuevo.turno = this.turnoNuevo;
     this.obtenerTurnoNuevo();
@@ -965,7 +971,7 @@ export class HorariosComponent implements OnInit {
 
       this.lstHorariosNuevos.lstHorarios.push(h);
     }
-    console.log("lstHorariosNuevos: ", this.lstHorariosNuevos);
+    // console.log("lstHorariosNuevos: ", this.lstHorariosNuevos);
     if (this.lstHorariosNuevos.lstHorarios.length != 0
       && (
         this.dia1 || this.dia2 || this.dia3 || this.dia4 || this.dia5 || this.dia6 || this.dia7
@@ -984,6 +990,7 @@ export class HorariosComponent implements OnInit {
   }
 
   btnCancelarHorario() {
+    this.obtenerHorarioporUbicacionDia(this.cveUbicacion, this.dia);
 
     $('#horario').modal('hide')
 

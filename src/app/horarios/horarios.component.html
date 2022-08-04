@@ -1,10 +1,9 @@
 <app-alerta [objAlerta]="mensaje"></app-alerta>
 <!-- <div class="container-fluid"> -->
-
   <!-- Modal -->
   <div class="modal fade" id="content">
-    <div class="modal-dialog">
-      <div class="modal-content modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered width-modal-horarios">
+      <div class="modal-content">
         <div class="modal-header">
           <img class="center" src="../../assets/images/frame_reloj.png">
           <h5 class="modal-title" id="agregarHorario" >Agregar horario</h5>
@@ -78,21 +77,6 @@
               </small>
             </div>
 
-            <!-- <div class="form-group lstcampos pull-left">
-              <label for="horafin" class="titulo">Horario final de atención
-                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horafin.errors}">*
-                </span>:
-              </label>
-              <select class="form-control captura" id="horafin" name="horafin" formControlName="horafin"
-              [(ngModel)]="horarioNuevo.horaFinal" 
-              [ngClass]="{'form-control-error': formfields.controls.horafin.errors}" required>
-                <option value="" disabled selected hidden>Seleccionar horario</option>
-                <option [value]="objeto" *ngFor="let objeto of lstHorarioFinal">{{objeto}}</option>
-              </select>
-              <small *ngIf="formfields.controls.horafin.errors" class="form-text form-text-error">
-                {{formfields.controls.horafin.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-              </small>
-            </div> -->
             <div class="form-group lstcampos pull-left">
               <label for="horafin" class="titulo">Horario final de atención:
               </label>
@@ -130,8 +114,8 @@
   </div>
   <!-- Modal Editar horario -->
   <div class="modal fade" id="horario">
-    <div class="modal-dialog">
-      <div class="modal-content modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered width-modal-horarios">
+      <div class="modal-content">
         <div class="modal-header">
           <img class="center" src="../../assets/images/frame_reloj.png">
           <h5 class="modal-title" id="editarHorario">Editar horario</h5>
@@ -173,24 +157,6 @@
                 {{formfields.controls.duracion.errors?.required? "Campo obligatorio" : "Formato inválido"}}
               </small>
             </div>
-
-            <!-- <div class="form-group lstcampos pull-left">
-              <label for="horafin" class="titulo">Horario final de atención
-                <span class="form-text" [ngClass]="{'form-text-error': formfields.controls.horafin.errors}">*
-                </span>:
-              </label>
-              <select class="form-control captura" id="horafin" name="horafin" formControlName="horafin"
-
-                [ngClass]="{'form-control-error': formfields.controls.horafin.errors}" required
-                [(ngModel)]="horarioSeleccionado.horaFinal" aria-placeholder="Seleccionar horario">
-
-                <option ng-value="objeto"   *ngFor="let objeto of lstHorarioFinal">{{objeto}}
-                </option>
-              </select>
-              <small *ngIf="formfields.controls.horafin.errors" class="form-text form-text-error">
-                {{formfields.controls.horafin.errors?.required? "Campo obligatorio" : "Formato inválido"}}
-              </small>
-            </div> -->
 
             <div class="form-group lstcampos pull-left">
               <label for="horafin" class="titulo">Horario final de atención:
