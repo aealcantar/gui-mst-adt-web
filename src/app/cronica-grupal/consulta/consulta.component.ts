@@ -62,6 +62,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
      this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
        (cronicasGrupales: any) => {
          this.cronicasGrupales = [];
+         this.cronicasGrupales.length = 0;
         //  this.cronicasGrupales = cronicasGrupales;
          console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
        }
@@ -165,7 +166,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   onChangeRadioBoton(value: Event) {
-    console.log("ENTRAMOS A RADIOBOTON");    
+    console.log("ENTRAMOS A RADIOBOTON");
     this.getCronicasGrupales();
   }
 
