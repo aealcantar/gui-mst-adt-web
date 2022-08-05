@@ -56,7 +56,6 @@ import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/c
 
 // informe servicios profesionales
 import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component'
-import { DetalleInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/detalle-informe-servicios-profesionales/detalle-informe-servicios-profesionales.component'
 // import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
 
 const routes: Routes = [
@@ -231,12 +230,6 @@ const routes: Routes = [
     component: ConsultaInformeServiciosProfesionalesComponent,
     canActivate: [SeguridadRouter],
   },
-  {
-    path: 'detalle-informe-servicios-profesionales',
-    component: DetalleInformeServiciosProfesionalesComponent,
-    canActivate: [SeguridadRouter],
-  },
-
   {
     path: 'catalogos',
     component: CatalogosComponent,
