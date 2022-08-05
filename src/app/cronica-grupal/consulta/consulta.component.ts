@@ -59,14 +59,14 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-     this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
-       (cronicasGrupales: any) => {
-         this.cronicasGrupales = [];
-         this.cronicasGrupales.length = 0;
+    //  this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
+    //    (cronicasGrupales: any) => {
+    //      this.cronicasGrupales = [];
+        //  this.cronicasGrupales.length = 0;
         //  this.cronicasGrupales = cronicasGrupales;
-         console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
-       }
-     );
+    //      console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
+    //    }
+    //  );
     this.loadCatalogos();
   }
 

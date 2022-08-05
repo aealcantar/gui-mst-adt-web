@@ -171,7 +171,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">N&uacute;mero de asistentes*:</span>
-              <input class="form-control matricula inputs" id="numParticipantesAsistieron" formControlName="numParticipantesAsistieron"
+              <input class="form-control matricula inputs" id="numTotalParticipantes" formControlName="numTotalParticipantes"
                 placeholder="Ingresar n&uacute;mero de asistentes" type="text" numbersOnly />
             </div>
           </div>
@@ -231,7 +231,7 @@
 
       <div class="container" style="margin-bottom: 0px; margin-left: 3.62%;">
         <span class="campo-obligatorio"> *Campos obligatorios </span>
-        <button *ngIf="listParticipantes.length === 0" 
+        <button *ngIf="listParticipantes.length === 0"
           style="width: 170px; border: solid 1px #9d2449; margin-left: -10px !important;" type="button"
           class="btn btn-primary buttonL" (click)="addParticipanteDialog();">
           Agregar participante

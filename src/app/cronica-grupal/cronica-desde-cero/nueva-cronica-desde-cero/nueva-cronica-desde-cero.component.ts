@@ -56,7 +56,8 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       fecha: [null, Validators.required],
       hora: [null, Validators.required],
       descPonentes: [null, Validators.required],
-      numParticipantesAsistieron: [null, Validators.required],
+      numTotalParticipantes: [null, Validators.required],
+      // numParticipantesAsistieron: [null, Validators.required],
       desTecnicaDidactica: [null, Validators.required],
       desMaterialApoyo: [null, Validators.required],
       desModalidad: ['Presencial', Validators.required],
@@ -81,9 +82,9 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-  }  
+  }
 
-  obtenerGrupoPorServicio() {    
+  obtenerGrupoPorServicio() {
     this.cronicaGrupalService.getCatGrupo(this.editForm.get('servicio').value).toPromise().then(
       (grupos) => {
         this.grupos = grupos;
@@ -95,7 +96,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
   }
 
   getNumParticipantes() {
-    // TO DO Implementar servicio para obtener Numero de Participantes 
+    // TO DO Implementar servicio para obtener Numero de Participantes
     // this.cronicaGrupalService.getNumParticipantes(idCita).subscribe((resp: any) => {
     //     if (resp) {
     //       this.editForm.get('numParticipantesAsistieron')?.patchValue(resp.numParticipantes || 0);
@@ -105,7 +106,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
     //     console.error(httpErrorResponse);
     //   }
     // );
-    this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
+    this.editForm.get('numTotalParticipantes')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
   }
 
   addParticipanteDialog() {
@@ -121,7 +122,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((participantes: Participante[]) => {
       if (participantes && participantes.length > 0) {
         this.listParticipantes = participantes;
-        this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
+        this.editForm.get('numTotalParticipantes')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
       }
     });
   }
@@ -175,7 +176,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       timHora: this.editForm.get('hora')!.value,
       desModalidad: this.editForm.get('desModalidad')!.value,
       desOcasionServicio: this.editForm.get('desOcasionServicio')!.value,
-      numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
+      numTotalParticipantes: this.editForm.get('numTotalParticipantes')!.value,
       // numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
       idEstatusCronica: 1,
       desEstatusCronica: null,
@@ -189,7 +190,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
     }
 
     console.log(this.cronica);
-    
+
 
     this.editForm.markAllAsTouched();
     if (this.editForm.valid) {
