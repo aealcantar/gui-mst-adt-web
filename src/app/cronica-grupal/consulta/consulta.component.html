@@ -90,12 +90,12 @@
             <label class="inline-flex select-font align-items-center relative mr-5">
               <input type="radio" name="radio-01" value="Si" [(ngModel)]="radioBtnSelected"
                 (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"
-                [disabled]="cronicasGrupales.length <= 1">  Sí
+                [disabled]="!formularioValido">  Sí
             </label>
             <label class="inline-flex select-font align-items-center ml-5 relative ">
               <input type="radio" name="radio-01" value="No" [(ngModel)]="radioBtnSelected"
                 (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"
-                [disabled]="cronicasGrupales.length  <= 1"> No
+                [disabled]="!formularioValido"> No
             </label>
           </div>
         </div>

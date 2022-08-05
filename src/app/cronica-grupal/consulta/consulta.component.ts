@@ -39,6 +39,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   cronicasGrupales: any[] = [];
   alert!: AlertInfo;
+  formularioValido: boolean = false;
 
   constructor(
     private router: Router,
@@ -62,8 +63,8 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     //  this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
     //    (cronicasGrupales: any) => {
     //      this.cronicasGrupales = [];
-        //  this.cronicasGrupales.length = 0;
-        //  this.cronicasGrupales = cronicasGrupales;
+    //  this.cronicasGrupales.length = 0;
+    //  this.cronicasGrupales = cronicasGrupales;
     //      console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
     //    }
     //  );
@@ -78,8 +79,14 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
           this.fechaSelected = date.replaceAll('/', '-');
           // console.log("date onSelect: ", date);
           setTimeout(() => {
-            this.getCronicasGrupales()
+            this.getCronicasGrupales();
           }, 0)
+        }
+      },
+      onClose: (date: any) => {
+        if (!date) {
+          this.fechaSelected = null;
+          this.getCronicasGrupales();
         }
       }
     });
@@ -123,12 +130,10 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Servicio
   onChangeServicio() {
-    console.log("ENTRAMOS A SERVICIO");
     //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
     this.cronicaGrupalService.getCatGrupo(this.servicioSelected).subscribe(
       (grupos) => {
         this.grupos = grupos;
-        console.log("GRUPOS BY SERVICIO: ", this.turnos);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -138,7 +143,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatLugar(this.servicioSelected).subscribe(
       (lugares) => {
         this.lugares = lugares;
-        console.log("LUGARES BY SERVICIO: ", this.turnos);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -149,63 +153,68 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Turno
   onChangeTurno() {
-    console.log("ENTRAMOS A TURNO");
     this.getCronicasGrupales();
   }
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Grupo
   onChangeGrupo() {
-    console.log("ENTRAMOS A GRUPO");
     this.getCronicasGrupales();
   }
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Lugar
   onChangeLugar() {
-    console.log("ENTRAMOS A LUGAR");
     this.getCronicasGrupales();
   }
 
   onChangeRadioBoton(value: Event) {
-    console.log("ENTRAMOS A RADIOBOTON");
     this.getCronicasGrupales();
   }
 
-  validateAllDataFull(): boolean {
-    if (this.servicioSelected !== '' && this.turnoSelected !== ''
-      && this.grupoSelected !== '' && this.lugarSelected !== ''
-      && this.fechaSelected !== null && this.radioBtnSelected) {
+  // validateAllDataFull(): boolean {
+  //   if (this.servicioSelected !== '' && this.turnoSelected !== ''
+  //     && this.grupoSelected !== '' && this.lugarSelected !== ''
+  //     && this.fechaSelected !== null && this.radioBtnSelected) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  validarFormulario(): boolean {
+    if (this.servicioSelected ||
+      this.turnoSelected ||
+      this.grupoSelected ||
+      this.lugarSelected ||
+      this.fechaSelected
+    ) {
       return true;
     }
     return false;
   }
 
   getCronicasGrupales() {
-    console.log("ENTRAMOS");
-
-    if (!this.servicioSelected || !this.grupoSelected) {
+    this.formularioValido = this.validarFormulario();    
+    this.cronicasGrupales = [];
+    if (this.formularioValido) {
+      let fechaConvertedFormat;
+      if (this.fechaSelected) {
+        fechaConvertedFormat = this.fechaSelected.substring(6, 10) + "-" + this.fechaSelected.substring(3, 5) + "-" + this.fechaSelected.substring(0, 2);
+      }
+      this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '' ? this.servicioSelected : '-', this.turnoSelected !== '' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
+        (cronicasGrupales: any) => {
+          this.cronicasGrupales = cronicasGrupales;
+        }
+      ).add(() => {
+        if (this.cronicasGrupales.length == 0) {
+          this.muestraAlerta(
+            'Verifique los filtros',
+            'alert-warning',
+            'Sin resultados',
+          );
+        }
+      });
+    } else {
       this.radioBtnSelected = undefined;
     }
-
-    this.cronicasGrupales = [];
-    let fechaConvertedFormat;
-    if (this.fechaSelected) {
-      fechaConvertedFormat = this.fechaSelected.substring(6, 10) + "-" + this.fechaSelected.substring(3, 5) + "-" + this.fechaSelected.substring(0, 2);
-    }
-    this.cronicaGrupalService.getCronicasGrupalesByFiltros(this.servicioSelected !== '' ? this.servicioSelected : '-', this.turnoSelected !== '' ? Number(this.turnoSelected) : 0, this.grupoSelected !== '' ? Number(this.grupoSelected) : 0, this.lugarSelected !== '' ? this.lugarSelected : '-', fechaConvertedFormat ? fechaConvertedFormat : '0000-00-00', this.radioBtnSelected !== undefined ? this.radioBtnSelected : '-').subscribe(
-      (cronicasGrupales: any) => {
-        console.log("RESPUESTA CRONICAS: ", cronicasGrupales);
-        this.cronicasGrupales = cronicasGrupales;
-        console.log("CRONICAS GRUPALES BY FILTROS: ", this.cronicasGrupales);
-      }
-    ).add(() => {
-      if (this.cronicasGrupales.length == 0) {
-        this.muestraAlerta(
-          'Verifique los filtros',
-          'alert-warning',
-          'Sin resultados',
-        );
-      }
-    });;
   }
 
   addCronica() {
