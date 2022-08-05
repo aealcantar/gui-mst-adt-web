@@ -26,11 +26,7 @@ export class InformeServiciosProfesionalesService {
     return this.http.get<any>(`${environment.msmtsServsProfesionales}/responsables`)
   }
 
-  getConsultaServicios(query?: any) {
-    if (!query) {
-      const request = {};
-      return this.http.post<any>(`${environment.msmtsServsProfesionales}/searchServiciosProfecionales`, request)
-    }
+  getConsultaServicios(query: any) {
     const { turno, responsable, servicio, lugar, fecha } = query
     const request = {
       idTurno: parseInt(turno),
@@ -47,7 +43,15 @@ export class InformeServiciosProfesionalesService {
       'Content-Type': 'application/json',
       Accept: 'application/json'
     })
-    return this.http.post<any>(`${environment.msmtsServsProfesionales}/reporteServiciosProfesionales4306P`, JSON.stringify(data),
+    const { turno, responsable, servicio, lugar, fecha } = data
+    const request = {
+      idTurno: parseInt(turno),
+      responsable,
+      especialidad: parseInt(servicio),
+      idLugar: parseInt(lugar),
+      fecha,
+    }
+    return this.http.post<any>(`${environment.msmtsServsProfesionales}/reporteServiciosProfesionales4306P`, JSON.stringify(request),
       { headers, responseType: 'blob' as 'json' })
   }
 
