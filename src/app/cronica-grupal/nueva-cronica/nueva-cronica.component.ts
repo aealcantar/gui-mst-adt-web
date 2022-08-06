@@ -71,7 +71,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         fecha: [null],
         hora: [""],
         descPonentes: [this.cronicaRecibida.descPonentes !== null ? this.cronicaRecibida.descPonentes : null, Validators.required],
-        numParticipantesAsistieron: [this.cronicaRecibida.numParticipantesAsistieron !== null ? this.cronicaRecibida.numParticipantesAsistieron : null, Validators.required],
+        numTotalParticipantes: [this.cronicaRecibida.numTotalParticipantes !== null ? this.cronicaRecibida.numTotalParticipantes : null, Validators.required],
         desTecnicaDidactica: [this.cronicaRecibida.desTecnicaDidactica !== null ? this.cronicaRecibida.desTecnicaDidactica : null, Validators.required],
         desMaterialApoyo: [this.cronicaRecibida.desMaterialApoyo !== null ? this.cronicaRecibida.desMaterialApoyo : null, Validators.required],
         desObjetivosSesion: [this.cronicaRecibida.desObjetivosSesion !== null ? this.cronicaRecibida.desObjetivosSesion : null, Validators.compose([Validators.required, Validators.maxLength(500)])],
@@ -85,13 +85,14 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         fecha: [null, Validators.required],
         hora: ["", Validators.required],
         descPonentes: [null, Validators.required],
-        numParticipantesAsistieron: [null, Validators.required],
+        numTotalParticipantes: [null, Validators.required],
         desTecnicaDidactica: [null, Validators.required],
         desMaterialApoyo: [null, Validators.required],
         desObjetivosSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desDesarrolloSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
+
       });
       this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
         (grupos) => {
@@ -118,7 +119,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     //     console.error(httpErrorResponse);
     //   }
     // );
-    this.editForm.get('numParticipantesAsistieron')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
+    this.editForm.get('numTotalParticipantes')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
   }
 
   addParticipanteDialog() {
@@ -135,7 +136,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       if (participantes && participantes.length > 0) {
         this.listParticipantes = participantes;
         // this.listParticipantes = this.listParticipantes.concat(participantes);
-        this.editForm.get('numParticipantesAsistieron')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
+        this.editForm.get('numTotalParticipantes')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
       }
     });
   }
@@ -215,8 +216,8 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         fecFechaCompleta: null,
         timHora: '10:00:00',
         desModalidad: null,
-        numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
-        numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
+        numTotalParticipantes: this.editForm.get('numTotalParticipantes')!.value,
+        // numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: 1,
         desEstatusCronica: null,
         descPonentes: this.editForm.get('descPonentes')!.value,

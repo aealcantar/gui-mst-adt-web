@@ -60,14 +60,13 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-    //  this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
-    //    (cronicasGrupales: any) => {
-    //      this.cronicasGrupales = [];
-    //  this.cronicasGrupales.length = 0;
-    //  this.cronicasGrupales = cronicasGrupales;
-    //      console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
-    //    }
-    //  );
+      // this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
+      //   (cronicasGrupales: any) => {
+      //     this.cronicasGrupales = [];
+      // this.cronicasGrupales = cronicasGrupales;
+      //     console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
+      //   }
+      // );
     this.loadCatalogos();
   }
 
@@ -192,7 +191,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   }
 
   getCronicasGrupales() {
-    this.formularioValido = this.validarFormulario();    
+    this.formularioValido = this.validarFormulario();
     this.cronicasGrupales = [];
     if (this.formularioValido) {
       let fechaConvertedFormat;
