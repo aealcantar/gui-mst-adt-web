@@ -20,6 +20,7 @@ export const environment = {
     msmtsOauth: 'msadt-auth/api/aplicacion',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
+    msmtsServsProfesionales: "https://mts-qa.cloudapps.imss.gob.mx/msmts-servs-profesionales/api",
     msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api/control/interno/certificado-defuncion",
     msmtsAvisosMP:"https://mts-qa.cloudapps.imss.gob.mx/msmts-minis-publico/api",
 
