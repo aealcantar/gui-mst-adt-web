@@ -124,7 +124,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Servicio
   onChangeServicio() {
-    debugger;
     if(this.servicioSelected !== '') {
       //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
       this.cronicaGrupalService.getCatGrupo(this.servicioSelected).subscribe(
