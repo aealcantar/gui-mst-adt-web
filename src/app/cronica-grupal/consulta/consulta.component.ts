@@ -22,7 +22,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   numitems: number = 15;
   order: string = 'desc';
   columnaId: string = 'fecFechaCorta';
-  // cronicaGrupalAsociada = true;
 
   catalogoEstatus: any[] = ['No impartida', 'Por impartir', 'Impartida'];
 
@@ -45,7 +44,10 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     private router: Router,
     private authService: AuthService,
     private cronicaGrupalService: CronicaGrupalService
-  ) { }
+  ) {
+      this.authService.userLogged$.next(true);
+      this.authService.isAuthenticatedObs$.next(true);
+    }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -60,13 +62,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       searching: false,
     };
     this.sortBy(this.columnaId, this.order, 'fecha');
-      // this.cronicaGrupalService.getAllCronicasGrupales().toPromise().then(
-      //   (cronicasGrupales: any) => {
-      //     this.cronicasGrupales = [];
-      // this.cronicasGrupales = cronicasGrupales;
-      //     console.log("CRONICAS GRUPALES: ", this.cronicasGrupales);
-      //   }
-      // );
     this.loadCatalogos();
   }
 
@@ -76,7 +71,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.fechaSelected = date.replaceAll('/', '-');
-          // console.log("date onSelect: ", date);
           setTimeout(() => {
             this.getCronicasGrupales();
           }, 0)
@@ -96,6 +90,7 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatServicios().toPromise().then(
       (servicios) => {
         this.serviciosEspecialidad = servicios;
+        this.servicioSelected = '15';
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -129,24 +124,29 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
 
   //Metodo que se ejecuta al seleccionar un nuevo valor del catalogo de Servicio
   onChangeServicio() {
-    //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
-    this.cronicaGrupalService.getCatGrupo(this.servicioSelected).subscribe(
-      (grupos) => {
-        this.grupos = grupos;
-      },
-      (httpErrorResponse: HttpErrorResponse) => {
-        console.error(httpErrorResponse);
-      }
-    );
-    //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
-    this.cronicaGrupalService.getCatLugar(this.servicioSelected).subscribe(
-      (lugares) => {
-        this.lugares = lugares;
-      },
-      (httpErrorResponse: HttpErrorResponse) => {
-        console.error(httpErrorResponse);
-      }
-    );
+    debugger;
+    if(this.servicioSelected !== '') {
+      //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
+      this.cronicaGrupalService.getCatGrupo(this.servicioSelected).subscribe(
+        (grupos) => {
+          this.grupos = grupos;
+          this.grupoSelected = '';
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse);
+        }
+      );
+      //Consumimo catalogo de grupo by ServicioEspecialidad seleccionado
+      this.cronicaGrupalService.getCatLugar(this.servicioSelected).subscribe(
+        (lugares) => {
+          this.lugares = lugares;
+          this.lugarSelected = '';
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse);
+        }
+      );
+    }
     this.getCronicasGrupales();
   }
 
@@ -168,15 +168,6 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
   onChangeRadioBoton(value: Event) {
     this.getCronicasGrupales();
   }
-
-  // validateAllDataFull(): boolean {
-  //   if (this.servicioSelected !== '' && this.turnoSelected !== ''
-  //     && this.grupoSelected !== '' && this.lugarSelected !== ''
-  //     && this.fechaSelected !== null && this.radioBtnSelected) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   validarFormulario(): boolean {
     if (this.servicioSelected ||
@@ -224,34 +215,10 @@ export class ConsultaComponent implements OnInit, AfterViewInit {
     let params = {
       'cronica': JSON.stringify(cronicaGrupal),
     }
-    console.log("OBJETO DETALLE: ", cronicaGrupal);
-    if (this.radioBtnSelected === 'Si') {
-      console.log(" ENTRAMOS A SI ");
-      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
-        console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
-      } else {
-        console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
-      }
-    } else if (this.radioBtnSelected === 'No') {
-      console.log(" ENTRAMOS A NO ");
-      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
-        console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
-      } else {
-        console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
-      }
+    if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
+      this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
     } else {
-      console.log(" ENTRAMOS SIN VALOR ");
-      if (cronicaGrupal.desTecnicaDidactica === null && cronicaGrupal.desDesarrolloSesion === null && cronicaGrupal.desObjetivosSesion === null && cronicaGrupal.desObservaciones === null && cronicaGrupal.desPerfilGrupo === null) {
-        console.log("NO HAY INFO");
-        this.router.navigate(["nuevaCronica"], { queryParams: params, skipLocationChange: true });
-      } else {
-        console.log("SI HAY INFO");
-        this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
-      }
+      this.router.navigate(["busquedaEspecifica"], { queryParams: params, skipLocationChange: true });
     }
   }
 
