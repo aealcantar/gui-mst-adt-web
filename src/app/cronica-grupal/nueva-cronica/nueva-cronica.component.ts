@@ -176,7 +176,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       this.cronica = {
         id: this.cronicaRecibida.id,
         idCalendarioAnual: this.cronicaRecibida.idCalendarioAnual,
-        idEspecialidad: this.cronicaRecibida.isEspecialidad,
+        idEspecialidad: this.cronicaRecibida.idEspecialidad,
         desEspecialidad: this.cronicaRecibida.desEspecialidad,
         idTurno: this.cronicaRecibida.idTurno,
         desTurno: this.cronicaRecibida.desTurno,
@@ -189,7 +189,6 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         timHora: this.cronicaRecibida.timHora,
         desModalidad: this.cronicaRecibida.desModalidad,
         numTotalParticipantes: this.cronicaRecibida.numTotalParticipantes,
-        // numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: this.cronicaRecibida.idEstatusCronica,
         desEstatusCronica: this.cronicaRecibida.desEstatusCronica,
         descPonentes: this.editForm.get('descPonentes')!.value,
@@ -198,7 +197,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         desObjetivosSesion: this.editForm.get('desObjetivosSesion')!.value,
         desDesarrolloSesion: this.editForm.get('desDesarrolloSesion')!.value,
         desPerfilGrupo: this.editForm.get('desPerfilGrupo')!.value,
-        desObservaciones: this.editForm.get('desObservaciones')!.value
+        desObservaciones: this.editForm.get('desObservaciones')!.value,
       }
     } else {
       this.cronica = {
@@ -241,7 +240,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       let params = {
         'cronica': JSON.stringify(this.cronica),
       }
-      this.cronicaGrupalService.addCronica(this.cronica).subscribe(
+      this.cronicaGrupalService.updateCronica(this.cronica).subscribe(
         (response: any) => {
           console.log(response);
         }, (response: HttpErrorResponse) => {
