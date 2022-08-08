@@ -307,7 +307,7 @@ export class CargamasivaComponent implements OnInit {
             this.servicio[index].fec_baja = fchBaja.toString();
             this.servicio[index].fec_alta = fchAlta.toString();
             this.servicio[index].fec_actualizacion = fchAct.toString();
-            console.log(this.servicio[index]);
+           // console.log(this.servicio[index]);
             break;
 
           case 3:
@@ -339,14 +339,36 @@ export class CargamasivaComponent implements OnInit {
             break;
 
           case 6:
+           
             this.calendarioDias[index] = new CalendarioDias();
-            this.calendarioDias[index].cvePrograma = element[this.confCarga.col1];
-            this.calendarioDias[index].cveServicio = element[this.confCarga.col2];
-            this.calendarioDias[index].servicioEspecialidad = element[this.confCarga.col3];
+          //  this.calendarioDias[index].cvePrograma = element[this.confCarga.col1];
+          //  this.calendarioDias[index].cveServicio = element[this.confCarga.col2];
+          //  this.calendarioDias[index].servicioEspecialidad = element[this.confCarga.col3];
             this.calendarioDias[index].cveUbicacion = element[this.confCarga.col4];
             
+            if (element[this.confCarga.col1] != undefined) {
+              this.calendarioDias[index].cvePrograma = "" + element[this.confCarga.col1];
+              this.calendarioDias[index].cvePrograma = this.calendarioDias[index].cvePrograma.trim();
+            } else{
+              this.calendarioDias[index].cvePrograma = null;
+            }
+            
+            if (element[this.confCarga.col2] != undefined) {
+              this.calendarioDias[index].cveServicio =""+ element[this.confCarga.col2];
+              this.calendarioDias[index].cveServicio =    this.calendarioDias[index].cveServicio.trim();
+            } else{
+              this.calendarioDias[index].cveServicio = null;
+            }
+            if (element[this.confCarga.col3] != undefined) {
+              this.calendarioDias[index].servicioEspecialidad = ""+element[this.confCarga.col3];
+              this.calendarioDias[index].servicioEspecialidad = this.calendarioDias[index].servicioEspecialidad.trim();
+            } else{
+              this.calendarioDias[index].servicioEspecialidad = null;
+            }
 
-            debugger
+
+            //debugger
+         
             let jsDateIn = null;
             let fechaInicio: any = null;
             if (element[this.confCarga.col5] != undefined) {
@@ -401,7 +423,7 @@ export class CargamasivaComponent implements OnInit {
 
             this.calendarioDias[index].horaFin = horaFin;
             this.calendarioDias[index].numParticipantes = element[this.confCarga.col10];
-            console.log(this.calendarioDias[index]);
+          //  console.log(this.calendarioDias[index]);
             break;
 
           case 7:
@@ -445,7 +467,7 @@ export class CargamasivaComponent implements OnInit {
 
 
           default:
-            console.log("1x");
+          //  console.log("1x");
             this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_ERROR_PLANTILLA_NOVALIDA, this._Mensajes.ERROR);
             break;
         }
