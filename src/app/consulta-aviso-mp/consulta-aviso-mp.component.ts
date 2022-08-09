@@ -49,7 +49,6 @@ export class ConsultaAvisoMpComponent implements OnInit {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaInicial')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -65,7 +64,6 @@ export class ConsultaAvisoMpComponent implements OnInit {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -74,7 +72,6 @@ export class ConsultaAvisoMpComponent implements OnInit {
         }
       }
     });
-    this.handleDatesChange();
   }
 
   handleDatesChange() {
@@ -84,6 +81,12 @@ export class ConsultaAvisoMpComponent implements OnInit {
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
       this.getAvisosByFecha();
+    } else {
+      this.muestraAlerta(
+        'Verifique los filtros',
+        'alert-warning',
+        'Sin resultados',
+      );
     }
   }
 
@@ -175,6 +178,14 @@ export class ConsultaAvisoMpComponent implements OnInit {
     }, 5000);
   }
 
+  limpiar() {
+    $('#avisosInit').val(null);
+    $('#avisosFinal').val(null);
+    this.datesForm.get('fechaInicial')?.setValue(null);
+    this.datesForm.get('fechaFinal')?.setValue(null);
+    this.tabla = [];
+  }
+
   irNuevoAvisoMP() {
     let params = {}
     this.router.navigate(["nuevo-aviso-mp"], { queryParams: params, skipLocationChange: true });
@@ -182,7 +193,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
 
 
   irDetalle(idAvisoMp: number) {
-    let params = { idAvisoMp };    
+    let params = { idAvisoMp };
     this.router.navigate(["detalle-aviso-mp"], { queryParams: params, skipLocationChange: true });
   }
 }
