@@ -94,7 +94,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaInicial')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -110,7 +109,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -119,7 +117,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
         }
       }
     });
-    this.handleDatesChange();
   }
 
   irDetalle(nota: Nota) {
@@ -142,6 +139,12 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
       this.getNotasByFecha();
+    } else {
+      this.muestraAlerta(
+        'Verifique los filtros',
+        'alert-warning',
+        'Sin resultados',
+      );
     }
   }
 
@@ -160,6 +163,14 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
         return c - d; // Ascendiente
       }
     });
+  }
+
+  limpiar() {
+    $('#notasInit').val(null);
+    $('#notasFinal').val(null);
+    this.datesForm.get('fechaInicial')?.setValue(null);
+    this.datesForm.get('fechaFinal')?.setValue(null);
+    this.tabla = [];
   }
 
   converType(val: any, type: string) {

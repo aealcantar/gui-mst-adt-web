@@ -260,9 +260,9 @@ a {
 
 .buttonL {
   width: 120px;
-  height: 35.87px;
+  height: 30px;
   border-radius: 3px;
-  margin: 10px 15px 0 10px !important;
+  margin: 5px 15px 0 10px !important;
   padding: 5px;
   align-self: stretch;
   flex-grow: 1;
