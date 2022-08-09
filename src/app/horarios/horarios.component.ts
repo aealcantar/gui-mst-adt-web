@@ -202,20 +202,20 @@ export class HorariosComponent implements OnInit {
 
             // console.log("horarios: ", this.diaSeleccionado.horarios);
           } else {
-            this.agregarHorarioBtn = true;
-            this.blnHabil = true;
-            this.lblBtnHabilitar = 'Habilitar día';
-            this.lblHabilitar = 'habilitar';
             
             let index = this.semana.findIndex(diasemana => diasemana == dia);
             this.diainhabil = {
               dia: index + 1,
               inhabil: true
             };
-            if(update){
+            if(update){//se valida si es la acción de actualizar
               console.log('update vacio');
               this.validarDia();
-            }else{//se verifica si hay horarios en la ubicación si no es para habilitar y deshabilitar
+            }else{//se verifica si hay horarios en la ubicación solo cuando carga por primera vez y se deshabilita solo en la consulta inicial si está vacío
+              this.agregarHorarioBtn = true;
+              this.blnHabil = true;
+              this.lblBtnHabilitar = 'Habilitar día';
+              this.lblHabilitar = 'habilitar';
               this.ubicacionService.getHorariosUbicacion(cveUbicacion).subscribe((resp: any) =>{
                 if(resp.code == 204){
                   this.mostrarMensaje(this._Mensajes.ALERT_DANGER, this._Mensajes.MSJ_MSG023, this._Mensajes.INFO);
@@ -311,6 +311,7 @@ export class HorariosComponent implements OnInit {
 
   private validarDia() {
 
+    // console.log('tamaño arreglo',this.diaSeleccionado.horarios.length,this.blnHabil);
     let cont: number = 0;
     for (let horario of this.diaSeleccionado.horarios) {
       if (horario.estatus.cveIdEstatus == 6) {
