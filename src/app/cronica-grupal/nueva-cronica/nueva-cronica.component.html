@@ -45,6 +45,11 @@
 
 
   <div header class="flex justify-content-between row" *ngIf="this.cronicaRecibida">
+    <!-- <div class="col-md-1"> -->
+      <img
+        class="botonRegresar" (click)="regresar()"
+        src="../../../assets/images/flecha-atras.svg"/>
+    <!-- </div> -->
     <div class="col-md-4">
       <div style="display: grid; text-align: left">
         <span class="pacienteNombreSpan">{{ "Nueva crónica grupal específica" }}</span>

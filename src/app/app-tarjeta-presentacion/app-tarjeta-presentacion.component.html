@@ -6,10 +6,12 @@
 
 
 <div class="Rectangle-855">
-
   <div class="row" style="display: contents;">
-
     <div class="pacienteInfoDiv">
+      <div class="row col-md-1 " *ngIf="mostrarBtnAtras">
+        <img style="width: 36px; height: 34px;" (click)="regresar()" class="botonRegresar mt-5"
+          src="assets/hu003-tarjeta/volver.ico" />
+      </div>
 
       <div style="display: grid;">
         <span class="pacienteSpan">PACIENTE</span>
@@ -119,9 +121,11 @@
                 médico</a></li>
             <li class="contenedorItems" (click)="irControlDeArticulos()"><a class="menuSinSeleccionar">Control de
                 artículos</a></li>
-            <li class="contenedorItems" (click)="iraVolantesSangre()"><a class="menuSinSeleccionar">Donación de sangre</a></li>
+            <li class="contenedorItems" (click)="iraVolantesSangre()"><a class="menuSinSeleccionar">Donación de
+                sangre</a></li>
             <li class="contenedorItems" (click)="irAvisosMP()"><a class="menuSinSeleccionar">Ministerio público</a></li>
-            <li class="contenedorItems" (click)=" irSertificadoDefuncion()"><a class="menuSinSeleccionar">Certificado de defunción</a></li>
+            <li class="contenedorItems" (click)=" irSertificadoDefuncion()"><a class="menuSinSeleccionar">Certificado de
+                defunción</a></li>
           </div>
         </ul>
       </div>

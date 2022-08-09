@@ -452,3 +452,10 @@ table.table-participantes>tbody tr td {
   margin: auto;
   width: 496px;
 }
+
+.botonRegresar{
+  margin-top: 0px;
+  width: 36px;
+  height: 36px;
+  margin-left: 8px;
+}

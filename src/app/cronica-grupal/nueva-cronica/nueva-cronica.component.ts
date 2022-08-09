@@ -257,4 +257,8 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     this.router.navigateByUrl("/consulta-cronica-grupal");
   }
 
+  regresar() {
+    this.router.navigateByUrl("/consulta-cronica-grupal");
+  }
+
 }
