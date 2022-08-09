@@ -57,7 +57,6 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaInicial')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -73,7 +72,6 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
         if (date != '') {
           date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
           this.datesForm.get('fechaFinal')?.patchValue(date);
-          this.handleDatesChange();
         }
       },
       onClose: (date: any) => {
@@ -82,7 +80,6 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
         }
       }
     });
-    this.handleDatesChange();
   }
 
   loadDataTable(): void {
@@ -90,7 +87,6 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     this.estudioMedicoService.getEstudiosMedicosByFechas(this.datesForm.get('fechaInicial')!.value, this.datesForm.get('fechaFinal')!.value).subscribe(
       (estudiosMedicosSociales: any) => {
         this.estudioMedicos = estudiosMedicosSociales;
-        console.log("ESTUDIOS MEDICOS: ", this.estudioMedicos);
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -134,6 +130,12 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
       this.datesForm.get('fechaFinal')?.value &&
       this.datesForm.get('fechaFinal')?.value !== '') {
       this.loadDataTable();
+    } else {
+      this.muestraAlerta(
+        'Verifique los filtros',
+        'alert-warning',
+        'Sin resultados',
+      );
     }
   }
 
@@ -167,6 +169,14 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
         break;
     }
     return data;
+  }
+
+  limpiar() {
+    $('#calendarCESM1').val(null);
+    $('#calendarCESM2').val(null);
+    this.datesForm.get('fechaInicial')?.setValue(null);
+    this.datesForm.get('fechaFinal')?.setValue(null);
+    this.estudioMedicos = [];
   }
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
