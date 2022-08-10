@@ -18,14 +18,13 @@
           <label class="control-label tituloServicio">
             Servicio:
           </label>
-          <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.servicioSelected" (selectionChange)="onChangeServicio()"
+          <mat-select class="form-control form-control-mat-select" [(ngModel)]="servicioSelected" (selectionChange)="onChangeServicio()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar servicio</mat-option>
             <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of serviciosEspecialidad">
               {{ item.des_especialidad }}
             </mat-option>
           </mat-select>
-
         </div>
       </div>
 
@@ -34,7 +33,7 @@
           <label class="control-label tituloServicio">
             Turno:
           </label>
-          <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.turnoSelected" (selectionChange)="onChangeTurno()"
+          <mat-select class="form-control form-control-mat-select" [(ngModel)]="turnoSelected" (selectionChange)="onChangeTurno()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar turno</mat-option>
             <mat-option class="select-font" [value]="item.cve_turno" *ngFor="let item of turnos">
@@ -48,7 +47,7 @@
           <label class="control-label tituloServicio">
             Grupo:
           </label>
-          <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.grupoSelected" (selectionChange)="onChangeGrupo()"
+          <mat-select class="form-control form-control-mat-select" [(ngModel)]="grupoSelected" (selectionChange)="onChangeGrupo()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar grupo</mat-option>
             <mat-option class="select-font" [value]="grupo.cve_grupo_programa" *ngFor="let grupo of grupos">
@@ -64,7 +63,7 @@
           <label class="control-label tituloServicio">
             Lugar:
           </label>
-          <mat-select class="form-control form-control-mat-select" [(ngModel)]="this.lugarSelected" (selectionChange)="onChangeLugar()"
+          <mat-select class="form-control form-control-mat-select" [(ngModel)]="lugarSelected" (selectionChange)="onChangeLugar()"
             [disableOptionCentering]="true" style="background-position-y: 10px" aria-label="Servicio">
             <mat-option class="select-font" [value]="''">Seleccionar lugar</mat-option>
             <mat-option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of lugares">
@@ -90,11 +89,13 @@
           <div class="radio flex align-items-center">
             <label class="inline-flex select-font align-items-center relative mr-5">
               <input type="radio" name="radio-01" value="Si" [(ngModel)]="radioBtnSelected"
-                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"> Sí
+                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"
+                [disabled]="!formularioValido">  Sí
             </label>
             <label class="inline-flex select-font align-items-center ml-5 relative ">
               <input type="radio" name="radio-01" value="No" [(ngModel)]="radioBtnSelected"
-                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"> No
+                (change)="onChangeRadioBoton($event)" class="radio-consulta" checked="checked"
+                [disabled]="!formularioValido"> No
             </label>
           </div>
         </div>

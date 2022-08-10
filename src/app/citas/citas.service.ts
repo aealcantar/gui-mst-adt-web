@@ -74,8 +74,8 @@ export class CitasService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  gethorarioscalanual(cve_especialidad: number, cve_gpo: number, fecha: string):Observable<any>{
-    let direccion = this.baseApiUrl + '/listCalendarioAnualHorarios/' + cve_especialidad + '/' + cve_gpo + '/' + fecha;
+  gethorarioscalanual(cve_especialidad: string, cve_gpo: string, fecha: string, idUnidadMedica: string):Observable<any>{
+    let direccion = this.baseApiUrl + '/listCalendarioAnualHorarios/' + cve_especialidad + '/' + cve_gpo + '/' + fecha+'/'+idUnidadMedica;
 
     return this.http.get(direccion,{headers: this.header});
   }
@@ -90,8 +90,8 @@ export class CitasService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  getcomplementocita(cve_especialidad: string, cve_gpo: number, idUnidadMedica: string):Observable<any>{
-    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo +'/'+idUnidadMedica;
+  getcomplementocita(cve_especialidad: string, cve_gpo: number, idUnidadMedica: string, fechaInicio: string, horaInicio:string):Observable<any>{
+    let direccion = this.baseApiUrl + '/Complemento/' + cve_especialidad + '/' + cve_gpo +'/'+idUnidadMedica+'/'+fechaInicio+'/'+horaInicio;
     return this.http.get(direccion,{headers: this.header});
   }
 

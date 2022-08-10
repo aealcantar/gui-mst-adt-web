@@ -32,7 +32,21 @@
           </span>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-auto mt-5" style="padding-right: 0.1em !important">
+        <button
+          class="btn btn-default btuser buttonL"
+          type="button"
+          (click)="limpiar()"
+        >
+          Limpiar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary btn-guardar buttonL"
+          (click)="handleDatesChange()"
+        >
+          Buscar
+        </button>
       </div>
     </div>
     <div class="row">

@@ -17,6 +17,9 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   executed: boolean = false;
   months: any;
 
+  @Input() mostrarBtnAtras: boolean = false;
+  @Input() url: string = "";
+
   constructor(private tarjetaService: AppTarjetaPresentacionService, private router: Router) { }
 
   ngOnInit(): void {
@@ -96,5 +99,9 @@ export class AppTarjetaPresentacionComponent implements OnInit {
 
   irSertificadoDefuncion(){
     this.router.navigateByUrl("/consulta-certificado-defuncion");
+  }
+
+  regresar() {
+    this.router.navigateByUrl("/" + this.url, { skipLocationChange: true });
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { HttpErrorResponse } from '@angular/common/http';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { DatePipe } from '@angular/common'
@@ -34,6 +35,7 @@ export class ConsultaMpAdministracionComponent implements OnInit {
   rolUser = ''
   cveUsuario = ''
   nombre = ''
+  avisoMp!: any;
   public alert!: AlertInfo
 
   constructor(
@@ -231,6 +233,65 @@ export class ConsultaMpAdministracionComponent implements OnInit {
     let verDetalle = "true";
     let params = { idAvisoMp,verDetalle };    
     this.router.navigate(["detalle-aviso-mp"], { queryParams: params, skipLocationChange: true });
+  }
+
+  obtenerAvisoById(idAvisoMp: number) {
+    this.avisoMinisterioPublicoService.getAvisoById(idAvisoMp).subscribe(
+      (res: any) => {
+        try {
+          let estatus = res.status;
+          if (estatus == 'OK') {
+            try {
+              this.avisoMp = res.datosAvisoMp;
+              this.avisoMp.fechaIngreso = moment(this.avisoMp.fechaIngreso, 'YYYY-MM-DD').format('DD/MM/YYYY');
+              this.imprimirAvisoMp();
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  imprimirAvisoMp() {
+    moment.locale('es');
+    let imprimirAvisoObj = {
+      estado: this.avisoMp?.estado,
+      dia: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('DD'),
+      mes: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('MMMM'),
+      año: moment(this.avisoMp?.fechaElaboracion, 'DD/MM/YYYY').format('YYYY'),
+      alcaldia: this.avisoMp?.delegacionMunicipio,
+      nombrePac: this.avisoMp?.nombrePaciente,
+      nombreHosp: this.avisoMp?.unidadMedica,
+      ubicacionHosp: this.avisoMp?.ubicacionHospital,
+      servicio: this.avisoMp?.especialidad,
+      cama: this.avisoMp?.cama,
+      fecIngreso: this.avisoMp?.fechaIngreso,
+      hrIngreso: moment(this.avisoMp?.horaIngreso, 'HH:mm:ss').format('HH:mm:ss a'),
+      observaciones: this.avisoMp?.lesionesPaciente,
+      nomMedico: this.avisoMp?.nombreMedico,
+      matriculaMed: this.avisoMp?.matriculaMedico,
+      nomTS: this.avisoMp?.nombreTrabajadorSocial,
+      matTS: this.avisoMp?.matriculaTrabajadorSocial,
+    }
+
+    this.avisoMinisterioPublicoService.downloadPdf(imprimirAvisoObj).subscribe(
+      (response: any) => {
+        var file = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(file);
+        window.open(url);
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error);
+        console.error('Error al descargar reporte: ', error.message);
+      }
+    );
   }
 
 }

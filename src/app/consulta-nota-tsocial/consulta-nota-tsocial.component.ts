@@ -8,6 +8,7 @@ import { AuthService } from '../service/auth-service.service';
 import { NotasService } from '../service/notas.service';
 import { formatDate } from '@angular/common';
 import { Usuario } from '../models/usuario.model';
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 
 @Component({
   selector: 'app-consulta-nota-tsocial',
@@ -15,7 +16,7 @@ import { Usuario } from '../models/usuario.model';
   styleUrls: ['./consulta-nota-tsocial.component.css']
 })
 export class ConsultaNotaTSocialComponent implements OnInit {
-
+  alert!: AlertInfo;
   public nota!: Nota;
   public reporteNota!: ReporteNota;
   public months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
@@ -33,7 +34,7 @@ export class ConsultaNotaTSocialComponent implements OnInit {
     private route: ActivatedRoute,
     private notasService: NotasService,
     private authService: AuthService
-  ) { 
+  ) {
     this.datetimeFormat = formatDate(this.dateToday, 'yyyy/MM/dd hh:mm:ss', 'en-ES');
   }
 
@@ -46,6 +47,16 @@ export class ConsultaNotaTSocialComponent implements OnInit {
         this.nota = JSON.parse(params.getAll('nota'))
       }
       console.log("OBJETO ENVIADO PARA DETALLE: ", this.nota);
+       if (params.getAll('nuevaNota').length > 0) {
+         const nuevaNota = JSON.parse(params.getAll('nuevaNota'));
+         if (nuevaNota) {
+           this.muestraAlerta(
+             '¡La información se guardo con éxito!',
+             'alert-success',
+             ''
+           );
+         }
+       }
     });
     this.pacienteSeleccionado = JSON.parse(localStorage.getItem('paciente')!);
     let userTmp = sessionStorage.getItem('usuario') || '';
@@ -114,6 +125,27 @@ export class ConsultaNotaTSocialComponent implements OnInit {
         console.error("Error al descargar reporte: ", error.message);
       }
     )
+  }
+
+  muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
+    this.alert = new AlertInfo;
+    this.alert = {
+
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj
+    };
+    setTimeout(() => {
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      };
+      if (funxion != null) {
+        funxion();
+      }
+    }, 5000);
   }
 
 }

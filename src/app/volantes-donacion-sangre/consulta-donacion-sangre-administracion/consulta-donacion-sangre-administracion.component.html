@@ -78,6 +78,12 @@
                         <mat-option class="select-font" [value]="6">
                             O-
                         </mat-option>
+                        <mat-option class="select-font" [value]="7">
+                            AB+
+                        </mat-option>
+                        <mat-option class="select-font" [value]="8">
+                            AB-
+                        </mat-option>
                     </mat-select>
                     <div *ngIf="selectTipoSangre==true"><span class="form-text form-text-error Campo-obligatorio">*Campo
                             obligatorio</span></div>
@@ -156,18 +162,18 @@
                                   (click)="irDetalle(item.idVolanteDonacionSangre);">
                                   {{ item.nss }}</td> -->
                                   <td class="bordesNSS"  style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
-                                  (click)="irDetalle(item.idVolanteDonacionSangre);"><div style="width: 84px; margin-left: 30px;
+                                  (click)="irDetalle(item.idVolanteDonacionSangre)"><div style="width: 84px; margin-left: 30px;
                                     white-space: nowrap;
                                     text-overflow: clip;
                                     overflow: hidden;">
                                     <span>{{item.nss}}</span>
                                     </div></td>
-                                  
+
                                 <td  class="bordesnombrePaciente" style="padding-left: 30px; text-align: left;"> {{item.nombrePaciente}} </td>
                                 <td class="bordesfecEfec" style="padding-left: 30px; text-align: left;"> {{item.fecEfec}} </td>
                                 <td class="bordesnombreTrabajadorSocial" style="padding-left: 30px; text-align: left;"> {{item.nombreTrabajadorSocial}} </td>
                                 <td class="bordestipoSangre" style="padding-left: 30px; text-align: left;"> {{item.tipoSangre.toUpperCase()}} </td>
-              
+
                               </tr>
                             </tbody>
                           </table>

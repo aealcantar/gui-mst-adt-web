@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { objAlert } from '../../common/alerta/alerta.interface';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse, HttpUrlEncodingCodec } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { DatePipe, KeyValue } from '@angular/common';
@@ -61,7 +61,7 @@ export const MY_DATE_FORMATS = {
 export class CitaguardaComponent implements OnInit {
   @ViewChild('picker') picker: any;
   alert!: objAlert;
-  txtotro: string
+  txtotro: string = ""
   lstParticipantes: Array<string> = [];
   private _usuario!: Usuario;
 
@@ -234,9 +234,10 @@ export class CitaguardaComponent implements OnInit {
   horarioOK: boolean = false;
   llenacatalogohorarios(fechaInicio: string) {
     this.msjLoading("Cargando...");
-    this.citaservice.gethorarioscalanual(this.citadata.value.servicio.cve_especialidad,
-      this.citadata.value.programa.cve_grupo_programa,
-      fechaInicio).subscribe({
+    let cveEspecialidad:string = encodeURIComponent(this.citadata.value.servicio.cve_especialidad);
+    let cvePrograma:string = encodeURIComponent( this.citadata.value.programa.cve_grupo_programa);
+    let idUM:string = encodeURIComponent( this._usuario.unidadMedica);
+    this.citaservice.gethorarioscalanual(cveEspecialidad,cvePrograma,fechaInicio,idUM).subscribe({
         next: (resp: any) => {
           console.log(resp);
 
@@ -294,12 +295,25 @@ export class CitaguardaComponent implements OnInit {
   agregaparticipante(otrop: any) {
     //console.log(this.txtotro);
     //console.log(otrop);
-    if (this.txtotro && this.txtotro.trim() != "" && otrop.control.status == "VALID") {
+    let regex = /^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$/g;
+
+    if (this.txtotro && this.txtotro.trim() != ""
+      && regex.test(this.txtotro.toString())
+      && !this.participanterepetido(this.txtotro) ) {
       this.lstParticipantes.push(this.txtotro);
       this.txtotro = "";
+      this.actualizacontador();
     }
-    this.actualizacontador();
+  }
 
+  participanterepetido(otro: string): boolean{
+    let repetido: boolean = false;
+    for(let nombre of this.lstParticipantes){
+      if(nombre.trim().toUpperCase() === otro.trim().toUpperCase()){
+        repetido = true;
+      }
+    }
+    return repetido;
   }
 
   eliminaparticipante(per: string) {
@@ -380,9 +394,11 @@ export class CitaguardaComponent implements OnInit {
 
   validaespaciocita(e: any) {
     this.msjLoading("Cargando...");
+    let fechaIni = this.citadata.value.fechahora ? this.datePipe.transform(new Date(this.citadata.value.fechahora), 'yyyy-MM-dd') : "";
     this.citaservice.getcomplementocita(this.citadata.value.servicio.cve_especialidad,
-      this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica).subscribe({
+      this.citadata.value.programa.cve_grupo_programa, this._usuario.unidadMedica,fechaIni,this.citadata.value.hora.tim_hora_inicio,).subscribe({
         next: (resp: any) => {
+          console.log(resp);
           if (resp) {
             //console.log(resp);
             this.datoscita = {
@@ -399,15 +415,18 @@ export class CitaguardaComponent implements OnInit {
               'Tipo de cita': 'Grupal',
               'des_abreviada_ubicacion': resp.des_abreviada_ubicacion
             };
+            this.muestraresumen = true;
+            this.submitted = false;
+  
+          }else{
+            this.muestraAlerta(this._Mensajes.MSJ_ERROR_DATOS_UM, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
           }
-          this.muestraresumen = true;
-          this.submitted = false;
-
+         
           Swal.close();
         },
         error: (err) => {
           //console.log(err);
-          this.muestraresumen = true;
+        //  this.muestraresumen = true;
           this.submitted = false;
           Swal.close();
           this.muestraAlerta(this._Mensajes.MSJ_ERROR_COMPLEMENTO_CITA, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR);
@@ -636,7 +655,7 @@ export class CitaguardaComponent implements OnInit {
       if (funxion != null) {
         funxion();
       }
-    }, 2000);
+    }, 4000);
   }
 
 }

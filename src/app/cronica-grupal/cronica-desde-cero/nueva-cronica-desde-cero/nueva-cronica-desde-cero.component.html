@@ -40,42 +40,16 @@
       </div>
 </div>
 </div>
-<!-- fin modal btn cancelar-->
 <app-card-template>
 
 
-  <div header class="flex justify-content-between row" *ngIf="this.cronicaRecibida">
-    <!-- <div class="col-md-1"> -->
-      <img
-        class="botonRegresar" (click)="regresar()"
-        src="../../../assets/images/flecha-atras.svg"/>
-    <!-- </div> -->
+  <div header class="justify-content-between row" >
     <div class="col-md-4">
       <div style="display: grid; text-align: left">
-        <span class="pacienteNombreSpan">{{ "Nueva crónica grupal específica" }}</span>
-      </div>
-    </div>
-    <hr class="hrCronica" style="margin-left: 5%" />
-    <div class="col-md-4 ">
-      <div style="display: grid; margin-left: 0%;">
-        <span class="tituloDosSpam">{{ this.cronicaRecibida.fecFechaCompleta }}</span>
-      </div>
-    </div>
-    <hr class="hrCronica2"/>
-    <div class="col-md-4">
-      <div style="display: grid; text-align: left; margin-left: 0%;">
-        <span class="tituloDosSpam">{{ this.cronicaRecibida.desGrupo }}</span>
+        <span class="pacienteNombreSpan">{{ "Nueva crónica grupal desde cero" }}</span>
       </div>
     </div>
   </div>
-  <div header class="flex justify-content-between row" *ngIf="!this.cronicaRecibida">
-    <div class="col-md-12">
-      <div style="display: grid; text-align: left">
-        <span class="pacienteNombreSpan">{{ "Nueva crónica grupal específica" }}</span>
-      </div>
-    </div>
-  </div>
-
 
   <div content>
     <div>
@@ -85,84 +59,135 @@
     </div>
     <form novalidate [formGroup]="editForm" class="formInfo">
       <div class="container seccion">
-        <div class="row" *ngIf="this.cronicaRecibida === null">
-          <div class="col-md-4">
+        <div class="row" >
+          <div class="col-md-3">
+            <div class="form-group">
+              <span class="spanInput">Servicio*:</span>
+              <mat-select class="form-control form-control-mat-select" formControlName="servicio" [disableOptionCentering]="true"
+                (selectionChange)="obtenerGrupoPorServicio()" id="servicio" placeholder="Seleccionar servicio">
+                <!-- <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar servicio</mat-option> -->
+                <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of serviciosEspecialidad">
+                  {{ item.des_especialidad }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Grupo*:</span>
-
-              <!-- <select class="form-control" formControlName="grupo" style="background-position-y: 5px;"
-                aria-label="Servicio">
-                <option class="select-font" [value]="''" selected>Ingresar grupo</option>
-                <option class="select-font" [value]="grupo.cve_grupo_programa" *ngFor="let grupo of grupos">
-                  {{ grupo.des_grupo_programa }}
-                </option>
-              </select> -->
-
               <mat-select class="form-control form-control-mat-select" formControlName="grupo" [disableOptionCentering]="true"
-                style="background-position-y: 5px" aria-label="Servicio">
-                <mat-option class="select-font" [value]="''">Ingresar grupo</mat-option>
+                id="grupo" placeholder="Seleccionar grupo">
+                <!-- <mat-option class="select-font optionSelect" [value]="''" selected>Seleccionar grupo</mat-option> -->
                 <mat-option class="select-font" [value]="item.cve_grupo_programa" *ngFor="let item of grupos">
                   {{ item.des_grupo_programa }}
                 </mat-option>
               </mat-select>
-
             </div>
           </div>
-
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group datepicker-group">
               <span class="spanInput">Fecha*:</span>
-              <input class="form-control" formControlName="fecha" id="calendarCronica" type="text"
-                placeholder="dd/mm/aaaa" maxlength="10">
+              <input class="form-control" formControlName="fecha" id="fecha-cronica-cero" type="text"
+                placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off">
               <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
             </div>
           </div>
-
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Hora*:</span>
-
-              <!-- <select class="form-control " formControlName="hora" style="background-position-y: 5px;"
-                aria-label="Servicio">
-                <option class="select-font " [value]="''" style="background-position-y: 10px;"
-                  selected>Ingresar hora</option>
-                <option class="select-font" [value]="1">10:00:00</option>
-              </select> -->
-
               <mat-select class="form-control form-control-mat-select" formControlName="hora" [disableOptionCentering]="true"
-                style="background-position-y: 5px" aria-label="Servicio">
-                <mat-option class="select-font" [value]="''">Ingresar hora</mat-option>
-                <mat-option class="select-font" [value]="1">10:00:00</mat-option>
+                placeholder="Seleccionar hora" style="background-position-y: 5px" aria-label="Hora">
+                <mat-option [value]="'00:00:00'" selected class="select-font">00:00:00</mat-option>
+                <mat-option [value]="'01:00:00'" selected class="select-font">01:00:00</mat-option>
+                <mat-option [value]="'02:00:00'" selected class="select-font">02:00:00</mat-option>
+                <mat-option [value]="'03:00:00'" selected class="select-font">03:00:00</mat-option>
+                <mat-option [value]="'04:00:00'" selected class="select-font">04:00:00</mat-option>
+                <mat-option [value]="'05:00:00'" selected class="select-font">05:00:00</mat-option>
+                <mat-option [value]="'06:00:00'" selected class="select-font">06:00:00</mat-option>
+                <mat-option [value]="'07:00:00'" selected class="select-font">07:00:00</mat-option>
+                <mat-option [value]="'08:00:00'" selected class="select-font">08:00:00</mat-option>
+                <mat-option [value]="'09:00:00'" selected class="select-font">09:00:00</mat-option>
+                <mat-option [value]="'10:00:00'" selected class="select-font">10:00:00</mat-option>
+                <mat-option [value]="'11:00:00'" selected class="select-font">11:00:00</mat-option>
+                <mat-option [value]="'12:00:00'" selected class="select-font">12:00:00</mat-option>
+                <mat-option [value]="'13:00:00'" selected class="select-font">13:00:00</mat-option>
+                <mat-option [value]="'14:00:00'" selected class="select-font">14:00:00</mat-option>
+                <mat-option [value]="'15:00:00'" selected class="select-font">15:00:00</mat-option>
+                <mat-option [value]="'16:00:00'" selected class="select-font">16:00:00</mat-option>
+                <mat-option [value]="'17:00:00'" selected class="select-font">17:00:00</mat-option>
+                <mat-option [value]="'18:00:00'" selected class="select-font">18:00:00</mat-option>
+                <mat-option [value]="'19:00:00'" selected class="select-font">19:00:00</mat-option>
+                <mat-option [value]="'20:00:00'" selected class="select-font">20:00:00</mat-option>
+                <mat-option [value]="'21:00:00'" selected class="select-font">21:00:00</mat-option>
+                <mat-option [value]="'22:00:00'" selected class="select-font">22:00:00</mat-option>
+                <mat-option [value]="'23:00:00'" selected class="select-font">23:00:00</mat-option>
               </mat-select>
-
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <span class="spanInput">Ponentes*:</span>
-            <input formControlName="descPonentes" class="form-control matricula inputs" id="txtconsulta"
-             type="text" placeholder="Ingresar ponentes" maxlength="500"/>
+        <div class="row" >
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Modalidad*:</span>
+              <div class="radio flex align-items-center">
+                <label class="inline-flex select-font align-items-center relative mr-5">
+                  <input type="radio" name="desModalidad" value="Presencial" formControlName="desModalidad"
+                    class="radio-consulta" checked="checked"> Presencial
+                </label>
+                <label class="inline-flex select-font align-items-center ml-5 relative ">
+                  <input type="radio" name="desModalidad" value="A distancia" formControlName="desModalidad"
+                    class="radio-consulta" checked="checked" [attr.disabled]="true"> A distancia
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <span class="spanInput">N&uacute;mero de asistentes*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="numTotalParticipantes"
-              placeholder="Ingresar n&uacute;mero de asistentes" type="number"/>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Ocasión de servicio*:</span>
+              <div class="radio flex align-items-center">
+                <label class="inline-flex select-font align-items-center relative mr-5">
+                  <input type="radio" name="desOcasionServicio" value="Inicial" formControlName="desOcasionServicio"
+                    class="radio-consulta" checked="checked"> Inicial
+                </label>
+                <label class="inline-flex select-font align-items-center ml-5 relative ">
+                  <input type="radio" name="desOcasionServicio" value="Seguimiento" formControlName="desOcasionServicio"
+                    class="radio-consulta" checked="checked" [attr.disabled]="true"> Seguimiento
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Ponentes*:</span>
+              <input formControlName="descPonentes" class="form-control matricula inputs" id="descPonentes"
+              type="text" placeholder="Ingresar ponentes" maxlength="500"/>
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desTecnicaDidactica"
-              placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" maxlength="500"/>
+        <div class="row" style="margin-right: -14px;">
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">N&uacute;mero de asistentes*:</span>
+              <input class="form-control matricula inputs" id="numTotalParticipantes" formControlName="numTotalParticipantes"
+                placeholder="Ingresar n&uacute;mero de asistentes" type="text" numbersOnly />
+            </div>
           </div>
-          <div class="col-md-6">
-            <span class="spanInput">Material apoyo*:</span>
-            <input class="form-control matricula inputs" id="txtconsulta" formControlName="desMaterialApoyo"
-              placeholder="Ingresar material apoyo" type="text" maxlength="500"/>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">T&eacute;cnica did&aacute;ctica*:</span>
+              <input class="form-control matricula inputs" id="desTecnicaDidactica" formControlName="desTecnicaDidactica"
+                placeholder="Ingresar t&eacute;cnica did&aacute;ctica" type="text" maxlength="500"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <span class="spanInput">Material apoyo*:</span>
+              <input class="form-control matricula inputs" id="desMaterialApoyo" formControlName="desMaterialApoyo"
+                placeholder="Ingresar material apoyo" type="text" maxlength="500"/>
+            </div>
           </div>
         </div>
       </div>

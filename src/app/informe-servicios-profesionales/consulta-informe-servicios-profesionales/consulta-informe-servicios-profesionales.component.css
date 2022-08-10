@@ -73,19 +73,6 @@
 
 #btnLimpiar,
 #btnBuscar {
-    /* min-width: 83px !important;
-    min-height: 39px !important;
-    border-radius: 3px;
-    padding: 5px;
-    align-self: stretch;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    margin-bottom: 0 !important; */
     width: 120px;
     height: 30px;
     border-radius: 3px;
@@ -156,7 +143,17 @@ th {
     text-align: left;
     background-color: rgba(196, 196, 196, 0.1);
     border: 1px solid #EEEEEE;
+    padding: 8px 16px 5px !important;
     text-align: left;
+}
+
+.encabezadoTableCenter {
+    text-align: center;
+    background-color: rgba(196, 196, 196, 0.1);
+    border: 1px solid #EEEEEE;
+    padding-top: 9px !important;
+    width: 170px;
+    padding-bottom: 5px !important;
 }
 
 .celdaEncabezadoTable {
@@ -168,23 +165,28 @@ th {
 }
 
 .celdaEncabezadoTableSec {
-    padding: 8px 30px 5px; text-align: left;
+    padding: 8px 30px 5px;
+    text-align: left;
 }
 
 .labelEncabezadoTable {
     margin-left: -15px;
 }
 
-.bordesTablaFecha {
+.bordesTablaDetalle {
     border: 1px solid #ddd;
     text-align: center !important;
     padding-top: 14px;
     width: 17%;
+    cursor: pointer;
+    text-decoration: none !important;
+    color: #4D92DF !important;
 }
 
-.bordesTablaDescripcion {
+.bordesTabla {
     border: 1px solid #ddd;
     text-align: left !important;
+    padding-left: 16px !important;
 }
 
 .my-pagination ::ng-deep .current {
@@ -263,14 +265,58 @@ th {
     align-items: center;
 }
 
-.Campo-obligatorio {
-    width: 101px;
-    height: 14px;
-    font-size: 10px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #e10000;
+section {
+    padding-bottom: 3.7%;
+}
+
+.label-counter {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.w-340 {
+    width: 340px;
+}
+
+.w-190 {
+    width: 190px;
+}
+
+.w-240 {
+    width: 240px;
+}
+
+.w-130 {
+    width: 130px;
+}
+
+.w-100 {
+    width: 100px;
+}
+
+.arrow-down {
+    top: 15px
+}
+
+table {
+    width: 100%;
+}
+
+.pagination-row {
+    height: 40px;
+    border: 1px solid #ddd;
+    margin-top: 0%;
+    margin-left: 0px;
+}
+
+.Rectangle-9601 {
+    margin-top: 0px !important;
+    justify-content: center;
+}
+
+.my-pagination {
+    margin-left: auto;
+    margin-right: auto;
+    content: '>';
 }

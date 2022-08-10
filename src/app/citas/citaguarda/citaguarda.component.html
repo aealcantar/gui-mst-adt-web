@@ -81,41 +81,47 @@
                 </div>
               </div>
             </div>
-
-            <div class="form-group">
-              <label for="otro" class="otros">Otros:</label>
-              <input
-                type="text"
-                class="form-control captura inp-otrs"
-                placeholder="Ingresar nombre de participante"
-                [(ngModel)]="txtotro"
-                maxlength="50"
-                pattern="^([a-zA-Z \-\']|[à-ú]|[À-Ú])+$"
-                #otrop="ngModel"
-                />
-              <span (click)="agregaparticipante(otrop);" style="cursor: pointer;"><img src="../../../assets/images/fi_plus-circle.svg"></span>
-            </div>
-
-            <div class="tbl-ots" *ngIf="lstParticipantes.length>0">
-              <div class="tb-head">
-                <span class="nombre">Nombre</span>
-                <span class=""></span>
-              </div>
-              <div class="tb-row" *ngFor="let per of lstParticipantes">
-                <span class="nombre">{{per}}</span>
-                <span class="accion" >
-                  <img src="../../../assets/images/icon-delete-min.svg"
-                  (click)="eliminaparticipante(per);">
-                </span>
+            <div class="row">
+              <div class="col-md-8 col-sm-12">
+                <div class="form-group">
+                  <label for="otro" class="otros">Otros:</label>
+                  <input
+                    type="text"
+                    class="form-control captura inp-otrs"
+                    placeholder="Ingresar nombre de participante"
+                    [(ngModel)]="txtotro"
+                    maxlength="50"
+                    #otrop="ngModel"
+                    />
+                  <span (click)="agregaparticipante(otrop);" style="cursor: pointer;">
+                    <img src="../../../assets/images/fi_plus-circle.svg">
+                  </span>
+                </div>
               </div>
             </div>
-
+            <div class="row">
+              <div class="col-md-11 col-sm-11">
+                <div class="tbl-ots" *ngIf="lstParticipantes.length>0">
+                  <div class="tb-head">
+                    <span class="nombre">Nombre</span>
+                    <span class=""></span>
+                  </div>
+                  <div class="tb-row" *ngFor="let per of lstParticipantes">
+                    <span class="nombre">{{per}}</span>
+                    <span class="accion" >
+                      <img src="../../../assets/images/icon-delete-min.svg"
+                      (click)="eliminaparticipante(per);">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="Rectangle-307">
             <form novalidate [formGroup]="citadata" class="form-inline" role="form" autocomplete="off" style="display: flex; flex-wrap:wrap; width: 100%;">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-6">
                   <div class="form-group usrlist pull-left">
                     <label for="servicio" class="titulo">Servicio
                       <span class="form-text"
@@ -141,7 +147,7 @@
                     </small>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-6">
                   <div class="form-group usrlist pull-left">
                     <label for="programa" class="titulo">Programa
                       <span class="form-text"
@@ -166,7 +172,7 @@
                     </small>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-6">
                   <div class="form-group usrlist pull-left datepicker-group">
                     <label for="fechahora" class="titulo">Fecha
                       <span class="form-text"
@@ -200,7 +206,7 @@
 
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-6">
                   <div class="form-group usrlist pull-left">
                     <label for="hora" class="titulo">Horario
                       <span class="form-text"
@@ -230,12 +236,14 @@
               <div class="cuadro-resumen" *ngIf="muestraresumen">
                 <div class="txt-resumen">Resumen:</div>
                 <div class="row">
-                  <div class="col-md-4" *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
+                  <ng-container *ngFor="let dato of datoscita | keyvalue: keepOriginalOrder">
+                  <div class="col-md-4" *ngIf="dato.key !== 'des_abreviada_ubicacion'">
                     <div class="lst-item pull-left">
                       <div class="lbel">{{dato.key}}:</div>
                       <div class="valor">{{dato.value}}</div>
                     </div>
                   </div>
+                </ng-container>
                 </div>
               </div>
 

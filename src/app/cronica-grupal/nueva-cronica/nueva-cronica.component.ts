@@ -12,7 +12,7 @@ import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
-const NUM_PARTICIPANTES: number = 5;
+// const NUM_PARTICIPANTES: number = 0;
 
 @Component({
   selector: 'app-nueva-cronica',
@@ -52,6 +52,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     this.initForm(cronicaParse);
   }
 
+
   ngAfterViewInit(): void {
     $('#calendarCronica').datepicker({
       onSelect: (date: any, datepicker: any) => {
@@ -70,7 +71,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         fecha: [null],
         hora: [""],
         descPonentes: [this.cronicaRecibida.descPonentes !== null ? this.cronicaRecibida.descPonentes : null, Validators.required],
-        numParticipantesAsistieron: [this.cronicaRecibida.numParticipantesAsistieron !== null ? this.cronicaRecibida.numParticipantesAsistieron : null, Validators.required],
+        numTotalParticipantes: [this.cronicaRecibida.numTotalParticipantes !== null ? this.cronicaRecibida.numTotalParticipantes : null, Validators.required],
         desTecnicaDidactica: [this.cronicaRecibida.desTecnicaDidactica !== null ? this.cronicaRecibida.desTecnicaDidactica : null, Validators.required],
         desMaterialApoyo: [this.cronicaRecibida.desMaterialApoyo !== null ? this.cronicaRecibida.desMaterialApoyo : null, Validators.required],
         desObjetivosSesion: [this.cronicaRecibida.desObjetivosSesion !== null ? this.cronicaRecibida.desObjetivosSesion : null, Validators.compose([Validators.required, Validators.maxLength(500)])],
@@ -84,13 +85,14 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         fecha: [null, Validators.required],
         hora: ["", Validators.required],
         descPonentes: [null, Validators.required],
-        numParticipantesAsistieron: [null, Validators.required],
+        numTotalParticipantes: [null, Validators.required],
         desTecnicaDidactica: [null, Validators.required],
         desMaterialApoyo: [null, Validators.required],
         desObjetivosSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desDesarrolloSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
         desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
+
       });
       this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
         (grupos) => {
@@ -107,7 +109,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
 
   getNumParticipantes() {
-    // TO DO Implementar servicio para obtener Numero de Participantes 
+    // TO DO Implementar servicio para obtener Numero de Participantes
     // this.cronicaGrupalService.getNumParticipantes(idCita).subscribe((resp: any) => {
     //     if (resp) {
     //       this.editForm.get('numParticipantesAsistieron')?.patchValue(resp.numParticipantes || 0);
@@ -117,7 +119,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     //     console.error(httpErrorResponse);
     //   }
     // );
-    this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
+    this.editForm.get('numTotalParticipantes')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
   }
 
   addParticipanteDialog() {
@@ -133,7 +135,8 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((participantes: Participante[]) => {
       if (participantes && participantes.length > 0) {
         this.listParticipantes = participantes;
-        this.editForm.get('numParticipantesAsistieron')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
+        // this.listParticipantes = this.listParticipantes.concat(participantes);
+        this.editForm.get('numTotalParticipantes')?.patchValue(this.cronicaRecibida.numTotalParticipantes + this.listParticipantes.length);
       }
     });
   }
@@ -173,7 +176,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       this.cronica = {
         id: this.cronicaRecibida.id,
         idCalendarioAnual: this.cronicaRecibida.idCalendarioAnual,
-        idEspecialidad: this.cronicaRecibida.isEspecialidad,
+        idEspecialidad: this.cronicaRecibida.idEspecialidad,
         desEspecialidad: this.cronicaRecibida.desEspecialidad,
         idTurno: this.cronicaRecibida.idTurno,
         desTurno: this.cronicaRecibida.desTurno,
@@ -186,7 +189,6 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         timHora: this.cronicaRecibida.timHora,
         desModalidad: this.cronicaRecibida.desModalidad,
         numTotalParticipantes: this.cronicaRecibida.numTotalParticipantes,
-        numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: this.cronicaRecibida.idEstatusCronica,
         desEstatusCronica: this.cronicaRecibida.desEstatusCronica,
         descPonentes: this.editForm.get('descPonentes')!.value,
@@ -195,7 +197,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         desObjetivosSesion: this.editForm.get('desObjetivosSesion')!.value,
         desDesarrolloSesion: this.editForm.get('desDesarrolloSesion')!.value,
         desPerfilGrupo: this.editForm.get('desPerfilGrupo')!.value,
-        desObservaciones: this.editForm.get('desObservaciones')!.value
+        desObservaciones: this.editForm.get('desObservaciones')!.value,
       }
     } else {
       this.cronica = {
@@ -213,8 +215,8 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         fecFechaCompleta: null,
         timHora: '10:00:00',
         desModalidad: null,
-        numTotalParticipantes: this.editForm.get('numParticipantesAsistieron')!.value,
-        numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
+        numTotalParticipantes: this.editForm.get('numTotalParticipantes')!.value,
+        // numParticipantesAsistieron: this.editForm.get('numParticipantesAsistieron')!.value,
         idEstatusCronica: 1,
         desEstatusCronica: null,
         descPonentes: this.editForm.get('descPonentes')!.value,
@@ -238,7 +240,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       let params = {
         'cronica': JSON.stringify(this.cronica),
       }
-      this.cronicaGrupalService.addCronica(this.cronica).subscribe(
+      this.cronicaGrupalService.updateCronica(this.cronica).subscribe(
         (response: any) => {
           console.log(response);
         }, (response: HttpErrorResponse) => {
@@ -252,6 +254,10 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
   }
 
   cancelar() {
+    this.router.navigateByUrl("/consulta-cronica-grupal");
+  }
+
+  regresar() {
     this.router.navigateByUrl("/consulta-cronica-grupal");
   }
 

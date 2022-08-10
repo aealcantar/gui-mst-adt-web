@@ -49,6 +49,11 @@ label span {
   color: #222;
 }
 
+.optionSelect{
+  background-position-y: 10px;
+  color: #545454;
+}
+
 .instrucciones {
   width: 270px;
   height: 17px;
@@ -62,8 +67,8 @@ label span {
   letter-spacing: normal;
   text-align: left;
   color: #222;
-  margin-top: 5px;
-  margin-left: 10px;
+  margin-top: 30px;
+  margin-left: -32.5%;
 }
 
 .seccion {
@@ -193,6 +198,7 @@ textarea {
   text-align: left;
   color:
     #222222;
+    padding-bottom: 55px;
 }
 
 .tituloDosSpam {
@@ -339,14 +345,6 @@ table.table-participantes>tbody tr td {
   width: 0.2%;
   margin-top: 8px;
 }
-.hrCronica2 {
-  text-align: left;
-  background-color: #000000;
-  height: 25px;
-  width: 0.2%;
-  margin-top: 8px;
-  margin-left: 34px;
-}
 
 .hrCronicaServicio {
   border: none;
@@ -415,7 +413,7 @@ table.table-participantes>tbody tr td {
 }
 
 .imgCalendar {
-  background-image: url("../../../assets/images/calendario.svg");
+  background-image: url("../../../../assets/images/calendario.svg");
   background-repeat: no-repeat;
   color: #191919;
   position: absolute;
@@ -459,11 +457,4 @@ table.table-participantes>tbody tr td {
 .modal-content{
   margin: auto;
   width: 496px;
-}
-
-.botonRegresar{
-  margin-top: 0px;
-  width: 36px;
-  height: 36px;
-  margin-left: 8px;
 }

@@ -61,24 +61,19 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     trabajadorNombreRecibe: new FormControl(''),
     enfermeriaNombreEntrega: new FormControl('', [Validators.required]),
     ubicacion: new FormControl('', Validators.required),
-    // horarioEntregaArticulo: new FormControl('', Validators.required),
-    horarioEntregaArticulo: new FormControl('', [Validators.required,
-    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    horarioEntregaArticulo: new FormControl('', Validators.required),
     resguardoFecha: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
-    resguardoHora: new FormControl('', [Validators.required, Validators.maxLength(5),
-    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    resguardoHora: new FormControl('', Validators.required),
     resguardoNombreRecibe: new FormControl('',[ Validators.required, Validators.maxLength(150)]),
     resguardoNombreEntrega: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionFecha: new FormControl('', [Validators.required,
     Validators.pattern(/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{4})/)]),
-    recepcionHora: new FormControl('', [Validators.required,Validators.maxLength(5),
-    Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+    recepcionHora: new FormControl('', Validators.required),
     recepcionNombreRecibe: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionNombreEntrega: new FormControl('', [Validators.required,Validators.maxLength(150)]),
     recepcionUbicacion: new FormControl('', Validators.required),
     recepcionHorarioEntregaArticulo: new FormControl('', [Validators.required,Validators.maxLength(15)]),
-
   });
 
 
@@ -492,6 +487,11 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   onChangeServicio() {
     let idServicio = this.formNuevoArticulo.value.servicio;
     console.log("SERVICIO: ", idServicio);
+  }
+
+  ajustarHora(formName: string) {
+    const hora = moment(this.formNuevoArticulo.get(formName).value, 'HHmm').format('HH:mm');
+    this.formNuevoArticulo.get(formName).setValue(hora);
   }
 
 

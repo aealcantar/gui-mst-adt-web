@@ -31,7 +31,7 @@ export class CronicaGrupalService {
   getCatLugar(cveServicio: string) {
     return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion/${cveServicio}`);
   }
-  
+
   getCatDiagnosticosMedicos(texto: string) {
     return this.http.get<any>(`${environment.urlMSEDSCatalogos}/getCatalogoCieAutoComplete/${texto}`);
   }
@@ -70,6 +70,10 @@ export class CronicaGrupalService {
 
   addCronica(cronica: Cronica) {
     return this.http.post(`${environment.msmtsCronicas}/guardanueva/`, cronica);
+  }
+
+  updateCronica(cronica: Cronica) {
+    return this.http.post(`${environment.msmtsCronicas}/actualizacronica/`, cronica);
   }
 
   downloadPdf(data: any): Observable<Blob> {

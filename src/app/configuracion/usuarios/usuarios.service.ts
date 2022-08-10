@@ -37,8 +37,8 @@ export class UsuariosService {
     return this.http.get(direccion,{headers: this.header});
   }
 
-  guardaUsuario(data: object):Observable<any>{
-    let direccion = this.baseApiUrl + '/registrarEmpleado';
+  guardaUsuario(data: object, iduser: number):Observable<any>{
+    let direccion = this.baseApiUrl + '/registrarEmpleado/' + iduser;
 
     return this.http.post(direccion, data, {headers: this.header});
   }

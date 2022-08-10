@@ -26,8 +26,6 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
 
   ngOnInit(): void {
     this.idVolanteDonacion = this.rutaActiva.snapshot.paramMap.get('id');
-    
-
 
     this.rutaActiva.queryParamMap.subscribe((params: any) => {
       this.verDetalle = params.getAll('verDetalle');
