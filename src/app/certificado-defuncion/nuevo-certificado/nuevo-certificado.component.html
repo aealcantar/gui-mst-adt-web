@@ -1,134 +1,83 @@
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
-  <div header class="flex justify-content-between aling-intems-center">
-    <div>
-      <label class="headerText"> Control Interno TS </label>
+    <div header class="flex justify-content-between aling-intems-center">
+        <div>
+            <label class="headerText"> Control Interno TS </label>
+        </div>
     </div>
-  </div>
-  <div content>
-    <div>
-      <span class="instrucciones">
+    <div content>
+        <div>
+            <span class="instrucciones">
         Por favor capture los siguientes datos:
       </span>
-    </div>
-    <form
-      novalidate
-      [formGroup]="formAdd"
-      (submit)="guardar()"
-      class="formInfo"
-    >
-      <div class="container seccion">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group datepicker-group">
-              <span class="spanInput">Fecha de defunción*:</span>
-              <input
-                autocomplete="off"
-                id="fhDefuncion"
-                [placeholder]="'Selecciona fecha'"
-                [maxLength]="10"
-                [minLength]="10"
-                [ngClass]="{
+        </div>
+        <form novalidate [formGroup]="formAdd" (submit)="guardar()" class="formInfo">
+            <div class="container seccion">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group datepicker-group">
+                            <span class="spanInput">Fecha de defunción*:</span>
+                            <input autocomplete="off" id="fhDefuncion" [placeholder]="'Selecciona fecha'" [maxLength]="10" [minLength]="10" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('fechaDefuncion').invalid) ||
                     (formAdd.get('fechaDefuncion').value.length < 10 &&
                       validarCampos)
-                }"
-                matInput
-                formControlName="fechaDefuncion"
-                class="form-control"
-              />
-              <span
-                class="glyphicon glyphicon-calendar fondocalendar"
-                aria-hidden="true"
-              >
+                }" matInput formControlName="fechaDefuncion" class="form-control" />
+                            <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
-              <mat-error
-                *ngIf="
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('fechaDefuncion').hasError('required')
-                "
-              >
-                <Strong><strong>Campo Obligatorio</strong></Strong>
-              </mat-error>
+                ">
+                                <Strong><strong>Campo Obligatorio</strong></Strong>
+                            </mat-error>
 
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group datepicker-group">
-              <span class="spanInput">Hora de defunción*:</span>
-              <input
-                class="form-control"
-                [placeholder]="'Ingresa hora'"
-                [ngxTimepicker]="hrDefuncionPicker"
-                [maxLength]="8"
-                [minLength]="8"
-                [ngClass]="{
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group datepicker-group">
+                            <span class="spanInput">Hora de defunción*:</span>
+                            <input class="form-control" [placeholder]="'Ingresa hora'" [ngxTimepicker]="hrDefuncionPicker" [maxLength]="8" [minLength]="8" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('horaDefuncion').invalid)
-                }"
-                formControlName="horaDefuncion"
-                type="text"
-              />
-              <ngx-material-timepicker
-                #hrDefuncionPicker
-              ></ngx-material-timepicker>
-              <span
-                class="glyphicon glyphicon-calendar fontIcono fondocalendar"
-                aria-hidden="true"
-              >
+                }" formControlName="horaDefuncion" type="text" />
+                            <ngx-material-timepicker #hrDefuncionPicker [confirmBtnTmpl]="okButton" [cancelBtnTmpl]="cancelButton"></ngx-material-timepicker>
+                            <span class="glyphicon glyphicon-calendar fontIcono fondocalendar" aria-hidden="true">
                 <div class="imgClock"></div>
               </span>
-              <mat-error
-                *ngIf="
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('horaDefuncion').hasError('required')
-                "
-              >
-                <strong>Campo Obligatorio</strong>
-              </mat-error>
-              <mat-error
-                *ngIf="
+                ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('horaDefuncion').value.length > 8
-                "
-              >
-                <strong>Formato de hora no valido</strong>
-              </mat-error>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">Folio del certificado*:</span>
-              <input
-                #folioInput
-                class="form-control"
-                [placeholder]="'Ingresa folio'"
-                formControlName="folioCertificacion"
-                [ngClass]="{
+                ">
+                                <strong>Formato de hora no valido</strong>
+                            </mat-error>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">Folio del certificado*:</span>
+                            <input #folioInput class="form-control" [placeholder]="'Ingresa folio'" formControlName="folioCertificacion" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('folioCertificacion').invalid)
-                }"
-                [maxLength]="10"
-                type="text"
-              />
-              <mat-error
-                *ngIf="
+                }" [maxLength]="10" type="text" />
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('folioCertificacion').hasError('required')
-                "
-              >
-                <strong>Campo Obligatorio</strong>
-              </mat-error>
-              <mat-error
-                *ngIf="
+                ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('folioCertificacion').value.length > 10
-                "
-              >
-                <strong
-                  >Maximo de caracteres: 10
+                ">
+                                <strong>Maximo de caracteres: 10
                   {{ folioInput.value.length }}</strong
                 >
               </mat-error>
@@ -157,158 +106,101 @@
               "
             >
               <strong>Campo Obligatorio</strong>
-            </mat-error>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">No. de Seguridad Social:</span>
-              <input
-                [disabled]="true"
-                class="form-control"
-                formControlName="nssPaciente"
-                [ngClass]="{
+                            </mat-error>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">No. de Seguridad Social:</span>
+                            <input [disabled]="true" class="form-control" formControlName="nssPaciente" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('nssPaciente').invalid)
-                }"
-                type="text"
-              />
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">Servicio*:</span>
-              <mat-select
-                class="form-control form-control-mat-select"
-                [placeholder]="'Seleccionar servicio'"
-                [ngClass]="{
+                }" type="text" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">Servicio*:</span>
+                            <mat-select class="form-control form-control-mat-select" [placeholder]="'Seleccionar servicio'" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('cveServicio').invalid)
-                }"
-                formControlName="cveServicio"
-                #servicios
-                (selectionChange)="onServicioSelect($event)"
-              >
-                <mat-option
-                  *ngFor="let servicio of listaServicios"
-                  [value]="servicio.cve_especialidad"
-                >
-                  {{ servicio.des_especialidad }}
-                </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="
+                }" formControlName="cveServicio" #servicios (selectionChange)="onServicioSelect($event)">
+                                <mat-option *ngFor="let servicio of listaServicios" [value]="servicio.cve_especialidad">
+                                    {{ servicio.des_especialidad }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('cveServicio').hasError('required')
-                "
-              >
-                <strong>Campo Obligatorio</strong>
-              </mat-error>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group datepicker-group">
-              <span class="spanInput">Fecha de entrega de certificado*:</span>
-              <input
-                [placeholder]="'selecciona fecha'"
-                id="entregaCertificado"
-                autocomplete="off"
-                [ngClass]="{
+                ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group datepicker-group">
+                            <span class="spanInput">Fecha de entrega de certificado*:</span>
+                            <input [placeholder]="'selecciona fecha'" id="entregaCertificado" autocomplete="off" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('fechaDeEntregaDeCertificado').invalid)
-                }"
-                [maxlength]="10"
-                formControlName="fechaDeEntregaDeCertificado"
-                class="form-control"
-                type="text"
-              />
-              <span
-                class="glyphicon glyphicon-calendar fondocalendar"
-                aria-hidden="true"
-              >
+                }" [maxlength]="10" formControlName="fechaDeEntregaDeCertificado" class="form-control" type="text" />
+                            <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
                 <div class="imgCalendar"></div>
               </span>
-              <mat-error
-                *ngIf="
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd
                     .get('fechaDeEntregaDeCertificado')
                     .hasError('required')
-                "
-              >
-                <strong>Campo Obligatorio</strong>
-              </mat-error>
+                ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
 
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group datepicker-group">
-              <span class="spanInput">Hora de entrega del certificado*:</span>
-              <input
-                [placeholder]="'Ingresa hora'"
-                class="form-control"
-                [ngxTimepicker]="hrEntregaPicker"
-                [maxLength]="8"
-                formControlName="horaDeEntregaDeCertificado"
-                [ngClass]="{
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group datepicker-group">
+                            <span class="spanInput">Hora de entrega del certificado*:</span>
+                            <input [placeholder]="'Ingresa hora'" class="form-control" [ngxTimepicker]="hrEntregaPicker" [maxLength]="8" formControlName="horaDeEntregaDeCertificado" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('horaDeEntregaDeCertificado').invalid)
-                }"
-                type="text"
-              />
-              <ngx-material-timepicker
-                #hrEntregaPicker
-              ></ngx-material-timepicker>
-              <span
-                class="glyphicon glyphicon-calendar fontIcono fondocalendar"
-                aria-hidden="true"
-              >
+                }" type="text" />
+                            <ngx-material-timepicker #hrEntregaPicker [confirmBtnTmpl]="okButton" [cancelBtnTmpl]="cancelButton"></ngx-material-timepicker>
+                            <span class="glyphicon glyphicon-calendar fontIcono fondocalendar" aria-hidden="true">
                 <div class="imgClock"></div>
               </span>
-              <mat-error
-              *ngIf="
+                            <mat-error *ngIf="
                 validarCampos &&
                 formAdd.get('horaDeEntregaDeCertificado').hasError('required')
-              "
-            >
-              <strong>Campo Obligatorio</strong>
-            </mat-error>
+              ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
 
-            </div>
+                        </div>
 
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">Funeraria*:</span>
-              <input
-                [placeholder]="'Ingresa nombre de la funeraria'"
-                class="form-control"
-                [maxlength]="100"
-                [ngClass]="{
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">Funeraria*:</span>
+                            <input [placeholder]="'Ingresa nombre de la funeraria'" class="form-control" [maxlength]="100" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('nombreFuneraria').invalid)
-                }"
-                formControlName="nombreFuneraria"
-                type="text"
-              />
-              <mat-error
-                *ngIf="
+                }" formControlName="nombreFuneraria" type="text" />
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('nombreFuneraria').hasError('required')
-                "
-              >
-                <strong>Campo Obligatorio</strong>
-              </mat-error>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput"
-                >Nombre del familiar que recibe certificado*:</span
+                ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">Nombre del familiar que recibe certificado*:</span
               >
               <input
                 [placeholder]="'Ingresa nombre del familiar'"
@@ -360,64 +252,39 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Observaciones*:</span>
-              <input
-                [placeholder]="'Ingresa observaciones'"
-                class="form-control"
-                [maxlength]="1500"
-                formControlName="observaciones"
-                [ngClass]="{
+                            <input [placeholder]="'Ingresa observaciones'" class="form-control" [maxlength]="1500" formControlName="observaciones" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('observaciones').invalid)
-                }"
-                type="text"
-              />
-              <mat-error
-                *ngIf="
+                }" type="text" />
+                            <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('observaciones').hasError('required')
-                "
-              >
-                <strong>Campo Obligatorio</strong>
-              </mat-error>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">Nombre del Trabajador social</span>
-              <input
-                [disabled]="true"
-                matInput
-                class="form-control"
-                type="text"
-                formControlName="nombrePersonalElaboro"
-              />
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <span class="spanInput">Matricula del Trabajador social</span>
-              <input
-                [disabled]="false"
-                class="form-control"
-                formControlName="matriculaPersonalElaboro"
-                type="text"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div><span class="instrucciones"> *Campos obligatorios </span></div>
-        </div>
-        <div class="row">
-          <div class="col-12 text-right" *ngIf="!hasCertificado">
-            <button
-              type="button"
-              id="btnCancelarCertificado"
-              class="btn btn-danger btn-sm"
-              (click)="cancelar(cancelarModal)"
-            >
+                ">
+                                <strong>Campo Obligatorio</strong>
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">Nombre del Trabajador social</span>
+                            <input [disabled]="true" matInput class="form-control" type="text" formControlName="nombrePersonalElaboro" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="spanInput">Matricula del Trabajador social</span>
+                            <input [disabled]="false" class="form-control" formControlName="matriculaPersonalElaboro" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div><span class="instrucciones"> *Campos obligatorios </span></div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-right" *ngIf="!hasCertificado">
+                        <button type="button" id="btnCancelarCertificado" class="btn btn-danger btn-sm" (click)="cancelar(cancelarModal)">
               Cancelar</button
             ><button
               #btnGuardar
@@ -428,39 +295,39 @@
             >
               Guardar
             </button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
 
 <ng-template #cancelarModal>
-  <div class="col-sm m-3 text-center">
-    <img src="assets/images/Group 2082.png" class="Group-2082" alt="" />
-    <div class="modal-title Atencin pt-3">Atención</div>
-  </div>
-  <div class="lineaSeparador"></div>
-  <div class="col-sm text-center mt-4 mb-4">
-    <label class="tituloModal fontEmergenteTitle"
-      >¿Desea salir sin guardar</label
+    <div class="col-sm m-3 text-center">
+        <img src="assets/images/Group 2082.png" class="Group-2082" alt="" />
+        <div class="modal-title Atencin pt-3">Atención</div>
+    </div>
+    <div class="lineaSeparador"></div>
+    <div class="col-sm text-center mt-4 mb-4">
+        <label class="tituloModal fontEmergenteTitle">¿Desea salir sin guardar</label
     >
     <br />
     <label class="fontEmergenteTitle"> los cambios?</label>
-    <br /><br />
-  </div>
-  <div class="col-sm text-center mb-4">
-    <button class="btn btn-danger btuser" type="button" mat-dialog-close>
+        <br /><br />
+    </div>
+    <div class="col-sm text-center mb-4">
+        <button class="btn btn-danger btuser" type="button" mat-dialog-close>
       Cancelar
     </button>
-    <button
-      type="button"
-      (click)="cancelarSinGuardar()"
-      class="btn btn-primary btnGuardar"
-      mat-dialog-close
-    >
+        <button type="button" (click)="cancelarSinGuardar()" class="btn btn-primary btnGuardar" mat-dialog-close>
       Aceptar
     </button>
-  </div>
+    </div>
+</ng-template>
+<ng-template #cancelButton>
+    <button class="btn btn-sm">Cancelar</button>
+</ng-template>
+<ng-template #okButton>
+    <button class="btn btn-sm">Aceptar</button>
 </ng-template>
