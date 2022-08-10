@@ -174,7 +174,7 @@ export class DetalleCronicaDesdeCeroComponent implements OnInit, OnDestroy {
       unidad: "HGZ 48 SAN PEDRO XALAPA",
       clavePtal: "35E1011D2153",
       turno: "MATUTINO",
-      servicio: "GRUPO",
+      servicio: this.cronica?.desEspecialidad.toUpperCase(),
       grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
       fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
       hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",
