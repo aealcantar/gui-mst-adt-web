@@ -171,10 +171,9 @@
                 </span>:
               </label>
               <select class="form-control captura" id="turno" name="turno" formControlName="turno"
-
                 [ngClass]="{'form-control-error': formfields.controls.turno.errors}" required
                 [(ngModel)]="turnoSeleccionado.des_turno" (change)="cambiarTurno()">
-                <option value="" disabled selected hidden>Seleccionar turno</option>
+                <!-- <option value="" disabled selected hidden>Seleccionar turno</option> -->
                 <option [value]="objeto.des_turno" *ngFor="let objeto of lstTurnos">
                   {{objeto.des_turno}}</option>
               </select>

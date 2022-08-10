@@ -122,10 +122,15 @@ export class HorariosComponent implements OnInit {
   turnoNuevo: HorarioTurno;
 
   seleccionafila(fila: any) {
-
     this.horarioSeleccionado = this.diaSeleccionado.horarios[fila];
-    this.turnoSeleccionado = this.horarioSeleccionado.turno;
-    // console.log('horario',this.horarioSeleccionado,'turno',this.turnoSeleccionado,'lista horarios', this.diaSeleccionado.horarios);
+    this.turnoSeleccionado = this.diaSeleccionado.horarios[fila].turno;
+    this.formfields.patchValue({
+      turno: this.diaSeleccionado.horarios[fila].turno.des_turno, 
+    });
+    // this.turnoSeleccionado = prueba;
+
+    
+    console.log('horario',this.horarioSeleccionado,'turno',this.turnoSeleccionado,'lista horarios', this.diaSeleccionado.horarios,'turno de la lista', this.turnoSeleccionado.des_turno);
     this.changeDetector.detectChanges();
     if (this.horarioSeleccionado.estatus.cveIdEstatus == 6) {
       this.blnHabil = false;
