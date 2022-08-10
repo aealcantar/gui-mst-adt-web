@@ -297,7 +297,7 @@
               <span class="est">Estatus:</span>
               <span class="acc"></span>
             </div>
-            <div class="body " *ngFor="let item of diaSeleccionado?.horarios let i = index" (click)="seleccionafila(i)"
+            <div class="body " *ngFor="let item of diaSeleccionado?.horarios let i = index" 
             [ngClass]="{'inhabiliar': item.estatus.cveIdEstatus== 6}">
               <span class="num">{{ i+1 }}</span>
               <span class="ini"> {{ item.horaInicial }}</span>
@@ -319,7 +319,7 @@
 
 
               </span>
-              <span class="acc">
+              <span class="acc iconoHover" (click)="seleccionafila(i)">
                 <img src="../../assets/images/icon-editar-azul.svg">
               </span>
             </div>
