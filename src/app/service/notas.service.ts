@@ -18,8 +18,9 @@ export class NotasService {
     private router: Router
   ) { }
 
-  getNotasByFechas(fechaInicial: string, fechaFinal: string) {
-    return this.http.get<any>(`${urlServNotas}/findNotasByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+  getNotasByFechas(fechaInicial: string, fechaFinal: string, numNss: string) {
+    return this.http.get<any>(`${urlServNotas}/findNotasByFechas/${fechaInicial}/${fechaFinal}/${numNss}`, { responseType: 'json'});
+    // return this.http.get<any>(`${urlServNotas}/findNotasByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
   }
 
   getNotasById(id: number) {

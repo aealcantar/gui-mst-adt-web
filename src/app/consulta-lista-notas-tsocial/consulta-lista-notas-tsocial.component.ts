@@ -8,7 +8,8 @@ import * as moment from 'moment';
 import { Nota } from '../models/notas.model';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { isEmpty } from 'rxjs';
-
+import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 declare var $: any;
 
 @Component({
@@ -17,6 +18,8 @@ declare var $: any;
   styleUrls: ['./consulta-lista-notas-tsocial.component.css']
 })
 export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit {
+  paciente!: pacienteSeleccionado;
+  public nss: string;
   public fechaSelected!: string;
   public page: number = 1;
   public pageSize: number = 15;
@@ -37,6 +40,7 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
     private authService: AuthService,
     private notasService: NotasService,
     private fb: FormBuilder,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
     if (this.extras && this.extras.state) {
@@ -53,6 +57,9 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
       fechaInicial: [null, Validators.required],
       fechaFinal: [null, Validators.required],
     });
+
+    this.paciente = this.tarjetaService.get();
+    this.nss = this.paciente.nss.toString();
   }
 
   getNotasById(id: number) {
@@ -69,7 +76,8 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
 
   getNotasByFecha() {
     this.tabla = [];
-    this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+    // this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+    this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value,  this.nss).subscribe(
       (res) => {
         this.tabla = res;
       },
