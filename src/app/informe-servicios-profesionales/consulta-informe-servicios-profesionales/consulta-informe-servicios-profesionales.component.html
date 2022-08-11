@@ -25,8 +25,7 @@
                             Servicio:
                         </label>
                         <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
-                            formControlName="servicio" [disableOptionCentering]="true">
-                            <mat-option class="select-font" [value]="''" selected>Seleccionar</mat-option>
+                            formControlName="servicio" [disableOptionCentering]="true" placeholder="Seleccionar">
                             <mat-option class="select-font" [value]="servicio.cve_especialidad"
                                 *ngFor="let servicio of serviciosEspecialidad">
                                 {{ servicio.des_especialidad }}</mat-option>
@@ -39,8 +38,7 @@
                             Turno:
                         </label>
                         <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
-                            formControlName="turno" [disableOptionCentering]="true">
-                            <mat-option class="select-font" [value]="''" selected>Seleccionar</mat-option>
+                            formControlName="turno" [disableOptionCentering]="true" placeholder="Seleccionar">
                             <mat-option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{
                                 turno.des_turno }}
                             </mat-option>
@@ -55,10 +53,7 @@
                             Lugar:
                         </label>
                         <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
-                            formControlName="lugar" [disableOptionCentering]="true">
-                            <mat-option class="select-font" [value]="''" selected>
-                                Seleccionar
-                            </mat-option>
+                            formControlName="lugar" [disableOptionCentering]="true" placeholder="Seleccionar">
                             <mat-option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
                                 {{ lugar.des_completa_ubicacion }}
                             </mat-option>
@@ -71,10 +66,7 @@
                             Responsable:
                         </label>
                         <mat-select class="form-control form-control-mat-select" aria-label="Servicio"
-                            formControlName="responsable" [disableOptionCentering]="true">
-                            <mat-option class="select-font" [value]="''" selected>
-                                Ingresar Responsable
-                            </mat-option>
+                            formControlName="responsable" [disableOptionCentering]="true" placeholder="Seleccionar">
                             <mat-option class="select-font" [value]="responsable.matriculaTs"
                                 *ngFor="let responsable of responsables">
                                 {{ responsable.nombreTs }}
