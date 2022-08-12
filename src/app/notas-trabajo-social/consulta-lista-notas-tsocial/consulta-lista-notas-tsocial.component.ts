@@ -5,10 +5,10 @@ import { AuthService } from 'src/app/service/auth-service.service';
 import { NotasService } from 'src/app/service/notas.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { Nota } from '../models/notas.model';
+import { Nota } from '../../models/notas.model';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { isEmpty } from 'rxjs';
-import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
+import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 declare var $: any;
 

@@ -1,4 +1,4 @@
-import { ConsultaNotaTSocialComponent } from './consulta-nota-tsocial/consulta-nota-tsocial.component';
+import { ConsultaNotaTSocialComponent } from './notas-trabajo-social/consulta-nota-tsocial/consulta-nota-tsocial.component';
 import { LOCALE_ID, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,8 +44,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import '@angular/common/locales/global/es';
 import { NumberDirective } from './directives/only-numbers.directive';
-import { NuevaNotaTSocialComponent } from './nueva-nota-tsocial/nueva-nota-tsocial.component';
-import { ConsultaListaNotasTSocialComponent } from './consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
+import { NuevaNotaTSocialComponent } from './notas-trabajo-social/nueva-nota-tsocial/nueva-nota-tsocial.component';
+import { ConsultaListaNotasTSocialComponent } from './notas-trabajo-social/consulta-lista-notas-tsocial/consulta-lista-notas-tsocial.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';

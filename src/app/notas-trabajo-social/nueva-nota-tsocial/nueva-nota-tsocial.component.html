@@ -70,8 +70,7 @@
               <span class="spanInput">Tipo de nota*:</span>
               <mat-select class="form-control form-control-mat-select"
                 [ngClass]="{'form-control-error': formNuevaNota.controls?.idTipoNota?.dirty && formNuevaNota.controls?.idTipoNota?.errors }"
-                id="idTipoNota" formControlName="idTipoNota" [disableOptionCentering]="true" aria-label="Servicio">
-                <mat-option class="select-font" [value]="''" selected>Ingresar tipo de nota</mat-option>
+                id="idTipoNota" formControlName="idTipoNota" [disableOptionCentering]="true" aria-label="Servicio" placeholder="Ingresar tipo de nota">
                 <mat-option class="select-font" [value]="item.id" *ngFor="let item of catTiposNotas">
                   {{ item.descripcion }}
                 </mat-option>
@@ -89,8 +88,7 @@
               <span class="spanInput">Red de apoyo con la que cuenta el paciente*:</span>
               <mat-select class="form-control form-control-mat-select"
                 [ngClass]="{'form-control-error':formNuevaNota.controls?.idRedApoyo?.dirty &&formNuevaNota.controls?.idRedApoyo?.errors}"
-                id="idRedApoyo" formControlName="idRedApoyo" [disableOptionCentering]="true" aria-label="Servicio">
-                <mat-option class="select-font" [value]="''" selected>Seleccionar red de apoyo</mat-option>
+                id="idRedApoyo" formControlName="idRedApoyo" [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar red de apoyo">
                 <mat-option class="select-font" [value]="item.id" *ngFor="let item of catRedesApoyo">
                   {{ item.descripcion }}
                 </mat-option>
@@ -113,8 +111,8 @@
                   formNuevaNota.controls?.idActividadTecnica?.errors
               }" class="form-control form-control-mat-select" id="idActividadTecnica"
                 formControlName="idActividadTecnica" [disableOptionCentering]="true" style="background-position-y: 5px"
-                aria-label="Servicio">
-                <mat-option class="select-font" [value]="''">Seleccionar actividad técnica</mat-option>
+                aria-label="Servicio" placeholder="Seleccionar actividad técnica">
+                <!-- <mat-option class="select-font" [value]="''">Seleccionar actividad técnica</mat-option> -->
                 <mat-option class="select-font" [value]="item.id" *ngFor="let item of catActividadesTecnicas">
                   {{ item.descripcion }}
                 </mat-option>
@@ -128,10 +126,10 @@
             </div>
           </div>
           <div style="margin-left: -1.1% ">
-            <div class="col-md-4" style="margin-left: 9px;">
-              <div class="form-group">
+            <div class="col-md-12" style="margin-left: 9px;">
+              <div class="form-group" style="width: 1064px;">
                 <span class="spanInput ">Diagnóstico médico*:</span>
-                <img src="../../assets/icons/select-indicador.svg" class="iconoSelect" alt="">
+                <img src="../../assets/icons/select-indicador.svg" class="iconoSelect" alt="" style="margin-left: 912px;;">
                 <input type=" input" class="form-control select" placeholder="Seleccionar diagnóstico médico"
                   aria-label="Number" matInput formControlName="diagnosticoMedico" [matAutocomplete]="auto"
                   (keyup)="handleChangeDiagnostico();" maxlength="19" (blur)="onBlur()">

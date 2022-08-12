@@ -1,13 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { pacienteSeleccionado } from '../busqueda-nss/paciente.interface';
-import { Nota } from '../models/notas.model';
-import { ReporteNota } from '../models/reporte-notas.model';
-import { AuthService } from '../service/auth-service.service';
-import { NotasService } from '../service/notas.service';
+import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
+import { Nota } from '../../models/notas.model';
+import { ReporteNota } from '../../models/reporte-notas.model';
+import { AuthService } from '../../service/auth-service.service';
+import { NotasService } from '../../service/notas.service';
 import { formatDate } from '@angular/common';
-import { Usuario } from '../models/usuario.model';
+import { Usuario } from '../../models/usuario.model';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 
 @Component({
