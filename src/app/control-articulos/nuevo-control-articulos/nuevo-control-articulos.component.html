@@ -51,40 +51,15 @@
 
           <div class="col-sm-4 form-group pt-5">
             <span class="labels pb-1">Servicio*:</span>
-            <!-- <select
-            [ngClass]="{
-              'form-control-error':
-                submitted && formNuevoArticulo.controls.servicio.errors
-            }"
-            class="form-control styleselect"
-            id="servicio"
-            formControlName="servicio"
-            (change)="onChangeServicio()"
-          >
-            <option [value]="''" selected disabled class="select-font optionSelect ">
-              Seleccionar servicio
-            </option>
-            <option
-            class="select-font optionSelect"
-              [value]="item.cve_especialidad"
-              *ngFor="let item of listaServicios"
-            >
-              {{ item.des_especialidad }}
-            </option>
-          </select> -->
-
             <mat-select class="form-control2 form-control form-control-mat-select " [ngClass]="{
               'form-control-error':
                 submitted && formNuevoArticulo.controls.servicio.errors
-            }" id="servicio" formControlName="servicio" (selectionChange)="onChangeServicio()">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
-                Seleccionar servicio</mat-option>
+            }" id="servicio" formControlName="servicio" (selectionChange)="onChangeServicio()"
+              placeholder="Seleccionar servicio">
               <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
                 {{ item.des_especialidad }}
               </mat-option>
             </mat-select>
-
-
             <small *ngIf="submitted && formNuevoArticulo.controls.servicio.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
@@ -175,23 +150,9 @@
         <div class="row pl-5 pr-5">
           <div class="col-sm-8 form-group pt-5">
             <span class="labels pb-1">Ubicación*:</span>
-            <!-- <select [ngClass]="{
-                'form-control-error':
-                  submitted && formNuevoArticulo.controls.ubicacion.errors
-              }" class="form-control styleselect" id="ubicacion" formControlName="ubicacion" name="ubicacion">
-              <option [value]="''" selected disabled class="select-font optionSelect ">Seleccionar ubicación</option>
-              <option class="select-font optionSelect " [value]="item.cve_ubicacion"
-                *ngFor="let item of listaUbicacion">
-                {{ item.des_completa_ubicacion }}
-              </option>
-            </select> -->
-
-
             <mat-select class="form-controlUvicacionLista form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.ubicacion.errors}"
-              id="ubicacion" formControlName="ubicacion">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
-                Seleccionar ubicación</mat-option>
+              id="ubicacion" formControlName="ubicacion" placeholder="Seleccionar ubicación">
               <mat-option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of listaUbicacion">
                 {{ item.des_completa_ubicacion }}
               </mat-option>
@@ -202,42 +163,14 @@
             </small>
           </div>
           <div class="col-sm-4 form-group pt-5">
-            <!-- <span class="labels pb-1"></span>
-             <select
-              [ngClass]="{
-                'form-control-error':
-                  submitted &&
-                  formNuevoArticulo.controls.horarioEntregaArticulo.errors
-              }"
-              class="form-control"
-              id="horarioEntregaArticulo"
-              formControlName="horarioEntregaArticulo"
-            >
-              <option [value]="''" selected disabled>Seleccionar horario</option>
-              <option
-                class="select-font"
-                [value]="item.idHorario"
-                *ngFor="let item of listaDeHorarios"
-              >
-                {{ item.nomDia }}
-              </option>
-            </select>
-            <small
-              *ngIf="
-                submitted &&
-                formNuevoArticulo.controls.horarioEntregaArticulo.errors
-              "
-              class="form-text form-text-error Campo-obligatorio"
-            >
-              Campo obligatorio
-            </small> -->
             <div class="datepicker-group ">
               <label class="control-label labels" for="calendarYear">Horario para entrega de artículos*:</label>
               <input type="text" [ngClass]="{
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.horarioEntregaArticulo.errors
-                }" class="form-control hasDatepicker" id="horarioEntregaArticulo" mask="Hh:m0" [leadZeroDateTime]="true"
-                formControlName="horarioEntregaArticulo" placeholder="Ingresa hora" maxlength="5" (blur)="ajustarHora('horarioEntregaArticulo');" />
+                }" class="form-control hasDatepicker" id="horarioEntregaArticulo" mask="Hh:m0"
+                [leadZeroDateTime]="true" formControlName="horarioEntregaArticulo" placeholder="Ingresa hora"
+                maxlength="5" (blur)="ajustarHora('horarioEntregaArticulo');" />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img src="assets/images/reloj.svg" height="21px" style="width: 20px;" class="icono" /></span>
             </div>
@@ -290,9 +223,10 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.resguardoHora.errors
                 }" class="form-control hasDatepicker" id="resguardoHora" formControlName="resguardoHora"
-                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" (blur)="ajustarHora('resguardoHora');" />
+                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true"
+                (blur)="ajustarHora('resguardoHora');" />
               <span class=" glyphicon fontIcono" aria-hidden="true">
-              <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
+                <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
             </div>
             <small *ngIf="
                 submitted && formNuevoArticulo.controls.resguardoHora.errors
@@ -357,7 +291,8 @@
                   'form-control-error':
                     submitted && formNuevoArticulo.controls.recepcionHora.errors
                 }" class="calendario form-control" id="recepcionHora" formControlName="recepcionHora"
-                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true" (blur)="ajustarHora('recepcionHora');" />
+                placeholder="Ingresa hora" maxlength="5" mask="Hh:m0" [leadZeroDateTime]="true"
+                (blur)="ajustarHora('recepcionHora');" />
               <span class="glyphicon fontIcono" aria-hidden="true">
                 <img src="assets/images/reloj.svg" height="21px" class="icono" style="width: 20px;" /></span>
             </div>
@@ -405,22 +340,8 @@
           </div>
           <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Ubicación*:</span>
-            <!-- <select [ngClass]="{
-                'form-control-error':
-                  submitted &&
-                  formNuevoArticulo.controls.recepcionUbicacion.errors
-              }" class="form-control styleselect" id="ubicacion" formControlName="recepcionUbicacion">
-              <option [value]="''" selected disabled class="select-font optionSelect "> Seleccionar ubicación</option>
-              <option class="select-font optionSelect " [value]="item.cve_ubicacion"
-                *ngFor="let item of listaUbicacion">
-                {{ item.des_completa_ubicacion }}
-              </option>
-            </select> -->
-
             <mat-select class="form-control2 form-control form-control-mat-select " [ngClass]="{'form-control-error':submitted && formNuevoArticulo.controls.recepcionUbicacion.errors
-            }" id="recepcionUbicacion" formControlName="recepcionUbicacion">
-              <mat-option [value]="''" selected disabled class="select-font optionSelect ">
-                Seleccionar ubicación</mat-option>
+            }" id="recepcionUbicacion" formControlName="recepcionUbicacion" placeholder="Seleccionar ubicación">
               <mat-option class="select-font" [value]="item.cve_ubicacion" *ngFor="let item of listaUbicacion">
                 {{ item.des_completa_ubicacion }}
               </mat-option>
@@ -432,8 +353,6 @@
               Campo obligatorio
             </small>
           </div>
-
-
           <div class="col-sm-4 form-group mt-2">
             <span class="labels pb-1">Horario para entregar artículos*:</span>
             <input [ngClass]="{
@@ -443,7 +362,7 @@
                     .errors
               }" class="form-control" id="recepcionHorarioEntregaArticulo"
               formControlName="recepcionHorarioEntregaArticulo" placeholder="Ingresa horario" type="text"
-              mask="Hh:m0 - Hh:m0" [showMaskTyped]="true" [leadZeroDateTime]="true"/>
+              mask="Hh:m0 - Hh:m0" [showMaskTyped]="true" [leadZeroDateTime]="true" />
             <small *ngIf="
                 submitted &&
                 formNuevoArticulo.controls.recepcionHorarioEntregaArticulo
@@ -459,16 +378,6 @@
 
       <div class="row">
         <div class="col-md-8"></div>
-        <!-- <div class="col-sm-4" style="padding-left: 3.27em !important">
-          <button class="btn btn-danger btuser" type="button" (click)="cancelar(cancelarModal)">
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary btn-guardar">
-            Guardar
-          </button>
-        </div> -->
-
-
         <div class="col-md-4" style="padding-top: 29px; padding-right: 17px;  margin-top: -1.4%;">
           <button type="submit" class="btn btn-primary buttonL" style="float: right;border: solid 1px #9d2449;">
             Guardar
@@ -478,13 +387,10 @@
             Cancelar
           </button>
         </div>
-
-
       </div>
     </form>
   </div>
 </app-card-template>
-<!-- <app-trabajador-social-clinico></app-trabajador-social-clinico> -->
 <app-info-bottom></app-info-bottom>
 
 <ng-template #cancelarModal>
