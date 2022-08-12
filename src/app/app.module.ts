@@ -84,7 +84,7 @@ import { CatalogosComponent } from './configuracion/catalogos/catalogos.componen
 import { HorariosComponent } from './horarios/horarios.component';
 import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.component';
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
-import { NuevoAvisoMpComponent } from './nuevo-aviso-mp/nuevo-aviso-mp.component';
+import { NuevoAvisoMpComponent } from './avisos-ministerio-publico/nuevo-aviso-mp/nuevo-aviso-mp.component';
 import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
 import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avisos-mp/detalle-avisos-mp.component';
 
@@ -100,7 +100,7 @@ import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certifi
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component';
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component';
-import { ConsultaMpAdministracionComponent } from './aviso-mp/consulta-mp-administracion/consulta-mp-administracion.component';
+import { ConsultaMpAdministracionComponent } from './avisos-ministerio-publico/consulta-mp-administracion/consulta-mp-administracion.component';
 import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component';
 import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
 import { NuevaCronicaDesdeCeroComponent } from './cronica-grupal/cronica-desde-cero/nueva-cronica-desde-cero/nueva-cronica-desde-cero.component';

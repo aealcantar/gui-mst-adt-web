@@ -51,15 +51,9 @@
 
           <div class="col-sm-4 form-group pt-5">
             <span class="labels pb-1">Servicio*:</span>
-            <mat-select class="form-control2 form-control form-control-mat-select " [ngClass]="{
-              'form-control-error':
-                submitted && formNuevoArticulo.controls.servicio.errors
-            }" id="servicio" formControlName="servicio" (selectionChange)="onChangeServicio()"
-              placeholder="Seleccionar servicio">
-              <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
-                {{ item.des_especialidad }}
-              </mat-option>
-            </mat-select>
+            <input [ngClass]="{'form-control-error': submitted && formNuevoArticulo.controls.servicio.errors}"
+            class="form-control" id="servicio" formControlName="servicio"
+            placeholder="Ingresar servicio" type="text" maxlength="100">
             <small *ngIf="submitted && formNuevoArticulo.controls.servicio.errors"
               class="form-text form-text-error Campo-obligatorio">
               Campo obligatorio
