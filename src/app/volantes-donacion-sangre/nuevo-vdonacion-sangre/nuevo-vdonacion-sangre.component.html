@@ -57,9 +57,9 @@
               <span class="spanInput">Nombre del Banco de Sangre*:</span>
               <mat-select class="form-control2 form-control form-control-mat-select "
                 [ngClass]="{'form-control-error': submitted && formNuevaDonacion.controls.idBancoSangre.errors}"
-                id="idBancoSangre" formControlName="idBancoSangre">
-                <mat-option [value]="''" selected class="select-font optionSelect ">
-                  Seleccionar servicio</mat-option>
+                id="idBancoSangre" formControlName="idBancoSangre" placeholder="Seleccionar servicio">
+                <!-- <mat-option [value]="''" selected class="select-font optionSelect ">
+                  Seleccionar servicio</mat-option> -->
                 <mat-option class="select-font" [value]="item.idBancoSangre" *ngFor="let item of bancosSangre">
                   {{ item.detalleBancoSangre }}
                 </mat-option>
@@ -109,9 +109,9 @@
             <span class="spanInput">Estado*:</span>
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idEstado.errors}" id="idEstado"
-              formControlName="idEstado" (selectionChange)="onChangeEstado()">
-              <mat-option [value]="''" selected class="select-font optionSelect ">
-                Ingresar estado</mat-option>
+              formControlName="idEstado" (selectionChange)="onChangeEstado()" placeholder="Ingresar estado">
+              <!-- <mat-option [value]="''" selected class="select-font optionSelect ">
+                Ingresar estado</mat-option> -->
               <mat-option class="select-font" [value]="estadoF.cve_estado" *ngFor="let estadoF of estadosFamiliar">
                 {{ estadoF.des_nombre_completo}}
               </mat-option>
@@ -125,9 +125,9 @@
             <span class="spanInput">Delegación/Municipio*:</span>
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idDelegacion.errors }"
-              id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()">
-              <mat-option [value]="''" selected class="select-font optionSelect ">
-                Ingresar delegación o municipio</mat-option>
+              id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()" placeholder="Ingresar delegación o municipio">
+              <!-- <mat-option [value]="''" selected class="select-font optionSelect ">
+                Ingresar delegación o municipio</mat-option> -->
               <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                 *ngFor="let delegacion of delegaciones">
                 {{ delegacion.des_municipio}}
@@ -145,9 +145,7 @@
             <span class="spanInput">Ciudad*:</span>
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idCiudad.errors }"
-              id="idCiudad" formControlName="idCiudad">
-              <mat-option [value]="''" selected class="select-font optionSelect ">
-                Ingresar ciudad</mat-option>
+              id="idCiudad" formControlName="idCiudad" placeholder=" Ingresar ciudad">
               <mat-option class="select-font" [value]="ciudadF.cve_ciudad" *ngFor="let ciudadF of ciudadesFamiliar">
                 {{ ciudadF.des_ciudad}}
               </mat-option>
@@ -223,10 +221,10 @@
             <span class="spanInput">Tipo de sangre*:</span>
               <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.tipoSangre.errors }"
-              maxlength="10" id="tipoSangre" formControlName="tipoSangre">
-              <mat-option [value]="''" selected class="select-font optionSelect ">
+              maxlength="10" id="tipoSangre" formControlName="tipoSangre" placeholder="Seleccionar tipo de sangre">
+              <!-- <mat-option [value]="''" selected class="select-font optionSelect ">
                 Seleccionar tipo de sangre
-              </mat-option>
+              </mat-option> -->
               <mat-option class="select-font" [value]="'A+'">{{ 'A+'}}</mat-option>
               <mat-option class="select-font" [value]="'B+'">{{ 'B+'}}</mat-option>
               <mat-option class="select-font" [value]="'O+'">{{ 'O+'}}</mat-option>
@@ -246,10 +244,10 @@
             <span class="spanInput">Servicio*:</span>
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idServicio.errors }"
-              id="idServicio" formControlName="idServicio">
-              <mat-option [value]="''" selected class="select-font optionSelect ">
+              id="idServicio" formControlName="idServicio" placeholder="Seleccionar servicio">
+              <!-- <mat-option [value]="''" selected class="select-font optionSelect ">
                 Seleccionar servicio
-              </mat-option>
+              </mat-option> -->
               <mat-option class="select-font" [value]="item.cve_especialidad" *ngFor="let item of listaServicios">
                 {{ item.des_especialidad }}
               </mat-option>
