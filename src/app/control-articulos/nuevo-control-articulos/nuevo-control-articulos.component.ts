@@ -119,7 +119,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
     }
 
     this.servicios();
-    this.ubicacion();
+    // this.ubicacion();
     this.formNuevoArticulo.controls['fecha'].setValue(this.fecha);
     this.formNuevoArticulo.controls['recepcionFecha'].setValue(this.fecha);
     this.formNuevoArticulo.controls['resguardoFecha'].setValue(this.fecha);
@@ -174,16 +174,16 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   }
 
   //busca las ubicaciones
-  ubicacion() {
-    this.controlArticulosService.getCatUbicaciones().subscribe(
-      (response) => {
-        this.listaUbicacion = response.filter( (r:any) => r.tipoUbicacionEntity.cveTipoUbicacion === 3);
-      },
-      (httpErrorResponse: HttpErrorResponse) => {
-        console.error(httpErrorResponse);
-      }
-    );
-  }
+  // ubicacion() {
+  //   this.controlArticulosService.getCatUbicaciones().subscribe(
+  //     (response) => {
+  //       this.listaUbicacion = response.filter( (r:any) => r.tipoUbicacionEntity.cveTipoUbicacion === 3);
+  //     },
+  //     (httpErrorResponse: HttpErrorResponse) => {
+  //       console.error(httpErrorResponse);
+  //     }
+  //   );
+  // }
 
   //horarios
   /*   horarioEntrega() {
