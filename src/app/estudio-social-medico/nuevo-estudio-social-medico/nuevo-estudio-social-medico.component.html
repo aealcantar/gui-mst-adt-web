@@ -102,7 +102,7 @@
                     <br>
 
                     <div class="row" style="margin-top: -0.8em !important;">
-                      <div class="col-md-4" style="margin-right: -23px;">
+                      <div class="col-md-4" style="margin-right: -23px;     margin-top: 4px;">
                         <div class=" form-group">
                           <span class="labels">Código Postal*:</span>
                           <input
@@ -121,9 +121,8 @@
                           <span class="labels">Estado*:</span>
                           <mat-select class="form-control form-control-mat-select"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.estado?.dirty && formEstudioSocial.controls?.estado?.errors }"
-                            id="estado" formControlName="estado" [disableOptionCentering]="true" aria-label="Servicio"
+                            id="estado" formControlName="estado" [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar estado"
                             (selectionChange)="onChangeEstado()">
-                            <mat-option class="select-font" [value]="''" selected>Seleccionar estado</mat-option>
                             <mat-option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of estados">
                               {{ estado.des_nombre_completo }}
                             </mat-option>
@@ -136,10 +135,8 @@
                           <span class="labels">Delegación/Municipio*:</span>
                           <mat-select class="form-control form-control-mat-select"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.municipio?.dirty && formEstudioSocial.controls?.municipio?.errors }"
-                            id="municipio" formControlName="municipio" [disableOptionCentering]="true"
+                            id="municipio" formControlName="municipio" [disableOptionCentering]="true" placeholder="Seleccionar delegación o municipio"
                             aria-label="Servicio" (selectionChange)="onChangeCiudad()">
-                            <mat-option class="select-font" [value]="''" selected>Seleccionar delegación o municipio
-                            </mat-option>
                             <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio"
                               *ngFor="let municipio of municipios">{{ municipio.des_municipio}}
                             </mat-option>
@@ -150,13 +147,12 @@
                     </div>
                     <div class="row">
                       <div class="col-md-4" style="margin-right: -23px; margin-top: 4px;">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top: -4px;">
                           <span class="labels">Ciudad*:</span>
                           <br>
                           <mat-select class="form-control form-control-mat-select"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudad?.dirty && formEstudioSocial.controls?.ciudad?.errors }"
-                            id="ciudad" formControlName="ciudad" [disableOptionCentering]="true" aria-label="Servicio">
-                            <mat-option class="select-font" [value]="''" selected>Ingresar ciudad</mat-option>
+                            id="ciudad" formControlName="ciudad" [disableOptionCentering]="true" aria-label="Servicio" placeholder="Ingresar ciudad">
                             <mat-option class="select-font" [value]="ciudad.cve_ciudad" *ngFor="let ciudad of ciudades">
                               {{ ciudad.des_ciudad}}
                             </mat-option>
@@ -235,9 +231,8 @@
 
                           <mat-select class="form-control form-control-mat-select"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.comunidad?.dirty && formEstudioSocial.controls?.comunidad?.errors }"
-                            id="comunidad" formControlName="comunidad" [disableOptionCentering]="true"
+                            id="comunidad" formControlName="comunidad" [disableOptionCentering]="true" placeholder="Seleccionar comunidad"
                             aria-label="Servicio">
-                            <mat-option class="select-font" [value]="''" selected>Seleccionar comunidad</mat-option>
                             <mat-option class="select-font" [value]="comunidad.id"
                               *ngFor="let comunidad of tiposComunidad">
                               {{ comunidad.descripcion }}
@@ -304,9 +299,8 @@
 
                           <mat-select class="form-control form-control-mat-select"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.estadoCivil?.dirty && formEstudioSocial.controls?.estadoCivil?.errors }"
-                            id="estadoCivil" formControlName="estadoCivil" [disableOptionCentering]="true"
+                            id="estadoCivil" formControlName="estadoCivil" [disableOptionCentering]="true" placeholder="Seleccionar estado civil"
                             aria-label="Servicio">
-                            <mat-option class="select-font" [value]="''" selected>Seleccionar estado civil</mat-option>
                             <mat-option class="select-font" [value]="estadoCivil.id"
                               *ngFor="let estadoCivil of estadosCiviles">
                               {{ estadoCivil.descripcion }}
@@ -325,9 +319,8 @@
                           <br>
                           <mat-select class="form-control form-control-mat-select"
                             [ngClass]="{'form-control-error': formEstudioSocial.controls?.ocupacion?.dirty && formEstudioSocial.controls?.ocupacion?.errors }"
-                            id="ocupacion" formControlName="ocupacion" [disableOptionCentering]="true"
+                            id="ocupacion" formControlName="ocupacion" [disableOptionCentering]="true" placeholder="Ingresar ocupación"
                             aria-label="Servicio">
-                            <mat-option class="select-font" [value]="''" selected>Ingresar ocupación</mat-option>
                             <mat-option class="select-font" [value]="ocupacion.id_OCUPACION"
                               *ngFor="let ocupacion of ocupaciones">
                               {{ ocupacion.nom_OCUPACION }}
@@ -532,10 +525,8 @@
 
                     <mat-select class="form-control form-control-mat-select"
                       [ngClass]="{'form-control-error': formEstudioSocial.controls?.estadoF?.dirty && formEstudioSocial.controls?.estadoF?.errors }"
-                      id="estadoF" formControlName="estadoF" [disableOptionCentering]="true" aria-label="Servicio"
+                      id="estadoF" formControlName="estadoF" [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar estado"
                       (selectionChange)="onChangeEstadoFamiliar()">
-                      <mat-option class="select-font" [value]="''" selected>Seleccionar estado
-                      </mat-option>
                       <mat-option class="select-font" [value]="estadoF.cve_estado"
                         *ngFor="let estadoF of estadosFamiliar">
                         {{ estadoF.des_nombre_completo}}
@@ -553,10 +544,8 @@
                     </label>
                     <mat-select class="form-control form-control-mat-select"
                       [ngClass]="{'form-control-error': formEstudioSocial.controls?.delegacionM?.dirty && formEstudioSocial.controls?.delegacionM?.errors }"
-                      id="delegacionM" formControlName="delegacionM" [disableOptionCentering]="true"
+                      id="delegacionM" formControlName="delegacionM" [disableOptionCentering]="true" placeholder="Seleccionar delegación o municipio"
                       aria-label="Servicio" (selectionChange)="onChangeMunicipioFamiliar()">
-                      <mat-option class="select-font" [value]="''" selected>Seleccionar delegación o municipio
-                      </mat-option>
                       <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
                         *ngFor="let delegacion of delegaciones">
                         {{ delegacion.des_municipio}}
@@ -581,9 +570,7 @@
                     </label>
                     <mat-select class="form-control form-control-mat-select"
                       [ngClass]="{'form-control-error': formEstudioSocial.controls?.ciudadF?.dirty && formEstudioSocial.controls?.ciudadF?.errors }"
-                      id="ciudadF" formControlName="ciudadF" [disableOptionCentering]="true" aria-label="Servicio">
-                      <mat-option class="select-font" [value]="''" selected>Ingresar ciudad
-                      </mat-option>
+                      id="ciudadF" formControlName="ciudadF" [disableOptionCentering]="true" aria-label="Servicio"  placeholder="Ingresar ciudad">
                       <mat-option class="select-font" [value]="ciudadF.cve_ciudad"
                         *ngFor="let ciudadF of ciudadesFamiliar">
                         {{ ciudadF.des_ciudad}}

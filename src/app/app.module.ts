@@ -56,9 +56,9 @@ import { CitaguardaComponent } from './citas/citaguarda/citaguarda.component';
 import { FichapacienteComponent } from './common/fichapaciente/fichapaciente.component';
 import { MenugralComponent } from './common/menugral/menugral.component';
 import { CitasService } from './citas/citas.service';
-import { NuevoEstudioSocialMedicoComponent } from './nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
-import { ConsultaEstudiosMedicosComponent } from './consulta-estudios-medicos/consulta-estudios-medicos.component';
-import { EstudioMedicoGuardadoComponent } from './estudio-medico-guardado/estudio-medico-guardado.component';
+import { NuevoEstudioSocialMedicoComponent } from './estudio-social-medico/nuevo-estudio-social-medico/nuevo-estudio-social-medico.component';
+import { ConsultaEstudiosMedicosComponent } from './estudio-social-medico/consulta-estudios-medicos/consulta-estudios-medicos.component';
+import { EstudioMedicoGuardadoComponent } from './estudio-social-medico/estudio-medico-guardado/estudio-medico-guardado.component';
 import { CardTemplateExpandibleComponent } from './commons/card-template-expandible/card-template-expandible.component';
 
 import { LogoutBarComponent } from './components/templates/logout-bar/logout-bar.component';

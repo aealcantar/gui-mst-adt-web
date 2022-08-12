@@ -5,14 +5,14 @@ import { Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Estado } from '../models/estado.model';
-import { Municipio } from '../models/municipio.model';
-import { Ciudad } from '../models/ciudad.model';
-import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
-import { EstadoCivil } from '../models/estado-civil.model';
-import { EstudioMedico } from '../models/estudio-medico.model';
-import { objAlert } from '../common/alerta/alerta.interface';
-import { Ocupacion } from '../models/ocupacion.model';
+import { Estado } from '../../models/estado.model';
+import { Municipio } from '../../models/municipio.model';
+import { Ciudad } from '../../models/ciudad.model';
+import { EstudioSocialMedicoService } from '../../service/estudio-social-medico.service';
+import { EstadoCivil } from '../../models/estado-civil.model';
+import { EstudioMedico } from '../../models/estudio-medico.model';
+import { objAlert } from '../../common/alerta/alerta.interface';
+import { Ocupacion } from '../../models/ocupacion.model';
 declare var $: any;
 
 @Component({

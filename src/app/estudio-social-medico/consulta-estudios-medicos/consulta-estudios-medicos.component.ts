@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { EstudioSocialMedicoService } from '../service/estudio-social-medico.service';
-import { EstudioMedico } from '../models/estudio-medico.model';
+import { EstudioSocialMedicoService } from '../../service/estudio-social-medico.service';
+import { EstudioMedico } from '../../models/estudio-medico.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as momment from 'moment';
 import { DatePipe } from '@angular/common';
-import { AlertInfo } from '../app-alerts/app-alert.interface';
+import { AlertInfo } from '../../app-alerts/app-alert.interface';
 declare var $: any;
 
 @Component({
@@ -158,7 +158,7 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     let data;
     switch (type) {
       case 'fecha':
-        val = this.datePipe.transform(val, 'dd/MM/YYYY'); 
+        val = this.datePipe.transform(val, 'dd/MM/YYYY');
         data = momment(val, 'DD/MM/YYYY');
         break;
       case 'hora':
