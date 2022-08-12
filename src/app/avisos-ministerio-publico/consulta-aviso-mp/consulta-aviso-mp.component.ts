@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AvisoMinisterioPublicoService } from 'src/app/service/aviso-mp.service';
-import { AvisoMP } from '../models/aviso-mp.model';
+import { AvisoMP } from '../../models/aviso-mp.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';

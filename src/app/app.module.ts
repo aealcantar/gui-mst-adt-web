@@ -85,7 +85,7 @@ import { HorariosComponent } from './horarios/horarios.component';
 import { MenuhorariosComponent } from './common/menuhorarios/menuhorarios.component';
 import { TrabajoSocialComponent } from './trabajo-social/trabajo-social.component';
 import { NuevoAvisoMpComponent } from './avisos-ministerio-publico/nuevo-aviso-mp/nuevo-aviso-mp.component';
-import { ConsultaAvisoMpComponent } from './consulta-aviso-mp/consulta-aviso-mp.component';
+import { ConsultaAvisoMpComponent } from './avisos-ministerio-publico/consulta-aviso-mp/consulta-aviso-mp.component';
 import { DetalleAvisoMpComponent } from './avisos-ministerio-publico/detalle-avisos-mp/detalle-avisos-mp.component';
 
 import { UbicacionesComponent } from './configuracion/catalogos/ubicaciones/ubicaciones.component';
