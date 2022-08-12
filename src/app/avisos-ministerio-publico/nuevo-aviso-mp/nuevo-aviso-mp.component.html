@@ -38,8 +38,7 @@
               <mat-select class="form-control form-control-mat-select"
                 [ngClass]="{'form-control-error':editForm.controls?.idEstado?.dirty && editForm.controls?.idEstado?.errors}"
                 id="idEstado" formControlName="idEstado" [disableOptionCentering]="true" aria-label="Servicio"
-                placeholder="Seleccionar estado" (selectionChange)="onChangeEstado()">
-                <mat-option [value]="''" selected class="select-font">Seleccionar estado</mat-option>
+                placeholder="Seleccionar estado" (selectionChange)="onChangeEstado()" placeholder="Seleccionar estado">
                 <mat-option class="select-font" [value]="estado.cve_estado" *ngFor="let estado of catEstados">
                   {{ estado.des_nombre_completo}}
                 </mat-option>
@@ -50,15 +49,13 @@
               </small>
             </div>
           </div>
-
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Alcaldía o municipio*:</span>
               <mat-select class="form-control form-control-mat-select"
                 [ngClass]="{'form-control-error':editForm.controls?.alcaldia?.dirty && editForm.controls?.alcaldia?.errors}"
                 id="alcaldia" formControlName="alcaldia" [disableOptionCentering]="true" aria-label="Servicio"
-                placeholder="Seleccionar alcaldía">
-                <mat-option [value]="''" selected class="select-font">Seleccionar alcaldía</mat-option>
+                placeholder="Seleccionar alcaldía" placeholder="Seleccionar alcaldía">
                 <mat-option class="select-font" [value]="municipio.cve_delegacion_municipio"
                   *ngFor="let municipio of catMunicipios">
                   {{ municipio.des_municipio}}
@@ -70,7 +67,6 @@
               </small>
             </div>
           </div>
-
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">Agencia del Ministerio público*:</span>
@@ -84,7 +80,6 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
@@ -111,17 +106,13 @@
               formControlName="ubicacionHospital" type="text" readonly />
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-3">
             <div class="form-group">
               <span class="spanInput">En el servicio de*:</span>
               <mat-select class="form-control form-control-mat-select" id="cveServicio" formControlName="cveServicio"
                 [ngClass]="{'form-control-error':editForm.controls?.cveServicio?.dirty && editForm.controls?.cveServicio?.errors}"
-                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio">
-                <mat-option [value]="''" selected class="select-font optionSelect ">
-                  Seleccionar servicio
-                </mat-option>
+                [disableOptionCentering]="true" aria-label="Servicio" placeholder="Seleccionar servicio" placeholder=" Seleccionar servicio">
                 <mat-option class="select-font optionSelect" [value]="item.cve_especialidad"
                   *ngFor="let item of listaServicios">
                   {{ item.des_especialidad }}
@@ -155,7 +146,6 @@
               </span>
             </div>
           </div>
-
           <div class="row col-md-3" style="padding-left: 31px;">
             <span class="spanInput">Hora de ingreso*:</span>
             <div class="col-md-12">
@@ -191,15 +181,10 @@
                     <mat-option [value]="'22'" selected class="select-font">22</mat-option>
                     <mat-option [value]="'23'" selected class="select-font">23</mat-option>
                     <mat-option [value]="'24'" selected class="select-font">24</mat-option>
-                    <!-- <mat-option selected class="select-font optionSelect " [value]="hora"
-                  *ngFor="let hora of horas">{{hora.hora}}</mat-option> -->
                   </mat-select>
-
                 </div>
               </div>
-
               <div class="divCustomMinutes col-md-6">
-
                 <span class="spanInput spanInputCustom">Minutos*</span>
                 <mat-select class="form-control form-control-mat-select" style="width: 62px; overflow: revert;"
                   id="minutosIngresoTmp" formControlName="minutosIngresoTmp" [disableOptionCentering]="true"
@@ -264,15 +249,11 @@
                   <mat-option [value]="'57'" selected class="select-font">57</mat-option>
                   <mat-option [value]="'58'" selected class="select-font">58</mat-option>
                   <mat-option [value]="'59'" selected class="select-font">59</mat-option>
-                  <!-- <mat-option selected class="select-font optionSelect " [value]="minuto"
-                  *ngFor="let minuto of minutos">{{minuto.minuto}}</mat-option> -->
                 </mat-select>
-
               </div>
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
@@ -290,7 +271,6 @@
             </div>
           </div>
         </div>
-
         <div class="row separacion">
           <div class="col-md-6">
             <div class="form-group">
@@ -319,7 +299,6 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -348,7 +327,6 @@
             </div>
           </div>
         </div>
-
         <div style="padding-bottom: 9px; padding-top: 13px;">
           <span class="instrucciones label-obligatorios" style="margin-left: 0em !important;">
             *Campos obligatorios
@@ -371,7 +349,6 @@
   </div>
 </app-card-template>
 <app-info-bottom></app-info-bottom>
-
 <div class="modal fade" role="dialog" id="content" #content>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
