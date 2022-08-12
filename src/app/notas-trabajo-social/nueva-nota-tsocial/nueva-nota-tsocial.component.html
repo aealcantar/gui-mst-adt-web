@@ -136,7 +136,7 @@
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText"
                   (optionSelected)="onSelectionChanged($event)">
                   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option?.cveCodigo+" - "+option?.nDiagnosticoMedicoCie}}
+                    {{ option?.cveCodigo+" - "+option?.nDiagnosticoMedicoCie}}
                   </mat-option>
                 </mat-autocomplete>
               </div>

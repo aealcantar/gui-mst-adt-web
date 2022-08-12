@@ -33,7 +33,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
     idTipoNota: ['', Validators.required],
     idRedApoyo: ['', Validators.required],
     idActividadTecnica: ['', Validators.required],
-    diagnosticoMedico: [null, Validators.required],
+    diagnosticoMedico: ['', Validators.required],
     redaccion: ['', Validators.required],
     diagnostico: ['', Validators.required],
   })
