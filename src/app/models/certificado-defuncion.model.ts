@@ -21,4 +21,5 @@ export class CertificadoDefuncion {
   fechaDeActualizacion:string
   fechaDeBaja:string
   indActivo : number
+  desAgregadoMedico: string
 }

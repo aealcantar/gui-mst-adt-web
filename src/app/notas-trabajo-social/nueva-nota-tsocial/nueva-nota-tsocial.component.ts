@@ -138,11 +138,12 @@ export class NuevaNotaTSocialComponent implements OnInit {
         (httpErrorResponse: HttpErrorResponse) => {
           console.error(httpErrorResponse)
         },
-      )
+        )
     }
   }
 
   onSelectionChanged(evt: any) {
+    // debugger
     this.filterControl.patchValue(
       this.formNuevaNota.get('diagnosticoMedico').value,
     )

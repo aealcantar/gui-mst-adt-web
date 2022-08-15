@@ -82,7 +82,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
       fechaIni: this.datesForm.get('fechaInicial')?.value,
       fechaFin: this.datesForm.get('fechaFinal')?.value,
       nssPaciente: this.paciente.nss,
-      nombrePaciente: this.paciente.paciente,
       agregadoMedico: this.paciente.agregadoMedico,
     }
     this.notasService.getNotasByFechas(objPaciente).subscribe(

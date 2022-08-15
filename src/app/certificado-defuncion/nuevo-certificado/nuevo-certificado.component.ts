@@ -20,6 +20,9 @@ import { Paciente } from 'src/app/models/paciente.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { CertificadoDefuncionService } from 'src/app/service/certificado-defuncion.service';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
+import { AppTarjetaPresentacionService } from '../../app-tarjeta-presentacion/app-tarjeta-presentacion.service'
+import { pacienteSeleccionado } from './../../busqueda-nss/paciente.interface';
+
 
 declare var $: any;
 @Component({
@@ -134,6 +137,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   }
 
   async guardar() {
+    const userTemp = sessionStorage.getItem('usuario') || ''
+    this.paciente = JSON.parse(localStorage.getItem('paciente'))
+    if (userTemp !== '') {
+      this.usuario = JSON.parse(userTemp)
+    }
     const date = moment().format('YYYY-MM-DD HH:mm:ss');
     this.formAdd.controls['fechaDeAlta'].setValue(date);
     this.formAdd.controls['fechaDeActualizacion'].setValue(date);
@@ -163,6 +171,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       certificadoDefuncion.horaDeEntregaDeCertificado = horaEntrega;
       certificadoDefuncion.fechaDefuncion = fechaDefuncion;
       certificadoDefuncion.fechaDeEntregaDeCertificado = fechaEntrega;
+      certificadoDefuncion.desAgregadoMedico = this.paciente.agregadoMedico;
 
       this.certificadoService.insert(certificadoDefuncion).subscribe(
         async (response) => {
