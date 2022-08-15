@@ -56,9 +56,9 @@ export class BusquedaNssComponent implements OnInit {
       this.authService.setProjectObs("Trabajo Social");
     }, 0);
 
-    let estatus =  localStorage.getItem('catalogosCompletos');
-    if(estatus === 'false'){
-      this.router.navigate(["/catalogos/cargaCatalogos/1"],{skipLocationChange: true});
+    let estatus = localStorage.getItem('catalogosCompletos');
+    if (estatus === 'false') {
+      this.router.navigate(["/catalogos/cargaCatalogos/1"], { skipLocationChange: true });
     }
   }
 

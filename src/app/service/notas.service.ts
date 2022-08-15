@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -18,13 +18,19 @@ export class NotasService {
     private router: Router
   ) { }
 
-  getNotasByFechas(fechaInicial: string, fechaFinal: string, numNss: string) {
-    return this.http.get<any>(`${urlServNotas}/findNotasByFechas/${fechaInicial}/${fechaFinal}/${numNss}`, { responseType: 'json'});
-    // return this.http.get<any>(`${urlServNotas}/findNotasByFechas/${fechaInicial}/${fechaFinal}`, { responseType: 'json'});
+  getNotasByFechas(paciente: any) {
+    // const params = new HttpParams()
+    //   .set('fechaIni', paciente.fechaIni)
+    //   .set('fechaFin', paciente.fechaFin)
+    //   .set('nssPaciente', paciente.nssPaciente)
+    //   .set('nombrePaciente', paciente.nombrePaciente)
+    //   .set('agregadoMedico', paciente.agregadoMedico);
+    // return this.http.post<any>(`${urlServNotas}/findNotasByFechas`, { responseType: 'json', params: params });
+    return this.http.post<any>(`${urlServNotas}/findNotasByFechas`, paciente);
   }
 
   getNotasById(id: number) {
-    return this.http.get<any>(`${urlServNotas}/getNotaTSById/${id}`, { responseType: 'json'});
+    return this.http.get<any>(`${urlServNotas}/getNotaTSById/${id}`, { responseType: 'json' });
   }
 
   addNota(nota: Nota) {
@@ -36,15 +42,15 @@ export class NotasService {
   }
 
   getTiposNota() {
-    return this.http.get<any>(`${urlServNotas}/getTiposDeNota`, { responseType: 'json'});
+    return this.http.get<any>(`${urlServNotas}/getTiposDeNota`, { responseType: 'json' });
   }
 
   getRedesApoyo() {
-    return this.http.get<any>(`${urlServNotas}/getRedesSociales`, { responseType: 'json'});
+    return this.http.get<any>(`${urlServNotas}/getRedesSociales`, { responseType: 'json' });
   }
 
   getActividadesTecnicas() {
-    return this.http.get<any>(`${urlServNotas}/getActividadesTecnicas`, { responseType: 'json'});
+    return this.http.get<any>(`${urlServNotas}/getActividadesTecnicas`, { responseType: 'json' });
   }
 
   downloadPdf(data: any): Observable<Blob> {

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { NotasService } from 'src/app/service/notas.service';
@@ -37,6 +37,7 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private notasService: NotasService,
     private fb: FormBuilder,
@@ -44,7 +45,6 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
   ) {
     this.extras = this.router.getCurrentNavigation()?.extras;
     if (this.extras && this.extras.state) {
-      console.log(this.extras.state.id);
       this.getNotasById(this.extras.state.id);
     }
   }
@@ -57,9 +57,11 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
       fechaInicial: [null, Validators.required],
       fechaFinal: [null, Validators.required],
     });
-
     this.paciente = this.tarjetaService.get();
-    this.nss = this.paciente.nss.toString();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+      this.nss = this.paciente.nss.toString();
+    }
   }
 
   getNotasById(id: number) {
@@ -76,23 +78,29 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
 
   getNotasByFecha() {
     this.tabla = [];
-    // this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
-    this.notasService.getNotasByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value,  this.nss).subscribe(
+    let objPaciente = {
+      fechaIni: this.datesForm.get('fechaInicial')?.value,
+      fechaFin: this.datesForm.get('fechaFinal')?.value,
+      nssPaciente: this.paciente.nss,
+      nombrePaciente: this.paciente.paciente,
+      agregadoMedico: this.paciente.agregadoMedico,
+    }
+    this.notasService.getNotasByFechas(objPaciente).subscribe(
       (res) => {
         this.tabla = res;
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
       }
-      ).add( ()=>{
-        if(this.tabla.length  == 0){
-          this.muestraAlerta(
-            'Verifique los filtros',
-            'alert-warning',
-            'Sin resultados',
-          );
-        }
-      });
+    ).add(() => {
+      if (this.tabla.length == 0) {
+        this.muestraAlerta(
+          'Verifique los filtros',
+          'alert-warning',
+          'Sin resultados',
+        );
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -136,7 +144,7 @@ export class ConsultaListaNotasTSocialComponent implements OnInit, AfterViewInit
   }
 
   irNuevaNota() {
-    let params = { }
+    let params = {}
     this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
   }
 
