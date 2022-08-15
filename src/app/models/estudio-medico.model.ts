@@ -53,4 +53,6 @@ export class EstudioMedico {
     planTratSocial?: string;
     accionRealizada?: string;
     esNuevo?: boolean;
+    desAgregadoMedico?: string;
+    desNssPaciente?: string;
 }

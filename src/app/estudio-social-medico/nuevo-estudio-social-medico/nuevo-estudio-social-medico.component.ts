@@ -13,6 +13,8 @@ import { EstadoCivil } from '../../models/estado-civil.model';
 import { EstudioMedico } from '../../models/estudio-medico.model';
 import { objAlert } from '../../common/alerta/alerta.interface';
 import { Ocupacion } from '../../models/ocupacion.model';
+import { AppTarjetaPresentacionService } from '../../app-tarjeta-presentacion/app-tarjeta-presentacion.service'
+import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface'
 declare var $: any;
 
 @Component({
@@ -23,7 +25,7 @@ declare var $: any;
 export class NuevoEstudioSocialMedicoComponent implements OnInit {
 
   alert!: objAlert;
-
+  paciente!: pacienteSeleccionado;
   estados: Estado[] = [];
   municipios: Municipio[] = [];
   ciudades: Ciudad[] = [];
@@ -305,6 +307,13 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   }
 
   guardarEstudioSocial() {
+
+    const userTemp = sessionStorage.getItem('usuario') || ''
+    this.paciente = JSON.parse(localStorage.getItem('paciente'))
+    if (userTemp !== '') {
+      this.paciente = JSON.parse(userTemp)
+    }
+
     let estudioMedicoData: EstudioMedico = {
       nombreSolicitante: this.formEstudioSocial.get('solicitadoPor').value,
       fecFecha: moment(this.formEstudioSocial.get('fecha').value, "DD/MM/YYYY").format('YYYY-MM-DD'),
@@ -358,7 +367,9 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       diagSocialFamilia: this.formEstudioSocial3.get('datosSocialF').value,
       planTratSocial: this.formEstudioSocial3.get('datosTratamiento').value,
       accionRealizada: this.formEstudioSocial3.get('datosAcciones').value,
-      esNuevo: true
+      esNuevo: true,
+      desAgregadoMedico: String(this.paciente.agregadoMedico),
+      desNssPaciente: String(this.paciente.nss),
     }
     let params = { 'estudioMedico': JSON.stringify(estudioMedicoData) };
     console.log("DATA SAVE: ", estudioMedicoData);

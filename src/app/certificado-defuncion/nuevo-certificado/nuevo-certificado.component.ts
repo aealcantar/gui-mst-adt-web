@@ -20,8 +20,6 @@ import { Paciente } from 'src/app/models/paciente.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { CertificadoDefuncionService } from 'src/app/service/certificado-defuncion.service';
 import { CronicaGrupalService } from 'src/app/service/cronica-grupal.service';
-import { AppTarjetaPresentacionService } from '../../app-tarjeta-presentacion/app-tarjeta-presentacion.service'
-import { pacienteSeleccionado } from './../../busqueda-nss/paciente.interface';
 
 
 declare var $: any;

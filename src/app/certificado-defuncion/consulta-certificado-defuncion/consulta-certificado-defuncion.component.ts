@@ -109,6 +109,7 @@ export class ConsultaCertificadoDefuncionComponent
       .list(
         fechaIni,
         fechaFin,
+
         this.page - 1,
         datos.count,
         JSON.stringify(this.criteriosDeOrden)
@@ -126,6 +127,7 @@ export class ConsultaCertificadoDefuncionComponent
     const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
       'YYYY-MM-DD'
     );
+
     if (fechaFin >= fechaIni) {
       this.paginacion = await this.certificadoService
         .getPagination(fechaIni, fechaFin)
@@ -288,7 +290,7 @@ export class ConsultaCertificadoDefuncionComponent
     }, 5000);
   }
   addCriterio(criterio: any) {
-    const index = this.criteriosDeOrden.findIndex(item => 
+    const index = this.criteriosDeOrden.findIndex(item =>
       item.propiedad === criterio.propiedad
     );
     console.log(index)

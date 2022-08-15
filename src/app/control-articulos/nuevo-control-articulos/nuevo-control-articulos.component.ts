@@ -46,6 +46,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   hora = moment(Date.now()).format('HH:mm');
 
   formNuevoArticulo: any = this.formBuilder.group({
+    desAgregadoMedico: new FormControl(''),
     clavePaciente: new FormControl(''),
     bitacora: new FormControl(this.bitacora),
     personalQueElaboro: new FormControl(''),
@@ -77,7 +78,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   });
 
 
-  paciente!: pacienteSeleccionado;
+   paciente!: pacienteSeleccionado;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -95,7 +96,9 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
     if (this.paciente !== null && this.paciente !== undefined) {
       let nss = this.paciente.nss;
+      let desAgregadoMedico = this.paciente.agregadoMedico;
       this.formNuevoArticulo.controls['clavePaciente'].setValue(nss);
+      this.formNuevoArticulo.controls['desAgregadoMedico'].setValue(desAgregadoMedico);
     }
 
     if (userTmp !== '') {
@@ -369,6 +372,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       rangoFecha1 = moment(rangoFecha1, 'HHmm').format('HH:mm');
       rangoFecha2 = moment(rangoFecha2, 'HHmm').format('HH:mm');
       this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].patchValue(`${rangoFecha1} - ${rangoFecha2}`);
+
       // this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].patchValue(`DE ${rangoFecha1} A ${rangoFecha2} HRS`);
 
       let datos = this.formNuevoArticulo.value;
