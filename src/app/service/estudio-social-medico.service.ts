@@ -46,8 +46,10 @@ export class EstudioSocialMedicoService {
     return this.http.get<EstadoCivil[]>(`${environment.msmtsEstudioMedicos}/getTiposComunidad`);
   }
 
-  getEstudiosMedicosByFechas(fechaInicio: string, fechaFin: string) {
-    return this.http.get<EstudioMedico[]>(`${environment.msmtsEstudioMedicos}/findEstudiosMedByRangoFechas/${fechaInicio}/${fechaFin}`);
+  getEstudiosMedicosByFechas(parametrosBusqueda: any) {
+  // getEstudiosMedicosByFechas(fechaInicio: string, fechaFin: string) {
+    // return this.http.get<EstudioMedico[]>(`${environment.msmtsEstudioMedicos}/findEstudiosMedByRangoFechas/${fechaInicio}/${fechaFin}`);
+    return this.http.post<any>(`${environment.msmtsEstudioMedicos}/findEstudiosMedByRangoFechas/`, parametrosBusqueda);
   }
 
   addEstudioSocial(estudioMedicoSocial: EstudioMedico){

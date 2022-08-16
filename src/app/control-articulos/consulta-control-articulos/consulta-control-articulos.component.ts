@@ -27,6 +27,7 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
   nssPaciente: string;
   fechaDesde: string = "";
   fechaHasta: string = "";
+  agregadoMedico: string = "";
   page: number = 1;
   pageSize: number = 15;
   datosBusqueda: Array<any> = [];
@@ -130,6 +131,8 @@ export class ConsultaControlArticulosComponent implements OnInit, AfterViewInit 
           fechaInicial: fechaInicial,
           fechaFinal: fechaFinal,
           clavePaciente: this.nssPaciente
+          // agregadoMedico: this.paciente.agregadoMedico
+
         };
         this.Artservice.getArticulosByFechas(datosBusqueda).subscribe(
           (res: any) => {

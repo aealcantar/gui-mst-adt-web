@@ -36,6 +36,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   delegaciones: Municipio[] = [];
   ciudadesFamiliar: Ciudad[] = [];
 
+
   datosGenerales = false;
   datosFamiliar = false;
   datosExploracionCaso = false;
@@ -92,7 +93,8 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private estudioSocialService: EstudioSocialMedicoService
+    private estudioSocialService: EstudioSocialMedicoService,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) { }
 
   ngOnInit(): void {
@@ -102,6 +104,10 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.loadCatalogos();
     this.loadCatalogosFamiliar();
     this.formEstudioSocial.get('fecha').patchValue(moment().format('DD/MM/YYYY'));
+    this.paciente = this.tarjetaService.get();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -308,11 +314,6 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
 
   guardarEstudioSocial() {
 
-    const userTemp = sessionStorage.getItem('usuario') || ''
-    this.paciente = JSON.parse(localStorage.getItem('paciente'))
-    if (userTemp !== '') {
-      this.paciente = JSON.parse(userTemp)
-    }
 
     let estudioMedicoData: EstudioMedico = {
       nombreSolicitante: this.formEstudioSocial.get('solicitadoPor').value,
@@ -368,8 +369,8 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       planTratSocial: this.formEstudioSocial3.get('datosTratamiento').value,
       accionRealizada: this.formEstudioSocial3.get('datosAcciones').value,
       esNuevo: true,
-      desAgregadoMedico: String(this.paciente.agregadoMedico),
-      desNssPaciente: String(this.paciente.nss),
+      desAgregadoMedico: this.paciente.agregadoMedico,
+      desNssPaciente: this.paciente.nss,
     }
     let params = { 'estudioMedico': JSON.stringify(estudioMedicoData) };
     console.log("DATA SAVE: ", estudioMedicoData);

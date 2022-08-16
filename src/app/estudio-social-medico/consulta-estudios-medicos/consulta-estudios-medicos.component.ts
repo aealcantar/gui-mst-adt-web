@@ -9,6 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import * as momment from 'moment';
 import { DatePipe } from '@angular/common';
 import { AlertInfo } from '../../app-alerts/app-alert.interface';
+import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 declare var $: any;
 
 @Component({
@@ -29,6 +31,8 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   order: string = 'desc';
   columnaId: string = 'fecFecha';
   alert!: AlertInfo;
+  paciente!: pacienteSeleccionado;
+  public nss: string;
 
   public datesForm!: FormGroup;
 
@@ -37,7 +41,8 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private estudioMedicoService: EstudioSocialMedicoService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +53,12 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
     setTimeout(() => {
       this.authService.setProjectObs("Trabajo Social");
     }, 0);
+
+    this.paciente = this.tarjetaService.get();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+      this.nss = this.paciente.nss.toString();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -83,8 +94,15 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   }
 
   loadDataTable(): void {
+
+    let parametrosBusqueda = {
+      fechaInicial: this.datesForm.get('fechaInicial')?.value,
+      fechaFinal: this.datesForm.get('fechaFinal')?.value,
+      nssPaciente: this.paciente.nss,
+      agregadoMedico: this.paciente.agregadoMedico,
+    }
     this.estudioMedicos = [];
-    this.estudioMedicoService.getEstudiosMedicosByFechas(this.datesForm.get('fechaInicial')!.value, this.datesForm.get('fechaFinal')!.value).subscribe(
+    this.estudioMedicoService.getEstudiosMedicosByFechas(parametrosBusqueda).subscribe(
       (estudiosMedicosSociales: any) => {
         this.estudioMedicos = estudiosMedicosSociales;
       },
