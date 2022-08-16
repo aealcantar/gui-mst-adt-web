@@ -43,6 +43,8 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     numInterior: new FormControl('', Validators.maxLength(10)),
     nombrePaciente: new FormControl(''),
     desNSS: new FormControl(''),
+    desAgregadoMedico: new FormControl(''),
+    desNssPaciente: new FormControl(''),
     idServicio: new FormControl('', Validators.required),
     fechaInternamiento: new FormControl(''),
     fechaCirugia: new FormControl(''),
@@ -91,6 +93,8 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       let nombrePaciente = this.paciente.paciente;
       this.formNuevaDonacion.controls['nombrePaciente'].setValue(nombrePaciente);
       this.formNuevaDonacion.controls['desNSS'].setValue(nss + " " + nssAgregado);
+      this.formNuevaDonacion.controls['desAgregadoMedico'].setValue(nssAgregado);
+      this.formNuevaDonacion.controls['desNssPaciente'].setValue(nss);
       this.getCatUnidadesMedicas();
     }
     this.formNuevaDonacion.controls['fecha1'].setValue(this.fecha);
@@ -194,7 +198,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   registarDonacion(formNuevaDonacion: FormGroup) {
     this.submitted = true;
     console.log(this.formNuevaDonacion.value);
-    
+
 
     const horaInicial = moment(this.formNuevaDonacion.get('horaInicialAtencion1').value, 'HHmm').format('HH:mm')
     const horaFinal = moment(this.formNuevaDonacion.get('horaFinalAtencion1').value, 'HHmm').format('HH:mm')

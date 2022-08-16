@@ -10,10 +10,10 @@ import { VolantesDonacion } from '../models/volantes-donacion.model'
 export class VolantesDonacionService {
   constructor(private httpsClient: HttpClient) {}
 
-  getVolantesByFechas(fechaInicial: string, fechaFinal: string) {
-    return this.httpsClient.get<any>(
-      `${environment.msmtsVolantesDonacion}/findVolantesByFechas/${fechaInicial}/${fechaFinal}`,
-    )
+  getVolantesByFechas(datosBusqueda: any) {
+  // getVolantesByFechas(fechaInicial: string, fechaFinal: string) {
+    // return this.httpsClient.get<any>(`${environment.msmtsVolantesDonacion}/findVolantesByFechas/${fechaInicial}/${fechaFinal}`,
+    return this.httpsClient.post<any>(`${environment.msmtsVolantesDonacion}/findVolantesByFechas`, datosBusqueda);
   }
 
   getBancosSangre() {

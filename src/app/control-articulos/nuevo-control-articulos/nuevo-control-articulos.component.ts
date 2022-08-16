@@ -47,6 +47,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
 
   formNuevoArticulo: any = this.formBuilder.group({
     desAgregadoMedico: new FormControl(''),
+    desNssPaciente: new FormControl(''),
     clavePaciente: new FormControl(''),
     bitacora: new FormControl(this.bitacora),
     personalQueElaboro: new FormControl(''),
@@ -372,6 +373,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       rangoFecha1 = moment(rangoFecha1, 'HHmm').format('HH:mm');
       rangoFecha2 = moment(rangoFecha2, 'HHmm').format('HH:mm');
       this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].patchValue(`${rangoFecha1} - ${rangoFecha2}`);
+      this.formNuevoArticulo.controls['']
 
       // this.formNuevoArticulo.controls['recepcionHorarioEntregaArticulo'].patchValue(`DE ${rangoFecha1} A ${rangoFecha2} HRS`);
 
