@@ -29,6 +29,7 @@ declare var $: any;
   styleUrls: ['./nuevo-certificado.component.css'],
 })
 export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
+  readonly ID_SERVICIO_TRABAJO_SOCIAL = "15";
   formAdd;
   certificado: CertificadoDefuncion;
   usuario!: Usuario;
@@ -131,6 +132,11 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
   async cargarServicios() {
     this.cronicaGrupalService.getCatServicios().subscribe((servicios) => {
       this.listaServicios = servicios;
+      const especialidad =
+        this.listaServicios.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
+      if (especialidad && especialidad.cve_especialidad) {
+        this.formAdd.get('cveServicio').setValue(especialidad.cve_especialidad);
+      }
     });
   }
 
@@ -152,7 +158,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         this.formAdd.controls['horaDefuncion'].value,
         'hh:mm A'
       ).format('HH:mm:ss');
-      console.log(`Fecha Nuevo Formato: ${horaDefuncnion}`,`Formato anterior ${ this.formAdd.controls['horaDefuncion'].value}`)
+      console.log(`Fecha Nuevo Formato: ${horaDefuncnion}`, `Formato anterior ${this.formAdd.controls['horaDefuncion'].value}`)
       const horaEntrega = moment(
         this.formAdd.controls['horaDeEntregaDeCertificado'].value,
         'hh:mm A'
