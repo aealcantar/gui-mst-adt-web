@@ -15,8 +15,8 @@ declare var $: any;
 })
 export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
+  readonly ID_SERVICIO_TRABAJO_SOCIAL = "15";
   public alert!: AlertInfo;
-
   // catalogos
   grupos: any[] = [];
   lugares: any[] = [];
@@ -57,7 +57,14 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     error: (error: HttpErrorResponse) => console.log(error),
   }
   serviciosObserver = {
-    next: (servicios: any) => this.serviciosEspecialidad = servicios,
+    next: (servicios: any) => {
+      this.serviciosEspecialidad = servicios;
+      const especialidad =
+        this.serviciosEspecialidad.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
+      if (especialidad && especialidad.cve_especialidad) {
+        this.formularioBusqueda.get('servicio').setValue(especialidad.cve_especialidad);
+      }
+    },
     error: (error: HttpErrorResponse) => console.log(error),
   }
   turnosObserver = {

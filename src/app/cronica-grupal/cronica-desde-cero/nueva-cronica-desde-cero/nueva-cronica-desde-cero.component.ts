@@ -20,6 +20,7 @@ const NUM_PARTICIPANTES: number = 0;
   styleUrls: ['./nueva-cronica-desde-cero.component.css'],
 })
 export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
+  readonly ID_SERVICIO_TRABAJO_SOCIAL = "15";
   public listParticipantes: Participante[] = [];
   public cronica!: Cronica;
   public editForm!: FormGroup;
@@ -76,7 +77,12 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
     this.cronicaGrupalService.getCatServicios().toPromise().then(
       (servicios) => {
         this.serviciosEspecialidad = servicios;
-        console.log("SERVICIOS: ", this.serviciosEspecialidad);
+        const especialidad =
+          this.serviciosEspecialidad.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
+        if (especialidad && especialidad.cve_especialidad) {
+          this.editForm.get('servicio').setValue(especialidad.cve_especialidad);
+          this.obtenerGrupoPorServicio();
+        }
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -206,7 +212,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
         (response: any) => {
         }, (response: HttpErrorResponse) => {
           if (response.statusText === 'OK') {
-              this.router.navigate(["detalle-cronica-cero"], { queryParams: params, skipLocationChange: true });
+            this.router.navigate(["detalle-cronica-cero"], { queryParams: params, skipLocationChange: true });
             // this.router.navigateByUrl('/detalle-cronica-cero');
           }
         }
