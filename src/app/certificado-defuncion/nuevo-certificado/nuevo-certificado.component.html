@@ -252,7 +252,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Observaciones*:</span>
-                            <input [placeholder]="'Ingresa observaciones'" class="form-control" [maxlength]="1500" formControlName="observaciones" [ngClass]="{
+                            <input [placeholder]="'Ingresa observaciones'" class="form-control" [maxlength]="50" formControlName="observaciones" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('observaciones').invalid)
                 }" type="text" />
