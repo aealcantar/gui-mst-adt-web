@@ -45,27 +45,15 @@ export class CertificadoDefuncionService {
       opt
     );
   }
-  list(
-    fechaInicio: string,
-    fechaFin: string,
-    pagina: any,
-    count: any,
-    criterio?: any
-  ) {
-    const opt = {
-      params: {
-        fechaInicio,
-        fechaFin,
-        pagina,
-        count,
-        orden: criterio != undefined ? criterio : '',
-      },
-    };
-    return this.http.get<CertificadoDefuncion[]>(
-      environment.msmtsControlInterno + '/list',
-      opt
-    );
+  list(fechaInicio: string,fechaFin: string,pagina: any,count: any,criterio?: any) {
+    const opt = {params: {fechaInicio,fechaFin,pagina,count, orden: criterio != undefined ? criterio : '',},};
+    return this.http.get<CertificadoDefuncion[]>(environment.msmtsControlInterno + '/list', opt );
   }
+
+  obtenerListaCertificados(criteriosBusqueda: any){
+    return this.http.post<any>(`${environment.msmtsControlInterno}/list`, criteriosBusqueda);
+  }
+
   getPagination(fechaInicio: string, fechaFin: string) {
     const opt = {
       params: {

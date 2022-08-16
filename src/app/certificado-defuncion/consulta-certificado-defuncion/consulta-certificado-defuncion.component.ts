@@ -10,6 +10,9 @@ import * as moment from 'moment';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { CertificadoDefuncionService } from 'src/app/service/certificado-defuncion.service';
 import { CertificadoDefuncion } from 'src/app/models/certificado-defuncion.model';
+import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
+
 
 declare var $: any;
 @Component({
@@ -38,12 +41,15 @@ export class ConsultaCertificadoDefuncionComponent
   public alert!: AlertInfo;
   //se utiliza para el Sort desde el back end
   criteriosDeOrden: Array<any> = [];
+  public nss: string;
+  paciente!: pacienteSeleccionado;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private certificadoService: CertificadoDefuncionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) {
     this.formAdd = fb.group({
       consultaDefuncionIni: new FormControl('', Validators.required),
@@ -58,6 +64,11 @@ export class ConsultaCertificadoDefuncionComponent
       fechaInicial: [moment().format('YYYY-MM-DD'), Validators.required],
       fechaFinal: [moment().format('YYYY-MM-DD'), Validators.required],
     });
+    this.paciente = this.tarjetaService.get();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+      this.nss = this.paciente.nss.toString();
+    }
   }
 
   async irDetalle(extras: CertificadoDefuncion) {
@@ -128,16 +139,26 @@ export class ConsultaCertificadoDefuncionComponent
       'YYYY-MM-DD'
     );
 
+
+
     if (fechaFin >= fechaIni) {
+
+      let busqueda = {
+        fechaIni: fechaIni,
+        fechaFin: fechaFin,
+        nssPaciente: this.paciente.nss,
+        agregadoMedico: this.paciente.agregadoMedico
+
+      }
       this.paginacion = await this.certificadoService
         .getPagination(fechaIni, fechaFin)
         .toPromise();
 
       console.log(this.paginacion);
       this.certificadoService
-        .list(fechaIni, fechaFin, datos.pagina - 1, datos.count)
-        .subscribe((response) => {
-          this.datosBusqueda = response;
+        .obtenerListaCertificados(busqueda)
+        // .list(fechaIni, fechaFin, datos.pagina - 1, datos.count)
+        .subscribe((response) => {this.datosBusqueda = response;
           console.log(response);
           if (this.datosBusqueda.length == 0) {
             this.muestraAlerta(
@@ -162,6 +183,7 @@ export class ConsultaCertificadoDefuncionComponent
     this.formAdd.controls['consultaDefuncionFin'].setValue('');
     this.datosBusqueda = [];
   }
+
   sortBy(columnaId: string, order: string, type: string) {
     this.columnaId = columnaId;
     this.order = order;
@@ -179,29 +201,8 @@ export class ConsultaCertificadoDefuncionComponent
     const fechaFin = moment(datos.consultaDefuncionFin, 'DD/MM/YYYY').format(
       'YYYY-MM-DD'
     );
-    this.certificadoService
-      .list(
-        fechaIni,
-        fechaFin,
-        this.page - 1,
-        datos.count,
-        JSON.stringify(this.criteriosDeOrden)
-      )
-      .subscribe((response) => {
-        console.log(response);
-        this.datosBusqueda = response;
-      });
-    // this.columnaId = columnaId;
-    // this.order = order;
-    // this.datosBusqueda.sort((a: any, b: any) => {
-    //   let c: any = this.converType(a[columnaId], type);
-    //   let d: any = this.converType(b[columnaId], type);
-    //   if (order === 'desc') {
-    //     return d - c; // Descendiente
-    //   } else {
-    //     return c - d; // Ascendiente
-    //   }
-    // });
+    this.certificadoService.list(fechaIni,fechaFin,this.page - 1,datos.count,JSON.stringify(this.criteriosDeOrden))
+    .subscribe((response) => {console.log(response);this.datosBusqueda = response;});
   }
 
   converType(val: any, type: string) {

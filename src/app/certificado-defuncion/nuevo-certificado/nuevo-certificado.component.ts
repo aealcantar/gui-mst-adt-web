@@ -176,6 +176,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
       certificadoDefuncion.fechaDefuncion = fechaDefuncion;
       certificadoDefuncion.fechaDeEntregaDeCertificado = fechaEntrega;
       certificadoDefuncion.desAgregadoMedico = this.paciente.agregadoMedico;
+      certificadoDefuncion.indActivo = 1;
 
       this.certificadoService.insert(certificadoDefuncion).subscribe(
         async (response) => {
