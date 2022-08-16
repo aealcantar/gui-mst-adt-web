@@ -96,8 +96,8 @@ export class ConsultaEstudiosMedicosComponent implements OnInit {
   loadDataTable(): void {
 
     let parametrosBusqueda = {
-      fechaInicial: this.datesForm.get('fechaInicial')?.value,
-      fechaFinal: this.datesForm.get('fechaFinal')?.value,
+      fechaIni: this.datesForm.get('fechaInicial')?.value,
+      fechaFin: this.datesForm.get('fechaFinal')?.value,
       nssPaciente: this.paciente.nss,
       agregadoMedico: this.paciente.agregadoMedico,
     }
