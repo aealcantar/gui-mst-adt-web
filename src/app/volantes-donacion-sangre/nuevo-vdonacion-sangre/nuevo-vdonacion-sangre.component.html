@@ -125,7 +125,8 @@
             <span class="spanInput">Delegación/Municipio*:</span>
             <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.idDelegacion.errors }"
-              id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()" placeholder="Ingresar delegación o municipio">
+              id="idDelegacion" formControlName="idDelegacion" (selectionChange)="onChangeMunicipio()"
+              placeholder="Ingresar delegación o municipio">
               <!-- <mat-option [value]="''" selected class="select-font optionSelect ">
                 Ingresar delegación o municipio</mat-option> -->
               <mat-option class="select-font" [value]="delegacion.cve_delegacion_municipio"
@@ -219,7 +220,7 @@
           </div>
           <div class="col-md-3  form-group">
             <span class="spanInput">Tipo de sangre*:</span>
-              <mat-select class="form-control2 form-control form-control-mat-select "
+            <mat-select class="form-control2 form-control form-control-mat-select "
               [ngClass]="{'form-control-error': submitted &&  formNuevaDonacion.controls.tipoSangre.errors }"
               maxlength="10" id="tipoSangre" formControlName="tipoSangre" placeholder="Seleccionar tipo de sangre">
               <!-- <mat-option [value]="''" selected class="select-font optionSelect ">

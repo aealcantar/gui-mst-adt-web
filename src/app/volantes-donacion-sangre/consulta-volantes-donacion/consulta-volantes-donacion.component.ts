@@ -122,7 +122,6 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         };
 
         this.volantesDonacionService.getVolantesByFechas(datosBusqueda).subscribe(
-        // this.volantesDonacionService.getVolantesByFechas(fechaInicial, fechaFinal).subscribe(
           (res: any) => {
             console.log(res)
             try {
