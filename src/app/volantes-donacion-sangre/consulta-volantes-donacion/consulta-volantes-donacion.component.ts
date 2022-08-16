@@ -114,7 +114,14 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
         let fechaHastaArray = vDonacionFin.split("/");
         let fechaFinal = fechaHastaArray[2] + "-" + fechaHastaArray[1] + "-" + fechaHastaArray[0];
 
-        this.volantesDonacionService.getVolantesByFechas(fechaInicial, fechaFinal).subscribe(
+        let datosBusqueda = {
+          fechaIni: fechaInicial,
+          fechaFin: fechaFinal,
+          nssPaciente: this.nssPaciente,
+          agregadoMedico: this.paciente.agregadoMedico,
+        };
+
+        this.volantesDonacionService.getVolantesByFechas(datosBusqueda).subscribe(
           (res: any) => {
             console.log(res)
             try {
