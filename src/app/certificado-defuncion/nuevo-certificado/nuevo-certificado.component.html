@@ -66,7 +66,7 @@
                             <input #folioInput class="form-control" [placeholder]="'Ingresa folio'" formControlName="folioCertificacion" [ngClass]="{
                   inputError:
                     (validarCampos && formAdd.get('folioCertificacion').invalid)
-                }" [maxLength]="10" type="text" />
+                }" [maxLength]="21" type="text" />
                             <mat-error *ngIf="
                   validarCampos &&
                   formAdd.get('folioCertificacion').hasError('required')
