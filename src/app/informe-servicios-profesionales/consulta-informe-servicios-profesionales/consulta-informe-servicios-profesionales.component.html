@@ -131,7 +131,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of datosBusqueda | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
-                <td class="bordesTablaDetalle" (click)="imprimirPdf();">{{ item.id }}</td>
+                <!-- <td class="bordesTablaDetalle">{{ item.id }}</td> -->
+                <td class="bordesTablaDetalle">{{ i + 1 }}</td>
 
                 <td class="bordesTabla">
                   {{ item.desNssPaciente + "-" + item.desAgregadoMedico}} </td>
@@ -173,6 +174,14 @@
         </div>
       </div>
       <!-- end pagination -->
+
+      <div>
+        <button type="submit" class="btn btn-primary btn-guardar buttonL" id="btnImprimir" (click)="imprimirPdf();">
+        Imprimir
+      </button>
+        </div>
+
+
     </ng-container>
     <ng-template #mostrarSeccionSinResultados>
       <div class="row">
