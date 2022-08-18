@@ -1,293 +1,133 @@
 <app-app-alerts [alert]="alert"></app-app-alerts>
 <app-tarjeta-presentacion></app-tarjeta-presentacion>
 <app-card-template>
-  <div
-    header
-    class="flex justify-content-between align-items-center consultaCertificadoDefuncion">
+  <div header class="flex justify-content-between align-items-center consultaCertificadoDefuncion">
     <label> Control Interno TS-Certificado de Defunción</label>
     <div class="botones">
-      <button
-        type=" button"
-        class="btn btn-primary btn-guardar buttonL"
-        (click)="irNuevoRegistro()"
-        style="width: 150px"
-      >
+      <button type=" button" class="btn btn-primary btn-guardar buttonL" (click)="irNuevoRegistro()"
+        style="width: 150px">
         Nuevo Certificado
       </button>
     </div>
   </div>
-  <div content style="padding-bottom: 3.7%">
-    <form class="formInfo" [formGroup]="formAdd" (submit)="buscar()" novalidate>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group datepicker-group">
-            <label class="control-label tituloServicio" for="articulosInit"
-              >Fecha desde:</label>
-            <input
-              [placeholder]="'dd/mm/aaaa'"
-              id="consultaDefuncionIni"
-              autocomplete="off"
-              formControlName="consultaDefuncionIni"
-              class="form-control"
-              type="text"
-            />
-            <span
-              class="glyphicon glyphicon-calendar fondocalendar"
-              aria-hidden="true"
-            >
-              <div class="imgCalendar"></div>
-            </span>
-            <mat-error
-              *ngIf="
-                validarCampos &&
-                formAdd.get('consultaDefuncionIni').hasError('required')
-              "
-            >
-              Campo Obligatorio
-            </mat-error>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group datepicker-group">
-            <label class="control-label tituloServicio" for="articulosFinal"
-              >Fecha hasta:</label
-            >
-            <input
-              [placeholder]="'dd/mm/aaaa'"
-              id="consultaDefuncionFin"
-              autocomplete="off"
-              formControlName="consultaDefuncionFin"
-              class="form-control"
-              type="text"
-            />
-            <span
-              class="glyphicon glyphicon-calendar fondocalendar"
-              aria-hidden="true "
-            >
-              <div class="imgCalendar"></div>
-            </span>
-            <mat-error
-              *ngIf="
-                validarCampos &&
-                formAdd.get('consultaDefuncionFin').hasError('required')
-              "
-            >
-              Campo Obligatorio
-            </mat-error>
-          </div>
-        </div>
-        <div class="col-auto mt-5" style="padding-right: 0.1em !important">
-          <button
-            class="btn btn-default btuser buttonL"
-            type="button"
-            (click)="limpiar()"
-          >
-            Limpiar
-          </button>
-          <button
-            type="submit"
-            class="btn btn-primary btn-guardar buttonL"
-            (click)="buscar()"
-          >
-            Buscar
-          </button>
+  <div content style="padding-bottom: 3.7%;">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group datepicker-group">
+          <label class="control-label tituloServicio" for="controlInit">Fecha desde:</label>
+          <input notasInit class="form-control" id="cInternoFecIni" type="text" placeholder="dd/mm/aaaa" autocomplete="off">
+          <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+            <div class="imgCalendar"></div>
+          </span>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label class="control-label" style="font-weight: 700; color: #666666"
-            >Búsquedas anteriores</label
-          >
+      <div class="col-md-4">
+        <div class="form-group datepicker-group">
+          <label class="control-label tituloServicio" for="controlFinal">Fecha hasta:</label>
+          <input notasFinal class="form-control" id="cInternoFecFin" type="text" placeholder="dd/mm/aaaa"
+            autocomplete="off">
+          <span class="glyphicon glyphicon-calendar fondocalendar" aria-hidden="true">
+            <div class="imgCalendar"></div>
+          </span>
         </div>
-        <div class="col-md-6 flex justify-content-end">
-          <div class="form-group">
-            <div style="position: relative; float: right; display: flex">
-              <span class="visualizarDatos" style="width: auto; float: right">
-                Visualizar datos
-              </span>
-              <mat-select
-                formControlName="count"
-                (selectionChange)="onSelectChange()"
-                class="form-select mat-select-table"
-                [disableOptionCentering]="true"
-                aria-label="Servicio"
-              >
-                <mat-option class="select-font" [value]="15" seleted
-                  >15</mat-option>
-                <mat-option class="select-font" [value]="20">20</mat-option>
-                <mat-option class="select-font" [value]="25">25</mat-option>
-              </mat-select>
+      </div>
+      <div class="col-auto mt-5" style="padding-right: 0.1em !important">
+        <button class="btn btn-default btuser buttonL" type="button" (click)="limpiar()">
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary btn-guardar buttonL" (click)="handleDatesChange()">
+          Buscar
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="control-label" style="font-weight: 700; color: #666666;">Búsquedas anteriores</label>
+      </div>
+      <div class="col-md-6 flex justify-content-end">
+        <div style="position: relative; float: right; display: flex;">
+          <span class="visDatos" style="width: auto; float: right;">
+            Visualizar datos
+          </span>
+          <mat-select class="form-select mat-select-table" [disableOptionCentering]="true" aria-label="Servicio"
+            [(ngModel)]="pageSize">
+            <mat-option class="select-font" [value]="15">15</mat-option>
+            <mat-option class="select-font" [value]="20">20</mat-option>
+            <mat-option class="select-font" [value]="25">25</mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="tabla.length > 0 else mostrarSeccionSinResultados">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="tabla" style="width: 100%;">
+            <thead>
+              <tr>
+                <th class="encabezadoTable" style="padding: 8px 30px 5px; justify-content: center;">
+                  <div style="">Fecha de defunción</div>
+                  <div>
+                    <i class="fa-solid fa-caret-up arrow arrow-up" style="    margin-left: 8%; margin-top: -21px;"
+                      [ngClass]="{'active-opacity': columnaId === 'fechaDefuncion' && order === 'asc'}"
+                      (click)="sortBy('fechaDefuncion', 'asc', 'fecha')">
+                    </i>
+                    <i class="fa-solid fa-caret-down arrow arrow-down" style="margin-left: 8%; margin-top: -4px;"
+                      [ngClass]="{'active-opacity': columnaId === 'fechaDefuncion' && order === 'desc'}"
+                      (click)="sortBy('fechaDefuncion', 'desc', 'fecha')">
+                    </i>
+                  </div>
+                </th>
+                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 4px">
+                  Nombe del asegurado
+                </th>
+                <th class="encabezadoTable" style="padding: 8px 30px 5px; text-align: left; width: 40px">
+                  NSS
+                </th>
+            </thead>
+            <tbody *ngFor="let item of tabla | paginate:{itemsPerPage:pageSize,currentPage:page}; let i = index">
+              <tr>
+                <td class="bordesTablaFecha" style="
+                cursor: pointer;
+                text-decoration: none !important;
+                color: #4d92df !important;
+                text-decoration: none !important;
+              " (click)="irDetalle(item)">
+                  {{ item.fechaDefuncion | date: 'dd / MM / yyyy'}}
+                </td>
+                <td class="bordesTablaNombre" style="padding-left: 30px;text-align: left !important;">{{
+                  item.nombreAsegurado }} </td>
+                <td class="bordesTablaNSS" style="padding-left: 30px;text-align: left !important;">{{ item.nssPaciente
+                  }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row col-md-12" style="height: 40px; border: 1px solid #ddd; margin-top: 0%; margin-left: 0px;">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="Rectangle-9601" style="margin-top: 0px !important;  justify-content: center; ">
+            <div class="">
+              <pagination-controls style="margin-left: auto; margin-right: auto;content: '>';" class="my-pagination"
+                (pageChange)="page = $event" previousLabel="" nextLabel="" screenReaderPaginationLabel="Pagination">
+              </pagination-controls>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="flex align-items-center justify-content-end" style="margin-right: -7%; margin-top: 1.3%;">
+            <label class="control-label" style="padding-top: 4px; margin-right: 10px;">Página</label>
+            <div class="form .wa-3 " style="text-align: center; width: 13%;">
+              <div style="float: right; margin-right: 24%; margin-top: -26%; color: gray;">{{page}} </div>
             </div>
           </div>
         </div>
       </div>
-      <ng-container
-        *ngIf="datosBusqueda.length > 0; else mostrarSeccionSinResultados"
-      >
-        <div class="row">
-          <div class="col-md-12">
-            <table class="tabla" style="width: 100%">
-              <thead>
-                <tr>
-                  <th
-                    class="encabezadoTable"
-                    style="
-                      padding: 8px 30px 5px;
-                      justify-content: center;
-                      position: relative;
-                      display: flex;
-                      gap: 25px;
-                    "
-                  >
-                    <div style="margin-left: -15px">Fecha</div>
-                    <div>
-                      <i
-                        class="fa-solid fa-caret-up arrow arrow-up"
-                        [ngClass]="{
-                          'active-opacity':
-                            columnaId === 'fechaDefuncion' && order === 'asc'
-                        }"
-                        (click)="sortBy('fechaDefuncion', 'asc', 'fecha')"
-                      >
-                      </i>
-                      <i
-                        class="fa-solid fa-caret-down arrow arrow-down"
-                        [ngClass]="{
-                          'active-opacity':
-                            columnaId === 'fechaDefuncion' && order === 'desc'
-                        }"
-                        (click)="sortBy('fechaDefuncion', 'desc', 'fecha')"
-                      >
-                      </i>
-                    </div>
-                  </th>
-                  <th
-                    class="encabezadoTable"
-                    style="padding: 8px 30px 5px; text-align: left; width: 70px"
-                  >
-                    Nombe del asegurado
-                  </th>
-                  <th
-                    class="encabezadoTable"
-                    style="padding: 8px 30px 5px; text-align: left; width: 70px"
-                  >
-                    NSS
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                *ngFor="
-                  let item of datosBusqueda
-                    | paginate
-                      : {
-                          itemsPerPage: formAdd.controls['count'].value,
-                          currentPage: page,
-                          totalItems: paginacion.totalRecords
-                        };
-                  let i = index
-                "
-              >
-                <tr>
-                  <td
-                    class="bordesTablaFecha"
-                    style="
-                      cursor: pointer;
-                      text-decoration: none !important;
-                      color: #4d92df !important;
-                      text-decoration: none !important;
-                    "
-                    (click)="irDetalle(item)"
-                  >
-                    {{ item.fechaDefuncion | date: 'dd / MM / yyyy'}}
-                  </td>
-                  <td
-                    class="bordesTablaNombre"
-                    style="
-                      padding-left: 30px;
-                      text-align: left !important;
-                      width: 557px;
-                    "
-                  >
-                    {{ item.nombreAsegurado }}
-                  </td>
-                  <td
-                    class="bordesTablaNSS"
-                    style="
-                      padding-left: 30px;
-                      text-align: left !important;
-                      width: 377px;
-                    "
-                  >
-                    {{ item.nssPaciente }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div
-          class="row col-md-12"
-          style="
-            height: 40px;
-            border: 1px solid #ddd;
-            margin-top: 0%;
-            margin-left: 0px;
-          "
-        >
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <div
-              class="Rectangle-9601"
-              style="margin-top: 0px !important; justify-content: center"
-            >
-              <div class="">
-                <pagination-controls
-                  style="margin-left: auto; margin-right: auto; content: '>'"
-                  class="my-pagination"
-                  (pageChange)="onPagechange($event)"
-                  previousLabel=""
-                  nextLabel=""
-                  screenReaderPaginationLabel="Pagination"
-                >
-                </pagination-controls>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div
-              class="flex align-items-center justify-content-end"
-              style="margin-right: -7%; margin-top: 1.3%"
-            >
-              <label
-                class="control-label"
-                style="padding-top: 4px; margin-right: 10px"
-                >Página</label
-              >
-              <div class="form .wa-3" style="text-align: center; width: 13%">
-                <div
-                  style="
-                    float: right;
-                    margin-right: 24%;
-                    margin-top: -26%;
-                    color: gray;
-                  "
-                >
-                  {{ page }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </form>
-
+    </ng-container>
     <ng-template #mostrarSeccionSinResultados>
       <div class="row">
         <div class="div-container-image">
-          <img
-            class="errorimg"
-            src="./assets/hu002-busqueda/no encontrado.png"
-          />
+          <img class="errorimg" src="./assets/hu002-busqueda/no encontrado.png">
         </div>
       </div>
     </ng-template>
