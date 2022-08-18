@@ -131,7 +131,11 @@ export class NuevaNotaTSocialComponent implements OnInit {
       this.catServices.getCatDiagnosticosMedicos(value).subscribe(
         (res) => {
           if (res) {
-            this.catDiagnosticosMedicos = res
+            res.forEach((element: any) => {
+              element.nDiagnosticoMedicoCie = `${element.cveCodigo} - ${element.nDiagnosticoMedicoCie}`
+            });
+            
+            this.catDiagnosticosMedicos = res;
             this.filterControl.patchValue(value)
           }
         },
@@ -281,6 +285,10 @@ export class NuevaNotaTSocialComponent implements OnInit {
   }
 
   public getOptionText(option: any) {
-    return option ? option.nDiagnosticoMedicoCie : null
+    return option ? `${option.nDiagnosticoMedicoCie}` : null
   }
+
+  // public getOptionText(option: any) {
+  //   return option ? `${option.cveCodigo} ${option.nDiagnosticoMedicoCie}` : null
+  // }
 }
