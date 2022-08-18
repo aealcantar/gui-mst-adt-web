@@ -136,6 +136,7 @@ export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
         this.listaServicios.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
       if (especialidad && especialidad.cve_especialidad) {
         this.formAdd.get('cveServicio').setValue(especialidad.cve_especialidad);
+        this.formAdd.get('nombreServicio').setValue(especialidad.des_especialidad);
       }
     });
   }
