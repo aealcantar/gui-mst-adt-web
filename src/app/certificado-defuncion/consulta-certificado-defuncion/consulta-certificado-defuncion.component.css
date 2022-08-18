@@ -146,7 +146,7 @@ a {
 }
 
 .encabezadoTable {
-  width: 150;
+  /* width: 150; */
   text-align: left;
   background-color: rgba(196, 196, 196, 0.1);
   border: 1px solid #EEEEEE;
@@ -154,7 +154,7 @@ a {
 }
 
 .encabezadoTableCentro {
-  width: 150;
+  /* width: 150; */
   text-align: left;
   background-color: rgba(196, 196, 196, 0.1);
   border: 1px solid #EEEEEE;
@@ -171,7 +171,7 @@ a {
   border: 1px solid #ddd;
   text-align: center !important;
   padding-top: 14px;
-  width: 17%;
+  width: 23%;
 }
 
 .bordesTablaHora {
@@ -201,13 +201,13 @@ a {
 .bordesTablaNombre {
   border: 1px solid #ddd;
   text-align: left !important;
-  width: 70%;
+  width: 48%;
 }
 /*.bordesTablaNSS obs*/
 .bordesTablaNSS {
   border: 1px solid #ddd;
   text-align: left !important;
-  width: 70%;
+  width: 56%;
 }
 
 .links {

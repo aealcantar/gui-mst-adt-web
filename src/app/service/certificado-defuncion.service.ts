@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CertificadoDefuncion } from '../models/certificado-defuncion.model';
 
+const urlServNotas = `${environment.msmtsControlInterno}`
+
 @Injectable({
   providedIn: 'root',
 })
@@ -40,11 +42,15 @@ export class CertificadoDefuncionService {
         idDefuncion,
       },
     };
-    return this.http.get<CertificadoDefuncion>(
-      environment.msmtsControlInterno + '/id',
-      opt
-    );
+    return this.http.get<CertificadoDefuncion>(environment.msmtsControlInterno + '/id',opt );
   }
+
+  getCertificadoById(id: number) {
+    // return this.http.get<any>(`${environment.msmtsControlInterno}/id ${id}`, { responseType: 'json' });
+    return this.http.get<any>(`${urlServNotas}/id${id}`, { responseType: 'json' });
+  }
+
+
   list(fechaInicio: string,fechaFin: string,pagina: any,count: any,criterio?: any) {
     const opt = {params: {fechaInicio,fechaFin,pagina,count, orden: criterio != undefined ? criterio : '',},};
     return this.http.get<CertificadoDefuncion[]>(environment.msmtsControlInterno + '/list', opt );

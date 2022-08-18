@@ -111,7 +111,14 @@
                 <td class="bordesTablaFecha"
                   style="cursor: pointer; text-decoration: none !important; color: #4D92DF!important; text-decoration: none !important;"
                   (click)="irDetalle(item);">{{ item.fecFecha | date: 'dd / MM / yyyy' }}</td>
-                <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;"> {{item.nombreDiagnostico}} </td>
+                  <td class="bordesTablaDescripcion" style="padding-left: 30px; text-align: left !important;">
+                    <div style="width: 800px; margin-left: 30px;
+                    white-space: nowrap;
+                    text-overflow: clip;
+                    overflow: hidden;">
+                      <span>{{item.nombreDiagnostico}}</span>
+                    </div>
+                  </td>
               </tr>
             </tbody>
           </table>
