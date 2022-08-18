@@ -26,6 +26,11 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
   public editForm!: FormGroup;
   public grupos: any[] = [];
   public serviciosEspecialidad: any[] = [];
+  lugares: any[] = [];
+  lugaresObserver = {
+    next: (lugares: any) => this.lugares = lugares,
+    error: (error: HttpErrorResponse) => console.log(error),
+  }
 
   constructor(
     private router: Router,
@@ -38,6 +43,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.cronicaGrupalService.getCatLugarSolo().subscribe(this.lugaresObserver);
   }
 
   ngAfterViewInit(): void {
@@ -67,6 +73,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       desDesarrolloSesion: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       desPerfilGrupo: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
       desObservaciones: [null, Validators.compose([Validators.required, Validators.maxLength(500)])],
+      desUbicacion: [null, Validators.required],
     });
 
     this.obtenerServicios();
@@ -176,7 +183,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       idGrupo: this.editForm.get('grupo')!.value,
       desGrupo: this.getNombreGrupo(this.editForm.get('grupo')!.value),
       idUbicacion: '9',
-      desUbicacion: null,
+      desUbicacion: this.editForm.get('desUbicacion')!.value,
       fecFechaCorta: this.editForm.get('fecha')!.value,
       fecFechaCompleta: null,
       timHora: this.editForm.get('hora')!.value,
@@ -192,7 +199,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       desObjetivosSesion: this.editForm.get('desObjetivosSesion')!.value,
       desDesarrolloSesion: this.editForm.get('desDesarrolloSesion')!.value,
       desPerfilGrupo: this.editForm.get('desPerfilGrupo')!.value,
-      desObservaciones: this.editForm.get('desObservaciones')!.value
+      desObservaciones: this.editForm.get('desObservaciones')!.value,
     }
 
     console.log(this.cronica);

@@ -16,92 +16,83 @@
     <div class="col-md-2" style="text-align: right;">
     </div>
   </div>
-
   <div content style="margin-left: -22px; margin-right: -22px">
     <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 16px"></div>
     <div class="container seccion">
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-3">
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Servicio
-            </label>
-            <label class="texto">{{ cronica.desEspecialidad }}</label>
-          </div>
-          <div class="col-md-3">
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Grupo:
-            </label>
-            <label class="texto">{{ cronica.desGrupo }}</label>
-          </div>
-          <div class="col-md-3">
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Fecha:
-            </label>
-            <label class="texto">{{
-              cronica.fecFechaCorta
-              }}</label>
-          </div>
-          <div class="col-md-3">
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Hora:
-            </label>
-            <label class="texto">{{
-              cronica.timHora
-              }}</label>
-          </div>
+        <div class="col-md-4">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Servicio
+          </label>
+          <label class="texto">{{ cronica.desEspecialidad }}</label>
         </div>
         <div class="col-md-4">
-          <div class="col-md-4" style="width: 90%;">
-            <!-- <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Grupo:
-            </label>
-            <label class="texto">{{ cronica.desGrupo }}</label> -->
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Modalidad:
-            </label>
-            <label class="texto">{{ cronica.desModalidad }}</label>
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Número de asistentes:
-            </label>
-            <label class="texto">{{ cronica.numTotalParticipantes }}</label>
-          </div>
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Grupo:
+          </label>
+          <label class="texto">{{ cronica.desGrupo }}</label>
         </div>
         <div class="col-md-4">
-          <div class="col-md-4" style="width: 90%;">
-            <!-- <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Fecha:
-            </label>
-            <label class="texto">{{
-              cronica.fecFechaCorta
-            }}</label> -->
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Ocasión de servicio:
-            </label>
-            <label class="texto">{{ cronica.desOcasionServicio }}</label>
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Técnica didactica:
-            </label>
-            <label class="texto">{{ cronica.desTecnicaDidactica }}</label>
-          </div>
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Fecha:
+          </label>
+          <label class="texto">{{
+            cronica.fecFechaCorta
+            }}</label>
         </div>
-        <div class="col-md-4">
-          <div class="col-md-4" style="width: 90%;">
-            <!-- <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Hora:
-            </label>
-            <label class="texto">{{
-              cronica.timHora
-            }}</label> -->
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Ponentes:
-            </label>
-            <label class="texto">{{ cronica.descPonentes }}</label>
-            <label class="titulo2" style="font-weight: bold; font-size: 16px">
-              Material de apoyo:
-            </label>
-            <label class="texto">{{ cronica.desMaterialApoyo }}</label>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Hora:
+          </label>
+          <label class="texto">{{
+            cronica.timHora
+            }}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Ponentes:
+          </label>
+          <label class="texto">{{ cronica.descPonentes }}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Lugar:
+          </label>
+          <label class="texto">{{ cronica.desUbicacion}}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Número de asistentes:
+          </label>
+          <label class="texto">{{ cronica.numTotalParticipantes }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Técnica didactica:
+          </label>
+          <label class="texto">{{ cronica.desTecnicaDidactica }}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Material de apoyo:
+          </label>
+          <label class="texto">{{ cronica.desMaterialApoyo }}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Ocasión de servicio:
+          </label>
+          <label class="texto">{{ cronica.desOcasionServicio }}</label>
+        </div>
+        <div class="col-md-3">
+          <label class="titulo2" style="font-weight: bold; font-size: 16px">
+            Modalidad:
+          </label>
+          <label class="texto">{{ cronica.desModalidad }}</label>
         </div>
       </div>
     </div>

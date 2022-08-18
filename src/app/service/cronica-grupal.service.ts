@@ -16,6 +16,10 @@ export class CronicaGrupalService {
     private router: Router
   ) { }
 
+  getCatLugarSolo() {
+    return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion/`)
+  }
+
   getCatServicios() {
     return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listservicios`);
   }

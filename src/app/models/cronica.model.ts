@@ -9,7 +9,7 @@ export class Cronica {
     idGrupo?: number;
     desGrupo?: string | null;
     idUbicacion?: string;
-    desUbicacion?: string | null;
+    desUbicacion?: string;
     fecFechaCorta?: string;
     fecFechaCompleta?: string | null;
     timHora?: string;
