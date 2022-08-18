@@ -93,7 +93,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
   }
 
   actualizarFecha(): void {
-    $('#calendar').datepicker({
+    $('#cInformeSPro').datepicker({
       dateFormat: 'dd/mm/yy',
       onSelect: (date: any) => {
         if (date == '') return

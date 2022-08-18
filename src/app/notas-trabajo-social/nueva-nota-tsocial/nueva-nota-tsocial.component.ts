@@ -134,7 +134,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
             res.forEach((element: any) => {
               element.nDiagnosticoMedicoCie = `${element.cveCodigo} - ${element.nDiagnosticoMedicoCie}`
             });
-            
+
             this.catDiagnosticosMedicos = res;
             this.filterControl.patchValue(value)
           }
