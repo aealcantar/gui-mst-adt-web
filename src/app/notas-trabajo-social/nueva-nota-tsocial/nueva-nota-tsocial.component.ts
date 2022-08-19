@@ -45,6 +45,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
   catDiagnosticosMedicos: any[] = []
   filteredOptions!: Observable<any[]>
   filterControl = new FormControl('')
+  horaraInicia: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,6 +72,11 @@ export class NuevaNotaTSocialComponent implements OnInit {
         this._filter(typeof value === 'object' ? value?.nombre : value),
       ),
     )
+    // this.route.queryParamMap.subscribe((params: any) => {
+    //   const timHoraInicial = JSON.parse(params.getAll('timHoraInicial'))
+    //    this.horaraInicia = timHoraInicial;
+    // }
+    this.horaraInicia = moment().format('HH:mm:ss')
   }
 
   getCatalogos() {
@@ -133,16 +139,16 @@ export class NuevaNotaTSocialComponent implements OnInit {
           if (res) {
             res.forEach((element: any) => {
               element.nDiagnosticoMedicoCie = `${element.cveCodigo} - ${element.nDiagnosticoMedicoCie}`
-            });
+            })
 
-            this.catDiagnosticosMedicos = res;
+            this.catDiagnosticosMedicos = res
             this.filterControl.patchValue(value)
           }
         },
         (httpErrorResponse: HttpErrorResponse) => {
           console.error(httpErrorResponse)
         },
-        )
+      )
     }
   }
 
@@ -212,24 +218,35 @@ export class NuevaNotaTSocialComponent implements OnInit {
       this.usuario = JSON.parse(userTemp)
     }
 
+
     let notaToSave: Nota = {
       fecFecha: moment().format('YYYY/MM/DD'),
       timHora: moment().format('HH:mm:ss'),
+      timHoraInicial: this.horaraInicia,
       timHoraFinal: moment().format('HH:mm:ss'),
-      timHoraInicial: moment().format('HH:mm:ss'),
       numNss: String(this.paciente.nss),
-      idActividadTecnica: parseInt(this.formNuevaNota.get('idActividadTecnica').value,),
+      idActividadTecnica: parseInt(
+        this.formNuevaNota.get('idActividadTecnica').value,
+      ),
       idRedApoyo: parseInt(this.formNuevaNota.get('idRedApoyo').value),
       idTipoNota: parseInt(this.formNuevaNota.get('idTipoNota').value),
       nombreTipoNota,
       nombreRedApoyo,
       nombreActividadTecnica,
-      idDiagnosticoMedico: parseInt(this.formNuevaNota.get('diagnosticoMedico').value?.id,),
-      nombreDiagnostico: this.formNuevaNota.get('diagnosticoMedico').value?.nDiagnosticoMedicoCie,
+      idDiagnosticoMedico: parseInt(
+        this.formNuevaNota.get('diagnosticoMedico').value?.id,
+      ),
+      nombreDiagnostico: this.formNuevaNota.get('diagnosticoMedico').value
+        ?.nDiagnosticoMedicoCie,
       redaccion: this.formNuevaNota.get('redaccion').value,
       diagnostico: this.formNuevaNota.get('diagnostico').value,
       matriculaTs: String(this.usuario.matricula),
-      desResponsable: this.usuario.strNombres+" "+this.usuario.strApellidoP+" "+this.usuario.strApellidoM,
+      desResponsable:
+        this.usuario.strNombres +
+        ' ' +
+        this.usuario.strApellidoP +
+        ' ' +
+        this.usuario.strApellidoM,
       desAgregadoMedico: String(this.paciente.agregadoMedico),
       nombrePaciente: String(this.paciente.paciente),
       cveTurno: String(this.paciente.turno),
@@ -257,7 +274,7 @@ export class NuevaNotaTSocialComponent implements OnInit {
         (response: any) => {
           if (response && response?.idNuevaNotaTS) {
             notaToSave.id = response?.idNuevaNotaTS
-            let params = { nota: JSON.stringify(notaToSave), nuevaNota:true}
+            let params = { nota: JSON.stringify(notaToSave), nuevaNota: true }
             this.router.navigate(['detalle-nota'], {
               queryParams: params,
               skipLocationChange: true,
