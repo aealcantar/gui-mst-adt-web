@@ -105,4 +105,6 @@ export class HelperMensajesService {
   public MSJ_ERROR_GUARDA_USR: string = 'Ocurrió un error al guardar el usuario.';
   public MSJ_ERROR_EDITA_USR: string = 'Ocurrió un error al editar el usuario.';
   public MSJ_ERROR_BUSCA_USR: string = 'No fue posible conectar con el servicio de consultar usuarios.';
+  public MSJ_ERROR_TURNOS_USR: string = 'No fue posible conectar con el servicio de consultar turnos.';
+  public MSJ_ERROR_PUESTOS_USR: string = 'No fue posible conectar con el servicio de consultar puestos.';
 }
