@@ -34,8 +34,8 @@ export class UserconsultaComponent implements OnInit {
   items = { 'Matrícula': '', 'Usuario': '', 'Contraseña': '',
   'Nombre(s)':'', 'Primer apellido':'', 'Segundo apellido': '',
   'Correo electrónico': '', 'Unidad médica': '',
-  'Rol': '', 'Estatus': '', 'Puesto': '',
-  'Escuela de procedencia': '' };
+  'Rol en el sistema': '', 'Turno': '', 'Puesto': '',
+  'Escuela de procedencia': '', 'Estatus': '' };
 
   originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
     return 0;
@@ -70,10 +70,11 @@ export class UserconsultaComponent implements OnInit {
         this.items['Segundo apellido'] = resp.nom_segundo_apellido;
         this.items['Correo electrónico'] = resp.email;
         this.items['Unidad médica'] = resp.des_unidad_medica;
-        this.items.Rol = resp.adtc_roles.des_rol;
-        this.items.Estatus = resp.ind_estatus? 'Activo' : 'Inactivo';
+        this.items['Rol en el sistema'] = resp.adtc_roles.des_rol;
+        this.items.Turno = resp.des_turno;
         this.items.Puesto = resp.des_puesto;
         this.items['Escuela de procedencia'] = resp.des_escuela_procedencia;
+        this.items.Estatus = resp.ind_estatus? 'Activo' : 'Inactivo';
         Swal.close();
       },
       error: (err) => {

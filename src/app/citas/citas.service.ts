@@ -121,5 +121,11 @@ export class CitasService {
     return ruta;
   }
 
+  getlistpuestos():Observable<any>{
+    let direccion = this.baseApiUrl + '/listPuestos';
+
+    return this.http.get(direccion,{headers: this.header});
+  }
+
 
 }

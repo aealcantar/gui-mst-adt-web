@@ -54,6 +54,4 @@ export class UsuariosService {
 		return this.http.get(direccion,{headers: this.header});
   }
 
-
-
 }

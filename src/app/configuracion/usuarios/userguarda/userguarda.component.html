@@ -127,7 +127,7 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <div class="form-group usrlist pull-left">
-            <label for="rol" class="titulo">Rol
+            <label for="rol" class="titulo">Rol en el sistema
               <span class="form-text"
                 [ngClass]="{'form-text-error': userdata.controls.rol.dirty && userdata.controls.rol.errors}">*
               </span>:
@@ -135,7 +135,7 @@
             <select class="form-control captura" id="rol" placeholder="Seleccionar rol" #cricket
               (change)="update($event)" formControlName="rol"
               [ngClass]="{ 'form-control-error': userdata.controls.rol.dirty && userdata.controls.rol.errors}" required>
-              <!-- <option value="default">----</option> -->
+              <option value="" disabled selected hidden>Seleccionar rol</option>
               <option [value]="objeto.cve_rol" *ngFor="let objeto of lstRoles">{{objeto.des_rol}}</option>
             </select>
             <small *ngIf="userdata.controls.rol.dirty && f.rol.errors" class="form-text form-text-error">
@@ -146,7 +146,51 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group usrlist pull-left">
+            <label for="turno" class="titulo">Turno
+              <span class="form-text"
+                [ngClass]="{'form-text-error': userdata.controls.turno.dirty && userdata.controls.turno.errors}">*
+              </span>:
+            </label>
+            <select class="form-control captura" id="turno" placeholder="Ingresar turno" #cricket
+              formControlName="turno"
+              [ngClass]="{ 'form-control-error': userdata.controls.turno.dirty && userdata.controls.turno.errors}" required>
+              <option value="" disabled selected hidden>Seleccionar turno</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstTurnos">{{objeto.des_turno}}</option>
+            </select>
+            <small *ngIf="userdata.controls.turno.dirty && f.turno.errors" class="form-text form-text-error">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group usrlist pull-left">
+            <label for="puesto" class="titulo">Puesto
+              <span class="form-text"
+                [ngClass]="{'form-text-error': userdata.controls.puesto.dirty && userdata.controls.puesto.errors}">*
+              </span>:
+            </label>
+            <select class="form-control captura" id="puesto" placeholder="Seleccionar puesto" #cricket
+              formControlName="puesto"
+              [ngClass]="{ 'form-control-error': userdata.controls.puesto.dirty && userdata.controls.puesto.errors}" required>
+              <option value="" disabled selected hidden>Seleccionar puesto</option>
+              <option [ngValue]="objeto" *ngFor="let objeto of lstPuestos">{{objeto.nom_puesto}}</option>
+            </select>
+            <small *ngIf="userdata.controls.puesto.dirty && f.puesto.errors" class="form-text form-text-error">
+              Campo obligatorio
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group usrlist pull-left">
+            <label for="escuelaprocd" class="titulo">Escuela de procedencia:</label>
+            <input type="text" class="form-control captura" id="escuelaprocd"
+              placeholder="Ingresar escuela de procedencia" formControlName="escuelaprocd" maxlength="45" />
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
           <div class="form-group usrlist pull-left">
             <label for="" class="titulo">Estatus:</label>
 
@@ -156,20 +200,6 @@
             <label class="radio-inline rdb-captura">
               Inactivo: <input type="radio" name="estatus" formControlName="estatus" id="inactivo" value="false">
             </label>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="form-group usrlist pull-left">
-            <label for="puesto" class="titulo">Puesto:</label>
-            <input type="text" class="form-control captura" id="puesto" placeholder="Ingresar puesto"
-              formControlName="puesto" maxlength="45" />
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="form-group usrlist pull-left">
-            <label for="escuelaprocd" class="titulo">Escuela de procedencia:</label>
-            <input type="text" class="form-control captura" id="escuelaprocd"
-              placeholder="Ingresar escuela de procedencia" formControlName="escuelaprocd" maxlength="45" />
           </div>
         </div>
       </div>

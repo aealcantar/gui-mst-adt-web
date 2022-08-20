@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/service/auth-service.service';
 import { HelperMensajesService } from '../../../services/helper.mensajes.service';
 import Swal from 'sweetalert2';
 import { Usuario } from 'src/app/models/usuario.model';
+import { CitasService } from 'src/app/citas/citas.service';
 
 declare var $gmx: any;
 
@@ -40,15 +41,18 @@ export class UserguardaComponent implements OnInit {
     correo: ['', [Validators.required, Validators.email]],
     unidadmedica: '',
     rol: ['', Validators.required],
-    estatus: ['', Validators.required],
-    puesto: '',
+    turno: ['', Validators.required],
+    puesto: ['', Validators.required],
     escuelaprocd: '',
-    idusuario: '',
+    estatus: ['', Validators.required],
+    idusuario: ''
   });
   submitted = false;
   objectKeys = Object.keys;
 
   lstRoles: Array<any> = [];
+  lstTurnos: Array<any> = [];
+  lstPuestos: Array<any> = [];
   rolselected!: object;
   selected = '----';
 
@@ -69,6 +73,7 @@ export class UserguardaComponent implements OnInit {
     private activerouter: ActivatedRoute,
     private userservice: UsuariosService,
     private _Mensajes: HelperMensajesService,
+    private citaservice: CitasService,
   ) {
     this.authService.userLogged$.next(true);
     this.authService.isAuthenticatedObs$.next(true);
@@ -77,6 +82,8 @@ export class UserguardaComponent implements OnInit {
   ngOnInit(): void {
     this.authService.setProjectObs("Agenda Digital Transversal");
     this.consultarRoles();
+    this.consultarTurnos();
+    this.consultarPuestos();
     this._usuario = JSON.parse(sessionStorage.getItem('usuario') as string) as Usuario;
     this.varid = this.activerouter.snapshot.paramMap.get('id');
     this.currentroute = this.router.url;
@@ -126,12 +133,14 @@ export class UserguardaComponent implements OnInit {
           correo: resp.email,
           unidadmedica: resp.des_unidad_medica,
           rol: resp.adtc_roles.cve_rol,
-          estatus: resp.ind_estatus.toString(),
+          turno: resp.turno,
           puesto: resp.des_puesto,
           escuelaprocd: resp.des_escuela_procedencia,
+          estatus: resp.ind_estatus.toString()
         });
         this.rolselected = resp.adtc_roles.cve_rol;
-        //this.userdata.controls['matricula'].setValue(resp.des_matricula);
+        this.userdata.controls['turno'].setValue(this.lstTurnos.find(x=>x.cve_turno==resp.turno));
+        this.userdata.controls['puesto'].setValue(this.lstPuestos.find(x=>x.nom_puesto.trim().toUpperCase()==resp.des_puesto.trim().toUpperCase()));
         Swal.close();
       },
       error: (err) => {
@@ -165,9 +174,10 @@ export class UserguardaComponent implements OnInit {
           des_password: this.userdata.value.password,
           des_unidad_medica: this.userdata.value.unidadmedica,
           ind_estatus: this.userdata.value.estatus,
-          des_puesto: this.userdata.value.puesto,
+          des_puesto: this.userdata.value.puesto.nom_puesto,
           des_escuela_procedencia: this.userdata.value.escuelaprocd,
           adtc_roles: { cve_rol: this.rolselected },
+          cve_turno: this.userdata.value.turno.cve_turno
         };
         this.userservice.guardaUsuario(data, this._usuario.cveUsuario).subscribe({
           next: (resp: any) => {
@@ -209,9 +219,10 @@ export class UserguardaComponent implements OnInit {
         des_password: this.userdata.value.password,
         des_unidad_medica: this.userdata.value.unidadmedica,
         ind_estatus: this.userdata.value.estatus,
-        des_puesto: this.userdata.value.puesto,
+        des_puesto: this.userdata.value.puesto.nom_puesto,
         des_escuela_procedencia: this.userdata.value.escuelaprocd,
         adtc_roles: { cve_rol: this.rolselected },
+        cve_turno: this.userdata.value.turno.cve_turno
       };
       this.userservice.actualizaUsuario(this.varid, data).subscribe({
         next: (resp: any) => {
@@ -296,6 +307,34 @@ export class UserguardaComponent implements OnInit {
         console.log(err);
         this.lstRoles = [];
         this.muestraAlerta(this._Mensajes.MSJ_ERROR_ROLES_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
+      }
+    });
+  }
+
+  consultarTurnos() {
+    this.citaservice.getlistturnos().subscribe({
+      next: (resp: any) => {
+        console.log(resp);
+        this.lstTurnos = resp;
+      },
+      error: (err) => {
+        console.log(err);
+        this.lstTurnos = [];
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_TURNOS_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
+      }
+    });
+  }
+
+  consultarPuestos() {
+    this.citaservice.getlistpuestos().subscribe({
+      next: (resp: any) => {
+        console.log(resp);
+        this.lstPuestos = resp;
+      },
+      error: (err) => {
+        console.log(err);
+        this.lstPuestos = [];
+        this.muestraAlerta(this._Mensajes.MSJ_ERROR_PUESTOS_USR, this._Mensajes.ALERT_DANGER, this._Mensajes.ERROR, null);
       }
     });
   }

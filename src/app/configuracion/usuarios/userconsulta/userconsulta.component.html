@@ -17,12 +17,14 @@
       </div>
       <div class="body-princ">
         <div class="row">
-          <div class="col-md-4 col-sm-6" *ngFor="let item of items | keyvalue: keepOriginalOrder">
-            <div class="usrlist pull-left" >
-              <div class="titulo">{{item.key}}:</div>
-              <div class="valor">{{item.value}}</div>
+          <ng-container *ngFor="let item of items | keyvalue: keepOriginalOrder; let i = index">
+            <div class="col-sm-6" [ngClass]="i <= 8 ? 'col-md-4': 'col-md-3'">
+              <div class="usrlist pull-left" >
+                <div class="titulo">{{item.key}}:</div>
+                <div class="valor">{{item.value}}</div>
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
 
 
