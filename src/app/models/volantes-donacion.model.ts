@@ -31,4 +31,5 @@ export class VolantesDonacion {
 	nss?:string;
 	nssCompleto?:string;
 	tipoSangre?:string;
+  refHorarioAtencion?:string;
 }
