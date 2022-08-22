@@ -108,6 +108,11 @@
 
 .blq-2-selected {
   background: url("../../assets/images/Subtract.svg");
+  color: #0e7b77;
+  background: url("../../assets/images/Subtract-sm.svg");
+  background-position: left;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .blq-3-selected img:nth-child(3) {
