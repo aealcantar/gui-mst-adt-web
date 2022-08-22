@@ -107,7 +107,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     let desNssAgregado = "";
     let timHoraFinalAtencion = "";
     let timHoraInicialAtencion = "";
-    let refHorarioAtencion = "";
+    // let refHorarioAtencion = "";
     this.volantesDonacion.nssCompleto=this.volantesDonacion?.desNssAgregado;
     try {
       let datosnss = this.volantesDonacion?.desNssAgregado.split(" ");
@@ -127,7 +127,7 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     this.volantesDonacion.nss = nss;
     this.volantesDonacion.timHoraFinalAtencion = timHoraFinalAtencion;
     this.volantesDonacion.timHoraInicialAtencion = timHoraInicialAtencion;
-    this.volantesDonacion.refHorarioAtencion = refHorarioAtencion;
+    this.volantesDonacion.refHorarioAtencion = this.volantesDonacion.refHorarioAtencion;
 
 
     console.log('DATA REPORT: ', this.volantesDonacion);
