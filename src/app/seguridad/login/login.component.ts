@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getAppAccesbyAppName("SAD").subscribe(async (resp: Aplicacion) => {
       this.aplicacion = resp;
-      console.log(" app " + this.aplicacion.cveUsuario);
     }, (error: HttpErrorResponse) => {
       console.error("Error: ", error);
     });
@@ -111,12 +110,12 @@ export class LoginComponent implements OnInit {
     if (this.logindata.valid) {
       this.strMsjError = "";
       try {
-        console.log(`Token [${this.token}] generated`);
         this.usuario.strEmail = this.logindata.get("usuario")?.value;
         this.usuario.strPassword = this.logindata.get("password")?.value;
         this.authService.login(this.usuario, this.aplicacion).subscribe(
           (result) => {
-            console.log(result);
+            this.authService.guardarToken(result.jwtToken);
+            this.seguridadService.registrarUsuario(this.usuario);
             this.authService.getUserData(this.usuario.strEmail).subscribe(
               (response: any) => {
                 this.authService.guardarUsuarioEnSesion(response);
@@ -127,16 +126,13 @@ export class LoginComponent implements OnInit {
                 usuario = JSON.parse(sessionStorage.getItem('usuario'));
                 if (usuario.nameRolUser.toLocaleLowerCase() === 'administrador') {
                   this.router.navigate(['/catalogos/cargaCatalogos/0']);
-                  
                 } else {
                   this.router.navigate(["/busqueda"]);
                 }
 
               }
             );
-            this.authService.guardarToken(result.access_token);
-            this.seguridadService.registrarUsuario(this.usuario);
-                      },
+          },
           (err: HttpErrorResponse) => {
             window.scroll(0, 0);
             switch (err.error.message) {

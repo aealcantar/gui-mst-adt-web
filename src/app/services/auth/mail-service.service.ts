@@ -10,7 +10,7 @@ export class MailService {
 
   constructor(private http: HttpClient) { }
 
-  recuperarPassword(correo:string){
-    return this.http.get<MailResponse>(`${environment.urlServOauth}/api/aplicacion/recuperarPassword/${correo}/`);
+  recuperarPassword(correo: string) {
+    return this.http.get<MailResponse>(`${environment.msmtsOauth}/recuperarPassword/${correo}/`);
   }
 }

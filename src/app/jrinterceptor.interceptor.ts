@@ -25,7 +25,11 @@ export class JRInterceptor implements HttpInterceptor {
         }
       });
     } else {
-      if(request.url.endsWith("token")){} else {
+      if (
+        request.url.endsWith("app?appName=SAD") ||
+        request.url.endsWith("publico/authenticate") ||
+        request.url.includes("recuperarPassword")
+      ) { } else {
         request = request.clone({
           setHeaders: {
             'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
