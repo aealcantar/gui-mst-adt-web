@@ -27,16 +27,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     umh: new FormControl('', Validators.required),
     fecha: new FormControl(''),
     idBancoSangre: new FormControl('', Validators.required),
-    horaInicialAtencion1: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
-    ]),
-    horaInicialAtencion: new FormControl(''),
-    horaFinalAtencion1: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
-    ]),
-    horaFinalAtencion: new FormControl(''),
+    refHorarioAtencion: new FormControl('', Validators.required),
     codigoPostal: new FormControl('', Validators.required),
     idEstado: new FormControl('', Validators.required),
     idDelegacion: new FormControl('', Validators.required),
@@ -104,7 +95,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     private volantesDonacionService: VolantesDonacionService,
     private tarjetaService: AppTarjetaPresentacionService,
     private avisoMinisterioPublico: AvisoMinisterioPublicoService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.estados()
@@ -224,19 +215,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   }
 
   registarDonacion(formNuevaDonacion: FormGroup) {
-    this.submitted = true
-    console.log(this.formNuevaDonacion.value)
-
-    const horaInicial = moment(
-      this.formNuevaDonacion.get('horaInicialAtencion1').value,
-      'HHmm',
-    ).format('HH:mm')
-    const horaFinal = moment(
-      this.formNuevaDonacion.get('horaFinalAtencion1').value,
-      'HHmm',
-    ).format('HH:mm')
-    this.formNuevaDonacion.get('horaInicialAtencion1').patchValue(horaInicial)
-    this.formNuevaDonacion.get('horaFinalAtencion1').patchValue(horaFinal)
+    this.submitted = true;
 
     if (formNuevaDonacion.status != 'INVALID') {
       //validando que los campos no vayan vacios
@@ -252,34 +231,6 @@ export class NuevoVdonacionSangreComponent implements OnInit {
 
       if (this.formNuevaDonacion.value.fecha1.length == 0 ? true : false) {
         this.formNuevaDonacion.controls['fecha1'].setValue(null)
-        this.muestraAlerta(
-          'Verificar datos capturados',
-          'alert-danger',
-          'Error',
-        )
-        return
-      }
-
-      if (
-        this.formNuevaDonacion.value.horaInicialAtencion1.length == 0
-          ? true
-          : false
-      ) {
-        this.formNuevaDonacion.controls['horaInicialAtencion1'].setValue(null)
-        this.muestraAlerta(
-          'Verificar datos capturados',
-          'alert-danger',
-          'Error',
-        )
-        return
-      }
-
-      if (
-        this.formNuevaDonacion.value.horaFinalAtencion1.length == 0
-          ? true
-          : false
-      ) {
-        this.formNuevaDonacion.controls['horaFinalAtencion1'].setValue(null)
         this.muestraAlerta(
           'Verificar datos capturados',
           'alert-danger',
@@ -420,12 +371,6 @@ export class NuevoVdonacionSangreComponent implements OnInit {
         return
       }
 
-      this.formNuevaDonacion.controls['horaFinalAtencion'].setValue(
-        formNuevaDonacion.value.horaFinalAtencion1 + ':00',
-      )
-      this.formNuevaDonacion.controls['horaInicialAtencion'].setValue(
-        formNuevaDonacion.value.horaInicialAtencion1 + ':00',
-      )
       let fechaa = formNuevaDonacion.value.fecha1.split('/')
       let fechaNew = fechaa[2] + '/' + fechaa[1] + '/' + fechaa[0]
       let fechaI = formNuevaDonacion.value.fecha2.split('/')
@@ -438,7 +383,8 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       )
       this.formNuevaDonacion.controls['fechaCirugia'].setValue(fechaCirugia)
 
-      let datos = JSON.stringify(this.formNuevaDonacion.value)
+      let datos = JSON.stringify(this.formNuevaDonacion.value);
+      
       this.volantesDonacionService.addVolante(datos).subscribe(
         async (res: any) => {
           let estatus = res.status
@@ -463,7 +409,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
           )
           console.error(error)
         },
-      )
+      );
     } else {
       this.muestraAlerta('Verificar datos capturados', 'alert-danger', 'Error')
       return
@@ -483,6 +429,14 @@ export class NuevoVdonacionSangreComponent implements OnInit {
           console.error(httpErrorResponse)
         },
       )
+  }
+
+  onChangeBancoSangre(): void {
+    const datosBancoSangre =
+      this.bancosSangre.filter((item: any) => item.idBancoSangre === this.formNuevaDonacion.get('idBancoSangre').value);
+    if (datosBancoSangre && datosBancoSangre.length > 0) {
+      this.formNuevaDonacion.get('refHorarioAtencion').setValue(datosBancoSangre[0]?.desHorarioAtencion);
+    }
   }
 
   onChangeEstado(): void {
