@@ -114,7 +114,8 @@ export class LoginComponent implements OnInit {
         this.usuario.strPassword = this.logindata.get("password")?.value;
         this.authService.login(this.usuario, this.aplicacion).subscribe(
           (result) => {
-            this.authService.guardarToken(result.jwtToken);
+            this.authService.guardarToken(result.accessToken);
+            this.authService.guardarRefreshToken(result.refreshToken);
             this.seguridadService.registrarUsuario(this.usuario);
             this.authService.getUserData(this.usuario.strEmail).subscribe(
               (response: any) => {

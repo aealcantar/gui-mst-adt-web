@@ -8,7 +8,7 @@ import { AdmonPasswordRequest } from '../models/admon-password-request.model';
 import { AdmonPasswordResponse } from '../models/admon-password-response.model';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+const urlEndpoint = environment.msmtsOauth;
 @Injectable({
   providedIn: 'root'
 })
@@ -153,10 +153,21 @@ export class AuthService {
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
-  guardarToken(accessToken: string): void {
+  guardarToken(accessToken: string ): void {
     this._token = accessToken;
     sessionStorage.setItem('token', accessToken);
   }
+
+  guardarRefreshToken(refreshToken: string ): void {
+    this._token = refreshToken;
+    sessionStorage.setItem('refreshToken', refreshToken);
+  }
+
+  renovarToken(refreshToken: any){
+    console.log('Esta llegando al servicio__'+ refreshToken);
+    // return this.http.post<any>(`${urlServNotas}/findNotasByFechas`, paciente);
+    return this.http.post<any>(`${urlEndpoint}/publico/refreshtoken`, refreshToken); // { headers: httpHeaders }
+   }
 
   obtenerDatosToken(accessToken: string): any {
     if (accessToken == 'ajaltechnology') return accessToken;

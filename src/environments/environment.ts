@@ -19,7 +19,8 @@ export const environment = {
     urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
 
     //Trabajo Social
-    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    // msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    msmtsPacientes: 'http://localhost:8080/msmts-pacientes/api/busquedanss/',
     msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
@@ -27,8 +28,9 @@ export const environment = {
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
     // msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/api/aplicacion',
     // urlServOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/',
-    // msmtsOauth: 'http://localhost:8080',
-    msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx',
+    //   msmtsOauth: 'http://localhost:8083',
+     msmtsOauth: 'http://localhost:8081/msadt-auth',
+    // msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
     msmtsServsProfesionales: "https://mts-qa.cloudapps.imss.gob.mx/msmts-servs-profesionales/api",

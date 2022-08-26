@@ -29,7 +29,6 @@ export class SeguridadService {
      strUserName: usr.strUserName,
      strPassword: usr.strPassword
     };
-
     this.seguridadCambio.next(true);
     this.router.navigate(['/login']);
   }

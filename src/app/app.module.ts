@@ -105,6 +105,8 @@ import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servic
 import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donacion-sangre/consulta-donacion-sangre-administracion/consulta-donacion-sangre-administracion.component';
 import { NuevaCronicaDesdeCeroComponent } from './cronica-grupal/cronica-desde-cero/nueva-cronica-desde-cero/nueva-cronica-desde-cero.component';
 import { DetalleCronicaDesdeCeroComponent } from './cronica-grupal/cronica-desde-cero/detalle-cronica-desde-cero/detalle-cronica-desde-cero.component';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { ModalSesionComponent } from './modal-sesion/modal-sesion.component';
 registerLocaleData('es');
 
 @NgModule({
@@ -172,6 +174,7 @@ registerLocaleData('es');
     ConsultaDonacionSangreAdministracionComponent,
     NuevaCronicaDesdeCeroComponent,
     DetalleCronicaDesdeCeroComponent,
+    ModalSesionComponent,
   ],
   imports: [
     BrowserModule,
@@ -216,7 +219,7 @@ registerLocaleData('es');
     })
   ],
   providers:
-    [DatePipe, UsuariosService, SeguridadService, CitasService, {
+    [DatePipe, UsuariosService, SeguridadService, CitasService, BnNgIdleService, {
       provide:
         RECAPTCHA_SETTINGS,
       useValue: {

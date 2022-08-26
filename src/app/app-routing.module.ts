@@ -53,6 +53,9 @@ import { ConsultaDonacionSangreAdministracionComponent } from './volantes-donaci
 import { NuevoCertificadoComponent } from './certificado-defuncion/nuevo-certificado/nuevo-certificado.component'
 import { DetalleCertificadoComponent } from './certificado-defuncion/detalle-certificado/detalle-certificado.component'
 import { ConsultaCertificadoDefuncionComponent } from './certificado-defuncion/consulta-certificado-defuncion/consulta-certificado-defuncion.component'
+import { ModalSesionComponent } from './modal-sesion/modal-sesion.component'
+
+
 
 // informe servicios profesionales
 import { ConsultaInformeServiciosProfesionalesComponent } from './informe-servicios-profesionales/consulta-informe-servicios-profesionales/consulta-informe-servicios-profesionales.component'
@@ -117,6 +120,11 @@ const routes: Routes = [
   {
     path: 'detalle-nota',
     component: ConsultaNotaTSocialComponent,
+    canActivate: [SeguridadRouter],
+  },
+  {
+    path: 'modal-sesion',
+    component: ModalSesionComponent,
     canActivate: [SeguridadRouter],
   },
   {
@@ -266,6 +274,7 @@ const routes: Routes = [
     component: ConsultaCertificadoDefuncionComponent,
     canActivate: [SeguridadRouter],
   },
+
 ]
 
 @NgModule({
