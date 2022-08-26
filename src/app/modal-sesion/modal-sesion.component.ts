@@ -42,7 +42,7 @@ export class ModalSesionComponent implements OnInit, OnDestroy {
     });
   }
 });
-  }
+}
 
 ngOnDestroy(): void {
   this.tiempoCaduca.unsubscribe();
