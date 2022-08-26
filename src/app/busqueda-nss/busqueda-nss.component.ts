@@ -1,11 +1,13 @@
 import { ServiceService } from './busqueda-nss.service';
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { pacienteSeleccionado } from './paciente.interface';
 import { Router } from '@angular/router';
 import { AppTarjetaPresentacionService } from '../app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import * as momment from 'moment';
 import { AuthService } from '../service/auth-service.service';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
+import { BnNgIdleService } from 'bn-ng-idle'
+declare var $: any
 
 @Component({
   selector: 'app-busqueda-nss',
@@ -17,17 +19,14 @@ export class BusquedaNssComponent implements OnInit {
   pacienteSeleccionado!: pacienteSeleccionado;
 
   isCollapsed: boolean[] = [];
-
   page: number = 1;
-
   pageSize: number = 15;
-
   alertMensaje: string = "";
   alertVisible: boolean = false;
   alertTipo: string = "";
-
-
-
+  tiempoCaduca: any;
+  verModal: boolean;
+  tiempoVidamodal: any;
   // txtNSS = "4382641109";
   txtNSS = "";
 
@@ -45,7 +44,8 @@ export class BusquedaNssComponent implements OnInit {
     private ServiceService: ServiceService,
     private router: Router,
     private tarjetaService: AppTarjetaPresentacionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private bnIdle: BnNgIdleService,
   ) {
     this.authService.userLogged$.next(true);
     this.authService.isAuthenticatedObs$.next(true);
@@ -60,7 +60,13 @@ export class BusquedaNssComponent implements OnInit {
     if (estatus === 'false') {
       this.router.navigate(["/catalogos/cargaCatalogos/1"], { skipLocationChange: true });
     }
+
+
+
   }
+
+
+
 
   elementoSeleccionado(elemento: any) {
     this.pacienteSeleccionado = elemento;

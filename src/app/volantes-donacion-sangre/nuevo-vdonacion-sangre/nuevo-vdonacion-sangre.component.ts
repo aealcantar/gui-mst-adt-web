@@ -384,7 +384,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       this.formNuevaDonacion.controls['fechaCirugia'].setValue(fechaCirugia)
 
       let datos = JSON.stringify(this.formNuevaDonacion.value);
-      
+
       this.volantesDonacionService.addVolante(datos).subscribe(
         async (res: any) => {
           let estatus = res.status
