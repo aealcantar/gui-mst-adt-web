@@ -6,35 +6,29 @@ export const environment = {
   production: false,
     urlLogin: 'https://mts-qa.cloudapps.imss.gob.mx/login',
 
-    //Agenda
+    //Agenda Catalogos
     urlMSADCargasCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-carga-catalogos',
-    //urlMSADCargasCatalogos: 'http://localhost:8080/msedsc-carga-catalogos',
     urlMSEDSCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
     urlMSADTCITAS: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-citas/api',
     urlMSEDSCatalogosHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos/api',
-    //urlMSEDSCHorarios: 'http://localhost:8080/msedsc-catalogos',
     urlMSEDSCHorarios: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
-
     urlMSEDSCAgenda: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
     urlMSADTUSUARIOS:'https://adt-qa.cloudapps.imss.gob.mx/msedsc-usuarios/api',
-
-    //Trabajo Social
-    // msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
-    msmtsPacientes: 'http://localhost:8080/msmts-pacientes/api/busquedanss/',
-    msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsCatalogos: 'https://adt-qa.cloudapps.imss.gob.mx/msedsc-catalogos',
+
+    //Login
+    urlServOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/',
+    msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth',
+
+    //Trabajo Social (Modulos)
+    msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',
+    msmtsCronicasReporte: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsCronicas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-cronica-grupal/api',
     msmtsNotas: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-notas/api',
     msmtsEstudioMedicos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-estudios-medicos/api',
-    // msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/api/aplicacion',
-    // urlServOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/',
-    //   msmtsOauth: 'http://localhost:8083',
-     msmtsOauth: 'http://localhost:8081/msadt-auth',
-    // msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx',
     msmtsControlArticulos: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-articulos/api',
     msmtsVolantesDonacion: "https://mts-qa.cloudapps.imss.gob.mx/msmts-donacion-sangre/api",
     msmtsServsProfesionales: "https://mts-qa.cloudapps.imss.gob.mx/msmts-servs-profesionales/api",
-     //msmtsControlInterno:"http://localhost:8088/msmts-ctrl-interno/api/control/interno/certificado-defuncion",
     msmtsControlInterno:"https://mts-qa.cloudapps.imss.gob.mx/msmts-ctrl-interno/api/control/interno/certificado-defuncion",
     msmtsAvisosMP:"https://mts-qa.cloudapps.imss.gob.mx/msmts-minis-publico/api",
     urlSiteGoogleRecaptcha: 'https://www.google.com/recaptcha/api/siteverify',
