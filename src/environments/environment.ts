@@ -18,7 +18,7 @@ export const environment = {
 
     //Login
     urlServOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/',
-    msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth',
+     msmtsOauth: 'https://adt-qa.cloudapps.imss.gob.mx/msadt-auth/api/aplicacion',
 
     //Trabajo Social (Modulos)
     msmtsPacientes: 'https://mts-qa.cloudapps.imss.gob.mx/msmts-pacientes/api/busquedanss/',

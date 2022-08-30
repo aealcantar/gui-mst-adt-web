@@ -100,8 +100,8 @@ export class NuevoAvisoMpComponent implements OnInit {
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.editForm.controls['fechaRegistroAviso'].setValue(date)
-          console.log('date onSelect: ', date)
-          console.log(this.editForm.value)
+          // console.log('date onSelect: ', date)
+          // console.log(this.editForm.value)
         }
       },
     })
@@ -110,7 +110,7 @@ export class NuevoAvisoMpComponent implements OnInit {
       onSelect: (date: any, datepicker: any) => {
         if (date != '') {
           this.editForm.controls['fechaIngreso'].setValue(date)
-          console.log('date onSelect: ', date)
+          // console.log('date onSelect: ', date)
         }
       },
     })
@@ -185,7 +185,7 @@ export class NuevoAvisoMpComponent implements OnInit {
       ).format('YYYY/MM/DD'),
       desNss: this.nss,
     }
-    console.log(this.avisoMP);
+    // console.log(this.avisoMP);
 
     this.avisoMinisterioPublico.agregarAvisoMP(this.avisoMP).subscribe(
       (response: any) => {

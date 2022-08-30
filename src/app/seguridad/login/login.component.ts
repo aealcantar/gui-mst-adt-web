@@ -129,6 +129,7 @@ export class LoginComponent implements OnInit {
                   this.router.navigate(['/catalogos/cargaCatalogos/0']);
                 } else {
                   this.router.navigate(["/busqueda"]);
+
                 }
 
               }
@@ -146,7 +147,6 @@ export class LoginComponent implements OnInit {
               default:
                 break;
             }
-            console.log("error " + err.error.message);
             if (err.error.message == undefined) {
               this.muestraAlerta('Servicio no esta disponible. Favor de reportarlo!', 'alert-danger', 'Error');
               return;
@@ -217,7 +217,6 @@ export class LoginComponent implements OnInit {
           else this.muestraAlerta(result.status, 'alert-danger', 'Error');
         },
         (err: HttpErrorResponse) => {
-          console.log("eror " + err.error.status);
           $('#content').modal('hide');
           this.muestraAlerta('¡Correo no registrado!', 'alert-danger', 'Error');
         }

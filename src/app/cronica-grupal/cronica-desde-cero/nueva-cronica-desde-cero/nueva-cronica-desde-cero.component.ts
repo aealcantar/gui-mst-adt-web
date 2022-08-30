@@ -202,8 +202,6 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
       desObservaciones: this.editForm.get('desObservaciones')!.value,
     }
 
-    console.log(this.cronica);
-
 
     this.editForm.markAllAsTouched();
     if (this.editForm.valid) {

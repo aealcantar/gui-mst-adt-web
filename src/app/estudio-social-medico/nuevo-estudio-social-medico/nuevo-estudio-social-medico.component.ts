@@ -131,7 +131,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatEstados().toPromise().then(
       (estados: Estado[]) => {
         this.estados = estados;
-        console.log("ESTADOS: ", this.estados);
+
       },
 
       (httpErrorResponse: HttpErrorResponse) => {
@@ -141,7 +141,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatEstadosCiviles().toPromise().then(
       (estadosCiviles: any) => {
         this.estadosCiviles = estadosCiviles;
-        console.log("ESTADO CIVILES: ", this.estadosCiviles);
+
       },
 
       (httpErrorResponse: HttpErrorResponse) => {
@@ -151,7 +151,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatTiposComunidad().toPromise().then(
       (tiposComunidad: any) => {
         this.tiposComunidad = tiposComunidad;
-        console.log("TIPOS COMUNIDAD: ", this.tiposComunidad);
+
       },
 
       (httpErrorResponse: HttpErrorResponse) => {
@@ -161,7 +161,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatOcupaciones().toPromise().then(
       (ocupaciones: Ocupacion[]) => {
         this.ocupaciones = ocupaciones;
-        console.log("OCUPACIONES: ", this.ocupaciones);
+
       },
 
       (httpErrorResponse: HttpErrorResponse) => {
@@ -174,7 +174,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatMunicipiosByEstado(this.formEstudioSocial.get('estado').value).toPromise().then(
       (municipios: Municipio[]) => {
         this.municipios = municipios;
-        console.log("MUNICIPIOS: ", this.municipios);
+
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -187,7 +187,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       this.formEstudioSocial.get('municipio').value).toPromise().then(
         (ciudades: Ciudad[]) => {
           this.ciudades = ciudades;
-          console.log("CIUDADES: ", this.ciudades);
+
           if (this.ciudades.length === 1) {
             this.formEstudioSocial.controls['ciudad'].setValue(this.ciudades[0].cve_ciudad);
           }
@@ -202,7 +202,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatEstados().toPromise().then(
       (estadosFamiliar: Estado[]) => {
         this.estadosFamiliar = estadosFamiliar;
-        console.log("ESTADOS FAMILIAR: ", this.estadosFamiliar);
+
       },
 
       (httpErrorResponse: HttpErrorResponse) => {
@@ -215,7 +215,7 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
     this.estudioSocialService.getCatMunicipiosByEstado(this.formEstudioSocial2.get('estadoF').value).toPromise().then(
       (delegaciones: Municipio[]) => {
         this.delegaciones = delegaciones;
-        console.log("MUNICIPIOS: ", this.delegaciones);
+
       },
       (httpErrorResponse: HttpErrorResponse) => {
         console.error(httpErrorResponse);
@@ -228,7 +228,6 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       this.formEstudioSocial2.get('delegacionM').value).toPromise().then(
         (ciudades: Ciudad[]) => {
           this.ciudadesFamiliar = ciudades;
-          console.log("CIUDADES: ", this.ciudadesFamiliar);
           if (this.ciudadesFamiliar.length === 1) {
             this.formEstudioSocial2.controls['ciudadF'].setValue(this.ciudadesFamiliar[0].cve_ciudad);
           }
@@ -373,12 +372,12 @@ export class NuevoEstudioSocialMedicoComponent implements OnInit {
       desNssPaciente: this.paciente.nss,
     }
     let params = { 'estudioMedico': JSON.stringify(estudioMedicoData) };
-    console.log("DATA SAVE: ", estudioMedicoData);
+
     this.estudioSocialService.addEstudioSocial(estudioMedicoData).subscribe(
       (response: any) => {
-        console.log(response);
+        // console.log(response);
       }, (resp: HttpErrorResponse) => {
-        console.log("RESPUESTA: ", resp.statusText);
+
         if (resp.statusText === 'OK') {
           this.router.navigate(["detalle-estudio-medico"], { queryParams: params, skipLocationChange: true });
         } else {

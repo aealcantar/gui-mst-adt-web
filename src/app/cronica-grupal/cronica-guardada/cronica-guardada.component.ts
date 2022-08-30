@@ -55,30 +55,20 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
     // this.showSucces("¡La información se guardó con éxito!");
     this.route.queryParamMap.subscribe((params: any) => {
       this.cronica = JSON.parse(params.getAll('cronica'));
-      console.log("OBJETO ENVIADO: ", this.cronica);
+      // console.log("OBJETO ENVIADO: ", this.cronica);
     });
 
-    // const currentDate = new Date();
-    // this.day = currentDate.getDate();
-    // this.month = currentDate.getMonth();
-    // this.year = currentDate.getFullYear();
-    // this.today = currentDate;
-// -------------
 
 this.route.queryParamMap.subscribe((params: any) => {
   if (params.getAll('cronica').length > 0) {
     this.cronica = JSON.parse(params.getAll('cronica'))
   }
-  console.log("OBJETO ENVIADO PARA DETALLE: ", this.cronica);
 });
 let userTmp = sessionStorage.getItem('usuario') || '';
 if (userTmp !== '') {
   this.usuario = JSON.parse(userTmp);
-  console.log("USER DATA: ", this.usuario);
 }
-console.log("FECHA: ", this.cronica?.fecFechaCorta);
 this.day = this.cronica?.fecFechaCorta.substring('0','2');
-console.log("DAY: ", this.day);
 const month = this.cronica?.fecFechaCorta.substring('3','5');
 switch(month) {
   case '01':
@@ -118,12 +108,9 @@ switch(month) {
       this.month = 'diciembre';
       break;
 }
-console.log("MONTH: ", this.month);
 this.year = this.cronica?.fecFechaCorta.substring('6','10');
-console.log("YEAR: ", this.year);
 const currentDate = new Date(this.year+"-"+this.month+"-"+this.day);
 this.today = currentDate;
-console.log("DATE: ", this.today);
 
     //----------------------------------------
 

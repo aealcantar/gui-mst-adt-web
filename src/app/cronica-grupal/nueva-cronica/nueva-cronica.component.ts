@@ -41,7 +41,6 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       cronicaParse = params.getAll('cronica');
       if (cronicaParse.length > 0) {
         this.cronicaRecibida = JSON.parse(params.getAll('cronica'));
-        console.log("OBJETO RECIBIDO: ", this.cronicaRecibida);
         if (this.cronicaRecibida.participanteList.length > 0) {
           this.listParticipantes = this.cronicaRecibida.participanteList;
         }
@@ -97,7 +96,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
       this.cronicaGrupalService.getCatGrupo('15').toPromise().then(
         (grupos) => {
           this.grupos = grupos;
-          console.log("GRUPOS: ", this.grupos);
+
         },
         (httpErrorResponse: HttpErrorResponse) => {
           console.error(httpErrorResponse);
@@ -167,7 +166,7 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
     } else if (typeof cveGrupo === 'number') {
       idGrupoConverted = cveGrupo;
     }
-    console.log("DESC GRUPO: ", this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa);
+    // console.log("DESC GRUPO: ", this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa);
     return this.grupos.find(g => g.cve_grupo_programa === cveGrupo)?.des_grupo_programa;
   }
 
@@ -236,15 +235,14 @@ export class NuevaCronicaComponent implements OnInit, AfterViewInit {
         participanteList: this.listParticipantes
       };
 
-      console.log("OBJETO: ", this.cronica);
+      // console.log("OBJETO: ", this.cronica);
       let params = {
         'cronica': JSON.stringify(this.cronica),
       }
       this.cronicaGrupalService.updateCronica(this.cronica).subscribe(
         (response: any) => {
-          console.log(response);
+          // console.log(response);
         }, (response: HttpErrorResponse) => {
-          console.log("RESPUESTA: ", response.statusText);
           if (response.statusText === 'OK') {
             this.router.navigate(["cronicaGuardada"], { queryParams: params, skipLocationChange: true });
           }

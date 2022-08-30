@@ -164,7 +164,6 @@ export class AuthService {
   }
 
   renovarToken(refreshToken: any){
-    console.log('Esta llegando al servicio__'+ refreshToken);
     // return this.http.post<any>(`${urlServNotas}/findNotasByFechas`, paciente);
     return this.http.post<any>(`${urlEndpoint}/publico/refreshtoken`, refreshToken); // { headers: httpHeaders }
    }

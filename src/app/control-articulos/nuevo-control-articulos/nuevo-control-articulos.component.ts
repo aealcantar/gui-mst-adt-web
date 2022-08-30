@@ -459,12 +459,10 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
       let datos = this.formNuevoArticulo.value
       this.controlArticulosService.setControlArticulos(datos).subscribe(
         async (res: any) => {
-          console.log(datos)
           let estatus = res.status
           if (estatus == 'OK') {
             try {
               let id = res.idCa + 'nuevo'
-              console.log(id)
               await this.router.navigateByUrl('/detalle-articulos/' + id)
             } catch (error) {
               this.muestraAlerta(
@@ -555,7 +553,7 @@ export class NuevoControlArticulosComponent implements OnInit, AfterViewInit {
   //si selecciona un servicio diferente cambia la ubicacion
   onChangeServicio() {
     let idServicio = this.formNuevoArticulo.value.servicio
-    console.log('SERVICIO: ', idServicio)
+    // console.log('SERVICIO: ', idServicio)
   }
 
   ajustarHora(formName: string) {

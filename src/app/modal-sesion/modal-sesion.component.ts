@@ -1,105 +1,107 @@
-import { SeguridadService } from './../seguridad/seguridad.service';
-import { AuthService } from 'src/app/service/auth-service.service';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario.model';
-import { Aplicacion } from 'src/app/models/aplicacion.model';
+import { ModalSesionService } from './modal-sesion.service'
+import { SeguridadService } from './../seguridad/seguridad.service'
+import { AuthService } from 'src/app/service/auth-service.service'
+import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Router } from '@angular/router'
+import { Usuario } from 'src/app/models/usuario.model'
+import { Aplicacion } from 'src/app/models/aplicacion.model'
 import { BnNgIdleService } from 'bn-ng-idle'
 declare var $: any
-
 
 @Component({
   selector: 'app-modal-sesion',
   templateUrl: './modal-sesion.component.html',
-  styleUrls: ['./modal-sesion.component.css']
+  styleUrls: ['./modal-sesion.component.css'],
 })
-export class ModalSesionComponent implements OnInit, OnDestroy {
-  public token: any;
-  usuario: Usuario = new Usuario();
-  aplicacion: Aplicacion = new Aplicacion();
-  tiempoCaduca: any;
-  tiempoVidaModal: any;
+export class ModalSesionComponent implements OnInit {
+  public token: any
+  usuario: Usuario = new Usuario()
+  aplicacion: Aplicacion = new Aplicacion()
+  tiempoCaduca: any
+  tiempoVidaModal: any
+  continuarEnNavegacion: boolean = false
+  idTimeOut: number
+  userActivity: ''
+  visualizacionModal: boolean = false
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private authService: AuthService,
     private seguridadService: SeguridadService,
     private bnIdle: BnNgIdleService,
-    ) {
-
-    }
+    private bnIdle2: BnNgIdleService,
+    private modalSesionService: ModalSesionService,
+  ) {}
 
   ngOnInit(): void {
-    console.log('entra a contador de sesion')
-    this.tiempoCaduca =  this.bnIdle.startWatching(30).subscribe((res) => {
+    console.log('modal__' + this.visualizacionModal)
+    // if(this.visualizacionModal = true){
+    console.log('modal')
+    this.tiempoCaduca = this.bnIdle.startWatching(1800).subscribe((res) => {
       if (res) {
-        console.log('HAbremodal e inicia el conteo para cerrarlo');
-        this.modalcarga();
-        this.tiempoVidaModal =  this.bnIdle.startWatching(60).subscribe((respuesta) => {
-          if (respuesta) {
-        console.log('se cierra modal');
-        this.irInicioSesion();
+        console.log('HAbremodal e inicia el conteo para cerrarlo')
+        this.visualizacionModal = false
+        this.modalcarga()
+        this.tiempoCaduca.unsubscribe()
       }
-    });
+    })
+    // }
   }
-});
-}
 
-ngOnDestroy(): void {
-  this.tiempoCaduca.unsubscribe();
-}
+  ngOnDestroy(): void {
+    this.tiempoCaduca.unsubscribe()
+  }
 
   modalcarga() {
-    $('#content').modal({
-      keyboard: false,
-      backdrop: 'static',
-    })
-    $('#content').modal('show')
+    this.modalSesionService.modalcarga()
+    console.log(this.visualizacionModal)
 
+    if ((this.visualizacionModal = false)) {
+      console.log('status del modal' + this.visualizacionModal)
+      const idTimeOut = setTimeout(() => {
+        console.log('cierra por que se terminó el tiempo tiemout')
+        this.cerrarModal()
+        this.cerrarCesion()
+      }, 300000)
+      // clearTimeout()
+      // clearTimeout(idTimeOut)
+    }
   }
-
 
   continuarEnSesion() {
-    //  sessionStorage.removeItem('accessToken')
+    this.visualizacionModal = false
+    clearTimeout()
+    this.continuarEnNavegacion = true
     let refreshToken = {
-       refreshToken: sessionStorage.getItem('refreshToken')
+      refreshToken: sessionStorage.getItem('refreshToken'),
     }
-
-    // this.usuario.strPassword = this.logindata.get("password")?.value;
-    this.authService.renovarToken(refreshToken).subscribe(
-      // (result) =>{
-        // this.authService.login(this.usuario, this.aplicacion).subscribe(
-          (res) => {
-            if(res && res?.accessToken && res?.refreshToken ){
-              this.authService.guardarToken(res.accessToken);
-              this.authService.guardarRefreshToken(res.refreshToken);
-              this.cerrarModal();
-            }else{
-               this.irInicioSesion();
-            }
+    this.authService.renovarToken(refreshToken).subscribe((res) => {
+      if (res && res?.accessToken && res?.refreshToken) {
+        this.authService.guardarToken(res.accessToken)
+        this.authService.guardarRefreshToken(res.refreshToken)
+        this.cerrarModal()
+      } else {
       }
-    )
+    })
   }
 
-  irInicioSesion() {
-     sessionStorage.removeItem('refreshToken');
-     sessionStorage.removeItem('usuario');
-     sessionStorage.removeItem('token');
-     this.tiempoCaduca.unsubscribe();
-     this.tiempoVidaModal.unsubscribe();
-    $('#content').modal('hide')
-    this.cerrarCesion();
-    this.router.navigateByUrl('/login')
+  cerrarModal() {
+    this.visualizacionModal = false
+    clearTimeout()
+    if (this.continuarEnNavegacion == true) {
+      $('#contentSesion').modal('hide')
+    } else {
+      this.cerrarCesion()
+    }
   }
 
-
-  cerrarModal(){
-    this.tiempoCaduca.unsubscribe();
-    this.tiempoVidaModal.unsubscribe();
-    $('#content').modal('hide');
+  cerrarCesion() {
+    clearTimeout()
+    $('#contentSesion').modal('hide')
+    this.authService.logout()
+    sessionStorage.removeItem('refreshToken')
+    sessionStorage.removeItem('usuario')
+    sessionStorage.removeItem('token')
+    this.visualizacionModal = false
   }
-
-  cerrarCesion(){
-    this.authService.logout();
-  }
-
 }

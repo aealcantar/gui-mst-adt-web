@@ -259,7 +259,6 @@ export class ConsultaDonacionSangreAdministracionComponent
     this.volantesDonacion.nss = nss
     this.volantesDonacion.timHoraFinalAtencion = timHoraFinalAtencion
     this.volantesDonacion.timHoraInicialAtencion = timHoraInicialAtencion
-    console.log('DATA REPORT: ', this.volantesDonacion)
     this.volantesService.downloadPdf(this.volantesDonacion).subscribe(
       (response: any) => {
         // console.log(response);

@@ -43,7 +43,7 @@ export class DetalleCertificadoComponent implements OnInit, OnDestroy {
     this.certificado.horaDefuncion = hrDefuncion;
     this.certificado.horaDeEntregaDeCertificado = hrEntrega;
 
-    
+
   }
 
 
@@ -51,7 +51,7 @@ export class DetalleCertificadoComponent implements OnInit, OnDestroy {
     if (this.certificado !== undefined) {
       this.certificadoService.imprimir(this.certificado.idDefuncion).subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           const file = new Blob([response], { type: 'application/pdf' });
           const url = window.URL.createObjectURL(file);
           window.open(url);

@@ -76,7 +76,6 @@ export class ConsultaCertificadoDefuncionComponent
   getCertificadoById(id: number) {
     this.certificadoService.getCertificadoById(id).subscribe(
       (res) => {
-        console.log(res)
         this.tabla = res
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -145,7 +144,7 @@ export class ConsultaCertificadoDefuncionComponent
   }
 
   sortBy(columnaId: string, order: string, type: string) {
-    console.log(columnaId, order, type)
+    // console.log(columnaId, order, type)
 
     this.columnaId = columnaId
     this.order = order

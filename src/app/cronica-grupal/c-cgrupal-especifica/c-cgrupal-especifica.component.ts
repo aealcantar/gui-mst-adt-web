@@ -27,7 +27,7 @@ export class CCGrupalEspecificaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService
-  ) { 
+  ) {
     this.datetimeFormat = formatDate(this.dateToday, 'dd/MM/yyyy hh:mm:ss aa', 'en-ES');
   }
 
@@ -36,16 +36,12 @@ export class CCGrupalEspecificaComponent implements OnInit {
       if (params.getAll('cronica').length > 0) {
         this.cronica = JSON.parse(params.getAll('cronica'))
       }
-      console.log("OBJETO ENVIADO PARA DETALLE: ", this.cronica);
     });
     let userTmp = sessionStorage.getItem('usuario') || '';
     if (userTmp !== '') {
       this.usuario = JSON.parse(userTmp);
-      console.log("USER DATA: ", this.usuario);
     }
-    console.log("FECHA: ", this.cronica?.fecFechaCorta);
     this.day = this.cronica?.fecFechaCorta.substring('0','2');
-    console.log("DAY: ", this.day);
     const month = this.cronica?.fecFechaCorta.substring('3','5');
     switch(month) {
       case '01':
@@ -85,12 +81,9 @@ export class CCGrupalEspecificaComponent implements OnInit {
           this.month = 'diciembre';
           break;
   }
-    console.log("MONTH: ", this.month);
     this.year = this.cronica?.fecFechaCorta.substring('6','10');
-    console.log("YEAR: ", this.year);
     const currentDate = new Date(this.year+"-"+this.month+"-"+this.day);
     this.today = currentDate;
-    console.log("DATE: ", this.today);
   }
 
   cancelar() {
@@ -119,7 +112,6 @@ export class CCGrupalEspecificaComponent implements OnInit {
       fecImpresion: fechaTransformada,
       trabajadorSocial: this.usuario?.strNombres + " " + this.usuario?.strApellidoP + " " + this.usuario?.strApellidoM
     };
-    console.log("DATA REPORT: ", data);
     this.cronicaGrupalService.downloadPdf(data).subscribe(
       (response: Blob) => {
         var file = new Blob([response], { type: 'application/pdf' });

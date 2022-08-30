@@ -123,11 +123,9 @@ export class ConsultaVolantesDonacionComponent implements OnInit, AfterViewInit 
 
         this.volantesDonacionService.getVolantesByFechas(datosBusqueda).subscribe(
           (res: any) => {
-            console.log(res)
             try {
 
               let estatus = res.status;
-              console.log(res.datosVolantesDonacion)
               if (estatus == 'OK') {
                 this.datosBusqueda = res.datosVolantesDonacion;
               } else {

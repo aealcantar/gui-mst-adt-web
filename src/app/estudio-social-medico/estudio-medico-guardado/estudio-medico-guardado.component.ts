@@ -75,10 +75,10 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
           true,
         )
       }
-      console.log('OBJETO ENVIADO PARA DETALLE: ', this.estudioMedico)
+      // console.log('OBJETO ENVIADO PARA DETALLE: ', this.estudioMedico)
     })
     this.pacienteSeleccionado = JSON.parse(localStorage.getItem('paciente')!)
-    console.log('PACIENTE: ', this.pacienteSeleccionado)
+    //  console.log('PACIENTE: ', this.pacienteSeleccionado)
   }
 
   irDatosDeFamiliar() {
@@ -106,7 +106,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       .then(
         (estadosCiviles: any) => {
           this.catEstadosCiviles = estadosCiviles
-          console.log('ESTADO CIVILES: ', this.catEstadosCiviles)
+          // console.log('ESTADO CIVILES: ', this.catEstadosCiviles)
         },
         (httpErrorResponse: HttpErrorResponse) => {
           console.error(httpErrorResponse)
@@ -118,7 +118,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       .then(
         (ocupaciones: Ocupacion[]) => {
           this.ocupaciones = ocupaciones
-          console.log('OCUPACIONES: ', this.ocupaciones)
+          // console.log('OCUPACIONES: ', this.ocupaciones)
         },
 
         (httpErrorResponse: HttpErrorResponse) => {
@@ -247,20 +247,16 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       '-' +
       fechaNacimiento.substring(6, 10)
     let birthDate = new Date(stringDate)
-    console.log('FECHA: ', birthDate)
     let today = new Date()
     let age = today.getFullYear() - birthDate.getFullYear()
     let months = today.getMonth() - birthDate.getMonth()
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
       age--
     }
-    console.log('EDAD: ', age)
     if (months > 0) {
-      console.log('MESES: ', months)
       months = months
     } else {
       months = months + 12
-      console.log('MESES: ', months)
     }
     return months + ' meses'
   }

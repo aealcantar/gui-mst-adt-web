@@ -130,10 +130,8 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     this.volantesDonacion.refHorarioAtencion = this.volantesDonacion.refHorarioAtencion;
 
 
-    console.log('DATA REPORT: ', this.volantesDonacion);
     this.volantesService.downloadPdf(this.volantesDonacion).subscribe(
       (response: any) => {
-        // console.log(response);
         var file = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(file);
         window.open(url);

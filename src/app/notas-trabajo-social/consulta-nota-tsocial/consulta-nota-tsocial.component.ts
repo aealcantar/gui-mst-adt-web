@@ -46,7 +46,6 @@ export class ConsultaNotaTSocialComponent implements OnInit {
       if (params.getAll('nota').length > 0) {
         this.nota = JSON.parse(params.getAll('nota'))
       }
-      console.log("OBJETO ENVIADO PARA DETALLE: ", this.nota);
        if (params.getAll('nuevaNota').length > 0) {
          const nuevaNota = JSON.parse(params.getAll('nuevaNota'));
          if (nuevaNota) {
@@ -62,16 +61,7 @@ export class ConsultaNotaTSocialComponent implements OnInit {
     let userTmp = sessionStorage.getItem('usuario') || '';
     if (userTmp !== '') {
       this.usuario = JSON.parse(userTmp);
-      console.log("USER DATA: ", this.usuario);
     }
-    // this.notasService.getNotasById(1).subscribe(
-    //   (res) => {
-    //     this.nota = res;
-    //   },
-    //   (httpErrorResponse: HttpErrorResponse) => {
-    //     console.error(httpErrorResponse);
-    //   }
-    // );
   }
 
   update() {
@@ -115,7 +105,6 @@ export class ConsultaNotaTSocialComponent implements OnInit {
 	    diagnosticoSocial: this.nota.diagnostico,
 	    diagnosticoSocial2: '',
     };
-    console.log("DATA NOTA REPORTE: ", this.reporteNota);
     this.notasService.downloadPdf(this.reporteNota).subscribe(
       (response: Blob) => {
         var file = new Blob([response], { type: 'application/pdf' });

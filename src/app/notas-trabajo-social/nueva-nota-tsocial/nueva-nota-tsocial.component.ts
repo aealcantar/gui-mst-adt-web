@@ -79,10 +79,8 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
       ),
     )
     this.horaraInicia = moment().format('HH:mm:ss')
-      console.log('entra a contador')
-      this.tiempoCaduca =  this.bnIdle.startWatching(30).subscribe((res) => {
+      this.tiempoCaduca =  this.bnIdle.startWatching(300).subscribe((res) => {
         if (res) {
-          console.log('session de notas expiró ')
           this.guardar()
         }
       })
@@ -97,7 +95,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
   getCatalogos() {
     this.notasService.getTiposNota().subscribe(
       (res) => {
-        console.log('Tipos Nota: ', res)
         this.catTiposNotas = res
       },
       (httpErrorResponse: HttpErrorResponse) => {
@@ -108,7 +105,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
     this.notasService.getRedesApoyo().subscribe(
       (res) => {
         if (res) {
-          console.log('Redes de apoyo: ', res)
           this.catRedesApoyo = res
         }
       },
@@ -120,7 +116,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
     this.notasService.getActividadesTecnicas().subscribe(
       (res) => {
         if (res) {
-          console.log('Actividades técnicas: ', res)
           this.catActividadesTecnicas = res
         }
       },
@@ -142,7 +137,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
         nDiagnosticoMedicoCie: this.nota.nombreDiagnostico,
       },
     })
-    console.log(this.formNuevaNota.value)
   }
 
   handleChangeDiagnostico() {
@@ -196,7 +190,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
     if (this.formNuevaNota.valid == false) {
       this.muestraAlerta('Verificar datos capturados', 'alert-danger', 'Error')
     } else {
-      console.log(this.formNuevaNota.value)
 
       let { descripcion: nombreTipoNota } = this.catTiposNotas.find(
         (item: any) =>
@@ -258,7 +251,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
 
         this.notasService.updateNota(notaToSave).subscribe(
           (response: any) => {
-            console.log(response)
           },
           (resp: HttpErrorResponse) => {
             if (resp.statusText === 'OK') {
@@ -285,7 +277,6 @@ export class NuevaNotaTSocialComponent implements OnInit, OnDestroy {
             }
           },
           (resp: HttpErrorResponse) => {
-            console.log(resp)
           },
         )
       }

@@ -99,32 +99,8 @@ export class AgregarParticipanteDialogComponent implements OnInit {
                       'alert-danger',
                       'Error de red. ',
                     );
-                    console.log(err);
                     this.errorBusqueda = true;
                     this.descNotData = "Sin resultados para mostrar";
-                    // this.listPacientes = [
-                    //     {
-                    //         nss: 4382641109,
-                    //         paciente: 'Jaime Daniel Villalobos Barrios',
-                    //         parentesco: 'Titular',
-                    //         agregadoMedico: '24567890567',
-                    //         unidadMedica: 'UMF #40',
-                    //     },
-                    //     {
-                    //         nss: 7648043776,
-                    //         paciente: 'Daniela García Rodríguez',
-                    //         parentesco: 'Esposa',
-                    //         agregadoMedico: '25567890567',
-                    //         unidadMedica: 'UMF #40',
-                    //     },
-                    //     {
-                    //         nss: 4052890017,
-                    //         paciente: 'Jaime Daniel Villalobos García',
-                    //         parentesco: 'Hijo',
-                    //         agregadoMedico: '26567890567',
-                    //         unidadMedica: 'UMF #40',
-                    //     }
-                    // ]
                 }
             });
         } else {

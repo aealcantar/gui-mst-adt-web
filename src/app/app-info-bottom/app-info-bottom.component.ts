@@ -16,7 +16,7 @@ export class AppInfoBottomComponent implements OnInit {
     let userTmp = sessionStorage.getItem('usuario') || '';
     if (userTmp !== '') {
       this.usuario = JSON.parse(userTmp);
-      console.log("USER DATA: ", this.usuario);
+      // console.log("USER DATA: ", this.usuario);
     }
   }
 }

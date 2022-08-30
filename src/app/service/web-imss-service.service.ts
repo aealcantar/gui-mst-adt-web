@@ -71,7 +71,7 @@ export class WebImssService {
     );
   }
 
-  
+
 
   HttpUploadFiles(servicio: string, formData: FormData): Observable<HttpEvent<any>> {
     return this.http.post(servicio, formData, {
@@ -129,19 +129,18 @@ export class WebImssService {
 
   public async refreshToken(url: string){
     if(sessionStorage.getItem('usuario') != null){
-     
+
       let usuario = JSON.parse(sessionStorage.getItem('usuario') || '');
-      console.log(usuario)
       //  await this.getAsync(url);
     }
-    
-    
+
+
   }
 
   upload(file: File, url: string): Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
     formData.append('files', file);
-   
+
     const req = new HttpRequest('POST', url, formData, {
       reportProgress: true,
       responseType: 'json'

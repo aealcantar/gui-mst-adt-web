@@ -14,14 +14,14 @@ import { HorarioRequest } from '../../models/horario-request.model';
   providedIn: 'root'
 })
 export class AgendaService {
-  
+
   private serverEndPointURLHorarios = `${environment.urlMSEDSCHorarios}`+`/api/`;
   constructor(private http: HttpClient) { }
 
   getLstTurnos(): Observable<TurnoResponse[]> {
 
     return this.http.get<TurnoResponse[]>(this.serverEndPointURLHorarios + `listTurnos/`, {
-         
+
     }).pipe(
         catchError(this.handleError),
         map((response: TurnoResponse[]) => {
