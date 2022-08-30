@@ -34,12 +34,10 @@ export class ModalSesionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('modal__' + this.visualizacionModal)
     // if(this.visualizacionModal = true){
-    console.log('modal')
     this.tiempoCaduca = this.bnIdle.startWatching(1800).subscribe((res) => {
       if (res) {
-        console.log('HAbremodal e inicia el conteo para cerrarlo')
+        // console.log('HAbremodal e inicia el conteo para cerrarlo')
         this.visualizacionModal = false
         this.modalcarga()
         this.tiempoCaduca.unsubscribe()
@@ -57,9 +55,9 @@ export class ModalSesionComponent implements OnInit {
     console.log(this.visualizacionModal)
 
     if ((this.visualizacionModal = false)) {
-      console.log('status del modal' + this.visualizacionModal)
+      // console.log('status del modal' + this.visualizacionModal)
       const idTimeOut = setTimeout(() => {
-        console.log('cierra por que se terminó el tiempo tiemout')
+        // console.log('cierra por que se terminó el tiempo tiemout')
         this.cerrarModal()
         this.cerrarCesion()
       }, 300000)
