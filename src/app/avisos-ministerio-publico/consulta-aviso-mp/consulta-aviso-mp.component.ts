@@ -91,7 +91,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
   }
 
   sortBy(columnaId: string, order: string, type: string) {
-    console.log(columnaId, order, type);
+    // console.log(columnaId, order, type);
 
     this.columnaId = columnaId;
     this.order = order;
@@ -129,7 +129,7 @@ export class ConsultaAvisoMpComponent implements OnInit {
   getAvisosById(id: number) {
     this.avisoMinisterioPublicoService.getAvisoById(id).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.tabla = res;
       },
       (httpErrorResponse: HttpErrorResponse) => {

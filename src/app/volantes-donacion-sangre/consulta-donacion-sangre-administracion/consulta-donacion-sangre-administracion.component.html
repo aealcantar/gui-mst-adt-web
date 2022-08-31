@@ -1,6 +1,6 @@
 <app-app-alerts [alert]="alert"></app-app-alerts>
-<!-- <app-tarjeta-presentacion></app-tarjeta-presentacion> -->
 <app-menu [activeItem]="2"></app-menu>
+<app-modal-sesion> </app-modal-sesion>
 <app-card-template>
     <div header class="flex justify-content-between align-items-center consultaControlDeArticulos">
         <label>
@@ -46,20 +46,7 @@
                 <div class="col-md-3">
                     <label class="control-label tituloServicio" for="articulosFinal">Tipo de sangre:
                     </label>
-                    <!-- <select class="form-control captura" [(ngModel)]="tiposangre">
-                        <option value="" selected>Seleccionar</option>
-                        <option [ngValue]="1">A+</option>
-                        <option [ngValue]="2">A-</option>
-                        <option [ngValue]="3">B+</option>
-                        <option [ngValue]="4">B-</option>
-                        <option [ngValue]="5">O+</option>
-                        <option [ngValue]="6">O-</option>
-                    </select> -->
-
                     <mat-select class="form-control2 form-control form-control-mat-select " ckg mnb [(ngModel)]="tiposangre" placeholder="Seleccionar">
-                        <!-- <mat-option [value]="''" selected disabled class="select-font optionSelect ">
-                            Seleccionar
-                        </mat-option> -->
                         <mat-option class="select-font" [value]="1">
                             A+
                         </mat-option>
