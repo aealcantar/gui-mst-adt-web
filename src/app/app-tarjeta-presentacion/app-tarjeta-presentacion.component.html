@@ -23,8 +23,10 @@
 
       <div style="display: grid;">
         <span class="unidadSpan">Unidad de Adscripción</span>
-        <span class="umf">UMF {{paciente?.unidadMedica}}</span>
-        <span class="ciudadUnidadMedica">Ciudad {{'Gustavo Días Ordaz'}}</span>
+        <div style="width: 112px; line-height: 15px;">
+        <span style="line-height: 17px;" class="ciudadUnidadMedica">{{paciente?.unidadMedica}}</span>
+        </div>
+        <!-- <span class="ciudadUnidadMedica">{{paciente?.unidadMedica}}</span> -->
       </div>
     </div>
     <div class="polig">

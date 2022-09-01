@@ -139,7 +139,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   getCatUnidadesMedicas(): void {
     this.formNuevaDonacion
       .get('umh')
-      .patchValue(`UMF${this.paciente.unidadMedica}`)
+      .patchValue(`${this.paciente.unidadMedica}`)
     // this.avisoMinisterioPublico.getCatUnidadesMedicas().toPromise().then(
     //   (unidadesMedicas: any[]) => {
     //     const unidadMedica = unidadesMedicas.filter(e => e.cve_unidad_medica === `UMF${this.paciente.unidadMedica}`) || [];
@@ -384,7 +384,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       this.formNuevaDonacion.controls['fechaCirugia'].setValue(fechaCirugia)
 
       let datos = JSON.stringify(this.formNuevaDonacion.value);
-      
+
       this.volantesDonacionService.addVolante(datos).subscribe(
         async (res: any) => {
           let estatus = res.status

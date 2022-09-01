@@ -155,7 +155,7 @@ export class NuevoAvisoMpComponent implements OnInit {
         (unidadesMedicas: any[]) => {
           const unidadMedica =
             unidadesMedicas.filter(
-              (e) => e.cve_unidad_medica === `UMF${this.paciente.unidadMedica}`,
+              (e) => e.cve_unidad_medica === `${this.paciente.unidadMedica}`,
             ) || []
           this.editForm
             .get('idUnidadHospital')

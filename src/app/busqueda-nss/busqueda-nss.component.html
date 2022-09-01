@@ -104,12 +104,24 @@
               </td>
               <td style="text-align: center !important; padding: 0px!important;">{{beneficiario.agregadoMedico}}
               </td>
-              <td style="text-align: center !important; padding: 0px!important;">UMF {{beneficiario.unidadMedica}}
+
+
+              <td style="text-align: center !important; padding: 0px!important;">
+                <div style="width: 49px; margin-left: 30px;
+                white-space: nowrap;
+                text-overflow: clip;
+                overflow: hidden;">
+                <span>{{beneficiario.unidadMedica}}</span>
+                </div>
+                <span>
                 <button type="button" class="botonTabla" (click)="muestra(i);">
                   <i *ngIf="isCollapsed[i]" class="iconTabla collapsedElement"></i>
                   <i *ngIf="!isCollapsed[i]" class="iconTablainv collapsedElement"></i>
                 </button>
+</span>
               </td>
+
+
             </tr>
             <tr *ngIf="isCollapsed[i]; then escondido else visible"></tr>
             <ng-template #escondido>

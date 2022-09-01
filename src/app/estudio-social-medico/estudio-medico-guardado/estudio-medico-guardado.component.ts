@@ -269,7 +269,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     let fechaTransformada = this.datetimeFormat
     let reporteEstudioMedicoSocial: any = {
       ooad: 'CDMX NORTE',
-      unidad: 'UMF ' + this.pacienteSeleccionado.unidadMedica,
+      unidad: '' + this.pacienteSeleccionado.unidadMedica,
       turno:
         this.pacienteSeleccionado.turno === 'M' ? 'MATUTINO' : 'VESPERTINO',
       servicio: 'GRUPO',
@@ -279,7 +279,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       aMedico: this.pacienteSeleccionado.agregadoMedico,
       nombrePaciente: this.pacienteSeleccionado.paciente.toUpperCase(),
       curp: this.pacienteSeleccionado.curp,
-      unidad2: 'UMF ' + this.pacienteSeleccionado.unidadMedica,
+      unidad2: '' + this.pacienteSeleccionado.unidadMedica,
       consultorio: this.pacienteSeleccionado.consultorio,
       edad:
         this.pacienteSeleccionado.edad +
