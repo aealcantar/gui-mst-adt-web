@@ -9,6 +9,6 @@ export interface pacienteSeleccionado {
   fechaNacimiento: String,
   turno: String,
   consultorio: String,
-  edad: number,
+  edad: String,
   sexo: String
 }

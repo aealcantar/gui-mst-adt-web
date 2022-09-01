@@ -27,7 +27,6 @@ export class AppTarjetaPresentacionComponent implements OnInit {
     if (!this.paciente) {
       this.paciente = JSON.parse(localStorage.getItem('paciente')!);
     }
-    this.convertDate();
   }
 
   validaTurno(turno: any) {
@@ -46,30 +45,6 @@ export class AppTarjetaPresentacionComponent implements OnInit {
       sexo = "Femenino"
     }
     return sexo;
-  }
-
-  convertDate() {
-    if (!this.executed) {
-      this.executed = true;
-      // let stringDate = this.paciente.fechaNacimiento.substring(3, 5) + "-" + this.paciente.fechaNacimiento.substring(0, 2) + "-" + this.paciente.fechaNacimiento.substring(6, 10);
-      let birthDate = new Date();
-      console.log("FECHA: ", birthDate);
-      let today = new Date();
-      let age = today.getFullYear() - birthDate.getFullYear();
-      this.months = today.getMonth() - birthDate.getMonth();
-      if (this.months < 0 || (this.months === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      console.log("EDAD: ", age);
-      if (this.months > 0) {
-        console.log("MESES: ", this.months);
-        this.months = this.months;
-      } else {
-        this.months = this.months + 12;
-        console.log("MESES: ", this.months);
-      }
-    }
-    return this.months + " meses";
   }
 
   irNotasDeTrabajo() {

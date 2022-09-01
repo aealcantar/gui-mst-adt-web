@@ -12,6 +12,7 @@ import { Nota } from '../../models/notas.model'
 import * as moment from 'moment'
 import { AppTarjetaPresentacionService } from '../../app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface'
+import { BnNgIdleService } from 'bn-ng-idle'
 import { Usuario } from 'src/app/models/usuario.model'
 declare var $: any
 
@@ -46,15 +47,17 @@ export class NuevaNotaTSocialComponent implements OnInit {
   filteredOptions!: Observable<any[]>
   filterControl = new FormControl('')
   horaraInicia: string = "";
+  tiempoCaduca: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal,
     private notasService: NotasService,
     private catServices: CronicaGrupalService,
     private tarjetaServce: AppTarjetaPresentacionService,
+    private bnIdle: BnNgIdleService,
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +80,11 @@ export class NuevaNotaTSocialComponent implements OnInit {
     //    this.horaraInicia = timHoraInicial;
     // }
     this.horaraInicia = moment().format('HH:mm:ss')
+    this.tiempoCaduca =  this.bnIdle.startWatching(300).subscribe((res) => {
+      if (res) {
+        this.guardar()
+      }
+    })
   }
 
   getCatalogos() {
