@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import { Estado } from '../../models/estado.model'
 import { Ciudad } from '../../models/ciudad.model'
 import { Municipio } from '../../models/municipio.model'
+import { Usuario } from 'src/app/models/usuario.model'
 @Component({
   selector: 'app-estudio-medico-guardado',
   templateUrl: './estudio-medico-guardado.component.html',
@@ -36,6 +37,9 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
   ciudadesFamiliar: Ciudad[] = []
   datetimeFormat = ''
   dateToday = new Date()
+  infoUnidad: any
+  estado: any
+  public usuario!: Usuario
 
   constructor(
     private route: ActivatedRoute,
@@ -56,6 +60,11 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     this.route.queryParamMap.subscribe((params: any) => {
       if (params.getAll('estudioMedico').length > 0) {
         this.estudioMedico = JSON.parse(params.getAll('estudioMedico'))
+        let userTmp = sessionStorage.getItem('usuario') || ''
+        if (userTmp !== '') {
+          this.usuario = JSON.parse(userTmp)
+          console.log('USER DATA: ', this.usuario)
+        }
         if (this.estudioMedico.esNuevo) {
           this.muestraAlerta(
             '¡La información se guardó con éxito!',
@@ -79,6 +88,8 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     })
     this.pacienteSeleccionado = JSON.parse(localStorage.getItem('paciente')!)
     console.log('PACIENTE: ', this.pacienteSeleccionado)
+
+    this.obtenerInfoUnidadMedicaByMatricula()
   }
 
   irDatosDeFamiliar() {
@@ -265,15 +276,45 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     return months + ' meses'
   }
 
+  obtenerInfoUnidadMedicaByMatricula() {
+    let matricula = this.usuario.matricula
+    this.estudioMedicoService
+      .obtenerInformacionTSPorMatricula(matricula)
+      .subscribe(
+        (res) => {
+          this.infoUnidad = res.datosUsuario
+          this.obtenerEstadoByUnidadMedica()
+        },
+
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+    console.log(this.infoUnidad)
+  }
+
+  obtenerEstadoByUnidadMedica() {
+    this.estudioMedicoService
+      .obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica)
+      .subscribe(
+        (res) => {
+          this.estado = res[0]
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+  }
+
   imprimir() {
     let fechaTransformada = this.datetimeFormat
     let reporteEstudioMedicoSocial: any = {
-      ooad: 'CDMX NORTE',
+      ooad: this.estado.des_nombre_delegacion_umae.toUpperCase(),
       unidad: '' + this.pacienteSeleccionado.unidadMedica,
       turno:
         this.pacienteSeleccionado.turno === 'M' ? 'MATUTINO' : 'VESPERTINO',
-      servicio: 'GRUPO',
-      cvePtal: '35E1011D2153',
+      servicio: this.infoUnidad.Especialidad.toUpperCase(),
+      cvePtal: this.estado.des_clave_presupuestal,
       fecImpresion: fechaTransformada,
       nss: this.pacienteSeleccionado.nss,
       aMedico: this.pacienteSeleccionado.agregadoMedico,

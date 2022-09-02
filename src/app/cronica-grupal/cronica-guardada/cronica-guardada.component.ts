@@ -199,13 +199,6 @@ console.log("DATE: ", this.today);
       )
   }
 
-
-  // unidad: String(this.umf + ' ' + this.noUmf),
-  // ooad: this.estado.des_nombre_delegacion_umae,
-  // unidad2: this.estado.des_denominacion_unidad,
-  // turno: this.infoUnidad.turno,
-  // servicio: this.infoUnidad.Especialidad,
-
   imprimir() {
     let data: any = {
       ooad: this.estado.des_nombre_delegacion_umae.toUpperCase(),

@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { EstadoCivil } from '../models/estado-civil.model';
 import { Ocupacion } from '../models/ocupacion.model';
 
+const urlServCatalogos = `${environment.msmtsCatalogos}`
+
 @Injectable({
   providedIn: 'root'
 })
@@ -62,6 +64,15 @@ export class EstudioSocialMedicoService {
       'Accept': 'application/json'
     });
     return this.http.post<any>(`${environment.msmtsEstudioMedicos}/reporteEstudiosMedicos`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
+  }
+
+
+  obtenerInformacionTSPorMatricula(matricula: string) {
+    return this.http.get<any>(`${urlServCatalogos}/api/getInfoTS/${matricula}`, { responseType: 'json' });
+  }
+
+  obtenerEstadoporUnidadMedica(unidadMedica: string){
+    return this.http.get<any>(`${urlServCatalogos}/api/getUnidades/${unidadMedica}`, { responseType: 'json' });
   }
 
 }
