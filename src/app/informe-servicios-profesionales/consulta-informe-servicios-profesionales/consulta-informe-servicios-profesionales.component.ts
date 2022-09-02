@@ -34,6 +34,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
   datosBusqueda: Array<any> = [];
   consultaBusqueda: any = {};
   texto : any
+  textoLugar : any
 
 
   // Formulario
@@ -65,6 +66,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
         this.serviciosEspecialidad.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
       if (especialidad && especialidad.cve_especialidad) {
         this.formularioBusqueda.get('servicio').setValue(especialidad.cve_especialidad);
+        this.texto = especialidad.des_especialidad
       }
     },
     error: (error: HttpErrorResponse) => console.log(error),
@@ -185,10 +187,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
  onChangeLugar(ev: any) {
 
-  let optionText = ev.source.selected.viewValue;
-  this.texto = ev.source.selected.viewValue;
-  debugger
-  console.log(optionText);
+  this.textoLugar = ev.source.selected.viewValue;
 }
  
   imprimirPdf(): void {
@@ -198,7 +197,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
       responsable : this.formularioBusqueda.get('responsable')?.value,
       servicio :this.formularioBusqueda.get('servicio')?.value,
       turno: this.formularioBusqueda.get('turno')?.value,
-      cubiculo : this.formularioBusqueda.get('lugar').value,
+      cubiculo : this.textoLugar,
       servicioCubi : this.texto
     }
     debugger

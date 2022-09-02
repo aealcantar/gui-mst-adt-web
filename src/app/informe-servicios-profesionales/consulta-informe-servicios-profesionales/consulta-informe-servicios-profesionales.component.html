@@ -122,12 +122,12 @@
                     (click)="ordenarPor('id', 'desc', 'numero')">
                   </i>
                 </th>
-                <th class="encabezadoTable w-130">NSS</th>
-                <th class="encabezadoTable w-190">Agregado Médico</th>
-                <th class="encabezadoTable w-240">Nombre del paciente</th>
-                <th class="encabezadoTable w-130">Hora de la cita</th>
+                <th class="encabezadoTableCenter">NSS</th>
+                <th class="encabezadoTableCenter">Agregado Médico</th>
+                <th class="encabezadoTable w-240" style="margin-left: 10px;">Nombre del paciente</th>
+                <th class="encabezadoTableCenter">Hora de la cita</th>
                 <!-- <th class="encabezadoTable w-100"></th> -->
-                <th class="encabezadoTable w-130">Tipo de cita</th>
+                <th class="encabezadoTableCenter">Tipo de cita</th>
               </tr>
             </thead>
             <tbody>
@@ -135,10 +135,10 @@
                 <!-- <td class="bordesTablaDetalle">{{ item.id }}</td> -->
                 <td class="bordesTablaDetalle">{{ i + 1 }}</td>
 
-                <td class="bordesTabla">
+                <td class="bordesTabla" >
                   {{ item.desNssPaciente }}</td>
 
-                <td class="bordesTabla" style="text-align: center;">{{item.desAgregadoMedico}} </td>
+                <td class="bordesTabla" >{{item.desAgregadoMedico}} </td>
 
                 <td class="bordesTabla">
                   {{item.nombrePaciente}}
