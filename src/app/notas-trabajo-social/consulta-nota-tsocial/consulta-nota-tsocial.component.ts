@@ -135,9 +135,9 @@ export class ConsultaNotaTSocialComponent implements OnInit {
     let fechaTransformada = this.datetimeFormat
     this.reporteNota = {
       unidad: String(this.umf + ' ' + this.noUmf),
-      ooad: this.estado.des_nombre_delegacion_umae,
-      unidad2: this.estado.des_denominacion_unidad,
-      turno: this.infoUnidad.turno,
+      ooad: this.estado.des_nombre_delegacion_umae.toUpperCase(),
+      unidad2: this.estado.des_denominacion_unidad.toUpperCase(),
+      turno: this.infoUnidad.turno.toUpperCase(),
       servicio: this.infoUnidad.Especialidad,
       nss: String(this.pacienteSeleccionado.nss),
       aMedico: String(this.pacienteSeleccionado.agregadoMedico),
