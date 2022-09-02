@@ -51,10 +51,8 @@ export class InformeServiciosProfesionalesService {
       idLugar: parseInt(lugar),
       fecha,
       cubiculo ,
-      servicioCubi  
+      servicioCubi
     }
-    debugger
-
     return this.http.post<any>(`${environment.msmtsServsProfesionales}/reporteServiciosProfesionales4306P`, JSON.stringify(request),
       { headers, responseType: 'blob' as 'json' })
   }

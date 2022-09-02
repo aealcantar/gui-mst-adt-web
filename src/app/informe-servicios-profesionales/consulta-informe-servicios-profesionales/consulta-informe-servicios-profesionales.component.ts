@@ -189,10 +189,10 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
   this.textoLugar = ev.source.selected.viewValue;
 }
- 
+
   imprimirPdf(): void {
     let parametrosBusqueda = {
-      fecha : this.formularioBusqueda.get('fecha')?.value,
+      fecha : this.consultaBusqueda.fecha,
       lugar : this.formularioBusqueda.get('lugar')?.value,
       responsable : this.formularioBusqueda.get('responsable')?.value,
       servicio :this.formularioBusqueda.get('servicio')?.value,
@@ -200,13 +200,12 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
       cubiculo : this.textoLugar,
       servicioCubi : this.texto
     }
-    debugger
     this.informeServProfService.imprimirPdf(parametrosBusqueda).subscribe({
       next: (response) => {
         var file = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(file);
         window.open(url);
-       
+
       },
       error: (error: HttpErrorResponse) => {
         console.error(error)
