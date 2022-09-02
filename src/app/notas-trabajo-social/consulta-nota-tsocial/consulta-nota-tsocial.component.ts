@@ -1,3 +1,4 @@
+import { TipoUbicacion } from './../../models/ubicacion-model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,6 +29,10 @@ export class ConsultaNotaTSocialComponent implements OnInit {
   public datetimeFormat = '';
   public dateToday= new Date();
   public usuario!: Usuario;
+  umf: String;
+  noUmf: String;
+  infoUnidad: any;
+  estado: any;
 
   constructor(
     private router: Router,
@@ -64,15 +69,12 @@ export class ConsultaNotaTSocialComponent implements OnInit {
       this.usuario = JSON.parse(userTmp);
       console.log("USER DATA: ", this.usuario);
     }
-    // this.notasService.getNotasById(1).subscribe(
-    //   (res) => {
-    //     this.nota = res;
-    //   },
-    //   (httpErrorResponse: HttpErrorResponse) => {
-    //     console.error(httpErrorResponse);
-    //   }
-    // );
+    this.obtenerInfoUnidadMedicaByMatricula();
+    // this.obtenerEstadoByUnidadMedica();
+
   }
+
+
 
   update() {
     let params = {
@@ -81,18 +83,53 @@ export class ConsultaNotaTSocialComponent implements OnInit {
     this.router.navigate(["nueva-nota"], { queryParams: params, skipLocationChange: true });
   }
 
+
+  obtenerInfoUnidadMedicaByMatricula(){
+    let matricula = this.usuario.matricula;
+      this.notasService.obtenerInformacionTSPorMatricula(matricula).subscribe(
+        (res) => {
+          debugger
+          console.log('infoUnidadMedica__' + res);
+          this.infoUnidad = res.datosUsuario;
+          this.obtenerEstadoByUnidadMedica();
+        },
+
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse);
+        }
+        );
+        console.log(this.infoUnidad);
+  }
+
+   obtenerEstadoByUnidadMedica(){
+     this.notasService.obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica).subscribe(
+       (res) => {
+        debugger
+         this.estado = res[0];
+         console.log(res);
+       },
+       (httpErrorResponse: HttpErrorResponse) => {
+         console.error(httpErrorResponse);
+       }
+     );
+   }
+
   imprimir() {
+    let saludo = String(this.pacienteSeleccionado.unidadMedica);
+    this.umf = saludo.split(' ')[0];
+    this.noUmf = saludo.split(' ')[1];
+
     let fechaTransformada = this.datetimeFormat;
     this.reporteNota = {
-      ooad: "CDMX NORTE",
-      unidad: "HGZ 48 SAN PEDRO XALAPA",
+      unidad: String(this.umf +" "+ this.noUmf),
+      ooad: this.estado.des_nombre_delegacion_umae,
+      unidad2: this.estado.des_denominacion_unidad,
       turno: "MATUTINO",
-      servicio: "GRUPO",
+      servicio: "Trabajo Social",
       nss: String(this.pacienteSeleccionado.nss),
       aMedico: String(this.pacienteSeleccionado.agregadoMedico),
       nombrePaciente: this.pacienteSeleccionado.paciente.toUpperCase(),
       curp: String(this.pacienteSeleccionado.curp),
-      unidad2: String(this.pacienteSeleccionado.unidadMedica),
       consultorio: String(this.pacienteSeleccionado.consultorio),
       fechaN: this.pacienteSeleccionado.fechaNacimiento.toString(),
 	    nombreTS: this.usuario.strNombres + " " + this.usuario.strApellidoP + " " + this.usuario.strApellidoM,

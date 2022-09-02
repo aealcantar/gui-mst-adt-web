@@ -1,3 +1,4 @@
+import { UnidadMedica } from './../models/unidad-medica.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Nota } from '../models/notas.model';
 
 const urlServNotas = `${environment.msmtsNotas}`
+const urlServCatalogos = `${environment.msmtsCatalogos}`
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +21,6 @@ export class NotasService {
   ) { }
 
   getNotasByFechas(paciente: any) {
-    // const params = new HttpParams()
-    //   .set('fechaIni', paciente.fechaIni)
-    //   .set('fechaFin', paciente.fechaFin)
-    //   .set('nssPaciente', paciente.nssPaciente)
-    //   .set('nombrePaciente', paciente.nombrePaciente)
-    //   .set('agregadoMedico', paciente.agregadoMedico);
-    // return this.http.post<any>(`${urlServNotas}/findNotasByFechas`, { responseType: 'json', params: params });
     return this.http.post<any>(`${urlServNotas}/findNotasByFechas`, paciente);
   }
 
@@ -49,6 +44,14 @@ export class NotasService {
     return this.http.get<any>(`${urlServNotas}/getRedesSociales`, { responseType: 'json' });
   }
 
+  obtenerInformacionTSPorMatricula(matricula: string) {
+    return this.http.get<any>(`${urlServCatalogos}/api/getInfoTS/${matricula}`, { responseType: 'json' });
+  }
+
+  obtenerEstadoporUnidadMedica(unidadMedica: string){
+    return this.http.get<any>(`${urlServCatalogos}/api/getUnidades/${unidadMedica}`, { responseType: 'json' });
+  }
+
   getActividadesTecnicas() {
     return this.http.get<any>(`${urlServNotas}/getActividadesTecnicas`, { responseType: 'json' });
   }
@@ -60,5 +63,6 @@ export class NotasService {
     });
     return this.http.post<any>(`${urlServNotas}/reporteNotaTs`, JSON.stringify(data), { headers: headers, responseType: 'blob' as 'json' });
   }
+
 
 }
