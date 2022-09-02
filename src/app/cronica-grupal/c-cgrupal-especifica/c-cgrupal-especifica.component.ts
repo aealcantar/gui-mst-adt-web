@@ -22,12 +22,14 @@ export class CCGrupalEspecificaComponent implements OnInit {
   public datetimeFormat = '';
   public dateToday= new Date();
   public usuario!: Usuario;
+  infoUnidad: any;
+  estado: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private cronicaGrupalService: CronicaGrupalService
-  ) { 
+  ) {
     this.datetimeFormat = formatDate(this.dateToday, 'dd/MM/yyyy hh:mm:ss aa', 'en-ES');
   }
 
@@ -91,20 +93,53 @@ export class CCGrupalEspecificaComponent implements OnInit {
     const currentDate = new Date(this.year+"-"+this.month+"-"+this.day);
     this.today = currentDate;
     console.log("DATE: ", this.today);
+
+
+    this.obtenerInfoUnidadMedicaByMatricula();
+
   }
 
   cancelar() {
     this.router.navigateByUrl("/consulta-cronica-grupal");
   }
 
+  obtenerInfoUnidadMedicaByMatricula() {
+    let matricula = this.usuario.matricula
+    this.cronicaGrupalService.obtenerInformacionTSPorMatricula(matricula).subscribe(
+      (res) => {
+        this.infoUnidad = res.datosUsuario
+        this.obtenerEstadoByUnidadMedica()
+      },
+
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse)
+      },
+    )
+    console.log(this.infoUnidad)
+  }
+
+  obtenerEstadoByUnidadMedica() {
+    this.cronicaGrupalService
+      .obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica)
+      .subscribe(
+        (res) => {
+          this.estado = res[0]
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+  }
+
+
   imprimir() {
     let fechaTransformada = this.datetimeFormat;
     let data: any = {
-      ooad: "CDMX NORTE",
-      unidad: "HGZ 48 SAN PEDRO XALAPA",
-      clavePtal: "35E1011D2153",
-      turno: "MATUTINO",
-      servicio: "GRUPO",
+      ooad: this.estado.des_nombre_delegacion_umae.toUpperCase(),
+      unidad: this.estado.des_denominacion_unidad.toUpperCase(),
+      clavePtal: this.estado.des_clave_presupuestal,
+      turno: this.infoUnidad.turno.toUpperCase(),
+      servicio: this.infoUnidad.Especialidad.toUpperCase(),
       grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
       fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
       hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",

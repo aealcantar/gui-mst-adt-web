@@ -31,6 +31,8 @@ export class CronicaGuardadaComponent implements OnInit, OnDestroy {
   public cronica: any;
   public datetimeFormat = '';
   public dateToday= new Date();
+  infoUnidad: any
+  estado: any
 
   constructor(
     private route: ActivatedRoute,
@@ -136,7 +138,7 @@ console.log("DATE: ", this.today);
         this.rxTime = time;
       });
 
-
+      this.obtenerInfoUnidadMedicaByMatricula() ;
 
   }
 
@@ -168,13 +170,49 @@ console.log("DATE: ", this.today);
     this.router.navigateByUrl("/consulta-cronica-grupal");
   }
 
+  obtenerInfoUnidadMedicaByMatricula() {
+    let matricula = this.usuario.matricula
+    this.cronicaGrupalService.obtenerInformacionTSPorMatricula(matricula).subscribe(
+      (res) => {
+        debugger
+        this.infoUnidad = res.datosUsuario
+        this.obtenerEstadoByUnidadMedica()
+      },
+
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse)
+      },
+    )
+    console.log(this.infoUnidad)
+  }
+
+  obtenerEstadoByUnidadMedica() {
+    this.cronicaGrupalService
+      .obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica)
+      .subscribe(
+        (res) => {
+          this.estado = res[0]
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+  }
+
+
+  // unidad: String(this.umf + ' ' + this.noUmf),
+  // ooad: this.estado.des_nombre_delegacion_umae,
+  // unidad2: this.estado.des_denominacion_unidad,
+  // turno: this.infoUnidad.turno,
+  // servicio: this.infoUnidad.Especialidad,
+
   imprimir() {
     let data: any = {
-      ooad: "CDMX NORTE",
-      unidad: "HGZ 48 SAN PEDRO XALAPA",
-      clavePtal: "35E1011D2153",
-      turno: "MATUTINO",
-      servicio: "GRUPO",
+      ooad: this.estado.des_nombre_delegacion_umae.toUpperCase(),
+      unidad: this.estado.des_denominacion_unidad.toUpperCase(),
+      clavePtal: this.estado.des_clave_presupuestal,
+      turno: this.infoUnidad.turno.toUpperCase(),
+      servicio: this.infoUnidad.Especialidad.toUpperCase(),
       grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
       fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
       hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",

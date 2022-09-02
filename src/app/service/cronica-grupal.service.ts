@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cronica } from '../models/cronica.model';
 
-
+const urlServCatalogos = `${environment.msmtsCatalogos}`
 @Injectable({
   providedIn: 'root'
 })
@@ -86,6 +86,14 @@ export class CronicaGrupalService {
       'Accept': 'application/json'
     });
     return this.http.post(`${environment.msmtsCronicas}/reporteCronica`, JSON.stringify(data), {responseType : 'blob'});
+  }
+
+  obtenerInformacionTSPorMatricula(matricula: string) {
+    return this.http.get<any>(`${urlServCatalogos}/api/getInfoTS/${matricula}`, { responseType: 'json' });
+  }
+
+  obtenerEstadoporUnidadMedica(unidadMedica: string){
+    return this.http.get<any>(`${urlServCatalogos}/api/getUnidades/${unidadMedica}`, { responseType: 'json' });
   }
 
 }
