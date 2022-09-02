@@ -25,7 +25,7 @@
               Servicio:
             </label>
             <mat-select class="form-control form-control-mat-select" aria-label="Servicio" formControlName="servicio"
-              [disableOptionCentering]="true" placeholder="Seleccionar">
+              [disableOptionCentering]="true" placeholder="Seleccionar" (selectionChange)="onChange($event)" >
               <mat-option class="select-font" [value]="servicio.cve_especialidad"
                 *ngFor="let servicio of serviciosEspecialidad">
                 {{ servicio.des_especialidad }}</mat-option>
@@ -38,7 +38,7 @@
               Turno:
             </label>
             <mat-select class="form-control form-control-mat-select" aria-label="Servicio" formControlName="turno"
-              [disableOptionCentering]="true" placeholder="Seleccionar">
+              [disableOptionCentering]="true" placeholder="Seleccionar" >
               <mat-option class="select-font" [value]="turno.cve_turno" *ngFor="let turno of turnos">{{
                 turno.des_turno }}
               </mat-option>
@@ -53,7 +53,7 @@
               Lugar:
             </label>
             <mat-select class="form-control form-control-mat-select" aria-label="Servicio" formControlName="lugar"
-              [disableOptionCentering]="true" placeholder="Seleccionar">
+              [disableOptionCentering]="true" placeholder="Seleccionar" (selectionChange)="onChangeLugar($event)">
               <mat-option class="select-font" [value]="lugar.cve_ubicacion" *ngFor="let lugar of lugares">
                 {{ lugar.des_completa_ubicacion }}
               </mat-option>
@@ -112,7 +112,7 @@
             <thead>
               <tr>
                 <th class="encabezadoTableCenter">
-                  Número
+                  Número Progresivo
                   <i class="fa-solid fa-caret-up arrow arrow-up"
                     [ngClass]="{'active-opacity': columnaId === 'id' && order === 'asc'}"
                     (click)="ordenarPor('id', 'asc', 'numero')">
@@ -122,9 +122,10 @@
                     (click)="ordenarPor('id', 'desc', 'numero')">
                   </i>
                 </th>
-                <th class="encabezadoTable w-340">Número afiliación</th>
+                <th class="encabezadoTable w-130">NSS</th>
+                <th class="encabezadoTable w-190">Agregado Médico</th>
                 <th class="encabezadoTable w-240">Nombre del paciente</th>
-                <th class="encabezadoTable w-190">Hora de la cita</th>
+                <th class="encabezadoTable w-130">Hora de la cita</th>
                 <!-- <th class="encabezadoTable w-100"></th> -->
                 <th class="encabezadoTable w-130">Tipo de cita</th>
               </tr>
@@ -135,7 +136,9 @@
                 <td class="bordesTablaDetalle">{{ i + 1 }}</td>
 
                 <td class="bordesTabla">
-                  {{ item.desNssPaciente + "-" + item.desAgregadoMedico}} </td>
+                  {{ item.desNssPaciente }}</td>
+
+                <td class="bordesTabla" style="text-align: center;">{{item.desAgregadoMedico}} </td>
 
                 <td class="bordesTabla">
                   {{item.nombrePaciente}}

@@ -169,7 +169,7 @@ th {
     background-color: rgba(196, 196, 196, 0.1);
     border: 1px solid #EEEEEE;
     padding-top: 9px !important;
-    width: 170px;
+    width: 100px;
     padding-bottom: 5px !important;
 }
 
@@ -194,7 +194,7 @@ th {
     border: 1px solid #ddd;
     text-align: center !important;
     padding-top: 14px;
-    width: 17%;
+    width: 14%;
     cursor: pointer;
     text-decoration: none !important;
     /* color: #4D92DF !important; */

@@ -33,6 +33,8 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
   // datos
   datosBusqueda: Array<any> = [];
   consultaBusqueda: any = {};
+  texto : any
+
 
   // Formulario
   formularioBusqueda = new FormGroup({
@@ -173,12 +175,39 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     return data;
   }
 
+  onChange(ev: any) {
+
+    let optionText = ev.source.selected.viewValue;
+    this.texto = ev.source.selected.viewValue;
+    debugger
+    console.log(optionText);
+ }
+
+ onChangeLugar(ev: any) {
+
+  let optionText = ev.source.selected.viewValue;
+  this.texto = ev.source.selected.viewValue;
+  debugger
+  console.log(optionText);
+}
+ 
   imprimirPdf(): void {
-    this.informeServProfService.imprimirPdf(this.consultaBusqueda).subscribe({
+    let parametrosBusqueda = {
+      fecha : this.formularioBusqueda.get('fecha')?.value,
+      lugar : this.formularioBusqueda.get('lugar')?.value,
+      responsable : this.formularioBusqueda.get('responsable')?.value,
+      servicio :this.formularioBusqueda.get('servicio')?.value,
+      turno: this.formularioBusqueda.get('turno')?.value,
+      cubiculo : this.formularioBusqueda.get('lugar').value,
+      servicioCubi : this.texto
+    }
+    debugger
+    this.informeServProfService.imprimirPdf(parametrosBusqueda).subscribe({
       next: (response) => {
         var file = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(file);
         window.open(url);
+       
       },
       error: (error: HttpErrorResponse) => {
         console.error(error)

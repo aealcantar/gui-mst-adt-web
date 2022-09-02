@@ -43,14 +43,18 @@ export class InformeServiciosProfesionalesService {
       'Content-Type': 'application/json',
       Accept: 'application/json'
     })
-    const { turno, responsable, servicio, lugar, fecha } = data
+    const { turno, responsable, servicio, lugar, fecha,cubiculo,servicioCubi } = data
     const request = {
       idTurno: parseInt(turno),
       responsable,
-      especialidad: parseInt(servicio),
+     especialidad: parseInt(servicio),
       idLugar: parseInt(lugar),
       fecha,
+      cubiculo ,
+      servicioCubi  
     }
+    debugger
+
     return this.http.post<any>(`${environment.msmtsServsProfesionales}/reporteServiciosProfesionales4306P`, JSON.stringify(request),
       { headers, responseType: 'blob' as 'json' })
   }
