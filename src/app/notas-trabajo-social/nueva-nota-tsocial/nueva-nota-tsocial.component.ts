@@ -12,8 +12,8 @@ import { Nota } from '../../models/notas.model'
 import * as moment from 'moment'
 import { AppTarjetaPresentacionService } from '../../app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface'
-import { BnNgIdleService } from 'bn-ng-idle'
 import { Usuario } from 'src/app/models/usuario.model'
+import { AlertInfo } from 'src/app/app-alerts/app-alert.interface'
 declare var $: any
 
 @Component({
@@ -24,7 +24,7 @@ declare var $: any
 export class NuevaNotaTSocialComponent implements OnInit {
   usuario!: Usuario
   camposCompletos: boolean = true
-
+  alert!: AlertInfo
   alertMensaje: string = ''
   alertVisible: boolean = false
   alertTipo: string = ''
@@ -46,9 +46,8 @@ export class NuevaNotaTSocialComponent implements OnInit {
   catDiagnosticosMedicos: any[] = []
   filteredOptions!: Observable<any[]>
   filterControl = new FormControl('')
-  horaraInicia: string = "";
-  tiempoCaduca: any;
-
+  horaraInicia: string = ''
+  tiempoCaduca: any
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,7 +56,6 @@ export class NuevaNotaTSocialComponent implements OnInit {
     private notasService: NotasService,
     private catServices: CronicaGrupalService,
     private tarjetaServce: AppTarjetaPresentacionService,
-    private bnIdle: BnNgIdleService,
   ) {}
 
   ngOnInit(): void {
@@ -80,11 +78,6 @@ export class NuevaNotaTSocialComponent implements OnInit {
     //    this.horaraInicia = timHoraInicial;
     // }
     this.horaraInicia = moment().format('HH:mm:ss')
-    this.tiempoCaduca =  this.bnIdle.startWatching(300).subscribe((res) => {
-      if (res) {
-        this.guardar()
-      }
-    })
   }
 
   getCatalogos() {
@@ -167,16 +160,25 @@ export class NuevaNotaTSocialComponent implements OnInit {
     )
   }
 
-  muestraAlerta(mensaje: string, estilo: string, funxion: any) {
-    this.alertMensaje = mensaje
-    this.alertTipo = estilo
-    this.alertVisible = true
-
+  muestraAlerta(
+    mensaje: string,
+    estilo: string,
+    tipoMsj?: string,
+    funxion?: any,
+  ) {
+    this.alert = new AlertInfo()
+    this.alert = {
+      message: mensaje,
+      type: estilo,
+      visible: true,
+      typeMsg: tipoMsj,
+    }
     setTimeout(() => {
-      this.alertMensaje = mensaje
-      this.alertTipo = estilo
-      this.alertVisible = false
-
+      this.alert = {
+        message: '',
+        type: 'custom',
+        visible: false,
+      }
       if (funxion != null) {
         funxion()
       }
@@ -202,98 +204,104 @@ export class NuevaNotaTSocialComponent implements OnInit {
   }
 
   guardar() {
+
     console.log(this.formNuevaNota.value)
-
-    let { descripcion: nombreTipoNota } = this.catTiposNotas.find(
-      (item: any) =>
-        item.id === parseInt(this.formNuevaNota.get('idTipoNota').value),
-    )
-    let { descripcion: nombreRedApoyo } = this.catRedesApoyo.find(
-      (item: any) =>
-        item.id === parseInt(this.formNuevaNota.get('idRedApoyo').value),
-    )
-    let {
-      descripcion: nombreActividadTecnica,
-    } = this.catActividadesTecnicas.find(
-      (item: any) =>
-        item.id ===
-        parseInt(this.formNuevaNota.get('idActividadTecnica').value),
-    )
-
-    const userTemp = sessionStorage.getItem('usuario') || ''
-    this.paciente = JSON.parse(localStorage.getItem('paciente'))
-    if (userTemp !== '') {
-      this.usuario = JSON.parse(userTemp)
-    }
-
-
-    let notaToSave: Nota = {
-      fecFecha: moment().format('YYYY/MM/DD'),
-      timHora: moment().format('HH:mm:ss'),
-      timHoraInicial: this.horaraInicia,
-      timHoraFinal: moment().format('HH:mm:ss'),
-      numNss: String(this.paciente.nss),
-      idActividadTecnica: parseInt(
-        this.formNuevaNota.get('idActividadTecnica').value,
-      ),
-      idRedApoyo: parseInt(this.formNuevaNota.get('idRedApoyo').value),
-      idTipoNota: parseInt(this.formNuevaNota.get('idTipoNota').value),
-      nombreTipoNota,
-      nombreRedApoyo,
-      nombreActividadTecnica,
-      idDiagnosticoMedico: parseInt(
-        this.formNuevaNota.get('diagnosticoMedico').value?.id,
-      ),
-      nombreDiagnostico: this.formNuevaNota.get('diagnosticoMedico').value
-        ?.nDiagnosticoMedicoCie,
-      redaccion: this.formNuevaNota.get('redaccion').value,
-      diagnostico: this.formNuevaNota.get('diagnostico').value,
-      matriculaTs: String(this.usuario.matricula),
-      desResponsable:
-        this.usuario.strNombres +
-        ' ' +
-        this.usuario.strApellidoP +
-        ' ' +
-        this.usuario.strApellidoM,
-      desAgregadoMedico: String(this.paciente.agregadoMedico),
-      nombrePaciente: String(this.paciente.paciente),
-      cveTurno: String(this.paciente.turno),
-    }
-
-    if (this.nota?.id) {
-      notaToSave.id = this.nota.id
-      let params = { nota: JSON.stringify(notaToSave), nuevaNota: true }
-
-      this.notasService.updateNota(notaToSave).subscribe(
-        (response: any) => {
-          console.log(response)
-        },
-        (resp: HttpErrorResponse) => {
-          if (resp.statusText === 'OK') {
-            this.router.navigate(['detalle-nota'], {
-              queryParams: params,
-              skipLocationChange: true,
-            })
-          }
-        },
+    if (this.formNuevaNota.valid == false) {
+      this.muestraAlerta('Verificar datos capturados', 'alert-danger', 'Error')
+    }else{
+      let { descripcion: nombreTipoNota } = this.catTiposNotas.find(
+        (item: any) =>
+          item.id === parseInt(this.formNuevaNota.get('idTipoNota').value),
       )
-    } else {
-      this.notasService.addNota(notaToSave).subscribe(
-        (response: any) => {
-          if (response && response?.idNuevaNotaTS) {
-            notaToSave.id = response?.idNuevaNotaTS
-            let params = { nota: JSON.stringify(notaToSave), nuevaNota: true }
-            this.router.navigate(['detalle-nota'], {
-              queryParams: params,
-              skipLocationChange: true,
-            })
-          }
-        },
-        (resp: HttpErrorResponse) => {
-          console.log(resp)
-        },
+      let { descripcion: nombreRedApoyo } = this.catRedesApoyo.find(
+        (item: any) =>
+          item.id === parseInt(this.formNuevaNota.get('idRedApoyo').value),
       )
+      let {
+        descripcion: nombreActividadTecnica,
+      } = this.catActividadesTecnicas.find(
+        (item: any) =>
+          item.id ===
+          parseInt(this.formNuevaNota.get('idActividadTecnica').value),
+      )
+
+      const userTemp = sessionStorage.getItem('usuario') || ''
+      this.paciente = JSON.parse(localStorage.getItem('paciente'))
+      if (userTemp !== '') {
+        this.usuario = JSON.parse(userTemp)
+      }
+
+      let notaToSave: Nota = {
+        fecFecha: moment().format('YYYY/MM/DD'),
+        timHora: moment().format('HH:mm:ss'),
+        timHoraInicial: this.horaraInicia,
+        timHoraFinal: moment().format('HH:mm:ss'),
+        numNss: String(this.paciente.nss),
+        idActividadTecnica: parseInt(
+          this.formNuevaNota.get('idActividadTecnica').value,
+        ),
+        idRedApoyo: parseInt(this.formNuevaNota.get('idRedApoyo').value),
+        idTipoNota: parseInt(this.formNuevaNota.get('idTipoNota').value),
+        nombreTipoNota,
+        nombreRedApoyo,
+        nombreActividadTecnica,
+        idDiagnosticoMedico: parseInt(
+          this.formNuevaNota.get('diagnosticoMedico').value?.id,
+        ),
+        nombreDiagnostico: this.formNuevaNota.get('diagnosticoMedico').value
+          ?.nDiagnosticoMedicoCie,
+        redaccion: this.formNuevaNota.get('redaccion').value,
+        diagnostico: this.formNuevaNota.get('diagnostico').value,
+        matriculaTs: String(this.usuario.matricula),
+        desResponsable:
+          this.usuario.strNombres +
+          ' ' +
+          this.usuario.strApellidoP +
+          ' ' +
+          this.usuario.strApellidoM,
+        desAgregadoMedico: String(this.paciente.agregadoMedico),
+        nombrePaciente: String(this.paciente.paciente),
+        cveTurno: String(this.paciente.turno),
+      }
+
+      if (this.nota?.id) {
+        notaToSave.id = this.nota.id
+        let params = { nota: JSON.stringify(notaToSave), nuevaNota: true }
+
+        this.notasService.updateNota(notaToSave).subscribe(
+          (response: any) => {
+            console.log(response)
+          },
+          (resp: HttpErrorResponse) => {
+            if (resp.statusText === 'OK') {
+              this.router.navigate(['detalle-nota'], {
+                queryParams: params,
+                skipLocationChange: true,
+              })
+            }
+          },
+        )
+      } else {
+        this.notasService.addNota(notaToSave).subscribe(
+          (response: any) => {
+            if (response && response?.idNuevaNotaTS) {
+              notaToSave.id = response?.idNuevaNotaTS
+              let params = { nota: JSON.stringify(notaToSave), nuevaNota: true }
+              this.router.navigate(['detalle-nota'], {
+                queryParams: params,
+                skipLocationChange: true,
+              })
+            }
+          },
+          (resp: HttpErrorResponse) => {
+            console.log(resp)
+          },
+        )
+      }
     }
+
+
+
   }
 
   onBlur() {
