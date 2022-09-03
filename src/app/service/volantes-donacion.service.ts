@@ -4,16 +4,18 @@ import { environment } from 'src/environments/environment'
 import { Observable } from 'rxjs'
 import { VolantesDonacion } from '../models/volantes-donacion.model'
 
+const urlServCatalogos = `${environment.msmtsCatalogos}`
 @Injectable({
   providedIn: 'root',
 })
 export class VolantesDonacionService {
-  constructor(private httpsClient: HttpClient) {}
+  constructor(private httpsClient: HttpClient, private http: HttpClient) {}
 
   getVolantesByFechas(datosBusqueda: any) {
-  // getVolantesByFechas(fechaInicial: string, fechaFinal: string) {
-    // return this.httpsClient.get<any>(`${environment.msmtsVolantesDonacion}/findVolantesByFechas/${fechaInicial}/${fechaFinal}`,
-    return this.httpsClient.post<any>(`${environment.msmtsVolantesDonacion}/findVolantesByFechas`, datosBusqueda);
+    return this.httpsClient.post<any>(
+      `${environment.msmtsVolantesDonacion}/findVolantesByFechas`,
+      datosBusqueda,
+    )
   }
 
   getBancosSangre() {
@@ -46,7 +48,27 @@ export class VolantesDonacionService {
     )
   }
 
-  getVolantesAdministracion(fechaInicial: string, fechaFinal: string, tipoSangre: string) {
-    return this.httpsClient.get<any>(`${environment.msmtsVolantesDonacion}/findVolantesAdministracion/${fechaInicial}/${fechaFinal}/${tipoSangre}`);
+  getVolantesAdministracion(
+    fechaInicial: string,
+    fechaFinal: string,
+    tipoSangre: string,
+  ) {
+    return this.httpsClient.get<any>(
+      `${environment.msmtsVolantesDonacion}/findVolantesAdministracion/${fechaInicial}/${fechaFinal}/${tipoSangre}`,
+    )
+  }
+
+  obtenerInformacionTSPorMatricula(matricula: string) {
+    return this.http.get<any>(
+      `${urlServCatalogos}/api/getInfoTS/${matricula}`,
+      { responseType: 'json' },
+    )
+  }
+
+  obtenerEstadoporUnidadMedica(unidadMedica: string) {
+    return this.http.get<any>(
+      `${urlServCatalogos}/api/getUnidades/${unidadMedica}`,
+      { responseType: 'json' },
+    )
   }
 }

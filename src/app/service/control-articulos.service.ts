@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
+const urlServCatalogos = `${environment.msmtsCatalogos}`
 
 @Injectable({
   providedIn: 'root'
 })
 export class ControlArticulosService {
 
-  constructor(private httpsClient: HttpClient) { }
+  constructor(private httpsClient: HttpClient, private http: HttpClient,) { }
 
   getCatUbicaciones() {
     return this.httpsClient.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion`);
@@ -37,6 +38,14 @@ export class ControlArticulosService {
 
   getArticulosByFechas(controlArticulos: any) {
     return this.httpsClient.post<any>(`${environment.msmtsControlArticulos}/rango/fechas`, controlArticulos);
+  }
+
+  obtenerInformacionTSPorMatricula(matricula: string) {
+    return this.http.get<any>(`${urlServCatalogos}/api/getInfoTS/${matricula}`, { responseType: 'json' });
+  }
+
+  obtenerEstadoporUnidadMedica(unidadMedica: string){
+    return this.http.get<any>(`${urlServCatalogos}/api/getUnidades/${unidadMedica}`, { responseType: 'json' });
   }
 
 }

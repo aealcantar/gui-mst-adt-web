@@ -6,6 +6,7 @@ import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
 import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface';
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 import { formatDate } from '@angular/common'
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-detalle-control-articulos',
@@ -16,6 +17,7 @@ export class DetalleControlArticulosComponent implements OnInit {
 
   //declaracion de variables para el funcionamiento del aplicativo
   datetimeFormat = '';
+  public usuario!: Usuario
   dateToday = new Date();
   detalle: any = {};
   alert!: AlertInfo;
@@ -29,9 +31,10 @@ export class DetalleControlArticulosComponent implements OnInit {
     nombreUsuario: '',
     tipoUsuario: 1,
   };
-
   nombreTSC: string = "";
   matricula: string = "";
+  infoUnidad: any;
+  estado: any;
 
   constructor(
     private controlArticulosService: ControlArticulosService,
@@ -59,6 +62,14 @@ export class DetalleControlArticulosComponent implements OnInit {
       this.idControlArticulos = this.idControlArticulos.replace("nuevo", "");
       this.buscarDetalleArticulos();
     }
+
+    let userTmp = sessionStorage.getItem('usuario') || ''
+    if (userTmp !== '') {
+      this.usuario = JSON.parse(userTmp)
+      console.log('USER DATA: ', this.usuario)
+    }
+
+    this.obtenerInfoUnidadMedicaByMatricula();
 
   }
 
@@ -112,6 +123,37 @@ export class DetalleControlArticulosComponent implements OnInit {
   }
 
 
+  obtenerInfoUnidadMedicaByMatricula() {
+    let matricula = this.usuario.matricula
+    this.controlArticulosService
+      .obtenerInformacionTSPorMatricula(matricula)
+      .subscribe(
+        (res) => {
+          this.infoUnidad = res.datosUsuario
+          this.obtenerEstadoByUnidadMedica()
+        },
+
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+    console.log(this.infoUnidad)
+  }
+
+  obtenerEstadoByUnidadMedica() {
+    this.controlArticulosService
+      .obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica)
+      .subscribe(
+        (res) => {
+          this.estado = res[0]
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+  }
+
+
   //genera un archivo pdf para su descarga
   impirmiControlArticulos() {
     let nombrePaciente = "";
@@ -121,7 +163,7 @@ export class DetalleControlArticulosComponent implements OnInit {
     if (this.paciente !== null && this.paciente !== undefined) {
       nss = this.paciente.nss.toString();
       nombrePaciente = this.paciente.paciente.toString();
-      unidadMedica = this.paciente.unidadMedica.toString();
+      unidadMedica = this.estado.des_denominacion_unidad;
     }
 
     let splitNombre = nombrePaciente.split(" ");

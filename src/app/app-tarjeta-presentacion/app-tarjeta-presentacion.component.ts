@@ -16,6 +16,11 @@ export class AppTarjetaPresentacionComponent implements OnInit {
   isCollapsed: boolean = true;
   executed: boolean = false;
   months: any;
+   aniosNum: string;
+   mesesNum: string;
+   aniosText: string;
+   mesesText: string;
+   posicion3: string;
 
   @Input() mostrarBtnAtras: boolean = false;
   @Input() url: string = "";
@@ -27,6 +32,12 @@ export class AppTarjetaPresentacionComponent implements OnInit {
     if (!this.paciente) {
       this.paciente = JSON.parse(localStorage.getItem('paciente')!);
     }
+    let edad = this.paciente.edad;
+    //  this.aniosNum = edad[0];
+    //  this.aniosText = edad[1];
+    //   this.mesesNum = edad.split(' ')[6]
+    //   this.mesesText = edad.split(' ')[7]
+
   }
 
   validaTurno(turno: any) {

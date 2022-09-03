@@ -21,7 +21,6 @@ import { Usuario } from 'src/app/models/usuario.model'
 export class EstudioMedicoGuardadoComponent implements OnInit {
   alert!: objAlert
   executed: boolean = false
-
   datosGenerales = false
   datosFamiliar = false
   datosExploracionCaso = false
@@ -89,7 +88,7 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     this.pacienteSeleccionado = JSON.parse(localStorage.getItem('paciente')!)
     console.log('PACIENTE: ', this.pacienteSeleccionado)
 
-    this.obtenerInfoUnidadMedicaByMatricula()
+    this.obtenerInfoUnidadMedicaByMatricula();
   }
 
   irDatosDeFamiliar() {
@@ -310,9 +309,9 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
     let fechaTransformada = this.datetimeFormat
     let reporteEstudioMedicoSocial: any = {
       ooad: this.estado.des_nombre_delegacion_umae.toUpperCase(),
+      unidad2: this.estado.des_denominacion_unidad.toUpperCase(),
       unidad: '' + this.pacienteSeleccionado.unidadMedica,
-      turno:
-        this.pacienteSeleccionado.turno === 'M' ? 'MATUTINO' : 'VESPERTINO',
+      turno: this.infoUnidad.turno.toUpperCase(),
       servicio: this.infoUnidad.Especialidad.toUpperCase(),
       cvePtal: this.estado.des_clave_presupuestal,
       fecImpresion: fechaTransformada,
@@ -320,7 +319,6 @@ export class EstudioMedicoGuardadoComponent implements OnInit {
       aMedico: this.pacienteSeleccionado.agregadoMedico,
       nombrePaciente: this.pacienteSeleccionado.paciente.toUpperCase(),
       curp: this.pacienteSeleccionado.curp,
-      unidad2: '' + this.pacienteSeleccionado.unidadMedica,
       consultorio: this.pacienteSeleccionado.consultorio,
       edad:
         this.pacienteSeleccionado.edad +

@@ -6,6 +6,7 @@ import { pacienteSeleccionado } from 'src/app/busqueda-nss/paciente.interface'
 import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service'
 import { VolantesDonacion } from 'src/app/models/volantes-donacion.model';
 import { VolantesDonacionService } from 'src/app/service/volantes-donacion.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-detalle-volantes-donacion-sangre',
@@ -18,6 +19,9 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   paciente!: pacienteSeleccionado;
   volantesDonacion!: VolantesDonacion;
   verDetalle: string = "";
+  usuario!: Usuario;
+  infoUnidad: any;
+  estado: any;
 
   constructor(private volantesService: VolantesDonacionService,
     private volantesDonacionService: VolantesDonacionService,
@@ -45,6 +49,14 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
       this.buscarDetalleVolanteDonacion();
 
     }
+
+    let userTmp = sessionStorage.getItem('usuario') || ''
+    if (userTmp !== '') {
+      this.usuario = JSON.parse(userTmp)
+      console.log('USER DATA: ', this.usuario)
+    }
+
+    this.obtenerInfoUnidadMedicaByMatricula()
 
   }
 
@@ -102,6 +114,38 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   }
 
 
+  obtenerInfoUnidadMedicaByMatricula() {
+    let matricula = this.usuario.matricula
+    this.volantesDonacionService
+      .obtenerInformacionTSPorMatricula(matricula)
+      .subscribe(
+        (res) => {
+          this.infoUnidad = res.datosUsuario
+          this.obtenerEstadoByUnidadMedica()
+        },
+
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+    console.log(this.infoUnidad)
+  }
+
+  obtenerEstadoByUnidadMedica() {
+    this.volantesDonacionService
+      .obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica)
+      .subscribe(
+        (res) => {
+          this.estado = res[0]
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+  }
+
+
+
   impirmiVolante() {
     let nss = "";
     let desNssAgregado = "";
@@ -128,6 +172,8 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     this.volantesDonacion.timHoraFinalAtencion = timHoraFinalAtencion;
     this.volantesDonacion.timHoraInicialAtencion = timHoraInicialAtencion;
     this.volantesDonacion.refHorarioAtencion = this.volantesDonacion.refHorarioAtencion;
+    this.volantesDonacion.desUnidadMedicaHospitalaria = this.estado.des_denominacion_unidad;
+
 
 
     console.log('DATA REPORT: ', this.volantesDonacion);
