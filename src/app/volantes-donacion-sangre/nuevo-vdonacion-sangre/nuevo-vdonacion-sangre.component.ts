@@ -14,6 +14,7 @@ import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface'
 import * as moment from 'moment'
 import { AvisoMinisterioPublicoService } from 'src/app/service/aviso-mp.service'
+
 declare var $: any
 
 @Component({
@@ -22,6 +23,7 @@ declare var $: any
   styleUrls: ['./nuevo-vdonacion-sangre.component.css'],
 })
 export class NuevoVdonacionSangreComponent implements OnInit {
+  
   submitted: boolean = false
   formNuevaDonacion: any = this.formBuilder.group({
     umh: new FormControl('', Validators.required),
@@ -86,6 +88,9 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   bancosSangre: Array<any> = []
   fecha = moment(Date.now()).format('DD/MM/YYYY')
   paciente!: pacienteSeleccionado
+  estadoUM: any;
+  usr: any;
+  infoUnidad: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -97,6 +102,41 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     private avisoMinisterioPublico: AvisoMinisterioPublicoService,
   ) { }
 
+   obtenerInfoUnidadMedicaByMatricula() {
+     let matricula = this.usr
+     this.volantesDonacionService
+       .obtenerInformacionTSPorMatricula(matricula)
+       .subscribe(
+         (res) => {
+           this.infoUnidad = res.datosUsuario
+           this.obtenerEstadoByUnidadMedica()
+         },
+
+         (httpErrorResponse: HttpErrorResponse) => {
+           console.error(httpErrorResponse)
+         },
+       )
+     console.log(this.infoUnidad)
+   }
+
+  obtenerEstadoByUnidadMedica() {
+    this.volantesDonacionService
+      .obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica)
+      .subscribe(
+        (res) => {
+          this.estadoUM = res[0]
+          this.formNuevaDonacion
+          .get('umh')
+          .patchValue(this.estadoUM.des_denominacion_unidad)
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
+     
+  }
+
+ 
   ngOnInit(): void {
     this.estados()
     this.servicios()
@@ -113,7 +153,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       )
       this.formNuevaDonacion.controls['desAgregadoMedico'].setValue(nssAgregado)
       this.formNuevaDonacion.controls['desNssPaciente'].setValue(nss)
-      this.getCatUnidadesMedicas()
+      
     }
     this.formNuevaDonacion.controls['fecha1'].setValue(this.fecha)
 
@@ -131,15 +171,17 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(
         matricula,
       )
+      this.usr = usuario?.matricula
+      this.obtenerInfoUnidadMedicaByMatricula() 
+      
     }
 
     this.buscarBancosSangre()
   }
 
+ 
+
   getCatUnidadesMedicas(): void {
-    this.formNuevaDonacion
-      .get('umh')
-      .patchValue(`${this.paciente.unidadMedica}`)
     // this.avisoMinisterioPublico.getCatUnidadesMedicas().toPromise().then(
     //   (unidadesMedicas: any[]) => {
     //     const unidadMedica = unidadesMedicas.filter(e => e.cve_unidad_medica === `UMF${this.paciente.unidadMedica}`) || [];
