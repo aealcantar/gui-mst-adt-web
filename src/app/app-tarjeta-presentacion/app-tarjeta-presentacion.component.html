@@ -24,7 +24,7 @@
       <div style="display: grid;">
         <span class="unidadSpan">Unidad de Adscripción</span>
         <div style="width: 136px; line-height: 15px;">
-        <span style="line-height: 17px;" class="ciudadUnidadMedica">{{paciente?.unidadMedica}}</span>
+          <span style="line-height: 17px;" class="ciudadUnidadMedica">{{paciente?.unidadMedica}}</span>
         </div>
         <!-- <span class="ciudadUnidadMedica">{{paciente?.unidadMedica}}</span> -->
       </div>
@@ -56,16 +56,12 @@
 
       <div style="display: grid;  width: 74px;">
         <span class="unidadSpan">Edad</span>
-        <div style="width: 74px; line-height: 17px; margin-top: 5px;" >
-          <span class="detalleDescrip" style="margin-top: -1px !important; line-height: 18px;">{{paciente?.edad}}</span>
+        <div style="width: 74px; line-height: 13px; margin-top: 5px;">
+          <span class="detalleDescrip" style="margin-top: -1px !important; line-height: 14px;">{{anios}}</span>
         </div>
-        <!-- <div style="width: 68px; line-height: 17px; margin-top: 5px;" >
-          <span class="detalleDescrip" style="margin-top: -1px !important; line-height: 18px;">{{aniosNum + aniosText + ' ' +'años'}}</span>
+        <div style="width: 74px; line-height: 13px; margin-top: 5px;">
+          <span class="detalleDescrip" style="margin-top: -1px !important; line-height: 14px;">{{meses}}</span>
         </div>
-        <div style="width: 68px; line-height: 17px; margin-top: 5px;" >
-          <span class="detalleDescrip" style="margin-top: -1px !important; line-height: 18px;">{{mesesNum + mesesText + ' ' +'meses'}}</span>
-        </div> -->
-
       </div>
 
       <div class="Rectangle-12052"></div>
@@ -134,7 +130,8 @@
             <li class="contenedorItems" (click)="iraVolantesSangre()"><a class="menuSinSeleccionar">Donación de
                 sangre</a></li>
             <!-- <li class="contenedorItems" (click)="irAvisosMP()"><a class="menuSinSeleccionar">Ministerio público</a></li> -->
-            <li class="contenedorItems" (click)=" irSertificadoDefuncion()"><a class="menuSinSeleccionar">Control Interno TS</a></li>
+            <li class="contenedorItems" (click)=" irSertificadoDefuncion()"><a class="menuSinSeleccionar">Control
+                Interno TS</a></li>
           </div>
         </ul>
       </div>
