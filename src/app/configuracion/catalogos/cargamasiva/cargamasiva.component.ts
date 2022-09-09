@@ -279,13 +279,13 @@ export class CargamasivaComponent implements OnInit {
             this.servicio[index].clave = element[this.confCarga.col1];
             if( this.servicio[index].clave){
              
-              this.servicio[index].clave = this.servicio[index].clave.trim();
+              this.servicio[index].clave = this.servicio[index].clave.toString().trim();
             }
 
             this.servicio[index].especialidad = element[this.confCarga.col2];
             if( this.servicio[index].especialidad){
             
-              this.servicio[index].especialidad = this.servicio[index].especialidad.trim();
+              this.servicio[index].especialidad = this.servicio[index].especialidad.toString().trim();
             }
           
           
