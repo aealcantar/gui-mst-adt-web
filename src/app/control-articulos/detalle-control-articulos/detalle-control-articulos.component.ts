@@ -260,7 +260,8 @@ export class DetalleControlArticulosComponent implements OnInit {
       nombreP: nombre,
       cama: this.detalle.noCama,
       nss: nss,
-      servicio: this.detalle.ubicacion,
+      servicio: this.detalle.servicio ,
+      ubicacionEntrega: this.detalle.recepcionUbicacion,
       tel1: this.detalle.telefono,
       articulos: nuevosArticulos,
       diaSA: diaRecepcionSA,
@@ -274,7 +275,10 @@ export class DetalleControlArticulosComponent implements OnInit {
       añoR: anioRecepion,
       horaR: horaRecepcion,
       fecImpresion: fechaTransformada,
-      ubicacionEntrega: this.detalle.recepcionUbicacion,
+
+
+
+
       horarioEntrega: rangoFechas.length > 0 ?
         `DE ${rangoFechas[0].trim()} A ${rangoFechas[1].trim()} HRS` :
         this.detalle.recepcionHorarioEntregaArticulo,

@@ -29,10 +29,10 @@ export class InformeServiciosProfesionalesService {
   getConsultaServicios(query: any) {
     const { turno, responsable, servicio, lugar, fecha } = query
     const request = {
-      idTurno: parseInt(turno),
+      idTurno: (turno),
       responsable,
-      especialidad: parseInt(servicio),
-      idLugar: parseInt(lugar),
+      especialidad: (servicio),
+      idLugar: (lugar),
       fecha,
     }
     return this.http.post<any>(`${environment.msmtsServsProfesionales}/searchServiciosProfecionales`, request)

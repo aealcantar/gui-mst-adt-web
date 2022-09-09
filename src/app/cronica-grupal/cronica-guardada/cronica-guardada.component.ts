@@ -174,7 +174,6 @@ console.log("DATE: ", this.today);
     let matricula = this.usuario.matricula
     this.cronicaGrupalService.obtenerInformacionTSPorMatricula(matricula).subscribe(
       (res) => {
-        debugger
         this.infoUnidad = res.datosUsuario
         this.obtenerEstadoByUnidadMedica()
       },

@@ -29,7 +29,7 @@ declare var $: any;
   styleUrls: ['./nuevo-certificado.component.css'],
 })
 export class NuevoCertificadoComponent implements OnInit, AfterViewInit {
-  readonly ID_SERVICIO_TRABAJO_SOCIAL = "15";
+  readonly ID_SERVICIO_TRABAJO_SOCIAL = "6901";
   formAdd;
   certificado: CertificadoDefuncion;
   usuario!: Usuario;

@@ -154,7 +154,6 @@ export class NuevaNotaTSocialComponent implements OnInit {
   }
 
   onSelectionChanged(evt: any) {
-    // debugger
     this.filterControl.patchValue(
       this.formNuevaNota.get('diagnosticoMedico').value,
     )

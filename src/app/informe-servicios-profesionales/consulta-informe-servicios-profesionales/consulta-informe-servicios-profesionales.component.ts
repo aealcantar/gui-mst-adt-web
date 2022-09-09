@@ -1,3 +1,4 @@
+import { Usuario } from '../../models/usuario.model'
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -15,7 +16,8 @@ declare var $: any;
 })
 export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
-  readonly ID_SERVICIO_TRABAJO_SOCIAL = "15";
+   readonly ID_SERVICIO_TRABAJO_SOCIAL = "6901"; //Obtener el id del trabajador social
+  // ID_SERVICIO_TRABAJO_SOCIAL: string; //Obtener el id del trabajador social
   public alert!: AlertInfo;
   // catalogos
   grupos: any[] = [];
@@ -35,6 +37,9 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
   consultaBusqueda: any = {};
   texto : any
   textoLugar : any
+  public usuario!: Usuario
+  infoUnidad: any
+  estado: any
 
 
   // Formulario
@@ -62,8 +67,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
   serviciosObserver = {
     next: (servicios: any) => {
       this.serviciosEspecialidad = servicios;
-      const especialidad =
-        this.serviciosEspecialidad.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
+      const especialidad = this.serviciosEspecialidad.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
       if (especialidad && especialidad.cve_especialidad) {
         this.formularioBusqueda.get('servicio').setValue(especialidad.cve_especialidad);
         this.texto = especialidad.des_especialidad
@@ -90,6 +94,14 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
       searching: false,
     };
     this.cargarCatalogos();
+
+    let userTmp = sessionStorage.getItem('usuario') || ''
+    if (userTmp !== '') {
+      this.usuario = JSON.parse(userTmp)
+      console.log('USER DATA: ', this.usuario)
+    }
+    // this.obtenerInfoUnidadMedicaByMatricula();
+
   }
 
   ngAfterViewInit(): void {
@@ -181,7 +193,6 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
 
     let optionText = ev.source.selected.viewValue;
     this.texto = ev.source.selected.viewValue;
-    debugger
     console.log(optionText);
  }
 

@@ -23,7 +23,7 @@ declare var $: any
   styleUrls: ['./nuevo-vdonacion-sangre.component.css'],
 })
 export class NuevoVdonacionSangreComponent implements OnInit {
-  
+
   submitted: boolean = false
   formNuevaDonacion: any = this.formBuilder.group({
     umh: new FormControl('', Validators.required),
@@ -91,6 +91,8 @@ export class NuevoVdonacionSangreComponent implements OnInit {
   estadoUM: any;
   usr: any;
   infoUnidad: any;
+  readonly ID_SERVICIO_TRABAJO_SOCIAL = "6901";
+  texto : any
 
   constructor(
     private formBuilder: FormBuilder,
@@ -133,10 +135,12 @@ export class NuevoVdonacionSangreComponent implements OnInit {
           console.error(httpErrorResponse)
         },
       )
-     
+
+
   }
 
- 
+
+
   ngOnInit(): void {
     this.estados()
     this.servicios()
@@ -153,7 +157,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       )
       this.formNuevaDonacion.controls['desAgregadoMedico'].setValue(nssAgregado)
       this.formNuevaDonacion.controls['desNssPaciente'].setValue(nss)
-      
+
     }
     this.formNuevaDonacion.controls['fecha1'].setValue(this.fecha)
 
@@ -170,16 +174,38 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       this.formNuevaDonacion.controls['nombreTrabajadorSocial'].setValue(nombre)
       this.formNuevaDonacion.controls['matriculaTrabajadorSocial'].setValue(
         matricula,
-      )
+        )
       this.usr = usuario?.matricula
-      this.obtenerInfoUnidadMedicaByMatricula() 
-      
+       this.obtenerInfoUnidadMedicaByMatricula()
+
     }
+
+
 
     this.buscarBancosSangre()
   }
 
- 
+
+  onChange(ev: any) {
+
+    let optionText = ev.source.selected.viewValue;
+    this.texto = ev.source.selected.viewValue;
+    console.log(optionText);
+ }
+
+
+
+  async servicios() {
+    this.cronicaGrupalService.getCatServicios().subscribe((servicios) => {
+      this.listaServicios = servicios;
+      const especialidad = this.listaServicios.find((item: any) => this.ID_SERVICIO_TRABAJO_SOCIAL === item.cve_especialidad);
+      if (especialidad && especialidad.cve_especialidad) {
+        this.formNuevaDonacion.get('idServicio').setValue(especialidad.cve_especialidad);
+        this.texto = especialidad.des_especialidad
+      }
+    });
+  }
+
 
   getCatUnidadesMedicas(): void {
     // this.avisoMinisterioPublico.getCatUnidadesMedicas().toPromise().then(
@@ -242,19 +268,15 @@ export class NuevoVdonacionSangreComponent implements OnInit {
     })
   }
 
-  servicios() {
-    this.cronicaGrupalService
-      .getCatServicios()
-      .toPromise()
-      .then(
-        (res) => {
-          this.listaServicios = res
-        },
-        (httpErrorResponse: HttpErrorResponse) => {
-          console.error(httpErrorResponse)
-        },
-      )
-  }
+  // servicios() {
+  //   this.cronicaGrupalService.getCatServicios().toPromise().then((res) => {this.listaServicios = res
+  //       },
+  //       (httpErrorResponse: HttpErrorResponse) => {
+  //         console.error(httpErrorResponse)
+  //       },
+  //     )
+  // }
+
 
   registarDonacion(formNuevaDonacion: FormGroup) {
     this.submitted = true;
@@ -420,9 +442,7 @@ export class NuevoVdonacionSangreComponent implements OnInit {
       let fechaC = formNuevaDonacion.value.fecha3.split('/')
       let fechaCirugia = fechaC[2] + '/' + fechaC[1] + '/' + fechaC[0]
       this.formNuevaDonacion.controls['fecha'].setValue(fechaNew)
-      this.formNuevaDonacion.controls['fechaInternamiento'].setValue(
-        fechaInternamiento,
-      )
+      this.formNuevaDonacion.controls['fechaInternamiento'].setValue(fechaInternamiento,)
       this.formNuevaDonacion.controls['fechaCirugia'].setValue(fechaCirugia)
 
       let datos = JSON.stringify(this.formNuevaDonacion.value);
