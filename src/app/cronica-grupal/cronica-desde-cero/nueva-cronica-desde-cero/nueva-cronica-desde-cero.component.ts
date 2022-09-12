@@ -20,7 +20,7 @@ const NUM_PARTICIPANTES: number = 0;
   styleUrls: ['./nueva-cronica-desde-cero.component.css'],
 })
 export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
-  readonly ID_SERVICIO_TRABAJO_SOCIAL = "15";
+  readonly ID_SERVICIO_TRABAJO_SOCIAL = "6901";
   public listParticipantes: Participante[] = [];
   public cronica!: Cronica;
   public editForm!: FormGroup;
@@ -43,7 +43,7 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.cronicaGrupalService.getCatLugarSolo().subscribe(this.lugaresObserver);
+    // this.cronicaGrupalService.getCatLugarSolo().subscribe(this.lugaresObserver);
   }
 
   ngAfterViewInit(): void {
@@ -106,19 +106,16 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
         console.error(httpErrorResponse);
       }
     );
-  }
+
+
+    this.cronicaGrupalService.getCatLugar(this.editForm.get('servicio').value).subscribe(this.lugaresObserver);
+    // this.lugaresObserver
+    debugger
+      // );
+
+    }
 
   getNumParticipantes() {
-    // TO DO Implementar servicio para obtener Numero de Participantes
-    // this.cronicaGrupalService.getNumParticipantes(idCita).subscribe((resp: any) => {
-    //     if (resp) {
-    //       this.editForm.get('numParticipantesAsistieron')?.patchValue(resp.numParticipantes || 0);
-    //     }
-    //   },
-    //   (httpErrorResponse: HttpErrorResponse) => {
-    //     console.error(httpErrorResponse);
-    //   }
-    // );
     this.editForm.get('numTotalParticipantes')?.patchValue(NUM_PARTICIPANTES + this.listParticipantes.length);
   }
 

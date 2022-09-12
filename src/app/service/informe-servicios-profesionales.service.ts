@@ -14,6 +14,10 @@ export class InformeServiciosProfesionalesService {
     return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion/`)
   }
 
+  getCatLugarByServicio(cveServicio: string) {
+    return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listUbicacion/${cveServicio}`);
+  }
+
   getCatServicios() {
     return this.http.get<any>(`${environment.urlMSEDSCatalogos}/listservicios`);
   }

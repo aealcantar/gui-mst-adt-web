@@ -71,7 +71,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
       if (especialidad && especialidad.cve_especialidad) {
         this.formularioBusqueda.get('servicio').setValue(especialidad.cve_especialidad);
         this.texto = especialidad.des_especialidad
-      }
+        this.informeServProfService.getCatLugarByServicio(this.formularioBusqueda.get('servicio').value).subscribe(this.lugaresObserver);}
     },
     error: (error: HttpErrorResponse) => console.log(error),
   }
@@ -194,10 +194,11 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     let optionText = ev.source.selected.viewValue;
     this.texto = ev.source.selected.viewValue;
     console.log(optionText);
+    this.informeServProfService.getCatLugarByServicio(this.formularioBusqueda.get('servicio').value).subscribe(this.lugaresObserver);
+
  }
 
  onChangeLugar(ev: any) {
-
   this.textoLugar = ev.source.selected.viewValue;
 }
 
@@ -228,7 +229,7 @@ export class ConsultaInformeServiciosProfesionalesComponent implements OnInit {
     this.informeServProfService.getCatTurnos().subscribe(this.turnosObserver);
     this.informeServProfService.getCatServicios().subscribe(this.serviciosObserver);
     this.informeServProfService.getCatResponsables().subscribe(this.responsablesObserver)
-    this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
+    // this.informeServProfService.getCatLugar().subscribe(this.lugaresObserver);
   }
 
   mostrarAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
