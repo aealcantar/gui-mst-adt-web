@@ -139,7 +139,7 @@ export class CCGrupalEspecificaComponent implements OnInit {
       unidad: this.estado.des_denominacion_unidad.toUpperCase(),
       clavePtal: this.estado.des_clave_presupuestal,
       turno: this.infoUnidad.turno.toUpperCase(),
-      servicio: this.infoUnidad.Especialidad.toUpperCase(),
+      servicio: this.cronica?.desEspecialidad.toUpperCase(),
       grupo : this.cronica?.desGrupo !== null ? this.cronica?.desGrupo : "",
       fecha: this.cronica?.fecFechaCorta !== null ? this.cronica?.fecFechaCorta : "",
       hora: this.cronica?.timHora !== null ? this.cronica?.timHora : "",

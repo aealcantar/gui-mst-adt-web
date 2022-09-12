@@ -109,10 +109,6 @@ export class NuevaCronicaDesdeCeroComponent implements OnInit, AfterViewInit {
 
 
     this.cronicaGrupalService.getCatLugar(this.editForm.get('servicio').value).subscribe(this.lugaresObserver);
-    // this.lugaresObserver
-    debugger
-      // );
-
     }
 
   getNumParticipantes() {
