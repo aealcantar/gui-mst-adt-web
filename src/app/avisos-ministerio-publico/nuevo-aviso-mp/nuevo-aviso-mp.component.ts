@@ -35,6 +35,10 @@ export class NuevoAvisoMpComponent implements OnInit {
   public listaServicios: Array<any> = []
   public catEstados: Estado[] = []
   public catMunicipios: Municipio[] = []
+  umf: String
+  noUmf: String
+  infoUnidad: any
+  estado: any
 
   editForm: any = this.formBuilder.group({
     fechaRegistroAviso: [null, Validators.required],
@@ -79,19 +83,14 @@ export class NuevoAvisoMpComponent implements OnInit {
       this.usuario = JSON.parse(userTemp);
     }
 
-    this.editForm
-    .get('nombreTrabajadorSocial')
-    .setValue(
-      `${this.usuario.strNombres} ${this.usuario.strApellidoP} ${this.usuario.strApellidoM}`
-    );
-  this.editForm
-    .get('matriculaTrabajadorSocial')
-    .setValue(this.usuario.matricula);
-  this.editForm.get('nssPaciente').setValue(this.paciente.nss);
-  this.editForm.get('matriculaTrabajadorSocial').setValue(this.usuario.cveUsuario);
+    this.editForm.get('nombreTrabajadorSocial').setValue(`${this.usuario.strNombres} ${this.usuario.strApellidoP} ${this.usuario.strApellidoM}`);
+    console.log("Matricula"+this.usuario.matricula);
+  this.editForm.get('matriculaTrabajadorSocial').setValue(this.usuario.matricula);
   this.editForm.controls['nombreTrabajadorSocial'].disable();
-  this.editForm.controls['nssPaciente'].disable();
+
   this.editForm.controls['matriculaTrabajadorSocial'].disable();
+
+   this.obtenerInfoUnidadMedicaByMatricula();
 
   }
 
@@ -114,6 +113,34 @@ export class NuevoAvisoMpComponent implements OnInit {
         }
       },
     })
+  }
+
+  obtenerInfoUnidadMedicaByMatricula() {
+    let matricula = this.usuario.matricula
+    this.avisoMinisterioPublico.obtenerInformacionTSPorMatricula(matricula).subscribe(
+      (res) => {
+        this.infoUnidad = res.datosUsuario
+        let unidad = res.datosUsuario.unidadMedica;
+        this.editForm.controls['idUnidadHospital'].setValue(unidad);
+        this.obtenerEstadoByUnidadMedica()
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.error(httpErrorResponse)
+      },
+      )
+  }
+
+  obtenerEstadoByUnidadMedica() {
+    this.avisoMinisterioPublico.obtenerEstadoporUnidadMedica(this.infoUnidad.unidadMedica).subscribe(
+        (res) => {
+          this.estado = res[0]
+          let estadoUbicacion = res[0].des_nombre_delegacion_umae
+          this.editForm.controls['ubicacionHospital'].setValue(estadoUbicacion);
+        },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.error(httpErrorResponse)
+        },
+      )
   }
 
   obtenerCatalogos() {
@@ -157,12 +184,8 @@ export class NuevoAvisoMpComponent implements OnInit {
             unidadesMedicas.filter(
               (e) => e.cve_unidad_medica === `${this.paciente.unidadMedica}`,
             ) || []
-          this.editForm
-            .get('idUnidadHospital')
-            .patchValue(unidadMedica[0]?.cve_unidad_medica)
-          this.editForm
-            .get('ubicacionHospital')
-            .patchValue(unidadMedica[0]?.dom_direccion)
+          //  this.editForm.get('idUnidadHospital').patchValue(unidadMedica[0]?.cve_unidad_medica)
+          //  this.editForm.get('ubicacionHospital').patchValue(unidadMedica[0]?.dom_direccion)
         },
         (httpErrorResponse: HttpErrorResponse) => {
           console.error(httpErrorResponse)
@@ -175,15 +198,14 @@ export class NuevoAvisoMpComponent implements OnInit {
     this.avisoMP = {
       ...this.avisoMP,
       ...this.editForm.value,
-      fechaRegistroAviso: moment(
-        this.editForm.get('fechaRegistroAviso').value,
-        'DD/MM/YYYY',
-      ).format('YYYY/MM/DD'),
-      fechaIngreso: moment(
-        this.editForm.get('fechaIngreso').value,
-        'DD/MM/YYYY',
-      ).format('YYYY/MM/DD'),
+      fechaRegistroAviso: moment(this.editForm.get('fechaRegistroAviso').value,'DD/MM/YYYY',).format('YYYY/MM/DD'),
+      fechaIngreso: moment( this.editForm.get('fechaIngreso').value,'DD/MM/YYYY',).format('YYYY/MM/DD'),
       desNss: this.nss,
+      clavePaciente: this.paciente.nss,
+      agregadoMedico: this.paciente.agregadoMedico,
+      desAgregadoMedico: this.paciente.agregadoMedico,
+      nombreTrabajadorSocial: this.usuario.strNombres +" " + this.usuario.strApellidoP +" "+ this.usuario.strApellidoM,
+      matriculaTrabajadorSocial:  this.paciente.agregadoMedico,
     }
     console.log(this.avisoMP);
 

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AvisoMP } from '../models/aviso-mp.model';
 
-
+const urlServCatalogos = `${environment.msmtsCatalogos}`
 @Injectable({
   providedIn: 'root'
 })
@@ -24,9 +24,13 @@ export class AvisoMinisterioPublicoService {
     return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisoById/${idAviso}`);
   }
 
-  getAvisosByFechas(fechaInicial: string, fechaFinal: string) {
-    return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisosMpByFechas/${fechaInicial}/${fechaFinal}`);
+  getAvisosByFechas(parametrosBusqueda: any) {
+    return this.http.post<any>(`${environment.msmtsAvisosMP}/findAvisosMpByFechas`, parametrosBusqueda);
   }
+
+  // getAvisosByFechas(fechaInicial: string, fechaFinal: string) {
+  //   return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisosMpByFechas/${fechaInicial}/${fechaFinal}`);
+  // }
 
   getCatUnidadesMedicas() {
     return this.http.get<any>(`${environment.msmtsCatalogos}/api/lisUnidades`);
@@ -42,6 +46,15 @@ export class AvisoMinisterioPublicoService {
 
   getDatosAvisosMp(fechaInicial: string, fechaFinal: string) {
     return this.http.get<any>(`${environment.msmtsAvisosMP}/findAvisosMpAdmin/${fechaInicial}/${fechaFinal}`);
+  }
+
+
+  obtenerInformacionTSPorMatricula(matricula: string) {
+    return this.http.get<any>(`${urlServCatalogos}/api/getInfoTS/${matricula}`, { responseType: 'json' });
+  }
+
+  obtenerEstadoporUnidadMedica(unidadMedica: string){
+    return this.http.get<any>(`${urlServCatalogos}/api/getUnidades/${unidadMedica}`, { responseType: 'json' });
   }
 
 }

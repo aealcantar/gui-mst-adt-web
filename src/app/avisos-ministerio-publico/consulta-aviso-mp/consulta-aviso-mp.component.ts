@@ -6,6 +6,8 @@ import { AvisoMP } from '../../models/aviso-mp.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { AlertInfo } from 'src/app/app-alerts/app-alert.interface';
+import { pacienteSeleccionado } from '../../busqueda-nss/paciente.interface';
+import { AppTarjetaPresentacionService } from 'src/app/app-tarjeta-presentacion/app-tarjeta-presentacion.service';
 declare var $: any;
 
 @Component({
@@ -28,14 +30,30 @@ export class ConsultaAvisoMpComponent implements OnInit {
   public columnaId: string = 'fechaElaboracion';
   public alert!: AlertInfo;
 
+  paciente!: pacienteSeleccionado;
+  public nss: string;
+  // public fechaSelected!: string;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private avisoMinisterioPublicoService: AvisoMinisterioPublicoService,
     private fb: FormBuilder,
+    private tarjetaService: AppTarjetaPresentacionService,
   ) { }
 
   ngOnInit(): void {
+    this.datesForm = this.fb.group({
+      fechaInicial: [null, Validators.required],
+      fechaFinal: [null, Validators.required],
+    });
+
+    this.paciente = this.tarjetaService.get();
+    if (!this.paciente) {
+      this.paciente = JSON.parse(localStorage.getItem('paciente')!);
+      this.nss = this.paciente.nss.toString();
+    }
+
     this.datesForm = this.fb.group({
       fechaInicial: [null, Validators.required],
       fechaFinal: [null, Validators.required],
@@ -76,11 +94,9 @@ export class ConsultaAvisoMpComponent implements OnInit {
 
   handleDatesChange() {
     if (
-      this.datesForm.get('fechaInicial')?.value &&
-      this.datesForm.get('fechaInicial')?.value !== '' &&
-      this.datesForm.get('fechaFinal')?.value &&
-      this.datesForm.get('fechaFinal')?.value !== '') {
-      this.getAvisosByFecha();
+      this.datesForm.get('fechaInicial')?.value && this.datesForm.get('fechaInicial')?.value !== '' &&
+      this.datesForm.get('fechaFinal')?.value && this.datesForm.get('fechaFinal')?.value !== '') {
+        this.getAvisosByFecha();
     } else {
       this.muestraAlerta(
         'Verifique los filtros',
@@ -140,7 +156,14 @@ export class ConsultaAvisoMpComponent implements OnInit {
 
   getAvisosByFecha() {
     this.tabla = [];
-    this.avisoMinisterioPublicoService.getAvisosByFechas(this.datesForm.get('fechaInicial')?.value, this.datesForm.get('fechaFinal')?.value).subscribe(
+    console.log(this.paciente.nss);
+    let parametrosBusqueda = {
+      fechaIni: this.datesForm.get('fechaInicial')?.value,
+      fechaFin: this.datesForm.get('fechaFinal')?.value,
+      nssPaciente: this.paciente.nss,
+      agregadoMedico: this.paciente.agregadoMedico,
+    }
+    this.avisoMinisterioPublicoService.getAvisosByFechas(parametrosBusqueda).subscribe(
       (res) => {
         this.tabla = res.datosAvisosMp;
       },
@@ -157,6 +180,10 @@ export class ConsultaAvisoMpComponent implements OnInit {
       }
     });
   }
+
+
+
+
 
   muestraAlerta(mensaje: string, estilo: string, tipoMsj?: string, funxion?: any) {
     this.alert = new AlertInfo;

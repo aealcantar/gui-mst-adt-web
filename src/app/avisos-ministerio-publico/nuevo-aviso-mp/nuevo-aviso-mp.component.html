@@ -96,14 +96,15 @@
           <div class="col-md-4">
             <div class="form-group">
               <span class="spanInput">Hospital*:</span>
-              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar hospital"
-                formControlName="idUnidadHospital" type="text" readonly />
+              <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar hospital" readonly
+              [ngClass]="{'form-control-error':editForm.controls?.idUnidadHospital?.dirty && editForm.controls?.idUnidadHospital?.errors}"
+                formControlName="idUnidadHospital" type="text" />
             </div>
           </div>
           <div class="col-md-4">
             <span class="spanInput">Ubicado en*:</span>
-            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar ubicación"
-              formControlName="ubicacionHospital" type="text" readonly />
+            <input class="form-control matricula inputBloqueo" id="txtconsulta" placeholder="Ingresar ubicación" readonly
+              formControlName="ubicacionHospital" type="text" />
           </div>
         </div>
         <div class="row">
@@ -318,7 +319,7 @@
               <span class="spanInput">Matrícula del(a) Trabajador(a) social:</span>
               <input class="form-control matricula inputBloqueo" id="txtconsulta" readonly
                 [ngClass]="{'form-control-error':editForm.controls?.matriculaTrabajadorSocial?.dirty && editForm.controls?.matriculaTrabajadorSocial?.errors}"
-                maxlength="11" formControlName="matriculaTrabajadorSocial" type="text" numbersOnly />
+                maxlength="11" formControlName="matriculaTrabajadorSocial" type="text"  />
               <small
                 *ngIf="editForm.controls?.matriculaTrabajadorSocial?.dirty && editForm.controls?.matriculaTrabajadorSocial?.errors"
                 class="form-text form-text-error Campo-obligatorio" style="color: red;">

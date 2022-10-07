@@ -119,8 +119,10 @@ export class DetalleAvisoMpComponent implements OnInit {
       observaciones: this.avisoMp?.lesionesPaciente,
       nomMedico: this.avisoMp?.nombreMedico,
       matriculaMed: this.avisoMp?.matriculaMedico,
-      nomTS: this.avisoMp?.nombreTrabajadorSocial,
-      matTS: this.avisoMp?.matriculaTrabajadorSocial,
+      nomTS: 'Hola',
+      matTS: 'HOla',
+      // nomTS: this.avisoMp?.nombreTrabajadorSocial,
+      // matTS: this.avisoMp?.matriculaTrabajadorSocial,
     }
 
     this.avisoMinisterioPublicoService.downloadPdf(imprimirAvisoObj).subscribe(
