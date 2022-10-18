@@ -110,7 +110,7 @@
         </div>
         <div class="col-sm-3 form-group">
           <span class="labels pb-1">Servicio:</span>
-          <span class="labelDetail"> {{ volantesDonacion?.nombreServicio }}</span>
+           <span class="labelDetail"> {{volantesDonacion?.nombreServicio == "No se encontro registro" ? TB : volantesDonacion?.nombreServicio}} </span>
         </div>
       </div>
       <div class="row pl-5 pr-5 mb-5">

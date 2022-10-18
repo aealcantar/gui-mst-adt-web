@@ -22,6 +22,8 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
   usuario!: Usuario;
   infoUnidad: any;
   estado: any;
+  TB: string = "Trabajo Social";
+
 
   constructor(private volantesService: VolantesDonacionService,
     private volantesDonacionService: VolantesDonacionService,
@@ -173,7 +175,11 @@ export class DetalleVolantesDonacionSangreComponent implements OnInit {
     this.volantesDonacion.timHoraInicialAtencion = timHoraInicialAtencion;
     this.volantesDonacion.refHorarioAtencion = this.volantesDonacion.refHorarioAtencion;
     this.volantesDonacion.desUnidadMedicaHospitalaria = this.estado.des_denominacion_unidad;
-
+    if(this.volantesDonacion.nombreServicio == 'No se encontro registro'){
+      this.volantesDonacion.nombreServicio =  'Trabajo Social'
+    }else{
+      this.volantesDonacion.nombreServicio = this.volantesDonacion.nombreServicio;
+    }
 
 
     console.log('DATA REPORT: ', this.volantesDonacion);
