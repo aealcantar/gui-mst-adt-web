@@ -429,16 +429,16 @@ export class CargamasivaComponent implements OnInit {
           case 7:
 
             this.persona[index] = new Persona();
-            this.persona[index].nombre = element[this.confCarga.col1];
-            this.persona[index].primerApellido = element[this.confCarga.col2];
-            this.persona[index].segundoApellido = element[this.confCarga.col3];
+            this.persona[index].nombre = element[this.confCarga.col1].trim()+"";
+            this.persona[index].primerApellido = element[this.confCarga.col2].trim()+"";
+            this.persona[index].segundoApellido = element[this.confCarga.col3].trim()+"";
             this.persona[index].matricula = element[this.confCarga.col4];
-            this.persona[index].rol = element[this.confCarga.col5];
-            this.persona[index].puesto = element[this.confCarga.col6]
-            this.persona[index].turno = element[this.confCarga.col7];
-            this.persona[index].email = element[this.confCarga.col8];
+            this.persona[index].rol = element[this.confCarga.col5].trim()+"";
+            this.persona[index].puesto = element[this.confCarga.col6].trim()+"";
+            this.persona[index].turno = element[this.confCarga.col7].trim()+"";
+            this.persona[index].email = element[this.confCarga.col8].trim()+"";
 
-            this.persona[index].escuelaProcedencia = element[this.confCarga.col9];
+            this.persona[index].escuelaProcedencia = element[this.confCarga.col9].trim()+"";
             this.persona[index].contrasena = this.persona[index].matricula + "";
             this.persona[index].nombreCompleto = this.persona[index].nombre + " " + this.persona[index].primerApellido + " " + this.persona[index].segundoApellido
             this.persona[index].usuario = this.persona[index].matricula;
